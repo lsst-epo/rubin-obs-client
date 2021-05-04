@@ -28,6 +28,20 @@ Step #3 above is worth discussing further: This Docker IP is required in order f
 
 It's possible that this step will be unnecessary if Kubernetes configurations are added for local dev as Kubernetes offers IP discovery, DNS services, etc.
 
+In order to build the Docker client image after making the above changes, enter the following command in the root project folder:
+
+```
+docker build -t epo/rubin_ui
+```
+
+The static site generation can take awhile, 5-10 minutes, so do not worry unless you do not see any progress on the static page generation step in the terminal logs.
+
+Finally, once the image is built, create/start the Docker container with the following command:
+
+```
+docker run -p 3000:3000 epo/rubin_ui
+```
+
 ## Finding the Craft CMS container's IP address
 
 1. Ensure that the Craft CMS container is running and functioning correctly by going to http://localhost:9000/api, if everything is working fine you should see some message about a missing GraphQL query
