@@ -1,0 +1,46 @@
+import PropTypes from "prop-types";
+import {
+  Image,
+  Text,
+  Callout,
+  Link,
+  Contact,
+  ContactStaff,
+  Share,
+  AccordionGroup,
+  GridBlock,
+  Schedule,
+  SlideBlock,
+  Video,
+} from "@/content-blocks";
+
+const blockMap = {
+  accordionGroup: AccordionGroup,
+  callout: Callout,
+  contact: Contact,
+  contactStaff: ContactStaff,
+  ctaGrid: GridBlock,
+  image: Image,
+  link: Link,
+  linkedAsset: Link,
+  news: GridBlock,
+  relatedContent: GridBlock,
+  schedule: Schedule,
+  share: Share,
+  slideBlock: SlideBlock,
+  staffGrid: GridBlock,
+  text: Text,
+  video: Video,
+};
+
+export default function ContentBlockFactory({ type, data, pageId }) {
+  const Block = blockMap[type];
+  if (!Block) return null;
+  return <Block {...data} pageId={pageId} />;
+}
+
+ContentBlockFactory.propTypes = {
+  type: PropTypes.string.isRequired,
+  data: PropTypes.object.isRequired,
+  pageId: PropTypes.string.isRequired,
+};

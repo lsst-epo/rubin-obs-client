@@ -1,0 +1,39 @@
+@use 'abstracts/functions';
+
+.c-content-rte {
+  > * + * {
+    margin-top: 1rem;
+  }
+
+  a:not([class^="c-"]) {
+    color: functions.palette(turquoise50);
+    text-decoration: none;
+  }
+
+  ul {
+    padding-left: 1em;
+    list-style-type: disc;
+  }
+
+  ol {
+    padding-left: 1em;
+    list-style-type: decimal;
+  }
+
+  li {
+    padding-left: 0.5em;
+  }
+  // these also have margin, so we've decreased padding accordingly.
+  h1 {
+    padding-top: 5rem;
+  }
+
+  h2 {
+    padding-top: 2rem;
+  }
+
+  h3,
+  h4 {
+    padding-top: 4rem;
+  }
+}

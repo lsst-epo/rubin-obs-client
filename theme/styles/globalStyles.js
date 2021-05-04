@@ -1,0 +1,398 @@
+/* eslint-disable */
+import { createGlobalStyle } from "styled-components";
+
+export const tokens = {
+  white: "#ffffff",
+  offWhite: "#e9e9e9",
+  neutral02: "#fafafa",
+  neutral08: "#ebebeb",
+  neutral10: "#f5f5f5",
+  neutral15: "#e3e4e8",
+  neutral20: "#dce0e3",
+  neutral30: "#d3d4d5",
+  neutral40: "#9E9EA3",
+  neutral60: "#666666",
+  neutral80: "#404040",
+  neutral90: "#2b2e34",
+  black: "#000000",
+  turquoise10: "#D9F7F6",
+  turquoise20: "#B2F2EF",
+  turquoise50: "#00bebf",
+  turquoise55: "#009fa1",
+  turquoise60: "#078b8c",
+  turquoise70: "#058b8c",
+  turquoise80: "#117273",
+  turquoise85: "#12726d",
+  turquoise90: "#0c4a4c",
+  blue10: "#eef5fb",
+  red: "#ff8488",
+  red20: "#f2c3c0",
+  red40: "#FF8489",
+  BREAK_DESKTOP: "1280px",
+  BREAK_LARGE_TABLET: "850px",
+  BREAK_LARGE_TABLET_MIN: "851px",
+  BREAK_TABLET: "768px",
+  BREAK_TABLET_MIN: "769px",
+  BREAK_PHABLET: "600px",
+  BREAK_PHABLET_MIN: "601px",
+  BREAK_MOBILE: "446px",
+  BREAK_MOBILE_MIN: "447px",
+  CONTAINER_MAX: "2560px",
+  CONTAINER_FULL: "1920px",
+  CONTAINER_WIDE: "1435px",
+  CONTAINER_REGULAR: "1160px",
+  CONTAINER_NARROW: "900px",
+  FONT_SIZE_BASE_DESKTOP: "22px",
+  FONT_SIZE_BASE_MOBILE: "16px",
+  FONT_STACK_BASE: `"Open Sans", system-ui`,
+  LINE_HEIGHT_BASE: "1.636",
+  PADDING_LARGE: "100px",
+  PADDING_MEDIUM: "40px",
+  PADDING_SMALL: "20px",
+};
+
+export const white = tokens.white;
+export const offWhite = tokens.offWhite;
+export const neutral02 = tokens.neutral02;
+export const neutral08 = tokens.neutral08;
+export const neutral10 = tokens.neutral10;
+export const neutral15 = tokens.neutral15;
+export const neutral20 = tokens.neutral20;
+export const neutral30 = tokens.neutral30;
+export const neutral40 = tokens.neutral40;
+export const neutral60 = tokens.neutral60;
+export const neutral80 = tokens.neutral80;
+export const neutral90 = tokens.neutral90;
+export const black = tokens.black;
+export const turquoise10 = tokens.turquoise10;
+export const turquoise20 = tokens.turquoise20;
+export const turquoise50 = tokens.turquoise50;
+export const turquoise55 = tokens.turquoise55;
+export const turquoise60 = tokens.turquoise60;
+export const turquoise70 = tokens.turquoise70;
+export const turquoise80 = tokens.turquoise80;
+export const turquoise85 = tokens.turquoise85;
+export const turquoise90 = tokens.turquoise90;
+export const blue10 = tokens.blue10;
+export const red = tokens.red;
+export const red20 = tokens.red20;
+export const red40 = tokens.red40;
+export const BREAK_DESKTOP = tokens.BREAK_DESKTOP;
+export const BREAK_LARGE_TABLET = tokens.BREAK_LARGE_TABLET;
+export const BREAK_LARGE_TABLET_MIN = tokens.BREAK_LARGE_TABLET_MIN;
+export const BREAK_TABLET = tokens.BREAK_TABLET;
+export const BREAK_TABLET_MIN = tokens.BREAK_TABLET_MIN;
+export const BREAK_PHABLET = tokens.BREAK_PHABLET;
+export const BREAK_PHABLET_MIN = tokens.BREAK_PHABLET_MIN;
+export const BREAK_MOBILE = tokens.BREAK_MOBILE;
+export const BREAK_MOBILE_MIN = tokens.BREAK_MOBILE_MIN;
+export const CONTAINER_MAX = tokens.CONTAINER_MAX;
+export const CONTAINER_FULL = tokens.CONTAINER_FULL;
+export const CONTAINER_WIDE = tokens.CONTAINER_WIDE;
+export const CONTAINER_REGULAR = tokens.CONTAINER_REGULAR;
+export const CONTAINER_NARROW = tokens.CONTAINER_NARROW;
+export const FONT_SIZE_BASE_DESKTOP = tokens.FONT_SIZE_BASE_DESKTOP;
+export const FONT_SIZE_BASE_MOBILE = tokens.FONT_SIZE_BASE_MOBILE;
+export const FONT_STACK_BASE = tokens.FONT_STACK_BASE;
+export const LINE_HEIGHT_BASE = tokens.LINE_HEIGHT_BASE;
+export const PADDING_LARGE = tokens.PADDING_LARGE;
+export const PADDING_MEDIUM = tokens.PADDING_MEDIUM;
+export const PADDING_SMALL = tokens.PADDING_SMALL;
+
+export const applyFluidScale = (
+  properties = [],
+  maxValue = "100%",
+  minValue = "60%",
+  maxVW = tokens.BREAK_DESKTOP,
+  minVW = tokens.BREAK_TABLET
+) => {
+  typeof properties === "string" && (properties = [properties]);
+
+  const mainString = properties
+    .map((p) => {
+      return `--${p}: ${maxValue};${p}: var(--${p});`;
+    })
+    .join("\n");
+
+  let firstMediaString = properties
+    .map(
+      (p) => `--${p}: ${calculateFluidScale(maxValue, minValue, maxVW, minVW)};`
+    )
+    .join("\n");
+
+  firstMediaString = `@media (max-width: ${maxVW}) {
+            ${firstMediaString}
+        }`;
+
+  let secondMediaString = properties.map((p) => `--${p}: ${minValue};`).join();
+
+  secondMediaString = `@media (max-width: ${minVW}) {
+            ${secondMediaString}
+        }`;
+
+  let supportsString = properties
+    .map((p) => {
+      return stripUnit(minValue) > stripUnit(maxValue)
+        ? `--${p}: clamp(${maxValue},${calculateFluidScale(
+            maxValue,
+            minValue,
+            maxVW,
+            minVW
+          )},${minValue});`
+        : `--${p}: clamp(${minValue},${calculateFluidScale(
+            maxValue,
+            minValue,
+            maxVW,
+            minVW
+          )},${maxValue});`;
+    })
+    .join("\n");
+
+  supportsString = `@supports (width: clamp(1px, 2px, 3px)) {
+            ${supportsString}
+        }`;
+
+  return `${mainString}
+  ${firstMediaString}
+  ${secondMediaString}
+  ${supportsString}`;
+};
+
+export const applyGap = (
+  property = "gap",
+  gapDesktop = tokens.PADDING_SMALL,
+  gapMobile = tokens.PADDING_SMALL
+) => {
+  return gapDesktop === gapMobile
+    ? `${property}: ${gapDesktop};`
+    : `${applyFluidScale(property, gapDesktop, gapMobile)}`;
+};
+
+export const applyTypeScale = (desktopSize = "24px", mobileSize = "18px") => {
+  return `${applyFluidScale(
+    "font-size",
+    desktopSize,
+    mobileSize,
+    tokens.BREAK_TABLET,
+    tokens.BREAK_MOBILE
+  )}`;
+};
+
+const calculateFluidScale = (maxValue, minValue, maxVW = 130, minVW = 60) => {
+  return `calc(${minValue} + ${
+    stripUnit(maxValue) - stripUnit(minValue)
+  } * (100vw - ${minVW}) / ${stripUnit(maxVW) - stripUnit(minVW)})`;
+};
+
+export const containerMax = () => protoContainer(tokens.CONTAINER_MAX);
+
+export const containerFull = () => protoContainer(tokens.CONTAINER_FULL);
+
+export const containerFullBleed = (width = "CONTAINER_MAX") => {
+  return `
+    width: 100%;
+    max-width: ${tokens[width]};
+    margin-right: auto;
+    margin-left: auto;
+  `;
+};
+
+export const containerWide = () => protoContainer(tokens.CONTAINER_WIDE);
+
+export const containerNews = () =>
+  protoContainer(tokens.CONTAINER_WIDE, "110px", "50px");
+
+export const containerRegular = () => protoContainer(tokens.CONTAINER_REGULAR);
+
+export const containerNarrow = () => protoContainer(tokens.CONTAINER_NARROW);
+
+export const layoutGrid = (
+  columns = 3,
+  gapDesktop = tokens.PADDING_SMALL,
+  gapMobile = tokens.PADDING_SMALL,
+  breakPoint = tokens.BREAK_TABLET
+) => {
+  const supportsQuery = `grid-auto-columns: min-content`;
+
+  return `
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  @supports (${supportsQuery}) {
+    display: grid;
+    grid-template-columns: repeat(${columns}, 1fr);
+    ${applyGap("gap", gapDesktop, gapMobile)};
+  }
+
+  > * {
+    flex: 0 1 calc(100% / ${columns} - ${gapMobile});
+
+    &:nth-child(n + ${columns + 1}) {
+      ${applyGap("margin-top", gapDesktop, gapMobile)};
+    }
+
+    @supports (${supportsQuery}) {
+      &:nth-child(n + ${columns}) {
+        margin-top: 0;
+      }
+    }
+
+    ${respond(
+      `{
+      flex-basis: 100%;
+
+      &:not(first-child) {
+        margin-top: ${gapMobile};
+      }
+
+      @supports (${supportsQuery}) {
+        grid-column: span ${columns};
+
+        &:not(first-child) {
+          margin-top: 0;
+        }
+      }
+    }
+  }`,
+      breakPoint
+    )}
+
+  `;
+};
+
+export const encodeColor = (string) => {
+  const str = string.split("#").pop();
+  return `%23${str}`;
+};
+
+export const focusDefault = () => {
+  return `
+    .js-focus-visible &:focus:not(.focus-visible) {
+      outline-width: 0;
+    }
+
+    &.focus-visible {
+      outline: auto 4px;
+    }
+  `;
+};
+
+export const needsDarkColor = (hexColor) => {
+  var color = hexColor.charAt(0) === "#" ? hexColor.substring(1, 7) : hexColor;
+  var r = parseInt(color.substring(0, 2), 16); // hexToR
+  var g = parseInt(color.substring(2, 4), 16); // hexToG
+  var b = parseInt(color.substring(4, 6), 16); // hexToB
+  return r * 0.299 + g * 0.587 + b * 0.114 > 186 ? true : false;
+};
+
+export const palette = (color) => {
+  return tokens[color];
+};
+
+export const protoButton = () => {
+  return `
+    ${focusDefault()}
+    display: inline-block;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    appearance: none;
+  `;
+};
+
+export const protoContainer = (
+  maxWidth = tokens.CONTAINER_WIDE,
+  widePadding = tokens.PADDING_LARGE,
+  narrowPadding = tokens.PADDING_SMALL
+) => {
+  const units = widePadding.toString().split(/\d+/);
+  const unit = units?.[0] || "px";
+  const maxValue = stripUnit(maxWidth) + 2 * stripUnit(widePadding);
+  const minValue = stripUnit(maxWidth) + 2 * stripUnit(narrowPadding);
+
+  return `
+    ${applyFluidScale("max-width", maxValue + unit, minValue + unit)}
+    ${applyFluidScale(
+      ["padding-right", "padding-left"],
+      widePadding,
+      narrowPadding
+    )}
+    margin-right: auto;
+    margin-left: auto;
+    `;
+};
+
+export const pxToEm = (px, base = tokens.FONT_SIZE_BASE_DESKTOP) => {
+  return `${stripUnit(px) / stripUnit(base)}em`;
+};
+
+export const respond = (
+  content,
+  size = tokens.BREAK_TABLET,
+  operator = "max",
+  aspect = "width"
+) => {
+  return `@media all and (${operator}-${aspect}: ${size}) {
+    ${content}
+  }`;
+};
+
+export const reducedMotion = (content) => {
+  `@media (prefers-reduced-motion: reduce) {${content}}`;
+};
+
+export const stripUnit = (unit) => parseInt(unit.toString().replace(/\D/g, ""));
+
+export const token = (which) => {
+  if (typeof which === "string") {
+    return tokens[which];
+  } else if (which.isArray()) {
+    let obj = which.reduce(function (result, item) {
+      result[item] = tokens[item];
+      return result;
+    }, {});
+    return obj;
+  } else {
+    return tokens;
+  }
+};
+
+const createCSSGlobalStyles = () => {
+  return Object.keys(tokens).map((k) => `--${k}: ${tokens[k]};`);
+};
+
+const GlobalStyles = createGlobalStyle`
+  :root {
+      ${createCSSGlobalStyles()}
+  }
+  .c-buttonish {
+    ${protoButton()}
+    padding: 1.188em 2.125em;
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--white);
+    text-decoration: none;
+    background-color: var(--turquoise60);
+    border-radius: 0.375em;
+    transition: background-color 0.2s;
+
+    &:hover:not(:disabled),
+    &:focus-visible {
+      background-color: var(--turquoise80);
+    }
+
+    &:disabled {
+      background-color: var(--neutral40);
+    }
+
+    &--block {
+      display: block;
+      text-align: center;
+    }
+  }
+`;
+
+export default GlobalStyles;

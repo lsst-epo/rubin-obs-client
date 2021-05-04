@@ -1,0 +1,21 @@
+import EventList from "./EventList";
+import GalleryList from "./GalleryList";
+import JobList from "./JobList";
+import NewsList from "./NewsList";
+import RelatedList from "./RelatedList";
+import SearchList from "./SearchList";
+import SlideshowList from "./SlideshowList";
+import StaffList from "./StaffList";
+import TempList from "./TempList";
+
+export default {
+  EventList,
+  JobList,
+  NewsList,
+  GalleryList,
+  RelatedList,
+  SearchList,
+  SlideshowList,
+  StaffList,
+  TempList,
+};
