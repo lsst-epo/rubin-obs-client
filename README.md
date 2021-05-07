@@ -44,6 +44,17 @@ docker run -p 3000:3000 epo/rubin_ui
 
 ## Finding the Craft CMS container's IP address
 
+### Automated:
+
+For your convenience, a node.js script has been included in this repo that grabs the rubin-obs-api Docker gateway IP and logs it to the terminal. Ensure the Craft CMS container is running, then in the terminal enter:
+
+```
+node getApiGatewayURL
+```
+
+
+### Manual:
+
 1. Ensure that the Craft CMS container is running and functioning correctly by going to http://localhost:9000/api, if everything is working fine you should see some message about a missing GraphQL query
 2. In the terminal, enter the command ```docker network ls``` and you should she text table output - under the "NAME" column verify that you see one row with the value "rubin-obs-api_default"
 3. Enter the command ```docker network inspect rubin-obs-api_default``` (note the underscore)
