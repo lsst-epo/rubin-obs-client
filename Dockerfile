@@ -14,6 +14,11 @@ COPY --from=deps /app/node_modules ./node_modules
 
 # Build with NEXT_PUBLIC_API_URL from .env, which is needed during static site generation and must be the
 # Docker bridge IP address which can be accessed within another container (can't be 'localhost')
+ENV DOCKERIZED true
+ARG API_IP
+ARG API_PORT
+ENV DOCKER_GATEWAY_IP=$API_IP
+ENV DOCKER_GATEWAY_PORT=$API_PORT
 RUN yarn static
 
 # Production image, copy all the files and run next
@@ -24,9 +29,6 @@ ENV NODE_ENV production
 
 RUN addgroup -g 1001 -S nodejs
 RUN adduser -S nextjs -u 1001
-
-# Now that build is complete, swap out the Docker bridge IP address with localhost for runtime usage
-RUN find . -type f -exec sed -i 's/<Docker Craft container IP>/localhost/g' {} \;
 
 # You only need to copy next.config.js if you are NOT using the default configuration
 COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next

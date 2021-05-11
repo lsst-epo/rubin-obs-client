@@ -16,23 +16,17 @@ Running the client within a container is a good way to test deployment in a prod
 
 There is one crucial thing to keep in mind when configuring your local client to run in a Docker container: Docker containers run in an isolated network that have a different concept of the usage of "localhost". As such, despite the fact that the Craft CMS container may be exposed at localhost on port 9000 on the host machine (your laptop), within the client container "localhost" is local to that container. In order for the client container to be able to communicate with the Craft CMS container you need to know the Craft CMS container's gateway IP address.
 
-See the below section on finding the Craft container's IP address and proceed when you have this IP address handy.
+Luckily, a node.js script is bundled with this code and Docker allows for arguments to be passed into a `docker build` command.
 
-Once you have the IP handy, replace localhost with the IP in the following places:
-
-1. Replace localhost in NEXT_PUBLIC_API_URL in **env.local**
-2. Replace localhost in the ***rewrite()*** method in **next.config.js**
-3. Replace ```<Docker Craft container IP>``` in the Dockerfile on the line below the comment talking about the Docker bridge IP
-
-Step #3 above is worth discussing further: This Docker IP is required in order for the Next.js build to complete successfully, however, the browser in the host machine won't be able to access this IP (confusing, I know). This line in the Dockerfile recursively looks through all files for the Docker IP that you entered and replaces it with "localhost" *after* the Next.js build has completed thus allowing for statically generated absolute paths to function correctly.
-
-It's possible that this step will be unnecessary if Kubernetes configurations are added for local dev as Kubernetes offers IP discovery, DNS services, etc.
-
-In order to build the Docker client image after making the above changes, enter the following command in the root project folder:
+In order to build the Docker client image **ensure the API project is running** then enter the following command in the root project folder:
 
 ```
-docker build -t epo/rubin_ui
+docker build -t epo/rubin_ui . --build-arg API_IP=$(node getApiGatewayURL) --build-arg API_PORT=9000
 ```
+
+As mentioned, if the rubin-obs-api project is not running within a Docker container before running the above command then the build may succeed, but will have broken links, images, and missing content.
+
+If for whatever reason you have altered the exposed port for the rubin-obs-api project as part of the nginx image then modify the API_PORT argument.
 
 The static site generation can take awhile, 5-10 minutes, so do not worry unless you do not see any progress on the static page generation step in the terminal logs.
 
