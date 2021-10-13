@@ -85,3 +85,4 @@ jobs:
     # Destruct!
     - name: Destroy version
       run: gcloud app versions delete ${{ github.head_ref }} --service=rubin-obs-client
+      
