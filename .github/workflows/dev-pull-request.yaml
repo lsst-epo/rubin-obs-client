@@ -1,0 +1,87 @@
+  # Builds, pushes, and deploys the rubin-obs-client container
+name: 'Build and deploy branch-tagged rubin-obs-client in Dev'
+
+on:
+  pull_request:
+    types:
+      - 'opened'
+      - 'synchronize'
+      - 'reopened'
+      - 'closed'
+    branches:
+      - 'develop'
+
+jobs:
+  build-push-deploy:
+    name: 'Build, Publish, and Deploy'
+    runs-on: ubuntu-latest
+    if: ${{ github.event.action != 'closed'}}
+
+    # Checkout the repository to the GitHub Actions runner
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    # gcloud CLI setup
+    - name: Login to GCP
+      uses: google-github-actions/setup-gcloud@master
+      with:
+        service_account_key: ${{ secrets.DEV_SA_KEY }}
+        project_id: ${{ secrets.SV_PROJ_NAME }}
+        export_default_credentials: true
+    
+    - name: Build Container Image
+      run: |-
+        docker build \
+        -t "gcr.io/${{ secrets.SV_PROJ_NAME }}/rubin-obs-client:${{ github.sha }}" \
+        --build-arg NEXT_PUBLIC_API_URL=https://rubin-obs-api-e3g4rcii3q-uc.a.run.app/api \
+        --build-arg NEXT_PUBLIC_ASSETS_BASE_URL=https://rubin-obs-api-e3g4rcii3q-uc.a.run.app/assets \
+        --build-arg NEXT_PUBLIC_ASTRO_API_URL=https://us-central1-rubin-obs.cloudfunctions.net/astro-objects-api \
+        .
+    - name: Configure Docker Auth
+      run: gcloud --quiet auth configure-docker
+
+    - name: Push Container Image to GCR
+      run: docker push gcr.io/${{ secrets.SV_PROJ_NAME }}/rubin-obs-client:${{ github.sha }}
+
+    - name: Deploy branch-tagged version to App Engine
+      run: |-
+        gcloud app deploy app.yaml \
+        --image-url=gcr.io/${{ secrets.SV_PROJ_NAME }}/rubin-obs-client:${{ github.sha }} \
+        --version=${{ github.head_ref }} \
+        --no-promote \
+        --project=${{ secrets.SV_PROJ_NAME }}
+    
+    - name: Get the version URL
+      id: get_version
+      run: echo "version_url=$(gcloud app versions list --uri --service=rubin-obs-client --filter=version.id:${{ github.head_ref }})" >> $GITHUB_ENV
+
+    - name: Post the URL to the PR
+      uses: peter-evans/create-or-update-comment@v1
+      with:
+        issue-number: ${{ github.event.pull_request.number }}
+        body: |
+          A preview of this PR will be available at ${{ env.version_url }} until the request is closed.
+        reactions: '+1'
+
+  cleanup:
+    name: 'Cleanup PR Preview'
+    runs-on: ubuntu-latest
+    if: ${{ github.event.action == 'closed'}}
+
+    # Checkout the repository to the GitHub Actions runner
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    # gcloud CLI setup
+    - name: Login to GCP
+      uses: google-github-actions/setup-gcloud@master
+      with:
+        service_account_key: ${{ secrets.DEV_SA_KEY }}
+        project_id: ${{ secrets.SV_PROJ_NAME }}
+        export_default_credentials: true        
+
+    # Destruct!
+    - name: Destroy version
+      run: gcloud app versions delete ${{ github.head_ref }} --service=rubin-obs-client
