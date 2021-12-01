@@ -75,7 +75,7 @@ export async function getStaticPaths() {
 
   return {
     paths: paths,
-    fallback: false // You cannot set this to true AND export the static build, the build will fail
+    fallback: true
   };
 }
 
