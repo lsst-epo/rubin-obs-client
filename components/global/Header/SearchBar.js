@@ -64,6 +64,7 @@ export default function SearchBar() {
         <IconComposer icon="Search" className="c-global-header__icon" />
       </button>
       <form
+        role="search"
         action=""
         onSubmit={handleSubmit}
         className={classNames({
