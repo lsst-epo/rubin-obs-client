@@ -56,6 +56,7 @@ export default function SearchBar() {
     <div ref={ref} className="c-search-bar">
       <button
         aria-expanded={open}
+        aria-haspopup="dialog"
         onClick={handleOpen}
         className="c-search-bar__toggle"
       >
