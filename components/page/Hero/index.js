@@ -2,11 +2,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import Image from "@/primitives/Image";
 import imageShape from "@/shapes/image";
-import {
-  applyFluidScale,
-  containerFullBleed,
-  respond,
-} from "@/styles/globalStyles";
+import { fluidScale, containerFullBleed, respond } from "@/styles/globalStyles";
 
 export default function Hero({ data }) {
   const imageData = data && data[0];
@@ -25,8 +21,8 @@ const StyledHero = styled.div`
 `;
 
 const StyledImage = styled(Image)`
-  ${applyFluidScale("height", "540px", "400px")}
   width: 100%;
+  height: ${fluidScale("540px", "400px")};
   object-fit: cover;
 
   ${respond(`--height: 56.25vw;`)}

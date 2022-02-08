@@ -28,6 +28,10 @@ module.exports = {
     "number-leading-zero": "always",
     "number-no-trailing-zeros": true,
     "unit-case": "lower",
+    // sometimes we need a unit for Sass
+    "length-zero-no-unit": null,
+    // Doesn't play nicely with Sass `rgb()` function
+    "color-function-notation": null,
     "value-keyword-case": [
       "lower",
       {

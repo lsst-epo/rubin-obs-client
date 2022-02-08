@@ -9,7 +9,7 @@ import {
   makeTruncatedString,
   useGlobalData,
 } from "@/lib/utils";
-import { applyFluidScale } from "@/styles/globalStyles";
+import { fluidScale } from "@/styles/globalStyles";
 import Breadcrumbs from "@/components/page/Breadcrumbs";
 import Buttonish from "@/components/primitives/Buttonish";
 import Container from "@/layout/Container";
@@ -155,7 +155,7 @@ const SearchList = ({
 };
 
 const Header = styled.h2`
-  ${applyFluidScale("margin-bottom", "40px", "20px")}
+  margin-bottom: ${fluidScale("40px", "20px")};
   padding-bottom: 10px;
   border-bottom: 10px solid var(--turquoise55);
 `;

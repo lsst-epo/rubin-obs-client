@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { applyTypeScale } from "@/styles/globalStyles";
+import { fluidScale } from "@/styles/globalStyles";
 export default function Accordion({ summary, children }) {
   return (
     <details>
@@ -14,11 +14,11 @@ const toggleWidth = "1.333em";
 const togglePadding = `calc(${toggleWidth} + 1em)`;
 
 const Summary = styled.summary`
-  ${applyTypeScale("24px", "18px")}
   position: relative;
   display: flex;
   align-self: baseline;
   padding-left: ${togglePadding};
+  font-size: ${fluidScale("24px", "18px")};
   cursor: pointer;
 
   &::-webkit-details-marker {

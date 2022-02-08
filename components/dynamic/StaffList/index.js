@@ -5,7 +5,7 @@ import DataList from "@/dynamic/DataList";
 import Grid from "@/layout/Grid";
 import Tile from "@/primitives/Tile";
 import Pagination from "@/page/Pagination";
-import { applyFluidScale } from "@/styles/globalStyles";
+import { fluidScale } from "@/styles/globalStyles";
 import Buttonish from "@/components/primitives/Buttonish";
 
 const StaffList = ({
@@ -70,7 +70,7 @@ const StaffList = ({
 };
 
 const Header = styled.h2`
-  ${applyFluidScale("margin-bottom", "40px", "20px")}
+  margin-bottom: ${fluidScale("40px", "20px")};
   padding-bottom: 10px;
   border-bottom: 10px solid var(--turquoise55);
 `;

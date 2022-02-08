@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { createGlobalStyle } from "styled-components";
-import { fluidScaleCalc, stripUnit, respondBase } from "@castiron/style-mixins";
+import { fluidScaleBase, stripUnit, respondBase } from "@castiron/style-mixins";
 
 export const tokens = {
   white: "#ffffff",
@@ -100,46 +100,15 @@ export const PADDING_LARGE = tokens.PADDING_LARGE;
 export const PADDING_MEDIUM = tokens.PADDING_MEDIUM;
 export const PADDING_SMALL = tokens.PADDING_SMALL;
 
-export const applyFluidScale = (
-  properties = [],
-  maxValue = "100%",
-  minValue = "60%",
-  maxVW = tokens.BREAK_DESKTOP,
-  minVW = tokens.BREAK_TABLET
-) => {
-  typeof properties === "string" && (properties = [properties]);
-  return properties
-    .map(
-      (p) =>
-        `--${p}: clamp(${minValue}, ${fluidScaleCalc(
-          maxValue,
-          minValue,
-          maxVW,
-          minVW
-        )}, ${maxValue});`
-    )
-    .join("\n");
-};
-
-export const applyGap = (
-  property = "gap",
-  gapDesktop = tokens.PADDING_SMALL,
-  gapMobile = tokens.PADDING_SMALL
-) => {
-  return gapDesktop === gapMobile
-    ? `${property}: ${gapDesktop};`
-    : `${applyFluidScale(property, gapDesktop, gapMobile)}`;
-};
-
-export const applyTypeScale = (desktopSize = "24px", mobileSize = "18px") => {
-  return `${applyFluidScale(
-    "font-size",
-    desktopSize,
-    mobileSize,
-    tokens.BREAK_TABLET,
-    tokens.BREAK_MOBILE
-  )}`;
-};
+export function fluidScale(
+  max,
+  min,
+  maxVw = tokens.BREAK_DESKTOP,
+  minVw = tokens.BREAK_TABLET
+) {
+  if (max === min) return max;
+  return fluidScaleBase(max, min, maxVw, minVw);
+}
 
 export const containerMax = () => protoContainer(tokens.CONTAINER_MAX);
 
@@ -172,7 +141,7 @@ export const layoutGrid = (
   return `
   display: grid;
   grid-template-columns: repeat(${columns}, 1fr);
-  ${applyGap("gap", gapDesktop, gapMobile)};
+  gap: ${fluidScale(gapDesktop, gapMobile)};
 
   ${respond(
     `& > * {
@@ -237,12 +206,9 @@ export const protoContainer = (
   const minValue = stripUnit(maxWidth) + 2 * stripUnit(narrowPadding);
 
   return `
-    ${applyFluidScale("max-width", maxValue + unit, minValue + unit)}
-    ${applyFluidScale(
-      ["padding-right", "padding-left"],
-      widePadding,
-      narrowPadding
-    )}
+    max-width: ${fluidScale(maxValue + unit, minValue + unit)};
+    padding-right: ${fluidScale(widePadding, narrowPadding)};
+    padding-left: ${fluidScale(widePadding, narrowPadding)};
     margin-right: auto;
     margin-left: auto;
     `;
