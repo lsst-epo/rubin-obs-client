@@ -41,6 +41,7 @@ export default function Header({ navItems }) {
       <div className="c-global-header__logo-block">
         <Link href={homeUrl}>
           <a className="c-global-header__logo-link">
+            <span className="a-hidden">{t("homepage")}</span>
             <Logo className="c-global-header__logo" />
           </a>
         </Link>
