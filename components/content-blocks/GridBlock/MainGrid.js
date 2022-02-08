@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import striptags from "striptags";
 import { normalizeItemData, useList } from "@/lib/utils";
 import Grid from "@/layout/Grid";
-import Tile from "@/primitives/Tile";
+import Tile from "@/atomic/Tile";
 
 const MainGrid = ({ items = [], limit, listTypeId, sectionHandle, pageId }) => {
   // get manually-curated data first

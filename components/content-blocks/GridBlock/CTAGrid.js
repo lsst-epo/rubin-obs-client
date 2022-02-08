@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import Grid from "@/layout/Grid";
-import Tile from "@/primitives/Tile";
+import Tile from "@/atomic/Tile";
 
 const CTAGrid = ({ items, limit }) => {
   const cols = limit === 4 ? 4 : 3;

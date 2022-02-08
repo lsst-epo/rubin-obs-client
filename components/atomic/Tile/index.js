@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import ResponsiveImage from "@/primitives/ResponsiveImage";
-import Image from "@/primitives/Image";
+import ResponsiveImage from "@/atomic/ResponsiveImage";
+import Image from "@/atomic/Image";
 import { mixedLinkShape } from "@/shapes/link";
 import { useGlobalData } from "@/lib/utils";
 import { PlayButton, StyledMixedLink } from "./styles";

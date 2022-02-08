@@ -8,7 +8,7 @@
       "@/content-blocks": ["components/content-blocks"],
       "@/dynamic/*": ["components/dynamic/*"],
       "@/factories/*": ["components/factories/*"],
-      "@/primitives/*": ["components/primitives/*"],
+      "@/atomic/*": ["components/atomic/*"],
       "@/layout/*": ["components/layout/*"],
       "@/templates/*": ["components/templates/*"],
       "@/global/*": ["components/global/*"],

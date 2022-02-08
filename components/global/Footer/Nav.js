@@ -1,4 +1,4 @@
-import MixedLink from "@/primitives/MixedLink";
+import MixedLink from "@/atomic/MixedLink";
 import { linksShape } from "@/shapes/link";
 
 export default function Nav({ links }) {

@@ -1,4 +1,4 @@
-import { InlineShare } from "@/components/primitives/Share";
+import { InlineShare } from "@/components/atomic/Share";
 import Container from "@/layout/Container";
 
 const SHARETHIS_PROPERTY = process.env.NEXT_PUBLIC_SHARETHIS_PROPERTY;

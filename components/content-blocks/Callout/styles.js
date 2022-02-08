@@ -1,5 +1,5 @@
-import Image from "@/primitives/Image";
-import MixedLink from "@/primitives/MixedLink";
+import Image from "@/atomic/Image";
+import MixedLink from "@/atomic/MixedLink";
 import styled from "styled-components";
 import {
   fluidScale,

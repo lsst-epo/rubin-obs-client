@@ -3,10 +3,10 @@ import styled from "styled-components";
 import Container from "@/layout/Container";
 import DataList from "@/dynamic/DataList";
 import Grid from "@/layout/Grid";
-import Tile from "@/primitives/Tile";
+import Tile from "@/atomic/Tile";
 import Pagination from "@/page/Pagination";
 import { fluidScale } from "@/styles/globalStyles";
-import Buttonish from "@/components/primitives/Buttonish";
+import Buttonish from "@/components/atomic/Buttonish";
 
 const StaffList = ({
   component,

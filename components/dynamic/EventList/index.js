@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import Container from "@/layout/Container";
 import DataList from "@/dynamic/DataList";
 import Grid from "@/layout/Grid";
-import Tile from "@/primitives/Tile";
+import Tile from "@/atomic/Tile";
 import Pagination from "@/page/Pagination";
 import {
   checkIfBetweenDates,
@@ -14,7 +14,7 @@ import {
 } from "@/lib/utils";
 import IconComposer from "@/svg/IconComposer";
 import { fluidScale, respond } from "@/styles/globalStyles";
-import Buttonish from "@/components/primitives/Buttonish";
+import Buttonish from "@/components/atomic/Buttonish";
 
 const EventList = ({
   button,

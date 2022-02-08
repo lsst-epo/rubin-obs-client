@@ -5,12 +5,12 @@ import Body from "@/global/Body";
 import ContentBlockFactory from "@/factories/ContentBlockFactory";
 import Hero from "@/page/Hero";
 import { respond } from "@/styles/globalStyles";
-import Buttonish from "@/components/primitives/Buttonish";
+import Buttonish from "@/components/atomic/Buttonish";
 import { makeDateString, makeTruncatedString } from "@/lib/utils";
 import { SlideBlock } from "@/components/content-blocks";
 import Tabs from "@/components/layout/Tabs";
 import TempList from "@/components/dynamic/TempList";
-import MixedLink from "@/components/primitives/MixedLink";
+import MixedLink from "@/components/atomic/MixedLink";
 
 export default function HomePage({
   data: { contentBlocks, customHero, description, hero, id, newsEntry, title },

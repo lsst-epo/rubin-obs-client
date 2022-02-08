@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import Social from "./Social";
 import Nav from "./Nav";
 import ContactForm from "./ContactForm";
-import Image from "@/primitives/Image";
+import Image from "@/atomic/Image";
 import { socialInfoShape } from "@/shapes/siteInfo";
 import footerContentShape from "@/shapes/footerContent";
 

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import Container from "@/layout/Container";
-import MixedLink from "@/primitives/MixedLink";
+import MixedLink from "@/atomic/MixedLink";
 import T from "@/page/Translate";
 import { usePathData } from "@/lib/utils";
 import { layoutGrid, respond } from "@/styles/globalStyles";

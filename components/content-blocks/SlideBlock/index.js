@@ -4,13 +4,13 @@ import striptags from "striptags";
 import { useTranslation } from "react-i18next";
 import Container from "@/layout/Container";
 import Slider from "@/components/layout/Slider";
-import Tile from "@/primitives/Tile";
+import Tile from "@/atomic/Tile";
 import {
   makeTruncatedString,
   normalizeItemData,
   useListForBlock,
 } from "@/lib/utils";
-import MixedLink from "@/components/primitives/MixedLink";
+import MixedLink from "@/components/atomic/MixedLink";
 import { mixedLinkShape } from "@/components/shapes/link";
 
 const SlideBlock = ({

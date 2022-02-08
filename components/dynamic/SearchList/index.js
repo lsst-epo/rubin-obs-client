@@ -11,11 +11,11 @@ import {
 } from "@/lib/utils";
 import { fluidScale } from "@/styles/globalStyles";
 import Breadcrumbs from "@/components/page/Breadcrumbs";
-import Buttonish from "@/components/primitives/Buttonish";
+import Buttonish from "@/components/atomic/Buttonish";
 import Container from "@/layout/Container";
 import DataList from "@/dynamic/DataList";
 import Grid from "@/layout/Grid";
-import Tile from "@/primitives/Tile";
+import Tile from "@/atomic/Tile";
 import Pagination from "@/page/Pagination";
 
 const SearchList = ({
