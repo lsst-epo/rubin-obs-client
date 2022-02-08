@@ -8,7 +8,7 @@ export default function Hamburger({ mobileNavActive, onClick }) {
 
   return (
     <button
-      aria-haspopup
+      aria-haspopup="dialog"
       aria-expanded={mobileNavActive}
       onClick={onClick}
       className={classNames({
