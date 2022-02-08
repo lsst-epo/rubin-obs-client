@@ -1,5 +1,5 @@
-@use 'abstracts/functions';
-@use 'abstracts/mixins/base';
+@use "abstracts/functions";
+@use "abstracts/mixins/base";
 
 $_breakpoint: functions.header(layout-breakpoint);
 $_link-gap: 14px;

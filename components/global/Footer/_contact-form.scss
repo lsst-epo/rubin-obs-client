@@ -1,6 +1,6 @@
-@use 'abstracts/mixins/appearance';
-@use 'abstracts/functions';
-@use 'abstracts/variables';
+@use "abstracts/mixins/appearance";
+@use "abstracts/functions";
+@use "abstracts/variables";
 
 $_input-color: functions.sass-palette(neutral80);
 $_input-bg: functions.sass-palette(neutral08);
@@ -17,6 +17,7 @@ $_input-bg: functions.sass-palette(neutral08);
 
   &__input {
     @include appearance.input-unstyled;
+
     display: block;
     width: 100%;
     padding: 0.813em;

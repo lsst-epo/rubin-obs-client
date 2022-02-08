@@ -1,8 +1,5 @@
-const projectName = "rubin";
-
 module.exports = {
-  plugins: ["stylelint-scss"],
-  extends: "stylelint-config-recess-order",
+  extends: ["stylelint-config-standard-scss", "stylelint-config-recess-order"],
   ignoreFiles: ["theme/styles/base/_resets.scss"],
   defaultSeverity: "error",
   rules: {
@@ -22,6 +19,8 @@ module.exports = {
     "declaration-no-important": true,
     "declaration-block-single-line-max-declarations": 1,
     "selector-class-pattern": "[a-z][a-z0-9-]*",
+    "selector-id-pattern": "[A-z_][A-z0-9-_]*",
+    "custom-property-pattern": "[A-z][A-z0-9-]*",
     // No id's allowed!! Unless accounted for
     "selector-max-id": 0,
     "selector-no-vendor-prefix": true,
