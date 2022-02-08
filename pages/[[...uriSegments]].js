@@ -89,8 +89,7 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
       Object.assign(obj, Object.keys(item).length && { [item.handle]: item }),
     {}
   );
-
-  // TODO: cache this from getStaticPaths and reuse here
+  
   const section = await getEntrySectionByUri(uri, site);
   const entryData = await getEntryData(
     uri,
