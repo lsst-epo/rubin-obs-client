@@ -35,7 +35,8 @@
     ]
   },
   "browserslist": [
-    "defaults"
+    "defaults",
+    "not IE 11"
   ],
   "lint-staged": {
     "*.{js,jsx}": "yarn fix:js",
