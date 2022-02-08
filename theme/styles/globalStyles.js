@@ -1,5 +1,6 @@
 /* eslint-disable */
 import { createGlobalStyle } from "styled-components";
+import { fluidScaleCalc, stripUnit, respondBase } from "@castiron/style-mixins";
 
 export const tokens = {
   white: "#ffffff",
@@ -107,55 +108,17 @@ export const applyFluidScale = (
   minVW = tokens.BREAK_TABLET
 ) => {
   typeof properties === "string" && (properties = [properties]);
-
-  const mainString = properties
-    .map((p) => {
-      return `--${p}: ${maxValue};${p}: var(--${p});`;
-    })
-    .join("\n");
-
-  let firstMediaString = properties
+  return properties
     .map(
-      (p) => `--${p}: ${calculateFluidScale(maxValue, minValue, maxVW, minVW)};`
+      (p) =>
+        `--${p}: clamp(${minValue}, ${fluidScaleCalc(
+          maxValue,
+          minValue,
+          maxVW,
+          minVW
+        )}, ${maxValue});`
     )
     .join("\n");
-
-  firstMediaString = `@media (max-width: ${maxVW}) {
-            ${firstMediaString}
-        }`;
-
-  let secondMediaString = properties.map((p) => `--${p}: ${minValue};`).join();
-
-  secondMediaString = `@media (max-width: ${minVW}) {
-            ${secondMediaString}
-        }`;
-
-  let supportsString = properties
-    .map((p) => {
-      return stripUnit(minValue) > stripUnit(maxValue)
-        ? `--${p}: clamp(${maxValue},${calculateFluidScale(
-            maxValue,
-            minValue,
-            maxVW,
-            minVW
-          )},${minValue});`
-        : `--${p}: clamp(${minValue},${calculateFluidScale(
-            maxValue,
-            minValue,
-            maxVW,
-            minVW
-          )},${maxValue});`;
-    })
-    .join("\n");
-
-  supportsString = `@supports (width: clamp(1px, 2px, 3px)) {
-            ${supportsString}
-        }`;
-
-  return `${mainString}
-  ${firstMediaString}
-  ${secondMediaString}
-  ${supportsString}`;
 };
 
 export const applyGap = (
@@ -176,12 +139,6 @@ export const applyTypeScale = (desktopSize = "24px", mobileSize = "18px") => {
     tokens.BREAK_TABLET,
     tokens.BREAK_MOBILE
   )}`;
-};
-
-const calculateFluidScale = (maxValue, minValue, maxVW = 130, minVW = 60) => {
-  return `calc(${minValue} + ${
-    stripUnit(maxValue) - stripUnit(minValue)
-  } * (100vw - ${minVW}) / ${stripUnit(maxVW) - stripUnit(minVW)})`;
 };
 
 export const containerMax = () => protoContainer(tokens.CONTAINER_MAX);
@@ -212,51 +169,17 @@ export const layoutGrid = (
   gapMobile = tokens.PADDING_SMALL,
   breakPoint = tokens.BREAK_TABLET
 ) => {
-  const supportsQuery = `grid-auto-columns: min-content`;
-
   return `
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  @supports (${supportsQuery}) {
-    display: grid;
-    grid-template-columns: repeat(${columns}, 1fr);
-    ${applyGap("gap", gapDesktop, gapMobile)};
-  }
+  display: grid;
+  grid-template-columns: repeat(${columns}, 1fr);
+  ${applyGap("gap", gapDesktop, gapMobile)};
 
-  > * {
-    flex: 0 1 calc(100% / ${columns} - ${gapMobile});
-
-    &:nth-child(n + ${columns + 1}) {
-      ${applyGap("margin-top", gapDesktop, gapMobile)};
-    }
-
-    @supports (${supportsQuery}) {
-      &:nth-child(n + ${columns}) {
-        margin-top: 0;
-      }
-    }
-
-    ${respond(
-      `{
-      flex-basis: 100%;
-
-      &:not(first-child) {
-        margin-top: ${gapMobile};
-      }
-
-      @supports (${supportsQuery}) {
-        grid-column: span ${columns};
-
-        &:not(first-child) {
-          margin-top: 0;
-        }
-      }
-    }
-  }`,
-      breakPoint
-    )}
-
+  ${respond(
+    `& > * {
+      grid-column: span ${columns};
+    }`,
+    breakPoint
+  )}
   `;
 };
 
@@ -335,16 +258,8 @@ export const respond = (
   operator = "max",
   aspect = "width"
 ) => {
-  return `@media all and (${operator}-${aspect}: ${size}) {
-    ${content}
-  }`;
+  return respondBase(content, size, operator, aspect);
 };
-
-export const reducedMotion = (content) => {
-  `@media (prefers-reduced-motion: reduce) {${content}}`;
-};
-
-export const stripUnit = (unit) => parseInt(unit.toString().replace(/\D/g, ""));
 
 export const token = (which) => {
   if (typeof which === "string") {

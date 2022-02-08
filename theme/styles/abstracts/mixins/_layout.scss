@@ -76,53 +76,14 @@
   $gap-mobile: functions.padding(small),
   $break: functions.break(tablet)
 ) {
-  $supports-query: "(grid-auto-columns: min-content)";
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
 
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-
-  // Use CSS Grid if supported
-  // Autoprefixer does not support autoplacement (mostly)
-  // so test for a newer grid spec property to limit implementation,
-  // with Flexbox as fallback
-  // see https://github.com/postcss/autoprefixer#does-autoprefixer-polyfill-grid-layout-for-ie
-  @supports (#{$supports-query}) {
-    /* autoprefixer: off */
-    display: grid;
-    grid-template-columns: repeat($columns, 1fr);
-
-    @include gap(gap, $gap-desktop, $gap-mobile);
-  }
-
-  > * {
-    flex: 0 1 calc(#{100% / $columns} - #{$gap-mobile});
-
-    &:nth-child(n + #{$columns + 1}) {
-      @include gap(margin-top, $gap-desktop, $gap-mobile);
-    }
-
-    @supports (#{$supports-query}) {
-      &:nth-child(n + #{$columns}) {
-        margin-top: 0;
-      }
-    }
-
-    @include base.respond($break) {
-      flex-basis: 100%;
-
-      &:not(first-child) {
-        margin-top: $gap-mobile;
-      }
-
-      @supports (#{$supports-query}) {
-        grid-column: span $columns;
-
-        /* stylelint-disable-next-line max-nesting-depth */
-        &:not(first-child) {
-          margin-top: 0;
-        }
-      }
+  @include gap(gap, $gap-desktop, $gap-mobile);
+  
+  @include base.respond($break) {
+    > * {
+      grid-column: span $columns;
     }
   }
 }
