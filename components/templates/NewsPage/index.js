@@ -13,7 +13,6 @@ import NewsList from "@/dynamic/NewsList";
 import ResponsiveImage from "@/primitives/ResponsiveImage";
 import IconComposer from "@/components/svg/IconComposer";
 import {
-  CONTAINER_WIDE,
   containerWide,
   containerFullBleed,
   respond,
@@ -66,16 +65,16 @@ export default function NewsPage({
       <AsideSecondary>
         <h3>{t(`media`)}</h3>
         {otherAssets.map((asset, i) => {
-          if(asset.image?.[0].url) { 
+          if (asset.image?.[0].url) {
             return (
               <Link key={i} href={asset.image?.[0].url}>
                 <a>
                   <ResponsiveImage image={asset.image?.[0]} ratio="8:5" />
                 </a>
               </Link>
-            )
+            );
           }
-          })}
+        })}
       </AsideSecondary>
     ) : null;
   };
@@ -85,14 +84,14 @@ export default function NewsPage({
       <AsideTags>
         <h3>{t(`tags`)}</h3>
         {postTags.map((tag, i) => {
-          if(rootHomeLink?.uri && tag.slug) { 
+          if (rootHomeLink?.uri && tag.slug) {
             return (
               <Link key={i} href={`/${rootHomeLink?.uri}?search=${tag.slug}`}>
                 <a>{`#${tag.title}`}</a>
               </Link>
-            )
+            );
           }
-          })}
+        })}
       </AsideTags>
     ) : null;
   };
@@ -135,14 +134,13 @@ export default function NewsPage({
                     </h3>
                   );
                 } else if (a.textLink?.length > 0) {
-                  if(a.textLink[0].url) { 
+                  if (a.textLink[0].url) {
                     return (
                       <Link href={a.textLink[0].url} key={i}>
                         <a>{a.text}</a>
                       </Link>
                     );
                   }
-                 
                 } else if (a.externalLink) {
                   manualDoc = true;
                   return (
@@ -164,18 +162,19 @@ export default function NewsPage({
                   );
                 } else if (a.galleryItem?.length > 0) {
                   manualMedia = true;
-                  if(a.galleryItem[0].uri) {
+                  if (a.galleryItem[0].uri) {
                     return (
                       <Link href={`/${a.galleryItem[0].uri}`} key={i}>
                         <a>
                           <ResponsiveImage
-                            image={a.galleryItem[0].representativeAssetVariant[0]}
+                            image={
+                              a.galleryItem[0].representativeAssetVariant[0]
+                            }
                           />
                         </a>
                       </Link>
                     );
                   }
-                  
                 }
               })}
             </AsidePrimary>

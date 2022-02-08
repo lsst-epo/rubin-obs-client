@@ -77,7 +77,7 @@ const NewsGrid = ({ items = [], limit, listTypeId, sectionHandle, pageId }) => {
                   sticker: makeSticker(newsAssets, title, url),
                 }}
                 image={image?.[0]}
-                isFeature={i === 0 ? true : false}
+                isFeature={i === 0}
                 link={uri}
                 pretitle={
                   postType?.[0]?.slug ? t(`news.${postType?.[0]?.slug}`) : null

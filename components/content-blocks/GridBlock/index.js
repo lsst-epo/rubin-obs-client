@@ -30,9 +30,7 @@ export default function GridBlock({
   return (
     <Container>
       <div>
-        <Header addBorder={typeHandle === "relatedContent" ? true : false}>
-          {header}
-        </Header>
+        <Header addBorder={typeHandle === "relatedContent"}>{header}</Header>
         <ContentGrid
           items={items}
           limit={parseInt(limit)}
