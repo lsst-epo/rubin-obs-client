@@ -6,7 +6,7 @@ import { mixedLinkShape } from "@/shapes/link";
 import CTAGrid from "./CTAGrid";
 import MainGrid from "./MainGrid";
 import NewsGrid from "./NewsGrid";
-import { applyFluidScale } from "@/styles/globalStyles";
+import { fluidScale } from "@/styles/globalStyles";
 
 export default function GridBlock({
   numberOfItems: limit,
@@ -51,7 +51,7 @@ export default function GridBlock({
 }
 
 const Header = styled.h2`
-  ${applyFluidScale("margin-bottom", "100px", "60px")}
+  margin-bottom: ${fluidScale("100px", "60px")};
 
   ${(p) =>
     p.addBorder &&
@@ -61,7 +61,7 @@ const Header = styled.h2`
 `;
 
 const StyledMixedLink = styled(MixedLink)`
-  ${applyFluidScale("margin-top", "95px", "40px")}
+  margin-top: ${fluidScale("95px", "40px")};
 `;
 
 GridBlock.displayName = "ContentBlock.GridBlock";

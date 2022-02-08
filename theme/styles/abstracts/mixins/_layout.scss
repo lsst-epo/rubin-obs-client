@@ -80,7 +80,7 @@
   grid-template-columns: repeat($columns, 1fr);
 
   @include gap(gap, $gap-desktop, $gap-mobile);
-  
+
   @include base.respond($break) {
     > * {
       grid-column: span $columns;

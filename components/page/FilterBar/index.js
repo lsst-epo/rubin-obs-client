@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import {
-  applyFluidScale,
+  fluidScale,
   BREAK_MOBILE,
   containerRegular,
   respond,
@@ -316,8 +316,8 @@ const FilterSearch = styled.form`
   }
 
   input {
-    ${applyFluidScale("width", "480px", "200px")}
     border: none;
+    width: ${fluidScale("480px", "200px")};
     height: 50px;
     padding: 4px 6px 5px 6px;
     vertical-align: middle;

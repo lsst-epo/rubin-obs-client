@@ -2,7 +2,7 @@ import Image from "@/primitives/Image";
 import MixedLink from "@/primitives/MixedLink";
 import styled from "styled-components";
 import {
-  applyFluidScale,
+  fluidScale,
   containerFullBleed,
   containerRegular,
   needsDarkColor,
@@ -28,14 +28,14 @@ export const Section = styled.section`
 
 export const Inner = styled.div`
   ${containerRegular()}
-  ${applyFluidScale("padding-top", "50px", "30px")}
-  ${applyFluidScale("padding-bottom", "50px", "40px")}
   display: grid;
   grid-template-areas: ${(p) =>
     p.order === "text" ? `"text image"` : `"image text"`};
   ${(p) => `grid-template-columns: ${p.ratio}% 1fr;`}
   gap: ${gap};
   min-height: 360px;
+  padding-top: ${fluidScale("50px", "30px")};
+  padding-bottom: ${fluidScale("50px", "40px")};
 
   ${respond(
     `
@@ -115,9 +115,10 @@ export const StyledTwoToneImage = styled.div`
   grid-area: image;
   align-self: start;
   justify-self: end;
+  width: ${fluidScale("180px", "130px")};
   min-height: 220px;
-  ${applyFluidScale("width", "180px", "130px")};
-  ${applyFluidScale("margin-right", "20px", "0px")};
+  margin-right: ${fluidScale("20px", "0px")};
+
   img {
     padding: 4px;
     border-radius: 100%;

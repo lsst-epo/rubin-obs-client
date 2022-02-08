@@ -13,7 +13,7 @@ import {
   useGlobalData,
 } from "@/lib/utils";
 import IconComposer from "@/svg/IconComposer";
-import { applyFluidScale, respond } from "@/styles/globalStyles";
+import { fluidScale, respond } from "@/styles/globalStyles";
 import Buttonish from "@/components/primitives/Buttonish";
 
 const EventList = ({
@@ -140,7 +140,7 @@ const EventList = ({
 };
 
 const Header = styled.h2`
-  ${applyFluidScale("margin-bottom", "40px", "20px")}
+  margin-bottom: ${fluidScale("40px", "20px")};
   padding-bottom: 10px;
   border-bottom: 10px solid var(--turquoise55);
 `;
@@ -159,13 +159,13 @@ const Date = styled.div`
   }
 
   .month {
-    ${applyFluidScale("font-size", "22px", "18px")}
+    font-size: ${fluidScale("22px", "18px")};
     font-weight: 800;
     ${respond(`font-weight: 400;`)}
   }
 
   .day {
-    ${applyFluidScale("font-size", "40px", "20px")}
+    font-size: ${fluidScale("40px", "20px")};
     font-weight: 800;
   }
 

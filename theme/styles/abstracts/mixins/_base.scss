@@ -18,8 +18,8 @@
   $max-vw: functions.break(desktop),
   $min-vw: functions.break(tablet)
 ) {
-  @if $min-value > $max-value {
-    @each $property in $properties {
+  @each $property in $properties {
+    @if $min-value > $max-value {
       --#{$property}:
         clamp(
           #{$max-value},
@@ -31,9 +31,7 @@
           )},
           #{$min-value}
         );
-    }
-  } @else {
-    @each $property in $properties {
+    } @else {
       --#{$property}:
         clamp(
           #{$min-value},
@@ -46,6 +44,8 @@
           #{$max-value}
         );
     }
+
+    #{$property}: var(#{"--" + $property});
   }
 }
 
