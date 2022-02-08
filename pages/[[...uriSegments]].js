@@ -1,6 +1,4 @@
-import { useRouter } from "next/router";
 import PropTypes from "prop-types";
-import Loader from "@/components/svg/unique/Loader";
 import { getGlobalData } from "@/api/global";
 import { getAllEntries, getEntrySectionByUri } from "@/api/entries";
 import { getEntryDataByUri } from "@/api/entry";
@@ -28,14 +26,6 @@ import { updateI18n } from "@/lib/i18n";
 const CRAFT_HOMEPAGE_URI = "__home__";
 
 export default function Page({ section, globalData, ...entryProps }) {
-  const router = useRouter();
-
-  // If the page is not yet generated, this will be displayed
-  // initially until getStaticProps() finishes running
-  if (router.isFallback) {
-    return <Loader />;
-  }
-
   globalData.localeInfo.locale === "es" ? updateI18n("es") : updateI18n("en");
 
   const sectionMap = {
@@ -69,7 +59,7 @@ async function getEntryData(uri, section, site, previewToken) {
 export async function getStaticPaths() {
   return {
     paths: await getAllEntries(),
-    fallback: true,
+    fallback: "blocking",
   };
 }
 
@@ -89,7 +79,7 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
       Object.assign(obj, Object.keys(item).length && { [item.handle]: item }),
     {}
   );
-  
+
   const section = await getEntrySectionByUri(uri, site);
   const entryData = await getEntryData(
     uri,
