@@ -33,8 +33,8 @@ function Item({ account, url }) {
 }
 
 Item.propTypes = {
-  account: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired,
+  account: PropTypes.string,
+  url: PropTypes.string,
 };
 
 export default function Social({ socialInfo }) {
