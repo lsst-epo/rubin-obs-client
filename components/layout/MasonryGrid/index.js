@@ -44,7 +44,7 @@ export default function MasonryGrid({ items }) {
   }
 
   function checkIfVideo(cats) {
-    return cats?.[0]?.slug === "video" ? true : false;
+    return cats?.[0]?.slug === "video";
   }
 
   return (

@@ -18,8 +18,7 @@ import {
   getCategoryGroup,
   useGlobalData,
 } from "@/lib/utils";
-import { default as SearchIcon } from "@/svg/icons/Search";
-import Link from "next/link";
+import SearchIcon from "@/svg/icons/Search";
 import withLiveRegionChange from "@/hoc/withLiveRegionChange";
 import IconComposer from "@/components/svg/IconComposer";
 

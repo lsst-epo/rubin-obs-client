@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import MixedLink from "@/primitives/MixedLink";
 import { linksShape } from "@/shapes/link";
 

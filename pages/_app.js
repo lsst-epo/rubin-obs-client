@@ -1,3 +1,5 @@
+/* eslint-disable unused-imports/no-unused-imports */
+
 import PropTypes from "prop-types";
 import "@/lib/i18n";
 import GlobalStyles from "@/styles/globalStyles";
@@ -19,3 +21,5 @@ Client.propTypes = {
 };
 
 export default Client;
+
+/* eslint-enable unused-imports/no-unused-imports */

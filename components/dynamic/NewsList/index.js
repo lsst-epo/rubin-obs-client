@@ -63,10 +63,7 @@ const NewsList = ({
             <div>
               {header && <Header>{header}</Header>}
               {entries?.length > 0 && (
-                <Grid
-                  showFeature={limit > 4 && page === 1 ? true : false}
-                  columns={cols}
-                >
+                <Grid showFeature={!!(limit > 4 && page === 1)} columns={cols}>
                   {entries.map(
                     (
                       {
@@ -93,7 +90,7 @@ const NewsList = ({
                             : null
                         }
                         image={image?.[0]}
-                        isFeature={limit > 4 && i === 0 ? true : false}
+                        isFeature={!!(limit > 4 && i === 0)}
                         link={uri}
                         pretitle={
                           gridType === "news" && postType?.[0]?.slug

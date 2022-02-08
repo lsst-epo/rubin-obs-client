@@ -75,7 +75,7 @@ export async function getStaticPaths() {
 
   return {
     paths: paths,
-    fallback: true
+    fallback: true,
   };
 }
 
@@ -89,7 +89,7 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
   const data = await getGlobalData();
 
   // add _es to property names if site is "es"
-  const isEspanol = site === "es" ? true : false;
+  const isEspanol = site === "es";
   const globals = data[`globals${isEspanol ? "_es" : ""}`].reduce(
     (obj, item) =>
       Object.assign(obj, Object.keys(item).length && { [item.handle]: item }),

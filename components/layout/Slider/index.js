@@ -3,7 +3,7 @@ import { StyledSlider } from "./styles";
 import Slider from "react-slick";
 
 export default function SimpleSlider({ children }) {
-  var settings = {
+  const settings = {
     dots: true,
   };
   return (

@@ -15,7 +15,7 @@ module.exports = {
     // storybook stories are exported this way
     "import/no-anonymous-default-export": 0,
     // would be good to use next/image but we aren't yet
-    "@next/next/no-img-element": 0
+    "@next/next/no-img-element": 0,
   },
   extends: ["@castiron", "next"],
 };

@@ -9,7 +9,6 @@ import Hamburger from "./Hamburger";
 import LanguageSelect from "@/global/Header/LanguageSelect";
 import Logo from "@/svg/unique/Logo";
 import internalLinkShape from "@/shapes/link";
-import { localizedShape } from "@/shapes/locale";
 import { useGlobalData, useNavHider } from "@/lib/utils";
 
 export default function Header({ navItems }) {

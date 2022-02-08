@@ -4,7 +4,6 @@ import {
   BREAK_PHABLET_MIN,
   BREAK_TABLET,
   layoutGrid,
-  respond,
 } from "@/styles/globalStyles";
 
 const Grid = ({ children, showFeature = false, columns = 3, tablet = 1 }) => {

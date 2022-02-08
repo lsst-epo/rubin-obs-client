@@ -7,7 +7,6 @@ import {
   normalizePathData,
   useList,
   useGlobalData,
-  getCategoryObject,
 } from "@/lib/utils";
 import Loader from "@/components/svg/unique/Loader";
 
