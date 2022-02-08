@@ -1,6 +1,6 @@
-@use '../functions';
-@use '../variables';
-@use 'sass:color';
+@use "../functions";
+@use "../variables";
+@use "sass:color";
 
 // Appearance mixins
 // --------------------
@@ -27,13 +27,14 @@
   width: 1em;
   height: 1em;
   vertical-align: middle;
-  fill: currentColor;
+  fill: currentcolor;
 }
 
 // Links, Buttons
 // --------------------------------------------------------
 @mixin proto-button {
   @include focus-default;
+
   display: inline-block;
   padding: 0;
   font: inherit;
@@ -60,6 +61,7 @@
 // --------------------------------------------------------
 @mixin input-unstyled {
   @include focus-default;
+
   display: inline-block;
   font-size: inherit;
   color: inherit;

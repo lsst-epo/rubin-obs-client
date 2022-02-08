@@ -1,4 +1,4 @@
-@use 'abstracts/functions';
+@use "abstracts/functions";
 
 $_color: functions.sass-palette(neutral80);
 $_bg-color: functions.sass-palette(neutral02);
@@ -43,8 +43,8 @@ $_bg-color: functions.sass-palette(neutral02);
       display: block;
       width: calc(100% - #{2 * functions.header(nav-link-padding-lateral)});
       height: 1px;
-      content: '';
-      background-color: currentColor;
+      content: "";
+      background-color: currentcolor;
     }
   }
 

@@ -1,12 +1,14 @@
-@use 'sass:map';
-@use 'sass:math';
-@use 'sass:meta';
-@use 'variables';
-@use 'tokens';
+@use "sass:map";
+@use "sass:math";
+@use "sass:meta";
+@use "sass:string";
+@use "sass:color";
+@use "variables";
+@use "tokens";
 
 // used by fluid-scale mixin
 @function strip-unit($number) {
-  @if meta.type-of($number) == 'number' and not math.is-unitless($number) {
+  @if meta.type-of($number) == "number" and not math.is-unitless($number) {
     @return $number / ($number * 0 + 1);
   }
 
@@ -19,22 +21,24 @@
 
 // convert px to em
 @function px-to-em($px, $base: variables.$font-size-base-desktop) {
-  @return (strip-unit($px) / strip-unit($base) + 0em);
+  @return (strip-unit($px) / strip-unit($base) + 0);
 }
 
 // encode colors
 @function encode-color($string) {
-  @if type-of($string) == 'color' {
-    $hex: str-slice(ie-hex-str($string), 4);
-    $string: unquote('#{$hex}');
+  @if type-of($string) == "color" {
+    $hex: string.slice(color.ie-hex-str($string), 4);
+    $string: string.unquote("#{$hex}");
   }
-  $string: '%23' + $string;
+
+  $string: "%23" + $string;
+
   @return $string;
 }
 
 // convert hex to rgb value
 @function hex-to-rgb($string) {
-  @return '#{red($string)}, #{green($string), #{blue($string)}}';
+  @return "#{red($string)}, #{green($string), #{blue($string)}}";
 }
 
 // return fluid-scale calc value
@@ -45,8 +49,7 @@
   $min-vw: break(60)
 ) {
   @return calc(
-    #{$min-value} + #{strip-unit($max-value - $min-value)} *
-    (100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}
+    #{$min-value} + #{strip-unit($max-value - $min-value)} * (100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}
   );
 }
 

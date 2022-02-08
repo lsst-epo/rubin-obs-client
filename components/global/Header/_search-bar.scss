@@ -1,6 +1,6 @@
-@use 'abstracts/mixins/appearance';
-@use 'abstracts/mixins/base';
-@use 'abstracts/functions';
+@use "abstracts/mixins/appearance";
+@use "abstracts/mixins/base";
+@use "abstracts/functions";
 
 .c-search-bar {
   position: relative;
@@ -46,6 +46,7 @@
       functions.break(tablet),
       functions.break(mobile)
     );
+
     width: calc(100% - var(--width));
     margin-left: var(--width);
 

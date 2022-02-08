@@ -1,6 +1,6 @@
-@use 'abstracts/functions';
-@use 'abstracts/mixins/base';
-@use 'abstracts/mixins/layout';
+@use "abstracts/functions";
+@use "abstracts/mixins/base";
+@use "abstracts/mixins/layout";
 
 $_breakpoint: functions.header(layout-breakpoint);
 
@@ -12,6 +12,7 @@ $_breakpoint: functions.header(layout-breakpoint);
     functions.break(tablet),
     functions.break(mobile)
   );
+
   top: 0;
   z-index: functions.z-stack(header);
   display: grid;
@@ -51,6 +52,7 @@ $_breakpoint: functions.header(layout-breakpoint);
 
   &__search-block {
     grid-area: search;
+
     @include base.respond($_breakpoint) {
       justify-self: end;
     }
@@ -91,6 +93,7 @@ $_breakpoint: functions.header(layout-breakpoint);
       functions.break(tablet),
       functions.break(mobile)
     );
+
     height: 100%;
     transition: background-color 0.2s;
 
@@ -124,6 +127,7 @@ $_breakpoint: functions.header(layout-breakpoint);
       functions.break(tablet),
       functions.break(mobile)
     );
+
     display: flex;
     align-items: center;
     height: var(--height);
@@ -155,7 +159,9 @@ $_breakpoint: functions.header(layout-breakpoint);
       functions.break(tablet),
       functions.break(mobile)
     );
+
     fill: functions.palette(white);
+
     // transition: fill 0.4s 0.1s;
   }
 

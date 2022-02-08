@@ -1,7 +1,7 @@
-@use 'abstracts/functions';
-@use 'abstracts/mixins/appearance';
-@use 'abstracts/mixins/base';
-@use 'abstracts/mixins/layout';
+@use "abstracts/functions";
+@use "abstracts/mixins/appearance";
+@use "abstracts/mixins/base";
+@use "abstracts/mixins/layout";
 
 // Base
 // --------------------------------------------------------
@@ -18,6 +18,7 @@
 html {
   // Applies a natural box layout model to all the things
   box-sizing: border-box;
+
   // Set the base font size here, which will correspond to 1em inside <body>
   font-size: 100%;
   background-color: functions.palette(offwhite);
@@ -60,6 +61,7 @@ img {
 
 a {
   @include appearance.focus-default;
+
   color: inherit;
 }
 
@@ -68,7 +70,7 @@ button {
 }
 
 svg {
-  fill: currentColor;
+  fill: currentcolor;
 }
 
 /* Remove all animations and transitions for people that prefer not to see them */

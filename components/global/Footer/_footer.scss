@@ -1,6 +1,6 @@
-@use 'abstracts/functions';
-@use 'abstracts/mixins/base';
-@use 'abstracts/mixins/layout';
+@use "abstracts/functions";
+@use "abstracts/mixins/base";
+@use "abstracts/mixins/layout";
 
 $_spacing-desktop: 35px;
 $_spacing-mobile: 24px;
@@ -18,15 +18,16 @@ $_form-breakpoint: functions.break(tablet);
       $_spacing-desktop,
       $_spacing-mobile
     );
+
     display: grid;
     grid-template:
-      'form colophon' auto
-      'form sponsors' auto / minmax(300px, auto) minmax(45%, 864px);
+      "form colophon" auto
+      "form sponsors" auto / minmax(300px, auto) minmax(45%, 864px);
 
     @include base.respond($_form-breakpoint) {
       grid-template:
-        'colophon' auto
-        'sponsors' auto / auto;
+        "colophon" auto
+        "sponsors" auto / auto;
     }
   }
 
