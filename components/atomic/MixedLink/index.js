@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import Link from "next/link";
-import ExternalLink from "@/primitives/ExternalLink";
+import ExternalLink from "@/atomic/ExternalLink";
 import { mixedLinkInternalShape } from "@/shapes/link";
 import { normalizePathData } from "@/lib/utils";
 

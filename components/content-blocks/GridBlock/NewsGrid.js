@@ -7,9 +7,9 @@ import {
   useList,
 } from "@/lib/utils";
 import Grid from "@/layout/Grid";
-import Tile from "@/primitives/Tile";
+import Tile from "@/atomic/Tile";
 import IconComposer from "@/svg/IconComposer";
-import { PopupShare } from "@/components/primitives/Share";
+import { PopupShare } from "@/components/atomic/Share";
 
 const NewsGrid = ({ items = [], limit, listTypeId, sectionHandle, pageId }) => {
   const { t } = useTranslation();

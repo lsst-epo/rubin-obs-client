@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import Container from "@/layout/Container";
-import Video from "@/components/primitives/Video";
+import Video from "@/components/atomic/Video";
 
 export default function VideoBlock({ caption, url }) {
   return (

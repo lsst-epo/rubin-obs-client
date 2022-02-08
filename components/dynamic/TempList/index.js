@@ -3,12 +3,12 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Container from "@/layout/Container";
-import MixedLink from "@/components/primitives/MixedLink";
+import MixedLink from "@/components/atomic/MixedLink";
 import { respond } from "@/styles/globalStyles";
 import { allData } from "./data";
 import { mixedLinkShape } from "@/components/shapes/link";
 import IconComposer from "@/components/svg/IconComposer";
-import ResponsiveImage from "@/components/primitives/ResponsiveImage";
+import ResponsiveImage from "@/components/atomic/ResponsiveImage";
 
 const Alert = ({ data }) => {
   const { t } = useTranslation();

@@ -6,7 +6,7 @@ import Body from "@/global/Body";
 import { Share } from "@/content-blocks";
 import Breadcrumbs from "@/page/Breadcrumbs";
 import Container from "@/layout/Container";
-import Image from "@/primitives/Image";
+import Image from "@/atomic/Image";
 import StaffList from "@/dynamic/StaffList";
 import { respond } from "@/styles/globalStyles";
 

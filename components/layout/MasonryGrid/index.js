@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import Link from "next/link";
 import styled from "styled-components";
-import ResponsiveImage from "@/components/primitives/ResponsiveImage";
+import ResponsiveImage from "@/components/atomic/ResponsiveImage";
 import { containerRegular } from "@/styles/globalStyles";
 import IconComposer from "@/components/svg/IconComposer";
 

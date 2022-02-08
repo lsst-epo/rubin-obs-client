@@ -10,7 +10,7 @@ import { Share } from "@/content-blocks";
 import Breadcrumbs from "@/page/Breadcrumbs";
 import Hero from "@/page/Hero";
 import NewsList from "@/dynamic/NewsList";
-import ResponsiveImage from "@/primitives/ResponsiveImage";
+import ResponsiveImage from "@/atomic/ResponsiveImage";
 import IconComposer from "@/components/svg/IconComposer";
 import {
   containerWide,

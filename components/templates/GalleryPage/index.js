@@ -13,10 +13,10 @@ import {
 import Body from "@/global/Body";
 import Breadcrumbs from "@/page/Breadcrumbs";
 import Container from "@/layout/Container";
-import ResponsiveImage from "@/primitives/ResponsiveImage";
-import Video from "@/primitives/Video";
-import Accordion from "@/primitives/Accordion";
-import Buttonish from "@/components/primitives/Buttonish";
+import ResponsiveImage from "@/atomic/ResponsiveImage";
+import Video from "@/atomic/Video";
+import Accordion from "@/atomic/Accordion";
+import Buttonish from "@/components/atomic/Buttonish";
 import { containerNarrow, respond } from "@/styles/globalStyles";
 
 export default function GalleryPage({

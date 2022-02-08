@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import Image from "@/primitives/Image";
+import Image from "@/atomic/Image";
 import imageShape from "@/shapes/image";
 import Container from "@/layout/Container";
 

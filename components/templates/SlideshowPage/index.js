@@ -8,8 +8,8 @@ import Body from "@/global/Body";
 import Breadcrumbs from "@/page/Breadcrumbs";
 import Container from "@/layout/Container";
 import Slider from "@/layout/Slider";
-import ResponsiveImage from "@/primitives/ResponsiveImage";
-import Buttonish from "@/components/primitives/Buttonish";
+import ResponsiveImage from "@/atomic/ResponsiveImage";
+import Buttonish from "@/components/atomic/Buttonish";
 import { containerFull, respond } from "@/styles/globalStyles";
 
 export default function SlideshowPage({

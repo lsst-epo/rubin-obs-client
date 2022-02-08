@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import Container from "@/layout/Container";
-import MixedLink from "@/primitives/MixedLink";
+import MixedLink from "@/atomic/MixedLink";
 import { mixedLinkShape } from "@/shapes/link";
 import CTAGrid from "./CTAGrid";
 import MainGrid from "./MainGrid";

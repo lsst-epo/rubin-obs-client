@@ -12,7 +12,7 @@ import {
   StyledBackgroundImage,
   StyledTwoToneImage,
 } from "./styles";
-import ResponsiveImage from "@/components/primitives/ResponsiveImage";
+import ResponsiveImage from "@/components/atomic/ResponsiveImage";
 
 export default function CalloutTwoTone({ callout }) {
   const {
