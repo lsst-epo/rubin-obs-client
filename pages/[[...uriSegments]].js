@@ -67,14 +67,8 @@ async function getEntryData(uri, section, site, previewToken) {
 }
 
 export async function getStaticPaths() {
-  const paths = await getAllEntries();
-  // this doesn't seem needed but here it is in case...
-  // paths.find(
-  //   (x) => x.params.uri === CRAFT_HOMEPAGE_URI
-  // ).params.uriSegments = [];
-
   return {
-    paths: paths,
+    paths: await getAllEntries(),
     fallback: true,
   };
 }
