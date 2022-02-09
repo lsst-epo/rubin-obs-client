@@ -404,6 +404,15 @@
     "@babel/helper-validator-identifier" "^7.16.7"
     to-fast-properties "^2.0.0"
 
+"@castiron/components-breadcrumbs@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@castiron/components-breadcrumbs/-/components-breadcrumbs-1.1.0.tgz#6bf68cb6ed0a6ccd63f38a7ed925718252649019"
+  integrity sha512-JBiSUqareT/ue+JzNR15iGZqUj81ibqX11alCuyrS8RhzZqCqsI/f7kv1SDSPWUQTjB9WAmCVgEmtd2jYTIINg==
+  dependencies:
+    react "^17.0.1"
+    react-dom "^17.0.1"
+    typescript "^4.4.4"
+
 "@castiron/eslint-config@^0.0.1":
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/@castiron/eslint-config/-/eslint-config-0.0.1.tgz#3c23173fcf57ee2b72b5bc1f5e4e1526e22c1fed"
@@ -3605,7 +3614,7 @@ quick-lru@^4.0.1:
   resolved "https://registry.yarnpkg.com/quick-lru/-/quick-lru-4.0.1.tgz#5b8878f113a58217848c6482026c73e1ba57727f"
   integrity sha512-ARhCpm70fzdcvNQfPoy49IaanKkTlRWF2JMzqhcJbhSFRZv7nPTvZJdcY7301IPmvW+/p0RgIWnQDLJxifsQ7g==
 
-react-dom@17.0.2:
+react-dom@17.0.2, react-dom@^17.0.1:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-17.0.2.tgz#ecffb6845e3ad8dbfcdc498f0d0a939736502c23"
   integrity sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA==
@@ -3660,7 +3669,7 @@ react-slick@^0.28.1:
     lodash.debounce "^4.0.8"
     resize-observer-polyfill "^1.5.0"
 
-react@17.0.2:
+react@17.0.2, react@^17.0.1:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react/-/react-17.0.2.tgz#d0b5cc516d29eb3eee383f75b62864cfb6800037"
   integrity sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA==
@@ -4489,7 +4498,7 @@ typedarray-to-buffer@^4.0.0:
   resolved "https://registry.yarnpkg.com/typedarray-to-buffer/-/typedarray-to-buffer-4.0.0.tgz#cdd2933c61dd3f5f02eda5d012d441f95bfeb50a"
   integrity sha512-6dOYeZfS3O9RtRD1caom0sMxgK59b27+IwoNy8RDPsmslSGOyU+mpTamlaIW7aNKi90ZQZ9DFaZL3YRoiSCULQ==
 
-typescript@^4.2.3:
+typescript@^4.2.3, typescript@^4.4.4:
   version "4.5.5"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.5.5.tgz#d8c953832d28924a9e3d37c73d729c846c5896f3"
   integrity sha512-TCTIul70LyWe6IJWT8QSYeA54WQe8EjQFU4wY52Fasj5UKx88LNYKCgBEHcOMOrFF1rKGbD8v/xcNWVUq9SymA==
