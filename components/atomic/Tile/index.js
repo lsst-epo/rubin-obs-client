@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import ResponsiveImage from "@/atomic/ResponsiveImage";
 import Image from "@/atomic/Image";
+import MixedLink from "@/atomic/MixedLink";
 import { mixedLinkShape } from "@/shapes/link";
 import { useGlobalData } from "@/lib/utils";
 import { PlayButton, StyledMixedLink } from "./styles";
@@ -37,6 +38,7 @@ const Tile = ({
 
   return (
     <StyledMixedLink
+      as={link?.url ? MixedLink : "div"}
       {...link}
       className={classNames(
         `${type}`,
@@ -88,7 +90,7 @@ Tile.propTypes = {
   ]),
   text: PropTypes.string,
   type: PropTypes.string,
-  link: PropTypes.oneOfType([PropTypes.string, mixedLinkShape]).isRequired,
+  link: PropTypes.oneOfType([PropTypes.string, mixedLinkShape]),
 };
 
 export default Tile;
