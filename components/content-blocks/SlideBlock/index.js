@@ -58,9 +58,11 @@ const SlideBlock = ({
     // combine with curated items. Filter so no dupes.
     allItems = [
       ...allItems,
-      ...data.entries.filter((item) =>
-        allItems.findIndex((obj) => obj?.id === item.id)
-      ),
+      ...data.entries.filter((item) => {
+        // filter out empty objects
+        if (!Object.keys(item).length) return false;
+        return allItems.findIndex((obj) => obj?.id === item.id);
+      }),
     ].slice(0, limit);
   }
 
