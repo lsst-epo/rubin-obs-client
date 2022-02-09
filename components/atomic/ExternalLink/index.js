@@ -20,7 +20,7 @@ export default function ExternalLink({
   );
 }
 
-ExternalLink.displayName = "Primitives.ExternalLink";
+ExternalLink.displayName = "Atomic.ExternalLink";
 
 ExternalLink.propTypes = {
   href: PropTypes.string.isRequired,
