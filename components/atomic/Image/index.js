@@ -36,6 +36,6 @@ export default function Image({ image, className, title }) {
   );
 }
 
-Image.displayName = "Primitives.Image";
+Image.displayName = "Atomic.Image";
 
 Image.propTypes = imageShape;

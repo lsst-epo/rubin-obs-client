@@ -57,7 +57,7 @@ const Details = styled.div`
   margin-top: 1.5em;
 `;
 
-Accordion.displayName = "Primitives.Accordion";
+Accordion.displayName = "Atomic.Accordion";
 
 Accordion.propTypes = {
   summary: PropTypes.string.isRequired,

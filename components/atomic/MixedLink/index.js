@@ -50,7 +50,7 @@ export default function MixedLink({
   }
 }
 
-MixedLink.displayName = "Primitives.MixedLink";
+MixedLink.displayName = "Atomic.MixedLink";
 
 MixedLink.propTypes = {
   ...mixedLinkInternalShape,
