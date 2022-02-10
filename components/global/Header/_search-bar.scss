@@ -16,6 +16,14 @@
     top: 0;
     left: 0;
     height: 100%;
+
+    svg {
+      transform: translateY(10%);
+
+      @include base.respond(functions.header(layout-breakpoint)) {
+        transform: none;
+      }
+    }
   }
 
   &__form {
