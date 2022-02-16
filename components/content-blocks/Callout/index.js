@@ -3,6 +3,8 @@ import CalloutTwoTone from "./CalloutTwoTone";
 import CalloutMain from "./CalloutMain";
 
 export default function CalloutContentBlock({ callout: calloutArray }) {
+  if (!calloutArray?.length) return null;
+
   const callout = calloutArray[0];
 
   return callout.calloutType === "calloutTwoTone" ? (
