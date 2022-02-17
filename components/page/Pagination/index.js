@@ -37,7 +37,7 @@ const Pagination = ({ limit, offset, page, total }) => {
     <StyledContainer width="regular">
       <NavDesktop>
         <div>
-          <T i18nKey="pagination.showing">
+          <T i18nKey="pagination.showing-range">
             Showing {{ from }} to {{ to }} of {{ total }}
           </T>
         </div>

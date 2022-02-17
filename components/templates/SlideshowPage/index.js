@@ -7,7 +7,7 @@ import { useCustomBreadcrumbs } from "@/lib/utils";
 import Body from "@/global/Body";
 import Breadcrumbs from "@/page/Breadcrumbs";
 import Container from "@/layout/Container";
-import Slider from "@/layout/Slider";
+import Carousel from "@/layout/Carousel";
 import ResponsiveImage from "@/atomic/ResponsiveImage";
 import Buttonish from "@/components/atomic/Buttonish";
 import { containerFull, respond } from "@/styles/globalStyles";
@@ -48,41 +48,39 @@ export default function SlideshowPage({
     <Body {...bodyProps}>
       <Breadcrumbs breadcrumbs={[...customBreadcrumbs, pageLink]} />
       <Modalish>
-        <Slider>
+        <Carousel>
           {allItems.map((item, i) => (
-            <div key={i}>
-              <SlideshowGrid>
-                <SlideshowMain>
-                  {i === 0 ? (
-                    <>
-                      <h1>{title}</h1>
-                      <div>{`${i + 1} of ${allItems.length}`}</div>
-                    </>
-                  ) : (
-                    <div>
-                      <h1>{title}</h1>
-                      <div>{`${i + 1} of ${allItems.length}`}</div>
-                      <h2>{item.title}</h2>
-                    </div>
-                  )}
-                  <div
-                    className="c-content-rte"
-                    dangerouslySetInnerHTML={{ __html: item.description }}
-                  />
-                </SlideshowMain>
-                <SlideshowFooter>
-                  <Buttonish
-                    url={item.image?.[0]?.url}
-                    text={t(`gallery.download-image`)}
-                  />
-                </SlideshowFooter>
-                {item.image?.[0] && (
-                  <StyledResponsiveImage image={item.image[0]} ratio="4:3" />
+            <SlideshowGrid key={i}>
+              <SlideshowMain>
+                {i === 0 ? (
+                  <>
+                    <h1>{title}</h1>
+                    <div>{`${i + 1} of ${allItems.length}`}</div>
+                  </>
+                ) : (
+                  <div>
+                    <h1>{title}</h1>
+                    <div>{`${i + 1} of ${allItems.length}`}</div>
+                    <h2>{item.title}</h2>
+                  </div>
                 )}
-              </SlideshowGrid>
-            </div>
+                <div
+                  className="c-content-rte"
+                  dangerouslySetInnerHTML={{ __html: item.description }}
+                />
+              </SlideshowMain>
+              <SlideshowFooter>
+                <Buttonish
+                  url={item.image?.[0]?.url}
+                  text={t(`gallery.download-image`)}
+                />
+              </SlideshowFooter>
+              {item.image?.[0] && (
+                <StyledResponsiveImage image={item.image[0]} ratio="4:3" />
+              )}
+            </SlideshowGrid>
           ))}
-        </Slider>
+        </Carousel>
       </Modalish>
       <Container width="regular">
         <Buttonish
@@ -96,6 +94,9 @@ export default function SlideshowPage({
 }
 
 const Modalish = styled.div`
+  --PrevButton-right: calc(100% - 10px);
+  --NextButton-left: calc(100% - 10px);
+
   ${containerFull()}
   overflow-x: hidden;
   background-color: var(--black);
@@ -118,6 +119,7 @@ const Modalish = styled.div`
 `;
 
 const SlideshowGrid = styled.div`
+  width: 100%;
   background-color: var(--black);
   padding: 40px;
   display: grid;
@@ -128,7 +130,7 @@ const SlideshowGrid = styled.div`
   grid-gap: 20px;
 
   ${respond(
-    `      grid-template-columns: 1fr;
+    ` grid-template-columns: 1fr;
       grid-template-areas:
         "image"
         "main"

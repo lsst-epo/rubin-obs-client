@@ -3,7 +3,7 @@ import styled from "styled-components";
 import striptags from "striptags";
 import { useTranslation } from "react-i18next";
 import Container from "@/layout/Container";
-import Slider from "@/components/layout/Slider";
+import Carousel from "@/components/layout/Carousel";
 import Tile from "@/atomic/Tile";
 import {
   makeTruncatedString,
@@ -88,8 +88,7 @@ const SlideBlock = ({
           <StyledMixedLink {...mixedLink} />
         )}
       </HeaderBlock>
-
-      <Slider>
+      <Carousel>
         {allItems.length > 0 &&
           allItems.map(
             ({
@@ -117,7 +116,7 @@ const SlideBlock = ({
               />
             )
           )}
-      </Slider>
+      </Carousel>
     </StyledContainer>
   );
 };

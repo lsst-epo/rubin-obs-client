@@ -3,15 +3,16 @@
 import PropTypes from "prop-types";
 import "@/lib/i18n";
 import GlobalStyles from "@/styles/globalStyles";
-import styles from "@/styles/styles.scss";
 import "focus-visible";
+import { UIDReset } from "react-uid";
+import styles from "@/styles/styles.scss";
 
 function Client({ Component, pageProps }) {
   return (
-    <>
+    <UIDReset>
       <GlobalStyles />
       <Component {...pageProps} />
-    </>
+    </UIDReset>
   );
 }
 
