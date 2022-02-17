@@ -84,9 +84,9 @@ export default function NewsPage({
       <AsideTags>
         <h3>{t(`tags`)}</h3>
         {postTags.map((tag, i) => {
-          if (rootHomeLink?.uri && tag.slug) {
+          if (tag.slug) {
             return (
-              <Link key={i} href={`/${rootHomeLink?.uri}?search=${tag.slug}`}>
+              <Link key={i} href={`/search?search=${tag.slug}`}>
                 <a>{`#${tag.title}`}</a>
               </Link>
             );
