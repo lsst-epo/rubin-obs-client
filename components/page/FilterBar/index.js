@@ -149,11 +149,15 @@ const FilterBar = ({ filterType, setLiveRegionMessage }) => {
         <FilterSearch onSubmit={handleSubmit}>
           <button type="submit">
             <SearchIcon />
-            <span className="a-hidden">Submit search</span>
+            <span className="a-hidden">{t("submit-search")}</span>
           </button>
+          <label htmlFor="filterSearchInput" className="a-hidden">
+            {t("search-filter")}
+          </label>
           <input
+            id="filterSearchInput"
             type="search"
-            placeholder={t("search-filter")}
+            placeholder={t("search-filter-placeholder")}
             value={searchText}
             onChange={(e) => handleChange(e.target.value)}
           />
