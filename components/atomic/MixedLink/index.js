@@ -3,6 +3,7 @@ import Link from "next/link";
 import ExternalLink from "@/atomic/ExternalLink";
 import { mixedLinkInternalShape } from "@/shapes/link";
 import { normalizePathData } from "@/lib/utils";
+import { isInternalUrl } from "@/helpers";
 
 export default function MixedLink({
   children,
@@ -11,21 +12,12 @@ export default function MixedLink({
   element,
   params,
   text,
-  target,
   url,
-  tabIndex = 0,
+  ...restProps
 }) {
-  // make sure we're not working with a rubin url -- TODO: expand this with the production domain when ready
-  url = url?.replace(/((https:\/\/|http:\/\/)(\w|\.|-)*rubin(\.\w+)*\/)/, "");
-
-  if (url?.startsWith("http") || url?.startsWith("//")) {
+  if (!isInternalUrl(url)) {
     return (
-      <ExternalLink
-        href={url}
-        className={className}
-        target={target}
-        tabIndex={tabIndex}
-      >
+      <ExternalLink href={url} className={className} {...restProps}>
         {!children && (customText ?? text)}
         {children}
       </ExternalLink>
@@ -41,7 +33,7 @@ export default function MixedLink({
 
     return (
       <Link href={href}>
-        <a className={className} target={target} tabIndex={tabIndex}>
+        <a className={className} {...restProps}>
           {!children && (customText ?? text)}
           {children}
         </a>

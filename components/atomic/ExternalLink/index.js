@@ -2,19 +2,12 @@ import PropTypes from "prop-types";
 
 export default function ExternalLink({
   href,
-  target,
-  className,
   children,
-  tabIndex = 0,
+  type: typeIgnored,
+  ...restProps
 }) {
   return (
-    <a
-      href={href}
-      target={target}
-      rel={target === "_blank" ? "noopener noreferrer" : ""}
-      className={className}
-      tabIndex={tabIndex}
-    >
+    <a href={href} target="_blank" rel="noopener noreferrer" {...restProps}>
       {children}
     </a>
   );
@@ -24,8 +17,5 @@ ExternalLink.displayName = "Atomic.ExternalLink";
 
 ExternalLink.propTypes = {
   href: PropTypes.string.isRequired,
-  target: PropTypes.oneOf(["_self", "_blank"]),
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
-  className: PropTypes.string,
-  tabIndex: PropTypes.number,
 };
