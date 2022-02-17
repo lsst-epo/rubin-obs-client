@@ -42,6 +42,7 @@ export default function LanguageSelect() {
             name="langSelect"
             id="langSelect"
             onChange={handleChange}
+            defaultChecked={toEs}
           />
           <Label htmlFor="langSelect" on={toEs ? "true" : "false"}>
             <span className="inner" />
