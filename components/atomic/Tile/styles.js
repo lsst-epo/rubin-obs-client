@@ -139,7 +139,7 @@ export const StyledMixedLink = styled(MixedLink)`
     .image {
       position: relative;
       opacity: 1;
-      transition: filter 0.2s;
+      transition: filter 0.2s, opacity 0.2s;
     }
 
     .pretitle {
@@ -221,7 +221,7 @@ export const StyledMixedLink = styled(MixedLink)`
     .image {
       position: relative;
       opacity: 1;
-      transition: filter 0.2s;
+      transition: filter 0.2s, opacity 0.2s;
     }
 
     .pretitle {
@@ -573,7 +573,7 @@ export const StyledMixedLink = styled(MixedLink)`
     .image {
       width: 100%;
       opacity: 1;
-      transition: filter 0.2s;
+      transition: filter 0.2s, opacity 0.2s;
     }
 
     .title {

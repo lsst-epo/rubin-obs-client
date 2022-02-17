@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { useUID } from "react-uid";
 import classNames from "classnames";
 import ResponsiveImage from "@/atomic/ResponsiveImage";
 import Image from "@/atomic/Image";
@@ -20,6 +21,7 @@ const Tile = ({
   text,
   type = "related",
 }) => {
+  const uid = useUID();
   const { siteInfo } = useGlobalData();
   const finalImage =
     type === "jobs" ? image : image || siteInfo?.siteImage?.[0];
@@ -40,6 +42,7 @@ const Tile = ({
     <StyledMixedLink
       as={link?.url ? MixedLink : "div"}
       {...link}
+      aria-labelledby={link?.url ? uid : null}
       className={classNames(
         `${type}`,
         `${isFeature ? "featured" : ""} `,
@@ -61,7 +64,11 @@ const Tile = ({
         </div>
       )}
       {pretitle && <div className="pretitle">{pretitle}</div>}
-      {title && <h2 className="title">{title}</h2>}
+      {title && (
+        <h2 id={uid} className="title">
+          {title}
+        </h2>
+      )}
       {subtitle && <div className="subtitle">{subtitle}</div>}
       {text && <div className="text">{text}</div>}
       {footer && (

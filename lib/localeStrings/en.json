@@ -129,7 +129,9 @@
     "pagination": {
       "previous": "Previous",
       "next": "Next",
-      "showing": "Showing {{from}} to {{to}} of {{total}}"
+      "current-slide": "Slide {{current}}",
+      "showing-current-slide": "Showing slide {{current}} of {{length}}",
+      "showing-range": "Showing {{from}} to {{to}} of {{length}}"
     },
     "social": {
       "email-rubin": "Email the Rubin Observatory",
