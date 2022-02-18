@@ -96,8 +96,6 @@ const EventList = ({
                           pretitle={
                             gridType === "events" && eventType?.[0]?.title
                               ? eventType?.[0]?.title
-                              : eventType?.[0]?.slug
-                              ? t(`events.${eventType?.[0]?.slug}`)
                               : " "
                           }
                           subtitle={

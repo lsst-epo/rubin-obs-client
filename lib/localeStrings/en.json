@@ -66,9 +66,6 @@
       "total-to-date": "Total to date"
     },
     "events": {
-      "special-event": "Special Event",
-      "scientific-event": "Scientific Event",
-      "press-event": "Press Event",
       "open": "Registration Open",
       "closed": "Registration Closed",
       "related-events": "Related Events",
