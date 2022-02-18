@@ -22,11 +22,14 @@ $_link-gap: 14px;
     right: 0;
     max-height: 100vh;
     flex-direction: column;
-    transition: transform 0.25s ease-in-out;
+    transition: transform 0.25s ease-in-out, visibility 0s 0.25s;
     transform: translateX(100%);
+    visibility: hidden;
 
     &.c-nav-list--is-active {
       transform: translateX(0);
+      visibility: visible;
+      transition: transform 0.25s ease-in-out;
     }
 
     @include base.respond($_breakpoint + 1, min) {
