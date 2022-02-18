@@ -93,8 +93,8 @@ const NewsList = ({
                         isFeature={!!(limit > 4 && i === 0)}
                         link={uri}
                         pretitle={
-                          gridType === "news" && postType?.[0]?.slug
-                            ? t(`news.${postType?.[0]?.slug}`)
+                          gridType === "news" && postType?.[0]?.title
+                            ? postType[0].title
                             : null
                         }
                         subtitle={makeDateString(date, lang)}

@@ -84,8 +84,8 @@ export default function HomePage({
             <Hero data={altHero} />
           </StyledNewsHero>
           <HeroContent>
-            {!custom && news?.postType?.[0] && (
-              <h4>{t(`news.${news.postType[0].slug}`)}</h4>
+            {!custom && news?.postType?.[0]?.title && (
+              <h4>{news.postType[0].title}</h4>
             )}
             <h1>{altHeader}</h1>
             <Details>
