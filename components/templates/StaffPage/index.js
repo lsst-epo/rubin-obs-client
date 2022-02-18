@@ -43,9 +43,7 @@ export default function StaffPage({
       <Breadcrumbs breadcrumbs={[...customBreadcrumbs, pageLink]} />
       <Container>
         <div>
-          {staffType?.[0]?.slug && (
-            <Pretitle>{t(`staff.${staffType?.[0]?.slug}`)}</Pretitle>
-          )}
+          {staffType?.[0]?.title && <Pretitle>{staffType[0].title}</Pretitle>}
           <h1>{title}</h1>
           <Subtitle>
             {staffTitle}

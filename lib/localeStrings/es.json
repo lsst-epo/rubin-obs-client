@@ -73,17 +73,12 @@
       "start-slideshow": "Start slideshow"
     },
     "jobs": {
-      "administrative": "Administrative",
-      "engineering": "Engineering",
-      "science": "Science",
-      "technical": "Technical",
+      "jobs": "Jobs",
       "open": "Open",
-      "closed": "Closed"
+      "closed": "Closed",
+      "read-more": "Read More"
     },
     "news": {
-      "press-release": "Press Release",
-      "news-post": "News Post",
-      "scientific-paper": "Scientific paper",
       "related-posts": "Related News Posts",
       "back-to-posts": "Go Back to News Posts"
     },

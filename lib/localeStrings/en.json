@@ -120,19 +120,10 @@
     "jobs": {
       "jobs": "Jobs",
       "read-more": "Read more about this position.",
-      "administrative": "Administrative",
-      "engineering": "Engineering",
-      "science": "Science",
-      "technical": "Technical",
       "open": "Open",
       "closed": "Closed"
     },
     "news": {
-      "press-release": "Press Release",
-      "news-post": "News Post",
-      "press-releases": "Press Releases",
-      "news-posts": "News Posts",
-      "scientific-paper": "Scientific paper",
       "related-posts": "Related News Posts",
       "back-to-posts": "Go Back to News Posts"
     },

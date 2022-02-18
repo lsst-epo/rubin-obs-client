@@ -79,9 +79,7 @@ const NewsGrid = ({ items = [], limit, listTypeId, sectionHandle, pageId }) => {
                 image={image?.[0]}
                 isFeature={i === 0}
                 link={uri}
-                pretitle={
-                  postType?.[0]?.slug ? t(`news.${postType?.[0]?.slug}`) : null
-                }
+                pretitle={postType?.[0]?.title ? postType[0].title : " "}
                 subtitle={makeDateString(date, lang)}
                 text={description}
                 title={title}

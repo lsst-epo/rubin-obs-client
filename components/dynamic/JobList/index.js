@@ -83,9 +83,7 @@ const JobList = ({
                           }
                           link={externalUrl}
                           pretitle={
-                            jobPosition?.[0]?.slug
-                              ? t(`jobs.${jobPosition?.[0]?.slug}`)
-                              : null
+                            jobPosition?.[0]?.title ? jobPosition[0].title : " "
                           }
                           subtitle={Location}
                           title={title}
