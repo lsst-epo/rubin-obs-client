@@ -94,7 +94,9 @@ const EventList = ({
                           image={image?.[0]}
                           link={uri}
                           pretitle={
-                            gridType === "events" && eventType?.[0]?.slug
+                            gridType === "events" && eventType?.[0]?.title
+                              ? eventType?.[0]?.title
+                              : eventType?.[0]?.slug
                               ? t(`events.${eventType?.[0]?.slug}`)
                               : " "
                           }
