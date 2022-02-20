@@ -50,7 +50,9 @@ export default function Page({
       dynamicComponent === "jobs" ||
       dynamicComponent === "news" ||
       dynamicComponent === "slideshows" ||
-      dynamicComponent === "staffProfiles");
+      dynamicComponent === "staffProfiles" ||
+      dynamicComponent === "scientificStaff" ||
+      dynamicComponent === "nonScientificStaff");
 
   const isWideHeader =
     dynamicComponent === "galleryItems" || dynamicComponent === "slideshows";
