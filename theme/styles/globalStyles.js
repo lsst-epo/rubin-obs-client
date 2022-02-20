@@ -47,7 +47,7 @@ export const tokens = {
   CONTAINER_NARROW: "900px",
   FONT_SIZE_BASE_DESKTOP: "22px",
   FONT_SIZE_BASE_MOBILE: "16px",
-  FONT_STACK_BASE: `"Open Sans", system-ui`,
+  FONT_STACK_BASE: `"Source Sans Pro", system-ui`,
   LINE_HEIGHT_BASE: "1.636",
   PADDING_LARGE: "100px",
   PADDING_MEDIUM: "40px",

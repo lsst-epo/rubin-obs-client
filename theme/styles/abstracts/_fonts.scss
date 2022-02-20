@@ -22,39 +22,40 @@
 // --------------------------
 // Do your @font-face embedding here, in the privacy of your own partial
 // `embedFont` must be used once per combination of weight and style
+// TODO: Check which charsets are needed (default is latin)
 @include embedFont(
-  "Open Sans",
-  "open-sans-regular",
+  "Source Sans Pro",
+  "source-sans-pro-v18-latin-regular",
   functions.font-weight(regular),
   normal
 );
 @include embedFont(
-  "Open Sans",
-  "open-sans-regular-italic",
+  "Source Sans Pro",
+  "source-sans-pro-v18-latin-italic",
   functions.font-weight(regular),
   italic
 );
 @include embedFont(
-  "Open Sans",
-  "open-sans-bold",
+  "Source Sans Pro",
+  "source-sans-pro-v18-latin-700",
   functions.font-weight(bold),
   normal
 );
 @include embedFont(
-  "Open Sans",
-  "open-sans-bold-italic",
+  "Source Sans Pro",
+  "source-sans-pro-v18-latin-700italic",
   functions.font-weight(bold),
   italic
 );
 @include embedFont(
-  "Open Sans",
-  "open-sans-extra-bold",
+  "Source Sans Pro",
+  "source-sans-pro-v18-latin-900",
   functions.font-weight(extra-bold),
   normal
 );
 @include embedFont(
-  "Open Sans",
-  "open-sans-extra-bold-italic",
+  "Source Sans Pro",
+  "source-sans-pro-v18-latin-900italic",
   functions.font-weight(extra-bold),
   italic
 );
