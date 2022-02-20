@@ -56,7 +56,7 @@ export default function Page({
     dynamicComponent === "galleryItems" || dynamicComponent === "slideshows";
 
   const isGalleryHome = uri === "gallery";
-  const isEventsPage = uri === "explore/calendar";
+  const isEventsPage = uri.split("/").includes("calendar");
 
   // custom page name for gallery search
   const isGallerySearch = uri === "gallery/gallery-search";
