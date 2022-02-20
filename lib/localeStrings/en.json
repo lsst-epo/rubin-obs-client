@@ -3,6 +3,7 @@
   "translation": {
     "english-site-name": "English",
     "espanol-site-name": "Spanish",
+    "language-select-label": "Language",
     "breaking-news": "Breaking News",
     "cell": "Cell",
     "localize-content": "Localize site content",

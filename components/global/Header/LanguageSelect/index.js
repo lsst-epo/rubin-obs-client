@@ -40,9 +40,12 @@ export default function LanguageSelect() {
   };
 
   return (
-    <fieldset>
+    <Styled.Fieldset>
       <legend className="a-hidden">{t("localize-content")}</legend>
       <Styled.Label htmlFor="langSelect">
+        <Styled.MobileLabelText role="presentation">
+          {t("language-select-label")}
+        </Styled.MobileLabelText>
         <span className="a-hidden">{t("espanol-site-name")}</span>
         <Styled.Switch
           id="langSelect"
@@ -54,7 +57,7 @@ export default function LanguageSelect() {
           <Styled.Inner aria-hidden />
         </Styled.Switch>
       </Styled.Label>
-    </fieldset>
+    </Styled.Fieldset>
   );
 }
 

@@ -46,11 +46,12 @@ $_link-gap: 14px;
   &__lang {
     width: 300px;
     max-width: 47vw;
-    padding-left: functions.header(nav-link-padding-lateral);
+    padding-left: functions.header(nav-link-padding-lateral) * 1.5;
+    padding-right: functions.header(nav-link-padding-lateral);
     background-color: functions.palette(turquoise60);
 
     fieldset {
-      border: 0;
+      height: var(--height);
     }
   }
 

@@ -23,6 +23,7 @@ export default function Header({ navItems }) {
 
   const { ref } = useResizeObserver({
     onResize: ({ width }) => {
+      if (width >= 1500) setMobileNavActive(false);
       document.documentElement.style.setProperty(
         "--header-width",
         `${width}px`
