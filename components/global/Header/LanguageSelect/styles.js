@@ -1,15 +1,31 @@
 import styled from "styled-components";
+import { respond, BREAK_HEADER_LAYOUT } from "@/styles/globalStyles";
 
 const SWITCH_WIDTH = 74;
 const SWITCH_HEIGHT = 39;
 const TOGGLE_MARGIN = 3.5;
 const TOGGLE_SIZE = SWITCH_HEIGHT - TOGGLE_MARGIN * 2;
 
+export const Fieldset = styled.fieldset`
+  border: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+`;
+
 export const Label = styled.label`
   display: flex;
   align-items: center;
-  font-size: 16px;
+  justify-content: space-between;
+  width: 100%;
   font-weight: bold;
+`;
+
+export const MobileLabelText = styled.span`
+  display: none;
+  padding-inline-end: 1em;
+
+  ${respond(`display: block;`, BREAK_HEADER_LAYOUT)}
 `;
 
 export const Switch = styled.button`
@@ -49,6 +65,9 @@ export const Inner = styled.span`
     padding-right: 5px;
     line-height: ${SWITCH_HEIGHT}px;
     transition: color 0.3s ease-in-out;
+    font-size: 0.727em;
+
+    ${respond(`font-size: 1em;`, BREAK_HEADER_LAYOUT)}
   }
 
   &:before {

@@ -3,6 +3,7 @@
   "translation": {
     "english-site-name": "English",
     "espanol-site-name": "Español",
+    "language-select-label": "Language",
     "localize-content": "Localizar el contenido del sitio",
     "page-not-found-title": "Page not found - es",
     "page-not-found-text": "The page you're looking for was not found.",

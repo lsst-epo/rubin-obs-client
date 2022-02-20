@@ -29,6 +29,7 @@ export const tokens = {
   red: "#ff8488",
   red20: "#f2c3c0",
   red40: "#FF8489",
+  BREAK_HEADER_LAYOUT: "1500px",
   BREAK_DESKTOP: "1280px",
   BREAK_DESKTOP_SMALL: "1130px",
   BREAK_LARGE_TABLET: "850px",
@@ -79,6 +80,7 @@ export const blue10 = tokens.blue10;
 export const red = tokens.red;
 export const red20 = tokens.red20;
 export const red40 = tokens.red40;
+export const BREAK_HEADER_LAYOUT = tokens.BREAK_HEADER_LAYOUT;
 export const BREAK_DESKTOP = tokens.BREAK_DESKTOP;
 export const BREAK_DESKTOP_SMALL = tokens.BREAK_DESKTOP_SMALL;
 export const BREAK_LARGE_TABLET = tokens.BREAK_LARGE_TABLET;
