@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { ptToEm } from "@/styles/globalStyles";
 
 export const Figure = styled.figcaption`
   ${({ $withBackground }) =>
@@ -10,6 +11,7 @@ export const Figure = styled.figcaption`
 `;
 
 export const FigCaption = styled.figcaption`
-  font-size: 18px;
-  padding-block-start: 1em;
+  font-size: ${ptToEm("14pt")};
+  line-height: 1.428;
+  padding-top: 13px;
 `;
