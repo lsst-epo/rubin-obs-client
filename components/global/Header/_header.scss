@@ -23,6 +23,7 @@ $_breakpoint: functions.header(layout-breakpoint);
   background-color: functions.palette(turquoise60);
   transform: none;
   transition: transform 0.4s;
+  overflow-x: hidden;
 
   &.invisible {
     transform: translate3d(0, -100%, 0);

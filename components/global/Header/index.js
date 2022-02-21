@@ -34,7 +34,9 @@ export default function Header({ navItems }) {
   return (
     <header
       ref={ref}
-      className={`c-global-header ${visible ? "" : "invisible"}`}
+      className={`c-global-header ${
+        visible || mobileNavActive ? "" : "invisible"
+      }`}
     >
       <a href="#page-content" className="c-global-header__skip-link">
         {t("skip-to-content")}
