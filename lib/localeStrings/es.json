@@ -42,13 +42,12 @@
       "press-event": "Press Event"
     },
     "events": {
-      "special-event": "Special Event",
-      "scientific-event": "Scientific Event",
-      "press-event": "Press Event",
       "open": "Registration Open",
       "closed": "Registration Closed",
       "related-events": "Related Events",
-      "go-to-events": "Go to events"
+      "go-to-events": "Go to events",
+      "upcoming": "Upcoming events",
+      "past": "Past events"
     },
     "gallery": {
       "about-the-image": "About the Image",

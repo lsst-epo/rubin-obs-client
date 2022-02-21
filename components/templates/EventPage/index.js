@@ -70,8 +70,8 @@ export default function EventPage({
       <Hero data={hero} />
       <Container>
         <div>
-          {eventType?.[0]?.slug && (
-            <Pretitle>{t(`events.${eventType?.[0]?.slug}`)}</Pretitle>
+          {eventType?.[0]?.title && (
+            <Pretitle>{eventType?.[0]?.title}</Pretitle>
           )}
           <h1>{title}</h1>
           <Subtitle>
