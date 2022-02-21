@@ -38,7 +38,7 @@ const Pagination = ({ limit, offset, page, total }) => {
       <NavDesktop>
         <div>
           <T i18nKey="pagination.showing-range">
-            Showing {{ from }} to {{ to }} of {{ total }}
+            Showing {{ from }} to {{ to }} of {{ length: total }}
           </T>
         </div>
         <div>
