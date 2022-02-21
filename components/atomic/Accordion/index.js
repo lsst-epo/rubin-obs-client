@@ -4,7 +4,10 @@ import { fluidScale } from "@/styles/globalStyles";
 export default function Accordion({ summary, children }) {
   return (
     <details>
-      <Summary>{summary}</Summary>
+      <Summary>
+        <Icon aria-hidden />
+        <span>{summary}</span>
+      </Summary>
       <Details>{children}</Details>
     </details>
   );
@@ -25,6 +28,17 @@ const Summary = styled.summary`
     display: none;
   }
 
+  &:focus {
+    outline: none;
+  }
+
+  &:hover,
+  &:focus-visible {
+    --Icon-background-color: var(--turquoise85);
+  }
+`;
+
+const Icon = styled.span`
   &::before {
     position: absolute;
     top: 0;
@@ -37,18 +51,9 @@ const Summary = styled.summary`
     line-height: ${toggleWidth};
     color: var(--white);
     content: "+";
-    background-color: var(--turquoise55);
+    background-color: var(--Icon-background-color, var(--turquoise55));
     transition: background-color 0.2s;
     place-content: center;
-  }
-
-  &:focus {
-    outline: none;
-  }
-
-  &:hover::before,
-  &:focus-visible::before {
-    background-color: var(--turquoise85);
   }
 `;
 
