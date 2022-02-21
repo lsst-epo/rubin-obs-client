@@ -222,6 +222,12 @@ export const pxToEm = (px, base = tokens.FONT_SIZE_BASE_DESKTOP) => {
   return `${stripUnit(px) / stripUnit(base)}em`;
 };
 
+// Converts pt to em
+// pt values are rounded down to the nearest px
+export const ptToEm = (pt, base = tokens.FONT_SIZE_BASE_DESKTOP) => {
+  return `${Math.floor(stripUnit(pt) * 1.333) / stripUnit(base)}em`;
+};
+
 export const respond = (
   content,
   size = tokens.BREAK_TABLET,
