@@ -35,7 +35,7 @@ export default function Navigation({
   if (!items || items.length < 1) return null;
 
   return (
-    <ul
+    <div
       ref={navList}
       className={classNames({
         "c-nav-list": true,
@@ -43,47 +43,49 @@ export default function Navigation({
         "c-nav-list--is-active": mobileActive,
       })}
     >
-      {theme === "mobile" && mobileActive && (
-        <li className="c-nav-list__lang">
-          <LanguageSelect />
-        </li>
-      )}
-      {items.map(({ id, title, uri, children }) => {
-        const hasChildren = children && children.length > 0;
-
-        return (
-          <li key={id} className="c-nav-list__item">
-            {hasChildren && (
-              <NavItemWithChildren
-                id={id}
-                active={id === active}
-                title={title}
-                uri={uri}
-                childItems={children}
-                onToggleClick={handleToggleClick}
-                onEsc={() => setActive(null)}
-                theme={theme}
-              />
-            )}
-            {!hasChildren && (
-              <Link href={`/${uri}`}>
-                {/* eslint-disable */}
-                <a
-                  onClick={() => setActive(null)}
-                  className={classNames({
-                    "c-nav-list__link": true,
-                    [`c-nav-list__link--${theme}`]: !!theme,
-                  })}
-                >
-                  {/* eslint-enable */}
-                  <span className="c-nav-list__link-text">{title}</span>
-                </a>
-              </Link>
-            )}
+      <ul className="c-nav-list__list">
+        {theme === "mobile" && mobileActive && (
+          <li className="c-nav-list__lang">
+            <LanguageSelect />
           </li>
-        );
-      })}
-    </ul>
+        )}
+        {items.map(({ id, title, uri, children }) => {
+          const hasChildren = children && children.length > 0;
+
+          return (
+            <li key={id} className="c-nav-list__item">
+              {hasChildren && (
+                <NavItemWithChildren
+                  id={id}
+                  active={id === active}
+                  title={title}
+                  uri={uri}
+                  childItems={children}
+                  onToggleClick={handleToggleClick}
+                  onEsc={() => setActive(null)}
+                  theme={theme}
+                />
+              )}
+              {!hasChildren && (
+                <Link href={`/${uri}`}>
+                  {/* eslint-disable */}
+                  <a
+                    onClick={() => setActive(null)}
+                    className={classNames({
+                      "c-nav-list__link": true,
+                      [`c-nav-list__link--${theme}`]: !!theme,
+                    })}
+                  >
+                    {/* eslint-enable */}
+                    <span className="c-nav-list__link-text">{title}</span>
+                  </a>
+                </Link>
+              )}
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
 }
 

@@ -5,10 +5,8 @@ $_breakpoint: functions.header(layout-breakpoint);
 $_link-gap: 14px;
 
 .c-nav-list {
-  display: flex;
   font-size: 0.727em;
   font-weight: functions.font-weight(bold);
-  background-color: functions.palette(turquoise60);
 
   &--desktop {
     @include base.respond($_breakpoint) {
@@ -35,6 +33,16 @@ $_link-gap: 14px;
 
     @include base.respond($_breakpoint + 1, min) {
       display: none;
+    }
+  }
+
+  &__list {
+    display: flex;
+    background-color: functions.palette(turquoise60);
+
+    .c-nav-list--mobile & {
+      flex-direction: column;
+      overflow-y: auto;
     }
   }
 
