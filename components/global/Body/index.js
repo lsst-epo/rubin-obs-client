@@ -46,7 +46,6 @@ const WideWidthContainer = styled.div`
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-  overflow: hidden;
 `;
 Body.displayName = "Global.Body";
 

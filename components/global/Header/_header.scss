@@ -23,7 +23,6 @@ $_breakpoint: functions.header(layout-breakpoint);
   background-color: functions.palette(turquoise60);
   transform: none;
   transition: transform 0.4s;
-  overflow-x: hidden;
 
   &.invisible {
     transform: translate3d(0, -100%, 0);
@@ -32,6 +31,7 @@ $_breakpoint: functions.header(layout-breakpoint);
   @include base.respond($_breakpoint) {
     grid-template: "logo . search hamburger" auto / auto 1fr auto auto;
     gap: functions.header(gap);
+    overflow-x: hidden;
   }
 
   @include base.respond(functions.header(breakpoint-for-search-bar)) {
