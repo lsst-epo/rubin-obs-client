@@ -49,7 +49,7 @@ export default function CalloutMain({ callout }) {
 
 CalloutMain.propTypes = {
   callout: PropTypes.shape({
-    header: PropTypes.string.isRequired,
+    header: PropTypes.string,
     text: PropTypes.node,
     image: PropTypes.arrayOf(imageShape).isRequired,
     padImage: PropTypes.bool,
