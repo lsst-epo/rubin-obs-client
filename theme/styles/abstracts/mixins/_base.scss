@@ -44,7 +44,7 @@
           #{$max-value}
         );
     }
-
+    /* stylelint-disable-next-line custom-property-pattern */
     #{$property}: var(#{"--" + $property});
   }
 }
