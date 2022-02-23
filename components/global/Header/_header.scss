@@ -17,7 +17,7 @@ $_breakpoint: functions.header(layout-breakpoint);
   z-index: functions.z-stack(header);
   display: grid;
   position: sticky;
-  grid-template: "logo nav search toggle" auto / auto minmax(0, 1fr) auto auto;
+  grid-template: "logo nav search toggle login" auto / auto minmax(0, 1fr) auto auto auto;
   gap: functions.header(gap);
   color: functions.palette(white);
   background-color: functions.palette(turquoise60);
@@ -29,13 +29,13 @@ $_breakpoint: functions.header(layout-breakpoint);
   }
 
   @include base.respond($_breakpoint) {
-    grid-template: "logo . search hamburger" auto / auto 1fr auto auto;
+    grid-template: "logo . search hamburger login" auto / auto 1fr auto auto auto;
     gap: functions.header(gap);
     overflow-x: hidden;
   }
 
   @include base.respond(functions.header(breakpoint-for-search-bar)) {
-    grid-template: "logo search hamburger" auto / auto minmax(0, 1fr) auto;
+    grid-template: "logo search hamburger login" auto / auto minmax(0, 1fr) auto auto;
     gap: functions.header(gap);
   }
 
@@ -73,6 +73,12 @@ $_breakpoint: functions.header(layout-breakpoint);
     @include base.respond($_breakpoint) {
       display: none;
     }
+  }
+
+  &__login-block {
+    grid-area: login;
+    align-self: center;
+    padding-right: 20px;
   }
 
   &__hamburger-block {

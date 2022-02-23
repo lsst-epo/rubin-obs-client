@@ -10,8 +10,10 @@ import LanguageSelect from "@/global/Header/LanguageSelect";
 import Logo from "@/svg/unique/Logo";
 import internalLinkShape from "@/shapes/link";
 import { useGlobalData, useNavHider } from "@/lib/utils";
+import useAuthentication from "@/hooks/useAuthentication";
 
 export default function Header({ navItems }) {
+  const { isAuthenticated, signIn, signOut } = useAuthentication();
   const [mobileNavActive, setMobileNavActive] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
@@ -57,6 +59,19 @@ export default function Header({ navItems }) {
       </div>
       <div className="c-global-header__toggle-block">
         {!mobileNavActive && <LanguageSelect />}
+      </div>
+      <div className="c-global-header__login-block">
+        {isAuthenticated ? (
+          <button onClick={() => signOut()}>Sign out</button>
+        ) : (
+          <button
+            onClick={() =>
+              signIn({ email: "user@test.com", password: "abc123" })
+            }
+          >
+            Sign in
+          </button>
+        )}
       </div>
       <div className="c-global-header__hamburger-block">
         <Hamburger
