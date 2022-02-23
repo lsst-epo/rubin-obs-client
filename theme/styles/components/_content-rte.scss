@@ -5,6 +5,10 @@
     margin-top: 1rem;
   }
 
+  > *:first-child {
+    margin-block-start: 0;
+  }
+
   a:not([class^="c-"]) {
     color: functions.palette(turquoise50);
     text-decoration: none;
@@ -24,15 +28,17 @@
     padding-left: 0.5em;
   }
 
-  // these also have margin, so we've decreased padding accordingly.
   h1 {
-    padding-top: 5rem;
+    margin-block-start: functions.pt-to-em(144pt);
   }
 
-  h2,
+  h2 {
+    margin-block-start: functions.pt-to-em(40pt);
+  }
+
   h3,
   h4 {
-    padding-top: 2rem;
+    margin-block-start: functions.pt-to-em(20pt);
   }
 
   figcaption {

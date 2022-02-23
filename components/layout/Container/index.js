@@ -1,47 +1,35 @@
 import PropTypes from "prop-types";
-import styled from "styled-components";
 import classNames from "classnames";
-import {
-  containerNarrow,
-  containerRegular,
-  PADDING_LARGE,
-  tokens,
-} from "@/styles/globalStyles";
+import * as Styled from "./styles";
 
 export default function Container({
   bgColor = "white",
   children,
   className,
   width = "narrow",
+  paddingSize = "large",
   elAttributes,
 }) {
   return (
-    <Section className={className} bgColor={bgColor} {...elAttributes}>
-      <Inner
+    <Styled.Section
+      className={classNames(className, {
+        [`l-pad-top-${paddingSize}`]: paddingSize !== "none",
+        [`l-pad-bottom-${paddingSize}`]: paddingSize !== "none",
+      })}
+      $bgColor={bgColor}
+      {...elAttributes}
+    >
+      <Styled.Inner
         className={classNames({
           [`${className}__inner`]: !!className,
         })}
-        width={width}
+        $width={width}
       >
         {children}
-      </Inner>
-    </Section>
+      </Styled.Inner>
+    </Styled.Section>
   );
 }
-
-const Section = styled.section`
-  background-color: ${(p) => tokens[p.bgColor]};
-  padding-top: ${PADDING_LARGE};
-  padding-bottom: ${PADDING_LARGE};
-
-  + section {
-    padding-top: 0;
-  }
-`;
-
-const Inner = styled.div`
-  ${(p) => (p.width === "narrow" ? containerNarrow() : containerRegular())}
-`;
 
 Container.displayName = "Layout.Container";
 
@@ -54,6 +42,9 @@ Container.propTypes = {
   ]).isRequired,
   className: PropTypes.string,
   width: PropTypes.string,
+  /** Applies padding utility class of the same name.
+   * Default is "large", "none" removes the class entirely */
+  paddingSize: PropTypes.oneOf(["large", "medium", "small", "none"]),
   elAttributes: PropTypes.shape({
     role: PropTypes.string,
     "aria-hidden": PropTypes.bool,

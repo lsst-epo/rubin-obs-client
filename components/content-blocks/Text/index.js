@@ -3,7 +3,7 @@ import Container from "@/layout/Container";
 
 export default function TextContentBlock({ text }) {
   return (
-    <Container>
+    <Container paddingSize="medium">
       <div
         dangerouslySetInnerHTML={{ __html: text }}
         className="c-content-rte"

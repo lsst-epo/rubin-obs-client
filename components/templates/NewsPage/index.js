@@ -102,11 +102,11 @@ export default function NewsPage({
       <Hero data={hero} />
       <NewsDetail>
         <article>
-          <Container>
+          <Container paddingSize="medium">
             <div>
               <h1>{title}</h1>
               <Pretitle>{localizedDate}</Pretitle>
-              <Subtitle>{description}</Subtitle>
+              {description && <Subtitle>{description}</Subtitle>}
             </div>
           </Container>
           <Share />

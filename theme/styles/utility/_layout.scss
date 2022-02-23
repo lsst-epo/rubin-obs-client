@@ -15,19 +15,19 @@
 // Create a a padding class in each direction for each value in $padding-sizes map
 @each $name, $value in variables.$padding-sizes {
   .l-pad-top-#{$name} {
-    padding-top: $value;
+    padding-block-start: $value;
   }
 
   .l-pad-right-#{$name} {
-    padding-right: $value;
+    padding-inline-end: $value;
   }
 
   .l-pad-bottom-#{$name} {
-    padding-bottom: $value;
+    padding-block-end: $value;
   }
 
   .l-pad-left-#{$name} {
-    padding-left: $value;
+    padding-inline-start: $value;
   }
 }
 

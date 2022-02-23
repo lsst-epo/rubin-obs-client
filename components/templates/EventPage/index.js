@@ -68,7 +68,7 @@ export default function EventPage({
     <Body {...bodyProps}>
       <Breadcrumbs breadcrumbs={[...customBreadcrumbs, pageLink]} />
       <Hero data={hero} />
-      <Container>
+      <Container paddingSize="medium">
         <div>
           {eventType?.[0]?.title && (
             <Pretitle>{eventType?.[0]?.title}</Pretitle>
@@ -83,7 +83,7 @@ export default function EventPage({
       </Container>
       <Share />
       {description && (
-        <Container>
+        <Container paddingSize="medium">
           <div
             className="c-content-rte"
             dangerouslySetInnerHTML={{ __html: description }}

@@ -57,6 +57,8 @@ export default function Page({
   const isWideHeader =
     dynamicComponent === "galleryItems" || dynamicComponent === "slideshows";
 
+  const isMediumPadding = dynamicComponent === "none";
+
   const isGalleryHome = uri === "gallery";
   const isEventsPage = uri.split("/").includes("calendar");
 
@@ -92,6 +94,7 @@ export default function Page({
           bgColor="white"
           className="c-page-header"
           width={isWideHeader ? "regular" : "narrow"}
+          paddingSize={isMediumPadding ? "medium" : undefined}
         >
           <h1>{title}</h1>
           {isEventsPage && (
