@@ -2,16 +2,22 @@
 
 import PropTypes from "prop-types";
 import "@/lib/i18n";
-import GlobalStyles from "@/styles/globalStyles";
 import "focus-visible";
 import { UIDReset } from "react-uid";
+import AuthenticationContext from "@/contexts/Authentication";
+import useAuthentication from "@/hooks/useAuthentication";
+import GlobalStyles from "@/styles/globalStyles";
 import styles from "@/styles/styles.scss";
 
 function Client({ Component, pageProps }) {
+  const value = useAuthentication();
+
   return (
     <UIDReset>
-      <GlobalStyles />
-      <Component {...pageProps} />
+      <AuthenticationContext.Provider value={value}>
+        <GlobalStyles />
+        <Component {...pageProps} />
+      </AuthenticationContext.Provider>
     </UIDReset>
   );
 }
