@@ -39,7 +39,8 @@ export const tokens = {
   BREAK_PHABLET: "600px",
   BREAK_PHABLET_MIN: "601px",
   BREAK_MOBILE: "446px",
-  BREAK_MOBILE_MIN: "447px",
+  // For extremely thin devices, or users with largeer font bases
+  BREAK_MOBILE_MIN: "280px",
   CONTAINER_MAX: "2560px",
   CONTAINER_FULL: "1920px",
   CONTAINER_WIDE: "1435px",

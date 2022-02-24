@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import Container from "@/layout/Container";
 import DataList from "@/dynamic/DataList";
@@ -13,8 +12,8 @@ import {
   useGlobalData,
 } from "@/lib/utils";
 import IconComposer from "@/svg/IconComposer";
-import { fluidScale, respond } from "@/styles/globalStyles";
 import Buttonish from "@/components/atomic/Buttonish";
+import * as Styled from "./styles";
 
 const EventList = ({
   button,
@@ -34,7 +33,7 @@ const EventList = ({
         <>
           <Container width={isWide ? "regular" : "narrow"}>
             <div>
-              {header && <Header>{header}</Header>}
+              {header && <Styled.Header>{header}</Styled.Header>}
               {entries?.length > 0 && (
                 <Grid columns={1}>
                   {entries.map(
@@ -43,6 +42,7 @@ const EventList = ({
                       city,
                       country,
                       date,
+                      endDate,
                       description,
                       id,
                       image,
@@ -74,6 +74,10 @@ const EventList = ({
                         true
                       );
 
+                      const endDateObject = endDate
+                        ? makeDateObject(endDate, lang, true)
+                        : null;
+
                       return (
                         /* eslint-disable */
                         <Tile
@@ -83,10 +87,10 @@ const EventList = ({
                             isThereRegistration
                               ? {
                                   sticker: (
-                                    <Sticker>
+                                    <Styled.Sticker>
                                       <IconComposer icon={lock} size={18} />
                                       <span>{t(`events.${registration}`)}</span>
-                                    </Sticker>
+                                    </Styled.Sticker>
                                   ),
                                 }
                               : null
@@ -99,14 +103,32 @@ const EventList = ({
                               : " "
                           }
                           subtitle={
-                            <Date>
-                              <span className="month">{month}</span>
-                              <span className="day">{day}</span>
-                              <span className="year">{year}</span>
-                            </Date>
+                            <Styled.DateWrapper $hasEndDate={!!endDateObject}>
+                              <Styled.Date>
+                                <Styled.DateMonth>{month}</Styled.DateMonth>
+                                <Styled.DateDay>{day}</Styled.DateDay>
+                                <Styled.DateYear>{year}</Styled.DateYear>
+                              </Styled.Date>
+                              {endDateObject && (
+                                <>
+                                  <Styled.DateEmDash>—</Styled.DateEmDash>
+                                  <Styled.Date>
+                                    <Styled.DateMonth>
+                                      {endDateObject.month}
+                                    </Styled.DateMonth>
+                                    <Styled.DateDay>
+                                      {endDateObject.day}
+                                    </Styled.DateDay>
+                                    <Styled.DateYear>
+                                      {endDateObject.year}
+                                    </Styled.DateYear>
+                                  </Styled.Date>
+                                </>
+                              )}
+                            </Styled.DateWrapper>
                           }
                           text={description}
-                          title={`${title}${loc && " - " + loc}`}
+                          title={`${title}${loc && " — " + loc}`}
                           type={gridType}
                         />
                       );
@@ -115,13 +137,13 @@ const EventList = ({
                 </Grid>
               )}
               {button && (
-                <Footer>
+                <Styled.Footer>
                   <Buttonish
                     isBlock={true}
                     text={button.text}
                     url={`/${button.uri}`}
                   />
-                </Footer>
+                </Styled.Footer>
               )}
             </div>
           </Container>
@@ -138,52 +160,6 @@ const EventList = ({
     </DataList>
   );
 };
-
-const Header = styled.h2`
-  margin-bottom: ${fluidScale("40px", "20px")};
-  padding-bottom: 10px;
-  border-bottom: 10px solid var(--turquoise55);
-`;
-
-const Footer = styled.div`
-  padding-top: 40px;
-`;
-
-const Date = styled.div`
-  display: flex;
-  flex-direction: column;
-  line-height: 1;
-
-  > * + * {
-    margin-top: 5px;
-  }
-
-  .month {
-    font-size: ${fluidScale("22px", "18px")};
-    font-weight: 800;
-    ${respond(`font-weight: 400;`)}
-  }
-
-  .day {
-    font-size: ${fluidScale("40px", "20px")};
-    font-weight: 800;
-  }
-
-  .year {
-    font-size: 20px;
-    font-weight: 400;
-  }
-`;
-
-const Sticker = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 0.5em;
-
-  > * + * {
-    margin-left: 10px;
-  }
-`;
 
 EventList.propTypes = {
   excludeId: PropTypes.string,
