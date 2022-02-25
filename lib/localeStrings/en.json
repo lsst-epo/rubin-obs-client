@@ -156,6 +156,28 @@
       "cloudy": "Cloudy",
       "moon": "Moon phase",
       "first-quarter": "First quarter"
+    },
+    "auth": {
+      "log_in": "Log in",
+      "sign_in_header": "Welcome back!",
+      "email_or_username_label": "Email or Username",
+      "password_label": "Password",
+      "email_label": "Email",
+      "name_label": "Your name",
+      "create_password_label": "Create a password",
+      "create_password_instructions": "Passwords should be at least 8 characters long and should contain a mixture of letters, numbers, and other characters.",
+      "forgot_password_link": "Forgot Password?",
+      "create_account_link": "Create an account",
+      "reset_password_header": "Reset password",
+      "reset_instructions": "Enter your email to reset your password",
+      "reset_password_button": "Reset password",
+      "register_header_student": "Sign up as student",
+      "register_instructions_student": "Please provide the following to create a student account",
+      "register_header_teacher": "Sign up as a teacher",
+      "register_instructions_teacher": "Please provide the following to create a teacher account",
+      "sign_up_button": "Sign Up",
+      "cancel_button": "Cancel",
+      "required_label": "(required)"
     }
   }
 }
