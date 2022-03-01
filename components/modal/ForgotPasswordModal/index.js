@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
-import useAuthentication from "@/hooks/useAuthentication";
+import { useAuthenticationContext } from "@/contexts/Authentication";
 import { Button } from "@/components/atomic";
 import { Input, FormField } from "@/components/form";
 import Modal from "@/components/modal/Modal";
@@ -25,7 +25,7 @@ export default function ForgotPasswordModal() {
 
   const [email, setEmail] = useState();
 
-  const { forgotPassword } = useAuthentication();
+  const { forgotPassword } = useAuthenticationContext();
 
   const onSubmit = async (data) => {
     if (!data.email) return;

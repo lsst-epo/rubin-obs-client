@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
-import useAuthentication from "@/hooks/useAuthentication";
+import { useAuthenticationContext } from "@/contexts/Authentication";
 import { Button } from "@/components/atomic";
 import { FormField, Input } from "@/components/form";
 import * as Styled from "./styles";
@@ -18,7 +18,7 @@ export default function RegisterForm({ role, onSuccess, onCancel }) {
     formState: { isDirty, isSubmitting },
   } = useForm();
 
-  const { register: registerApi } = useAuthentication();
+  const { register: registerApi } = useAuthenticationContext();
 
   const onSubmit = async (data) => {
     if (!data.email || !data.password) return;
