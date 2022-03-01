@@ -1,6 +1,5 @@
 import { useTranslation } from "react-i18next";
-import useAuthentication from "@/hooks/useAuthentication";
-import useAuthModal from "@/hooks/useAuthModal";
+import { useAuthentication, useAuthModal } from "@/hooks";
 import * as Styled from "./styles";
 
 function UserNav() {

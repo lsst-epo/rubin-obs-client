@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-// import useAuthentication from "@/hooks/useAuthentication";
 import { Button, Link as BaseLink, SSOButton } from "@/components/atomic";
 import * as Styled from "./styles";
 import Link from "next/link";
