@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { respond, BREAK_HEADER_LAYOUT } from "@/styles/globalStyles";
 
-const SWITCH_WIDTH = 74;
-const SWITCH_HEIGHT = 39;
+const SWITCH_WIDTH = 90;
+const SWITCH_HEIGHT = 49;
 const TOGGLE_MARGIN = 3.5;
 const TOGGLE_SIZE = SWITCH_HEIGHT - TOGGLE_MARGIN * 2;
 
@@ -16,14 +16,14 @@ export const Fieldset = styled.fieldset`
 export const Label = styled.label`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   width: 100%;
-  font-weight: bold;
+  font-weight: 700;
 `;
 
 export const MobileLabelText = styled.span`
   display: none;
-  padding-inline-end: 1em;
+  padding-inline-end: 1.75em;
 
   ${respond(`display: block;`, BREAK_HEADER_LAYOUT)}
 `;
@@ -36,9 +36,9 @@ export const Switch = styled.button`
   width: ${SWITCH_WIDTH}px;
   height: ${SWITCH_HEIGHT}px;
   display: block;
-  background-color: var(--turquoise85);
-  border: 0 solid var(--turquoise85);
-  border-radius: 20px;
+  background-color: var(--turquoise50);
+  border: 0 solid var(--turquoise50);
+  border-radius: ${SWITCH_HEIGHT}px;
   overflow: hidden;
 
   &[aria-checked="true"] {
