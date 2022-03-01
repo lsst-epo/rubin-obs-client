@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import useAuthentication from "@/hooks/useAuthentication";
 import { Button } from "@/components/atomic";
 import { Input, FormField } from "@/components/form";
-import Modal from "@/components/layout/Modal";
+import Modal from "@/components/modal/Modal";
 import * as Styled from "./styles";
 
 export default function ForgotPasswordModal() {
@@ -40,7 +40,7 @@ export default function ForgotPasswordModal() {
   // TODO: Needs proper a11y roles and labels
   // Check footer contact form for a11y messaging / alerts
   return (
-    <Modal open={!!query.forgotPassword} onClose={onClose}>
+    <Modal open={!!query.forgotPassword} onClose={onClose} maxWidth="550px">
       <h2>{t("auth.reset_password_header")}</h2>
       <p>{t("auth.reset_instructions")}</p>
       <Styled.Form onSubmit={handleSubmit(onSubmit)}>

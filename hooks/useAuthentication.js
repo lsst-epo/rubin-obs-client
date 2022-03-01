@@ -24,10 +24,23 @@ export default function useAuthentication() {
   async function register({ email, password, fullName, role }) {
     const registerMethod =
       role === "teacher" ? registerTeacher : registerStudent;
-    const data = await registerMethod({ email, password, fullName });
 
-    if (data?.authenticate?.jwt) {
-      setAuthToken(data.authenticate.jwt);
+    if (!fullName) return;
+
+    const name = fullName.split(" ");
+    const firstName = name[0];
+    const lastName =
+      name.length > 1 ? fullName.slice(firstName.length + 1) : "";
+
+    const data = await registerMethod({ email, password, firstName, lastName });
+
+    const returnRole =
+      role === "teacher" ? "registerTeachers" : "registerStudents";
+
+    if (data?.[returnRole]?.jwt) {
+      setAuthToken(data[returnRole].jwt);
+
+      return data[returnRole];
     }
   }
 
