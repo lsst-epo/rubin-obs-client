@@ -1,10 +1,11 @@
 import styled from "styled-components";
-import { respond, BREAK_HEADER_LAYOUT } from "@/styles/globalStyles";
-
-const SWITCH_WIDTH = 90;
-const SWITCH_HEIGHT = 49;
-const TOGGLE_MARGIN = 3.5;
-const TOGGLE_SIZE = SWITCH_HEIGHT - TOGGLE_MARGIN * 2;
+import {
+  respond,
+  fluidScale,
+  BREAK_HEADER_LAYOUT,
+  BREAK_MOBILE,
+  BREAK_TABLET,
+} from "@/styles/globalStyles";
 
 export const Fieldset = styled.fieldset`
   border: 0;
@@ -29,22 +30,28 @@ export const MobileLabelText = styled.span`
 `;
 
 export const Switch = styled.button`
+  --switch-width: ${fluidScale("90px", "64px", BREAK_TABLET, BREAK_MOBILE)};
+  --switch-height: ${fluidScale("49px", "34px", BREAK_TABLET, BREAK_MOBILE)};
+  --toggle-margin: 3.5px;
+  --toggle-size: calc(var(--switch-height) - var(--toggle-margin) * 2);
   --Inner-before-color: var(--white);
   --Inner-after-color: var(--turquoise90);
 
   position: relative;
-  width: ${SWITCH_WIDTH}px;
-  height: ${SWITCH_HEIGHT}px;
+  width: var(--switch-width);
+  height: var(--switch-height);
   display: block;
   background-color: var(--turquoise50);
   border: 0 solid var(--turquoise50);
-  border-radius: ${SWITCH_HEIGHT}px;
+  border-radius: var(--switch-height);
   overflow: hidden;
 
   &[aria-checked="true"] {
     --Inner-before-color: var(--turquoise90);
     --Inner-after-color: var(--white);
-    --Toggle-translateX: ${SWITCH_WIDTH - TOGGLE_SIZE - TOGGLE_MARGIN * 2}px;
+    --Toggle-translateX: calc(
+      var(--switch-width) - var(--toggle-size) - var(--toggle-margin) * 2
+    );
   }
 `;
 
@@ -63,7 +70,7 @@ export const Inner = styled.span`
     height: 100%;
     padding-left: 5px;
     padding-right: 5px;
-    line-height: ${SWITCH_HEIGHT}px;
+    line-height: var(--switch-height);
     transition: color 0.3s ease-in-out;
     font-size: 0.727em;
 
@@ -85,10 +92,10 @@ export const Inner = styled.span`
 
 export const Toggle = styled.span`
   position: absolute;
-  top: ${TOGGLE_MARGIN}px;
-  left: ${TOGGLE_MARGIN}px;
-  width: ${TOGGLE_SIZE}px;
-  height: ${TOGGLE_SIZE}px;
+  top: var(--toggle-margin);
+  left: var(--toggle-margin);
+  width: var(--toggle-size);
+  height: var(--toggle-size);
   background: var(--turquoise90);
   border: 0 solid var(--turquoise85);
   border-radius: 50%;
