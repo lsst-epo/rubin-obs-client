@@ -1,11 +1,6 @@
 /* eslint-disable */
 import { createGlobalStyle } from "styled-components";
-import {
-  fluidScaleBase,
-  stripUnit,
-  respondBase,
-  pxToRem as basePxToRem,
-} from "@castiron/style-mixins";
+import { fluidScaleBase, stripUnit, respondBase } from "@castiron/style-mixins";
 
 export const tokens = {
   white: "#ffffff",
@@ -34,7 +29,7 @@ export const tokens = {
   red: "#ff8488",
   red20: "#f2c3c0",
   red40: "#FF8489",
-  BREAK_HEADER_LAYOUT: "1500px",
+  BREAK_HEADER_LAYOUT: "1625px",
   BREAK_DESKTOP: "1280px",
   BREAK_DESKTOP_SMALL: "1130px",
   BREAK_LARGE_TABLET: "850px",

@@ -99,6 +99,26 @@
       "non-scientific-staff": "Non-scientific Staff Profile",
       "browse-more": "Browse More Profiles",
       "back-to-profiles": "Go Back to Profiles"
+    },
+    "auth": {
+      "log_in": "Log in",
+      "sign_up": "Sign up",
+      "sign_in_header": "Welcome back!",
+      "forgot_password_link": "Forgot Password?",
+      "create_account_link": "Create an account",
+      "reset_password_header": "Reset password",
+      "reset_instructions": "Enter your email to reset your password",
+      "reset_password_button": "Reset password",
+      "sign_up_as_student": "I'm a student",
+      "sign_up_as_teacher": "I'm a teacher",
+      "sign_up_student": "Learn real astronomy",
+      "sign_up_teacher": "Teach real astronomy",
+      "join_student": "Join to learn how astronomers learn and interact with real astronomy data. Free of charge forever.",
+      "join_teacher": "Join to access real astronomy data and tools for your class. Free of charge forever.",
+      "register_header_student": "Sign up as student",
+      "register_instructions_student": "Please provide the following to create a student account",
+      "register_header_teacher": "Sign up as a teacher",
+      "register_instructions_teacher": "Please provide the following to create a teacher account"
     }
   }
 }

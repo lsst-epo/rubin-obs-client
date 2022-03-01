@@ -1,4 +1,5 @@
 @use "abstracts/functions";
+@use "abstracts/mixins/base";
 @use "abstracts/mixins/appearance";
 @use "sass:color";
 
@@ -47,5 +48,13 @@
   .a-bg-#{"" + $name} {
     color: $_color;
     background-color: $value;
+  }
+}
+
+// Display
+
+.a-show-mobile {
+  @include base.respond(functions.break(mobile) + 1, min) {
+    display: none;
   }
 }
