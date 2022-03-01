@@ -18,7 +18,13 @@ export default function Button({
       data-inactive={isInactive || undefined}
       {...buttonProps}
     >
-      {icon && <IconComposer icon={icon} size={iconSize} />}
+      {icon && (
+        <IconComposer
+          icon={icon}
+          size={iconSize}
+          role={children && "presentation"}
+        />
+      )}
       <Styled.ButtonText>{children}</Styled.ButtonText>
     </Styled.Button>
   );

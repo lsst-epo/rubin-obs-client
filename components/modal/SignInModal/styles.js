@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { fluidScale } from "@/styles/globalStyles";
 
 export const SSOButtons = styled.div`
-  margin-block-start: ${fluidScale("30px", "50px")};
+  margin-block-start: 30px;
 
   > * + * {
     margin-block-start: 10px;

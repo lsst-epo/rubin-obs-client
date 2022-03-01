@@ -15,6 +15,7 @@
       "@/page/*": ["components/page/*"],
       "@/shapes/*": ["components/shapes/*"],
       "@/hooks/*": ["hooks/*"],
+      "@/hooks": ["hooks"],
       "@/contexts/*": ["contexts/*"],
       "@/styles/*": ["theme/styles/*"],
       "@/svg/*": ["components/svg/*"],

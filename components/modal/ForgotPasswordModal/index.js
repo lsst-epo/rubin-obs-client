@@ -3,10 +3,10 @@ import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { useAuthenticationContext } from "@/contexts/Authentication";
+import useAuthModal from "@/hooks/useAuthModal";
 import { Button } from "@/components/atomic";
 import { Input, FormField } from "@/components/form";
 import Modal from "@/components/modal/Modal";
-import useAuthModal from "@/hooks/useAuthModal";
 import * as Styled from "./styles";
 import ResetPasswordSuccess from "./ResetPasswordSuccess";
 
@@ -69,7 +69,7 @@ export default function ForgotPasswordModal() {
                 id="resetPasswordEmail"
                 type="email"
                 required
-                {...register("email", { required: true })}
+                {...register("email")}
               />
             </FormField>
             <Styled.FormButtons>
