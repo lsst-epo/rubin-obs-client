@@ -6,7 +6,7 @@ $_bg-color: functions.sass-palette(neutral02);
 .c-subnav-list {
   position: absolute;
   z-index: -5;
-  width: functions.header(nav-width);
+  width: var(--nav-width);
   max-width: 47vw;
   overflow: auto;
   color: $_color;

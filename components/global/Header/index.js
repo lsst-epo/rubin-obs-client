@@ -1,23 +1,22 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import useResizeObserver from "use-resize-observer";
 import { useTranslation } from "react-i18next";
-import Navigation from "./Navigation";
-import SearchBar from "./SearchBar";
-import Hamburger from "./Hamburger";
-import LanguageSelect from "@/global/Header/LanguageSelect";
 import Logo from "@/svg/unique/Logo";
 import internalLinkShape from "@/shapes/link";
 import { useGlobalData, useNavHider } from "@/lib/utils";
-import useAuthentication from "@/hooks/useAuthentication";
 import SignInModal from "@/components/modal/SignInModal";
 import RegisterModal from "@/components/modal/RegisterModal";
 import ForgotPasswordModal from "@/components/modal/ForgotPasswordModal";
+import { tokens } from "@/styles/globalStyles";
+import Navigation from "./Navigation";
+import SearchBar from "./SearchBar";
+import Hamburger from "./Hamburger";
+import LanguageSelect from "./LanguageSelect";
+import UserNavigation from "./UserNav";
 
 export default function Header({ navItems }) {
-  const { isAuthenticated, signIn, signOut } = useAuthentication();
   const [mobileNavActive, setMobileNavActive] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
@@ -25,23 +24,18 @@ export default function Header({ navItems }) {
   const { localeInfo } = useGlobalData();
   const homeUrl = localeInfo.locale === "es" ? `/es` : `/`;
 
-  const router = useRouter();
-
   useNavHider(prevScrollPos, setPrevScrollPos, visible, setVisible);
 
+  const breakpoint = parseInt(tokens.BREAK_HEADER_LAYOUT, 10);
   const { ref } = useResizeObserver({
     onResize: ({ width }) => {
-      if (width >= 1500) setMobileNavActive(false);
+      if (width >= breakpoint) setMobileNavActive(false);
       document.documentElement.style.setProperty(
         "--header-width",
         `${width}px`
       );
     },
   });
-
-  const onSignIn = () => {
-    router.push({ query: { signIn: true } }, undefined, { shallow: true });
-  };
 
   return (
     <header
@@ -70,12 +64,8 @@ export default function Header({ navItems }) {
       <div className="c-global-header__toggle-block">
         {!mobileNavActive && <LanguageSelect />}
       </div>
-      <div className="c-global-header__login-block">
-        {isAuthenticated ? (
-          <button onClick={() => signOut()}>Sign out</button>
-        ) : (
-          <button onClick={() => onSignIn()}>Sign in</button>
-        )}
+      <div className="c-global-header__user-nav-block">
+        <UserNavigation />
       </div>
       <div className="c-global-header__hamburger-block">
         <Hamburger
