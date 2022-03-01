@@ -29,13 +29,26 @@
     "homepage": "Homepage",
     "contact-form": {
       "contact-us": "Contact us",
+      "success": "Thank you. We’ve received your message.",
+      "error": "We seem to have run into a problem."
+    },
+    "form": {
       "email": "Email",
+      "email_required": "Email (required)",
       "inquiry": "Inquiry",
+      "password": "Password",
+      "password_required": "Password (required)",
+      "name": "Your name",
+      "name_required": "Your name (required)",
+      "create_password": "Create a password",
+      "create_password_required": "Create a password (required)",
+      "create_password_instructions": "Passwords should be at least 8 characters long and should contain a mixture of letters, numbers, and other characters.",
       "send": "Send",
       "sending": "Sending…",
       "reset": "Reset form",
-      "success": "Thank you. We’ve received your message.",
-      "error": "We seem to have run into a problem."
+      "sign_up": "Sign Up",
+      "cancel": "Cancel",
+      "error": "Error:"
     },
     "filters": {
       "ascending": "Ascending",
@@ -156,6 +169,25 @@
       "cloudy": "Cloudy",
       "moon": "Moon phase",
       "first-quarter": "First quarter"
+    },
+    "auth": {
+      "log_in": "Log in",
+      "sign_in_header": "Welcome back!",
+      "forgot_password_link": "Forgot Password?",
+      "create_account_link": "Create an account",
+      "reset_password_header": "Reset password",
+      "reset_instructions": "Enter your email to reset your password",
+      "reset_password_button": "Reset password",
+      "sign_up_as_student": "I'm a student",
+      "sign_up_as_teacher": "I'm a teacher",
+      "sign_up_student": "Learn real astronomy",
+      "sign_up_teacher": "Teach real astronomy",
+      "join_student": "Join to learn how astronomers learn and interact with real astronomy data. Free of charge forever.",
+      "join_teacher": "Join to access real astronomy data and tools for your class. Free of charge forever.",
+      "register_header_student": "Sign up as student",
+      "register_instructions_student": "Please provide the following to create a student account",
+      "register_header_teacher": "Sign up as a teacher",
+      "register_instructions_teacher": "Please provide the following to create a teacher account"
     }
   }
 }

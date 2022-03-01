@@ -1,6 +1,11 @@
 /* eslint-disable */
 import { createGlobalStyle } from "styled-components";
-import { fluidScaleBase, stripUnit, respondBase } from "@castiron/style-mixins";
+import {
+  fluidScaleBase,
+  stripUnit,
+  respondBase,
+  pxToRem as basePxToRem,
+} from "@castiron/style-mixins";
 
 export const tokens = {
   white: "#ffffff",
@@ -53,6 +58,11 @@ export const tokens = {
   PADDING_LARGE: "100px",
   PADDING_MEDIUM: "40px",
   PADDING_SMALL: "20px",
+};
+
+export const zStack = {
+  dialog: 30,
+  dialogBackdrop: 25,
 };
 
 export const white = tokens.white;
