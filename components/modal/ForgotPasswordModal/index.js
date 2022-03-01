@@ -6,11 +6,14 @@ import useAuthentication from "@/hooks/useAuthentication";
 import { Button } from "@/components/atomic";
 import { Input, FormField } from "@/components/form";
 import Modal from "@/components/modal/Modal";
+import useAuthModal from "@/hooks/useAuthModal";
 import * as Styled from "./styles";
 import ResetPasswordSuccess from "./ResetPasswordSuccess";
 
 export default function ForgotPasswordModal() {
-  const { query, push } = useRouter();
+  const { openModal, closeModal } = useAuthModal();
+
+  const { query } = useRouter();
 
   const { t } = useTranslation();
 
@@ -37,11 +40,11 @@ export default function ForgotPasswordModal() {
   };
 
   const onClose = () => {
-    push({ query: {} }, undefined, { shallow: true });
+    closeModal();
   };
 
   const onCancel = () => {
-    push({ query: { signIn: true } }, undefined, { shallow: true });
+    openModal("signIn");
   };
 
   // TODO: Needs proper a11y roles and labels
@@ -52,6 +55,7 @@ export default function ForgotPasswordModal() {
       onClose={onClose}
       maxWidth="550px"
       aria-live="polite"
+      aria-label="Forgot Password"
     >
       {isSubmitSuccessful ? (
         <ResetPasswordSuccess email={email} onClose={onClose} />

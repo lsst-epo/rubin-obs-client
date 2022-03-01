@@ -3,20 +3,20 @@ import { fluidScale, zStack } from "@/styles/globalStyles";
 
 export const Modal = styled.div`
   position: fixed;
-  display: none;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-height: 100vh;
+  overflow-y: auto;
+  z-index: ${zStack.dialogBackdrop};
+  background-color: rgba(0, 0, 0, 0.7);
 
-  &[open] {
-    display: flex;
-    align-items: start;
-    justify-content: center;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    max-height: 100vh;
-    overflow-y: auto;
-    z-index: ${zStack.dialogBackdrop};
-    background-color: rgba(0, 0, 0, 0.7);
+  &[hidden] {
+    display: none;
   }
 `;
 

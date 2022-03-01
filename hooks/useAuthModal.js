@@ -5,13 +5,13 @@ export default function useAuthModal() {
   const router = useRouter();
 
   const doRouterPush = useCallback(
-    (nameParam, roleParam) => {
+    (nameParam, queryVars) => {
       const query = {
         ...(nameParam && {
           [nameParam]: true,
         }),
-        ...(roleParam && {
-          [roleParam]: true,
+        ...(queryVars && {
+          ...queryVars,
         }),
       };
       router.push({ query }, undefined, { shallow: true });

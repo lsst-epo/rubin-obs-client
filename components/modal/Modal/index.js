@@ -1,7 +1,9 @@
-import React from "react";
+import { useRef } from "react";
 import PropTypes from "prop-types";
 import IconComposer from "@/components/svg/IconComposer";
 import * as Styled from "./styles";
+import useFocusTrap from "@/hooks/useFocusTrap";
+import { useKeyDownEvent } from "@/hooks/listeners";
 
 export default function Modal({
   open,
@@ -10,10 +12,20 @@ export default function Modal({
   maxWidth,
   ...modalProps
 }) {
-  // TODO: Needs proper a11y roles and labels
+  const ref = useRef(null);
+
+  useFocusTrap(ref, open);
+
+  useKeyDownEvent(handleKeyDown);
+
+  function handleKeyDown({ key }) {
+    if (!open || key !== "Escape") return;
+    onClose();
+  }
+
   return (
-    <Styled.Modal open={open} {...modalProps}>
-      <Styled.Inner>
+    <Styled.Modal hidden={!open} ref={ref}>
+      <Styled.Inner role="dialog" {...modalProps}>
         <Styled.CloseButton type="button" aria-label="Close" onClick={onClose}>
           <IconComposer icon="close" />
         </Styled.CloseButton>
@@ -25,8 +37,11 @@ export default function Modal({
 
 Modal.propTypes = {
   open: PropTypes.bool,
-  onClose: PropTypes.func,
-  children: PropTypes.node,
+  onClose: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
+  /** An aria label is required for dialogs */
+  "aria-label": PropTypes.string.isRequired,
   /** maxWidth string - can be px, ems, vw, etc */
   maxWidth: PropTypes.string,
+  disclosureRef: PropTypes.ref,
 };
