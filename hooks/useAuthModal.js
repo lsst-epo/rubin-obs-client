@@ -1,18 +1,26 @@
+import { useCallback } from "react";
 import { useRouter } from "next/router";
 
 export default function useAuthModal() {
   const router = useRouter();
 
-  function openModal(param) {
-    router.push({ query: { [param]: true } }, undefined, { shallow: true });
-  }
-
-  function closeModal() {
-    router.push({ query: {} }, undefined, { shallow: true });
-  }
+  const doRouterPush = useCallback(
+    (nameParam, roleParam) => {
+      const query = {
+        ...(nameParam && {
+          [nameParam]: true,
+        }),
+        ...(roleParam && {
+          [roleParam]: true,
+        }),
+      };
+      router.push({ query }, undefined, { shallow: true });
+    },
+    [router]
+  );
 
   return {
-    openModal,
-    closeModal,
+    openModal: (nameParam, roleParam) => doRouterPush(nameParam, roleParam),
+    closeModal: () => doRouterPush(),
   };
 }
