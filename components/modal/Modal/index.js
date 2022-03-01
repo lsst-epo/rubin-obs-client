@@ -2,8 +2,7 @@ import { useRef } from "react";
 import PropTypes from "prop-types";
 import IconComposer from "@/components/svg/IconComposer";
 import * as Styled from "./styles";
-import useFocusTrap from "@/hooks/useFocusTrap";
-import { useKeyDownEvent } from "@/hooks/listeners";
+import { useFocusTrap, useKeyDownEvent, useLockBodyScroll } from "@/hooks";
 
 export default function Modal({
   open,
@@ -15,6 +14,8 @@ export default function Modal({
   const ref = useRef(null);
 
   useFocusTrap(ref, open);
+
+  useLockBodyScroll(open);
 
   useKeyDownEvent(handleKeyDown);
 
@@ -43,5 +44,4 @@ Modal.propTypes = {
   "aria-label": PropTypes.string.isRequired,
   /** maxWidth string - can be px, ems, vw, etc */
   maxWidth: PropTypes.string,
-  disclosureRef: PropTypes.ref,
 };

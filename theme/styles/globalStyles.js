@@ -55,8 +55,9 @@ export const tokens = {
 };
 
 export const zStack = {
-  dialog: 30,
-  dialogBackdrop: 25,
+  dialog: 35,
+  dialogBackdrop: 30,
+  header: 25,
 };
 
 export const white = tokens.white;

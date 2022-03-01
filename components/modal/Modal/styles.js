@@ -1,5 +1,10 @@
 import styled, { css } from "styled-components";
-import { fluidScale, zStack } from "@/styles/globalStyles";
+import {
+  BREAK_PHABLET,
+  fluidScale,
+  zStack,
+  respond,
+} from "@/styles/globalStyles";
 
 export const Modal = styled.div`
   position: fixed;
@@ -25,17 +30,24 @@ export const Inner = styled.div`
   display: flex;
   background: var(--white);
   color: var(--neutral80);
-  margin-block-start: ${fluidScale("150px", "15px")};
-  margin-block-end: ${fluidScale("150px", "15px")};
+  margin-block-start: 10vh;
   margin-inline-start: 15px;
   margin-inline-end: 15px;
+  margin-block-end: 15px;
+
+  ${respond(
+    css`
+      margin-block-start: 15px;
+    `,
+    BREAK_PHABLET
+  )}
 `;
 
 export const Image = styled.div``;
 
 export const Content = styled.div`
   padding: ${fluidScale("60px", "15px")};
-  padding-block-start: ${fluidScale("60px", "76px")};
+  padding-block-start: 60px;
 
   ${({ $maxWidth }) =>
     $maxWidth &&

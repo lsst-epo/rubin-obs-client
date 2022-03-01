@@ -23,6 +23,7 @@ export default class IconComposer extends PureComponent {
       fill,
       stroke,
       icon,
+      role = "img",
     } = this.props;
     const className = classNames({
       "a-svg": true,
@@ -35,9 +36,11 @@ export default class IconComposer extends PureComponent {
     return React.createElement(IconComponent, {
       svgProps: this.props.svgProps,
       className,
-      icon,
       size,
       fill,
+      stroke,
+      icon,
+      role,
     });
   }
 }

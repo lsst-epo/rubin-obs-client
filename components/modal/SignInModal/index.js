@@ -4,10 +4,10 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { useAuthenticationContext } from "@/contexts/Authentication";
+import useAuthModal from "@/hooks/useAuthModal";
 import { Link as BaseLink, Button, SSOButton } from "@/components/atomic";
 import { Input, FormField, FormButtons } from "@/components/form";
 import Modal from "@/components/modal/Modal";
-import useAuthModal from "@/hooks/useAuthModal";
 import * as Styled from "./styles";
 
 export default function SignInModal() {
@@ -50,19 +50,14 @@ export default function SignInModal() {
       </Styled.SSOButtons>
       <Styled.Form onSubmit={handleSubmit(onSubmit)}>
         <FormField isBlock htmlFor="signInEmail" label="form.email">
-          <Input
-            id="signInEmail"
-            type="text"
-            required
-            {...register("email", { required: true })}
-          />
+          <Input id="signInEmail" type="text" required {...register("email")} />
         </FormField>
         <FormField isBlock htmlFor="signInPassword" label="form.password">
           <Input
             id="signInPassword"
             type="password"
             required
-            {...register("password", { required: true })}
+            {...register("password")}
           />
         </FormField>
         <Styled.AccountLinks>
