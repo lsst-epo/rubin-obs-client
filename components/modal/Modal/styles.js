@@ -1,10 +1,5 @@
 import styled, { css } from "styled-components";
-import {
-  fluidScale,
-  respond,
-  zStack,
-  BREAK_PHABLET,
-} from "@/styles/globalStyles";
+import { fluidScale, zStack } from "@/styles/globalStyles";
 
 export const Modal = styled.div`
   position: fixed;
@@ -30,18 +25,10 @@ export const Inner = styled.div`
   display: flex;
   background: var(--white);
   color: var(--neutral80);
-  max-width: 827px;
   margin-block-start: ${fluidScale("150px", "15px")};
   margin-block-end: ${fluidScale("150px", "15px")};
   margin-inline-start: 15px;
   margin-inline-end: 15px;
-
-  ${respond(
-    css`
-      width: 100vw;
-    `,
-    BREAK_PHABLET
-  )}
 `;
 
 export const Image = styled.div``;
@@ -49,6 +36,13 @@ export const Image = styled.div``;
 export const Content = styled.div`
   padding: ${fluidScale("60px", "15px")};
   padding-block-start: ${fluidScale("60px", "76px")};
+
+  ${({ $maxWidth }) =>
+    $maxWidth &&
+    css`
+      width: calc(100vw - 30px);
+      max-width: ${$maxWidth};
+    `}
 `;
 
 export const CloseButton = styled.button`

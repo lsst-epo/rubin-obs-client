@@ -6,8 +6,6 @@ export const Inner = styled.div``;
 
 export const ImageWrapper = styled.div``;
 
-export const Content = styled.div``;
-
 export const Form = styled.form`
   margin-block-start: 30px;
   max-width: 550px;
