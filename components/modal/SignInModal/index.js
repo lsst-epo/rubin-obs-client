@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import useAuthentication from "@/hooks/useAuthentication";
+import { useAuthenticationContext } from "@/contexts/Authentication";
 import { Link as BaseLink, Button, SSOButton } from "@/components/atomic";
 import { Input, FormField, FormButtons } from "@/components/form";
 import Modal from "@/components/modal/Modal";
@@ -23,7 +23,7 @@ export default function SignInModal() {
     formState: { isDirty, isSubmitting },
   } = useForm();
 
-  const { signIn } = useAuthentication();
+  const { signIn } = useAuthenticationContext();
 
   const onSubmit = (data) => {
     if (!data.email || !data.password) return;

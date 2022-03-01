@@ -4,7 +4,7 @@ const AuthenticationContext = createContext(null);
 
 export default AuthenticationContext;
 
-export function useAuhtenticationContext() {
+export function useAuthenticationContext() {
   const context = useContext(AuthenticationContext);
   if (!context) {
     throw new Error(
