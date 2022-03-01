@@ -7,10 +7,13 @@ import useAuthentication from "@/hooks/useAuthentication";
 import { Link as BaseLink, Button, SSOButton } from "@/components/atomic";
 import { Input, FormField, FormButtons } from "@/components/form";
 import Modal from "@/components/modal/Modal";
+import useAuthModal from "@/hooks/useAuthModal";
 import * as Styled from "./styles";
 
 export default function SignInModal() {
-  const { query, push } = useRouter();
+  const { query } = useRouter();
+
+  const { closeModal } = useAuthModal();
 
   const { t } = useTranslation();
 
@@ -29,12 +32,17 @@ export default function SignInModal() {
   };
 
   const onClose = () => {
-    push({ query: {} }, undefined, { shallow: true });
+    closeModal();
   };
 
   // TODO: Needs proper a11y roles and labels
   return (
-    <Modal open={!!query.signIn} onClose={onClose} maxWidth="550px">
+    <Modal
+      open={!!query.signIn}
+      onClose={onClose}
+      maxWidth="550px"
+      aria-label="Sign In"
+    >
       <h2>{t("auth.sign_in_header")}</h2>
       <Styled.SSOButtons>
         <SSOButton icon="google">Continue with Google</SSOButton>
