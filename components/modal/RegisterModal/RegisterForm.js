@@ -15,7 +15,7 @@ export default function RegisterForm({ role, onSuccess, onCancel }) {
   const {
     register,
     handleSubmit,
-    formState: { isDirty },
+    formState: { isDirty, isSubmitting },
   } = useForm();
 
   const { register: registerApi } = useAuthentication();
@@ -64,8 +64,15 @@ export default function RegisterForm({ role, onSuccess, onCancel }) {
           />
         </FormField>
         <Styled.FormButtons>
-          <Button isInactive={!isDirty}>{t("form.sign_up")}</Button>
-          <Button type="button" onClick={onCancel} styleAs="warning">
+          <Button isInactive={!isDirty} disabled={isSubmitting}>
+            {isSubmitting ? "Submitting..." : t("form.sign_up")}
+          </Button>
+          <Button
+            type="button"
+            onClick={onCancel}
+            styleAs="warning"
+            disabled={isSubmitting}
+          >
             {t("form.cancel")}
           </Button>
         </Styled.FormButtons>

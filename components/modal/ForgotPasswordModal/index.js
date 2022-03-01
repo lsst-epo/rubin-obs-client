@@ -17,12 +17,12 @@ export default function ForgotPasswordModal() {
   const {
     register,
     handleSubmit,
-    formState: { isDirty },
+    formState: { isDirty, isSubmitting, isSubmitSuccessful },
   } = useForm();
 
-  const { forgotPassword } = useAuthentication();
+  const [email, setEmail] = useState();
 
-  const [formState, setFormState] = useState({ email: null, success: false });
+  const { forgotPassword } = useAuthentication();
 
   const onSubmit = async (data) => {
     if (!data.email) return;
@@ -30,8 +30,10 @@ export default function ForgotPasswordModal() {
     const message = await forgotPassword(data);
 
     if (message) {
-      setFormState({ email: data.email, success: true });
+      setEmail(data.email);
+      return message;
     }
+    // TODO: Handle graphql errors
   };
 
   const onClose = () => {
@@ -51,8 +53,8 @@ export default function ForgotPasswordModal() {
       maxWidth="550px"
       aria-live="polite"
     >
-      {formState.success ? (
-        <ResetPasswordSuccess email={formState.email} onClose={onClose} />
+      {isSubmitSuccessful ? (
+        <ResetPasswordSuccess email={email} onClose={onClose} />
       ) : (
         <>
           <h2>{t("auth.reset_password_header")}</h2>
@@ -61,16 +63,23 @@ export default function ForgotPasswordModal() {
             <FormField htmlFor="resetPasswordEmail" label="form.email" required>
               <Input
                 id="resetPasswordEmail"
-                type="text"
+                type="email"
                 required
                 {...register("email", { required: true })}
               />
             </FormField>
             <Styled.FormButtons>
-              <Button isInactive={!isDirty}>
-                {t("auth.reset_password_button")}
+              <Button isInactive={!isDirty} disabled={isSubmitting}>
+                {isSubmitting
+                  ? "Submitting..."
+                  : t("auth.reset_password_button")}
               </Button>
-              <Button type="button" styleAs="warning" onClick={onCancel}>
+              <Button
+                type="button"
+                styleAs="warning"
+                onClick={onCancel}
+                disabled={isSubmitting}
+              >
                 {t("form.cancel")}
               </Button>
             </Styled.FormButtons>
