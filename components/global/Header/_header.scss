@@ -6,23 +6,24 @@ $_breakpoint: functions.header(layout-breakpoint);
 
 .c-global-header {
   @include base.fluid-scale(
-    height,
+    header-height,
     functions.header(height-tablet),
     functions.header(height-mobile),
     functions.break(tablet),
     functions.break(mobile)
   );
 
-  top: 0;
-  z-index: functions.z-stack(header);
-  display: grid;
   position: sticky;
+  top: 0;
+  height: var(--header-height);
+  display: grid;
   grid-template: "logo nav search toggle login" auto / auto minmax(0, 1fr) auto auto auto;
   gap: functions.header(gap);
   color: functions.palette(white);
   background-color: functions.palette(turquoise60);
   transform: none;
   transition: transform 0.4s;
+  z-index: functions.z-stack(header);
 
   &.invisible {
     transform: translate3d(0, -100%, 0);
@@ -67,7 +68,7 @@ $_breakpoint: functions.header(layout-breakpoint);
 
     fieldset {
       border: 0;
-      padding: 0 20px 0 10px;
+      padding: 0 15px;
     }
 
     @include base.respond($_breakpoint) {
@@ -85,7 +86,7 @@ $_breakpoint: functions.header(layout-breakpoint);
     display: flex;
     grid-area: hamburger;
     align-items: center;
-    height: var(--height);
+    height: var(--header-height);
 
     @include base.respond($_breakpoint + 1, min) {
       display: none;
@@ -102,18 +103,21 @@ $_breakpoint: functions.header(layout-breakpoint);
     );
 
     height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: background-color 0.2s;
 
     &--is-active {
-      background-color: functions.palette(darkblue);
+      background-color: var(--turquoise90);
     }
   }
 
   &__icon {
     @include base.fluid-scale(
       width height,
-      36px,
-      25.412px,
+      41.85px,
+      34px,
       functions.break(tablet),
       functions.break(mobile)
     );
@@ -121,15 +125,8 @@ $_breakpoint: functions.header(layout-breakpoint);
 
   &__logo-link {
     @include base.fluid-scale(
-      padding-left,
+      padding-left padding-right,
       36px,
-      16.5px,
-      functions.break(tablet),
-      functions.break(mobile)
-    );
-    @include base.fluid-scale(
-      padding-right,
-      75px,
       16.5px,
       functions.break(tablet),
       functions.break(mobile)
@@ -137,39 +134,27 @@ $_breakpoint: functions.header(layout-breakpoint);
 
     display: flex;
     align-items: center;
-    height: var(--height);
+    height: var(--header-height);
     margin-top: -3px;
-
-    // .c-global-header__logo {
-    //   fill: functions.palette(white);
-    // }
-
-    // &:hover {
-    //   .c-global-header__logo {
-    //     fill: functions.palette(black);
-    //   }
-    // }
   }
 
   &__logo {
     @include base.fluid-scale(
       width,
-      103.889px,
-      59.889px,
+      86.09px,
+      67.13px,
       functions.break(tablet),
       functions.break(mobile)
     );
     @include base.fluid-scale(
       height,
-      70.3px,
-      40.1px,
+      57.71px,
+      45px,
       functions.break(tablet),
       functions.break(mobile)
     );
 
     fill: functions.palette(white);
-
-    // transition: fill 0.4s 0.1s;
   }
 
   &__skip-link {
