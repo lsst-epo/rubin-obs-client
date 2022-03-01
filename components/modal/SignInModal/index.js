@@ -17,8 +17,7 @@ export default function SignInModal() {
   const {
     register,
     handleSubmit,
-    // isValid returns false until form is submitted
-    formState: { isDirty },
+    formState: { isDirty, isSubmitting },
   } = useForm();
 
   const { signIn } = useAuthentication();
@@ -67,7 +66,9 @@ export default function SignInModal() {
           </Link>
         </Styled.AccountLinks>
         <FormButtons>
-          <Button isInactive={!isDirty}>{t("auth.log_in")}</Button>
+          <Button isInactive={!isDirty} disabled={isSubmitting}>
+            {isSubmitting ? "Logging in..." : t("auth.log_in")}
+          </Button>
         </FormButtons>
       </Styled.Form>
     </Modal>
