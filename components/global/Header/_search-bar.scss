@@ -3,6 +3,13 @@
 @use "abstracts/functions";
 
 .c-search-bar {
+  @include base.fluid-scale(
+    toggle-width,
+    75px,
+    60px,
+    functions.break(tablet),
+    functions.break(mobile)
+  );
   position: relative;
   height: 100%;
   overflow: hidden;
@@ -12,24 +19,20 @@
 
   &__toggle {
     position: absolute;
-    width: 60px;
+    width: var(--toggle-width);
     top: 0;
     left: 0;
     height: 100%;
 
     svg {
       transform: translateY(10%);
-
-      @include base.respond(functions.header(layout-breakpoint)) {
-        transform: none;
-      }
     }
   }
 
   &__form {
     display: flex;
     align-items: center;
-    width: 60px;
+    width: var(--toggle-width);
     height: 100%;
     transition: width 0.35s ease-in-out, background-color 0.35s ease-in-out, visibility 0s 0.35s;
     visibility: hidden;

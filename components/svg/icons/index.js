@@ -1,6 +1,7 @@
 import Calendar from "./Calendar";
 import Cancel from "./Cancel";
 import Caret from "./Caret";
+import CaretThin from "./CaretThin";
 import Close from "./Close";
 import Cloud from "./Cloud";
 import Doc from "./Doc";
@@ -29,6 +30,7 @@ export default {
   Calendar,
   Cancel,
   Caret,
+  CaretThin,
   Close,
   Cloud,
   Doc,
