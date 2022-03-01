@@ -1,6 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import useResizeObserver from "use-resize-observer";
 import { useTranslation } from "react-i18next";
 import Navigation from "./Navigation";
@@ -11,6 +12,9 @@ import Logo from "@/svg/unique/Logo";
 import internalLinkShape from "@/shapes/link";
 import { useGlobalData, useNavHider } from "@/lib/utils";
 import useAuthentication from "@/hooks/useAuthentication";
+import SignInModal from "@/components/templates/SignInModal";
+import RegisterModal from "@/components/templates/RegisterModal";
+import ForgotPasswordModal from "@/components/templates/ForgotPasswordModal";
 
 export default function Header({ navItems }) {
   const { isAuthenticated, signIn, signOut } = useAuthentication();
@@ -20,6 +24,8 @@ export default function Header({ navItems }) {
   const { t } = useTranslation();
   const { localeInfo } = useGlobalData();
   const homeUrl = localeInfo.locale === "es" ? `/es` : `/`;
+
+  const router = useRouter();
 
   useNavHider(prevScrollPos, setPrevScrollPos, visible, setVisible);
 
@@ -32,6 +38,10 @@ export default function Header({ navItems }) {
       );
     },
   });
+
+  const onSignIn = () => {
+    router.push({ query: { signIn: true } }, undefined, { shallow: true });
+  };
 
   return (
     <header
@@ -64,13 +74,7 @@ export default function Header({ navItems }) {
         {isAuthenticated ? (
           <button onClick={() => signOut()}>Sign out</button>
         ) : (
-          <button
-            onClick={() =>
-              signIn({ email: "user@test.com", password: "abc123" })
-            }
-          >
-            Sign in
-          </button>
+          <button onClick={() => onSignIn()}>Sign in</button>
         )}
       </div>
       <div className="c-global-header__hamburger-block">
@@ -85,6 +89,9 @@ export default function Header({ navItems }) {
         mobileActive={mobileNavActive}
         mobileSetter={setMobileNavActive}
       />
+      <SignInModal />
+      <RegisterModal />
+      <ForgotPasswordModal />
     </header>
   );
 }

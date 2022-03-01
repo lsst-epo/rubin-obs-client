@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { authenticate, registerTeacher, registerStudent } from "@/lib/api/auth";
+import {
+  authenticate,
+  registerTeacher,
+  registerStudent,
+  forgottenPassword,
+} from "@/lib/api/auth";
 
 export default function useAuthentication() {
   const [authToken, setAuthToken] = useState(null);
@@ -26,10 +31,19 @@ export default function useAuthentication() {
     }
   }
 
+  async function forgotPassword({ email }) {
+    const data = await forgottenPassword({ email });
+
+    if (data?.forgottenPassword) {
+      return data.forgottenPassword;
+    }
+  }
+
   return {
     isAuthenticated: !!authToken,
     signIn,
     signOut,
     register,
+    forgotPassword,
   };
 }
