@@ -3,8 +3,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import Subnavigation from "./Subnavigation";
 import IconComposer from "@/svg/IconComposer";
-import useFocusTrap from "@/hooks/useFocusTrap";
-import { useKeyDownEvent } from "@/hooks/listeners";
+import { useKeyDownEvent, useFocusTrap } from "@/hooks";
 import internalLinkShape, { internalLinkInternalShape } from "@/shapes/link";
 
 export default function NavItemWithChildren({
