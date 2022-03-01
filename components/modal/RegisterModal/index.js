@@ -4,9 +4,12 @@ import Modal from "@/components/modal/Modal";
 import RegisterForm from "./RegisterForm";
 import RegisterRoleForm from "./RegisterRoleForm";
 import RegisterSuccess from "./RegisterSuccess";
+import useAuthModal from "@/hooks/useAuthModal";
 
 export default function RegisterModal() {
-  const { query, push } = useRouter();
+  const { query } = useRouter();
+
+  const { openModal, closeModal } = useAuthModal();
 
   const [formState, setFormState] = useState({
     role: "student",
@@ -14,17 +17,15 @@ export default function RegisterModal() {
   });
 
   const onClose = () => {
-    push({ query: {} }, undefined, { shallow: true });
+    closeModal();
   };
 
   const onCancel = () => {
-    push({ query: { register: true } }, undefined, { shallow: true });
+    openModal("register");
   };
 
   const onEmailSignup = () => {
-    push({ query: { register: true, role: formState.role } }, undefined, {
-      shallow: true,
-    });
+    openModal("register", { role: formState.role });
   };
 
   const onSuccess = () => {
@@ -39,6 +40,7 @@ export default function RegisterModal() {
       onClose={onClose}
       maxWidth="550px"
       aria-live="polite"
+      aria-label="Sign Up"
     >
       {formState.success ? (
         <RegisterSuccess role={query.role} onClose={onClose} />
