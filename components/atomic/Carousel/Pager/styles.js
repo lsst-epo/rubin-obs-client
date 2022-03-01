@@ -13,7 +13,7 @@ export const Button = styled.button`
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background-color: var(--turquoise85);
+  background-color: var(--turquoise55);
   outline: 2px solid transparent;
   outline-offset: 2px;
   transition: background-color 0.2s, outline-color 0.2s;
@@ -23,18 +23,15 @@ export const Button = styled.button`
     outline-width: 2px;
   }
 
-  &:hover {
-    background-color: var(--turquoise50);
-  }
-
+  &:hover,
   &:focus-visible {
-    background-color: var(--turquoise50);
-    outline: 2px solid var(--turquoise50);
+    background-color: var(--turquoise55);
+    outline: 2px solid var(--turquoise55);
   }
 
   &[aria-current="step"] {
-    background-color: var(--turquoise50);
-    outline-color: var(--turquoise50);
+    background-color: var(--turquoise55);
+    outline-color: var(--turquoise55);
 
     &:hover,
     &:focus-visible {

@@ -13,11 +13,20 @@ export const Button = styled.button`
   color: var(--white);
   background-color: var(--neutral60);
   border-radius: 50%;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
   z-index: 1;
-  transition: color 0.2s, background-color 0.2s;
+  transition: color 0.2s, background-color 0.2s, outline-color 0.2s;
 
-  &:hover {
-    background-color: var(--neutral40);
+  // override global outline style
+  .js-focus-visible &:focus:not(.focus-visible) {
+    outline-width: 2px;
+  }
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--turquoise70);
+    outline: 2px solid var(--turquoise70);
   }
 
   &[aria-disabled="true"] {
