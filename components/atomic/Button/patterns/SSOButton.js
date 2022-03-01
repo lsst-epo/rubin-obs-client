@@ -1,9 +1,15 @@
 import PropTypes from "prop-types";
 import Button from "../";
 
-export default function SSOButton({ icon, children }) {
+export default function SSOButton({ icon, children, ...buttonProps }) {
   return (
-    <Button icon={icon} iconSize={30} styleAs="tertiary" isBlock>
+    <Button
+      icon={icon}
+      iconSize={30}
+      styleAs="tertiary"
+      isBlock
+      {...buttonProps}
+    >
       {children}
     </Button>
   );

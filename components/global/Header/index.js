@@ -12,9 +12,9 @@ import Logo from "@/svg/unique/Logo";
 import internalLinkShape from "@/shapes/link";
 import { useGlobalData, useNavHider } from "@/lib/utils";
 import useAuthentication from "@/hooks/useAuthentication";
-import SignInModal from "@/components/templates/SignInModal";
-import RegisterModal from "@/components/templates/RegisterModal";
-import ForgotPasswordModal from "@/components/templates/ForgotPasswordModal";
+import SignInModal from "@/components/modal/SignInModal";
+import RegisterModal from "@/components/modal/RegisterModal";
+import ForgotPasswordModal from "@/components/modal/ForgotPasswordModal";
 
 export default function Header({ navItems }) {
   const { isAuthenticated, signIn, signOut } = useAuthentication();
