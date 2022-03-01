@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import useAuthentication from "@/hooks/useAuthentication";
 import { Link as BaseLink, Button, SSOButton } from "@/components/atomic";
 import { Input, FormField, FormButtons } from "@/components/form";
-import Modal from "@/components/layout/Modal";
+import Modal from "@/components/modal/Modal";
 import * as Styled from "./styles";
 
 export default function SignInModal() {
@@ -35,7 +35,7 @@ export default function SignInModal() {
 
   // TODO: Needs proper a11y roles and labels
   return (
-    <Modal open={!!query.signIn} onClose={onClose}>
+    <Modal open={!!query.signIn} onClose={onClose} maxWidth="550px">
       <h2>{t("auth.sign_in_header")}</h2>
       <Styled.SSOButtons>
         <SSOButton icon="google">Continue with Google</SSOButton>
