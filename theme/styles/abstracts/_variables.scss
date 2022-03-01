@@ -62,14 +62,15 @@ $font-weights: (
 // --------------------------------------------------------
 $header: (
   height-tablet: 110px,
-  height-mobile: 80px,
+  height-mobile: 60px,
   gap: 0,
-  layout-breakpoint: 1500px,
+  layout-breakpoint: 1625px,
   breakpoint-for-search-bar: 850px,
   nav-link-padding-lateral: 0.8em,
-  nav-width: 300px,
+  nav-width-desktop: 300px,
+  nav-width-mobile: 225px,
   button-width-tablet: 114px,
-  button-width-mobile: 75px,
+  button-width-mobile: 60px,
 );
 $cta: (
   breakpoint: 600px,

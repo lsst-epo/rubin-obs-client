@@ -1,11 +1,13 @@
 import { useState, useRef } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import Link from "next/link";
-import NavItemWithChildren from "./NavItemWithChildren";
+import { useTranslation } from "react-i18next";
 import { useClickEvent } from "@/hooks/listeners";
+import useAuthModal from "@/hooks/useAuthModal";
 import { internalLinkWithChildrenShape } from "@/shapes/link";
 import LanguageSelect from "./LanguageSelect";
+import NavItem from "./NavItem";
+import NavItemWithChildren from "./NavItemWithChildren";
 
 export default function Navigation({
   items,
@@ -15,6 +17,8 @@ export default function Navigation({
 }) {
   const [active, setActive] = useState(null);
   const navList = useRef();
+  const { openModal } = useAuthModal();
+  const { t } = useTranslation();
 
   useClickEvent(handleClick);
 
@@ -44,7 +48,7 @@ export default function Navigation({
       })}
     >
       <ul className="c-nav-list__list">
-        {theme === "mobile" && mobileActive && (
+        {theme === "mobile" && (
           <li className="c-nav-list__lang">
             <LanguageSelect />
           </li>
@@ -67,23 +71,38 @@ export default function Navigation({
                 />
               )}
               {!hasChildren && (
-                <Link href={`/${uri}`}>
-                  {/* eslint-disable */}
-                  <a
-                    onClick={() => setActive(null)}
-                    className={classNames({
-                      "c-nav-list__link": true,
-                      [`c-nav-list__link--${theme}`]: !!theme,
-                    })}
-                  >
-                    {/* eslint-enable */}
-                    <span className="c-nav-list__link-text">{title}</span>
-                  </a>
-                </Link>
+                <NavItem
+                  href={`/${uri}`}
+                  onClick={() => setActive(null)}
+                  title={title}
+                  theme={theme}
+                />
               )}
             </li>
           );
         })}
+        {theme === "mobile" && (
+          <>
+            <NavItem
+              onClick={() => {
+                setActive(null);
+                openModal("signIn");
+              }}
+              title={t("auth.log_in")}
+              theme={theme}
+              className="a-bg-turquoise50 a-show-mobile"
+            />
+            <NavItem
+              onClick={() => {
+                setActive(null);
+                openModal("register");
+              }}
+              title={t("auth.sign_up")}
+              theme={theme}
+              className="a-bg-turquoise50 a-show-mobile"
+            />
+          </>
+        )}
       </ul>
     </div>
   );
