@@ -62,7 +62,7 @@ function ContactForm({ className, setLiveRegionMessage }) {
     >
       <div className="c-contact-form__block">
         <label htmlFor={EMAIL_ID} className="a-hidden">
-          {t("contact-form.email")}
+          {t("form.email")}
         </label>
         <input
           id={EMAIL_ID}
@@ -70,7 +70,7 @@ function ContactForm({ className, setLiveRegionMessage }) {
           name="fromEmail"
           type="email"
           value={email}
-          placeholder={t("contact-form.email")}
+          placeholder={t("form.email")}
           onChange={(event) => setEmail(event.target.value)}
           required
           className="c-contact-form__input"
@@ -84,7 +84,7 @@ function ContactForm({ className, setLiveRegionMessage }) {
           id={MESSAGE_ID}
           name="message"
           value={message}
-          placeholder={t("contact-form.inquiry")}
+          placeholder={t("form.inquiry")}
           onChange={(event) => setMessage(event.target.value)}
           required
           className="c-contact-form__input"
@@ -96,9 +96,7 @@ function ContactForm({ className, setLiveRegionMessage }) {
           className="c-contact-form__submit c-buttonish"
           disabled={status === "success"} // prevent second submission until reset
         >
-          {status === "sending"
-            ? t("contact-form.sending")
-            : t("contact-form.send")}
+          {status === "sending" ? t("form.sending") : t("form.send")}
         </button>
       </div>
       <div className="c-contact-form__block" aria-live="polite">
@@ -111,7 +109,7 @@ function ContactForm({ className, setLiveRegionMessage }) {
                 onClick={handleReset}
                 className="c-contact-form__reset"
               >
-                {t("contact-form.reset")}
+                {t("form.reset")}
               </button>
               {"."}
             </>

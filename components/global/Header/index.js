@@ -40,7 +40,7 @@ export default function Header({ navItems }) {
   });
 
   const onSignIn = () => {
-    router.push({ query: { signIn: true } }, undefined, true);
+    router.push({ query: { signIn: true } }, undefined, { shallow: true });
   };
 
   return (

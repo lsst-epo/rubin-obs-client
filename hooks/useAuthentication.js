@@ -34,8 +34,8 @@ export default function useAuthentication() {
   async function forgotPassword({ email }) {
     const data = await forgottenPassword({ email });
 
-    if (data?.forgottenPassword?.forgottenPassword) {
-      return data.forgottenPassword.forgottenPassword;
+    if (data?.forgottenPassword) {
+      return data.forgottenPassword;
     }
   }
 

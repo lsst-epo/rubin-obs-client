@@ -1,9 +1,16 @@
 import styled from "styled-components";
+import { fluidScale } from "@/styles/globalStyles";
 
-export const Label = styled.label`
-  display: block;
-  font-weight: 600;
-  font-size: 0.85rem;
+export const SSOButtons = styled.div`
+  margin-block-start: ${fluidScale("30px", "50px")};
+
+  > * + * {
+    margin-block-start: 10px;
+  }
+`;
+
+export const Form = styled.form`
+  margin-block-start: ${fluidScale("56px", "30px")};
 `;
 
 export const AccountLinks = styled.div`
@@ -11,4 +18,6 @@ export const AccountLinks = styled.div`
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 1rem;
+  margin-block-start: 10px;
+  margin-block-end: 30px;
 `;

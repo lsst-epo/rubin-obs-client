@@ -4,7 +4,8 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import useAuthentication from "@/hooks/useAuthentication";
-import { Input, Link as BaseLink } from "@/components/atomic";
+import { Link as BaseLink, Button, SSOButton } from "@/components/atomic";
+import { Input, FormField, FormButtons } from "@/components/form";
 import Modal from "@/components/layout/Modal";
 import * as Styled from "./styles";
 
@@ -13,7 +14,12 @@ export default function SignInModal() {
 
   const { t } = useTranslation();
 
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    // isValid returns false until form is submitted
+    formState: { isDirty },
+  } = useForm();
 
   const { signIn } = useAuthentication();
 
@@ -24,37 +30,46 @@ export default function SignInModal() {
   };
 
   const onClose = () => {
-    push({ query: {} }, undefined, true);
+    push({ query: {} }, undefined, { shallow: true });
   };
 
   // TODO: Needs proper a11y roles and labels
   return (
     <Modal open={!!query.signIn} onClose={onClose}>
       <h2>{t("auth.sign_in_header")}</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Styled.Label htmlFor="signInEmail">
-          {t("auth.email_or_username_label")} {t("auth.required_label")}
-        </Styled.Label>
-        <Input id="signInEmail" type="text" required {...register("email")} />
-        <Styled.Label htmlFor="signInPassword">
-          {t("auth.password_label")} {t("auth.required_label")}
-        </Styled.Label>
-        <Input
-          id="signInPassword"
-          type="password"
-          required
-          {...register("password")}
-        />
+      <Styled.SSOButtons>
+        <SSOButton icon="google">Continue with Google</SSOButton>
+        <SSOButton icon="facebook">Continue with Facebook</SSOButton>
+      </Styled.SSOButtons>
+      <Styled.Form onSubmit={handleSubmit(onSubmit)}>
+        <FormField isBlock htmlFor="signInEmail" label="form.email">
+          <Input
+            id="signInEmail"
+            type="text"
+            required
+            {...register("email", { required: true })}
+          />
+        </FormField>
+        <FormField isBlock htmlFor="signInPassword" label="form.password">
+          <Input
+            id="signInPassword"
+            type="password"
+            required
+            {...register("password", { required: true })}
+          />
+        </FormField>
         <Styled.AccountLinks>
-          <Link href={{ query: { forgotPassword: true } }} replace passHref>
+          <Link href={{ query: { forgotPassword: true } }} shallow passHref>
             <BaseLink>{t("auth.forgot_password_link")}</BaseLink>
           </Link>
-          <Link href={{ query: { registerStudent: true } }} replace passHref>
+          <Link href={{ query: { register: true } }} shallow passHref>
             <BaseLink>{t("auth.create_account_link")}</BaseLink>
           </Link>
         </Styled.AccountLinks>
-        <button className="c-buttonish">{t("auth.log_in")}</button>
-      </form>
+        <FormButtons>
+          <Button isInactive={!isDirty}>{t("auth.log_in")}</Button>
+        </FormButtons>
+      </Styled.Form>
     </Modal>
   );
 }
