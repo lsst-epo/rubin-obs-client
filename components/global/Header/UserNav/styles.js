@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import NextLink from "next/link";
 import { fluidScale, respond, tokens } from "@/styles/globalStyles";
 
 export const Nav = styled.nav`
@@ -22,7 +23,15 @@ export const Nav = styled.nav`
   )}
 `;
 
-export const Toggle = styled.button``;
+export const Toggle = styled.button`
+  display: flex;
+  align-items: center;
+`;
+
+export const UserToggle = styled(NextLink)`
+  margin-right: 15px;
+  margin-left: 15px;
+`;
 
 export const RegisterToggle = styled(Toggle)`
   padding: 0.5em 0.85em;
