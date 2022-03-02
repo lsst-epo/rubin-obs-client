@@ -93,7 +93,7 @@ export default function SignInModal() {
         </Styled.AccountLinks>
         <Styled.FormButtons>
           <Button isInactive={!isDirty} disabled={isSubmitting}>
-            {isSubmitting ? t("sign_in.submit") : t("sign_in.submit_pending")}
+            {isSubmitting ? t("sign_in.submit_pending") : t("sign_in.submit")}
           </Button>
         </Styled.FormButtons>
       </Styled.Form>
