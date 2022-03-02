@@ -7,6 +7,7 @@ export default function SSOButton({ icon, children, ...buttonProps }) {
       icon={icon}
       iconSize={30}
       styleAs="tertiary"
+      type="button"
       isBlock
       {...buttonProps}
     >

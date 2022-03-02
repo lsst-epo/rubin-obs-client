@@ -15,7 +15,7 @@ function UserNav() {
         <Styled.UserToggle href="/account" passHref>
           <a>
             <IconComposer icon="User" />
-            <span className="a-hidden">{t("auth.account")}</span>
+            <span className="a-hidden">{t("account.header")}</span>
           </a>
         </Styled.UserToggle>
       )}
