@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 import { useClickEvent, useAuthModal } from "@/hooks";
+import { useAuthenticationContext } from "@/contexts/Authentication";
 import { internalLinkWithChildrenShape } from "@/shapes/link";
 import LanguageSelect from "./LanguageSelect";
 import NavItem from "./NavItem";
@@ -18,6 +19,7 @@ export default function Navigation({
   const navList = useRef();
   const { openModal } = useAuthModal();
   const { t } = useTranslation();
+  const { isAuthenticated } = useAuthenticationContext();
 
   useClickEvent(handleClick);
 
@@ -82,24 +84,39 @@ export default function Navigation({
         })}
         {theme === "mobile" && (
           <>
-            <NavItem
-              onClick={() => {
-                setActive(null);
-                openModal("signIn");
-              }}
-              title={t("auth.log_in")}
-              theme={theme}
-              className="a-bg-turquoise50 a-show-mobile"
-            />
-            <NavItem
-              onClick={() => {
-                setActive(null);
-                openModal("register");
-              }}
-              title={t("auth.sign_up")}
-              theme={theme}
-              className="a-bg-turquoise50 a-show-mobile"
-            />
+            {isAuthenticated && (
+              <NavItem
+                onClick={() => {
+                  setActive(null);
+                }}
+                href="/account"
+                title={t("auth.account")}
+                theme={theme}
+                className="a-bg-turquoise50 a-show-mobile"
+              />
+            )}
+            {!isAuthenticated && (
+              <>
+                <NavItem
+                  onClick={() => {
+                    setActive(null);
+                    openModal("signIn");
+                  }}
+                  title={t("auth.log_in")}
+                  theme={theme}
+                  className="a-bg-turquoise50 a-show-mobile"
+                />
+                <NavItem
+                  onClick={() => {
+                    setActive(null);
+                    openModal("register");
+                  }}
+                  title={t("auth.sign_up")}
+                  theme={theme}
+                  className="a-bg-turquoise50 a-show-mobile"
+                />
+              </>
+            )}
           </>
         )}
       </ul>
