@@ -7,20 +7,20 @@ import {
 } from "@/lib/api/auth";
 
 export default function useAuthentication() {
-  const [authToken, setAuthToken] = useState(null);
+  const [token, setToken] = useState(null);
 
   async function signIn({ email, password }) {
-    const data = await authenticate({ email, password });
+    const data = await authenticate({ email, password, token });
 
     if (data?.authenticate?.jwt) {
-      setAuthToken(data.authenticate.jwt);
+      setToken(data.authenticate.jwt);
     }
 
     return data;
   }
 
   function signOut() {
-    setAuthToken(null);
+    setToken(null);
   }
 
   async function register({ email, password, fullName, role }) {
@@ -34,13 +34,19 @@ export default function useAuthentication() {
     const lastName =
       name.length > 1 ? fullName.slice(firstName.length + 1) : "";
 
-    const data = await registerMethod({ email, password, firstName, lastName });
+    const data = await registerMethod({
+      email,
+      password,
+      firstName,
+      lastName,
+      token,
+    });
 
     const returnRole =
       role === "teacher" ? "registerTeachers" : "registerStudents";
 
     if (data?.[returnRole]?.jwt) {
-      setAuthToken(data[returnRole].jwt);
+      setToken(data[returnRole].jwt);
 
       return data[returnRole];
     } else {
@@ -49,7 +55,7 @@ export default function useAuthentication() {
   }
 
   async function forgotPassword({ email }) {
-    const data = await forgottenPassword({ email });
+    const data = await forgottenPassword({ email, token });
 
     if (data?.forgottenPassword) {
       return data.forgottenPassword;
@@ -59,7 +65,7 @@ export default function useAuthentication() {
   }
 
   return {
-    isAuthenticated: !!authToken,
+    isAuthenticated: !!token,
     signIn,
     signOut,
     register,
