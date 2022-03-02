@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import Modal from "@/components/modal/Modal";
 import RegisterForm from "./RegisterForm";
 import RegisterRoleForm from "./RegisterRoleForm";
 import RegisterSuccess from "./RegisterSuccess";
 import useAuthModal from "@/hooks/useAuthModal";
+import AuthModal from "../AuthModal";
 
 export default function RegisterModal() {
   const { query } = useRouter();
@@ -32,15 +32,12 @@ export default function RegisterModal() {
     setFormState({ ...formState, success: true });
   };
 
-  // TODO: Needs proper a11y roles and labels
-  // Make sure modal is announced when user moves between sign in / forgot password / etc.
   return (
-    <Modal
+    <AuthModal
       open={!!query.register}
       onClose={onClose}
-      maxWidth="550px"
-      aria-live="polite"
       aria-label="Sign Up"
+      image={formState.success ? undefined : formState.role}
     >
       {formState.success ? (
         <RegisterSuccess role={query.role} onClose={onClose} />
@@ -57,6 +54,6 @@ export default function RegisterModal() {
           onEmailSignup={onEmailSignup}
         />
       )}
-    </Modal>
+    </AuthModal>
   );
 }

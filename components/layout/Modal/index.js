@@ -4,13 +4,7 @@ import IconComposer from "@/components/svg/IconComposer";
 import * as Styled from "./styles";
 import { useFocusTrap, useKeyDownEvent, useLockBodyScroll } from "@/hooks";
 
-export default function Modal({
-  open,
-  onClose,
-  children,
-  maxWidth,
-  ...modalProps
-}) {
+export default function Modal({ open, onClose, children, ...ModalProps }) {
   const ref = useRef(null);
 
   useFocusTrap(ref, open);
@@ -26,11 +20,11 @@ export default function Modal({
 
   return (
     <Styled.Modal hidden={!open} ref={ref}>
-      <Styled.Inner role="dialog" {...modalProps}>
+      <Styled.Inner role="dialog" aria-live="polite" {...ModalProps}>
         <Styled.CloseButton type="button" aria-label="Close" onClick={onClose}>
           <IconComposer icon="close" />
         </Styled.CloseButton>
-        <Styled.Content $maxWidth={maxWidth}>{children}</Styled.Content>
+        {children}
       </Styled.Inner>
     </Styled.Modal>
   );
@@ -42,6 +36,4 @@ Modal.propTypes = {
   children: PropTypes.node.isRequired,
   /** An aria label is required for dialogs */
   "aria-label": PropTypes.string.isRequired,
-  /** maxWidth string - can be px, ems, vw, etc */
-  maxWidth: PropTypes.string,
 };
