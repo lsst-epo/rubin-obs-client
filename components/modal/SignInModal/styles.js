@@ -12,6 +12,10 @@ export const SSOButtons = styled.div`
 
 export const Form = styled.form`
   margin-block-start: ${fluidScale("56px", "30px")};
+
+  > * + * {
+    margin-block-start: 30px;
+  }
 `;
 
 export const AccountLinks = styled.div`

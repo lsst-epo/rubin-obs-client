@@ -5,6 +5,10 @@ import { fluidScale } from "@/styles/globalStyles";
 export const Form = styled.form`
   margin-block-start: 30px;
   max-width: 550px;
+
+  > * + * {
+    margin-block-start: 30px;
+  }
 `;
 
 export const FormButtons = styled(BaseFormButtons)`
