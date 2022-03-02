@@ -19,6 +19,7 @@ $_link-gap: 14px;
     functions.break(tablet),
     functions.break(mobile)
   );
+
   font-weight: functions.font-weight(bold);
 
   &--desktop {
