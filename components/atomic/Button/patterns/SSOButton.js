@@ -17,5 +17,5 @@ export default function SSOButton({ icon, children, ...buttonProps }) {
 
 SSOButton.prototypes = {
   children: PropTypes.node,
-  icon: PropTypes.oneOf(["google", "facebook"]),
+  icon: PropTypes.oneOf(["google", "facebook", "email"]),
 };
