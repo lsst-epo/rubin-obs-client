@@ -173,6 +173,7 @@
     "auth": {
       "log_in": "Log in",
       "sign_up": "Sign up",
+      "account": "Account",
       "sign_in_header": "Welcome back!",
       "forgot_password_link": "Forgot Password?",
       "create_account_link": "Create an account",
