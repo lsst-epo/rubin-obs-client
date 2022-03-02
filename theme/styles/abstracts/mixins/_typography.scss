@@ -26,6 +26,7 @@
 
 @mixin heading-secondary {
   @include type-scale(30px, 20px);
+
   font-weight: functions.font-weight(bold);
   line-height: 1.2;
 }

@@ -15,6 +15,8 @@ export default function useAuthentication() {
     if (data?.authenticate?.jwt) {
       setAuthToken(data.authenticate.jwt);
     }
+
+    return data;
   }
 
   function signOut() {
@@ -41,6 +43,8 @@ export default function useAuthentication() {
       setAuthToken(data[returnRole].jwt);
 
       return data[returnRole];
+    } else {
+      return data;
     }
   }
 
@@ -49,6 +53,8 @@ export default function useAuthentication() {
 
     if (data?.forgottenPassword) {
       return data.forgottenPassword;
+    } else {
+      return data;
     }
   }
 
