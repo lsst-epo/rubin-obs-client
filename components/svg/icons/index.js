@@ -23,6 +23,7 @@ import Team from "./Team";
 import Temp from "./Temp";
 import Time from "./Time";
 import Twitter from "./Twitter";
+import User from "./User";
 import Video from "./Video";
 import YouTube from "./YouTube";
 
@@ -52,6 +53,7 @@ export default {
   Temp,
   Time,
   Twitter,
+  User,
   Video,
   YouTube,
 };
