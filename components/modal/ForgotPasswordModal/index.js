@@ -6,9 +6,9 @@ import { useAuthenticationContext } from "@/contexts/Authentication";
 import useAuthModal from "@/hooks/useAuthModal";
 import { Button } from "@/components/atomic";
 import { Input, FormField } from "@/components/form";
-import Modal from "@/components/modal/Modal";
-import * as Styled from "./styles";
+import AuthModal from "../AuthModal";
 import ResetPasswordSuccess from "./ResetPasswordSuccess";
+import * as Styled from "./styles";
 
 export default function ForgotPasswordModal() {
   const { openModal, closeModal } = useAuthModal();
@@ -47,13 +47,10 @@ export default function ForgotPasswordModal() {
     openModal("signIn");
   };
 
-  // TODO: Needs proper a11y roles and labels
-  // Check footer contact form for a11y messaging / alerts
   return (
-    <Modal
+    <AuthModal
       open={!!query.forgotPassword}
       onClose={onClose}
-      maxWidth="550px"
       aria-live="polite"
       aria-label="Forgot Password"
     >
@@ -90,7 +87,7 @@ export default function ForgotPasswordModal() {
           </Styled.Form>
         </>
       )}
-    </Modal>
+    </AuthModal>
   );
 }
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -6,8 +6,8 @@ import { useForm } from "react-hook-form";
 import { useAuthenticationContext } from "@/contexts/Authentication";
 import useAuthModal from "@/hooks/useAuthModal";
 import { Link as BaseLink, Button, SSOButton } from "@/components/atomic";
-import { Input, FormField, FormButtons } from "@/components/form";
-import Modal from "@/components/modal/Modal";
+import { Input, FormField } from "@/components/form";
+import AuthModal from "../AuthModal";
 import * as Styled from "./styles";
 
 export default function SignInModal() {
@@ -20,29 +20,29 @@ export default function SignInModal() {
   const {
     register,
     handleSubmit,
-    formState: { isDirty, isSubmitting },
+    formState: { isDirty, isSubmitting, isSubmitSuccessful },
   } = useForm();
 
   const { signIn } = useAuthenticationContext();
 
-  const onSubmit = (data) => {
+  useEffect(
+    () => (isSubmitSuccessful ? closeModal() : null),
+    [closeModal, isSubmitSuccessful]
+  );
+
+  // TODO: Handle errors
+  const onSubmit = async (data) => {
     if (!data.email || !data.password) return;
 
-    signIn(data);
+    return await signIn(data);
   };
 
   const onClose = () => {
     closeModal();
   };
 
-  // TODO: Needs proper a11y roles and labels
   return (
-    <Modal
-      open={!!query.signIn}
-      onClose={onClose}
-      maxWidth="550px"
-      aria-label="Sign In"
-    >
+    <AuthModal open={!!query.signIn} onClose={onClose} aria-label="Sign In">
       <h2>{t("auth.sign_in_header")}</h2>
       <Styled.SSOButtons>
         <SSOButton icon="google">Continue with Google</SSOButton>
@@ -68,13 +68,13 @@ export default function SignInModal() {
             <BaseLink>{t("auth.create_account_link")}</BaseLink>
           </Link>
         </Styled.AccountLinks>
-        <FormButtons>
+        <Styled.FormButtons>
           <Button isInactive={!isDirty} disabled={isSubmitting}>
             {isSubmitting ? "Logging in..." : t("auth.log_in")}
           </Button>
-        </FormButtons>
+        </Styled.FormButtons>
       </Styled.Form>
-    </Modal>
+    </AuthModal>
   );
 }
 
