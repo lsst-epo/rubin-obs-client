@@ -30,13 +30,13 @@ export default function ForgotPasswordModal() {
   const onSubmit = async (data) => {
     if (!data.email) return;
 
-    const message = await forgotPassword(data);
+    const response = await forgotPassword(data);
 
-    if (message) {
+    if (response) {
       setEmail(data.email);
-      return message;
     }
-    // TODO: Handle graphql errors
+
+    return response;
   };
 
   const onClose = () => {

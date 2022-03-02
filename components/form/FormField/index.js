@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import Error from "../Error";
 import * as Styled from "./styles";
 
 export default function FormField({
@@ -9,23 +10,19 @@ export default function FormField({
   children,
   error,
   description,
+  ...wrapperProps
 }) {
   const { t } = useTranslation();
 
   return (
-    <Styled.Group>
+    <div {...wrapperProps}>
       <Styled.Label htmlFor={htmlFor}>
         {t(label, { context: required ? "required" : "" })}
       </Styled.Label>
       {description && <Styled.Description>{description}</Styled.Description>}
       <Styled.InputWrapper>{children}</Styled.InputWrapper>
-      {error && (
-        <Styled.Error>
-          <span className="a-hidden">{t("form.error_label")}</span>
-          {error}
-        </Styled.Error>
-      )}
-    </Styled.Group>
+      {error && <Styled.InputError as={Error}>{error}</Styled.InputError>}
+    </div>
   );
 }
 

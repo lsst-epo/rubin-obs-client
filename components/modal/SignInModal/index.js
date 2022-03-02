@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { useAuthenticationContext } from "@/contexts/Authentication";
 import useAuthModal from "@/hooks/useAuthModal";
 import { Link as BaseLink, Button, SSOButton } from "@/components/atomic";
-import { Input, FormField } from "@/components/form";
+import { Input, FormField, Error } from "@/components/form";
 import AuthModal from "../AuthModal";
 import * as Styled from "./styles";
 
@@ -20,21 +20,36 @@ export default function SignInModal() {
   const {
     register,
     handleSubmit,
-    formState: { isDirty, isSubmitting, isSubmitSuccessful },
+    setError,
+    formState: { errors, isDirty, isSubmitting },
   } = useForm();
 
   const { signIn } = useAuthenticationContext();
 
-  useEffect(
-    () => (isSubmitSuccessful ? closeModal() : null),
-    [closeModal, isSubmitSuccessful]
-  );
-
-  // TODO: Handle errors
   const onSubmit = async (data) => {
     if (!data.email || !data.password) return;
 
-    return await signIn(data);
+    const response = await signIn(data);
+
+    if (response.errors) {
+      const invalid = response.errors.find(
+        (e) => e.extensions.code === "INVALID"
+      );
+
+      if (invalid) {
+        setError("email", { type: "manual", message: invalid.message });
+      } else {
+        setError("form", {
+          type: "manual",
+          message: response.errors.map((e) => e.message),
+        });
+      }
+    } else {
+      closeModal();
+    }
+
+    // Return response for react-hook-from submit state
+    return response;
   };
 
   const onClose = () => {
@@ -49,7 +64,13 @@ export default function SignInModal() {
         <SSOButton icon="facebook">Continue with Facebook</SSOButton>
       </Styled.SSOButtons>
       <Styled.Form onSubmit={handleSubmit(onSubmit)}>
-        <FormField isBlock htmlFor="signInEmail" label="form.email">
+        {errors?.form?.message && <Error>{errors.form.message}</Error>}
+        <FormField
+          isBlock
+          htmlFor="signInEmail"
+          label="form.email"
+          error={errors?.email?.message}
+        >
           <Input id="signInEmail" type="text" required {...register("email")} />
         </FormField>
         <FormField isBlock htmlFor="signInPassword" label="form.password">
