@@ -58,10 +58,12 @@ export default function SignInModal() {
 
   return (
     <AuthModal open={!!query.signIn} onClose={onClose} aria-label="Sign In">
-      <h2>{t("auth.sign_in_header")}</h2>
+      <h2>{t("sign_in.header")}</h2>
       <Styled.SSOButtons>
-        <SSOButton icon="google">Continue with Google</SSOButton>
-        <SSOButton icon="facebook">Continue with Facebook</SSOButton>
+        <SSOButton icon="google">{t("sign_in.continue_with_google")}</SSOButton>
+        <SSOButton icon="facebook">
+          {t("sign_in.continue_with_facebook")}
+        </SSOButton>
       </Styled.SSOButtons>
       <Styled.Form onSubmit={handleSubmit(onSubmit)}>
         {errors?.form?.message && <Error>{errors.form.message}</Error>}
@@ -83,15 +85,15 @@ export default function SignInModal() {
         </FormField>
         <Styled.AccountLinks>
           <Link href={{ query: { forgotPassword: true } }} shallow passHref>
-            <BaseLink>{t("auth.forgot_password_link")}</BaseLink>
+            <BaseLink>{t("sign_in.forgot_password_link")}</BaseLink>
           </Link>
           <Link href={{ query: { register: true } }} shallow passHref>
-            <BaseLink>{t("auth.create_account_link")}</BaseLink>
+            <BaseLink>{t("sign_in.create_account_link")}</BaseLink>
           </Link>
         </Styled.AccountLinks>
         <Styled.FormButtons>
           <Button isInactive={!isDirty} disabled={isSubmitting}>
-            {isSubmitting ? "Logging in..." : t("auth.log_in")}
+            {isSubmitting ? t("sign_in.submit") : t("sign_in.submit_pending")}
           </Button>
         </Styled.FormButtons>
       </Styled.Form>

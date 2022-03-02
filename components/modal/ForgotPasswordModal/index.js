@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { useAuthenticationContext } from "@/contexts/Authentication";
@@ -7,7 +7,6 @@ import useAuthModal from "@/hooks/useAuthModal";
 import { Button } from "@/components/atomic";
 import { Input, FormField } from "@/components/form";
 import AuthModal from "../AuthModal";
-import ResetPasswordSuccess from "./ResetPasswordSuccess";
 import * as Styled from "./styles";
 
 export default function ForgotPasswordModal() {
@@ -52,14 +51,30 @@ export default function ForgotPasswordModal() {
       open={!!query.forgotPassword}
       onClose={onClose}
       aria-live="polite"
-      aria-label="Forgot Password"
+      aria-label={t("reset_password.header")}
     >
       {isSubmitSuccessful ? (
-        <ResetPasswordSuccess email={email} onClose={onClose} />
+        <>
+          <h2>{t("reset_password.success")}</h2>
+          <p>
+            <Trans
+              i18nKey="reset_password.success_message"
+              values={{
+                email,
+              }}
+              components={[<strong key="bold"></strong>]}
+            />
+          </p>
+          <Styled.FormButtons>
+            <Button onClick={onClose}>
+              {t("reset_password.confirm_button")}
+            </Button>
+          </Styled.FormButtons>
+        </>
       ) : (
         <>
-          <h2>{t("auth.reset_password_header")}</h2>
-          <p>{t("auth.reset_instructions")}</p>
+          <h2>{t("reset_password.header")}</h2>
+          <p>{t("reset_password.instructions")}</p>
           <Styled.Form onSubmit={handleSubmit(onSubmit)}>
             <FormField htmlFor="resetPasswordEmail" label="form.email" required>
               <Input
@@ -72,8 +87,8 @@ export default function ForgotPasswordModal() {
             <Styled.FormButtons>
               <Button isInactive={!isDirty} disabled={isSubmitting}>
                 {isSubmitting
-                  ? "Submitting..."
-                  : t("auth.reset_password_button")}
+                  ? t("form.submitting")
+                  : t("reset_password.submit")}
               </Button>
               <Button
                 type="button"
