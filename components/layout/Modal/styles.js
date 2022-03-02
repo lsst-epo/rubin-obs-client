@@ -27,7 +27,6 @@ export const Modal = styled.div`
 
 export const Inner = styled.div`
   position: relative;
-  display: flex;
   background: var(--white);
   color: var(--neutral80);
   margin-block-start: 10vh;
@@ -41,20 +40,6 @@ export const Inner = styled.div`
     `,
     BREAK_PHABLET
   )}
-`;
-
-export const Image = styled.div``;
-
-export const Content = styled.div`
-  padding: ${fluidScale("60px", "15px")};
-  padding-block-start: 60px;
-
-  ${({ $maxWidth }) =>
-    $maxWidth &&
-    css`
-      width: calc(100vw - 30px);
-      max-width: ${$maxWidth};
-    `}
 `;
 
 export const CloseButton = styled.button`

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { fluidScale } from "@/styles/globalStyles";
+import { FormButtons as BaseFormButtons } from "@/components/form";
 
 export const SSOButtons = styled.div`
   margin-block-start: 30px;
@@ -20,4 +21,8 @@ export const AccountLinks = styled.div`
   gap: 1rem;
   margin-block-start: 10px;
   margin-block-end: 30px;
+`;
+
+export const FormButtons = styled(BaseFormButtons)`
+  margin-block-start: 44px;
 `;

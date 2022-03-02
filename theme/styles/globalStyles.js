@@ -25,6 +25,8 @@ export const tokens = {
   turquoise80: "#117273",
   turquoise85: "#12726d",
   turquoise90: "#0c4a4c",
+  orange10: "#FFE7CC",
+  orange55: "#FAB364",
   blue10: "#eef5fb",
   red: "#ff8488",
   red20: "#f2c3c0",
@@ -74,6 +76,8 @@ export const neutral60 = tokens.neutral60;
 export const neutral80 = tokens.neutral80;
 export const neutral90 = tokens.neutral90;
 export const black = tokens.black;
+export const orange10 = tokens.orange10;
+export const orange55 = tokens.orange55;
 export const turquoise10 = tokens.turquoise10;
 export const turquoise20 = tokens.turquoise20;
 export const turquoise50 = tokens.turquoise50;
