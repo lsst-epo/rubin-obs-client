@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { useAuthenticationContext } from "@/contexts/Authentication";
 import { Button } from "@/components/atomic";
@@ -8,8 +7,6 @@ import { Error, FormField, Input } from "@/components/form";
 import * as Styled from "./styles";
 
 export default function RegisterForm({ role, onSuccess, onCancel }) {
-  const { push } = useRouter();
-
   const { t } = useTranslation();
 
   const {
@@ -49,8 +46,8 @@ export default function RegisterForm({ role, onSuccess, onCancel }) {
 
   return (
     <>
-      <h2>{t("auth.register_header", { context: role })}</h2>
-      <p>{t("auth.register_instructions", { context: role })}</p>
+      <h2>{t("register.header", { context: role })}</h2>
+      <p>{t("register.instructions", { context: role })}</p>
       <Styled.Form onSubmit={handleSubmit(onSubmit)}>
         {errors?.form?.message && <Error>{errors.form.message}</Error>}
         <FormField
@@ -84,7 +81,7 @@ export default function RegisterForm({ role, onSuccess, onCancel }) {
         </FormField>
         <Styled.FormButtons>
           <Button isInactive={!isDirty} disabled={isSubmitting}>
-            {isSubmitting ? "Submitting..." : t("form.sign_up")}
+            {isSubmitting ? t("form.submitting") : t("register.submit_button")}
           </Button>
           <Button
             type="button"

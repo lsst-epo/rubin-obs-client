@@ -43,8 +43,8 @@
       "create_password_instructions": "Passwords should be at least 8 characters long and should contain a mixture of letters, numbers, and other characters.",
       "send": "Send",
       "sending": "Sending…",
+      "submitting": "Submitting...",
       "reset": "Reset form",
-      "sign_up": "Sign Up",
       "cancel": "Cancel",
       "error": "Error:"
     },
@@ -171,23 +171,51 @@
     "auth": {
       "log_in": "Log in",
       "sign_up": "Sign up",
-      "account": "Account",
-      "sign_in_header": "Welcome back!",
+      "account": "Account"
+    },
+    "sign_in": {
+      "header": "Welcome back!",
       "forgot_password_link": "Forgot Password?",
       "create_account_link": "Create an account",
-      "reset_password_header": "Reset password",
-      "reset_instructions": "Enter your email to reset your password",
-      "reset_password_button": "Reset password",
-      "sign_up_as_student": "I'm a student",
-      "sign_up_as_teacher": "I'm a teacher",
-      "sign_up_student": "Learn real astronomy",
-      "sign_up_teacher": "Teach real astronomy",
-      "join_student": "Join to learn how astronomers learn and interact with real astronomy data. Free of charge forever.",
-      "join_teacher": "Join to access real astronomy data and tools for your class. Free of charge forever.",
-      "register_header_student": "Sign up as student",
-      "register_instructions_student": "Please provide the following to create a student account",
-      "register_header_teacher": "Sign up as a teacher",
-      "register_instructions_teacher": "Please provide the following to create a teacher account"
+      "continue_with_google": "Continue with Google",
+      "continue_with_facebook": "Continue with Facebook",
+      "submit": "Log in",
+      "submit_pending": "Logging in..."
+    },
+    "reset_password": {
+      "header": "Reset password",
+      "instructions": "Enter your email to reset your password",
+      "submit": "Reset password",
+      "success": "Success!",
+      "success_message": "We’ve sent you a link to <0>{{email}}</0> with instructions to reset your password",
+      "confirm_button": "Got it!"
+    },
+    "join": {
+      "as_student": "I'm a student",
+      "as_teacher": "I'm a teacher",
+      "header_student": "Learn real astronomy",
+      "header_teacher": "Teach real astronomy",
+      "description_student": "Join to learn how astronomers learn and interact with real astronomy data. Free of charge forever.",
+      "description_teacher": "Join to access real astronomy data and tools for your class. Free of charge forever.",
+      "sign_in_link": "Already have an account?",
+      "continue_with_google": "Continue with Google",
+      "continue_with_facebook": "Continue with Facebook",
+      "sign_up_with_email": "Sign up with email"
+    },
+    "register": {
+      "header_student": "Sign up as student",
+      "header_teacher": "Sign up as a teacher",
+      "instructions_student": "Please provide the following to create a student account",
+      "instructions_teacher": "Please provide the following to create a teacher account",
+      "submit_button": "Sign Up",
+      "success_student": "Success!",
+      "success_message_student": "Your account has been successfully created! Enjoy access to real astronomy data and tools. <0>Free of charge forever.</0>",
+      "success_teacher": "Approval pending",
+      "success_message_teacher": "Your account is now created, but approval is pending. You’ll receive an email notification once it is approved and ready to enjoy access to real astronomy data and tools. <0>Free of charge forever.</0>",
+      "confirm_button": "Got it!"
+    },
+    "account": {
+      "header": "Account"
     }
   }
 }
