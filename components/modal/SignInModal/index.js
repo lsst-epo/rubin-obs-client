@@ -75,7 +75,7 @@ export default function SignInModal() {
         >
           <Input id="signInEmail" type="text" required {...register("email")} />
         </FormField>
-        <FormField isBlock htmlFor="signInPassword" label="form.password">
+        <FormField htmlFor="signInPassword" label="form.password">
           <Input
             id="signInPassword"
             type="password"
