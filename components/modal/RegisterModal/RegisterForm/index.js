@@ -5,6 +5,7 @@ import { useAuthenticationContext } from "@/contexts/Authentication";
 import { Button } from "@/components/atomic";
 import { Error, FormField, Input } from "@/components/form";
 import * as Styled from "./styles";
+import AuthModal from "../../AuthModal";
 
 export default function RegisterForm({ role, onSuccess, onCancel }) {
   const { t } = useTranslation();
@@ -46,8 +47,12 @@ export default function RegisterForm({ role, onSuccess, onCancel }) {
 
   return (
     <>
-      <h2>{t("register.header", { context: role })}</h2>
-      <p>{t("register.instructions", { context: role })}</p>
+      <AuthModal.Title>
+        {t("register.header", { context: role })}
+      </AuthModal.Title>
+      <AuthModal.Description>
+        {t("register.instructions", { context: role })}
+      </AuthModal.Description>
       <Styled.Form onSubmit={handleSubmit(onSubmit)}>
         {errors?.form?.message && <Error>{errors.form.message}</Error>}
         <FormField

@@ -45,14 +45,16 @@ export default function RegisterModal() {
     >
       {formState.success ? (
         <>
-          <h2>{t("register.success", { context: query.role })}</h2>
-          <p>
+          <AuthModal.Title>
+            {t("register.success", { context: query.role })}
+          </AuthModal.Title>
+          <AuthModal.Description>
             <Trans
               i18nKey="register.success_message"
               values={{ context: query.role }}
               components={[<strong key="bold"></strong>]}
             />
-          </p>
+          </AuthModal.Description>
           <Styled.FormButtons>
             <Button onClick={onClose}>{t("register.confirm_button")}</Button>
           </Styled.FormButtons>
