@@ -85,36 +85,42 @@ export default function Navigation({
         {theme === "mobile" && (
           <>
             {isAuthenticated && (
-              <NavItem
-                onClick={() => {
-                  setActive(null);
-                }}
-                href="/account"
-                title={t("auth.account")}
-                theme={theme}
-                className="a-bg-turquoise50 a-show-mobile"
-              />
+              <li className="c-nav-list__item">
+                <NavItem
+                  onClick={() => {
+                    setActive(null);
+                  }}
+                  href="/account"
+                  title={t("auth.account")}
+                  theme={theme}
+                  className="a-bg-turquoise50 a-show-mobile"
+                />
+              </li>
             )}
             {!isAuthenticated && (
               <>
-                <NavItem
-                  onClick={() => {
-                    setActive(null);
-                    openModal("signIn");
-                  }}
-                  title={t("auth.log_in")}
-                  theme={theme}
-                  className="a-bg-turquoise50 a-show-mobile"
-                />
-                <NavItem
-                  onClick={() => {
-                    setActive(null);
-                    openModal("register");
-                  }}
-                  title={t("auth.sign_up")}
-                  theme={theme}
-                  className="a-bg-turquoise50 a-show-mobile"
-                />
+                <li className="c-nav-list__item">
+                  <NavItem
+                    onClick={() => {
+                      setActive(null);
+                      openModal("signIn");
+                    }}
+                    title={t("auth.log_in")}
+                    theme={theme}
+                    className="a-bg-turquoise50 a-show-mobile"
+                  />
+                </li>
+                <li className="c-nav-list__item">
+                  <NavItem
+                    onClick={() => {
+                      setActive(null);
+                      openModal("register");
+                    }}
+                    title={t("auth.sign_up")}
+                    theme={theme}
+                    className="a-bg-turquoise50 a-show-mobile"
+                  />
+                </li>
               </>
             )}
           </>

@@ -12,12 +12,10 @@ function UserNav() {
   return (
     <Styled.Nav aria-label="User">
       {isAuthenticated && (
-        <Styled.UserToggle href="/account" passHref>
-          <a>
-            <IconComposer icon="User" />
-            <span className="a-hidden">{t("account.header")}</span>
-          </a>
-        </Styled.UserToggle>
+        <Styled.UserLink url="/account">
+          <IconComposer icon="User" />
+          <span className="a-hidden">{t("account.header")}</span>
+        </Styled.UserLink>
       )}
       {!isAuthenticated && (
         <>
