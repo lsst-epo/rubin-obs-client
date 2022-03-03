@@ -32,7 +32,7 @@ $_breakpoint: functions.header(layout-breakpoint);
   @include base.respond($_breakpoint) {
     grid-template: "logo . search user-nav hamburger" auto / auto 1fr auto auto auto;
     gap: functions.header(gap);
-    overflow-x: hidden;
+    overflow: hidden;
   }
 
   @include base.respond(functions.header(breakpoint-for-search-bar)) {
