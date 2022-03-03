@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import NextLink from "next/link";
+import MixedLink from "@/atomic/MixedLink";
 import { fluidScale, respond, tokens } from "@/styles/globalStyles";
 
 export const Nav = styled.nav`
@@ -28,7 +28,9 @@ export const Toggle = styled.button`
   align-items: center;
 `;
 
-export const UserToggle = styled(NextLink)`
+export const UserLink = styled(MixedLink)`
+  display: flex;
+  align-items: center;
   margin-right: 15px;
   margin-left: 15px;
 `;
