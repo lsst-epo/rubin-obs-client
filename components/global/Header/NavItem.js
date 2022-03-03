@@ -3,18 +3,20 @@ import Link from "next/link";
 import classNames from "classnames";
 
 function NavItem({ href, onClick, title, theme, className }) {
-  const Tag = href ? Link : "button";
-  const tagProps = {
-    onClick,
-    ...(href && {
-      href,
-      passHref: true,
-    }),
-  };
+  const WrapperTag = ({ href, children }) =>
+    href ? (
+      <Link href={href} passHref>
+        {children}
+      </Link>
+    ) : (
+      <>{children}</>
+    );
+  const InteractiveTag = href ? "a" : "button";
+
   return (
-    <Tag {...tagProps}>
+    <WrapperTag>
       {/* eslint-disable */}
-      <a
+      <InteractiveTag
         onClick={onClick}
         className={classNames({
           "c-nav-list__link": true,
@@ -24,8 +26,8 @@ function NavItem({ href, onClick, title, theme, className }) {
       >
         {/* eslint-enable */}
         <span className="c-nav-list__link-text">{title}</span>
-      </a>
-    </Tag>
+      </InteractiveTag>
+    </WrapperTag>
   );
 }
 
