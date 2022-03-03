@@ -2,6 +2,7 @@ import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import { Button, Link as BaseLink, SSOButton } from "@/components/atomic";
 import * as Styled from "./styles";
+import AuthModal from "../../AuthModal";
 
 export default function JoinForm({ onEmailSignup, onRoleChange, role }) {
   const { t } = useTranslation();
@@ -27,8 +28,10 @@ export default function JoinForm({ onEmailSignup, onRoleChange, role }) {
         </Button>
       </Styled.JoinAsButtons>
       <div id="signUpDescription">
-        <h2>{t("join.header", { context: role })}</h2>
-        <p>{t("join.description", { context: role })}</p>
+        <AuthModal.Title>{t("join.header", { context: role })}</AuthModal.Title>
+        <AuthModal.Description>
+          {t("join.description", { context: role })}
+        </AuthModal.Description>
       </div>
       <Styled.SSOButtons>
         <SSOButton icon="google" type="button">
