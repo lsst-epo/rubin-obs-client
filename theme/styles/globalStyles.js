@@ -59,7 +59,6 @@ export const tokens = {
 
 export const zStack = {
   dialog: 35,
-  dialogBackdrop: 30,
   header: 25,
 };
 

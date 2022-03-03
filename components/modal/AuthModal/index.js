@@ -1,9 +1,15 @@
 import PropTypes from "prop-types";
 import Image from "next/image";
-import Modal from "@/components/layout/Modal";
+import IconComposer from "@/components/svg/IconComposer";
 import * as Styled from "./styles";
 
-export default function AuthModal({ children, header, image, ...modalProps }) {
+export default function AuthModal({
+  children,
+  image,
+  open = false,
+  onClose,
+  ...modalProps
+}) {
   const imageProps =
     image === "student"
       ? {
@@ -20,27 +26,31 @@ export default function AuthModal({ children, header, image, ...modalProps }) {
       : null;
 
   return (
-    <Modal {...modalProps}>
+    <Styled.Dialog open={open} onClose={() => onClose()}>
+      <Styled.Overlay />
       <Styled.Inner>
+        <Styled.CloseButton type="button" aria-label="Close" onClick={onClose}>
+          <IconComposer icon="close" />
+        </Styled.CloseButton>
         {imageProps && (
           <Styled.ImageWrapper $image={image} role="presentation">
             <Image {...imageProps} />
           </Styled.ImageWrapper>
         )}
-        <Styled.Content>{children}</Styled.Content>
+        <Styled.Content aria-live="polite">{children}</Styled.Content>
       </Styled.Inner>
-    </Modal>
+    </Styled.Dialog>
   );
 }
 
+AuthModal.Title = Styled.Title;
+
+AuthModal.Description = Styled.Description;
+
 AuthModal.propTypes = {
-  /** Modal header text */
-  header: PropTypes.string,
   /** Image shown to the left of the modal */
   image: PropTypes.oneOf(["student", "teacher"]),
   open: PropTypes.bool,
   onClose: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
-  /** An aria label is required for dialogs */
-  "aria-label": PropTypes.string.isRequired,
 };

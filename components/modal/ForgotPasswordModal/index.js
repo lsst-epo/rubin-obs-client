@@ -55,8 +55,8 @@ export default function ForgotPasswordModal() {
     >
       {isSubmitSuccessful ? (
         <>
-          <h2>{t("reset_password.success")}</h2>
-          <p>
+          <AuthModal.Title>{t("reset_password.success")}</AuthModal.Title>
+          <AuthModal.Description>
             <Trans
               i18nKey="reset_password.success_message"
               values={{
@@ -64,7 +64,7 @@ export default function ForgotPasswordModal() {
               }}
               components={[<strong key="bold"></strong>]}
             />
-          </p>
+          </AuthModal.Description>
           <Styled.FormButtons>
             <Button onClick={onClose}>
               {t("reset_password.confirm_button")}
@@ -73,8 +73,10 @@ export default function ForgotPasswordModal() {
         </>
       ) : (
         <>
-          <h2>{t("reset_password.header")}</h2>
-          <p>{t("reset_password.instructions")}</p>
+          <AuthModal.Title>{t("reset_password.header")}</AuthModal.Title>
+          <AuthModal.Description>
+            {t("reset_password.instructions")}
+          </AuthModal.Description>
           <Styled.Form onSubmit={handleSubmit(onSubmit)}>
             <FormField htmlFor="resetPasswordEmail" label="form.email" required>
               <Input

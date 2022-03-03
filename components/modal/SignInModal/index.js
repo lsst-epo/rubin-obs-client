@@ -58,7 +58,7 @@ export default function SignInModal() {
 
   return (
     <AuthModal open={!!query.signIn} onClose={onClose} aria-label="Sign In">
-      <h2>{t("sign_in.header")}</h2>
+      <AuthModal.Title>{t("sign_in.header")}</AuthModal.Title>
       <Styled.SSOButtons>
         <SSOButton icon="google">{t("sign_in.continue_with_google")}</SSOButton>
         <SSOButton icon="facebook">
