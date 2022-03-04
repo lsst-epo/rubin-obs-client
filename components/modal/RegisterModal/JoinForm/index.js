@@ -1,50 +1,24 @@
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import { Button, Link as BaseLink, SSOButton } from "@/components/atomic";
-import * as Styled from "./styles";
-import AuthModal from "../../AuthModal";
 import useAuthModal from "@/hooks/useAuthModal";
-import useAuthentication from "@/hooks/useAuthentication";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useAuthenticationContext } from "@/contexts/Authentication";
+import AuthModal from "../../AuthModal";
+import * as Styled from "./styles";
 
 export default function JoinForm({ onEmailSignup, onRoleChange, role }) {
   const { t } = useTranslation();
 
   const { getModalUrl } = useAuthModal();
 
-  const { query } = useRouter();
-
-  const {
-    authenticateWithGoogle,
-    authenticateWithFacebook,
-    getFacebookAuthUrl,
-    getGoogleAuthUrl,
-  } = useAuthentication();
-
-  /** WIP: If the query includes a code, sign in with google */
-  useEffect(() => {
-    if (query.code) {
-      console.info("Fetching token...");
-      const fetchToken = async () => {
-        const data = await authenticateWithGoogle({ code: query.code, role });
-
-        return data;
-      };
-
-      fetchToken()
-        .then((data) => console.info(data))
-        .catch(console.error);
-    }
-  }, [query, authenticateWithGoogle, role]);
+  const { getFacebookAuthUrl, getGoogleAuthUrl } = useAuthenticationContext();
 
   /** WIP: google auth */
-  const onGoogleSignIn = async () => {
-    const googleOauthUrl = getGoogleAuthUrl();
+  const onGoogleSignIn = () => {
+    const googleOauthUrl = getGoogleAuthUrl({ role });
+    console.info("googleOauthUrl", googleOauthUrl);
 
     window.open(googleOauthUrl, "_blank");
-
-    return {};
   };
 
   /** WIP: facebook auth */

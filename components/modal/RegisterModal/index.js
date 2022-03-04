@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useTranslation, Trans } from "react-i18next";
+import { useAuthenticationContext } from "@/contexts/Authentication";
 import RegisterForm from "./RegisterForm";
 import useAuthModal from "@/hooks/useAuthModal";
 import { Button } from "@/components/atomic";
@@ -13,11 +14,15 @@ export default function RegisterModal() {
 
   const { openModal, closeModal } = useAuthModal();
 
+  const { authenticateWithGoogle } = useAuthenticationContext();
+
   const { t } = useTranslation();
 
   const [formState, setFormState] = useState({
     role: "student",
+    loading: false,
     success: false,
+    error: false,
   });
 
   const onClose = () => {
@@ -36,6 +41,35 @@ export default function RegisterModal() {
     setFormState({ ...formState, success: true });
   };
 
+  /** WIP: If the query includes a code, sign in with google.
+   * Google return URL should also include a role of teacher or student
+   */
+  useEffect(() => {
+    if (query.code) {
+      console.info("Fetching token...");
+      setFormState({ loading: true });
+
+      const fetchToken = async () => {
+        const data = await authenticateWithGoogle({
+          code: query.code,
+          role: query.role,
+        });
+
+        return data;
+      };
+
+      fetchToken()
+        .then((data) => {
+          setFormState({ loading: false, success: true });
+          console.info(data);
+        })
+        .catch((e) => {
+          setFormState({ loading: false, error: true });
+          console.error(e);
+        });
+    }
+  }, [query, authenticateWithGoogle, setFormState]);
+
   return (
     <AuthModal
       open={!!query.register}
@@ -43,7 +77,11 @@ export default function RegisterModal() {
       aria-label="Sign Up"
       image={formState.success ? undefined : formState.role}
     >
-      {formState.success ? (
+      {formState.loading ? (
+        <>
+          <AuthModal.Title>Registering...</AuthModal.Title>
+        </>
+      ) : formState.success ? (
         <>
           <AuthModal.Title>
             {t("register.success", { context: query.role })}
@@ -58,6 +96,14 @@ export default function RegisterModal() {
           <Styled.FormButtons>
             <Button onClick={onClose}>{t("register.confirm_button")}</Button>
           </Styled.FormButtons>
+        </>
+      ) : formState.error ? (
+        <>
+          <AuthModal.Title>Error!</AuthModal.Title>
+          <AuthModal.Description>
+            There was an error signing you in with{" "}
+            {query.scope ? "Google" : "Facebook"}.
+          </AuthModal.Description>
         </>
       ) : query.role === "teacher" || query.role === "student" ? (
         <RegisterForm

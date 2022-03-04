@@ -152,10 +152,10 @@ export default function useAuthentication() {
   }
 
   /** Returns the google auth url */
-  function getGoogleAuthUrl() {
+  function getGoogleAuthUrl({ role }) {
     const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_APP_ID;
 
-    const GOOGLE_REDIRECT_URI = process.env.NEXT_PUBLIC_GOOGLE_REDIRECT_URI;
+    const GOOGLE_REDIRECT_URI = `${process.env.NEXT_PUBLIC_GOOGLE_REDIRECT_URI}&role=${role}`;
 
     const scope = "https://www.googleapis.com/auth/userinfo.email openid";
 
@@ -169,13 +169,20 @@ export default function useAuthentication() {
    * role: The user's role (student or teacher)
    */
   async function authenticateWithGoogle({ code, role }) {
-    const tokenData = await getGoogleOauthToken({ code });
+    const tokenData = await getGoogleOauthToken({ code, role });
 
     if (tokenData.id_token) {
       const data = await authenticateGoogle({
         token: tokenData.id_token,
-        role: "student",
+        role,
       });
+
+      const returnRole =
+        role === "teacher" ? "googleSignInTeachers" : "googleSignInStudents";
+
+      if (data?.[returnRole]) {
+        setStateFromResponse(data[returnRole]);
+      }
 
       return data;
     } else {
