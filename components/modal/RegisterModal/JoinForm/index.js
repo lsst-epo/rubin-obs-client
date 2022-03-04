@@ -3,9 +3,12 @@ import Link from "next/link";
 import { Button, Link as BaseLink, SSOButton } from "@/components/atomic";
 import * as Styled from "./styles";
 import AuthModal from "../../AuthModal";
+import useAuthModal from "@/hooks/useAuthModal";
 
 export default function JoinForm({ onEmailSignup, onRoleChange, role }) {
   const { t } = useTranslation();
+
+  const { getModalUrl } = useAuthModal();
 
   return (
     <>
@@ -44,7 +47,7 @@ export default function JoinForm({ onEmailSignup, onRoleChange, role }) {
           {t("join.sign_up_with_email")}
         </SSOButton>
       </Styled.SSOButtons>
-      <Link href={{ query: { signIn: true } }} shallow passHref>
+      <Link href={getModalUrl("signIn")} shallow passHref>
         <BaseLink>{t("join.sign_in_link")}</BaseLink>
       </Link>
     </>

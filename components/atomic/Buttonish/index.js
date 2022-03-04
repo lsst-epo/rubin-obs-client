@@ -7,14 +7,14 @@ import { isInternalUrl } from "@/helpers";
 export default function Buttonish({ isBlock = false, text, url }) {
   if (!isInternalUrl(url)) {
     return (
-      <StyledButton href={url} isBlock={isBlock}>
+      <StyledButton href={url} $isBlock={isBlock}>
         {text}
       </StyledButton>
     );
   } else if (url) {
     return (
       <Link href={url} passHref>
-        <StyledButton isBlock={isBlock}>{text}</StyledButton>
+        <StyledButton $isBlock={isBlock}>{text}</StyledButton>
       </Link>
     );
   } else {
@@ -42,7 +42,7 @@ const StyledButton = styled.a`
     background-color: var(--neutral40);
   }
 
-  ${(p) => p.isBlock && `display: block; text-align: center;`}
+  ${(p) => p.$isBlock && `display: block; text-align: center;`}
 `;
 
 Buttonish.propTypes = {

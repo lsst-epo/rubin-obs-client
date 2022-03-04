@@ -82,6 +82,7 @@ export default function ForgotPasswordModal() {
               <Input
                 id="resetPasswordEmail"
                 type="email"
+                autoComplete="email"
                 required
                 {...register("email")}
               />

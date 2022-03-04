@@ -11,7 +11,7 @@ export const Button = styled.button`
   font-weight: bold;
   text-decoration: none;
   border-radius: 6px;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
   min-height: 60px;
   border: 1px solid transparent;
 
@@ -45,7 +45,7 @@ export const Button = styled.button`
   }}
 
   &:hover:not(:disabled):not([data-inactive]),
-  &:focus-visible {
+  .focus-visible {
     border-color: transparent;
     background-color: var(--turquoise80);
     color: var(--white);
