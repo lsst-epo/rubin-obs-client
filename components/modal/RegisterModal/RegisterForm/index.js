@@ -56,30 +56,37 @@ export default function RegisterForm({ role, onSuccess, onCancel }) {
       <Styled.Form onSubmit={handleSubmit(onSubmit)}>
         {errors?.form?.message && <Error>{errors.form.message}</Error>}
         <FormField
-          htmlFor="studentEmail"
+          htmlFor="registerEmail"
           label="form.email"
           error={errors?.email?.message}
           required
         >
           <Input
-            id="studentEmail"
+            id="registerEmail"
             type="email"
+            autoComplete="email"
             required
             {...register("email")}
           />
         </FormField>
-        <FormField htmlFor="studentName" label="form.your_name" required>
-          <Input id="studentName" type="text" {...register("fullName")} />
+        <FormField htmlFor="registerName" label="form.your_name" required>
+          <Input
+            id="registerName"
+            type="text"
+            autoComplete="name"
+            {...register("fullName")}
+          />
         </FormField>
         <FormField
-          htmlFor="studentPassword"
+          htmlFor="createPassword"
           label="form.create_password"
           description={t("form.create_password_instructions")}
         >
           <Input
-            id="studentPassword"
+            id="createPassword"
             type="password"
             pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
+            autoComplete="new-password"
             required
             {...register("password")}
           />

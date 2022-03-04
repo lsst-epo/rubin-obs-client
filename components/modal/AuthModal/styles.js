@@ -9,11 +9,10 @@ import { Dialog as BaseDialog } from "@headlessui/react";
 
 export const Overlay = styled(BaseDialog.Overlay)`
   background-color: rgba(0, 0, 0, 0.7);
-  position: absolute;
+  position: fixed;
   top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  width: 100%;
+  height: 100%;
 `;
 
 export const Dialog = styled(BaseDialog)`
@@ -40,6 +39,7 @@ export const Inner = styled.div`
   position: relative;
   display: flex;
   background: var(--white);
+  max-width: 100vw;
 `;
 
 export const Content = styled.div`
