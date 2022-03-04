@@ -13,7 +13,7 @@ import * as Styled from "./styles";
 export default function SignInModal() {
   const { query } = useRouter();
 
-  const { closeModal } = useAuthModal();
+  const { closeModal, getModalUrl } = useAuthModal();
 
   const { t } = useTranslation();
 
@@ -68,9 +68,10 @@ export default function SignInModal() {
       <Styled.Form onSubmit={handleSubmit(onSubmit)}>
         {errors?.form?.message && <Error>{errors.form.message}</Error>}
         <FormField
-          isBlock
           htmlFor="signInEmail"
           label="form.email"
+          type="email"
+          autoComplete="email"
           error={errors?.email?.message}
         >
           <Input id="signInEmail" type="text" required {...register("email")} />
@@ -80,14 +81,15 @@ export default function SignInModal() {
             id="signInPassword"
             type="password"
             required
+            autoComplete="current-password"
             {...register("password")}
           />
         </FormField>
         <Styled.AccountLinks>
-          <Link href={{ query: { forgotPassword: true } }} shallow passHref>
+          <Link href={getModalUrl("forgotPassword")} shallow passHref>
             <BaseLink>{t("sign_in.forgot_password_link")}</BaseLink>
           </Link>
-          <Link href={{ query: { register: true } }} shallow passHref>
+          <Link href={getModalUrl("register")} shallow passHref>
             <BaseLink>{t("sign_in.create_account_link")}</BaseLink>
           </Link>
         </Styled.AccountLinks>
