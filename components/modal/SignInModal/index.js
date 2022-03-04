@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { useAuthenticationContext } from "@/contexts/Authentication";
 import useAuthModal from "@/hooks/useAuthModal";
 import { Link as BaseLink, Button, SSOButton } from "@/components/atomic";
-import { Input, FormField, Error } from "@/components/form";
+import { Input, FormField, Error, Password } from "@/components/form";
 import AuthModal from "../AuthModal";
 import * as Styled from "./styles";
 
@@ -77,9 +77,8 @@ export default function SignInModal() {
           <Input id="signInEmail" type="text" required {...register("email")} />
         </FormField>
         <FormField htmlFor="signInPassword" label="form.password">
-          <Input
+          <Password
             id="signInPassword"
-            type="password"
             required
             autoComplete="current-password"
             {...register("password")}
@@ -94,7 +93,7 @@ export default function SignInModal() {
           </Link>
         </Styled.AccountLinks>
         <Styled.FormButtons>
-          <Button isInactive={!isDirty} disabled={isSubmitting}>
+          <Button type="submit" isInactive={!isDirty} disabled={isSubmitting}>
             {isSubmitting ? t("sign_in.submit_pending") : t("sign_in.submit")}
           </Button>
         </Styled.FormButtons>
