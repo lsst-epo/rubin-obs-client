@@ -172,6 +172,7 @@ export default function useAuthentication() {
     const tokenData = await getGoogleOauthToken({ code, role });
 
     if (tokenData.id_token) {
+      console.info("Authenticating with Google...");
       const data = await authenticateGoogle({
         token: tokenData.id_token,
         role,
@@ -197,8 +198,15 @@ export default function useAuthentication() {
     return data;
   }
 
-  async function authenticateWithFacebook({ token, role }) {
-    const data = await authenticateFacebook({ token, role });
+  async function authenticateWithFacebook({ code, role }) {
+    const data = await authenticateFacebook({ code, role });
+
+    const returnRole =
+      role === "teacher" ? "googleSignInTeachers" : "googleSignInStudents";
+
+    if (data?.[returnRole]) {
+      setStateFromResponse(data[returnRole]);
+    }
 
     return data;
   }

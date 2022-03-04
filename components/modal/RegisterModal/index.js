@@ -14,7 +14,8 @@ export default function RegisterModal() {
 
   const { openModal, closeModal } = useAuthModal();
 
-  const { authenticateWithGoogle } = useAuthenticationContext();
+  const { authenticateWithGoogle, authenticateWithFacebook } =
+    useAuthenticationContext();
 
   const { t } = useTranslation();
 
@@ -45,8 +46,8 @@ export default function RegisterModal() {
    * Google return URL should also include a role of teacher or student
    */
   useEffect(() => {
-    if (query.code) {
-      console.info("Fetching token...");
+    if (query.code && !query.facebook) {
+      console.info("Fetching Google token...");
       setFormState({ loading: true });
 
       const fetchToken = async () => {
@@ -68,7 +69,35 @@ export default function RegisterModal() {
           console.error(e);
         });
     }
-  }, [query, authenticateWithGoogle, setFormState]);
+
+    if (query.code && query.facebook) {
+      console.info("Authenticating with Facebook...");
+      setFormState({ loading: true });
+
+      const authWithFB = async () => {
+        const data = await authenticateWithFacebook({
+          code: query.code,
+          role: query.role,
+        });
+
+        return data;
+      };
+
+      authWithFB()
+        .then((data) => {
+          setFormState({
+            loading: false,
+            error: !!data.errors,
+            success: data.errors === undefined,
+          });
+          console.info(data);
+        })
+        .catch((e) => {
+          setFormState({ loading: false, error: true });
+          console.error(e);
+        });
+    }
+  }, [query, authenticateWithGoogle, authenticateWithFacebook, setFormState]);
 
   return (
     <AuthModal
