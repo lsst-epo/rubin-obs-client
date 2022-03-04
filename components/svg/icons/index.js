@@ -6,6 +6,7 @@ import Close from "./Close";
 import Cloud from "./Cloud";
 import Doc from "./Doc";
 import Email from "./Email";
+import Eye from "./Eye";
 import Facebook from "./Facebook";
 import Google from "./Google";
 import Hamburger from "./Hamburger";
@@ -36,6 +37,7 @@ export default {
   Cloud,
   Doc,
   Email,
+  Eye,
   Facebook,
   Google,
   Hamburger,

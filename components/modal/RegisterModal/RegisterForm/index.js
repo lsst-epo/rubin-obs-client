@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { useAuthenticationContext } from "@/contexts/Authentication";
 import { Button } from "@/components/atomic";
-import { Error, FormField, Input } from "@/components/form";
+import { Error, FormField, Input, Password } from "@/components/form";
 import * as Styled from "./styles";
 import AuthModal from "../../AuthModal";
 
@@ -82,9 +82,8 @@ export default function RegisterForm({ role, onSuccess, onCancel }) {
           label="form.create_password"
           description={t("form.create_password_instructions")}
         >
-          <Input
+          <Password
             id="createPassword"
-            type="password"
             pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
             autoComplete="new-password"
             required
