@@ -1,14 +1,36 @@
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import { Button, Link as BaseLink, SSOButton } from "@/components/atomic";
-import * as Styled from "./styles";
-import AuthModal from "../../AuthModal";
 import useAuthModal from "@/hooks/useAuthModal";
+import { useAuthenticationContext } from "@/contexts/Authentication";
+import AuthModal from "../../AuthModal";
+import * as Styled from "./styles";
 
 export default function JoinForm({ onEmailSignup, onRoleChange, role }) {
   const { t } = useTranslation();
 
   const { getModalUrl } = useAuthModal();
+
+  const { getFacebookAuthUrl, getGoogleAuthUrl } = useAuthenticationContext();
+
+  /** WIP: google auth */
+  const onGoogleSignIn = () => {
+    const googleOauthUrl = getGoogleAuthUrl({ role });
+    console.info("googleOauthUrl", googleOauthUrl);
+
+    window.open(googleOauthUrl, "_blank");
+  };
+
+  /** WIP: facebook auth */
+  const onFacebookSignIn = async () => {
+    const data = await getFacebookAuthUrl();
+
+    console.info("onFacebookSignIn", data);
+
+    if (data?.facebookOauthUrl) {
+      window.open(data.facebookOauthUrl, "_blank");
+    }
+  };
 
   return (
     <>
@@ -37,10 +59,10 @@ export default function JoinForm({ onEmailSignup, onRoleChange, role }) {
         </AuthModal.Description>
       </div>
       <Styled.SSOButtons>
-        <SSOButton icon="google" type="button">
+        <SSOButton icon="google" type="button" onClick={onGoogleSignIn}>
           {t("join.continue_with_google")}
         </SSOButton>
-        <SSOButton icon="facebook" type="button">
+        <SSOButton icon="facebook" type="button" onClick={onFacebookSignIn}>
           {t("join.continue_with_facebook")}
         </SSOButton>
         <SSOButton icon="email" type="button" onClick={onEmailSignup}>
