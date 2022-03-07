@@ -5,6 +5,10 @@ import {
   registerStudent,
   forgottenPassword,
   refreshJWT,
+  authenticateGoogle,
+  authenticateFacebook,
+  getFacebookOauthUrl,
+  getGoogleOauthToken,
 } from "@/lib/api/auth";
 
 const SESSION_STORAGE_KEYS = [
@@ -147,6 +151,66 @@ export default function useAuthentication() {
     }
   }
 
+  /** Returns the google auth url */
+  function getGoogleAuthUrl({ role }) {
+    const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_APP_ID;
+
+    const GOOGLE_REDIRECT_URI = `${process.env.NEXT_PUBLIC_GOOGLE_REDIRECT_URI}&role=${role}`;
+
+    const scope = "https://www.googleapis.com/auth/userinfo.email openid";
+
+    const responseType = "code";
+
+    return `https://accounts.google.com/o/oauth2/v2/auth?scope=${scope}&client_id=${GOOGLE_CLIENT_ID}&response_type=${responseType}&redirect_uri=${GOOGLE_REDIRECT_URI}`;
+  }
+
+  /** Gets the google user's auth token and signs in using the auth plugin
+   * code: The auth code returned by Google after a sucessful sign in
+   * role: The user's role (student or teacher)
+   */
+  async function authenticateWithGoogle({ code, role }) {
+    const tokenData = await getGoogleOauthToken({ code, role });
+
+    if (tokenData.id_token) {
+      console.info("Authenticating with Google...");
+      const data = await authenticateGoogle({
+        token: tokenData.id_token,
+        role,
+      });
+
+      const returnRole =
+        role === "teacher" ? "googleSignInTeachers" : "googleSignInStudents";
+
+      if (data?.[returnRole]) {
+        setStateFromResponse(data[returnRole]);
+      }
+
+      return data;
+    } else {
+      // TODO: Would want to show an error or return an error...
+      return tokenData;
+    }
+  }
+
+  async function getFacebookAuthUrl() {
+    const data = await getFacebookOauthUrl();
+
+    return data;
+  }
+
+  async function authenticateWithFacebook({ code, role }) {
+    const data = await authenticateFacebook({ code, role });
+
+    const returnRole =
+      role === "teacher" ? "googleSignInTeachers" : "googleSignInStudents";
+
+    if (data?.[returnRole]) {
+      setStateFromResponse(data[returnRole]);
+    }
+
+    return data;
+  }
+
   return {
     isAuthenticated: !!token,
     maybeRefreshToken,
@@ -154,5 +218,9 @@ export default function useAuthentication() {
     signOut,
     register,
     forgotPassword,
+    getFacebookAuthUrl,
+    getGoogleAuthUrl,
+    authenticateWithGoogle,
+    authenticateWithFacebook,
   };
 }
