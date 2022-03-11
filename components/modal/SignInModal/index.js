@@ -13,9 +13,9 @@ import * as Styled from "./styles";
 export default function SignInModal() {
   const { query } = useRouter();
 
-  const { closeModal, getModalUrl } = useAuthModal();
-
   const { t } = useTranslation();
+
+  const { closeModal, getModalUrl } = useAuthModal();
 
   const {
     register,
@@ -24,7 +24,8 @@ export default function SignInModal() {
     formState: { errors, isDirty, isSubmitting },
   } = useForm();
 
-  const { signIn } = useAuthenticationContext();
+  const { signIn, goToFacebookSignIn, goToGoogleSignIn } =
+    useAuthenticationContext();
 
   const onSubmit = async (data) => {
     if (!data.email || !data.password) return;
@@ -60,8 +61,10 @@ export default function SignInModal() {
     <AuthModal open={!!query.signIn} onClose={onClose} aria-label="Sign In">
       <AuthModal.Title>{t("sign_in.header")}</AuthModal.Title>
       <Styled.SSOButtons>
-        <SSOButton icon="google">{t("sign_in.continue_with_google")}</SSOButton>
-        <SSOButton icon="facebook">
+        <SSOButton icon="google" onClick={goToGoogleSignIn}>
+          {t("sign_in.continue_with_google")}
+        </SSOButton>
+        <SSOButton icon="facebook" onClick={goToFacebookSignIn}>
           {t("sign_in.continue_with_facebook")}
         </SSOButton>
       </Styled.SSOButtons>
@@ -70,11 +73,15 @@ export default function SignInModal() {
         <FormField
           htmlFor="signInEmail"
           label="form.email"
-          type="email"
-          autoComplete="email"
           error={errors?.email?.message}
         >
-          <Input id="signInEmail" type="text" required {...register("email")} />
+          <Input
+            id="signInEmail"
+            type="email"
+            autoComplete="email"
+            required
+            {...register("email")}
+          />
         </FormField>
         <FormField htmlFor="signInPassword" label="form.password">
           <Password
@@ -101,5 +108,3 @@ export default function SignInModal() {
     </AuthModal>
   );
 }
-
-SignInModal.propTypes = {};
