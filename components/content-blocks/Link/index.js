@@ -4,8 +4,6 @@ import Container from "@/layout/Container";
 import { mixedLinkShape } from "@/shapes/link";
 
 export default function LinkContentBlock({ mixedLink, url, text }) {
-  console.info("LinkContentBlock", mixedLink, url, text);
-
   return (
     <Container>
       <MixedLink

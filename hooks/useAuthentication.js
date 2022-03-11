@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import {
   authenticate,
   registerTeacher,
@@ -16,49 +17,101 @@ const SESSION_STORAGE_KEYS = [
   "jwtExpiresAt",
   "refreshToken",
   "refreshTokenExpiresAt",
+  "pendingRole",
 ];
+
+function getTokensFromStorage() {
+  const tokens = {};
+  SESSION_STORAGE_KEYS.forEach(
+    (key) => (tokens[key] = sessionStorage.getItem(key))
+  );
+  return tokens;
+}
+
+function storeTokens(tokens) {
+  Object.keys(tokens)
+    .filter(Boolean)
+    .forEach((key) => sessionStorage.setItem(key, tokens[key]));
+}
+
+function unstoreTokens() {
+  SESSION_STORAGE_KEYS.forEach((key) => sessionStorage.removeItem(key));
+}
 
 // TODO: store refresh token in cookie so token can be refreshed after browser session ends
 export default function useAuthentication() {
+  const { query } = useRouter();
+
   const [token, setToken] = useState(null);
+  const [pendingRole, setPendingRole] = useState("student");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return null;
+
+    const { jwt, pendingRole } = getTokensFromStorage();
+
+    if (pendingRole) {
+      setPendingRole();
+    }
+    if (jwt) {
+      setToken(jwt);
+    }
+  }, []);
 
   useEffect(() => {
     // TODO: cancel promise if component unmounts first
     (async () => await maybeRefreshToken())();
   }, []); /* eslint-disable-line react-hooks/exhaustive-deps */
 
-  function getTokensFromStorage() {
-    const tokens = {};
-    SESSION_STORAGE_KEYS.forEach(
-      (key) => (tokens[key] = sessionStorage.getItem(key))
-    );
-    return tokens;
-  }
+  useEffect(() => {
+    if (!query.code || query.facebook) return;
 
-  function storeTokens(tokens) {
-    Object.keys(tokens).forEach((key) =>
-      sessionStorage.setItem(key, tokens[key])
-    );
-  }
+    (async () => await authenticateWithGoogle({ code: query.code }))();
+  }, [query]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  function unstoreTokens() {
-    SESSION_STORAGE_KEYS.forEach((key) => sessionStorage.removeItem(key));
-  }
+  useEffect(() => {
+    if (!query.code || !query.facebook) return;
 
-  function setStateFromResponse(authData) {
-    const { jwt, jwtExpiresAt, refreshToken, refreshTokenExpiresAt } = authData;
-
-    setToken(jwt);
-    storeTokens({ jwt, jwtExpiresAt, refreshToken, refreshTokenExpiresAt });
-  }
+    (async () => await authenticateWithFacebook({ code: query.code }))();
+  }, [query]); // eslint-disable-line react-hooks/exhaustive-deps
 
   function clearState() {
     setToken(null);
+    setLoading(false);
+    setError(false);
     unstoreTokens();
   }
 
-  // Returned from context so it can be run before making API requests for protected data.
-  // This way, authenticated users whose JWT has expired can get a refreshed token before fetching data.
+  function handleSuccess(authData) {
+    const { jwt, jwtExpiresAt, refreshToken, refreshTokenExpiresAt } = authData;
+
+    setToken(jwt);
+    setLoading(false);
+    setError(false);
+    storeTokens({
+      jwt,
+      jwtExpiresAt,
+      refreshToken,
+      refreshTokenExpiresAt,
+      pendingRole,
+    });
+
+    return authData;
+  }
+
+  function handleError(data) {
+    setError(true);
+    setLoading(false);
+    return data;
+  }
+
+  /**
+   * Returned from context so it can be run before making API requests
+   * for protected data. This way, authenticated users whose JWT has expired
+   * can get a refreshed token before fetching data.
+   */
   async function maybeRefreshToken() {
     if (typeof window === "undefined") return null;
 
@@ -81,45 +134,39 @@ export default function useAuthentication() {
       return refreshToken;
     }
 
-    // before fetching, optimistically assume user is logged in
-    // so UI doesn't show logged-out state while awaiting response
-    setToken(jwt);
-
     const data = await refreshJWT({ refreshToken });
 
-    if (data?.refreshToken) {
-      setStateFromResponse(data.refreshToken);
-      return data.refreshToken.jwt;
-    } else {
-      clearState();
-      return null;
-    }
+    return data?.refreshToken
+      ? handleSuccess(data.refreshToken)
+      : handleError(data);
   }
 
   async function signIn({ email, password }) {
+    setLoading(true);
+
     const data = await authenticate({ email, password, token });
 
-    if (data?.authenticate) {
-      setStateFromResponse(data.authenticate);
-    }
-
-    return data;
+    return data?.authenticate
+      ? handleSuccess(data.authenticate)
+      : handleError(data);
   }
 
   function signOut() {
     setToken(null);
   }
 
-  async function register({ email, password, fullName, role }) {
-    const registerMethod =
-      role === "teacher" ? registerTeacher : registerStudent;
-
+  async function register({ email, password, fullName }) {
     if (!fullName) return;
+
+    setLoading(true);
 
     const name = fullName.split(" ");
     const firstName = name[0];
     const lastName =
       name.length > 1 ? fullName.slice(firstName.length + 1) : "";
+
+    const registerMethod =
+      pendingRole === "teacher" ? registerTeacher : registerStudent;
 
     const data = await registerMethod({
       email,
@@ -130,97 +177,120 @@ export default function useAuthentication() {
     });
 
     const returnRole =
-      role === "teacher" ? "registerTeachers" : "registerStudents";
+      pendingRole === "teacher" ? "registerTeachers" : "registerStudents";
 
-    if (data?.[returnRole]) {
-      setStateFromResponse(data[returnRole]);
-
-      return data[returnRole];
-    } else {
-      return data;
-    }
+    return data?.[returnRole]
+      ? handleSuccess(data[returnRole])
+      : handleError(data);
   }
 
   async function forgotPassword({ email }) {
+    setLoading(true);
+
     const data = await forgottenPassword({ email, token });
 
-    if (data?.forgottenPassword) {
-      return data.forgottenPassword;
-    } else {
-      return data;
-    }
+    return data?.forgottenPassword
+      ? handleSuccess(data.forgottenPassword)
+      : handleError(data);
   }
 
-  /** Returns the google auth url */
-  function getGoogleAuthUrl({ role }) {
-    const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_APP_ID;
-
-    const GOOGLE_REDIRECT_URI = `${process.env.NEXT_PUBLIC_GOOGLE_REDIRECT_URI}&role=${role}`;
-
+  function buildGoogleSignInUrl() {
+    const clientId = process.env.NEXT_PUBLIC_GOOGLE_APP_ID;
+    const redirectUri = `${process.env.NEXT_PUBLIC_GOOGLE_REDIRECT_URI}&role=${pendingRole}`;
     const scope = "https://www.googleapis.com/auth/userinfo.email openid";
-
     const responseType = "code";
 
-    return `https://accounts.google.com/o/oauth2/v2/auth?scope=${scope}&client_id=${GOOGLE_CLIENT_ID}&response_type=${responseType}&redirect_uri=${GOOGLE_REDIRECT_URI}`;
+    return `https://accounts.google.com/o/oauth2/v2/auth?scope=${scope}&client_id=${clientId}&response_type=${responseType}&redirect_uri=${redirectUri}`;
   }
 
-  /** Gets the google user's auth token and signs in using the auth plugin
-   * code: The auth code returned by Google after a sucessful sign in
-   * role: The user's role (student or teacher)
+  /**
+   * 1. Redirect to Google sign-in
+   * 2. After user is signs in they will be redirected back
+   *    to this site with a `code` URL param.
+   * 3. An effect above watches for changes to URL params and
+   *    executes `authenticateWithGoogle` when `code` and `google` params are present
    */
-  async function authenticateWithGoogle({ code, role }) {
-    const tokenData = await getGoogleOauthToken({ code, role });
-
-    if (tokenData.id_token) {
-      console.info("Authenticating with Google...");
-      const data = await authenticateGoogle({
-        token: tokenData.id_token,
-        role,
-      });
-
-      const returnRole =
-        role === "teacher" ? "googleSignInTeachers" : "googleSignInStudents";
-
-      if (data?.[returnRole]) {
-        setStateFromResponse(data[returnRole]);
-      }
-
-      return data;
-    } else {
-      // TODO: Would want to show an error or return an error...
-      return tokenData;
-    }
+  function goToGoogleSignIn() {
+    const googleOauthUrl = buildGoogleSignInUrl();
+    window.open(googleOauthUrl, "_self");
   }
 
-  async function getFacebookAuthUrl() {
-    const data = await getFacebookOauthUrl();
+  /**
+   * Gets the google user's auth token and signs in using the auth plugin
+   * @param code: The auth code returned by Google after a sucessful sign in
+   */
+  async function authenticateWithGoogle({ code }) {
+    setLoading(true);
 
-    return data;
-  }
+    const tokenData = await getGoogleOauthToken({ code, role: pendingRole });
 
-  async function authenticateWithFacebook({ code, role }) {
-    const data = await authenticateFacebook({ code, role });
+    if (!tokenData.id_token) handleError(tokenData);
+
+    console.info("Authenticating with Google...");
+
+    const data = await authenticateGoogle({
+      token: tokenData.id_token,
+      role: pendingRole,
+    });
 
     const returnRole =
-      role === "teacher" ? "googleSignInTeachers" : "googleSignInStudents";
+      pendingRole === "teacher"
+        ? "googleSignInTeachers"
+        : "googleSignInStudents";
 
-    if (data?.[returnRole]) {
-      setStateFromResponse(data[returnRole]);
+    return data?.[returnRole]
+      ? handleSuccess(data[returnRole])
+      : handleError(data);
+  }
+
+  /**
+   * 1. Get the FB sign-in URL from Craft
+   * 2. Redirect to FB sign-in
+   * 3. After user is authenticated by FB, they will be redirected back
+   *    to this site with a `code` URL param.
+   * 4. An effect above watches for changes to URL params and
+   *    executes `authenticateWithFacebook` when `code` and `facebook` params are present
+   */
+  async function goToFacebookSignIn() {
+    setLoading(true);
+
+    const data = await getFacebookOauthUrl();
+
+    if (data?.facebookOauthUrl) {
+      setLoading(false);
+      window.open(data.facebookOauthUrl, "_self");
+    } else {
+      handleError(data);
     }
+  }
 
-    return data;
+  async function authenticateWithFacebook({ code }) {
+    setLoading(true);
+
+    const data = await authenticateFacebook({ code, role: pendingRole });
+
+    const returnRole =
+      pendingRole === "teacher"
+        ? "facebookSignInTeachers"
+        : "facebookSignInStudents";
+
+    return data?.[returnRole]
+      ? handleSuccess(data[returnRole])
+      : handleError(data);
   }
 
   return {
     isAuthenticated: !!token,
+    pendingRole,
+    loading,
+    error,
+    setPendingRole,
     maybeRefreshToken,
     signIn,
     signOut,
     register,
     forgotPassword,
-    getFacebookAuthUrl,
-    getGoogleAuthUrl,
-    authenticateWithGoogle,
-    authenticateWithFacebook,
+    goToFacebookSignIn,
+    goToGoogleSignIn,
   };
 }
