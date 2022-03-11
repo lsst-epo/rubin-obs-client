@@ -1,6 +1,5 @@
 runtime: custom
 env: flex
-service: rubin-obs-client
 
 vm_health_check:
  enable_health_check: False
