@@ -51,21 +51,21 @@ jobs:
           name: edc-int-vpc
           subnetwork_name: subnet-us-central1-01" >> app.yaml
 
+    - name: Format version name
+      id: version_name
+      run: echo "version_name=$(echo sdfjkahrp48apggfdkg;94 | tr -cd '[:alnum:]' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+
     - name: Deploy branch-tagged version to App Engine
-      env:
-        BRANCH_NAME: ${{ github.head_ref }}
       run: |-
         gcloud app deploy app.yaml \
         --image-url=gcr.io/edc-int-6c5e/rubin-obs-client:${{ github.sha }} \
-        --version=${BRANCH_NAME,,} \
+        --version=${{ env.version_name }} \
         --no-promote \
         --project=edc-int-6c5e
     
     - name: Get the version URL
       id: get_version
-      env:
-        BRANCH_NAME: ${{ github.head_ref }}
-      run: echo "version_url=$(gcloud app versions list --uri --service=rubin-obs-client --filter=version.id:${BRANCH_NAME,,})" >> $GITHUB_ENV
+      run: echo "version_url=$(gcloud app versions list --uri --service=rubin-obs-client --filter=version.id:${{ env.version_name }})" >> $GITHUB_ENV
 
     # Create or update a comment with the URL
     - name: Find Comment
@@ -105,6 +105,4 @@ jobs:
 
     # Destruct!
     - name: Destroy version
-      env:
-        BRANCH_NAME: ${{ github.head_ref }}
-      run: gcloud app versions delete ${BRANCH_NAME,,} --service=rubin-obs-client
+      run: gcloud app versions delete ${{ env.version_name }} --service=rubin-obs-client
