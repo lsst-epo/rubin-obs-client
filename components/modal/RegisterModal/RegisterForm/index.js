@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { useAuthenticationContext } from "@/contexts/Authentication";
@@ -7,7 +6,7 @@ import { Error, FormField, Input, Password } from "@/components/form";
 import * as Styled from "./styles";
 import AuthModal from "../../AuthModal";
 
-export default function RegisterForm({ role, onSuccess, onCancel }) {
+export default function RegisterForm({ onCancel }) {
   const { t } = useTranslation();
 
   const {
@@ -17,16 +16,14 @@ export default function RegisterForm({ role, onSuccess, onCancel }) {
     formState: { isDirty, isSubmitting, errors },
   } = useForm();
 
-  const { register: registerApi } = useAuthenticationContext();
+  const { register: registerApi, pendingRole } = useAuthenticationContext();
 
   const onSubmit = async (data) => {
     if (!data.email || !data.password) return;
 
-    const response = await registerApi({ ...data, role });
+    const response = await registerApi(data);
 
-    if (response?.jwt) {
-      onSuccess();
-    } else if (response?.errors) {
+    if (response.errors) {
       const invalid = response.errors.find(
         (e) => e.extensions.code === "INVALID"
       );
@@ -48,10 +45,10 @@ export default function RegisterForm({ role, onSuccess, onCancel }) {
   return (
     <>
       <AuthModal.Title>
-        {t("register.header", { context: role })}
+        {t("register.header", { context: pendingRole })}
       </AuthModal.Title>
       <AuthModal.Description>
-        {t("register.instructions", { context: role })}
+        {t("register.instructions", { context: pendingRole })}
       </AuthModal.Description>
       <Styled.Form onSubmit={handleSubmit(onSubmit)}>
         {errors?.form?.message && <Error>{errors.form.message}</Error>}
@@ -107,7 +104,3 @@ export default function RegisterForm({ role, onSuccess, onCancel }) {
     </>
   );
 }
-
-RegisterForm.propTypes = {
-  role: PropTypes.oneOf(["student", "teacher"]),
-};
