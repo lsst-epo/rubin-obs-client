@@ -1,3 +1,4 @@
+import Script from "next/script";
 import { useShareButtons } from "@/lib/utils";
 import PropTypes from "prop-types";
 import styled from "styled-components";
@@ -13,11 +14,17 @@ export const PopupShare = ({ title, url }) => {
   useShareButtons();
   if (!SHARETHIS_PROPERTY) return null;
   return (
-    <StyledShare
-      className="sharethis-inline-share-buttons"
-      data-title={title}
-      data-url={url}
-    />
+    <>
+      <Script
+        src={`https://platform-api.sharethis.com/js/sharethis.js#property=${SHARETHIS_PROPERTY}&product=sop`}
+        strategy="lazyOnload"
+      />
+      <StyledShare
+        className="sharethis-inline-share-buttons"
+        data-title={title}
+        data-url={url}
+      />
+    </>
   );
 };
 

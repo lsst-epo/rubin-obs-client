@@ -3,6 +3,7 @@ import { ServerStyleSheet } from "styled-components";
 import { getLangString } from "@/lib/utils";
 
 const SHARETHIS_PROPERTY = process.env.NEXT_PUBLIC_SHARETHIS_PROPERTY;
+const GOOGLE_APP_ID = process.env.NEXT_PUBLIC_GOOGLE_APP_ID;
 
 class CustomDocument extends Document {
   static async getInitialProps(ctx) {
@@ -43,13 +44,6 @@ class CustomDocument extends Document {
         <body>
           <Main />
           <NextScript />
-          {SHARETHIS_PROPERTY && (
-            <script
-              type="text/javascript"
-              src={`https://platform-api.sharethis.com/js/sharethis.js#property=${SHARETHIS_PROPERTY}&product=sop`}
-              async="async"
-            ></script>
-          )}
         </body>
       </Html>
     );
