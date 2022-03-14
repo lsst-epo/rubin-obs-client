@@ -2,7 +2,15 @@ import { createContext, useContext } from "react";
 
 const AuthenticationContext = createContext(null);
 
-export default AuthenticationContext;
+export function AuthenticationContextProvider({ data, children }) {
+  return (
+    <AuthenticationContext.Provider value={data}>
+      {children}
+    </AuthenticationContext.Provider>
+  );
+}
+
+AuthenticationContextProvider.displayName = "AuthenticationContext.Provider";
 
 export function useAuthenticationContext() {
   const context = useContext(AuthenticationContext);
@@ -13,3 +21,5 @@ export function useAuthenticationContext() {
   }
   return context;
 }
+
+export default AuthenticationContext;
