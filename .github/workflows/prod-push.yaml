@@ -4,7 +4,9 @@ name: 'Production Deployment'
 on:
   push:
     branches:
-      - 'production'
+      - 'master'
+    tags:
+      - '*'
 
 jobs:
   build-push-deploy:
@@ -27,7 +29,7 @@ jobs:
     - name: Build Container Image
       run: |-
         docker build \
-        -t "gcr.io/edc-prod-eef0/rubin-obs-client:${{ github.sha }}" \
+        -t "gcr.io/edc-prod-eef0/rubin-obs-client:${{ github.ref_name }}" \
         --build-arg NEXT_PUBLIC_API_URL=https://rubin-obs-api-int-2eici5myiq-uc.a.run.app/api \
         --build-arg NEXT_PUBLIC_ASSETS_BASE_URL=https://rubin-obs-api-int-2eici5myiq-uc.a.run.app/assets \
         .
@@ -35,7 +37,7 @@ jobs:
       run: gcloud --quiet auth configure-docker
 
     - name: Push Container Image to GCR
-      run: docker push gcr.io/edc-prod-eef0/rubin-obs-client:${{ github.sha }}
+      run: docker push gcr.io/edc-prod-eef0/rubin-obs-client:${{ github.ref_name }}
 
     - name: Update app.yaml
       run: |-
@@ -47,6 +49,7 @@ jobs:
     - name: Deploy to App Engine
       run: |-
         gcloud app deploy app.yaml \
-        --image-url=gcr.io/edc-prod-eef0/rubin-obs-client:${{ github.sha }} \
+        --image-url=gcr.io/edc-prod-eef0/rubin-obs-client:${{ github.ref_name }} \
+        --version=${{ github.ref_name }}
         --promote \
         --project=edc-prod-eef0
