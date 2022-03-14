@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { focusDefault } from "theme/styles/globalStyles";
+import { focusDefault } from "@/styles/mixins/appearance";
 
 export const Carousel = styled.div`
   ${focusDefault}
