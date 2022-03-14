@@ -4,20 +4,20 @@ import PropTypes from "prop-types";
 import "@/lib/i18n";
 import "focus-visible";
 import { UIDReset } from "react-uid";
-import AuthenticationContext from "@/contexts/Authentication";
+import { AuthenticationContextProvider } from "@/contexts/Authentication";
 import useAuthentication from "@/hooks/useAuthentication";
 import GlobalStyles from "@/styles/globalStyles";
 import styles from "@/styles/styles.scss";
 
 function Client({ Component, pageProps }) {
-  const value = useAuthentication();
+  const authData = useAuthentication();
 
   return (
     <UIDReset>
-      <AuthenticationContext.Provider value={value}>
+      <AuthenticationContextProvider data={authData}>
         <GlobalStyles />
         <Component {...pageProps} />
-      </AuthenticationContext.Provider>
+      </AuthenticationContextProvider>
     </UIDReset>
   );
 }

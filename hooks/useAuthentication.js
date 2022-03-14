@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { useGoogleLogin } from "react-google-login";
 import {
   authenticate,
   registerTeacher,
@@ -9,9 +10,9 @@ import {
   authenticateGoogle,
   authenticateFacebook,
   getFacebookOauthUrl,
-  getGoogleOauthToken,
 } from "@/lib/api/auth";
 
+const GOOGLE_APP_ID = process.env.NEXT_PUBLIC_GOOGLE_APP_ID;
 const SESSION_STORAGE_KEYS = [
   "jwt",
   "jwtExpiresAt",
@@ -47,6 +48,13 @@ export default function useAuthentication() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
+  const { signIn: goToGoogleSignIn } = useGoogleLogin({
+    clientId: GOOGLE_APP_ID,
+    onSuccess: (response) =>
+      authenticateWithGoogle({ idToken: response.tokenId }),
+    onFailure: (error) => console.error(error),
+  });
+
   useEffect(() => {
     if (typeof window === "undefined") return null;
 
@@ -64,12 +72,6 @@ export default function useAuthentication() {
     // TODO: cancel promise if component unmounts first
     (async () => await maybeRefreshToken())();
   }, []); /* eslint-disable-line react-hooks/exhaustive-deps */
-
-  useEffect(() => {
-    if (!query.code || query.facebook) return;
-
-    (async () => await authenticateWithGoogle({ code: query.code }))();
-  }, [query]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (!query.code || !query.facebook) return;
@@ -194,42 +196,15 @@ export default function useAuthentication() {
       : handleError(data);
   }
 
-  function buildGoogleSignInUrl() {
-    const clientId = process.env.NEXT_PUBLIC_GOOGLE_APP_ID;
-    const redirectUri = `${process.env.NEXT_PUBLIC_GOOGLE_REDIRECT_URI}&role=${pendingRole}`;
-    const scope = "https://www.googleapis.com/auth/userinfo.email openid";
-    const responseType = "code";
-
-    return `https://accounts.google.com/o/oauth2/v2/auth?scope=${scope}&client_id=${clientId}&response_type=${responseType}&redirect_uri=${redirectUri}`;
-  }
-
-  /**
-   * 1. Redirect to Google sign-in
-   * 2. After user is signs in they will be redirected back
-   *    to this site with a `code` URL param.
-   * 3. An effect above watches for changes to URL params and
-   *    executes `authenticateWithGoogle` when `code` and `google` params are present
-   */
-  function goToGoogleSignIn() {
-    const googleOauthUrl = buildGoogleSignInUrl();
-    window.open(googleOauthUrl, "_self");
-  }
-
   /**
    * Gets the google user's auth token and signs in using the auth plugin
-   * @param code: The auth code returned by Google after a sucessful sign in
+   * @param idToken: The auth code returned by Google after a sucessful sign in
    */
-  async function authenticateWithGoogle({ code }) {
+  async function authenticateWithGoogle({ idToken }) {
     setLoading(true);
 
-    const tokenData = await getGoogleOauthToken({ code, role: pendingRole });
-
-    if (!tokenData.id_token) handleError(tokenData);
-
-    console.info("Authenticating with Google...");
-
     const data = await authenticateGoogle({
-      token: tokenData.id_token,
+      idToken,
       role: pendingRole,
     });
 
@@ -290,7 +265,7 @@ export default function useAuthentication() {
     signOut,
     register,
     forgotPassword,
-    goToFacebookSignIn,
     goToGoogleSignIn,
+    goToFacebookSignIn,
   };
 }

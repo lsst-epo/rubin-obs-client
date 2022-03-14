@@ -9,7 +9,7 @@ import * as Styled from "./styles";
 export default function JoinForm({ onEmailSignup, onRoleChange, role }) {
   const { t } = useTranslation();
   const { getModalUrl } = useAuthModal();
-  const { goToFacebookSignIn, goToGoogleSignIn } = useAuthenticationContext();
+  const { goToGoogleSignIn, goToFacebookSignIn } = useAuthenticationContext();
 
   return (
     <>
