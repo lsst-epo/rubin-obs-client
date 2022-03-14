@@ -30,8 +30,8 @@ jobs:
       run: |-
         docker build \
         -t "gcr.io/edc-prod-eef0/rubin-obs-client:${{ github.ref_name }}" \
-        --build-arg NEXT_PUBLIC_API_URL=https://rubin-obs-api-int-2eici5myiq-uc.a.run.app/api \
-        --build-arg NEXT_PUBLIC_ASSETS_BASE_URL=https://rubin-obs-api-int-2eici5myiq-uc.a.run.app/assets \
+        --build-arg NEXT_PUBLIC_API_URL=https://api.rubinobs.com/api \
+        --build-arg NEXT_PUBLIC_ASSETS_BASE_URL=https://api.rubinobs.com/assets \
         .
     - name: Configure Docker Auth
       run: gcloud --quiet auth configure-docker
