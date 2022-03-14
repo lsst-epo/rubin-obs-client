@@ -41,7 +41,6 @@ export const aButtonTheme = (style) => {
       return css`
         --button-background-color: var(--red);
         --button-border-color: var(--red);
-        --button-focus-outline-color: var(--black);
         --button-color: var(--white);
       `;
 
@@ -49,7 +48,6 @@ export const aButtonTheme = (style) => {
       return css`
         --button-background-color: var(--white);
         --button-border-color: var(--black);
-        --button-focus-outline-color: var(--black);
         --button-color: var(--black);
       `;
 
@@ -65,7 +63,6 @@ export const aButtonTheme = (style) => {
       return css`
         --button-background-color: var(--turquoise85);
         --button-border-color: var(--turquoise85);
-        --button-focus-outline-color: var(--black);
         --button-color: var(--white);
       `;
   }
@@ -84,7 +81,7 @@ export const aButton = (style) => css`
   text-decoration: none;
   transition: background-color 0.2s, color 0.2s, border-color 0.2s;
 
-  ${aFocus(`outline-color: var(--button-focus-outline-color);`)}
+  ${aFocus()}
 
   &:hover {
     outline: 3px solid var(--button-border-color);
