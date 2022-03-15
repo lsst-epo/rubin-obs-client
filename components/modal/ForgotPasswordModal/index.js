@@ -95,7 +95,7 @@ export default function ForgotPasswordModal() {
               </Button>
               <Button
                 type="button"
-                styleAs="warning"
+                styleAs="secondary"
                 onClick={onCancel}
                 disabled={isSubmitting}
               >

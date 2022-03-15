@@ -10,6 +10,7 @@ import {
   respond,
   tokens,
 } from "@/styles/globalStyles";
+import { aButtonTheme } from "@/styles/mixins/appearance";
 
 const breakpointMin = tokens.BREAK_TABLET_MIN;
 const gap = "40px";
@@ -81,7 +82,7 @@ export const StyledMixedLink = styled(MixedLink)`
   margin-right: ${linkPadding};
 
   &:nth-of-type(even) {
-    background-color: ${tokens.red};
+    ${aButtonTheme("secondary")};
   }
 `;
 

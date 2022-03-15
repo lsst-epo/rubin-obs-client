@@ -44,7 +44,7 @@ export default function JoinForm({ onEmailSignup, onRoleChange, role }) {
           {t("join.as", { context: "student" })}
         </Button>
         <Button
-          styleAs={role === "teacher" ? "primary" : "tertiary"}
+          styleAs={role === "teacher" ? "educator" : "tertiary"}
           onClick={() => onRoleChange("teacher")}
           aria-controls="signUpDescription"
           aria-selected={role === "teacher"}

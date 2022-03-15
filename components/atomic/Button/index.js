@@ -15,7 +15,8 @@ export default function Button({
     <Styled.Button
       $isBlock={isBlock}
       $styleAs={styleAs}
-      data-inactive={isInactive || undefined}
+      $hasIcon={!!icon}
+      aria-disabled={isInactive || undefined}
       {...buttonProps}
     >
       {icon && (

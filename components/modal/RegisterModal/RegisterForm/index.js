@@ -97,7 +97,7 @@ export default function RegisterForm({ role, onSuccess, onCancel }) {
           <Button
             type="button"
             onClick={onCancel}
-            styleAs="warning"
+            styleAs="secondary"
             disabled={isSubmitting}
           >
             {t("form.cancel")}
