@@ -92,6 +92,7 @@ export const aButton = (style) => css`
   &[aria-disabled] {
     background-color: var(--neutral40);
     border-color: var(--neutral40);
+    pointer-events: none;
 
     &.focus-visible,
     &:hover {

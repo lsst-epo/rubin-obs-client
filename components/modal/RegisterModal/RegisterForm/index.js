@@ -6,6 +6,14 @@ import { Error, FormField, Input, Password } from "@/components/form";
 import * as Styled from "./styles";
 import AuthModal from "../../AuthModal";
 
+function getErrorSource(error) {
+  const isEmail =
+    error?.message &&
+    (error.message.toLowerCase().includes("email") ||
+      error.message.toLowerCase().includes("username"));
+  return isEmail ? "email" : "form";
+}
+
 export default function RegisterForm({ onCancel }) {
   const { t } = useTranslation();
 
@@ -16,7 +24,7 @@ export default function RegisterForm({ onCancel }) {
     formState: { isDirty, isSubmitting, errors },
   } = useForm();
 
-  const { register: registerApi, pendingRole } = useAuthenticationContext();
+  const { register: registerApi, pendingGroup } = useAuthenticationContext();
 
   const onSubmit = async (data) => {
     if (!data.email || !data.password) return;
@@ -27,14 +35,15 @@ export default function RegisterForm({ onCancel }) {
       const invalid = response.errors.find(
         (e) => e.extensions.code === "INVALID"
       );
+      const errorSource = getErrorSource(invalid);
 
-      // TOOD: There's got to be a better way to check field errors...
-      if (invalid?.message && invalid.message.toLowerCase().includes("email")) {
+      if (errorSource === "email") {
+        console.info(`settings error on email: ${invalid.message}`);
         setError("email", { type: "manual", message: invalid.message });
       } else {
         setError("form", {
           type: "manual",
-          message: response.errors.map((e) => e.message),
+          message: response.errors.map((e) => e.message).join(" "),
         });
       }
     }
@@ -45,10 +54,10 @@ export default function RegisterForm({ onCancel }) {
   return (
     <>
       <AuthModal.Title>
-        {t("register.header", { context: pendingRole })}
+        {t("register.header", { context: pendingGroup })}
       </AuthModal.Title>
       <AuthModal.Description>
-        {t("register.instructions", { context: pendingRole })}
+        {t("register.instructions", { context: pendingGroup })}
       </AuthModal.Description>
       <Styled.Form onSubmit={handleSubmit(onSubmit)}>
         {errors?.form?.message && <Error>{errors.form.message}</Error>}

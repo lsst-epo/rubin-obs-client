@@ -19,6 +19,7 @@ export default function ForgotPasswordModal() {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { isDirty, isSubmitting, isSubmitSuccessful },
   } = useForm();
 
@@ -31,7 +32,20 @@ export default function ForgotPasswordModal() {
 
     const response = await forgotPassword(data);
 
-    if (response) {
+    if (response.errors) {
+      const invalid = response.errors.find(
+        (e) => e.extensions.code === "INVALID"
+      );
+
+      if (invalid) {
+        setError("email", { type: "manual", message: invalid.message });
+      } else {
+        setError("form", {
+          type: "manual",
+          message: response.errors.map((e) => e.message),
+        });
+      }
+    } else {
       setEmail(data.email);
     }
 
@@ -50,7 +64,6 @@ export default function ForgotPasswordModal() {
     <AuthModal
       open={!!query.forgotPassword}
       onClose={onClose}
-      aria-live="polite"
       aria-label={t("reset_password.header")}
     >
       {isSubmitSuccessful ? (
