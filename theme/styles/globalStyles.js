@@ -1,6 +1,7 @@
 /* eslint-disable */
 import { createGlobalStyle } from "styled-components";
 import { fluidScaleBase, stripUnit, respondBase } from "@castiron/style-mixins";
+import { aButton } from "@/styles/mixins/appearance";
 
 export const tokens = {
   white: "#ffffff",
@@ -24,13 +25,13 @@ export const tokens = {
   turquoise60: "#078b8c",
   turquoise70: "#058b8c",
   turquoise80: "#117273",
-  turquoise85: "#12726d",
+  turquoise85: "#12726c",
   turquoise90: "#0c4a4c",
   orange05: "#FFF9F2",
   orange10: "#FFE7CC",
   orange55: "#FAB364",
   blue10: "#eef5fb",
-  red: "#ff8488",
+  red: "#cf4040",
   red20: "#f2c3c0",
   red40: "#FF8489",
   BREAK_HEADER_LAYOUT: "1625px",
@@ -173,18 +174,6 @@ export const encodeColor = (string) => {
   return `%23${str}`;
 };
 
-export const focusDefault = () => {
-  return `
-    .js-focus-visible &:focus:not(.focus-visible) {
-      outline-width: 0;
-    }
-
-    &.focus-visible {
-      outline: auto 4px;
-    }
-  `;
-};
-
 export const needsDarkColor = (hexColor) => {
   var color = hexColor.charAt(0) === "#" ? hexColor.substring(1, 7) : hexColor;
   var r = parseInt(color.substring(0, 2), 16); // hexToR
@@ -195,20 +184,6 @@ export const needsDarkColor = (hexColor) => {
 
 export const palette = (color) => {
   return tokens[color];
-};
-
-export const protoButton = () => {
-  return `
-    ${focusDefault()}
-    display: inline-block;
-    padding: 0;
-    font: inherit;
-    color: inherit;
-    cursor: pointer;
-    background: transparent;
-    border: 0;
-    appearance: none;
-  `;
 };
 
 export const protoContainer = (
@@ -272,24 +247,9 @@ const GlobalStyles = createGlobalStyle`
       ${createCSSGlobalStyles()}
   }
   .c-buttonish {
-    ${protoButton()}
-    padding: 1.188em 2.125em;
+    ${aButton()}
+    padding: 15px 2.125em;
     font-size: 16px;
-    font-weight: bold;
-    color: var(--white);
-    text-decoration: none;
-    background-color: var(--turquoise60);
-    border-radius: 0.375em;
-    transition: background-color 0.2s;
-
-    &:hover:not(:disabled),
-    &:focus-visible {
-      background-color: var(--turquoise80);
-    }
-
-    &:disabled {
-      background-color: var(--neutral40);
-    }
 
     &--block {
       display: block;
