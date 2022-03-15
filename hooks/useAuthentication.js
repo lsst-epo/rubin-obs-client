@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useGoogleLogin } from "react-google-login";
+import jwtDecode from "jwt-decode";
 import {
   authenticate,
   registerTeacher,
@@ -18,8 +19,12 @@ const SESSION_STORAGE_KEYS = [
   "jwtExpiresAt",
   "refreshToken",
   "refreshTokenExpiresAt",
-  "pendingRole",
 ];
+
+function getTokenFromStorage(key) {
+  if (typeof window === "undefined") return null;
+  return sessionStorage.getItem(key);
+}
 
 function getTokensFromStorage() {
   const tokens = {};
@@ -41,37 +46,41 @@ function unstoreTokens() {
 
 // TODO: store refresh token in cookie so token can be refreshed after browser session ends
 export default function useAuthentication() {
-  const { query } = useRouter();
+  const { query, push } = useRouter();
 
-  const [token, setToken] = useState(null);
-  const [pendingRole, setPendingRole] = useState("student");
+  const [token, setToken] = useState(getTokenFromStorage("jwt"));
+  const [user, setUser] = useState(getUserFromJwt());
+  const [pendingGroup, setPendingGroup] = useState(
+    getTokenFromStorage("pendingGroup") || "students"
+  );
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
   const { signIn: goToGoogleSignIn } = useGoogleLogin({
     clientId: GOOGLE_APP_ID,
-    onSuccess: (response) =>
-      authenticateWithGoogle({ idToken: response.tokenId }),
+    onSuccess: (response) => {
+      const ssoModalUrl = { pathname: "/", query: { sso: true } };
+      push(ssoModalUrl, undefined, {
+        shallow: true,
+      });
+      authenticateWithGoogle({ idToken: response.tokenId });
+    },
     onFailure: (error) => console.error(error),
   });
-
-  useEffect(() => {
-    if (typeof window === "undefined") return null;
-
-    const { jwt, pendingRole } = getTokensFromStorage();
-
-    if (pendingRole) {
-      setPendingRole();
-    }
-    if (jwt) {
-      setToken(jwt);
-    }
-  }, []);
 
   useEffect(() => {
     // TODO: cancel promise if component unmounts first
     (async () => await maybeRefreshToken())();
   }, []); /* eslint-disable-line react-hooks/exhaustive-deps */
+
+  useEffect(() => {
+    // Store pendingGroup to persist value during SSO redirect
+    const storedGroup = sessionStorage.getItem("pendingGroup");
+
+    if (storedGroup !== pendingGroup) {
+      sessionStorage.setItem("pendingGroup", pendingGroup);
+    }
+  }, [pendingGroup]);
 
   useEffect(() => {
     if (!query.code || !query.facebook) return;
@@ -81,24 +90,28 @@ export default function useAuthentication() {
 
   function clearState() {
     setToken(null);
+    setUser(null);
     setLoading(false);
     setError(false);
     unstoreTokens();
   }
 
   function handleSuccess(authData) {
-    const { jwt, jwtExpiresAt, refreshToken, refreshTokenExpiresAt } = authData;
-
-    setToken(jwt);
     setLoading(false);
     setError(false);
-    storeTokens({
-      jwt,
-      jwtExpiresAt,
-      refreshToken,
-      refreshTokenExpiresAt,
-      pendingRole,
-    });
+
+    const { jwt, jwtExpiresAt, refreshToken, refreshTokenExpiresAt } = authData;
+
+    if (jwt) {
+      setToken(jwt);
+      setUserFromJwt(jwt);
+      storeTokens({
+        jwt,
+        jwtExpiresAt,
+        refreshToken,
+        refreshTokenExpiresAt,
+      });
+    }
 
     return authData;
   }
@@ -107,6 +120,24 @@ export default function useAuthentication() {
     setError(true);
     setLoading(false);
     return data;
+  }
+
+  function getUserFromJwt(jwt = getTokenFromStorage("jwt")) {
+    if (!jwt) return;
+
+    const { email, groups, fullName } = jwtDecode(jwt);
+    const group = groups?.length ? groups[0].toLowerCase() : null;
+    return {
+      email,
+      fullName,
+      group,
+    };
+  }
+
+  function setUserFromJwt(jwt) {
+    const user = getUserFromJwt(jwt);
+
+    setUser(user);
   }
 
   /**
@@ -133,6 +164,7 @@ export default function useAuthentication() {
     // if current JWT hasn't expired, set in state to keep using and return current refresh token
     if (Date.now() < jwtExpiresAt) {
       setToken(jwt);
+      setUserFromJwt(jwt);
       return refreshToken;
     }
 
@@ -168,7 +200,7 @@ export default function useAuthentication() {
       name.length > 1 ? fullName.slice(firstName.length + 1) : "";
 
     const registerMethod =
-      pendingRole === "teacher" ? registerTeacher : registerStudent;
+      pendingGroup === "teachers" ? registerTeacher : registerStudent;
 
     const data = await registerMethod({
       email,
@@ -179,7 +211,7 @@ export default function useAuthentication() {
     });
 
     const returnRole =
-      pendingRole === "teacher" ? "registerTeachers" : "registerStudents";
+      pendingGroup === "teachers" ? "registerTeachers" : "registerStudents";
 
     return data?.[returnRole]
       ? handleSuccess(data[returnRole])
@@ -205,11 +237,11 @@ export default function useAuthentication() {
 
     const data = await authenticateGoogle({
       idToken,
-      role: pendingRole,
+      pendingGroup,
     });
 
     const returnRole =
-      pendingRole === "teacher"
+      pendingGroup === "teachers"
         ? "googleSignInTeachers"
         : "googleSignInStudents";
 
@@ -232,7 +264,6 @@ export default function useAuthentication() {
     const data = await getFacebookOauthUrl();
 
     if (data?.facebookOauthUrl) {
-      setLoading(false);
       window.open(data.facebookOauthUrl, "_self");
     } else {
       handleError(data);
@@ -242,10 +273,10 @@ export default function useAuthentication() {
   async function authenticateWithFacebook({ code }) {
     setLoading(true);
 
-    const data = await authenticateFacebook({ code, role: pendingRole });
+    const data = await authenticateFacebook({ code, pendingGroup });
 
     const returnRole =
-      pendingRole === "teacher"
+      pendingGroup === "teachers"
         ? "facebookSignInTeachers"
         : "facebookSignInStudents";
 
@@ -256,10 +287,11 @@ export default function useAuthentication() {
 
   return {
     isAuthenticated: !!token,
-    pendingRole,
+    user,
+    pendingGroup,
     loading,
     error,
-    setPendingRole,
+    setPendingGroup,
     maybeRefreshToken,
     signIn,
     signOut,

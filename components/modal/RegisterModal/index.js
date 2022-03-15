@@ -13,8 +13,7 @@ export default function RegisterModal() {
 
   const { openModal, closeModal } = useAuthModal();
 
-  const { isAuthenticated, loading, error, pendingRole, setPendingRole } =
-    useAuthenticationContext();
+  const { isAuthenticated, pendingGroup, user } = useAuthenticationContext();
 
   const { t } = useTranslation();
 
@@ -27,29 +26,25 @@ export default function RegisterModal() {
   };
 
   const onEmailSignup = () => {
-    openModal("register", { role: pendingRole });
+    openModal("register", { group: pendingGroup });
   };
 
   return (
     <AuthModal
       open={!!query.register}
       onClose={onClose}
-      aria-label="Sign Up"
-      image={isAuthenticated || loading ? undefined : pendingRole}
+      aria-label={t("register.header")}
+      image={isAuthenticated ? undefined : pendingGroup}
     >
-      {loading ? (
-        <>
-          <AuthModal.Title>Registering...</AuthModal.Title>
-        </>
-      ) : isAuthenticated ? (
+      {isAuthenticated ? (
         <>
           <AuthModal.Title>
-            {t("register.success", { context: pendingRole })}
+            {t("register.success", { context: user?.group || pendingGroup })}
           </AuthModal.Title>
           <AuthModal.Description>
             <Trans
               i18nKey="register.success_message"
-              values={{ context: pendingRole }}
+              values={{ context: user?.group || pendingGroup }}
               components={[<strong key="bold"></strong>]}
             />
           </AuthModal.Description>
@@ -57,22 +52,10 @@ export default function RegisterModal() {
             <Button onClick={onClose}>{t("register.confirm_button")}</Button>
           </Styled.FormButtons>
         </>
-      ) : error ? (
-        <>
-          <AuthModal.Title>Error!</AuthModal.Title>
-          <AuthModal.Description>
-            There was an error signing you in with{" "}
-            {query.scope ? "Google" : "Facebook"}.
-          </AuthModal.Description>
-        </>
-      ) : query.role === "teacher" || query.role === "student" ? (
+      ) : query.group === "teachers" || query.group === "students" ? (
         <RegisterForm onCancel={onCancel} />
       ) : (
-        <JoinForm
-          onEmailSignup={onEmailSignup}
-          onRoleChange={setPendingRole}
-          role={pendingRole}
-        />
+        <JoinForm onEmailSignup={onEmailSignup} />
       )}
     </AuthModal>
   );

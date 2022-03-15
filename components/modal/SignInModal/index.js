@@ -24,8 +24,13 @@ export default function SignInModal() {
     formState: { errors, isDirty, isSubmitting },
   } = useForm();
 
-  const { signIn, goToFacebookSignIn, goToGoogleSignIn } =
-    useAuthenticationContext();
+  const {
+    isAuthenticated,
+    user,
+    signIn,
+    goToFacebookSignIn,
+    goToGoogleSignIn,
+  } = useAuthenticationContext();
 
   const onSubmit = async (data) => {
     if (!data.email || !data.password) return;
@@ -42,7 +47,7 @@ export default function SignInModal() {
       } else {
         setError("form", {
           type: "manual",
-          message: response.errors.map((e) => e.message),
+          message: response.errors.map((e) => e.message).join(" "),
         });
       }
     } else {
@@ -58,53 +63,77 @@ export default function SignInModal() {
   };
 
   return (
-    <AuthModal open={!!query.signIn} onClose={onClose} aria-label="Sign In">
-      <AuthModal.Title>{t("sign_in.header")}</AuthModal.Title>
-      <Styled.SSOButtons>
-        <SSOButton icon="google" onClick={goToGoogleSignIn}>
-          {t("sign_in.continue_with_google")}
-        </SSOButton>
-        <SSOButton icon="facebook" onClick={goToFacebookSignIn}>
-          {t("sign_in.continue_with_facebook")}
-        </SSOButton>
-      </Styled.SSOButtons>
-      <Styled.Form onSubmit={handleSubmit(onSubmit)}>
-        {errors?.form?.message && <Error>{errors.form.message}</Error>}
-        <FormField
-          htmlFor="signInEmail"
-          label="form.email"
-          error={errors?.email?.message}
-        >
-          <Input
-            id="signInEmail"
-            type="email"
-            autoComplete="email"
-            required
-            {...register("email")}
-          />
-        </FormField>
-        <FormField htmlFor="signInPassword" label="form.password">
-          <Password
-            id="signInPassword"
-            required
-            autoComplete="current-password"
-            {...register("password")}
-          />
-        </FormField>
-        <Styled.AccountLinks>
-          <Link href={getModalUrl("forgotPassword")} shallow passHref>
-            <BaseLink>{t("sign_in.forgot_password_link")}</BaseLink>
-          </Link>
-          <Link href={getModalUrl("register")} shallow passHref>
-            <BaseLink>{t("sign_in.create_account_link")}</BaseLink>
-          </Link>
-        </Styled.AccountLinks>
-        <Styled.FormButtons>
-          <Button type="submit" isInactive={!isDirty} disabled={isSubmitting}>
-            {isSubmitting ? t("sign_in.submit_pending") : t("sign_in.submit")}
-          </Button>
-        </Styled.FormButtons>
-      </Styled.Form>
+    <AuthModal
+      open={!!query.signIn}
+      onClose={onClose}
+      aria-label={t("sign_in.header")}
+    >
+      {isAuthenticated ? ( // included only in case a user inadvertantly reopens the modal
+        <>
+          <AuthModal.Title>{t("sign_in.success")}</AuthModal.Title>
+          <AuthModal.Description>
+            {t("sign_in.success_message", { username: user?.email })}
+          </AuthModal.Description>
+          <Styled.FormButtons>
+            <Button onClick={onClose}>{t("register.confirm_button")}</Button>
+          </Styled.FormButtons>
+        </>
+      ) : (
+        <>
+          <AuthModal.Title>{t("sign_in.header")}</AuthModal.Title>
+          <Styled.SSOButtons>
+            <SSOButton service="google" onClick={goToGoogleSignIn}>
+              {t("sign_in.continue_with_google")}
+            </SSOButton>
+            <SSOButton service="facebook" onClick={goToFacebookSignIn}>
+              {t("sign_in.continue_with_facebook")}
+            </SSOButton>
+          </Styled.SSOButtons>
+          <Styled.Form onSubmit={handleSubmit(onSubmit)}>
+            {errors?.form?.message && <Error>{errors.form.message}</Error>}
+            <FormField
+              htmlFor="signInEmail"
+              label="form.email"
+              error={errors?.email?.message}
+            >
+              <Input
+                id="signInEmail"
+                type="email"
+                autoComplete="email"
+                required
+                {...register("email")}
+              />
+            </FormField>
+            <FormField htmlFor="signInPassword" label="form.password">
+              <Password
+                id="signInPassword"
+                required
+                autoComplete="current-password"
+                {...register("password")}
+              />
+            </FormField>
+            <Styled.AccountLinks>
+              <Link href={getModalUrl("forgotPassword")} shallow passHref>
+                <BaseLink>{t("sign_in.forgot_password_link")}</BaseLink>
+              </Link>
+              <Link href={getModalUrl("register")} shallow passHref>
+                <BaseLink>{t("sign_in.create_account_link")}</BaseLink>
+              </Link>
+            </Styled.AccountLinks>
+            <Styled.FormButtons>
+              <Button
+                type="submit"
+                isInactive={!isDirty}
+                disabled={isSubmitting}
+              >
+                {isSubmitting
+                  ? t("sign_in.submit_pending")
+                  : t("sign_in.submit")}
+              </Button>
+            </Styled.FormButtons>
+          </Styled.Form>
+        </>
+      )}
     </AuthModal>
   );
 }

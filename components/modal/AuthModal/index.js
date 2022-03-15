@@ -3,21 +3,15 @@ import Image from "next/image";
 import IconComposer from "@/components/svg/IconComposer";
 import * as Styled from "./styles";
 
-export default function AuthModal({
-  children,
-  image,
-  open = false,
-  onClose,
-  ...modalProps
-}) {
+export default function AuthModal({ children, image, open = false, onClose }) {
   const imageProps =
-    image === "student"
+    image === "students"
       ? {
           src: "/images/sign_up_student.png",
           width: 231.21,
           height: 247.22,
         }
-      : image === "teacher"
+      : image === "teachers"
       ? {
           src: "/images/sign_up_teacher.png",
           width: 201,
@@ -49,7 +43,7 @@ AuthModal.Description = Styled.Description;
 
 AuthModal.propTypes = {
   /** Image shown to the left of the modal */
-  image: PropTypes.oneOf(["student", "teacher"]),
+  image: PropTypes.oneOf(["students", "teachers"]),
   open: PropTypes.bool,
   onClose: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
