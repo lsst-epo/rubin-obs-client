@@ -6,45 +6,56 @@ import { useAuthenticationContext } from "@/contexts/Authentication";
 import AuthModal from "../../AuthModal";
 import * as Styled from "./styles";
 
-export default function JoinForm({ onEmailSignup, onRoleChange, role }) {
+export default function JoinForm({ onEmailSignup }) {
   const { t } = useTranslation();
   const { getModalUrl } = useAuthModal();
-  const { goToGoogleSignIn, goToFacebookSignIn } = useAuthenticationContext();
+  const {
+    pendingGroup,
+    setPendingGroup,
+    goToGoogleSignIn,
+    goToFacebookSignIn,
+  } = useAuthenticationContext();
 
   return (
     <>
       <Styled.JoinAsButtons>
         <Button
-          styleAs={role === "student" ? "primary" : "tertiary"}
-          onClick={() => onRoleChange("student")}
+          styleAs={pendingGroup === "students" ? "primary" : "tertiary"}
+          onClick={() => setPendingGroup("students")}
           aria-controls="signUpDescription"
-          aria-selected={role === "student"}
+          aria-selected={pendingGroup === "students"}
         >
-          {t("join.as", { context: "student" })}
+          {t("join.as", { context: "students" })}
         </Button>
         <Button
-          styleAs={role === "teacher" ? "educator" : "tertiary"}
-          onClick={() => onRoleChange("teacher")}
+          styleAs={pendingGroup === "teachers" ? "educator" : "tertiary"}
+          onClick={() => setPendingGroup("teachers")}
           aria-controls="signUpDescription"
-          aria-selected={role === "teacher"}
+          aria-selected={pendingGroup === "teachers"}
         >
-          {t("join.as", { context: "teacher" })}
+          {t("join.as", { context: "teachers" })}
         </Button>
       </Styled.JoinAsButtons>
       <div id="signUpDescription">
-        <AuthModal.Title>{t("join.header", { context: role })}</AuthModal.Title>
+        <AuthModal.Title>
+          {t("join.header", { context: pendingGroup })}
+        </AuthModal.Title>
         <AuthModal.Description>
-          {t("join.description", { context: role })}
+          {t("join.description", { context: pendingGroup })}
         </AuthModal.Description>
       </div>
       <Styled.SSOButtons>
-        <SSOButton icon="google" type="button" onClick={goToGoogleSignIn}>
+        <SSOButton service="google" type="button" onClick={goToGoogleSignIn}>
           {t("join.continue_with_google")}
         </SSOButton>
-        <SSOButton icon="facebook" type="button" onClick={goToFacebookSignIn}>
+        <SSOButton
+          service="facebook"
+          type="button"
+          onClick={goToFacebookSignIn}
+        >
           {t("join.continue_with_facebook")}
         </SSOButton>
-        <SSOButton icon="email" type="button" onClick={onEmailSignup}>
+        <SSOButton service="email" type="button" onClick={onEmailSignup}>
           {t("join.sign_up_with_email")}
         </SSOButton>
       </Styled.SSOButtons>

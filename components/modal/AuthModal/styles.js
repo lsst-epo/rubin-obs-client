@@ -6,6 +6,7 @@ import {
   zStack,
 } from "@/styles/globalStyles";
 import { Dialog as BaseDialog } from "@headlessui/react";
+import { FormButtons as BaseFormButtons } from "@/components/form";
 
 export const Overlay = styled(BaseDialog.Overlay)`
   background-color: rgba(0, 0, 0, 0.7);
@@ -32,7 +33,12 @@ export const Dialog = styled(BaseDialog)`
 export const Title = styled(BaseDialog.Title)``;
 
 export const Description = styled(BaseDialog.Description)`
+  font-size: 0.909em;
   line-height: 1.5;
+
+  &:not(:first-child) {
+    margin-block-start: 1.4em;
+  }
 `;
 
 export const Inner = styled.div`
@@ -68,10 +74,9 @@ export const ImageWrapper = styled.div`
   display: flex;
   align-items: start;
   width: ${fluidScale("277px", "200px")};
-  transition: background 1s ease-in, padding 1s ease-in;
 
   ${({ $image }) =>
-    $image === "teacher"
+    $image === "teachers"
       ? css`
           background: var(--orange10);
           justify-content: center;
@@ -87,4 +92,8 @@ export const ImageWrapper = styled.div`
         `};
 
   ${respond(`display: none;`, BREAK_PHABLET)}
+`;
+
+export const FormButtons = styled(BaseFormButtons)`
+  margin-block-start: 44px;
 `;

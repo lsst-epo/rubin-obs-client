@@ -8,6 +8,7 @@ import internalLinkShape from "@/shapes/link";
 import { useGlobalData, useNavHider } from "@/lib/utils";
 import SignInModal from "@/components/modal/SignInModal";
 import RegisterModal from "@/components/modal/RegisterModal";
+import SSOModal from "@/components/modal/SSOModal";
 import ForgotPasswordModal from "@/components/modal/ForgotPasswordModal";
 import { tokens } from "@/styles/globalStyles";
 import Navigation from "./Navigation";
@@ -81,6 +82,7 @@ export default function Header({ navItems }) {
       />
       <SignInModal />
       <RegisterModal />
+      <SSOModal />
       <ForgotPasswordModal />
     </header>
   );
