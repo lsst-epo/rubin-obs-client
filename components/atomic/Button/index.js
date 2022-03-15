@@ -16,7 +16,7 @@ export default function Button({
       $isBlock={isBlock}
       $styleAs={styleAs}
       $hasIcon={!!icon}
-      data-disabled={isInactive || undefined}
+      aria-disabled={isInactive || undefined}
       {...buttonProps}
     >
       {icon && (

@@ -51,7 +51,7 @@ export const aButtonTheme = (style) => {
         --button-color: var(--black);
       `;
 
-    case "teacher":
+    case "educator":
       return css`
         --button-background-color: var(--orange55);
         --button-border-color: var(--orange55);
@@ -89,7 +89,7 @@ export const aButton = (style) => css`
   }
 
   &:disabled,
-  &[data-disabled] {
+  &[aria-disabled] {
     background-color: var(--neutral40);
     border-color: var(--neutral40);
 
