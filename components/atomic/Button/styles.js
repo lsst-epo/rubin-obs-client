@@ -18,12 +18,13 @@ export const Button = styled.button`
     $hasIcon &&
     css`
       display: inline-flex;
-      padding: 15px;
+      padding-inline-start: 15px;
     `}
 `;
 
 export const ButtonText = styled.span`
   flex: 1 1 auto;
+  text-align: center;
 
   svg + & {
     padding-inline-start: 10px;

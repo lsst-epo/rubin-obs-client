@@ -10,6 +10,7 @@ import GridBlock from "./GridBlock";
 import Schedule from "./Schedule";
 import SlideBlock from "./SlideBlock";
 import Video from "./Video";
+import DownloadList from "./DownloadList";
 
 export {
   Callout,
@@ -24,4 +25,5 @@ export {
   Schedule,
   SlideBlock,
   Video,
+  DownloadList,
 };

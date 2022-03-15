@@ -9,6 +9,7 @@ export default function Button({
   isBlock,
   styleAs,
   isInactive,
+  className,
   ...buttonProps
 }) {
   return (
@@ -17,6 +18,7 @@ export default function Button({
       $styleAs={styleAs}
       $hasIcon={!!icon}
       aria-disabled={isInactive || undefined}
+      className={className}
       {...buttonProps}
     >
       {icon && (
