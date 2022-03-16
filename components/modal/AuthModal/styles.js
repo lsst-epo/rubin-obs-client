@@ -76,7 +76,7 @@ export const ImageWrapper = styled.div`
   width: ${fluidScale("277px", "200px")};
 
   ${({ $image }) =>
-    $image === "teachers"
+    $image === "educators"
       ? css`
           background: var(--orange10);
           justify-content: center;

@@ -4,7 +4,7 @@ import { useGoogleLogin } from "react-google-login";
 import jwtDecode from "jwt-decode";
 import {
   authenticate,
-  registerTeacher,
+  registerEducator,
   registerStudent,
   forgottenPassword,
   refreshJWT,
@@ -141,7 +141,7 @@ export default function useAuthentication() {
   }
 
   /**
-   * Returned from context so it can be run before making API requests
+   * Returned from hook so it can be run before making API requests
    * for protected data. This way, authenticated users whose JWT has expired
    * can get a refreshed token before fetching data.
    */
@@ -200,7 +200,7 @@ export default function useAuthentication() {
       name.length > 1 ? fullName.slice(firstName.length + 1) : "";
 
     const registerMethod =
-      pendingGroup === "teachers" ? registerTeacher : registerStudent;
+      pendingGroup === "educators" ? registerEducator : registerStudent;
 
     const data = await registerMethod({
       email,
@@ -211,7 +211,7 @@ export default function useAuthentication() {
     });
 
     const returnRole =
-      pendingGroup === "teachers" ? "registerTeachers" : "registerStudents";
+      pendingGroup === "educators" ? "registerEducators" : "registerStudents";
 
     return data?.[returnRole]
       ? handleSuccess(data[returnRole])
@@ -241,8 +241,8 @@ export default function useAuthentication() {
     });
 
     const returnRole =
-      pendingGroup === "teachers"
-        ? "googleSignInTeachers"
+      pendingGroup === "educators"
+        ? "googleSignInEducators"
         : "googleSignInStudents";
 
     return data?.[returnRole]
@@ -276,8 +276,8 @@ export default function useAuthentication() {
     const data = await authenticateFacebook({ code, pendingGroup });
 
     const returnRole =
-      pendingGroup === "teachers"
-        ? "facebookSignInTeachers"
+      pendingGroup === "educators"
+        ? "facebookSignInEducators"
         : "facebookSignInStudents";
 
     return data?.[returnRole]

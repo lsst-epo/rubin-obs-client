@@ -52,7 +52,7 @@ export default function RegisterModal() {
             <Button onClick={onClose}>{t("register.confirm_button")}</Button>
           </Styled.FormButtons>
         </>
-      ) : query.group === "teachers" || query.group === "students" ? (
+      ) : query.group === "educators" || query.group === "students" ? (
         <RegisterForm onCancel={onCancel} />
       ) : (
         <JoinForm onEmailSignup={onEmailSignup} />
