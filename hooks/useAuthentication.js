@@ -177,6 +177,7 @@ export default function useAuthentication() {
 
   async function signIn({ email, password }) {
     setLoading(true);
+    setError(false);
 
     const data = await authenticate({ email, password, token });
 
@@ -193,6 +194,7 @@ export default function useAuthentication() {
     if (!fullName) return;
 
     setLoading(true);
+    setError(false);
 
     const name = fullName.split(" ");
     const firstName = name[0];
@@ -220,6 +222,7 @@ export default function useAuthentication() {
 
   async function forgotPassword({ email }) {
     setLoading(true);
+    setError(false);
 
     const data = await forgottenPassword({ email, token });
 
@@ -234,6 +237,7 @@ export default function useAuthentication() {
    */
   async function authenticateWithGoogle({ idToken }) {
     setLoading(true);
+    setError(false);
 
     const data = await authenticateGoogle({
       idToken,
@@ -260,6 +264,7 @@ export default function useAuthentication() {
    */
   async function goToFacebookSignIn() {
     setLoading(true);
+    setError(false);
 
     const data = await getFacebookOauthUrl();
 
@@ -272,6 +277,7 @@ export default function useAuthentication() {
 
   async function authenticateWithFacebook({ code }) {
     setLoading(true);
+    setError(false);
 
     const data = await authenticateFacebook({ code, pendingGroup });
 
