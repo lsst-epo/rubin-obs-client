@@ -11,7 +11,7 @@ export default function AuthModal({ children, image, open = false, onClose }) {
           width: 231.21,
           height: 247.22,
         }
-      : image === "teachers"
+      : image === "educators"
       ? {
           src: "/images/sign_up_teacher.png",
           width: 201,
@@ -43,7 +43,7 @@ AuthModal.Description = Styled.Description;
 
 AuthModal.propTypes = {
   /** Image shown to the left of the modal */
-  image: PropTypes.oneOf(["students", "teachers"]),
+  image: PropTypes.oneOf(["students", "educators"]),
   open: PropTypes.bool,
   onClose: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,

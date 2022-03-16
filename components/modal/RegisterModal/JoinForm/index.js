@@ -28,12 +28,12 @@ export default function JoinForm({ onEmailSignup }) {
           {t("join.as", { context: "students" })}
         </Button>
         <Button
-          styleAs={pendingGroup === "teachers" ? "educator" : "tertiary"}
-          onClick={() => setPendingGroup("teachers")}
+          styleAs={pendingGroup === "educators" ? "educator" : "tertiary"}
+          onClick={() => setPendingGroup("educators")}
           aria-controls="signUpDescription"
-          aria-selected={pendingGroup === "teachers"}
+          aria-selected={pendingGroup === "educators"}
         >
-          {t("join.as", { context: "teachers" })}
+          {t("join.as", { context: "educators" })}
         </Button>
       </Styled.JoinAsButtons>
       <div id="signUpDescription">
