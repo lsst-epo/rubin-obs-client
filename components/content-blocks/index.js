@@ -8,6 +8,7 @@ import Share from "./ShareBlock";
 import AccordionGroup from "./AccordionGroup";
 import GridBlock from "./GridBlock";
 import Schedule from "./Schedule";
+import SimpleTable from "./SimpleTable";
 import SlideBlock from "./SlideBlock";
 import Video from "./Video";
 
@@ -22,6 +23,7 @@ export {
   AccordionGroup,
   GridBlock,
   Schedule,
+  SimpleTable,
   SlideBlock,
   Video,
 };
