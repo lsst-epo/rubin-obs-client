@@ -18,6 +18,7 @@ export const tokens = {
   neutral90: "#2b2e34",
   black: "#000000",
   turquoise05: "#EDFFFE",
+  turqouise07: "#EDFFFE",
   turquoise10: "#D9F7F6",
   turquoise20: "#B2F2EF",
   turquoise50: "#00bebf",
@@ -29,12 +30,15 @@ export const tokens = {
   turquoise90: "#0c4a4c",
   orange05: "#FFF9F2",
   orange10: "#FFE7CC",
+  orange20: "#FFE7CC",
   orange55: "#FAB364",
+  orange60: "#FAB364",
   blue10: "#eef5fb",
   red: "#cf4040",
   red20: "#f2c3c0",
   red40: "#FF8489",
   BREAK_HEADER_LAYOUT: "1625px",
+  BREAK_HEADER_LAYOUT: "1500px",
   BREAK_DESKTOP: "1280px",
   BREAK_DESKTOP_SMALL: "1130px",
   BREAK_LARGE_TABLET: "850px",
@@ -254,6 +258,11 @@ const GlobalStyles = createGlobalStyle`
     &--block {
       display: block;
       text-align: center;
+    }
+
+    &--educators {
+      background-color: var(--orange60);
+      color: #333333;
     }
   }
 `;

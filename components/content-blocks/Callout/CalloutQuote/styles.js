@@ -20,7 +20,8 @@ export const Inner = styled.div`
   // Accent color is always across the first row
   &:before {
     content: "";
-    background-color: #edfffe;
+    background-color: ${({ $colorScheme }) =>
+      $colorScheme === "educator" ? tokens.orange20 : tokens.turqouise07};
     grid-row: 1;
     grid-column: 1 / -1;
   }
@@ -93,6 +94,8 @@ export const QuoteImageWrapper = styled.figure`
   position: relative;
   align-self: end;
   margin-inline-start: ${fluidScale("69px", "0px")};
+  margin-block-start: ${({ $colorScheme }) =>
+    $colorScheme === "educator" ? "15px" : "0"};
 
   ${tablet(`margin-inline-start: -30px`)}
 
