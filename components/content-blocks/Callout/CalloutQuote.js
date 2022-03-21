@@ -6,18 +6,21 @@ import Container from "@/components/layout/Container";
 import * as Styled from "./CalloutQuote/styles";
 import StudentsSvg from "./CalloutQuote/StudentsSvg";
 import StudentsMobileSvg from "./CalloutQuote/StudentsMobileSvg";
-// import EducatorsSvg from "./CalloutQuote/EducatorsSvg";
-// import EducatorsMobileSvg from "./CalloutQuote/EducatorsMobileSvg";
+import EducatorsSvg from "./CalloutQuote/EducatorsSvg";
+import EducatorsMobileSvg from "./CalloutQuote/EducatorsMobileSvg";
+import classNames from "classnames";
 
 export default function CalloutQuote({ callout }) {
-  const { header, text, links, quote, attribution, imageQuote } = callout;
+  const { header, text, links, quote, attribution, imageQuote, colorScheme } =
+    callout;
   const image = imageQuote?.[0];
-  const Svg = StudentsSvg;
-  const SvgMobile = StudentsMobileSvg;
+  const Svg = colorScheme === "educator" ? EducatorsSvg : StudentsSvg;
+  const SvgMobile =
+    colorScheme === "educator" ? EducatorsMobileSvg : StudentsMobileSvg;
 
   return (
     <Container bgColor="white" width="regular">
-      <Styled.Inner>
+      <Styled.Inner $colorScheme={colorScheme}>
         <Styled.Text>
           <h2>{header}</h2>
           {text && (
@@ -32,7 +35,9 @@ export default function CalloutQuote({ callout }) {
                   <MixedLink
                     {...link.mixedLink}
                     key={index}
-                    className="c-buttonish"
+                    className={classNames("c-buttonish", {
+                      "c-buttonish--educators": colorScheme === "educator",
+                    })}
                   />
                 ))}
               </Styled.Buttons>
@@ -47,7 +52,7 @@ export default function CalloutQuote({ callout }) {
             )}
           </Styled.Quote>
         )}
-        <Styled.QuoteImageWrapper>
+        <Styled.QuoteImageWrapper $colorScheme={colorScheme}>
           <Styled.QuoteSvgDesktop as={Svg} image={image} />
           <Styled.QuoteSvgMobile as={SvgMobile} image={image} />
         </Styled.QuoteImageWrapper>
