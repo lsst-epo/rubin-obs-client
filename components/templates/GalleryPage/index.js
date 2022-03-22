@@ -71,7 +71,7 @@ export default function GalleryPage({
     customBreadcrumbs.push({
       id: typeId,
       title: typeTitlePlural,
-      uri: `gallery/gallery-search?filter=${typeId}`,
+      uri: `gallery?filter=${typeId}`,
     });
   }
 
