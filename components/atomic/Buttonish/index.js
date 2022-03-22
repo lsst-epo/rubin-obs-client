@@ -3,17 +3,17 @@ import Link from "next/link";
 import { isInternalUrl } from "@/helpers";
 import Button from "../Button";
 
-export default function Buttonish({ isBlock = false, text, url }) {
+export default function Buttonish({ text, url, ...props }) {
   if (!isInternalUrl(url)) {
     return (
-      <Button as="a" href={url} $isBlock={isBlock}>
+      <Button as="a" href={url} {...props}>
         {text}
       </Button>
     );
   } else if (url) {
     return (
       <Link href={url} passHref>
-        <Button as="a" $isBlock={isBlock}>
+        <Button as="a" {...props}>
           {text}
         </Button>
       </Link>
@@ -26,5 +26,4 @@ export default function Buttonish({ isBlock = false, text, url }) {
 Buttonish.propTypes = {
   url: PropTypes.string,
   text: PropTypes.string.isRequired,
-  isBlock: PropTypes.bool,
 };

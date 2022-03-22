@@ -27,6 +27,8 @@ import Twitter from "./Twitter";
 import User from "./User";
 import Video from "./Video";
 import YouTube from "./YouTube";
+import Pdf from "./Pdf";
+import Word from "./Word";
 
 export default {
   Calendar,
@@ -58,4 +60,6 @@ export default {
   User,
   Video,
   YouTube,
+  Pdf,
+  Word,
 };
