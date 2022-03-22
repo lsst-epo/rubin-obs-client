@@ -1,7 +1,7 @@
 /* eslint-disable */
 import { createGlobalStyle } from "styled-components";
 import { fluidScaleBase, stripUnit, respondBase } from "@castiron/style-mixins";
-import { aButton } from "@/styles/mixins/appearance";
+import { aButton, aButtonTheme } from "@/styles/mixins/appearance";
 
 export const tokens = {
   white: "#ffffff",
@@ -29,10 +29,8 @@ export const tokens = {
   turquoise85: "#12726c",
   turquoise90: "#0c4a4c",
   orange05: "#FFF9F2",
-  orange10: "#FFE7CC",
   orange20: "#FFE7CC",
   orange55: "#FAB364",
-  orange60: "#FAB364",
   blue10: "#eef5fb",
   red: "#cf4040",
   red20: "#f2c3c0",
@@ -82,7 +80,7 @@ export const neutral60 = tokens.neutral60;
 export const neutral80 = tokens.neutral80;
 export const neutral90 = tokens.neutral90;
 export const black = tokens.black;
-export const orange10 = tokens.orange10;
+export const orange20 = tokens.orange20;
 export const orange55 = tokens.orange55;
 export const turquoise10 = tokens.turquoise10;
 export const turquoise20 = tokens.turquoise20;
@@ -251,18 +249,13 @@ const GlobalStyles = createGlobalStyle`
       ${createCSSGlobalStyles()}
   }
   .c-buttonish {
-    ${aButton()}
+    ${aButton}
     padding: 15px 2.125em;
     font-size: 16px;
 
     &--block {
       display: block;
       text-align: center;
-    }
-
-    &--educators {
-      background-color: var(--orange60);
-      color: #333333;
     }
   }
 `;

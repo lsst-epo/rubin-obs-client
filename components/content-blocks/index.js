@@ -11,6 +11,7 @@ import Schedule from "./Schedule";
 import SimpleTable from "./SimpleTable";
 import SlideBlock from "./SlideBlock";
 import Video from "./Video";
+import DownloadList from "./DownloadList";
 
 export {
   Callout,
@@ -26,4 +27,5 @@ export {
   SimpleTable,
   SlideBlock,
   Video,
+  DownloadList,
 };

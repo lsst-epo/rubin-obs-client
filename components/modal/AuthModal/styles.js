@@ -78,7 +78,7 @@ export const ImageWrapper = styled.div`
   ${({ $image }) =>
     $image === "educators"
       ? css`
-          background: var(--orange10);
+          background: var(--orange20);
           justify-content: center;
           padding-block-start: 134px;
           padding-inline-start: 20px;

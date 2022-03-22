@@ -9,6 +9,7 @@ export default function Button({
   isBlock,
   styleAs,
   isInactive,
+  className,
   ...buttonProps
 }) {
   return (
@@ -17,6 +18,7 @@ export default function Button({
       $styleAs={styleAs}
       $hasIcon={!!icon}
       aria-disabled={isInactive || undefined}
+      className={className}
       {...buttonProps}
     >
       {icon && (
@@ -38,7 +40,7 @@ Button.prototypes = {
   icon: PropTypes.oneOf(["google", "facebook"]),
   iconSize: PropTypes.number,
   isBlock: PropTypes.bool,
-  styleAs: PropTypes.oneOf(["primary", "secondary", "tertiary"]),
+  styleAs: PropTypes.oneOf(["primary", "secondary", "tertiary", "educator"]),
   /** This is a disabled style without disabling the button.
    * Good for a11y - button is visible even if form isn't complete.
    */
