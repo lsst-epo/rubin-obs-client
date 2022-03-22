@@ -234,6 +234,9 @@
     },
     "account": {
       "header": "Account"
+    },
+    "glossary": {
+      "back_button": "Go back to Glossary"
     }
   }
 }

@@ -4,12 +4,14 @@ import { getAllEntries, getEntrySectionByUri } from "@/api/entries";
 import { getEntryDataByUri } from "@/api/entry";
 import { getBreadcrumbs } from "@/api/pages";
 import { getGalleryItemDataByUri } from "@/lib/api/gallery-items";
+import { getGlossaryTermDataByUri } from "@/lib/api/glossary-terms";
 import { getSlideshowDataByUri } from "@/api/slideshows";
 import { getSiteString } from "@/lib/utils";
 import { GlobalDataProvider } from "@/contexts/GlobalData";
 import PageTemplate from "@/templates/Page";
 import EventPageTemplate from "@/templates/EventPage";
 import GalleryPageTemplate from "@/templates/GalleryPage";
+import GlossaryPageTemplate from "@/templates/GlossaryPage";
 import HomePageTemplate from "@/templates/HomePage";
 import NewsPageTemplate from "@/templates/NewsPage";
 import SearchPageTemplate from "@/templates/SearchPage";
@@ -31,6 +33,7 @@ export default function Page({ section, globalData, ...entryProps }) {
   const sectionMap = {
     events: EventPageTemplate,
     galleryItems: GalleryPageTemplate,
+    glossaryTerms: GlossaryPageTemplate,
     homepage: HomePageTemplate,
     news: NewsPageTemplate,
     searchResults: SearchPageTemplate,
@@ -51,6 +54,7 @@ async function getEntryData(uri, section, site, previewToken) {
   const dataMap = {
     galleryItems: getGalleryItemDataByUri,
     slideshows: getSlideshowDataByUri,
+    glossaryTerms: getGlossaryTermDataByUri,
   };
   const getData = dataMap[section] || getEntryDataByUri;
   return await getData(uri, site, previewToken);
