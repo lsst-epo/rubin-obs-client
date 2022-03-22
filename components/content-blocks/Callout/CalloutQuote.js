@@ -1,14 +1,13 @@
 import PropTypes from "prop-types";
 import imageShape from "@/shapes/image";
 import { linksShape } from "@/shapes/link";
-import MixedLink from "@/components/atomic/MixedLink";
 import Container from "@/components/layout/Container";
 import * as Styled from "./CalloutQuote/styles";
 import StudentsSvg from "./CalloutQuote/StudentsSvg";
 import StudentsMobileSvg from "./CalloutQuote/StudentsMobileSvg";
 import EducatorsSvg from "./CalloutQuote/EducatorsSvg";
 import EducatorsMobileSvg from "./CalloutQuote/EducatorsMobileSvg";
-import classNames from "classnames";
+import Buttonish from "@/components/atomic/Buttonish";
 
 export default function CalloutQuote({ callout }) {
   const { header, text, links, quote, attribution, imageQuote, colorScheme } =
@@ -32,12 +31,13 @@ export default function CalloutQuote({ callout }) {
 
               <Styled.Buttons>
                 {links?.map((link, index) => (
-                  <MixedLink
-                    {...link.mixedLink}
+                  <Buttonish
+                    url={link.mixedLink.url}
                     key={index}
-                    className={classNames("c-buttonish", {
-                      "c-buttonish--educators": colorScheme === "educator",
-                    })}
+                    styleAs={
+                      colorScheme === "educator" ? "educator" : "primary"
+                    }
+                    text={link.mixedLink.text}
                   />
                 ))}
               </Styled.Buttons>

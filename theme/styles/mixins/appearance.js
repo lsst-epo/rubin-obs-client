@@ -68,9 +68,8 @@ export const aButtonTheme = (style) => {
   }
 };
 
-export const aButton = (style) => css`
+export const aButton = css`
   ${protoButton()}
-  ${aButtonTheme(style)}
 
   border: 1px solid var(--button-border-color);
   border-radius: 6px;

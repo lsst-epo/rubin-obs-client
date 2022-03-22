@@ -13,6 +13,7 @@ import {
   Schedule,
   SlideBlock,
   Video,
+  DownloadList,
 } from "@/content-blocks";
 
 const blockMap = {
@@ -33,6 +34,7 @@ const blockMap = {
   staffGrid: GridBlock,
   text: Text,
   video: Video,
+  downloadList: DownloadList,
 };
 
 export default function ContentBlockFactory({ type, data, pageId }) {
