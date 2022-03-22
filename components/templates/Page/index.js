@@ -15,7 +15,7 @@ import NavButtons from "@/components/layout/NavButtons";
 
 export default function Page({
   data: {
-    contentBlocks,
+    contentBlocks = [],
     description,
     dynamicComponent,
     featuredImage,
@@ -55,12 +55,14 @@ export default function Page({
       dynamicComponent === "nonScientificStaff");
 
   const isWideHeader =
-    dynamicComponent === "galleryItems" || dynamicComponent === "slideshows";
+    dynamicComponent === "galleryItems" ||
+    dynamicComponent === "slideshows" ||
+    dynamicComponent === "glossaryTerms";
 
   const isMediumPadding = dynamicComponent === "none";
 
   const isGalleryHome = uri === "gallery";
-  const isEventsPage = uri.split("/").includes("calendar");
+  const isEventsPage = uri?.split("/").includes("calendar");
 
   // custom page name for gallery search
   const isGallerySearch = uri === "gallery/gallery-search";

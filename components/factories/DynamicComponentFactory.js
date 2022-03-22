@@ -8,6 +8,7 @@ import SearchList from "@/dynamic/SearchList";
 import SlideshowList from "@/dynamic/SlideshowList";
 import StaffList from "@/dynamic/StaffList";
 import TempList from "@/dynamic/TempList";
+import GlossaryList from "@/dynamic/GlossaryList";
 
 const componentMap = {
   alertStream: TempList,
@@ -24,6 +25,7 @@ const componentMap = {
   nonScientificStaff: StaffList,
   scientificStaff: StaffList,
   telescopeStatus: TempList,
+  glossaryTerms: GlossaryList,
 };
 
 export default function DynamicComponentFactory({ componentType, pageId }) {
