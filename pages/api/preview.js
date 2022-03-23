@@ -1,4 +1,5 @@
 import { getPageUrlByUid } from "@/api/pages";
+import { getStudentPageUrlByUid } from "@/lib/api/student-pages";
 
 export default async (req, res) => {
   const { query } = req;
@@ -19,7 +20,9 @@ export default async (req, res) => {
   // Fetch the headless CMS to check if the provided entry exists
   const entry = await getPageUrlByUid(query.entryUid, site);
 
-  if (!entry?.url) {
+  const studentEntry = await getStudentPageUrlByUid(query.entryUid, site);
+
+  if (!entry?.url && !studentEntry?.url) {
     return res.status(401).json({
       message: `URL of the entry "${query.entryUid}" could not be fetched`,
     });
