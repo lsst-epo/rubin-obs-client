@@ -12,6 +12,7 @@ import Hero from "@/page/Hero";
 import SlideBlock from "@/components/content-blocks/SlideBlock";
 import { getCategoryObject, useGlobalData, usePathData } from "@/lib/utils";
 import NavButtons from "@/components/layout/NavButtons";
+import SubHero from "@/components/page/SubHero";
 
 export default function Page({
   data: {
@@ -25,6 +26,10 @@ export default function Page({
     pageType,
     title,
     uri,
+    // student and educator pages
+    typeHandle,
+    subHeroHeader,
+    subHeroText,
   },
   breadcrumbs,
   children,
@@ -91,6 +96,8 @@ export default function Page({
       )}
       {hasFilterbar && <FilterBar filterType={dynamicComponent} />}
       <Hero data={hero} />
+
+      <SubHero type={typeHandle} header={subHeroHeader} text={subHeroText} />
       {!hideTitle && (
         <Container
           bgColor="white"
