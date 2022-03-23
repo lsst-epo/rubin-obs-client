@@ -250,6 +250,7 @@ const GlobalStyles = createGlobalStyle`
   }
   .c-buttonish {
     ${aButton}
+    ${aButtonTheme()}
     padding: 15px 2.125em;
     font-size: 16px;
 
