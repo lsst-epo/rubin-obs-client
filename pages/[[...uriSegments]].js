@@ -101,11 +101,11 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
   );
 
   const globalData = {
-    categories: data[`allCategories${isEspanol ? "_es" : ""}`],
-    footerContent: globals.footer,
-    headerNavItems: data[`pageTree${isEspanol ? "_es" : ""}`],
-    rootPages: globals.rootPageInformation.customBreadcrumbs,
-    siteInfo: globals.siteInfo,
+    categories: data?.[`allCategories${isEspanol ? "_es" : ""}`] || [],
+    footerContent: globals?.footer || {},
+    headerNavItems: data?.[`pageTree${isEspanol ? "_es" : ""}`] || [],
+    rootPages: globals?.rootPageInformation.customBreadcrumbs || [],
+    siteInfo: globals?.siteInfo || {},
     localeInfo: {
       locale: site,
       language: entryData?.language || entryData?.entry?.language || "",
