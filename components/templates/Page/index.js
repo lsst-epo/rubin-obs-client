@@ -30,6 +30,7 @@ export default function Page({
     typeHandle,
     subHeroHeader,
     subHeroText,
+    subHeroColorScheme,
   },
   breadcrumbs,
   children,
@@ -97,7 +98,12 @@ export default function Page({
       {hasFilterbar && <FilterBar filterType={dynamicComponent} />}
       <Hero data={hero} />
 
-      <SubHero type={typeHandle} header={subHeroHeader} text={subHeroText} />
+      <SubHero
+        type={typeHandle}
+        header={subHeroHeader}
+        text={subHeroText}
+        colorScheme={subHeroColorScheme}
+      />
       {!hideTitle && (
         <Container
           bgColor="white"

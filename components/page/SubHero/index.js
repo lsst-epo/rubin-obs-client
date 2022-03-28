@@ -1,10 +1,14 @@
 import PropTypes from "prop-types";
 import * as Styled from "./styles";
 
-export default function SubHero({ header, text, type = "studentPages" }) {
+export default function SubHero({ header, text, type, colorScheme }) {
   return text || header ? (
     <Styled.Wrapper
-      $bgColor={type === "studentPages" ? "turquoise05" : "orange20"}
+      $bgColor={
+        colorScheme === "educator" || type === "educatorPages"
+          ? "orange20"
+          : "turquoise05"
+      }
       className="c-content-rte"
     >
       <h2>{header}</h2>
@@ -19,4 +23,5 @@ SubHero.propTypes = {
   text: PropTypes.string,
   header: PropTypes.string,
   type: PropTypes.oneOf(["studentPages", "educatorPages"]),
+  colorScheme: PropTypes.oneOf(["student", "educator"]),
 };
