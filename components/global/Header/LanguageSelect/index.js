@@ -5,6 +5,7 @@ import { useGlobalData } from "@/lib/utils";
 import * as Styled from "./styles";
 
 const CRAFT_HOMEPAGE_URI = "__home__";
+
 export default function LanguageSelect() {
   const router = useRouter();
   const { t } = useTranslation();
@@ -12,6 +13,7 @@ export default function LanguageSelect() {
     localeInfo: { language: currentLanguage, localized },
   } = useGlobalData();
   const [toEs, setToEs] = useState(currentLanguage !== "en-US");
+  const [loading, setLoading] = useState(false);
   const switchCount = useRef(0);
 
   useEffect(() => {
@@ -26,6 +28,10 @@ export default function LanguageSelect() {
     switchCount.current++;
   }, [toEs]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  useEffect(() => {
+    setLoading(false);
+  }, [currentLanguage]);
+
   const getNewRoute = (newLanguage) => {
     const newLocale = localized.find(
       (locale) => locale.language === newLanguage
@@ -36,13 +42,16 @@ export default function LanguageSelect() {
   };
 
   const handleClick = () => {
-    setToEs((prevValue) => !prevValue);
+    if (!loading) {
+      setToEs((prevValue) => !prevValue);
+    }
+    setLoading(true);
   };
 
   return (
     <Styled.Fieldset>
       <legend className="a-hidden">{t("localize-content")}</legend>
-      <Styled.Label htmlFor="langSelect">
+      <Styled.Label htmlFor="langSelect" $disabled={loading}>
         <Styled.MobileLabelText role="presentation">
           {t("language-select-label")}
         </Styled.MobileLabelText>
@@ -51,6 +60,7 @@ export default function LanguageSelect() {
           id="langSelect"
           role="switch"
           aria-checked={toEs}
+          aria-disabled={loading}
           onClick={handleClick}
         >
           <Styled.Toggle aria-hidden />
