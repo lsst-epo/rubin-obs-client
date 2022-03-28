@@ -31,7 +31,7 @@ export default function GlossaryList({ excludeId = null, limit = null }) {
   return (
     <Container width="wide">
       <DataList excludeId={excludeId} limit={limit} section="glossaryTerms">
-        {({ entries, ...other }) => {
+        {({ entries }) => {
           const groupedEntries = getGroupedEntires(entries);
           const charKeys = Object.keys(groupedEntries);
 

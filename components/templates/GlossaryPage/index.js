@@ -7,7 +7,7 @@ import Buttonish from "@/atomic/Buttonish";
 import ResponsiveImage from "@/atomic/ResponsiveImage";
 import { useTranslation } from "react-i18next";
 
-export default function GlossaryPage({ data, ...other }) {
+export default function GlossaryPage({ data }) {
   const { t } = useTranslation();
 
   const { entry } = data;
