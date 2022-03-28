@@ -75,7 +75,7 @@ export const aButton = css`
   border-radius: 6px;
   background-color: var(--button-background-color);
   padding: 15px 32px;
-  color: var(--button-color);
+  color: var(--button-color) !important;
   font-weight: bold;
   text-decoration: none;
   transition: background-color 0.2s, color 0.2s, border-color 0.2s;

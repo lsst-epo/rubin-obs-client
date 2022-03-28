@@ -85,6 +85,7 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
   );
 
   const section = await getEntrySectionByUri(uri, site);
+
   const entryData = await getEntryData(
     uri,
     section,

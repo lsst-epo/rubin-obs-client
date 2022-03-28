@@ -13,6 +13,7 @@ import SlideBlock from "@/components/content-blocks/SlideBlock";
 import { getCategoryObject, useGlobalData, usePathData } from "@/lib/utils";
 import NavButtons from "@/components/layout/NavButtons";
 import SubHero from "@/components/page/SubHero";
+import AuthorizePage from "@/components/auth/AuthorizePage";
 
 export default function Page({
   data: {
@@ -85,57 +86,66 @@ export default function Page({
 
   return (
     <Body {...bodyProps}>
-      {breadcrumbs && <Breadcrumbs breadcrumbs={[...breadcrumbs, pageLink]} />}
-      {/* Special slideshow component here */}
-      {isGalleryHome && (
-        <SlideBlock
-          section="slideshows"
-          header={t(`gallery.curated-slideshows`)}
-          mixedLink={{ url: "/gallery/slideshows", text: t(`gallery.see-all`) }}
-          truncate={50}
+      <AuthorizePage typeHandle={typeHandle}>
+        {breadcrumbs && (
+          <Breadcrumbs breadcrumbs={[...breadcrumbs, pageLink]} />
+        )}
+        {/* Special slideshow component here */}
+        {isGalleryHome && (
+          <SlideBlock
+            section="slideshows"
+            header={t(`gallery.curated-slideshows`)}
+            mixedLink={{
+              url: "/gallery/slideshows",
+              text: t(`gallery.see-all`),
+            }}
+            truncate={50}
+          />
+        )}
+        {hasFilterbar && <FilterBar filterType={dynamicComponent} />}
+        <Hero data={hero} />
+        <SubHero
+          type={typeHandle}
+          header={subHeroHeader}
+          text={subHeroText}
+          colorScheme={subHeroColorScheme}
         />
-      )}
-      {hasFilterbar && <FilterBar filterType={dynamicComponent} />}
-      <Hero data={hero} />
-
-      <SubHero
-        type={typeHandle}
-        header={subHeroHeader}
-        text={subHeroText}
-        colorScheme={subHeroColorScheme}
-      />
-      {!hideTitle && (
-        <Container
-          bgColor="white"
-          className="c-page-header"
-          width={isWideHeader ? "regular" : "narrow"}
-          paddingSize={isMediumPadding ? "medium" : undefined}
-        >
-          <h1>{title}</h1>
-          {isEventsPage && (
-            <NavButtons
-              linkLeft="upcoming"
-              linkRight="past"
-              textLeft={t(`events.upcoming`)}
-              textRight={t(`events.past`)}
+        {!hideTitle && (
+          <Container
+            bgColor="white"
+            className="c-page-header"
+            width={isWideHeader ? "regular" : "narrow"}
+            paddingSize={isMediumPadding ? "medium" : undefined}
+          >
+            <h1>{title}</h1>
+            {isEventsPage && (
+              <NavButtons
+                linkLeft="upcoming"
+                linkRight="past"
+                textLeft={t(`events.upcoming`)}
+                textRight={t(`events.past`)}
+              />
+            )}
+          </Container>
+        )}
+        {[...contentBlocks].map((block) => {
+          return (
+            <ContentBlockFactory
+              key={block.id}
+              type={block.typeHandle}
+              data={block}
+              pageId={id}
             />
-          )}
-        </Container>
-      )}
-      {[...contentBlocks].map((block) => {
-        return (
-          <ContentBlockFactory
-            key={block.id}
-            type={block.typeHandle}
-            data={block}
+          );
+        })}
+        {pageType === "dynamic" && dynamicComponent && (
+          <DynamicComponentFactory
+            componentType={dynamicComponent}
             pageId={id}
           />
-        );
-      })}
-      {pageType === "dynamic" && dynamicComponent && (
-        <DynamicComponentFactory componentType={dynamicComponent} pageId={id} />
-      )}
-      {children}
+        )}
+        {children}
+      </AuthorizePage>
     </Body>
   );
 }

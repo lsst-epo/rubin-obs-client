@@ -237,6 +237,15 @@
     },
     "glossary": {
       "back_button": "Go back to Glossary"
+    },
+    "restricted": {
+      "header_approval_pending": "Content not yet available",
+      "message_approval_pending": "This content is not yet available for you since approval is pending. If you wish to speed up this process, please send us an email to <0>webmaster@lsst.org</0>.",
+      "header_restricted": "Content not available",
+      "message_restricted": "This content is not available to you. If you think this is in error, please send us an email to <0>webmaster@lsst.org</0>.",
+      "header_not_authorized": "Content not available",
+      "message_not_authorized": "You must log in to access this page.",
+      "button_confirm": "Got it!"
     }
   }
 }
