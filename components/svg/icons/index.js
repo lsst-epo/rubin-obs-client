@@ -19,6 +19,7 @@ import LockOpen from "./LockOpen";
 import LogOut from "./LogOut";
 import Mail from "./Mail";
 import Search from "./Search";
+import SelectCaret from "./SelectCaret";
 import Phone from "./Phone";
 import Pin from "./Pin";
 import Play from "./Play";
@@ -27,6 +28,7 @@ import Temp from "./Temp";
 import Time from "./Time";
 import Twitter from "./Twitter";
 import User from "./User";
+import UserInverted from "./UserInverted";
 import Video from "./Video";
 import YouTube from "./YouTube";
 import Pdf from "./Pdf";
@@ -57,11 +59,13 @@ export default {
   Pin,
   Play,
   Search,
+  SelectCaret,
   Team,
   Temp,
   Time,
   Twitter,
   User,
+  UserInverted,
   Video,
   YouTube,
   Pdf,

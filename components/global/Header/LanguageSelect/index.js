@@ -58,14 +58,10 @@ export default function LanguageSelect() {
         <span className="a-hidden">{t("espanol-site-name")}</span>
         <Styled.Switch
           id="langSelect"
-          role="switch"
-          aria-checked={toEs}
+          checked={toEs}
           aria-disabled={loading}
           onClick={handleClick}
-        >
-          <Styled.Toggle aria-hidden />
-          <Styled.Inner aria-hidden />
-        </Styled.Switch>
+        />
       </Styled.Label>
     </Styled.Fieldset>
   );

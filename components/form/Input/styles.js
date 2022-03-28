@@ -7,8 +7,8 @@ export const Input = styled.input`
   font-size: inherit;
   padding-inline-start: 20px;
   padding-inline-end: 20px;
-  padding-block-start: 17px;
-  padding-block-end: 18px;
+  padding-block-start: calc(var(--Input-padding-block, 18px) - 1px);
+  padding-block-end: var(--Input-padding-block, 18px);
   font-size: 20px;
   font-family: inherit;
 `;

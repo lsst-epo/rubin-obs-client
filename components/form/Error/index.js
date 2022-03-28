@@ -6,7 +6,7 @@ export default function Error({ children, ...props }) {
   const { t } = useTranslation();
 
   return (
-    <Styled.Error {...props}>
+    <Styled.Error role="alert" {...props}>
       <span className="a-hidden">{t("form.error_label")}</span>
       {children}
     </Styled.Error>

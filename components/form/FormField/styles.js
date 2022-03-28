@@ -3,8 +3,8 @@ import { fluidScale } from "@/styles/globalStyles";
 
 export const Label = styled.label`
   display: block;
-  font-weight: 600;
-  font-size: ${fluidScale("20px", "16px")};
+  font-weight: var(--FormField-Label-font-weight, 600);
+  font-size: var(--FormField-Label-font-size, ${fluidScale("20px", "16px")});
   line-height: 1.5;
 `;
 
@@ -18,5 +18,5 @@ export const Description = styled.p`
 `;
 
 export const InputWrapper = styled.div`
-  padding-block-start: 9px;
+  padding-block-start: var(--FormField-InputWrapper-padding-block-start, 9px);
 `;

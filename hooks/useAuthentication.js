@@ -168,11 +168,11 @@ export default function useAuthentication(data) {
       return null;
     }
 
-    // if current JWT hasn't expired, set in state to keep using and return current refresh token
+    // if current JWT hasn't expired, set in state to keep using and return current token data
     if (Date.now() < jwtExpiresAt) {
       setToken(jwt);
       setUserFromJwt(jwt);
-      return refreshToken;
+      return { jwt, jwtExpiresAt, refreshToken, refreshTokenExpiresAt };
     }
 
     const data = await refreshJWT({ refreshToken });
@@ -196,7 +196,7 @@ export default function useAuthentication(data) {
   function signOut() {
     clearState();
 
-    if (typeHandle === "educatorPages") {
+    if (typeHandle === "educatorPages" || typeHandle === "userProfilePage") {
       push("/");
     }
   }
