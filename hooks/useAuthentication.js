@@ -19,6 +19,7 @@ const SESSION_STORAGE_KEYS = [
   "jwtExpiresAt",
   "refreshToken",
   "refreshTokenExpiresAt",
+  "status",
 ];
 
 function getTokenFromStorage(key) {
@@ -50,6 +51,7 @@ export default function useAuthentication() {
 
   const [token, setToken] = useState(getTokenFromStorage("jwt"));
   const [user, setUser] = useState(getUserFromJwt());
+  const [status, setStatus] = useState(getTokenFromStorage("status"));
   const [pendingGroup, setPendingGroup] = useState(
     getTokenFromStorage("pendingGroup") || "students"
   );
@@ -91,6 +93,7 @@ export default function useAuthentication() {
   function clearState() {
     setToken(null);
     setUser(null);
+    setStatus(null);
     setLoading(false);
     setError(false);
     unstoreTokens();
@@ -100,16 +103,19 @@ export default function useAuthentication() {
     setLoading(false);
     setError(false);
 
-    const { jwt, jwtExpiresAt, refreshToken, refreshTokenExpiresAt } = authData;
+    const { jwt, jwtExpiresAt, refreshToken, refreshTokenExpiresAt, user } =
+      authData;
 
     if (jwt) {
       setToken(jwt);
+      setStatus(user?.status);
       setUserFromJwt(jwt);
       storeTokens({
         jwt,
         jwtExpiresAt,
         refreshToken,
         refreshTokenExpiresAt,
+        status: user?.status,
       });
     }
 
@@ -187,7 +193,7 @@ export default function useAuthentication() {
   }
 
   function signOut() {
-    setToken(null);
+    clearState();
   }
 
   async function register({ email, password, fullName }) {
@@ -294,6 +300,7 @@ export default function useAuthentication() {
   return {
     isAuthenticated: !!token,
     user,
+    status,
     pendingGroup,
     loading,
     error,
