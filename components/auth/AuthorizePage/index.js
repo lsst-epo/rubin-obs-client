@@ -7,7 +7,7 @@ import { Button, Buttonish } from "@/components/atomic";
 
 export default function AuthorizePage({ typeHandle, children }) {
   const { t } = useTranslation();
-  const { isAuthenticated, user, pendingGroup, loading, error } =
+  const { isAuthenticated, user, status, loading, error } =
     useAuthenticationContext();
   const { openModal } = useAuthModal();
 
@@ -15,8 +15,7 @@ export default function AuthorizePage({ typeHandle, children }) {
   const authorized =
     typeHandle === "educatorPages" ? user?.group === "educators" : true;
 
-  const pending =
-    typeHandle === "educatorPages" && pendingGroup === "educators";
+  const pending = typeHandle === "educatorPages" && status === "pending";
 
   const context = pending
     ? "approval_pending"
