@@ -38,7 +38,6 @@ export default function RegisterForm({ onCancel }) {
       const errorSource = getErrorSource(invalid);
 
       if (errorSource === "email") {
-        console.info(`settings error on email: ${invalid.message}`);
         setError("email", { type: "manual", message: invalid.message });
       } else {
         setError("form", {

@@ -38,11 +38,17 @@
       "inquiry": "Inquiry",
       "password": "Password",
       "password_required": "Password (required)",
+      "current_password": "Current password",
+      "new_password": "New password",
+      "confirm_password": "Confirm new password",
       "show_password": "Show password",
       "hide_password": "Hide password",
       "your_name": "Your name (required)",
       "create_password": "Create a password (required)",
       "create_password_instructions": "Passwords should be at least 8 characters long and should contain a mixture of letters, numbers, and other characters.",
+      "school": "School",
+      "preferred_language": "Preferred language",
+      "email_subscription": "Email subscription",
       "send": "Send",
       "sending": "Sending…",
       "submitting": "Submitting...",
@@ -236,7 +242,19 @@
       "error_message": "There was an error signing you in with {{service}}."
     },
     "account": {
-      "header": "Account"
+      "header": "Account",
+      "profile": "Profile",
+      "preferences": "Preferences",
+      "password": "Password",
+      "loading": "Loading…",
+      "edit": "Edit",
+      "submit_profile": "Update profile & preferences",
+      "submit_password": "Update password",
+      "submit_pending": "Submitting…",
+      "submit_success": "Updated!",
+      "error": "There was an error fetching your account information.",
+      "error_session_expired": "Your session has expired. Please log back in.",
+      "delete": "Delete my account"
     },
     "glossary": {
       "back_button": "Go back to Glossary"

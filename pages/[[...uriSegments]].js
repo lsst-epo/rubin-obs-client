@@ -17,6 +17,7 @@ import NewsPageTemplate from "@/templates/NewsPage";
 import SearchPageTemplate from "@/templates/SearchPage";
 import SlideshowPageTemplate from "@/templates/SlideshowPage";
 import StaffPageTemplate from "@/templates/StaffPage";
+import UserProfilePageTemplate from "@/templates/UserProfilePage";
 import internalLinkShape, {
   internalLinkWithChildrenShape,
 } from "@/shapes/link";
@@ -39,6 +40,7 @@ export default function Page({ section, globalData, ...entryProps }) {
     searchResults: SearchPageTemplate,
     slideshows: SlideshowPageTemplate,
     staffProfiles: StaffPageTemplate,
+    userProfilePage: UserProfilePageTemplate,
   };
 
   const Template = sectionMap[section] || PageTemplate;

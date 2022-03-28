@@ -16,12 +16,16 @@ export default function FormField({
 
   return (
     <div {...wrapperProps}>
-      <Styled.Label htmlFor={htmlFor}>
-        {t(label, { context: required ? "required" : "" })}
-      </Styled.Label>
-      {description && <Styled.Description>{description}</Styled.Description>}
-      <Styled.InputWrapper>{children}</Styled.InputWrapper>
-      {error && <Styled.InputError as={Error}>{error}</Styled.InputError>}
+      <div>
+        <Styled.Label htmlFor={htmlFor}>
+          {t(label, { context: required ? "required" : "" })}
+        </Styled.Label>
+        {description && <Styled.Description>{description}</Styled.Description>}
+      </div>
+      <div>
+        <Styled.InputWrapper>{children}</Styled.InputWrapper>
+        {error && <Styled.InputError as={Error}>{error}</Styled.InputError>}
+      </div>
     </div>
   );
 }

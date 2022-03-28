@@ -5,6 +5,12 @@ import { useAuthenticationContext } from "@/contexts/Authentication";
 import Container from "@/components/layout/Container";
 import { Button, Buttonish } from "@/components/atomic";
 
+function isAuthorized(typeHandle, user) {
+  if (typeHandle === "educatorPages") return user?.group === "educators";
+  if (typeHandle === "userProfilePage") return !!user;
+  return true;
+}
+
 export default function AuthorizePage({ children }) {
   const { t } = useTranslation();
   const { isAuthenticated, user, status, typeHandle } =
@@ -12,8 +18,7 @@ export default function AuthorizePage({ children }) {
   const { openModal } = useAuthModal();
 
   // Check the user type against the page type
-  const authorized =
-    typeHandle === "educatorPages" ? user?.group === "educators" : true;
+  const authorized = isAuthorized(typeHandle, user);
 
   const pending = typeHandle === "educatorPages" && status === "pending";
 
@@ -59,6 +64,11 @@ export default function AuthorizePage({ children }) {
 }
 
 AuthorizePage.propTypes = {
-  typeHandle: PropTypes.oneOf(["pages", "educatorPages", "studentPages"]),
+  typeHandle: PropTypes.oneOf([
+    "pages",
+    "educatorPages",
+    "studentPages",
+    "userProfilePage",
+  ]),
   children: PropTypes.node,
 };
