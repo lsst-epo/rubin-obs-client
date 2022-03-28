@@ -20,6 +20,8 @@ export const Label = styled.label`
   justify-content: center;
   width: 100%;
   font-weight: 700;
+
+  ${({ $disabled }) => $disabled && `pointer-events: none;`}
 `;
 
 export const MobileLabelText = styled.span`
@@ -52,6 +54,11 @@ export const Switch = styled.button`
     --Toggle-translateX: calc(
       var(--switch-width) - var(--toggle-size) - var(--toggle-margin) * 2
     );
+  }
+
+  &[aria-disabled="true"] {
+    pointer-events: none;
+    cursor: pointer;
   }
 `;
 
