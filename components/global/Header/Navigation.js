@@ -95,6 +95,7 @@ export default function Navigation({
                     title={t("auth.account")}
                     theme={theme}
                     className="a-bg-turquoise50 a-show-mobile"
+                    icon="account"
                   />
                 </li>
                 <li className="c-nav-list__item">
@@ -106,6 +107,7 @@ export default function Navigation({
                     title={t("auth.log_out")}
                     theme={theme}
                     className="a-show-mobile"
+                    icon="logOut"
                   />
                 </li>
               </>

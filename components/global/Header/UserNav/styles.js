@@ -37,6 +37,12 @@ export const DropdownWrapper = styled.div`
 export const UserButton = styled.button`
   display: flex;
   align-items: center;
+  border-radius: 100%;
+  transition: background-color 0.2s ease-in;
+
+  &:hover {
+    background-color: ${tokens.turquoise85};
+  }
 `;
 
 export const SubnavList = styled.ul`
@@ -70,6 +76,7 @@ export const SubnavLink = styled.a`
   width: 100%;
   text-align: left;
   transition: color 0.2s, background-color 0.2s;
+  text-decoration: none;
 
   &:hover {
     color: var(--white);

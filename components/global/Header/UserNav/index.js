@@ -47,7 +47,7 @@ function UserNav() {
           </Styled.UserButton>
           <Styled.SubnavList open={active} id="userSubNav">
             <Styled.SubnavItem>
-              <Styled.SubnavLink as="a">
+              <Styled.SubnavLink as="a" href="./account">
                 <IconComposer icon="account" />
                 {t("auth.account")}
               </Styled.SubnavLink>

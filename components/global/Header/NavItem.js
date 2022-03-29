@@ -1,8 +1,9 @@
 import PropTypes from "prop-types";
 import Link from "next/link";
 import classNames from "classnames";
+import IconComposer from "@/svg/IconComposer";
 
-function NavItem({ href, onClick, title, theme, className }) {
+function NavItem({ href, onClick, title, theme, className, icon }) {
   const WrapperTag = ({ href, children }) =>
     href ? (
       <Link href={href} passHref>
@@ -25,6 +26,7 @@ function NavItem({ href, onClick, title, theme, className }) {
         })}
       >
         {/* eslint-enable */}
+        {icon && <IconComposer icon={icon} className="c-nav-list__link-icon" />}
         <span className="c-nav-list__link-text">{title}</span>
       </InteractiveTag>
     </WrapperTag>
@@ -39,6 +41,7 @@ NavItem.propTypes = {
   theme: PropTypes.string.isRequired,
   href: PropTypes.string,
   className: PropTypes.string,
+  icon: PropTypes.string,
 };
 
 export default NavItem;
