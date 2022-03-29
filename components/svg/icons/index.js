@@ -1,3 +1,4 @@
+import Account from "./Account";
 import Calendar from "./Calendar";
 import Cancel from "./Cancel";
 import Caret from "./Caret";
@@ -15,6 +16,7 @@ import Instagram from "./Instagram";
 import LinkedIn from "./LinkedIn";
 import LockClosed from "./LockClosed";
 import LockOpen from "./LockOpen";
+import LogOut from "./LogOut";
 import Mail from "./Mail";
 import Search from "./Search";
 import Phone from "./Phone";
@@ -31,6 +33,7 @@ import Pdf from "./Pdf";
 import Word from "./Word";
 
 export default {
+  Account,
   Calendar,
   Cancel,
   Caret,
@@ -48,6 +51,7 @@ export default {
   LinkedIn,
   LockClosed,
   LockOpen,
+  LogOut,
   Mail,
   Phone,
   Pin,

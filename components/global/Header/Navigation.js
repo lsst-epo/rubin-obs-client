@@ -19,7 +19,7 @@ export default function Navigation({
   const navList = useRef();
   const { openModal } = useAuthModal();
   const { t } = useTranslation();
-  const { isAuthenticated } = useAuthenticationContext();
+  const { isAuthenticated, signOut } = useAuthenticationContext();
 
   useClickEvent(handleClick);
 
@@ -85,17 +85,30 @@ export default function Navigation({
         {theme === "mobile" && (
           <>
             {isAuthenticated && (
-              <li className="c-nav-list__item">
-                <NavItem
-                  onClick={() => {
-                    setActive(null);
-                  }}
-                  href="/account"
-                  title={t("auth.account")}
-                  theme={theme}
-                  className="a-bg-turquoise50 a-show-mobile"
-                />
-              </li>
+              <>
+                <li className="c-nav-list__item">
+                  <NavItem
+                    onClick={() => {
+                      setActive(null);
+                    }}
+                    href="/account"
+                    title={t("auth.account")}
+                    theme={theme}
+                    className="a-bg-turquoise50 a-show-mobile"
+                  />
+                </li>
+                <li className="c-nav-list__item">
+                  <NavItem
+                    onClick={() => {
+                      setActive(null);
+                      signOut();
+                    }}
+                    title={t("auth.log_out")}
+                    theme={theme}
+                    className="a-show-mobile"
+                  />
+                </li>
+              </>
             )}
             {!isAuthenticated && (
               <>

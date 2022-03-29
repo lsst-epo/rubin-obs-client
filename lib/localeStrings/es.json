@@ -102,8 +102,9 @@
     },
     "auth": {
       "log_in": "Log in",
+      "log_out": "Log out",
       "sign_up": "Sign up",
-      "account": "Account"
+      "account": "Account Overview"
     },
     "sign_in": {
       "header": "Welcome back!",
