@@ -66,7 +66,7 @@ export default function Header({ navItems }) {
         {!mobileNavActive && <LanguageSelect />}
       </div>
       <div className="c-global-header__user-nav-block">
-        <UserNavigation />
+        <UserNavigation headerVisible={visible} />
       </div>
       <div className="c-global-header__hamburger-block">
         <Hamburger

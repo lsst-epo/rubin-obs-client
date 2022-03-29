@@ -46,11 +46,12 @@ export const UserButton = styled.button`
 `;
 
 export const SubnavList = styled.ul`
-  position: absolute;
+  position: fixed;
   background-color: var(--white);
   border: 1px solid #707070;
   border-radius: 6px;
-  right: 0;
+  right: var(--UserNav-button-right);
+  top: var(--UserNav-button-top);
   min-width: 236px;
   overflow: hidden;
   transform: translateY(-30px);
@@ -58,10 +59,14 @@ export const SubnavList = styled.ul`
   transition: transform 0.25s ease-in-out, opacity 0.125s ease-in;
   z-index: -1;
 
+  .invisible & {
+    display: none;
+  }
+
   &[open] {
     opacity: 1;
-    transform: translateY(12px);
-    z-index: 0;
+    transform: translateY(0);
+    z-index: 1000;
   }
 `;
 

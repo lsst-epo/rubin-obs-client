@@ -1,65 +1,59 @@
-import { useRef, useState } from "react";
+import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import {
-  useAuthModal,
-  useKeyDownEvent,
-  useFocusTrap,
-  useOnClickOutside,
-} from "@/hooks";
+import { Popover, Portal } from "@headlessui/react";
+import { useAuthModal, useBoundingBox } from "@/hooks";
 import IconComposer from "@/svg/IconComposer";
 import { useAuthenticationContext } from "@/contexts/Authentication";
 import * as Styled from "./styles";
 
-function UserNav() {
+function UserNav({ headerVisible }) {
   const { openModal } = useAuthModal();
   const { t } = useTranslation();
   const { isAuthenticated, signOut } = useAuthenticationContext();
-  const ref = useRef(null);
-  const [active, setActive] = useState(false);
-  useFocusTrap(ref, active);
-  useKeyDownEvent(handleKeyDown);
-  useOnClickOutside(ref, () => {
-    setActive(false);
-  });
-
-  function handleKeyDown({ key }) {
-    if (!active || key !== "Escape") return;
-    setActive(false);
-  }
-
-  function handleClick(e) {
-    e.preventDefault();
-    setActive(!active);
-  }
+  const [box, windowSize, ref] = useBoundingBox();
 
   return (
-    <Styled.Nav aria-label="User" ref={ref} className="c-nav-list--desktop">
+    <Styled.Nav aria-label="User" className="c-nav-list--desktop">
       {isAuthenticated && (
-        <Styled.DropdownWrapper>
-          <Styled.UserButton
-            aria-expanded={active}
-            aria-haspopup="menu"
-            aria-controls="userSubNav"
-            onClick={handleClick}
-          >
-            <IconComposer icon="User" />
-            <span className="a-hidden">{t("account.header")}</span>
-          </Styled.UserButton>
-          <Styled.SubnavList open={active} id="userSubNav">
-            <Styled.SubnavItem>
-              <Styled.SubnavLink as="a" href="./account">
-                <IconComposer icon="account" />
-                {t("auth.account")}
-              </Styled.SubnavLink>
-            </Styled.SubnavItem>
-            <Styled.SubnavItem>
-              <Styled.SubnavLink as="button" type="button" onClick={signOut}>
-                <IconComposer icon="logOut" />
-                {t("auth.log_out")}
-              </Styled.SubnavLink>
-            </Styled.SubnavItem>
-          </Styled.SubnavList>
-        </Styled.DropdownWrapper>
+        <Popover>
+          {({ open }) => (
+            <Styled.DropdownWrapper>
+              <Popover.Button ref={ref} as={Styled.UserButton}>
+                <IconComposer icon="User" />
+                <span className="a-hidden">{t("account.header")}</span>
+              </Popover.Button>
+              <Portal>
+                <Popover.Panel
+                  as={Styled.SubnavList}
+                  open={open && headerVisible}
+                  style={{
+                    "--UserNav-button-right": `${
+                      windowSize.width - box.right
+                    }px`,
+                    "--UserNav-button-top": `${box.top + box.height + 12}px`,
+                  }}
+                >
+                  <Styled.SubnavItem>
+                    <Styled.SubnavLink as="a" href="./account">
+                      <IconComposer icon="account" />
+                      {t("auth.account")}
+                    </Styled.SubnavLink>
+                  </Styled.SubnavItem>
+                  <Styled.SubnavItem>
+                    <Styled.SubnavLink
+                      as="button"
+                      type="button"
+                      onClick={signOut}
+                    >
+                      <IconComposer icon="logOut" />
+                      {t("auth.log_out")}
+                    </Styled.SubnavLink>
+                  </Styled.SubnavItem>
+                </Popover.Panel>
+              </Portal>
+            </Styled.DropdownWrapper>
+          )}
+        </Popover>
       )}
       {!isAuthenticated && (
         <>
@@ -76,5 +70,9 @@ function UserNav() {
 }
 
 UserNav.displayName = "Global.Header.UserNav";
+
+UserNav.propTypes = {
+  headerVisible: PropTypes.bool,
+};
 
 export default UserNav;
