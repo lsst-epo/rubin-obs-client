@@ -4,6 +4,7 @@ import {
   Text,
   Callout,
   Link,
+  ComplexTable,
   Contact,
   ContactStaff,
   Share,
@@ -12,6 +13,7 @@ import {
   GridBlock,
   Schedule,
   SlideBlock,
+  TableGroup,
   Video,
   DownloadList,
 } from "@/content-blocks";
@@ -19,6 +21,7 @@ import {
 const blockMap = {
   accordionGroup: AccordionGroup,
   callout: Callout,
+  complexTable: ComplexTable,
   contact: Contact,
   contactStaff: ContactStaff,
   ctaGrid: GridBlock,
@@ -32,6 +35,7 @@ const blockMap = {
   simpleTable: SimpleTable,
   slideBlock: SlideBlock,
   staffGrid: GridBlock,
+  tableGroup: TableGroup,
   text: Text,
   video: Video,
   downloadList: DownloadList,
