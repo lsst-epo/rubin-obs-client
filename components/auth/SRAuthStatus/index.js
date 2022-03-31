@@ -1,7 +1,7 @@
 import { useAuthenticationContext } from "@/contexts/Authentication";
 import { useTranslation } from "react-i18next";
 
-export default function SRAuthStatus() {
+export default function SRAnnouncement() {
   const { isAuthenticated, user } = useAuthenticationContext();
   const { t } = useTranslation();
 

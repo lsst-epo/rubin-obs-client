@@ -8,7 +8,6 @@ import { internalLinkWithChildrenShape } from "@/shapes/link";
 import LanguageSelect from "./LanguageSelect";
 import NavItem from "./NavItem";
 import NavItemWithChildren from "./NavItemWithChildren";
-import SRAuthStatus from "@/components/auth/SRAuthStatus";
 
 export default function Navigation({
   items,
@@ -91,9 +90,6 @@ export default function Navigation({
         })}
         {theme === "mobile" && (
           <>
-            <li aria-live="polite">
-              <SRAuthStatus />
-            </li>
             {isAuthenticated && (
               <>
                 <li className="c-nav-list__item">
