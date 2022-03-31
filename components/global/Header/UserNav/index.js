@@ -10,15 +10,15 @@ function UserNav({ headerVisible }) {
   const { openModal } = useAuthModal();
   const { t } = useTranslation();
   const { isAuthenticated, signOut } = useAuthenticationContext();
-  const [box, windowSize, ref] = useBoundingBox();
+  const [box, ref] = useBoundingBox();
 
   return (
-    <Styled.Nav aria-label="User" className="c-nav-list--desktop">
+    <Styled.Nav aria-label="User" className="c-nav-list--desktop" ref={ref}>
       {isAuthenticated && (
         <Popover>
           {({ open }) => (
             <Styled.DropdownWrapper>
-              <Popover.Button ref={ref} as={Styled.UserButton}>
+              <Popover.Button as={Styled.UserButton}>
                 <IconComposer icon="User" />
                 <span className="a-hidden">{t("account.header")}</span>
               </Popover.Button>
@@ -27,10 +27,10 @@ function UserNav({ headerVisible }) {
                   as={Styled.SubnavList}
                   open={open && headerVisible}
                   style={{
-                    "--UserNav-button-right": `${
-                      windowSize.width - box.right
-                    }px`,
-                    "--UserNav-button-top": `${box.top + box.height + 12}px`,
+                    "--UserNav-button-right": `calc(100vw - ${
+                      box.right - 15
+                    }px)`,
+                    "--UserNav-button-top": `${box.top + box.height - 12}px`,
                   }}
                 >
                   <Styled.SubnavItem>
