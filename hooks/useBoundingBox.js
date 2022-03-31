@@ -1,4 +1,6 @@
 import { useState, useRef, useEffect } from "react";
+import debounce from "lodash/debounce";
+
 export default function useBbox() {
   const ref = useRef();
   const [box, setBoundingBox] = useState({});
@@ -11,8 +13,10 @@ export default function useBbox() {
   useEffect(() => {
     set();
 
-    window.addEventListener("resize", set);
-    return () => window.removeEventListener("resize", set);
+    const debounced = debounce(set, 200);
+
+    window.addEventListener("resize", debounced);
+    return () => window.removeEventListener("resize", debounced);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

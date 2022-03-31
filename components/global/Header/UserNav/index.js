@@ -5,6 +5,7 @@ import { useAuthModal, useBoundingBox } from "@/hooks";
 import IconComposer from "@/svg/IconComposer";
 import { useAuthenticationContext } from "@/contexts/Authentication";
 import * as Styled from "./styles";
+import SRAuthStatus from "@/components/auth/SRAuthStatus";
 
 function UserNav({ headerVisible }) {
   const { openModal } = useAuthModal();
@@ -13,7 +14,13 @@ function UserNav({ headerVisible }) {
   const [box, ref] = useBoundingBox();
 
   return (
-    <Styled.Nav aria-label="User" className="c-nav-list--desktop" ref={ref}>
+    <Styled.Nav
+      aria-label="User"
+      aria-live="polite"
+      className="c-nav-list--desktop"
+      ref={ref}
+    >
+      <SRAuthStatus />
       {isAuthenticated && (
         <Popover>
           {({ open }) => (
@@ -30,7 +37,7 @@ function UserNav({ headerVisible }) {
                     "--UserNav-button-right": `calc(100vw - ${
                       box.right - 15
                     }px)`,
-                    "--UserNav-button-top": `${box.top + box.height - 12}px`,
+                    "--UserNav-button-top": `${box.bottom}px`,
                   }}
                 >
                   <Styled.SubnavItem>

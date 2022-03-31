@@ -46,7 +46,8 @@ function unstoreTokens() {
 }
 
 // TODO: store refresh token in cookie so token can be refreshed after browser session ends
-export default function useAuthentication({ typeHandle = "" }) {
+export default function useAuthentication(data) {
+  const typeHandle = data?.typeHandle;
   const { query, push } = useRouter();
 
   const [token, setToken] = useState(getTokenFromStorage("jwt"));

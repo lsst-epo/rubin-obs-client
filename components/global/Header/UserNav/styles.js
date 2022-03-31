@@ -29,8 +29,8 @@ export const Toggle = styled.button`
 
 export const DropdownWrapper = styled.div`
   position: relative;
-  margin-right: 15px;
-  margin-left: 15px;
+  margin-inline-end: 15px;
+  margin-inline-start: 15px;
   z-index: 5;
 `;
 
@@ -46,6 +46,8 @@ export const UserButton = styled.button`
 `;
 
 export const SubnavList = styled.ul`
+  --UserNav-subnav-margin-top: ${fluidScale("16px", "6px")};
+
   position: fixed;
   background-color: var(--white);
   border: 1px solid #707070;
@@ -58,6 +60,7 @@ export const SubnavList = styled.ul`
   opacity: 0;
   transition: transform 0.25s ease-in-out, opacity 0.125s ease-in;
   z-index: -1;
+  margin-block-start: calc(var(--UserNav-subnav-margin-top) * -1);
 
   .invisible & {
     display: none;

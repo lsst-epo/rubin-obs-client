@@ -173,6 +173,8 @@
     "auth": {
       "log_in": "Log in",
       "log_out": "Log out",
+      "logged_in_as": "Logged in as {{name}}",
+      "logged_out": "Logged out",
       "sign_up": "Sign up",
       "account": "Account Overview"
     },
