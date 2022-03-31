@@ -86,7 +86,7 @@ export default function Page({
 
   return (
     <Body {...bodyProps}>
-      <AuthorizePage typeHandle={typeHandle}>
+      <AuthorizePage>
         {breadcrumbs && (
           <Breadcrumbs breadcrumbs={[...breadcrumbs, pageLink]} />
         )}

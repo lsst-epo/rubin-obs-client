@@ -37,6 +37,11 @@ export default function Navigation({
     setActive((prevActive) => (prevActive === id ? null : id));
   }
 
+  function handleSignOut() {
+    setActive(null);
+    signOut();
+  }
+
   if (!items || items.length < 1) return null;
 
   return (
@@ -100,10 +105,7 @@ export default function Navigation({
                 </li>
                 <li className="c-nav-list__item">
                   <NavItem
-                    onClick={() => {
-                      setActive(null);
-                      signOut();
-                    }}
+                    onClick={handleSignOut}
                     title={t("auth.log_out")}
                     theme={theme}
                     className="a-show-mobile"

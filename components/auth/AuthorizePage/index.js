@@ -5,9 +5,9 @@ import { useAuthenticationContext } from "@/contexts/Authentication";
 import Container from "@/components/layout/Container";
 import { Button, Buttonish } from "@/components/atomic";
 
-export default function AuthorizePage({ typeHandle, children }) {
+export default function AuthorizePage({ children }) {
   const { t } = useTranslation();
-  const { isAuthenticated, user, status, loading, error } =
+  const { isAuthenticated, user, status, typeHandle } =
     useAuthenticationContext();
   const { openModal } = useAuthModal();
 
