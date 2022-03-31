@@ -19,7 +19,7 @@ export default function Navigation({
   const navList = useRef();
   const { openModal } = useAuthModal();
   const { t } = useTranslation();
-  const { isAuthenticated } = useAuthenticationContext();
+  const { isAuthenticated, signOut } = useAuthenticationContext();
 
   useClickEvent(handleClick);
 
@@ -35,6 +35,12 @@ export default function Navigation({
 
   function handleToggleClick(id) {
     setActive((prevActive) => (prevActive === id ? null : id));
+  }
+
+  function handleSignOut() {
+    setActive(null);
+    mobileSetter(false);
+    signOut();
   }
 
   if (!items || items.length < 1) return null;
@@ -85,17 +91,29 @@ export default function Navigation({
         {theme === "mobile" && (
           <>
             {isAuthenticated && (
-              <li className="c-nav-list__item">
-                <NavItem
-                  onClick={() => {
-                    setActive(null);
-                  }}
-                  href="/account"
-                  title={t("auth.account")}
-                  theme={theme}
-                  className="a-bg-turquoise50 a-show-mobile"
-                />
-              </li>
+              <>
+                <li className="c-nav-list__item">
+                  <NavItem
+                    onClick={() => {
+                      setActive(null);
+                    }}
+                    href="/account"
+                    title={t("auth.account")}
+                    theme={theme}
+                    className="a-bg-turquoise50 a-show-mobile"
+                    icon="account"
+                  />
+                </li>
+                <li className="c-nav-list__item">
+                  <NavItem
+                    onClick={handleSignOut}
+                    title={t("auth.log_out")}
+                    theme={theme}
+                    className="a-show-mobile"
+                    icon="logOut"
+                  />
+                </li>
+              </>
             )}
             {!isAuthenticated && (
               <>

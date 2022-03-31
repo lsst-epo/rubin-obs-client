@@ -10,7 +10,9 @@ import GlobalStyles from "@/styles/globalStyles";
 import styles from "@/styles/styles.scss";
 
 function Client({ Component, pageProps }) {
-  const authData = useAuthentication();
+  const authData = useAuthentication({
+    typeHandle: pageProps?.data?.typeHandle || "",
+  });
 
   return (
     <UIDReset>

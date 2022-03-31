@@ -16,6 +16,7 @@ import SearchBar from "./SearchBar";
 import Hamburger from "./Hamburger";
 import LanguageSelect from "./LanguageSelect";
 import UserNavigation from "./UserNav";
+import SRAuthStatus from "../../auth/SRAuthStatus";
 
 export default function Header({ navItems }) {
   const [mobileNavActive, setMobileNavActive] = useState(false);
@@ -48,6 +49,7 @@ export default function Header({ navItems }) {
       <a href="#page-content" className="c-global-header__skip-link">
         {t("skip-to-content")}
       </a>
+      <SRAuthStatus />
       <div className="c-global-header__logo-block">
         <Link href={homeUrl}>
           <a className="c-global-header__logo-link">
@@ -66,7 +68,7 @@ export default function Header({ navItems }) {
         {!mobileNavActive && <LanguageSelect />}
       </div>
       <div className="c-global-header__user-nav-block">
-        <UserNavigation />
+        <UserNavigation headerVisible={visible} />
       </div>
       <div className="c-global-header__hamburger-block">
         <Hamburger

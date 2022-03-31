@@ -46,7 +46,8 @@ function unstoreTokens() {
 }
 
 // TODO: store refresh token in cookie so token can be refreshed after browser session ends
-export default function useAuthentication() {
+export default function useAuthentication(data) {
+  const typeHandle = data?.typeHandle;
   const { query, push } = useRouter();
 
   const [token, setToken] = useState(getTokenFromStorage("jwt"));
@@ -194,6 +195,10 @@ export default function useAuthentication() {
 
   function signOut() {
     clearState();
+
+    if (typeHandle === "educatorPages") {
+      push("/");
+    }
   }
 
   async function register({ email, password, fullName }) {
@@ -312,5 +317,6 @@ export default function useAuthentication() {
     forgotPassword,
     goToGoogleSignIn,
     goToFacebookSignIn,
+    typeHandle,
   };
 }

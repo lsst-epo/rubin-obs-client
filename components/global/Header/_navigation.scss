@@ -114,6 +114,7 @@ $_link-gap: 14px;
   &__link-icon {
     grid-area: icon;
     align-self: center;
+    justify-self: end;
 
     .c-nav-list__link--desktop & {
       margin-left: 8px;
