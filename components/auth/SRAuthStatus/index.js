@@ -11,7 +11,7 @@ export default function SRAnnouncement() {
 
   return (
     <div role="status" className="a-hidden">
-      {isAuthenticated
+      {isAuthenticated && user?.fullName
         ? t("auth.logged_in_as", { name: user.fullName })
         : t("auth.logged_out")}
     </div>

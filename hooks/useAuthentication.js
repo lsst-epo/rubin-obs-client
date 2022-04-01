@@ -11,6 +11,8 @@ import {
   authenticateGoogle,
   authenticateFacebook,
   getFacebookOauthUrl,
+  fetchUser,
+  requestDeletion,
 } from "@/lib/api/auth";
 
 const GOOGLE_APP_ID = process.env.NEXT_PUBLIC_GOOGLE_APP_ID;
@@ -20,6 +22,7 @@ const SESSION_STORAGE_KEYS = [
   "refreshToken",
   "refreshTokenExpiresAt",
   "status",
+  "pendingDeletion",
 ];
 
 function getTokenFromStorage(key) {
@@ -45,6 +48,10 @@ function unstoreTokens() {
   SESSION_STORAGE_KEYS.forEach((key) => sessionStorage.removeItem(key));
 }
 
+function hasPendingDeletion(userData) {
+  return userData?.requestDeletion?.[0] === "requested";
+}
+
 // TODO: store refresh token in cookie so token can be refreshed after browser session ends
 export default function useAuthentication(data) {
   const typeHandle = data?.typeHandle;
@@ -53,6 +60,9 @@ export default function useAuthentication(data) {
   const [token, setToken] = useState(getTokenFromStorage("jwt"));
   const [user, setUser] = useState(getUserFromJwt());
   const [status, setStatus] = useState(getTokenFromStorage("status"));
+  const [pendingDeletion, setPendingDeletion] = useState(
+    getTokenFromStorage("pendingDeletion")
+  );
   const [pendingGroup, setPendingGroup] = useState(
     getTokenFromStorage("pendingGroup") || "students"
   );
@@ -110,6 +120,7 @@ export default function useAuthentication(data) {
     if (jwt) {
       setToken(jwt);
       setStatus(user?.status);
+      setPendingDeletion(hasPendingDeletion(user));
       setUserFromJwt(jwt);
       storeTokens({
         jwt,
@@ -117,6 +128,7 @@ export default function useAuthentication(data) {
         refreshToken,
         refreshTokenExpiresAt,
         status: user?.status,
+        pendingDeletion: hasPendingDeletion(user),
       });
     }
 
@@ -302,13 +314,48 @@ export default function useAuthentication(data) {
       : handleError(data);
   }
 
+  async function fetchUserData() {
+    const freshTokenData = await maybeRefreshToken();
+
+    if (!freshTokenData?.jwt)
+      return { error: true, errorType: "session_expired" };
+
+    const data = await fetchUser(freshTokenData.jwt);
+
+    if (!data?.viewer) return { error: true, errorType: "generic", data };
+
+    setStatus(data.viewer.status);
+    setPendingDeletion(hasPendingDeletion(data.viewer));
+    storeTokens({
+      status: data.viewer.status,
+      pendingDeletion: hasPendingDeletion(data.updateViewer),
+    });
+
+    return data;
+  }
+
+  async function requestAccountDeletion() {
+    const data = await requestDeletion(token);
+
+    if (!data?.updateViewer) return data;
+
+    setPendingDeletion(hasPendingDeletion(data.updateViewer));
+    storeTokens({
+      pendingDeletion: hasPendingDeletion(data.updateViewer),
+    });
+
+    return data;
+  }
+
   return {
     isAuthenticated: !!token,
     user,
     status,
+    pendingDeletion,
     pendingGroup,
     loading,
     error,
+    typeHandle,
     setPendingGroup,
     maybeRefreshToken,
     signIn,
@@ -317,6 +364,7 @@ export default function useAuthentication(data) {
     forgotPassword,
     goToGoogleSignIn,
     goToFacebookSignIn,
-    typeHandle,
+    fetchUserData,
+    requestAccountDeletion,
   };
 }

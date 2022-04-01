@@ -46,6 +46,13 @@ export const Inner = styled.div`
   display: flex;
   background: var(--white);
   max-width: 100vw;
+
+  ${({ $darkMode }) =>
+    $darkMode &&
+    `
+      color: #fff;
+      background-color: #161818;
+    `}
 `;
 
 export const Content = styled.div`
