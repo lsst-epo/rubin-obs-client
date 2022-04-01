@@ -14,6 +14,7 @@ import { getCategoryObject, useGlobalData, usePathData } from "@/lib/utils";
 import NavButtons from "@/components/layout/NavButtons";
 import SubHero from "@/components/page/SubHero";
 import AuthorizePage from "@/components/auth/AuthorizePage";
+import GuideNavigation from "@/components/layout/GuideNavigation";
 
 export default function Page({
   data: {
@@ -90,6 +91,7 @@ export default function Page({
         {breadcrumbs && (
           <Breadcrumbs breadcrumbs={[...breadcrumbs, pageLink]} />
         )}
+        <GuideNavigation />
         {/* Special slideshow component here */}
         {isGalleryHome && (
           <SlideBlock
