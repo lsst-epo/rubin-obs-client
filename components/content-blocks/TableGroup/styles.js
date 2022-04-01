@@ -20,6 +20,7 @@ export const Tab = styled.button`
   font-weight: bold;
   margin-inline-start: 20px;
   margin-block-end: 10px;
+  transition: color 0.2s, background-color 0.2s, border-color 0.2s;
 
   &[aria-selected="true"] {
     background-color: #ff8800;

@@ -10,21 +10,22 @@ export default function ComplexTable({
   const renderTable = () => (
     <Styled.TableWrapper>
       <Styled.Table as="table" $styleAs={styleAs}>
-        <caption className="a-hidden">{plainText}</caption>
-        {complexTable.map((row, i) => (
-          <Styled.TableRow key={i} as="tr">
-            {row.tableRow.map((cell, j) => (
-              <Styled.TableCell
-                as="td"
-                key={cell.id}
-                $row={i + 1}
-                $colWidth={cell.cellWidth}
-                $background={cell.cellBackground}
-                dangerouslySetInnerHTML={{ __html: cell.cellContent }}
-              />
-            ))}
-          </Styled.TableRow>
-        ))}
+        {plainText && <caption className="a-hidden">{plainText}</caption>}
+        <tbody>
+          {complexTable.map((row, i) => (
+            <Styled.TableRow key={i}>
+              {row.tableRow.map((cell, j) => (
+                <Styled.TableCell
+                  key={cell.id}
+                  $row={i + 1}
+                  colspan={cell.cellWidth}
+                  $background={cell.cellBackground}
+                  dangerouslySetInnerHTML={{ __html: cell.cellContent }}
+                />
+              ))}
+            </Styled.TableRow>
+          ))}
+        </tbody>
       </Styled.Table>
     </Styled.TableWrapper>
   );

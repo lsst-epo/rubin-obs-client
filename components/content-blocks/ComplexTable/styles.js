@@ -8,49 +8,34 @@ export const TableWrapper = styled.div`
 
 export const Table = styled.table`
   width: 100%;
+  border-collapse: collapse;
 
   ${({ $styleAs }) =>
     $styleAs === "secondary"
       ? css`
           --ComplexTable-cell-bg: var(--neutral10);
-          --ComplexTable-border: 0;
-          border-spacing: 5px;
+          --ComplexTable-border: 5px solid var(--white);
+          border-style: hidden;
         `
       : css`
           --ComplexTable-border: 1px solid var(--black);
           --ComplexTable-cell-bg: none;
-          border-collapse: collapse;
         `}
 `;
 
-// export const Table = styled.div`
-//   display: grid;
-//   grid-auto-columns: auto;
-//   grid-auto-rows: auto;
-//   grid-auto-flow: dense;
-//   overflow-x: auto;
-//   padding: 1px;
-//   border-collapse: collapse;
-// `;
-
-export const TableRow = styled.div`
+export const TableRow = styled.tr`
   &:nth-child(odd) {
     background-color: var(--neutral10);
   }
 `;
 
-export const TableCell = styled.div`
-  ${({ $row, $background }) =>
+export const TableCell = styled.td`
+  ${({ $background }) =>
     css`
       background-color: ${$background || "var(--ComplexTable-cell-bg)"};
       color: ${$background ? "var(--black)" : "inherit"};
-      grid-row: ${$row};
     `};
-
-  ${({ $colWidth }) => `grid-column: span ${$colWidth};`}
 
   border: var(--ComplexTable-border);
   padding: 20px;
-  margin-block-end: -1px;
-  margin-inline-end: -1px;
 `;

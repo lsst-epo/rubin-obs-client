@@ -5,7 +5,7 @@ import * as Styled from "./styles";
 
 export default function TableGroup({ items }) {
   return (
-    <Container width="regular">
+    <Container width="wide">
       <Tab.Group>
         <Tab.List as={Styled.TabList}>
           {items.map(({ plainText }, i) => (
