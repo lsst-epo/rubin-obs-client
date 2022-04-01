@@ -18,8 +18,8 @@ export default function ComplexTable({
                 <Styled.TableCell
                   key={cell.id}
                   $row={i + 1}
-                  colspan={cell.cellWidth}
                   $background={cell.cellBackground}
+                  colSpan={cell.cellWidth}
                   dangerouslySetInnerHTML={{ __html: cell.cellContent }}
                 />
               ))}
