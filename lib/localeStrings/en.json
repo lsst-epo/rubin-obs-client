@@ -54,7 +54,8 @@
       "submitting": "Submitting...",
       "reset": "Reset form",
       "cancel": "Cancel",
-      "error": "Error:"
+      "error": "Error:",
+      "confirm": "Got it!"
     },
     "filters": {
       "ascending": "Ascending",
@@ -254,7 +255,15 @@
       "submit_success": "Updated!",
       "error": "There was an error fetching your account information.",
       "error_session_expired": "Your session has expired. Please log back in.",
-      "delete": "Delete my account"
+      "error_delete_failed": "There was a problem submitting your deletion request. Reload the page and try again.",
+      "delete": "Delete my account",
+      "delete_pending": "  Submitting…",
+      "delete_confirm_header": "Delete account?",
+      "delete_confirm_description": "We are sorry to see you go, but you are always welcome to come back. We’ll be here for you, with free of charge investigations for everybody. <0>Are you sure you want to delete your account?</0>",
+      "delete_success_header": "Your request to delete your account has been accepted",
+      "delete_success_description": "We have received your request. An administrator will delete your account promptly.",
+      "delete_confirm_label": "Yes, delete it!",
+      "delete_error_header": "Error!"
     },
     "glossary": {
       "back_button": "Go back to Glossary"
@@ -266,6 +275,8 @@
       "message_restricted": "This content is not available to you. If you think this is in error, please send us an email to <0>webmaster@lsst.org</0>.",
       "header_not_authorized": "Content not available",
       "message_not_authorized": "You must log in to access this page.",
+      "header_deletion_pending": "Content not available",
+      "message_deletion_pending": "You have requested to delete your account. This process is pending. If you think you are seeing this message in error, please send us an email to <0>webmaster@lsst.org</0>.",
       "button_confirm": "Got it!"
     }
   }

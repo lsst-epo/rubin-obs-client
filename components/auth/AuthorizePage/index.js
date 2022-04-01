@@ -11,22 +11,29 @@ function isAuthorized(typeHandle, user) {
   return true;
 }
 
+function getRestrictedContext(pending, pendingDeletion, isAuthenticated) {
+  if (pendingDeletion) return "deletion_pending";
+  if (pending) return "approval_pending";
+  if (isAuthenticated) return "restricted";
+  return "not_authorized";
+}
+
 export default function AuthorizePage({ children }) {
   const { t } = useTranslation();
-  const { isAuthenticated, user, status, typeHandle } =
+  const { isAuthenticated, user, status, pendingDeletion, typeHandle } =
     useAuthenticationContext();
   const { openModal } = useAuthModal();
 
   // Check the user type against the page type
-  const authorized = isAuthorized(typeHandle, user);
+  const authorized = !pendingDeletion && isAuthorized(typeHandle, user);
 
   const pending = typeHandle === "educatorPages" && status === "pending";
 
-  const context = pending
-    ? "approval_pending"
-    : isAuthenticated
-    ? "restricted"
-    : "not_authorized";
+  const context = getRestrictedContext(
+    pending,
+    pendingDeletion,
+    isAuthenticated
+  );
 
   // Show child content if authorized
   return authorized ? (

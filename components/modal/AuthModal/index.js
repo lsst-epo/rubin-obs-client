@@ -3,7 +3,13 @@ import Image from "next/image";
 import IconComposer from "@/components/svg/IconComposer";
 import * as Styled from "./styles";
 
-export default function AuthModal({ children, image, open = false, onClose }) {
+export default function AuthModal({
+  children,
+  image,
+  open = false,
+  onClose,
+  darkMode = false,
+}) {
   const imageProps =
     image === "students"
       ? {
@@ -22,7 +28,7 @@ export default function AuthModal({ children, image, open = false, onClose }) {
   return (
     <Styled.Dialog open={open} onClose={() => onClose()}>
       <Styled.Overlay />
-      <Styled.Inner>
+      <Styled.Inner $darkMode={darkMode}>
         <Styled.CloseButton type="button" aria-label="Close" onClick={onClose}>
           <IconComposer icon="close" />
         </Styled.CloseButton>
@@ -47,4 +53,5 @@ AuthModal.propTypes = {
   open: PropTypes.bool,
   onClose: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
+  darkMode: PropTypes.bool,
 };

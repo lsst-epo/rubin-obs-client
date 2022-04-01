@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import Body from "@/global/Body";
 import Container from "@/components/layout/Container";
 import IconComposer from "@/components/svg/IconComposer";
 import AuthorizePage from "@/components/auth/AuthorizePage";
-import { Button } from "@/components/atomic";
 import { useAuthenticationContext } from "@/contexts/Authentication";
-import { fetchUser, suspendUser } from "@/lib/api/auth";
+import { Button } from "@/components/atomic";
+import { BasicModal, ConfirmModal } from "@/components/modal";
 import ProfilePreferencesForm from "./ProfilePreferencesForm";
 import PasswordForm from "./PasswordForm";
 import * as Styled from "./styles";
@@ -16,15 +16,18 @@ function UserProfilePageTemplate({
   data: { id, title, text, uri, typeHandle },
 }) {
   const { t } = useTranslation();
-  const { maybeRefreshToken } = useAuthenticationContext();
+  const { maybeRefreshToken, fetchUserData, requestAccountDeletion } =
+    useAuthenticationContext();
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState(null);
+  const [showModal, setShowModal] = useState(null);
+  const [isSubmittingDelete, setIsSubmittingDelete] = useState(false);
 
   const isLoading = !userData && !error;
 
   useEffect(() => {
     (async () => {
-      const data = await fetchUser(maybeRefreshToken);
+      const data = await fetchUserData();
       if (data?.viewer) {
         setUserData(data.viewer);
       } else if (data?.error) {
@@ -33,9 +36,18 @@ function UserProfilePageTemplate({
     })();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  async function onDeleteClick() {
-    const response = await suspendUser(maybeRefreshToken);
-    console.info(response);
+  async function onConfirmDelete() {
+    setIsSubmittingDelete(true);
+
+    const response = await requestAccountDeletion();
+
+    if (!response.updateViewer) {
+      setShowModal("error");
+      setIsSubmittingDelete(false);
+    } else {
+      setShowModal("success");
+      setIsSubmittingDelete(false);
+    }
   }
 
   return (
@@ -47,9 +59,14 @@ function UserProfilePageTemplate({
               <IconComposer icon="userInverted" />
               <span>{title}</span>
             </Styled.PageTitle>
-            <Button onClick={onDeleteClick} styleAs="tertiary">
-              {t("account.delete")}
-            </Button>
+            {userData && (
+              <Button
+                onClick={() => setShowModal("confirm")}
+                styleAs="tertiary"
+              >
+                {t("account.delete")}
+              </Button>
+            )}
           </Styled.Header>
           <div aria-live="polite" aria-atomic={false} aria-busy={isLoading}>
             {isLoading && (
@@ -84,6 +101,38 @@ function UserProfilePageTemplate({
           </div>
         </Container>
       </AuthorizePage>
+      {showModal === "confirm" && (
+        <ConfirmModal
+          header={t("account.delete_confirm_header")}
+          description={
+            <Trans
+              i18nKey="account.delete_confirm_description"
+              components={[<strong key="bold"></strong>]}
+            />
+          }
+          confirmLabel={
+            isSubmittingDelete
+              ? t("account.delete_pending")
+              : t("account.delete_confirm_label")
+          }
+          onConfirm={onConfirmDelete}
+          onClose={() => setShowModal(null)}
+        />
+      )}
+      {showModal === "success" && (
+        <BasicModal
+          header={t("account.delete_success_header")}
+          description={t("account.delete_success_description")}
+          onClose={() => setShowModal(null)}
+        />
+      )}
+      {showModal === "error" && (
+        <BasicModal
+          header={t("account.delete_error_header")}
+          description={t("account.error", { context: "delete_failed" })}
+          onClose={() => setShowModal(null)}
+        />
+      )}
     </Body>
   );
 }
