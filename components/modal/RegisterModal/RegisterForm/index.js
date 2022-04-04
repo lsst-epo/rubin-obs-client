@@ -74,12 +74,20 @@ export default function RegisterForm({ onCancel }) {
             {...register("email")}
           />
         </FormField>
-        <FormField htmlFor="registerName" label="form.your_name" required>
+        <FormField htmlFor="registerFirstName" label="form.first_name" required>
           <Input
-            id="registerName"
+            id="registerFirstName"
             type="text"
-            autoComplete="name"
-            {...register("fullName")}
+            autoComplete="given-name"
+            {...register("firstName")}
+          />
+        </FormField>
+        <FormField htmlFor="registerLastName" label="form.last_name" required>
+          <Input
+            id="registerLastName"
+            type="text"
+            autoComplete="family-name"
+            {...register("lastName")}
           />
         </FormField>
         <FormField

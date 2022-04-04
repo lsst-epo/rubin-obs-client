@@ -213,16 +213,9 @@ export default function useAuthentication(data) {
     }
   }
 
-  async function register({ email, password, fullName }) {
-    if (!fullName) return;
-
+  async function register({ email, password, firstName, lastName }) {
     setLoading(true);
     setError(false);
-
-    const name = fullName.split(" ");
-    const firstName = name[0];
-    const lastName =
-      name.length > 1 ? fullName.slice(firstName.length + 1) : "";
 
     const registerMethod =
       pendingGroup === "educators" ? registerEducator : registerStudent;
