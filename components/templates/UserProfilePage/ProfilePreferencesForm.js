@@ -42,6 +42,8 @@ function ProfilePreferencesForm({ userData, maybeRefreshToken, onSuccess }) {
   } = useForm({
     defaultValues: {
       email: userData.email || "",
+      firstName: userData.firstName || "",
+      lastName: userData.lastName || "",
       school: userData.school || "",
       preferredLanguage: userData.preferredLanguage || "en",
       emailSubscription: userData.emailSubscription || [],
@@ -106,14 +108,43 @@ function ProfilePreferencesForm({ userData, maybeRefreshToken, onSuccess }) {
           label="form.email"
           error={errors?.email?.message}
         >
-          <Input id="accountEmail" {...register("email")} />
+          <Input
+            id="accountEmail"
+            type="email"
+            autoComplete="email"
+            {...register("email")}
+          />
+        </Styled.ResponsiveField>
+        <Styled.ResponsiveField
+          htmlFor="accountFirstName"
+          label="form.first_name"
+          error={errors?.firstName?.message}
+        >
+          <Input
+            id="accountFirstName"
+            type="text"
+            autoComplete="given-name"
+            {...register("firstName")}
+          />
+        </Styled.ResponsiveField>
+        <Styled.ResponsiveField
+          htmlFor="accountLastName"
+          label="form.last_name"
+          error={errors?.lastName?.message}
+        >
+          <Input
+            id="accountLastName"
+            type="text"
+            autoComplete="family-name"
+            {...register("lastName")}
+          />
         </Styled.ResponsiveField>
         <Styled.ResponsiveField
           htmlFor="accountSchool"
           label="form.school"
           error={errors?.school?.message}
         >
-          <Input id="accountSchool" {...register("school")} />
+          <Input id="accountSchool" type="text" {...register("school")} />
         </Styled.ResponsiveField>
       </Styled.Section>
       <Styled.Section>
