@@ -61,7 +61,7 @@ export default function useAuthentication(data) {
   const [user, setUser] = useState(getUserFromJwt());
   const [status, setStatus] = useState(getTokenFromStorage("status"));
   const [pendingDeletion, setPendingDeletion] = useState(
-    getTokenFromStorage("pendingDeletion")
+    getTokenFromStorage("pendingDeletion") === "true"
   );
   const [pendingGroup, setPendingGroup] = useState(
     getTokenFromStorage("pendingGroup") || "students"
