@@ -45,7 +45,6 @@
       "confirm_password": "Confirm new password",
       "show_password": "Show password",
       "hide_password": "Hide password",
-      "your_name": "Your name (required)",
       "create_password": "Create a password (required)",
       "create_password_instructions": "Passwords should be at least 8 characters long and should contain a mixture of letters, numbers, and other characters.",
       "school": "School",
