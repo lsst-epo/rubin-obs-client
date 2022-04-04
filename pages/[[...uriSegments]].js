@@ -114,6 +114,7 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
       language: entryData?.language || entryData?.entry?.language || "",
       localized: entryData?.localized || entryData?.entry?.localized || [],
     },
+    userProfilePage: data?.[`userProfilePage${isEspanol ? "_es" : ""}`] || {},
   };
 
   // Handle 404 if there is no data
@@ -146,6 +147,7 @@ Page.propTypes = {
     localeInfo: PropTypes.object,
     rootPages: rootPagesShape,
     siteInfo: siteInfoShape,
+    userProfilePage: PropTypes.object,
   }),
   breadcrumbs: PropTypes.arrayOf(internalLinkShape),
 };

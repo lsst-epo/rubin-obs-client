@@ -18,7 +18,7 @@ import LanguageSelect from "./LanguageSelect";
 import UserNavigation from "./UserNav";
 import SRAuthStatus from "../../auth/SRAuthStatus";
 
-export default function Header({ navItems }) {
+export default function Header({ navItems, userProfilePage }) {
   const [mobileNavActive, setMobileNavActive] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
@@ -68,7 +68,10 @@ export default function Header({ navItems }) {
         {!mobileNavActive && <LanguageSelect />}
       </div>
       <div className="c-global-header__user-nav-block">
-        <UserNavigation headerVisible={visible} />
+        <UserNavigation
+          headerVisible={visible}
+          userProfilePage={userProfilePage}
+        />
       </div>
       <div className="c-global-header__hamburger-block">
         <Hamburger
@@ -78,6 +81,7 @@ export default function Header({ navItems }) {
       </div>
       <Navigation
         items={navItems}
+        userProfilePage={userProfilePage}
         theme="mobile"
         mobileActive={mobileNavActive}
         mobileSetter={setMobileNavActive}
@@ -94,4 +98,5 @@ Header.displayName = "Global.Header";
 
 Header.propTypes = {
   navItems: PropTypes.arrayOf(internalLinkShape),
+  userProfilePage: PropTypes.object,
 };
