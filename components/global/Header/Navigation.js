@@ -11,6 +11,7 @@ import NavItemWithChildren from "./NavItemWithChildren";
 
 export default function Navigation({
   items,
+  userProfilePage,
   theme,
   mobileActive,
   mobileSetter,
@@ -97,8 +98,8 @@ export default function Navigation({
                     onClick={() => {
                       setActive(null);
                     }}
-                    href="/account"
-                    title={t("auth.account")}
+                    href={userProfilePage.uri}
+                    title={userProfilePage.title}
                     theme={theme}
                     className="a-bg-turquoise50 a-show-mobile"
                     icon="account"
@@ -152,6 +153,7 @@ Navigation.displayName = "Header.Navigation";
 
 Navigation.propTypes = {
   items: PropTypes.arrayOf(internalLinkWithChildrenShape),
+  userProfilePage: PropTypes.object,
   theme: PropTypes.oneOf(["desktop", "mobile"]),
   mobileActive: PropTypes.bool,
   mobileSetter: PropTypes.func,

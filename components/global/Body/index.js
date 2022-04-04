@@ -9,7 +9,7 @@ import imageShape from "@/shapes/image";
 export default function Body({ children, description, featuredImage, title }) {
   return (
     <GlobalDataContext.Consumer>
-      {({ siteInfo, headerNavItems, footerContent }) => {
+      {({ siteInfo, headerNavItems, userProfilePage, footerContent }) => {
         const {
           siteTitle,
           siteDescription,
@@ -30,7 +30,10 @@ export default function Body({ children, description, featuredImage, title }) {
               siteInfo={siteInfo}
             />
             <WideWidthContainer>
-              <Header navItems={headerNavItems} />
+              <Header
+                navItems={headerNavItems}
+                userProfilePage={userProfilePage}
+              />
               <main id="page-content">{children}</main>
               <Footer socialInfo={socialInfo} content={footerContent} />
             </WideWidthContainer>

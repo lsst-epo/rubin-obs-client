@@ -11,6 +11,6 @@ const rootPagesShape = PropTypes.arrayOf(
       })
     ),
   })
-).isRequired;
+);
 
 export default rootPagesShape;

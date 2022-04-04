@@ -40,6 +40,8 @@ export default function Error({ statusCode }) {
       localeInfo: {
         locale: lang,
       },
+      userProfilePage:
+        data?.[`userProfilePage${lang === "es" ? "_es" : ""}`] || {},
     };
   }
 

@@ -6,7 +6,7 @@ import IconComposer from "@/svg/IconComposer";
 import { useAuthenticationContext } from "@/contexts/Authentication";
 import * as Styled from "./styles";
 
-function UserNav({ headerVisible }) {
+function UserNav({ headerVisible, userProfilePage }) {
   const { openModal } = useAuthModal();
   const { t } = useTranslation();
   const { isAuthenticated, signOut } = useAuthenticationContext();
@@ -34,9 +34,9 @@ function UserNav({ headerVisible }) {
                   }}
                 >
                   <Styled.SubnavItem>
-                    <Styled.SubnavLink as="a" href="./account">
+                    <Styled.SubnavLink as="a" href={userProfilePage.uri}>
                       <IconComposer icon="account" />
-                      {t("auth.account")}
+                      {userProfilePage.title}
                     </Styled.SubnavLink>
                   </Styled.SubnavItem>
                   <Styled.SubnavItem>
@@ -73,6 +73,7 @@ UserNav.displayName = "Global.Header.UserNav";
 
 UserNav.propTypes = {
   headerVisible: PropTypes.bool,
+  userProfilePage: PropTypes.object,
 };
 
 export default UserNav;
