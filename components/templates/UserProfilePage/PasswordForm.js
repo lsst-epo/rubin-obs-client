@@ -24,8 +24,15 @@ function PasswordForm({ maybeRefreshToken }) {
     register,
     handleSubmit,
     setError,
+    clearErrors,
     reset,
-    formState: { errors, isDirty, isSubmitting, isSubmitSuccessful },
+    formState: {
+      errors,
+      isDirty,
+      submitCount,
+      isSubmitting,
+      isSubmitSuccessful,
+    },
   } = useForm();
   const [submitLabel, setSubmitLabel] = useState(t("account.submit_password"));
 
@@ -35,11 +42,24 @@ function PasswordForm({ maybeRefreshToken }) {
     reset();
     setSubmitLabel(t("account.submit_success"));
     setTimeout(() => setSubmitLabel(t("account.submit_password")), 2500);
-  }, [isSubmitSuccessful, reset, t]);
+  }, [isSubmitSuccessful]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // runs on a failed form submission
+  useEffect(() => {
+    if (isSubmitSuccessful || submitCount < 1) return;
+
+    reset(null, { keepErrors: true, keepValues: true, keepSubmitCount: true });
+    setSubmitLabel(t("account.submit_password"));
+  }, [isSubmitSuccessful, submitCount]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (isSubmitting) setSubmitLabel(t("account.submit_pending"));
-  }, [isSubmitting, t]);
+  }, [isSubmitting]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // clear form errors when fields are modified after failed form submission
+  useEffect(() => {
+    if (submitCount >= 1 && isDirty) clearErrors();
+  }, [isDirty]); // eslint-disable-line react-hooks/exhaustive-deps
 
   async function onSubmit(data) {
     const response = await updatePassword({
@@ -82,6 +102,7 @@ function PasswordForm({ maybeRefreshToken }) {
           <Password
             id="accountCurrentPassword"
             autoComplete="current-password"
+            required
             {...register("currentPassword")}
           />
         </Styled.ResponsiveField>
@@ -93,6 +114,7 @@ function PasswordForm({ maybeRefreshToken }) {
           <Password
             id="accountNewPassword"
             autoComplete="new-password"
+            required
             {...register("newPassword")}
           />
         </Styled.ResponsiveField>
@@ -104,6 +126,7 @@ function PasswordForm({ maybeRefreshToken }) {
           <Password
             id="accountConfirmPassword"
             autoComplete="new-password"
+            required
             {...register("confirmPassword")}
           />
         </Styled.ResponsiveField>
