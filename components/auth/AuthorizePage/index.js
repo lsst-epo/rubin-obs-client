@@ -5,15 +5,15 @@ import { useAuthenticationContext } from "@/contexts/Authentication";
 import Container from "@/components/layout/Container";
 import { Button, Buttonish } from "@/components/atomic";
 
-function isAuthorized(typeHandle, user) {
+function isAuthorized(typeHandle, user, status) {
   if (typeHandle === "educatorPages") return user?.group === "educators";
-  if (typeHandle === "userProfilePage") return !!user;
+  if (typeHandle === "userProfilePage") return !!user && status === "active";
   return true;
 }
 
-function getRestrictedContext(pending, pendingDeletion, isAuthenticated) {
+function getRestrictedContext(status, pendingDeletion, isAuthenticated) {
   if (pendingDeletion) return "deletion_pending";
-  if (pending) return "approval_pending";
+  if (status === "pending") return "approval_pending";
   if (isAuthenticated) return "restricted";
   return "not_authorized";
 }
@@ -25,12 +25,10 @@ export default function AuthorizePage({ children }) {
   const { openModal } = useAuthModal();
 
   // Check the user type against the page type
-  const authorized = !pendingDeletion && isAuthorized(typeHandle, user);
-
-  const pending = typeHandle === "educatorPages" && status === "pending";
+  const authorized = !pendingDeletion && isAuthorized(typeHandle, user, status);
 
   const context = getRestrictedContext(
-    pending,
+    status,
     pendingDeletion,
     isAuthenticated
   );
