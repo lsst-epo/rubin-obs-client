@@ -209,9 +209,26 @@
       "instructions": "Enter your email to reset your password",
       "submit": "Reset password",
       "success": "Success!",
-      "success_message": "We’ve sent you a link to <0>{{email}}</0> with instructions to reset your password",
+      "success_message": "We’ve sent you a link to <0>{{email}}</0> with instructions to reset your password.",
       "error": "Error!",
       "error_message": "There was an error resetting your password.",
+      "confirm_button": "Got it!"
+    },
+    "set_password": {
+      "header": "Create a new password",
+      "submit": "Submit",
+      "success": "Success!",
+      "success_message": "Your password has been updated.",
+      "error": "Error!",
+      "error_message": "There was an error updating your password.",
+      "confirm_button": "Got it!"
+    },
+    "activate": {
+      "success": "Success!",
+      "success_message": "Your account has been activated.",
+      "error": "Error!",
+      "error_message": "There was an error activating your account.",
+      "loading": "Activating your account…",
       "confirm_button": "Got it!"
     },
     "join": {
@@ -233,14 +250,20 @@
       "instructions_students": "Please provide the following to create a student account",
       "instructions_educators": "Please provide the following to create an educator account",
       "submit_button": "Sign Up",
-      "success_students": "Success!",
-      "success_message_students": "Your account has been successfully created! Enjoy access to real astronomy data and tools. <0>Free of charge forever.</0>",
-      "success_educators": "Approval pending",
-      "success_message_educators": "Your account is now created, but approval is pending. You’ll receive an email notification once it is approved and ready to enjoy access to real astronomy data and tools. <0>Free of charge forever.</0>",
+      "success_students": "Activation pending",
+      "success_message_students": "Your account is now created, but activation is pending. You’ll receive an email with instructions to activate your account and enjoy access to real astronomy data and tools. <0>Free of charge forever.</0>",
+      "success_educators": "Activation pending",
+      "success_message_educators": "Your account is now created, but activation is pending. You’ll receive an email with instructions to activate your account and enjoy access to real astronomy data and tools. <0>Free of charge forever.</0>",
       "confirm_button": "Got it!",
       "loading": "Registering…",
       "error": "Error!",
       "error_message": "There was an error signing you in with {{service}}."
+    },
+    "sso": {
+      "success": "Success!",
+      "success_pending": "Activation pending",
+      "success_message": "You are signed in as {{username}}.",
+      "success_message_pending": "Your account is now created, but activation is pending. You’ll receive an email with instructions to activate your account and enjoy access to real astronomy data and tools. <0>Free of charge forever.</0>"
     },
     "account": {
       "header": "Account",

@@ -7,6 +7,8 @@ import {
   registerEducator,
   registerStudent,
   forgottenPassword,
+  setNewPassword,
+  activate,
   refreshJWT,
   authenticateGoogle,
   authenticateFacebook,
@@ -271,6 +273,28 @@ export default function useAuthentication(data) {
       : handleError(data);
   }
 
+  async function setPassword({ password, code, id }) {
+    setLoading(true);
+    setError(false);
+
+    const data = await setNewPassword({ password, code, id });
+
+    return data?.setPassword
+      ? handleSuccess(data.setPassword)
+      : handleError(data);
+  }
+
+  async function activateUser({ code, id }) {
+    setLoading(true);
+    setError(false);
+
+    const data = await activate({ code, id });
+
+    return data?.activateUser
+      ? handleSuccess(data.activateUser)
+      : handleError(data);
+  }
+
   /**
    * Gets the google user's auth token and signs in using the auth plugin
    * @param idToken: The auth code returned by Google after a sucessful sign in
@@ -380,6 +404,8 @@ export default function useAuthentication(data) {
     signOut,
     register,
     forgotPassword,
+    setPassword,
+    activateUser,
     goToGoogleSignIn,
     goToFacebookSignIn,
     fetchUserData,
