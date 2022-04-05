@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { fluidScale } from "@/styles/globalStyles";
 
 export const TableWrapper = styled.div`
   max-width: 100vw;
@@ -38,7 +39,9 @@ export const TableCell = styled.td`
       color: ${$background ? "var(--black)" : "inherit"};
     `};
 
+  min-width: ${fluidScale("180px", "110px")};
   border: var(--ComplexTable-border);
   padding: 20px;
+  text-align: inherit;
   vertical-align: var(--ComplexTable-vertical-align);
 `;

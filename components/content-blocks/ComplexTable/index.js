@@ -16,6 +16,7 @@ export default function ComplexTable({
             <Styled.TableRow key={i}>
               {row.tableRow.map((cell, j) => (
                 <Styled.TableCell
+                  as={i === 0 ? "th" : "td"}
                   key={cell.id}
                   $row={i + 1}
                   $background={cell.cellBackground}
