@@ -10,7 +10,7 @@
     "dev": "npm-run-all --parallel dev:*",
     "dev:next": "next dev",
     "static": "npm-run-all static:*",
-    "static:build": "next build",
+    "static:build": "next build --debug",
     "static:export": "next export",
     "start": "next start -p 8080",
     "lint": "npm-run-all lint:*",
