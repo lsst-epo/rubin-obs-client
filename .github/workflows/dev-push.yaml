@@ -1,5 +1,4 @@
-# Builds, pushes, and deploys the Skyviewer API container
-name: 'Build and deploy Skyviewer Client to Google App Engine in Dev'
+name: 'Rubin Obs Client to Dev GAE'
 
 on:
   push:

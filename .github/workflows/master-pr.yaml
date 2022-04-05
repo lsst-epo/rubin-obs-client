@@ -1,5 +1,4 @@
-  # Builds, pushes, and deploys the Rubin Main Site container
-name: 'Build and deploy branch-tagged Rubin Main Site in Integration'
+name: 'Rubin Obs Client PR preview to Int GAE'
 
 on:
   pull_request:

@@ -1,5 +1,4 @@
-  # Builds, pushes, and deploys the rubin-obs-client container
-name: 'Build and deploy branch-tagged rubin-obs-client in Dev'
+name: 'Rubin Obs Client PR preview to Dev GAE'
 
 on:
   pull_request:
