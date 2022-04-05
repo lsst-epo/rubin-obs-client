@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 export const TableWrapper = styled.div`
   max-width: 100vw;
   width: 100%;
-  overflow: scroll;
+  overflow: auto;
 `;
 
 export const Table = styled.table`
@@ -15,11 +15,13 @@ export const Table = styled.table`
       ? css`
           --ComplexTable-cell-bg: var(--neutral10);
           --ComplexTable-border: 5px solid var(--white);
+          --ComplexTable-vertical-align: middle;
           border-style: hidden;
         `
       : css`
           --ComplexTable-border: 1px solid var(--black);
           --ComplexTable-cell-bg: none;
+          --ComplexTable-vertical-align: baseline;
         `}
 `;
 
@@ -38,4 +40,5 @@ export const TableCell = styled.td`
 
   border: var(--ComplexTable-border);
   padding: 20px;
+  vertical-align: var(--ComplexTable-vertical-align);
 `;
