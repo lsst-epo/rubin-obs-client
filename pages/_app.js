@@ -12,6 +12,8 @@ import styles from "@/styles/styles.scss";
 function Client({ Component, pageProps }) {
   const authData = useAuthentication({
     typeHandle: pageProps?.data?.typeHandle || "",
+    language: pageProps?.data?.language || "en-US",
+    localized: pageProps?.data?.localized || [],
   });
 
   return (
