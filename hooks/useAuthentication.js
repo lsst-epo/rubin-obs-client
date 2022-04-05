@@ -61,8 +61,6 @@ function normalizeLanguage(language) {
 
 // TODO: store refresh token in cookie so token can be refreshed after browser session ends
 export default function useAuthentication(data) {
-  const typeHandle = data?.typeHandle;
-
   const { query, push } = useRouter();
 
   const [token, setToken] = useState(getTokenFromStorage("jwt"));
@@ -234,10 +232,6 @@ export default function useAuthentication(data) {
 
   function signOut() {
     clearState();
-
-    if (typeHandle === "educatorPages" || typeHandle === "userProfilePage") {
-      push("/");
-    }
   }
 
   async function register({ email, password, firstName, lastName }) {
@@ -377,7 +371,6 @@ export default function useAuthentication(data) {
     pendingGroup,
     loading,
     error,
-    typeHandle,
     setPendingGroup,
     maybeRefreshToken,
     signIn,
