@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import { useAuthenticationContext } from "@/contexts/Authentication";
 import useAuthModal from "@/hooks/useAuthModal";
 import { Button } from "@/components/atomic";
@@ -11,7 +11,8 @@ export default function SSOModal() {
 
   const { closeModal } = useAuthModal();
 
-  const { isAuthenticated, user, error, loading } = useAuthenticationContext();
+  const { isAuthenticated, user, status, error, loading } =
+    useAuthenticationContext();
 
   const { t } = useTranslation();
 
@@ -29,11 +30,20 @@ export default function SSOModal() {
         service,
       })}
     >
-      {isAuthenticated && ( // included only in case a user inadvertently reopens the modal
+      {isAuthenticated && (
         <>
-          <AuthModal.Title>{t("sign_in.success")}</AuthModal.Title>
+          <AuthModal.Title>
+            {status === "pending" ? t("sso.success_pending") : t("sso.success")}
+          </AuthModal.Title>
           <AuthModal.Description>
-            {t("sign_in.success_message", { username: user?.email })}
+            {status === "pending" ? (
+              <Trans
+                i18nKey="sso.success_message_pending"
+                components={[<strong key="bold"></strong>]}
+              />
+            ) : (
+              t("sso.success_message", { username: user?.email })
+            )}
           </AuthModal.Description>
           <Styled.FormButtons>
             <Button onClick={onClose}>{t("register.confirm_button")}</Button>
