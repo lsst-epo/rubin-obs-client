@@ -6,10 +6,14 @@ import { useTranslation } from "react-i18next";
 import Logo from "@/svg/unique/Logo";
 import internalLinkShape from "@/shapes/link";
 import { useGlobalData, useNavHider } from "@/lib/utils";
-import SignInModal from "@/components/modal/SignInModal";
-import RegisterModal from "@/components/modal/RegisterModal";
-import SSOModal from "@/components/modal/SSOModal";
-import ForgotPasswordModal from "@/components/modal/ForgotPasswordModal";
+import {
+  SignInModal,
+  RegisterModal,
+  SSOModal,
+  ForgotPasswordModal,
+  SetPasswordModal,
+  ActivateModal,
+} from "@/components/modal";
 import { tokens } from "@/styles/globalStyles";
 import Navigation from "./Navigation";
 import SearchBar from "./SearchBar";
@@ -90,6 +94,8 @@ export default function Header({ navItems, userProfilePage }) {
       <RegisterModal />
       <SSOModal />
       <ForgotPasswordModal />
+      <SetPasswordModal />
+      <ActivateModal />
     </header>
   );
 }
