@@ -1,9 +1,7 @@
 name: 'Rubin Obs Client to Prod GAE'
 
 on:
-  push:
-    branches:
-      - 'master'
+  creaste:
     tags:
       - '*'
 
