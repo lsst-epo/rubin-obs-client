@@ -1,6 +1,8 @@
+import { useEffect } from "react";
 import PropTypes from "prop-types";
 import { Trans, useTranslation } from "react-i18next";
-import { useAuthModal } from "@/hooks";
+import { useRouter } from "next/router";
+import { useAuthModal, useIsMounted } from "@/hooks";
 import { useAuthenticationContext } from "@/contexts/Authentication";
 import Container from "@/components/layout/Container";
 import { Button, Buttonish } from "@/components/atomic";
@@ -18,11 +20,13 @@ function getRestrictedContext(status, pendingDeletion, isAuthenticated) {
   return "not_authorized";
 }
 
-export default function AuthorizePage({ children }) {
+export default function AuthorizePage({ typeHandle, children }) {
   const { t } = useTranslation();
-  const { isAuthenticated, user, status, pendingDeletion, typeHandle } =
+  const { isAuthenticated, user, status, pendingDeletion } =
     useAuthenticationContext();
   const { openModal } = useAuthModal();
+  const router = useRouter();
+  const mounted = useIsMounted();
 
   // Check the user type against the page type
   const authorized = !pendingDeletion && isAuthorized(typeHandle, user, status);
@@ -32,6 +36,13 @@ export default function AuthorizePage({ children }) {
     pendingDeletion,
     isAuthenticated
   );
+
+  // redirect to homepage when a user is no longer authenticated (signs out)
+  useEffect(() => {
+    if (!mounted || isAuthenticated) return;
+
+    router.push("/");
+  }, [isAuthenticated]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Show child content if authorized
   return authorized ? (
