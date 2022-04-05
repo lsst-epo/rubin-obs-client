@@ -72,8 +72,7 @@
     "striptags": "^3.2.0",
     "styled-components": "^5.3.3",
     "swr": "^1.2.2",
-    "use-resize-observer": "^8.0.0",
-    "yarn": "^1.22.17"
+    "use-resize-observer": "^8.0.0"
   },
   "devDependencies": {
     "@castiron/eslint-config": "^0.0.1",
