@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -21,7 +21,8 @@ export default function SignInModal() {
     register,
     handleSubmit,
     setError,
-    formState: { errors, isDirty, isSubmitting },
+    reset,
+    formState: { errors, isDirty, isSubmitting, isSubmitSuccessful },
   } = useForm();
 
   const {
@@ -31,6 +32,10 @@ export default function SignInModal() {
     goToFacebookSignIn,
     goToGoogleSignIn,
   } = useAuthenticationContext();
+
+  useEffect(() => {
+    if (isSubmitSuccessful) reset();
+  }, [isSubmitSuccessful, reset]);
 
   const onSubmit = async (data) => {
     if (!data.email || !data.password) return;
