@@ -24,6 +24,7 @@ const SESSION_STORAGE_KEYS = [
   "status",
   "pendingDeletion",
 ];
+const CRAFT_HOMEPAGE_URI = "__home__";
 
 function getTokenFromStorage(key) {
   if (typeof window === "undefined") return null;
@@ -52,9 +53,16 @@ function hasPendingDeletion(userData) {
   return userData?.requestDeletion?.[0] === "requested";
 }
 
+function normalizeLanguage(language) {
+  if (language !== "en" && language !== "es") return null;
+  if (language === "en") return "en-US";
+  return language;
+}
+
 // TODO: store refresh token in cookie so token can be refreshed after browser session ends
 export default function useAuthentication(data) {
   const typeHandle = data?.typeHandle;
+
   const { query, push } = useRouter();
 
   const [token, setToken] = useState(getTokenFromStorage("jwt"));
@@ -105,6 +113,8 @@ export default function useAuthentication(data) {
     setToken(null);
     setUser(null);
     setStatus(null);
+    setPendingDeletion(false);
+    setPendingGroup("students");
     setLoading(false);
     setError(false);
     unstoreTokens();
@@ -139,6 +149,20 @@ export default function useAuthentication(data) {
     setError(true);
     setLoading(false);
     return data;
+  }
+
+  function maybeRedirectToPreferredLanguage(preferredLanguage) {
+    const newlanguage = normalizeLanguage(preferredLanguage);
+
+    if (!newlanguage || data?.language === newlanguage) return;
+
+    const localized = data?.localized ?? [];
+    const newLocale = localized.find(
+      (locale) => locale.language === newlanguage
+    );
+    const uri = newLocale?.uri;
+
+    push(uri === CRAFT_HOMEPAGE_URI ? "/" : uri);
   }
 
   function getUserFromJwt(jwt = getTokenFromStorage("jwt")) {
@@ -200,9 +224,12 @@ export default function useAuthentication(data) {
 
     const data = await authenticate({ email, password, token });
 
-    return data?.authenticate
-      ? handleSuccess(data.authenticate)
-      : handleError(data);
+    if (!data?.authenticate) return handleError(data);
+
+    maybeRedirectToPreferredLanguage(
+      data.authenticate?.user?.preferredLanguage
+    );
+    return handleSuccess(data.authenticate);
   }
 
   function signOut() {
@@ -265,9 +292,10 @@ export default function useAuthentication(data) {
         ? "googleSignInEducators"
         : "googleSignInStudents";
 
-    return data?.[returnRole]
-      ? handleSuccess(data[returnRole])
-      : handleError(data);
+    if (!data?.[returnRole]) return handleError(data);
+
+    maybeRedirectToPreferredLanguage(data[returnRole]?.user?.preferredLanguage);
+    return handleSuccess(data[returnRole]);
   }
 
   /**
@@ -302,9 +330,10 @@ export default function useAuthentication(data) {
         ? "facebookSignInEducators"
         : "facebookSignInStudents";
 
-    return data?.[returnRole]
-      ? handleSuccess(data[returnRole])
-      : handleError(data);
+    if (!data?.[returnRole]) return handleError(data);
+
+    maybeRedirectToPreferredLanguage(data[returnRole]?.user?.preferredLanguage);
+    return handleSuccess(data[returnRole]);
   }
 
   async function fetchUserData() {
