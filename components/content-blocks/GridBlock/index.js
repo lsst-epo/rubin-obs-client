@@ -8,6 +8,18 @@ import MainGrid from "./MainGrid";
 import NewsGrid from "./NewsGrid";
 import { fluidScale } from "@/styles/globalStyles";
 
+function getLimit(numberOfItems) {
+  switch (numberOfItems) {
+    // due to a mistaken default value in the CMS,
+    // we treat "all" as === "none"
+    case "all":
+    case "none":
+      return 0;
+    default:
+      return parseInt(numberOfItems) || null;
+  }
+}
+
 export default function GridBlock({
   numberOfItems,
   postType,
@@ -20,7 +32,7 @@ export default function GridBlock({
 }) {
   const listTypeId = staffType?.[0]?.id || postType?.[0]?.id;
   const pathParams = listTypeId && { filter: listTypeId };
-  const limit = parseInt(numberOfItems) || null;
+  const limit = getLimit(numberOfItems);
 
   const gridMap = {
     ctaGrid: CTAGrid,
