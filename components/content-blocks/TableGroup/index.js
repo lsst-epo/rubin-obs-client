@@ -15,11 +15,12 @@ export default function TableGroup({ items }) {
           ))}
         </Tab.List>
         <Tab.Panels>
-          {items.map(({ complexTable, plainText }, i) => (
+          {items.map(({ complexTable, plainText, verticalAlignment }, i) => (
             <Tab.Panel key={`panel${i}`}>
               <ComplexTable
                 complexTable={complexTable}
                 plainText={plainText}
+                verticalAlignment={verticalAlignment}
                 styleAs="secondary"
                 isChild
               />

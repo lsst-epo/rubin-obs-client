@@ -4,12 +4,17 @@ import * as Styled from "./styles";
 export default function ComplexTable({
   complexTable,
   plainText,
+  verticalAlignment,
   styleAs = "primary",
   isChild = false,
 }) {
   const renderTable = () => (
     <Styled.TableWrapper>
-      <Styled.Table as="table" $styleAs={styleAs}>
+      <Styled.Table
+        as="table"
+        $styleAs={styleAs}
+        $verticalAlignment={verticalAlignment}
+      >
         {plainText && <caption className="a-hidden">{plainText}</caption>}
         <tbody>
           {complexTable.map((row, i) => (

@@ -11,18 +11,18 @@ export const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
 
-  ${({ $styleAs }) =>
+  ${({ $styleAs, $verticalAlignment = "top" }) =>
     $styleAs === "secondary"
       ? css`
           --ComplexTable-cell-bg: var(--neutral10);
           --ComplexTable-border: 5px solid var(--white);
-          --ComplexTable-vertical-align: middle;
+          --ComplexTable-vertical-align: ${$verticalAlignment};
           border-style: hidden;
         `
       : css`
           --ComplexTable-border: 1px solid var(--black);
           --ComplexTable-cell-bg: none;
-          --ComplexTable-vertical-align: baseline;
+          --ComplexTable-vertical-align: ${$verticalAlignment};
         `}
 `;
 
