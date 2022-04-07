@@ -9,7 +9,7 @@ import NewsGrid from "./NewsGrid";
 import { fluidScale } from "@/styles/globalStyles";
 
 export default function GridBlock({
-  numberOfItems: limit,
+  numberOfItems,
   postType,
   staffType,
   header,
@@ -20,6 +20,7 @@ export default function GridBlock({
 }) {
   const listTypeId = staffType?.[0]?.id || postType?.[0]?.id;
   const pathParams = listTypeId && { filter: listTypeId };
+  const limit = parseInt(numberOfItems) || null;
 
   const gridMap = {
     ctaGrid: CTAGrid,
@@ -33,7 +34,7 @@ export default function GridBlock({
         <Header addBorder={typeHandle === "relatedContent"}>{header}</Header>
         <ContentGrid
           items={items}
-          limit={parseInt(limit)}
+          limit={limit}
           listTypeId={listTypeId}
           sectionHandle={typeHandle}
           pageId={pageId}
