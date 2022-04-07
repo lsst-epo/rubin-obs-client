@@ -6,7 +6,7 @@ import Tile from "@/atomic/Tile";
 
 const MainGrid = ({ items = [], limit, listTypeId, sectionHandle, pageId }) => {
   // get manually-curated data first
-  let allItems = normalizeItemData(items);
+  const curatedItems = normalizeItemData(items);
 
   const sectionMap = {
     eventGrid: "events",
@@ -23,19 +23,17 @@ const MainGrid = ({ items = [], limit, listTypeId, sectionHandle, pageId }) => {
   }) || {
     data: {},
   };
-  if (data?.entries) {
-    // combine with curated items. Filter so no dupes.
-    allItems = [
-      ...allItems,
-      ...data.entries.filter((item) => allItems.indexOf(item) < 0),
-    ].slice(0, limit);
-  }
-  const cols = limit === 4 ? 4 : 3;
+  const curatedIds = curatedItems.map((item) => item.id);
+  // filter out curatedItems
+  const filteredEntries = !data?.entries?.length
+    ? []
+    : data.entries.filter((item) => curatedIds.indexOf(item.id) < 0);
+  const allItems = [...curatedItems, ...filteredEntries];
 
   return (
     <>
       {allItems?.length > 0 && (
-        <Grid columns={cols} tablet={tabletNumber}>
+        <Grid columns={limit === 4 ? 4 : 3} tablet={tabletNumber}>
           {allItems.map(
             (
               {
