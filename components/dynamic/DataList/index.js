@@ -8,7 +8,6 @@ import {
   useList,
   useGlobalData,
 } from "@/lib/utils";
-import Loader from "@/components/svg/unique/Loader";
 
 const DataList = ({
   children,
@@ -47,12 +46,7 @@ const DataList = ({
     section,
   });
 
-  if (isLoading || isError)
-    return (
-      <Container>
-        <Loader />
-      </Container>
-    );
+  if (isLoading || isError) return null;
 
   const { offset, total } = data;
   const numberOfPages = Math.ceil(total / limit) || 1;
