@@ -2,6 +2,7 @@ import Callout from "./Callout";
 import Image from "./Image";
 import Text from "./Text";
 import Link from "./Link";
+import ComplexTable from "./ComplexTable";
 import Contact from "./Contact";
 import ContactStaff from "./ContactStaff";
 import Share from "./ShareBlock";
@@ -10,6 +11,7 @@ import GridBlock from "./GridBlock";
 import Schedule from "./Schedule";
 import SimpleTable from "./SimpleTable";
 import SlideBlock from "./SlideBlock";
+import TableGroup from "./TableGroup";
 import Video from "./Video";
 import DownloadList from "./DownloadList";
 
@@ -18,6 +20,7 @@ export {
   Image,
   Text,
   Link,
+  ComplexTable,
   Contact,
   ContactStaff,
   Share,
@@ -26,6 +29,7 @@ export {
   Schedule,
   SimpleTable,
   SlideBlock,
+  TableGroup,
   Video,
   DownloadList,
 };

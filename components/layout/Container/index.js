@@ -41,7 +41,7 @@ Container.propTypes = {
     PropTypes.node,
   ]).isRequired,
   className: PropTypes.string,
-  width: PropTypes.string,
+  width: PropTypes.oneOf(["narrow", "regular", "wide"]),
   /** Applies padding utility class of the same name.
    * Default is "large", "none" removes the class entirely */
   paddingSize: PropTypes.oneOf(["large", "medium", "small", "none"]),
