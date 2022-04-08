@@ -26,6 +26,7 @@ import Play from "./Play";
 import Team from "./Team";
 import Temp from "./Temp";
 import Time from "./Time";
+import Timer from "./Timer";
 import Twitter from "./Twitter";
 import User from "./User";
 import UserInverted from "./UserInverted";
@@ -63,6 +64,7 @@ export default {
   Team,
   Temp,
   Time,
+  Timer,
   Twitter,
   User,
   UserInverted,
