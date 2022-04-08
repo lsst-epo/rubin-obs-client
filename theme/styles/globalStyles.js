@@ -28,6 +28,7 @@ export const tokens = {
   turquoise80: "#117273",
   turquoise85: "#12726c",
   turquoise90: "#0c4a4c",
+  orange02: "#FFFDFA",
   orange05: "#FFF9F2",
   orange20: "#FFE7CC",
   orange55: "#FAB364",
