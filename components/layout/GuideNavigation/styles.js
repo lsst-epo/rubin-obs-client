@@ -48,7 +48,6 @@ export const NavItem = styled.li`
   position: relative;
   counter-increment: guide-nav-counter;
   font-weight: bold;
-  display: flex;
   break-inside: avoid;
   border: 1px solid transparent;
 
@@ -56,7 +55,40 @@ export const NavItem = styled.li`
     margin-block-start: ${pxToEm(18)};
   }
 
+  &:not(:last-child):after {
+    content: "";
+    display: block;
+    height: 100%;
+    border-right: 5px solid var(--orange20);
+    position: absolute;
+    left: 13px;
+    top: 30px;
+  }
+`;
+
+export const NavLink = styled.a`
+  text-decoration: none;
+  line-height: ${NUM_HEIGHT};
+  display: flex;
+
+  &[aria-current="page"] {
+    > span {
+      color: #db5400;
+    }
+    &:before {
+      background-color: #ff8800;
+    }
+  }
+
+  &[aria-current="page"],
+  &:hover {
+    > span {
+      text-decoration: underline;
+    }
+  }
+
   &:before {
+    content: counter(guide-nav-counter);
     flex: none;
     display: inline-flex;
     align-items: center;
@@ -64,7 +96,6 @@ export const NavItem = styled.li`
     width: ${NUM_HEIGHT};
     height: ${NUM_HEIGHT};
     margin-inline-end: ${fluidScale("30px", "7px")};
-    content: counter(guide-nav-counter);
     border-radius: 100%;
     background-color: ${({ $active }) =>
       $active ? "#ff8800" : "var(--orange20)"};
@@ -72,22 +103,9 @@ export const NavItem = styled.li`
     z-index: 1;
   }
 
-  &:focus-within:before {
+  &:hover:before,
+  &.focus-visible:before {
     background-color: ${({ $active }) =>
       $active ? "#ff8800" : "var(--orange55)"};
-  }
-`;
-
-export const NavLink = styled.a`
-  text-decoration: none;
-  line-height: ${NUM_HEIGHT};
-
-  &[aria-current="page"] {
-    color: #ff8800;
-  }
-
-  &[aria-current="page"],
-  &:hover {
-    text-decoration: underline;
   }
 `;
