@@ -34,7 +34,7 @@ export default function GuideNavigation() {
   });
 
   return (
-    <Container width="regular" bgColor="orange05" paddingSize="medium">
+    <Container width="regular" bgColor="orange02" paddingSize="medium">
       <Styled.Wrapper ref={ref}>
         <Styled.Title>
           <h2>{FAKE_DATA.title}</h2>
