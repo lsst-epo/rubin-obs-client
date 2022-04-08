@@ -15,6 +15,7 @@ import NavButtons from "@/components/layout/NavButtons";
 import SubHero from "@/components/page/SubHero";
 import AuthorizePage from "@/components/auth/AuthorizePage";
 import GuideNavigation from "@/components/layout/GuideNavigation";
+import InvestigationHero from "@/components/layout/InvestigationHero";
 
 export default function Page({
   data: {
@@ -91,6 +92,7 @@ export default function Page({
         {breadcrumbs && (
           <Breadcrumbs breadcrumbs={[...breadcrumbs, pageLink]} />
         )}
+        <InvestigationHero />
         <GuideNavigation />
         {/* Special slideshow component here */}
         {isGalleryHome && (
