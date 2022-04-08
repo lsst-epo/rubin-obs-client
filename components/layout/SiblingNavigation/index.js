@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useRouter } from "next/router";
 import { Button } from "@/components/atomic";
 import Loader from "@/components/svg/unique/Loader";
@@ -8,7 +9,6 @@ import Container from "../Container";
 import Grid from "../Grid";
 
 export default function SiblingNavigation({ pageId, pageLevel }) {
-  // TODO: See if there's a simpler way to get the site
   const router = useRouter();
   const { query } = router;
   const site = getSiteString(query.uriSegments);
@@ -64,3 +64,8 @@ export default function SiblingNavigation({ pageId, pageLevel }) {
     </Container>
   );
 }
+
+SiblingNavigation.propTypes = {
+  pageId: PropTypes.string.isRequired,
+  pageLevel: PropTypes.number.isRequired,
+};
