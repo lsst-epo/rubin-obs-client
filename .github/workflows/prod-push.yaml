@@ -52,6 +52,6 @@ jobs:
       run: |-
         gcloud app deploy app.yaml \
         --image-url=gcr.io/edc-prod-eef0/rubin-obs-client:${{ env.version_name }} \
-        --version=${{ env.version_name }}
+        --version=${{ env.version_name }} \
         --promote \
         --project=edc-prod-eef0
