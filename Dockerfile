@@ -5,7 +5,7 @@ FROM node:16-alpine AS builder
 WORKDIR /app
 COPY . /app
 
-RUN apk add --no-cache libc6-compat
+RUN apk add --no-cache libc6-compat git
 RUN yarn install --frozen-lockfile
 
 ARG NEXT_PUBLIC_API_URL=https://rubin-obs-api-e3g4rcii3q-uc.a.run.app/api
