@@ -7,7 +7,9 @@ import withLiveRegionChange from "@/hoc/withLiveRegionChange";
 
 const EMAIL_ID = "footerContactEmail";
 const MESSAGE_ID = "footerContactMessage";
-const POST_URL = process.env.NEXT_PUBLIC_CONTACT_FORM_POST_URL;
+// const POST_URL = process.env.NEXT_PUBLIC_CONTACT_FORM_POST_URL;
+// Should be replaced with an env var
+const POST_URL = "something";
 
 function ContactForm({ className, setLiveRegionMessage }) {
   const { t } = useTranslation();
