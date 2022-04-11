@@ -2,8 +2,10 @@ name: 'Rubin Obs Client to Prod GAE'
 
 on:
   create:
+    branches:
+      - '!*'
     tags:
-      - '*'
+      - 'v*'
 
 jobs:
   build-push-deploy:
