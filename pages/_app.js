@@ -10,6 +10,10 @@ import useAuthentication from "@/hooks/useAuthentication";
 import GlobalStyles from "@/styles/globalStyles";
 import styles from "@/styles/styles.scss";
 
+// const PAGEPROOFER_ID = process.env.NEXT_PUBLIC_PAGEPROOFER_ID;
+// Should be replaced with an env var
+const PAGEPROOFER_ID = "0a40ceaf-340d-5e6a-adc7-898f09823859";
+
 function Client({ Component, pageProps }) {
   const authData = useAuthentication({
     typeHandle: pageProps?.data?.typeHandle || "",
@@ -22,7 +26,7 @@ function Client({ Component, pageProps }) {
       <AuthenticationContextProvider data={authData}>
         <Script
           id="page-proofer-snippet"
-          src="https://app.pageproofer.com/embed/77e83361-ba26-51f2-978b-850fb00a263e"
+          src={`https://app.pageproofer.com/embed/${PAGEPROOFER_ID}`}
           strategy="lazyOnload"
         />
         <GlobalStyles />
