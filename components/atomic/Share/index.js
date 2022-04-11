@@ -3,7 +3,9 @@ import { useShareButtons } from "@/lib/utils";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-const SHARETHIS_PROPERTY = process.env.NEXT_PUBLIC_SHARETHIS_PROPERTY;
+// const SHARETHIS_PROPERTY = process.env.NEXT_PUBLIC_SHARETHIS_PROPERTY;
+// Should be replaced with an env var
+const SHARETHIS_PROPERTY = "5f57f7661db73a00129d7d03";
 
 export const InlineShare = () => {
   useShareButtons();
