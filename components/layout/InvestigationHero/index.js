@@ -1,14 +1,12 @@
+import PropTypes from "prop-types";
 import * as Styled from "./styles";
 import { Button } from "@/components/atomic";
 import IconComposer from "@/components/svg/IconComposer";
 import T from "@/page/Translate";
 
-const FAKE_DATA = {
-  title: "Coloring the Universe",
-  duration: "1-2h",
-};
+export default function InvestigationHero({ investigation }) {
+  if (!investigation) return null;
 
-export default function InvestigationHero() {
   return (
     <Styled.Wrapper>
       <Styled.Inner>
@@ -16,10 +14,10 @@ export default function InvestigationHero() {
           <img src="/images/coloring_the_universe.png" />
         </Styled.Image>
         <Styled.Text>
-          <h1>{FAKE_DATA.title}</h1>
+          <h1>{investigation.title}</h1>
         </Styled.Text>
         <Styled.ButtonWrapper>
-          <Button styleAs="educator">
+          <Button styleAs="educator" as="a" href={investigation.externalUrl}>
             <T translate="investigation.start" />
           </Button>
         </Styled.ButtonWrapper>
@@ -28,9 +26,22 @@ export default function InvestigationHero() {
           <Styled.DurationText>
             <T translate="investigation.total_duration" />
           </Styled.DurationText>
-          <Styled.DurationTime>{FAKE_DATA.duration}</Styled.DurationTime>
+          <Styled.DurationTime>{investigation.duration}</Styled.DurationTime>
         </Styled.Duration>
       </Styled.Inner>
     </Styled.Wrapper>
   );
 }
+
+InvestigationHero.propTypes = {
+  investigation: PropTypes.shape({
+    title: PropTypes.string,
+    duration: PropTypes.duration,
+    externalUrl: PropTypes.string,
+    isActive: PropTypes.bool,
+    landingPage: {
+      uri: PropTypes.string,
+      title: PropTypes.string,
+    },
+  }),
+};

@@ -29,6 +29,22 @@
   .l-pad-left-#{$name} {
     padding-inline-start: $value;
   }
+
+  .l-mar-top-#{$name} {
+    margin-block-start: $value;
+  }
+
+  .l-mar-right-#{$name} {
+    margin-inline-end: $value;
+  }
+
+  .l-mar-bottom-#{$name} {
+    margin-block-end: $value;
+  }
+
+  .l-mar-left-#{$name} {
+    margin-inline-start: $value;
+  }
 }
 
 // Containers
