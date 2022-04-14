@@ -14,6 +14,34 @@ import { getCategoryObject, useGlobalData, usePathData } from "@/lib/utils";
 import NavButtons from "@/components/layout/NavButtons";
 import SubHero from "@/components/page/SubHero";
 import AuthorizePage from "@/components/auth/AuthorizePage";
+import InvestigationHero from "@/components/layout/InvestigationHero";
+import GuideNavigation from "@/components/layout/GuideNavigation";
+import SiblingNavigation from "@/components/layout/SiblingNavigation";
+
+function usePageInvestigation(uri, parent, ancestors) {
+  const investigations = useGlobalData("investigations");
+  let level = 1;
+
+  const investigation = investigations.find((inv) => {
+    const landingPageUri = inv.landingPage?.[0].uri;
+
+    return (
+      landingPageUri === uri ||
+      ancestors.map((anc, i) => {
+        const isAncestor = anc.uri === landingPageUri;
+
+        if (isAncestor) {
+          level = i + 1;
+        }
+        return isAncestor;
+      })
+    );
+  });
+
+  if (!investigation) return {};
+
+  return { investigation, level };
+}
 
 export default function Page({
   data: {
@@ -27,12 +55,14 @@ export default function Page({
     pageType,
     title,
     uri,
-    // student and educator pages
     typeHandle,
     subHeroHeader,
     subHeroText,
     subHeroColorScheme,
     level,
+    parent,
+    ancestors,
+    childPages,
   },
   breadcrumbs,
   children,
@@ -72,6 +102,13 @@ export default function Page({
   const isGalleryHome = uri === "gallery";
   const isEventsPage = uri?.split("/").includes("calendar");
 
+  // custom page for investigations
+  const { investigation, level: investigationLevel } = usePageInvestigation(
+    uri,
+    parent,
+    ancestors
+  );
+
   // custom page name for gallery search
   const isGallerySearch = uri === "gallery/gallery-search";
   const { query } = usePathData();
@@ -90,6 +127,14 @@ export default function Page({
       <AuthorizePage typeHandle={typeHandle}>
         {breadcrumbs && (
           <Breadcrumbs breadcrumbs={[...breadcrumbs, pageLink]} />
+        )}
+        {investigation && <InvestigationHero investigation={investigation} />}
+        {investigation && investigationLevel > 2 && (
+          <GuideNavigation
+            title={parent.title}
+            pages={parent.children}
+            currentUri={uri}
+          />
         )}
         {/* Special slideshow component here */}
         {isGalleryHome && (
@@ -147,6 +192,9 @@ export default function Page({
           />
         )}
         {children}
+        {investigation && investigationLevel > 2 && (
+          <SiblingNavigation pageUri={uri} pageLevel={level} />
+        )}
       </AuthorizePage>
     </Body>
   );

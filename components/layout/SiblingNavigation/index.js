@@ -8,17 +8,19 @@ import T from "@/page/Translate";
 import Container from "../Container";
 import Grid from "../Grid";
 
-export default function SiblingNavigation({ pageId, pageLevel }) {
+export default function SiblingNavigation({ pageUri, pageLevel }) {
   const router = useRouter();
   const { query } = router;
   const site = getSiteString(query.uriSegments);
 
-  const response = useSiblingNav({ id: pageId, site, level: pageLevel });
+  const response = useSiblingNav({ uri: pageUri, site, level: pageLevel });
 
   const entry = response?.data?.entry;
 
+  if (!entry) return null;
+
   return (
-    <Container width="narrow" paddingSize="large">
+    <Container width="narrow" paddingSize="large" className="l-mar-top-small">
       {response.isLoading ? (
         <Loader />
       ) : !response.isError ? (
@@ -66,6 +68,6 @@ export default function SiblingNavigation({ pageId, pageLevel }) {
 }
 
 SiblingNavigation.propTypes = {
-  pageId: PropTypes.string.isRequired,
+  pageUri: PropTypes.string.isRequired,
   pageLevel: PropTypes.number.isRequired,
 };
