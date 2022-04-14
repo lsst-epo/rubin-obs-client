@@ -18,31 +18,6 @@ import InvestigationHero from "@/components/layout/InvestigationHero";
 import GuideNavigation from "@/components/layout/GuideNavigation";
 import SiblingNavigation from "@/components/layout/SiblingNavigation";
 
-function usePageInvestigation(uri, parent, ancestors) {
-  const investigations = useGlobalData("investigations");
-  let level = 1;
-
-  const investigation = investigations.find((inv) => {
-    const landingPageUri = inv.landingPage?.[0].uri;
-
-    return (
-      landingPageUri === uri ||
-      ancestors.map((anc, i) => {
-        const isAncestor = anc.uri === landingPageUri;
-
-        if (isAncestor) {
-          level = i + 1;
-        }
-        return isAncestor;
-      })
-    );
-  });
-
-  if (!investigation) return {};
-
-  return { investigation, level };
-}
-
 export default function Page({
   data: {
     contentBlocks = [],
@@ -59,10 +34,9 @@ export default function Page({
     subHeroHeader,
     subHeroText,
     subHeroColorScheme,
-    level,
     parent,
-    ancestors,
-    childPages,
+    investigation,
+    siblings,
   },
   breadcrumbs,
   children,
@@ -102,13 +76,6 @@ export default function Page({
   const isGalleryHome = uri === "gallery";
   const isEventsPage = uri?.split("/").includes("calendar");
 
-  // custom page for investigations
-  const { investigation, level: investigationLevel } = usePageInvestigation(
-    uri,
-    parent,
-    ancestors
-  );
-
   // custom page name for gallery search
   const isGallerySearch = uri === "gallery/gallery-search";
   const { query } = usePathData();
@@ -122,6 +89,13 @@ export default function Page({
     title = t(`gallery.plural-${categoryObj.slug}`);
   }
 
+  const isInvestigationChild = investigation?.landingPage?.uri !== uri;
+
+  const showGuideNavigation =
+    investigation && parent?.children && isInvestigationChild;
+
+  const showSiblingNav = investigation && siblings && isInvestigationChild;
+
   return (
     <Body {...bodyProps}>
       <AuthorizePage typeHandle={typeHandle}>
@@ -129,7 +103,7 @@ export default function Page({
           <Breadcrumbs breadcrumbs={[...breadcrumbs, pageLink]} />
         )}
         {investigation && <InvestigationHero investigation={investigation} />}
-        {investigation && investigationLevel > 2 && (
+        {showGuideNavigation && (
           <GuideNavigation
             title={parent.title}
             pages={parent.children}
@@ -192,8 +166,11 @@ export default function Page({
           />
         )}
         {children}
-        {investigation && investigationLevel > 2 && (
-          <SiblingNavigation pageUri={uri} pageLevel={level} />
+        {showSiblingNav && (
+          <SiblingNavigation
+            siblings={siblings}
+            parent={investigation ? investigation.landingPage?.[0] : parent}
+          />
         )}
       </AuthorizePage>
     </Body>

@@ -1,73 +1,67 @@
 import PropTypes from "prop-types";
-import { useRouter } from "next/router";
 import { Button } from "@/components/atomic";
-import Loader from "@/components/svg/unique/Loader";
-import { useSiblingNav } from "@/lib/api/sibling-nav";
-import { getSiteString } from "@/lib/utils";
 import T from "@/page/Translate";
 import Container from "../Container";
 import Grid from "../Grid";
 
-export default function SiblingNavigation({ pageUri, pageLevel }) {
-  const router = useRouter();
-  const { query } = router;
-  const site = getSiteString(query.uriSegments);
-
-  const response = useSiblingNav({ uri: pageUri, site, level: pageLevel });
-
-  const entry = response?.data?.entry;
-
-  if (!entry) return null;
+export default function SiblingNavigation({ siblings, parent }) {
+  if (!siblings) return null;
 
   return (
     <Container width="narrow" paddingSize="large" className="l-mar-top-small">
-      {response.isLoading ? (
-        <Loader />
-      ) : !response.isError ? (
-        <Grid columns={1}>
+      <Grid columns={1}>
+        {(siblings.prev || siblings.next) && (
           <Grid columns={2}>
             <Button
               as="a"
-              href={entry.prev ? `/${entry.prev.uri}` : undefined}
-              aria-disabled={!entry.prev || undefined}
+              href={siblings.prev ? `/${siblings.prev.uri}` : undefined}
+              aria-disabled={!siblings.prev || undefined}
             >
               <T
                 translate={
-                  entry.prev
+                  siblings.prev
                     ? "pagination.previous_name"
                     : "pagination.previous"
                 }
-                values={{ name: entry.prev?.title }}
+                values={{ name: siblings.prev?.title }}
               />
             </Button>
             <Button
               as="a"
-              href={entry.next ? `/${entry.next.uri}` : undefined}
-              aria-disabled={!entry.next || undefined}
+              href={siblings.next ? `/${siblings.next.uri}` : undefined}
+              aria-disabled={!siblings.next || undefined}
             >
               <T
                 translate={
-                  entry.next ? "pagination.next_name" : "pagination.next"
+                  siblings.next ? "pagination.next_name" : "pagination.next"
                 }
-                values={{ name: entry.next?.title }}
+                values={{ name: siblings.next?.title }}
               />
             </Button>
           </Grid>
-          {entry.parent && (
-            <Button as="a" href={`/${entry.parent.uri}`}>
-              <T
-                translate="pagination.back_to_name"
-                values={{ name: entry.parent.title }}
-              />
-            </Button>
-          )}
-        </Grid>
-      ) : null}
+        )}
+        {parent && (
+          <Button as="a" href={`/${parent.uri}`}>
+            <T
+              translate="pagination.back_to_name"
+              values={{ name: parent.title }}
+            />
+          </Button>
+        )}
+      </Grid>
     </Container>
   );
 }
 
+const siblingShape = PropTypes.shape({
+  uri: PropTypes.string,
+  title: PropTypes.string,
+});
+
 SiblingNavigation.propTypes = {
-  pageUri: PropTypes.string.isRequired,
-  pageLevel: PropTypes.number.isRequired,
+  siblings: PropTypes.shape({
+    prev: siblingShape,
+    next: siblingShape,
+  }),
+  parent: siblingShape,
 };
