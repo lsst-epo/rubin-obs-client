@@ -18,6 +18,7 @@ function NavItem({ href, onClick, title, theme, className, icon }) {
     <WrapperTag>
       {/* eslint-disable */}
       <InteractiveTag
+        href={href}
         onClick={onClick}
         className={classNames({
           "c-nav-list__link": true,
