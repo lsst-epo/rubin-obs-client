@@ -61,9 +61,11 @@ export default function GuideNavigation({ title, pages, currentUri }) {
 
 GuideNavigation.propTypes = {
   title: PropTypes.string,
-  pages: PropTypes.shape({
-    uri: PropTypes.string,
-    title: PropTypes.string,
-  }),
+  pages: PropTypes.arrayOf(
+    PropTypes.shape({
+      uri: PropTypes.string,
+      title: PropTypes.string,
+    })
+  ),
   currentUri: PropTypes.string,
 };

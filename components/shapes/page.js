@@ -11,6 +11,7 @@ const pageShape = PropTypes.shape({
   dynamicComponent: PropTypes.string,
   hero: PropTypes.arrayOf(imageShape),
   typeHandle: PropTypes.oneOf(["pages", "educatorPages", "studentPages"]),
+  investigtion: PropTypes.object,
 }).isRequired;
 
 export default pageShape;

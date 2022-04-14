@@ -27,7 +27,7 @@ GlobalDataProvider.propTypes = {
     rootPages: rootPagesShape,
     siteInfo: siteInfoShape,
     userProfilePage: PropTypes.object,
-    investigations: PropTypes.object,
+    investigation: PropTypes.object,
   }),
 };
 
