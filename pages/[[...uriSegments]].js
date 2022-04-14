@@ -115,7 +115,6 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
       localized: entryData?.localized || entryData?.entry?.localized || [],
     },
     userProfilePage: data?.[`userProfilePage${isEspanol ? "_es" : ""}`] || {},
-    investigations: data?.[`allInvestigations${isEspanol ? "_es" : ""}`] || [],
   };
 
   // Handle 404 if there is no data
