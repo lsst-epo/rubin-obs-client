@@ -27,7 +27,7 @@ export default function Page({
     hero,
     hideTitle,
     id,
-    pageType,
+    pageType = "standard",
     title,
     uri,
     typeHandle,
