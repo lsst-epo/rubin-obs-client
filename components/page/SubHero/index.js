@@ -22,6 +22,11 @@ SubHero.displayName = "Global.SubHero";
 SubHero.propTypes = {
   text: PropTypes.string,
   header: PropTypes.string,
-  type: PropTypes.oneOf(["pages", "studentPages", "educatorPages"]),
+  type: PropTypes.oneOf([
+    "pages",
+    "studentPages",
+    "educatorPages",
+    "investigationLandingPage",
+  ]),
   colorScheme: PropTypes.oneOf(["student", "educator"]),
 };

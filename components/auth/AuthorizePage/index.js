@@ -8,7 +8,11 @@ import Container from "@/components/layout/Container";
 import { Button, Buttonish } from "@/components/atomic";
 
 function isAuthorized(typeHandle, user, status) {
-  if (typeHandle === "educatorPages") return user?.group === "educators";
+  if (
+    typeHandle === "educatorPages" ||
+    typeHandle === "investigationLandingPage"
+  )
+    return user?.group === "educators";
   if (typeHandle === "userProfilePage") return !!user && status === "active";
   return true;
 }
@@ -85,6 +89,7 @@ AuthorizePage.propTypes = {
     "educatorPages",
     "studentPages",
     "userProfilePage",
+    "investigationLandingPage",
   ]),
   children: PropTypes.node,
 };
