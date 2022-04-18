@@ -11,7 +11,7 @@ const CTAGrid = ({ items, limit }) => {
   const cols = limit === 4 ? 4 : 3;
 
   const renderTile = ({ id, contentImage, mixedLink }) => {
-    const TileBlock = tileMap[mixedLink.element.typeHandle] || Tile;
+    const TileBlock = tileMap[mixedLink.element?.typeHandle] || Tile;
 
     return (
       <TileBlock
