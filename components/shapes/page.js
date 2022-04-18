@@ -7,10 +7,15 @@ const pageShape = PropTypes.shape({
   title: PropTypes.string.isRequired,
   description: PropTypes.string,
   contentBlocks: PropTypes.arrayOf(PropTypes.object),
-  pageType: PropTypes.string.isRequired,
+  pageType: PropTypes.string,
   dynamicComponent: PropTypes.string,
   hero: PropTypes.arrayOf(imageShape),
-  typeHandle: PropTypes.oneOf(["pages", "educatorPages", "studentPages"]),
+  typeHandle: PropTypes.oneOf([
+    "pages",
+    "educatorPages",
+    "studentPages",
+    "investigationLandingPage",
+  ]),
   investigtion: PropTypes.object,
 }).isRequired;
 
