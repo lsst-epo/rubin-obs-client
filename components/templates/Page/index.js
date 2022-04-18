@@ -89,7 +89,7 @@ export default function Page({
     title = t(`gallery.plural-${categoryObj.slug}`);
   }
 
-  const isInvestigationChild = investigation?.landingPage?.uri !== uri;
+  const isInvestigationChild = investigation?.landingPage?.[0]?.uri !== uri;
 
   const showGuideNavigation =
     investigation && parent?.children && isInvestigationChild;
