@@ -117,6 +117,16 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
     userProfilePage: data?.[`userProfilePage${isEspanol ? "_es" : ""}`] || {},
   };
 
+  // Handle redirect if the entry has one
+  if (entryData?.typeHandle === "redirectPage" && entryData?.linkTo?.url) {
+    return {
+      redirect: {
+        destination: entryData.linkTo.url,
+        permanent: false,
+      },
+    };
+  }
+
   // Handle 404 if there is no data
   if (!currentId) {
     return {
