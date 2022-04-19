@@ -44,7 +44,7 @@ export const Inner = styled.div`
   )}
 `;
 
-export const Image = styled.image`
+export const Image = styled.div`
   grid-area: image;
   width: ${fluidScale("200px", "160px")};
   height: ${fluidScale("200px", "160px")};
