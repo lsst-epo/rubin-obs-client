@@ -165,6 +165,11 @@
     },
     "account": {
       "header": "Account"
+    },
+    "investigation": {
+      "total_duration": "Investigation total duration",
+      "start": "Start Investigation",
+      "coming_soon": "(Coming Soon)"
     }
   }
 }

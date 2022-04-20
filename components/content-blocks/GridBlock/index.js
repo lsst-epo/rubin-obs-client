@@ -7,6 +7,7 @@ import CTAGrid from "./CTAGrid";
 import MainGrid from "./MainGrid";
 import NewsGrid from "./NewsGrid";
 import { fluidScale } from "@/styles/globalStyles";
+import InvestigationGrid from "./InvestigationGrid";
 
 function getLimit(numberOfItems) {
   switch (numberOfItems) {
@@ -37,13 +38,29 @@ export default function GridBlock({
   const gridMap = {
     ctaGrid: CTAGrid,
     news: NewsGrid,
+    investigationGrid: InvestigationGrid,
   };
+
+  const widthMap = {
+    ctaGrid: undefined,
+    news: undefined,
+    investigationGrid: "regular",
+  };
+
   const ContentGrid = gridMap[typeHandle] || MainGrid;
+  const containerWidth = widthMap[typeHandle] || undefined;
 
   return (
-    <Container>
+    <Container width={containerWidth}>
       <div>
-        <Header addBorder={typeHandle === "relatedContent"}>{header}</Header>
+        <Header
+          className={
+            typeHandle === "investigationGrid" ? "t-align-center" : undefined
+          }
+          addBorder={typeHandle === "relatedContent"}
+        >
+          {header}
+        </Header>
         <ContentGrid
           items={items}
           limit={limit}
