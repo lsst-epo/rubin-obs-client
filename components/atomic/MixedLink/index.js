@@ -3,7 +3,14 @@ import Link from "next/link";
 import ExternalLink from "@/atomic/ExternalLink";
 import { mixedLinkInternalShape } from "@/shapes/link";
 import { normalizePathData } from "@/lib/utils";
-import { isInternalUrl } from "@/helpers";
+import { isInternalUrl, isAbsoluteUrl } from "@/helpers";
+
+function getPathnameInput({ element, url }) {
+  if (element?.uri) return element.uri;
+  if (!url) return "/";
+  if (isAbsoluteUrl(url)) return new URL(url).pathname;
+  return url;
+}
 
 export default function MixedLink({
   children,
@@ -23,7 +30,7 @@ export default function MixedLink({
       </ExternalLink>
     );
   } else {
-    const pathnameInput = element?.uri || url || "/";
+    const pathnameInput = getPathnameInput({ element, url });
     const { pathname, pathParams } = normalizePathData(pathnameInput);
 
     const href = {
@@ -32,7 +39,7 @@ export default function MixedLink({
     };
 
     return (
-      <Link href={href}>
+      <Link href={href} passHref>
         <a className={className} {...restProps}>
           {!children && (customText ?? text)}
           {children}
