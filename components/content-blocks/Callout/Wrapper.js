@@ -12,8 +12,8 @@ export default function CalloutWrapper({
   width = "full",
 }) {
   return (
-    <Section bgColor={backgroundColor} width={width} overlay={overlay}>
-      <Inner order={order} ratio={ratio} height={height} stack={stack}>
+    <Section $bgColor={backgroundColor} $width={width} $overlay={overlay}>
+      <Inner $order={order} $ratio={ratio} $height={height} $stack={stack}>
         {children}
       </Inner>
     </Section>

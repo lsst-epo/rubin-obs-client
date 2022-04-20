@@ -49,7 +49,7 @@ export default function CalloutTwoTone({ callout }) {
         )}
       </Wrapper>
       <Wrapper order="image" ratio="33" overlay={true} stack="bottom">
-        <Header align="end">
+        <Header $align="end">
           {captionRichText && (
             <Caption
               className="c-content-rte"
