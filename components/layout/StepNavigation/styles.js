@@ -1,36 +1,49 @@
 import { fluidScale, pxToEm, respond, tokens } from "@/styles/globalStyles";
 import styled from "styled-components";
+import MixedLink from "@/components/atomic/MixedLink";
 
 export const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  margin-inline-start: -60px;
+  margin-inline-start: -50px;
   margin-block-end: -18px;
 
   > * {
-    margin-inline-start: 60px;
+    margin-inline-start: 50px;
     margin-block-end: 18px;
   }
 `;
 
 export const Title = styled.div`
   display: flex;
-  flex: 1 1 auto;
+  flex-wrap: wrap;
+  flex: 666 1 0%;
   justify-content: space-between;
+
+  h2 {
+    flex-grow: 1;
+  }
 
   button {
     display: none;
+    flex-shrink: 0;
 
     ${respond(`display: block;`, tokens.BREAK_PHABLET)}
   }
 `;
 
+export const Description = styled.div`
+  flex-basis: 100%;
+`;
+
 export const NavList = styled.ol`
   position: relative;
-  flex: 1 1 ${tokens.BREAK_TABLET};
-  columns: 2;
-  column-gap: ${fluidScale("60px", "30px")};
+  flex: 1 1
+    ${({ $columns }) =>
+      fluidScale(`${400 * $columns}px`, `${300 * $columns}px`)};
+  columns: ${({ $columns }) => $columns};
+  column-gap: ${fluidScale("50px", "30px")};
   visibility: hidden;
   max-height: 0;
 
@@ -44,18 +57,8 @@ export const NavList = styled.ol`
 
 const NUM_HEIGHT = "31px";
 
-export const NavItem = styled.li`
-  position: relative;
-  counter-increment: guide-nav-counter;
-  font-weight: bold;
-  break-inside: avoid;
-  border: 1px solid transparent;
-
-  & + & {
-    margin-block-start: ${pxToEm(18)};
-  }
-
-  &:not(:last-child):after {
+const itemBorder = `
+  &::after {
     content: "";
     display: block;
     height: 100%;
@@ -66,7 +69,29 @@ export const NavItem = styled.li`
   }
 `;
 
-export const NavLink = styled.a`
+export const NavItem = styled.li`
+  position: relative;
+  counter-increment: guide-nav-counter;
+  font-size: ${fluidScale("20px", "16px")};
+  font-weight: bold;
+  break-inside: avoid;
+  border: 1px solid transparent;
+
+  & + & {
+    margin-block-start: ${pxToEm(24)};
+  }
+
+  ${({ $showBorder }) => $showBorder && itemBorder}
+
+  ${respond(
+    `&:not(:last-child) {
+      ${itemBorder}
+    }`,
+    tokens.BREAK_PHABLET
+  )}
+`;
+
+export const NavLink = styled(MixedLink)`
   text-decoration: none;
   line-height: ${NUM_HEIGHT};
   display: flex;
