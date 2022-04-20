@@ -17,12 +17,12 @@ const gap = "40px";
 const linkPadding = pxToEm("18px", "16px");
 
 export const Section = styled.section`
-  background-color: ${(p) => tokens[p.bgColor]};
+  background-color: ${(p) => tokens[p.$bgColor]};
   color: ${(p) =>
-    needsDarkColor(tokens[p.bgColor]) ? tokens.neutral80 : tokens.white};
-  ${(p) => p.width === "block" && containerFullBleed("CONTAINER_REGULAR")};
+    needsDarkColor(tokens[p.$bgColor]) ? tokens.neutral80 : tokens.white};
+  ${(p) => p.$width === "block" && containerFullBleed("CONTAINER_REGULAR")};
   ${(p) =>
-    p.overlay &&
+    p.$overlay &&
     `position: relative; top: -100px; background-color: transparent;
     ${respond(`top: -60px;`)}`};
 `;
@@ -31,8 +31,8 @@ export const Inner = styled.div`
   ${containerRegular()}
   display: grid;
   grid-template-areas: ${(p) =>
-    p.order === "text" ? `"text image"` : `"image text"`};
-  ${(p) => `grid-template-columns: ${p.ratio}% 1fr;`}
+    p.$order === "text" ? `"text image"` : `"image text"`};
+  ${(p) => `grid-template-columns: ${p.$ratio}% 1fr;`}
   gap: ${gap};
   min-height: 360px;
   padding-top: ${fluidScale("50px", "30px")};
@@ -50,18 +50,18 @@ export const Inner = styled.div`
   )}
 
   ${(p) =>
-    p.height === "slim"
+    p.$height === "slim"
       ? `min-height: 0; padding-top: 1em; padding-bottom: 1em;`
       : ""}
   ${(p) =>
-    p.stack === "top"
+    p.$stack === "top"
       ? `min-height: 0; padding-top: 1em; padding-bottom: 0;
       ${respond(
         `grid-template-areas: "text" "image"; img { max-height: unset; width: 80%; }`
       )}`
       : ""}
   ${(p) =>
-    p.stack === "bottom"
+    p.$stack === "bottom"
       ? `min-height: 0; padding-top: 0; padding-bottom: 1em; padding-right: 0;`
       : ""}
 `;
@@ -70,7 +70,7 @@ export const Header = styled.header`
   flex-basis: percentage(1 / 3);
   grid-area: text;
   align-self: center;
-  ${(p) => p.align === "end" && `align-self: end;`};
+  ${(p) => p.$align === "end" && `align-self: end;`};
 `;
 
 export const Text = styled.div`
@@ -98,7 +98,7 @@ export const StyledImage = styled(Image)`
 `
   )}
 
-  ${(p) => p.padImage && respond(`padding: 2em;`, breakpointMin, "min")}
+  ${(p) => p.$padImage && respond(`padding: 2em;`, breakpointMin, "min")}
 `;
 export const StyledBackgroundImage = styled(Image)`
   grid-area: image;
