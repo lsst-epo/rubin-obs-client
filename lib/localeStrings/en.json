@@ -190,6 +190,8 @@
     },
     "sign_in": {
       "header": "Welcome back!",
+      "sso_description": "To log in using Google or Facebook, please select whether you are a student or educator before continuing.",
+      "email_sign_in_description": "Or, log in using your email and password.",
       "forgot_password_link": "Forgot Password?",
       "create_account_link": "Create an account",
       "continue_with_google": "Continue with Google",
