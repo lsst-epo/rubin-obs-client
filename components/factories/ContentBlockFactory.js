@@ -39,6 +39,7 @@ const blockMap = {
   text: Text,
   video: Video,
   downloadList: DownloadList,
+  investigationGrid: GridBlock,
 };
 
 export default function ContentBlockFactory({ type, data, pageId }) {
