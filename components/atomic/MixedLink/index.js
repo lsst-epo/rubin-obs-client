@@ -20,6 +20,7 @@ export default function MixedLink({
   params,
   text,
   url,
+  type: typeIgnored,
   ...restProps
 }) {
   if (!isInternalUrl(url)) {
