@@ -17,6 +17,8 @@ const pageShape = PropTypes.shape({
     "investigationLandingPage",
   ]),
   investigtion: PropTypes.object,
+  childNavigation: PropTypes.arrayOf(PropTypes.object),
+  childNavigationDescription: PropTypes.node,
 }).isRequired;
 
 export default pageShape;
