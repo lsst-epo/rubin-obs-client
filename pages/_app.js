@@ -13,6 +13,9 @@ import styles from "@/styles/styles.scss";
 // const PAGEPROOFER_ID = process.env.NEXT_PUBLIC_PAGEPROOFER_ID;
 // Should be replaced with an env var
 const PAGEPROOFER_ID = "0a40ceaf-340d-5e6a-adc7-898f09823859";
+// const PLAUSIBLE_DOMAIN = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
+// Should be replaced with an env var
+const PLAUSIBLE_DOMAIN = "rubinobs.com";
 
 function Client({ Component, pageProps }) {
   const authData = useAuthentication({
@@ -24,6 +27,12 @@ function Client({ Component, pageProps }) {
   return (
     <UIDReset>
       <AuthenticationContextProvider data={authData}>
+        <Script
+          id="plausible-script"
+          data-domain={PLAUSIBLE_DOMAIN}
+          src="https://plausible.io/js/plausible.js"
+          strategy="afterInteractive"
+        />
         <Script
           id="page-proofer-snippet"
           src={`https://app.pageproofer.com/embed/${PAGEPROOFER_ID}`}
