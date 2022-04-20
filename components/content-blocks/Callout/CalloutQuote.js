@@ -62,12 +62,12 @@ export default function CalloutQuote({ callout }) {
 }
 
 CalloutQuote.propTypes = {
-  callout: {
+  callout: PropTypes.shape({
     header: PropTypes.string,
     text: PropTypes.node,
     links: linksShape,
     quote: PropTypes.string,
     attribution: PropTypes.string,
     imageQuote: PropTypes.arrayOf(imageShape),
-  },
+  }),
 };
