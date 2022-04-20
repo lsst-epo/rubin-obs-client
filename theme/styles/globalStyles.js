@@ -259,6 +259,10 @@ const GlobalStyles = createGlobalStyle`
       display: block;
       text-align: center;
     }
+
+    &--educator {
+      ${aButtonTheme("educator")}
+    }
   }
 `;
 
