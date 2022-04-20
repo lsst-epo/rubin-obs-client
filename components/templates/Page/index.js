@@ -15,6 +15,7 @@ import NavButtons from "@/components/layout/NavButtons";
 import SubHero from "@/components/page/SubHero";
 import AuthorizePage from "@/components/auth/AuthorizePage";
 import InvestigationHero from "@/components/layout/InvestigationHero";
+import ChildNavigation from "@/components/layout/ChildNavigation";
 import GuideNavigation from "@/components/layout/GuideNavigation";
 import SiblingNavigation from "@/components/layout/SiblingNavigation";
 
@@ -37,6 +38,8 @@ export default function Page({
     parent,
     investigation,
     siblings,
+    childNavigation,
+    childNavigationDescription,
   },
   breadcrumbs,
   children,
@@ -108,9 +111,14 @@ export default function Page({
             title={parent.title}
             pages={parent.children}
             currentUri={uri}
+            expandable={true}
           />
         )}
-        {/* Special slideshow component here */}
+        <ChildNavigation
+          title="Contents and suggested sequence"
+          description={childNavigationDescription}
+          pages={childNavigation}
+        />
         {isGalleryHome && (
           <SlideBlock
             section="slideshows"
