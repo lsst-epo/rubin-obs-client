@@ -39,7 +39,7 @@ export default function CalloutMain({ callout }) {
           />
         ))}
       </Header>
-      {image?.[0] && <StyledImage image={image[0]} padImage={padImage} />}
+      {image?.[0] && <StyledImage image={image[0]} $padImage={padImage} />}
       {dynamicComponent === "alertStream" && (
         <TempList dynamicComponent={dynamicComponent} />
       )}
