@@ -39,9 +39,11 @@ InvestigationHero.propTypes = {
     duration: PropTypes.duration,
     externalUrl: PropTypes.string,
     isActive: PropTypes.bool,
-    landingPage: {
-      uri: PropTypes.string,
-      title: PropTypes.string,
-    },
+    landingPage: PropTypes.arrayOf(
+      PropTypes.shape({
+        uri: PropTypes.string,
+        title: PropTypes.string,
+      })
+    ),
   }),
 };
