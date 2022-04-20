@@ -28,6 +28,8 @@ export default function SignInModal() {
   const {
     isAuthenticated,
     user,
+    pendingGroup,
+    setPendingGroup,
     signIn,
     goToFacebookSignIn,
     goToGoogleSignIn,
@@ -86,6 +88,27 @@ export default function SignInModal() {
       ) : (
         <>
           <AuthModal.Title>{t("sign_in.header")}</AuthModal.Title>
+          <AuthModal.Description>
+            {t("sign_in.sso_description")}
+          </AuthModal.Description>
+          <Styled.SignInAsButtons>
+            <Button
+              styleAs={pendingGroup === "students" ? "primary" : "tertiary"}
+              onClick={() => setPendingGroup("students")}
+              aria-controls="signUpDescription"
+              aria-selected={pendingGroup === "students"}
+            >
+              {t("join.as", { context: "students" })}
+            </Button>
+            <Button
+              styleAs={pendingGroup === "educators" ? "educator" : "tertiary"}
+              onClick={() => setPendingGroup("educators")}
+              aria-controls="signUpDescription"
+              aria-selected={pendingGroup === "educators"}
+            >
+              {t("join.as", { context: "educators" })}
+            </Button>
+          </Styled.SignInAsButtons>
           <Styled.SSOButtons>
             <SSOButton service="google" onClick={goToGoogleSignIn}>
               {t("sign_in.continue_with_google")}
@@ -95,6 +118,9 @@ export default function SignInModal() {
             </SSOButton>
           </Styled.SSOButtons>
           <Styled.Form onSubmit={handleSubmit(onSubmit)}>
+            <AuthModal.Description>
+              {t("sign_in.email_sign_in_description")}
+            </AuthModal.Description>
             {errors?.form?.message && <Error>{errors.form.message}</Error>}
             <FormField
               htmlFor="signInEmail"
