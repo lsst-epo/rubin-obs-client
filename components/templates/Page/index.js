@@ -112,7 +112,6 @@ export default function Page({
             title={parent.title}
             pages={parent.children}
             currentUri={uri}
-            expandable={true}
           />
         )}
         <ChildNavigation
