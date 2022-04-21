@@ -36,6 +36,7 @@ export default function Page({
     subHeroText,
     subHeroColorScheme,
     parent,
+    showGuideNav,
     investigation,
     siblings,
     childNavigation,
@@ -94,8 +95,7 @@ export default function Page({
 
   const isInvestigationChild = investigation?.landingPage?.[0]?.uri !== uri;
 
-  const showGuideNavigation =
-    investigation && parent?.children && isInvestigationChild;
+  const showGuideNavigation = showGuideNav && parent?.children;
 
   const showSiblingNav = investigation && siblings && isInvestigationChild;
 
