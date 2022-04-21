@@ -10,9 +10,13 @@ export function isAbsoluteUrl(url) {
   return /^https?:\/\//i.test(url);
 }
 
+// const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+// Should be replaced with an env var
+const BASE_URL = "https://dev.rubinobs.com";
+
 export function isInternalUrl(url) {
   if (!isAbsoluteUrl(url)) return true;
-  return new URL(url).origin === process.env.NEXT_PUBLIC_BASE_URL;
+  return new URL(url).origin === BASE_URL;
 }
 
 export function fileSize(size) {
