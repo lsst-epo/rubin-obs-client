@@ -19,6 +19,7 @@ const pageShape = PropTypes.shape({
   investigtion: PropTypes.object,
   childNavigation: PropTypes.arrayOf(PropTypes.object),
   childNavigationDescription: PropTypes.node,
+  showGuideNav: PropTypes.bool,
 }).isRequired;
 
 export default pageShape;
