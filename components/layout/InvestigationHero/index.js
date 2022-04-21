@@ -1,23 +1,27 @@
 import PropTypes from "prop-types";
 import * as Styled from "./styles";
-import { Button } from "@/components/atomic";
+import { Button, Image } from "@/components/atomic";
 import IconComposer from "@/components/svg/IconComposer";
 import T from "@/page/Translate";
 
 export default function InvestigationHero({ investigation }) {
   if (!investigation) return null;
 
+  const { image, title, externalUrl, duration } = investigation;
+
   return (
     <Styled.Wrapper>
       <Styled.Inner>
-        <Styled.Image>
-          <img src="/images/coloring_the_universe.png" />
-        </Styled.Image>
+        {image?.[0] && (
+          <Styled.Image>
+            <Image image={image?.[0]} />
+          </Styled.Image>
+        )}
         <Styled.Text>
-          <h1>{investigation.title}</h1>
+          <h1>{title}</h1>
         </Styled.Text>
         <Styled.ButtonWrapper>
-          <Button styleAs="educator" as="a" href={investigation.externalUrl}>
+          <Button styleAs="educator" as="a" href={externalUrl}>
             <T translate="investigation.start" />
           </Button>
         </Styled.ButtonWrapper>
@@ -26,7 +30,7 @@ export default function InvestigationHero({ investigation }) {
           <Styled.DurationText>
             <T translate="investigation.total_duration" />
           </Styled.DurationText>
-          <Styled.DurationTime>{investigation.duration}</Styled.DurationTime>
+          <Styled.DurationTime>{duration}</Styled.DurationTime>
         </Styled.Duration>
       </Styled.Inner>
     </Styled.Wrapper>
