@@ -40,6 +40,7 @@ export default function Page({
     investigation,
     siblings,
     childNavigation,
+    childNavigationTitle,
     childNavigationDescription,
   },
   breadcrumbs,
@@ -115,7 +116,7 @@ export default function Page({
           />
         )}
         <ChildNavigation
-          title="Contents and suggested sequence"
+          title={childNavigationTitle}
           description={childNavigationDescription}
           pages={childNavigation}
         />

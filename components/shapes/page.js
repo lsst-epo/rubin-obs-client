@@ -18,6 +18,7 @@ const pageShape = PropTypes.shape({
   ]),
   investigtion: PropTypes.object,
   childNavigation: PropTypes.arrayOf(PropTypes.object),
+  childNavigationTitle: PropTypes.string,
   childNavigationDescription: PropTypes.node,
   showGuideNav: PropTypes.bool,
 }).isRequired;
