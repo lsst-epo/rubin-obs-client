@@ -33,8 +33,8 @@ jobs:
       run: |-
         docker build \
         -t "gcr.io/${{ secrets.SV_PROJ_NAME }}/rubin-obs-client:${{ github.sha }}" \
-        --build-arg NEXT_PUBLIC_API_URL=https://api-int.rubinobs.com/api \
-        --build-arg NEXT_PUBLIC_ASSETS_BASE_URL=https://api-int.rubinobs.com/assets \
+        --build-arg NEXT_PUBLIC_API_URL=https://api-dev.rubinobs.com/api \
+        --build-arg NEXT_PUBLIC_ASSETS_BASE_URL=https://api-dev.rubinobs.com/assets \
         --build-arg NEXT_PUBLIC_ASTRO_API_URL=https://us-central1-rubin-obs.cloudfunctions.net/astro-objects-api \
         --build-arg NEXT_PUBLIC_GOOGLE_APP_ID=688095955960-t0fpaj4ec3gh5vsr9lhg8govapk2oeo9.apps.googleusercontent.com \
         --build-arg NEXT_PUBLIC_PAGEPROOFER_ID=0a40ceaf-340d-5e6a-adc7-898f09823859 \
