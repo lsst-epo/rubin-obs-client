@@ -79,8 +79,7 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
   const data = await getGlobalData();
   // add _es to property names if site is "es"
   const isEspanol = site === "es";
-  // eslint-disable-next-line no-console
-  console.log(isEspanol, Object.keys(data), data.globals, data.globals_es);
+
   const globals = data[`globals${isEspanol ? "_es" : ""}`].reduce(
     (obj, item) =>
       Object.assign(obj, Object.keys(item).length && { [item.handle]: item }),
