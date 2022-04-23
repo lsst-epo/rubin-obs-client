@@ -5,11 +5,11 @@ import "@/lib/i18n";
 import "focus-visible";
 import { UIDReset } from "react-uid";
 import Script from "next/script";
+import ErrorBoundary from "@/templates/ErrorBoundary";
 import { AuthenticationContextProvider } from "@/contexts/Authentication";
 import useAuthentication from "@/hooks/useAuthentication";
 import GlobalStyles from "@/styles/globalStyles";
 import styles from "@/styles/styles.scss";
-
 // const PAGEPROOFER_ID = process.env.NEXT_PUBLIC_PAGEPROOFER_ID;
 // Should be replaced with an env var
 const PAGEPROOFER_ID = "0a40ceaf-340d-5e6a-adc7-898f09823859";
@@ -39,7 +39,9 @@ function Client({ Component, pageProps }) {
           strategy="lazyOnload"
         />
         <GlobalStyles />
-        <Component {...pageProps} />
+        <ErrorBoundary>
+          <Component {...pageProps} />
+        </ErrorBoundary>
       </AuthenticationContextProvider>
     </UIDReset>
   );
