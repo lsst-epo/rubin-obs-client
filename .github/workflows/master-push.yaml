@@ -41,12 +41,8 @@ jobs:
     - name: Push Container Image to GCR
       run: docker push gcr.io/edc-int-6c5e/skyviewer-client:${{ github.sha }}
 
-    - name: Update app.yaml
-      run: |-
-        echo "
-        network:
-          name: edc-int-vpc
-          subnetwork_name: subnet-us-central1-01" >> app.yaml
+    - name: Get app.yaml
+      run: gcloud secrets versions access latest --secret=rubin-obs-client-appyaml > app.yaml
 
     - name: Deploy to App Engine
       run: |-
