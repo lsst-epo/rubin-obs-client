@@ -12,6 +12,7 @@ const imageShape = PropTypes.shape({
   className: PropTypes.string,
   focalPointX: PropTypes.integer,
   focalPointY: PropTypes.integer,
+  id: PropTypes.string,
 }).isRequired;
 
 export default imageShape;
