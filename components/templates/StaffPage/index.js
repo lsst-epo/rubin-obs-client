@@ -1,32 +1,50 @@
 import PropTypes from "prop-types";
-import styled from "styled-components";
+import Link from "next/link";
 import { useTranslation } from "react-i18next";
-import { useCustomBreadcrumbs } from "@/lib/utils";
+import { useGlobalData } from "@/lib/utils";
 import Body from "@/global/Body";
 import { Share } from "@/content-blocks";
-import Breadcrumbs from "@/page/Breadcrumbs";
-import Container from "@/layout/Container";
-import Image from "@/atomic/Image";
 import StaffList from "@/dynamic/StaffList";
-import { respond } from "@/styles/globalStyles";
+import ContentBlockFactory from "@/factories/ContentBlockFactory";
+import NestedContext from "@/contexts/Nested";
+import Image from "@/atomic/Image";
+import Breadcrumbs from "@/page/Breadcrumbs";
+import * as Styled from "./styles";
+
+function getParentUri(uri) {
+  const pathFragments = uri.split("/");
+  return pathFragments.slice(0, -1).join("/");
+}
+
+function getParentRootPage(parentUri, rootPages) {
+  return rootPages.find((page) => {
+    return page.pageEntry?.[0].uri.includes(parentUri);
+  });
+}
+
+function getParentEntry(parentUri, rootPages) {
+  const parentRootPage = getParentRootPage(parentUri, rootPages);
+  return parentRootPage?.pageEntry?.[0];
+}
 
 export default function StaffPage({
   data: {
     featuredImage = [],
-    staffPullQuote,
     id,
-    plainText: staffTitle,
-    staffBio,
-    staffLocation,
-    image = [],
-    staffType = [],
-    title,
     uri,
+    title,
+    bio,
+    heroImage = [],
+    tradingCard = [],
+    quote,
+    tags = [],
+    contentBlocks,
   },
 }) {
   const { t } = useTranslation();
-  const customBreadcrumbs = useCustomBreadcrumbs("Staff Profiles");
-  const rootHomeLink = customBreadcrumbs.slice(-1)[0];
+  const rootPages = useGlobalData("rootPages");
+  const parentUri = getParentUri(uri);
+  const parentEntry = getParentEntry(parentUri, rootPages);
   const bodyProps = {
     featuredImage,
     title,
@@ -37,80 +55,84 @@ export default function StaffPage({
     title,
     active: true,
   };
+  const breadcrumbs = [parentEntry, pageLink].filter(Boolean);
 
   return (
     <Body {...bodyProps}>
-      <Breadcrumbs breadcrumbs={[...customBreadcrumbs, pageLink]} />
-      <Container>
-        <div>
-          {staffType?.[0]?.title && <Pretitle>{staffType[0].title}</Pretitle>}
-          <h1>{title}</h1>
-          <Subtitle>
-            {staffTitle}
-            {staffLocation && `, ${staffLocation}`}
-          </Subtitle>
-        </div>
-        <PortraitBlock>
-          {image[0] && (
-            <Portrait>
-              <Image image={image[0]} />
-            </Portrait>
+      <Breadcrumbs breadcrumbs={breadcrumbs} />
+      <Styled.Hero data={heroImage}>
+        {quote && (
+          <Styled.QuotePositioner>
+            <Styled.Quote>
+              <Styled.QuoteInner dangerouslySetInnerHTML={{ __html: quote }} />
+            </Styled.Quote>
+          </Styled.QuotePositioner>
+        )}
+      </Styled.Hero>
+      <Styled.Layout $hasHero={!!heroImage?.[0]}>
+        <Styled.Main>
+          <NestedContext.Provider value={true}>
+            <h1>{title}</h1>{" "}
+            <Styled.Bio
+              className="c-content-rte"
+              dangerouslySetInnerHTML={{ __html: bio }}
+            />
+            <Share />
+            {!!contentBlocks?.length &&
+              contentBlocks.map((block) => (
+                <ContentBlockFactory
+                  key={block.id}
+                  type={block.typeHandle}
+                  data={block}
+                  pageId={id}
+                />
+              ))}
+          </NestedContext.Provider>
+        </Styled.Main>
+        <Styled.Aside>
+          {tradingCard?.[0] && (
+            <section>
+              <Styled.SectionHeading>
+                {t("staff.trading-card")}
+              </Styled.SectionHeading>
+              <Image image={tradingCard[0]} />
+            </section>
           )}
-          {staffPullQuote && <PortraitText>{staffPullQuote}</PortraitText>}
-        </PortraitBlock>
-      </Container>
-      <Share />
-      <Container>
-        <div
-          className="c-content-rte"
-          dangerouslySetInnerHTML={{ __html: staffBio }}
-        />
-      </Container>
+          {!!tags?.length && (
+            <section>
+              <Styled.SectionHeading>{t(`tags`)}</Styled.SectionHeading>
+              <Styled.TagList>
+                {tags.map(({ id, slug, title }) => (
+                  <Styled.Tag key={id}>
+                    <Link
+                      href={{
+                        pathname: `/${parentEntry?.uri || parentUri}`,
+                        query: { search: slug },
+                      }}
+                      passHref
+                    >
+                      <Styled.Link>{title}</Styled.Link>
+                    </Link>
+                  </Styled.Tag>
+                ))}
+              </Styled.TagList>
+            </section>
+          )}
+        </Styled.Aside>
+      </Styled.Layout>
       <StaffList
         excludeId={id}
         header={t(`staff.browse-more`)}
         limit={4}
         button={{
           text: t(`staff.back-to-profiles`),
-          uri: `${rootHomeLink?.uri}`,
+          uri: parentEntry?.uri || parentUri,
         }}
         isWide={true}
       />
     </Body>
   );
 }
-
-const Pretitle = styled.h4`
-  padding-bottom: 10px;
-`;
-
-const Subtitle = styled.div`
-  padding-top: 10px;
-`;
-
-const PortraitBlock = styled.div`
-  display: grid;
-  grid-template-columns: 250px 1fr;
-  grid-column-gap: 20px;
-  margin-top: 2em;
-  align-items: center;
-
-  ${respond(`grid-template-columns: 1fr;`)}
-`;
-
-const Portrait = styled.div`
-  img {
-    margin: 10px auto 25px;
-    border-radius: 50%;
-    object-fit: cover;
-  }
-`;
-
-const PortraitText = styled.blockquote`
-  flex: 10 0 20em;
-  font-weight: 700;
-  color: var(--neutral60);
-`;
 
 StaffPage.displayName = "Template.StaffPage";
 
