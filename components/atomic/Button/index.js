@@ -1,37 +1,44 @@
+import { forwardRef } from "react";
 import PropTypes from "prop-types";
 import IconComposer from "@/components/svg/IconComposer";
 import * as Styled from "./styles";
 
-export default function Button({
-  children,
-  icon,
-  iconSize,
-  isBlock,
-  styleAs,
-  isInactive,
-  className,
-  ...buttonProps
-}) {
-  return (
-    <Styled.Button
-      $isBlock={isBlock}
-      $styleAs={styleAs}
-      $hasIcon={!!icon}
-      aria-disabled={isInactive || undefined}
-      className={className}
-      {...buttonProps}
-    >
-      {icon && (
-        <IconComposer
-          icon={icon}
-          size={iconSize}
-          role={children && "presentation"}
-        />
-      )}
-      <Styled.ButtonText>{children}</Styled.ButtonText>
-    </Styled.Button>
-  );
-}
+const Button = forwardRef(
+  (
+    {
+      children,
+      icon,
+      iconSize,
+      isBlock,
+      styleAs,
+      isInactive,
+      className,
+      ...buttonProps
+    },
+    ref
+  ) => {
+    return (
+      <Styled.Button
+        ref={ref}
+        $isBlock={isBlock}
+        $styleAs={styleAs}
+        $hasIcon={!!icon}
+        aria-disabled={isInactive || undefined}
+        className={className}
+        {...buttonProps}
+      >
+        {icon && (
+          <IconComposer
+            icon={icon}
+            size={iconSize}
+            role={children && "presentation"}
+          />
+        )}
+        <Styled.ButtonText>{children}</Styled.ButtonText>
+      </Styled.Button>
+    );
+  }
+);
 
 Button.displayName = "Atomic.Button";
 
@@ -46,3 +53,5 @@ Button.prototypes = {
    */
   isInactive: PropTypes.bool,
 };
+
+export default Button;
