@@ -166,7 +166,8 @@
       "scientific-staff": "Scientific Staff Profile",
       "non-scientific-staff": "Non-scientific Staff Profile",
       "browse-more": "Browse More Profiles",
-      "back-to-profiles": "Go Back to Profiles"
+      "back-to-profiles": "Go Back to Profiles",
+      "trading-card": "Trading card"
     },
     "telescope": {
       "state": "State",
