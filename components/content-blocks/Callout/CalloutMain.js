@@ -20,6 +20,8 @@ export default function CalloutMain({ callout }) {
     ...wrapperProps
   } = callout;
 
+  const imageAsset = useEnhancedImageAsset(image[0]);
+
   return (
     <Wrapper
       {...wrapperProps}
@@ -45,12 +47,7 @@ export default function CalloutMain({ callout }) {
           />
         ))}
       </Header>
-      {image?.[0] && (
-        <StyledImage
-          image={useEnhancedImageAsset(image[0])}
-          $padImage={padImage}
-        />
-      )}
+      {imageAsset && <StyledImage image={imageAsset} $padImage={padImage} />}
       {dynamicComponent === "alertStream" && (
         <TempList dynamicComponent={dynamicComponent} />
       )}
