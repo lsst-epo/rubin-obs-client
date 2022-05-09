@@ -37,9 +37,6 @@ const SearchList = ({
     if (entry.postType) {
       return t(`filters.${entry.postType[0].slug}`);
     }
-    if (entry.staffType) {
-      return t(`staff.${entry.staffType[0].slug}`);
-    }
     if (entry.jobPosition) {
       return t(`jobs.jobs`) + " - " + t(`filters.${entry.jobPosition[0].slug}`);
     }

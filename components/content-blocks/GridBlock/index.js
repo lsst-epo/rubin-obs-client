@@ -24,14 +24,13 @@ function getLimit(numberOfItems) {
 export default function GridBlock({
   numberOfItems,
   postType,
-  staffType,
   header,
   items = [],
   mixedLink,
   pageId,
   typeHandle,
 }) {
-  const listTypeId = staffType?.[0]?.id || postType?.[0]?.id;
+  const listTypeId = postType?.[0]?.id;
   const pathParams = listTypeId && { filter: listTypeId };
   const limit = getLimit(numberOfItems);
 
@@ -100,7 +99,6 @@ GridBlock.propTypes = {
   typeHandle: PropTypes.string,
   numberOfItems: PropTypes.string,
   postType: PropTypes.array,
-  staffType: PropTypes.array,
   ctas: PropTypes.array,
   items: PropTypes.array,
   header: PropTypes.string,
