@@ -15,6 +15,7 @@ const DataList = ({
   excludeId = null,
   isSitewideSearch,
   limit = 10,
+  showsFeatured = false,
   section = null,
 }) => {
   const { t } = useTranslation();
@@ -40,6 +41,7 @@ const DataList = ({
     excludeId,
     isSitewideSearch,
     limit,
+    showsFeatured,
     listTypeId,
     section,
   });
