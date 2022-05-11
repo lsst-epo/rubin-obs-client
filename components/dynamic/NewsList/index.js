@@ -21,14 +21,15 @@ const NewsList = ({
   component,
   excludeId = null,
   header,
-  limit = 10,
+  limit: initialLimit = 10,
   isWide = false,
   gridType = "news",
 }) => {
   const { t } = useTranslation();
   const localeInfo = useGlobalData("localeInfo");
   const lang = localeInfo?.language || "en-US";
-  const cols = limit === 4 ? 4 : limit === 3 ? 3 : 2;
+  const cols = initialLimit === 4 ? 4 : initialLimit === 3 ? 3 : 2;
+  const canShowFeatured = initialLimit > 4;
 
   const makeSticker = (newsAssets, title, url) => {
     const doc = newsAssets.filter((n, i) => n.textLink);
@@ -54,16 +55,20 @@ const NewsList = ({
     <DataList
       component={component}
       excludeId={excludeId}
-      limit={limit}
+      limit={initialLimit}
+      showsFeatured={canShowFeatured}
       section="news"
     >
-      {({ entries, offset, page, total }) => (
+      {({ entries, limit, offset, page, total }) => (
         <>
           <Container width={isWide ? "regular" : "narrow"}>
             <div>
               {header && <Header>{header}</Header>}
               {entries?.length > 0 && (
-                <Grid showFeature={!!(limit > 4 && page === 1)} columns={cols}>
+                <Grid
+                  showFeature={canShowFeatured && page === 1}
+                  columns={cols}
+                >
                   {entries.map(
                     (
                       {
@@ -90,7 +95,7 @@ const NewsList = ({
                             : null
                         }
                         image={image?.[0]}
-                        isFeature={!!(limit > 4 && i === 0)}
+                        isFeature={canShowFeatured && page === 1 && i === 0}
                         link={uri}
                         pretitle={
                           gridType === "news" && postType?.[0]?.title
@@ -118,7 +123,7 @@ const NewsList = ({
               )}
             </div>
           </Container>
-          {limit >= 10 && (
+          {initialLimit >= 10 && (
             <Pagination
               limit={limit}
               offset={offset}
