@@ -49,10 +49,12 @@ InvestigationTile.propTypes = {
     damAsset: PropTypes.object,
     externalUrl: PropTypes.string,
     isActive: PropTypes.bool,
-    landingPage: PropTypes.shape({
-      uri: PropTypes.string,
-      title: PropTypes.string,
-    }),
+    landingPage: PropTypes.arrayOf(
+      PropTypes.shape({
+        uri: PropTypes.string,
+        title: PropTypes.string,
+      })
+    ),
   }),
 };
 
