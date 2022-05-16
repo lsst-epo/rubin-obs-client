@@ -121,7 +121,7 @@ export default function EventPage({
   );
 }
 
-const Pretitle = styled.h4`
+const Pretitle = styled.div`
   padding-bottom: 10px;
 `;
 
