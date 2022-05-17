@@ -85,8 +85,8 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
   // .reduce() needs to check for null before attempting to use
   const globalKey = `globals${isEspanol ? "_es" : ""}`;
   let globals;
-  if(data.globalKey === undefined || data.globalKey === null) {
-    console.error("data[" + globalKey + "] is null! Cannot be referenced before it is populated")
+  if (data[globalKey] === undefined || data[globalKey] === null) {
+    console.error(       "data[" +        globalKey +        "] is null! Cannot be referenced before it is populated"    )
     globals = {};
   } else {
     globals = data[globalKey].reduce(
