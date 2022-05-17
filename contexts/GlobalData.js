@@ -24,6 +24,7 @@ GlobalDataProvider.propTypes = {
     footerContent: footerContentShape,
     headerNavItems: PropTypes.arrayOf(internalLinkWithChildrenShape),
     localeInfo: PropTypes.object,
+    metadata: PropTypes.arrayOf(PropTypes.object),
     rootPages: rootPagesShape,
     siteInfo: siteInfoShape,
     userProfilePage: PropTypes.object,

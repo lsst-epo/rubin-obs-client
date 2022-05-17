@@ -4,7 +4,7 @@ import internalLinkShape from "@/shapes/link";
 import * as Styled from "./styles";
 
 export default function Breadcrumbs({ breadcrumbs, type }) {
-  if (!breadcrumbs || breadcrumbs.length < 1) return null;
+  if (!breadcrumbs || breadcrumbs.length <= 1) return null;
 
   return (
     <Styled.Breadcrumbs breadcrumbs={breadcrumbs} $type={type}>

@@ -8,6 +8,7 @@ import { getGlossaryTermDataByUri } from "@/lib/api/glossary-terms";
 import { getSlideshowDataByUri } from "@/api/slideshows";
 import { getSiteString } from "@/lib/utils";
 import { GlobalDataProvider } from "@/contexts/GlobalData";
+import { getDAMMetadata } from "@/lib/api/dam-metadata";
 import PageTemplate from "@/templates/Page";
 import EventPageTemplate from "@/templates/EventPage";
 import GalleryPageTemplate from "@/templates/GalleryPage";
@@ -113,7 +114,10 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
     previewData?.previewToken
   );
 
+  const { metadata } = await getDAMMetadata();
+
   const globalData = {
+    metadata,
     categories: data?.[`allCategories${isEspanol ? "_es" : ""}`] || [],
     footerContent: globals?.footer || {},
     headerNavItems: data?.[`pageTree${isEspanol ? "_es" : ""}`] || [],
@@ -161,6 +165,7 @@ Page.propTypes = {
   data: PropTypes.object,
   section: PropTypes.string,
   globalData: PropTypes.exact({
+    metadata: PropTypes.arrayOf(PropTypes.object),
     categories: PropTypes.array,
     footerContent: footerContentShape,
     headerNavItems: PropTypes.arrayOf(internalLinkWithChildrenShape),
