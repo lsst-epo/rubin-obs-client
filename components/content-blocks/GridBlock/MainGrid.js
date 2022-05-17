@@ -45,13 +45,18 @@ const MainGrid = ({ items = [], limit, listTypeId, sectionHandle, pageId }) => {
                 mixedLink,
                 externalUrl,
                 uri,
+                landingPage,
               },
               i
             ) => (
               <Tile
                 key={id}
                 image={image?.[0]}
-                link={mixedLink || { url: externalUrl || uri }}
+                link={
+                  mixedLink || {
+                    url: externalUrl || uri || landingPage?.[0]?.uri,
+                  }
+                }
                 text={plainText || striptags(description)}
                 title={title}
                 type={tileType}

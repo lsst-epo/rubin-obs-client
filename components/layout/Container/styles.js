@@ -15,7 +15,9 @@ export const Section = styled.section`
 `;
 
 export const Inner = styled.div`
-  ${({ $width = "regular" }) => {
+  ${({ $width = "regular", $nested }) => {
+    if ($nested) return ``;
+
     switch ($width) {
       case "narrow":
         return containerNarrow();

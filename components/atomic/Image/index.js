@@ -21,6 +21,18 @@ export default function Image({ image, className, title }) {
     objectPosition: position(focalPointX, focalPointY),
   };
 
+  const urls = [url, url2x, url3x];
+
+  const getSrcSet = (resolutions) => {
+    let srcSet = "";
+
+    resolutions.forEach((resolution, i) => {
+      srcSet += resolution ? `${i > 0 ? ", " : ""}${resolution} ${i + 1}x` : "";
+    });
+
+    return srcSet;
+  };
+
   return (
     <img
       alt={altText || title}
@@ -29,7 +41,7 @@ export default function Image({ image, className, title }) {
       })}
       height={height}
       src={url}
-      srcSet={`${url3x} 3x, ${url2x} 2x, ${url} 1x`}
+      srcSet={getSrcSet(urls)}
       style={style}
       width={width}
     />

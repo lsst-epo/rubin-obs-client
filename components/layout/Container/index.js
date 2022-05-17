@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import { useNestedContext } from "@/contexts/Nested";
 import * as Styled from "./styles";
 
 export default function Container({
@@ -10,11 +11,12 @@ export default function Container({
   paddingSize = "large",
   elAttributes,
 }) {
+  const nested = useNestedContext();
   return (
     <Styled.Section
       className={classNames(className, {
-        [`l-pad-top-${paddingSize}`]: paddingSize !== "none",
-        [`l-pad-bottom-${paddingSize}`]: paddingSize !== "none",
+        [`l-pad-top-${paddingSize}`]: !nested && paddingSize !== "none",
+        [`l-pad-bottom-${paddingSize}`]: !nested && paddingSize !== "none",
       })}
       $bgColor={bgColor}
       {...elAttributes}
@@ -24,6 +26,7 @@ export default function Container({
           [`${className}__inner`]: !!className,
         })}
         $width={width}
+        $nested={nested}
       >
         {children}
       </Styled.Inner>

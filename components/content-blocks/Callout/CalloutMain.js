@@ -7,6 +7,7 @@ import { linksShape } from "@/shapes/link";
 import Wrapper from "./Wrapper";
 import { Header, Text, StyledMixedLink, StyledImage } from "./styles";
 import TempList from "@/components/dynamic/TempList";
+import { useEnhancedImageAsset } from "@/lib/utils";
 
 export default function CalloutMain({ callout }) {
   const {
@@ -18,6 +19,8 @@ export default function CalloutMain({ callout }) {
     text,
     ...wrapperProps
   } = callout;
+
+  const imageAsset = useEnhancedImageAsset(image[0]);
 
   return (
     <Wrapper
@@ -44,7 +47,7 @@ export default function CalloutMain({ callout }) {
           />
         ))}
       </Header>
-      {image?.[0] && <StyledImage image={image[0]} $padImage={padImage} />}
+      {imageAsset && <StyledImage image={imageAsset} $padImage={padImage} />}
       {dynamicComponent === "alertStream" && (
         <TempList dynamicComponent={dynamicComponent} />
       )}
