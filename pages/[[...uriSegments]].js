@@ -81,11 +81,20 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
   // add _es to property names if site is "es"
   const isEspanol = site === "es";
 
-  const globals = data[`globals${isEspanol ? "_es" : ""}`].reduce(
-    (obj, item) =>
-      Object.assign(obj, Object.keys(item).length && { [item.handle]: item }),
-    {}
-  );
+  // Beginning of bug fix
+  // .reduce() needs to check for null before attempting to use
+  const globalKey = `globals${isEspanol ? "_es" : ""}`;
+  let globals;
+  if (data[globalKey] === undefined || data[globalKey] === null) {
+    console.error(       "data[" +        globalKey +        "] is null! Cannot be referenced before it is populated"    )
+    globals = {};
+  } else {
+    globals = data[globalKey].reduce(
+      (obj, item) =>
+        Object.assign(obj, Object.keys(item).length && { [item.handle]: item }),
+      {}
+    );
+  }
 
   const section = await getEntrySectionByUri(uri, site);
 
