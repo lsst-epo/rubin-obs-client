@@ -48,7 +48,6 @@ export default function GridBlock({
 
   const ContentGrid = gridMap[typeHandle] || MainGrid;
   const containerWidth = widthMap[typeHandle] || undefined;
-  const ifHeader = header !== null;
 
   return (
     <Container width={containerWidth}>

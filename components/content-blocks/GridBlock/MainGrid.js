@@ -45,7 +45,7 @@ const MainGrid = ({ items = [], limit, listTypeId, sectionHandle, pageId }) => {
                 mixedLink,
                 externalUrl,
                 uri,
-                landing
+                landingPage,
               },
               i
             ) => (

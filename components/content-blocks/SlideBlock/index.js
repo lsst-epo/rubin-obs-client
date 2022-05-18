@@ -83,7 +83,7 @@ const SlideBlock = ({
   return (
     <StyledContainer bgColor="black" width="regular" elAttributes={panelProps}>
       <HeaderBlock>
-        <Header>{header}</Header>
+        <Header className="t-heading-tertiary">{header}</Header>
         {(mixedLink?.element || mixedLink?.url) && (
           <StyledMixedLink {...mixedLink} />
         )}
@@ -140,7 +140,7 @@ const HeaderBlock = styled.div`
   }
 `;
 
-const Header = styled.h3`
+const Header = styled.h2`
   color: var(--white);
 `;
 
