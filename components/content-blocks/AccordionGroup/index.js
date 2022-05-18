@@ -7,7 +7,7 @@ export default function AccordionGroup({ header, accordions }) {
   return (
     <Container>
       <div>
-        {header && <h3>{header}</h3>}
+        {header && <h2>{header}</h2>}
         <AccordionList>
           {accordions.map(({ text, header, id }) => (
             <Accordion key={id} summary={header}>
