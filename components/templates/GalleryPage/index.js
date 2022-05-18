@@ -108,7 +108,7 @@ export default function GalleryPage({
       {assetVariants.length > 0 &&
         assetVariants.map((a, i) => {
           if (a.assetHeader) {
-            return <h4 key={i}>{a.assetHeader}</h4>;
+            return <h2 className="t-heading-quaternary" key={i}>{a.assetHeader}</h2>;
           } else if (a.assetLink?.length > 0) {
             return (
               <React.Fragment key={i}>
@@ -128,7 +128,7 @@ export default function GalleryPage({
         })}
       {galleryItemTags?.length > 0 && (
         <>
-          <h4>{t(`gallery.tags`)}</h4>
+          <h2 className="t-heading-quaternary">{t(`gallery.tags`)}</h2>
           {galleryItemTags.map((tag, i) => (
             <Link key={i} href={`/${galleryHomeLink?.uri}?search=${tag.slug}`}>
               <a>{`#${tag.title} `}</a>
@@ -166,7 +166,7 @@ export default function GalleryPage({
       </Tile>
       <ContainerDesktop>
         <div>
-          <h4>{t(`gallery.about-the-${typeSlug}`)}</h4>
+          <h2 className="t-heading-quaternary">{t(`gallery.about-the-${typeSlug}`)}</h2>
           <Details>
             <div>Credit:</div>
             <div>{credit || creditDefault}</div>
