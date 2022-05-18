@@ -73,7 +73,9 @@ export default function EventPage({
       <Container paddingSize="medium">
         <div>
           {eventType?.[0]?.title && (
-            <Pretitle>{eventType?.[0]?.title}</Pretitle>
+            <Pretitle className="t-heading-quaternary">
+              {eventType?.[0]?.title}
+            </Pretitle>
           )}
           <h1>{title}</h1>
           <Subtitle>

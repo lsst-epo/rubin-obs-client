@@ -105,7 +105,9 @@ export default function NewsPage({
           <Container paddingSize="medium">
             <div>
               <h1>{title}</h1>
-              <Pretitle>{localizedDate}</Pretitle>
+              <Pretitle className="t-heading-quaternary">
+                {localizedDate}
+              </Pretitle>
               {description && <Subtitle>{description}</Subtitle>}
             </div>
           </Container>
@@ -212,7 +214,7 @@ const NewsDetail = styled.div`
   }
 `;
 
-const Pretitle = styled.h4`
+const Pretitle = styled.div`
   padding-bottom: 10px;
 `;
 
