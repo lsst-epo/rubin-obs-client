@@ -13,7 +13,7 @@ export default function CalloutMain({ callout }) {
   const {
     dynamicComponent,
     header,
-    image,
+    calloutImage: image,
     links,
     padImage,
     text,
@@ -59,7 +59,7 @@ CalloutMain.propTypes = {
   callout: PropTypes.shape({
     header: PropTypes.string,
     text: PropTypes.node,
-    image: PropTypes.arrayOf(imageShape).isRequired,
+    calloutImage: PropTypes.arrayOf(imageShape).isRequired,
     padImage: PropTypes.bool,
     links: linksShape,
     backgroundColor: PropTypes.string,

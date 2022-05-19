@@ -11,7 +11,13 @@ const InvestigationTile = ({ investigation, useExternalLink }) => {
 
   if (!investigation) return null;
 
-  const { image, isActive, title, externalUrl, landingPage } = investigation;
+  const {
+    investigationImage: image,
+    isActive,
+    title,
+    externalUrl,
+    landingPage,
+  } = investigation;
 
   const finalImage = image?.[0];
 
@@ -38,7 +44,7 @@ InvestigationTile.propTypes = {
   investigation: PropTypes.shape({
     uri: PropTypes.string,
     title: PropTypes.string,
-    image: PropTypes.object,
+    investigationImage: PropTypes.object,
     externalUrl: PropTypes.string,
     isActive: PropTypes.bool,
     landingPage: PropTypes.shape({

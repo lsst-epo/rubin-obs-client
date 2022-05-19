@@ -115,7 +115,7 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
   const { metadata } = await getDAMMetadata();
 
   const globalData = {
-    metadata,
+    metadata: metadata || {},
     categories: data?.[`allCategories${isEspanol ? "_es" : ""}`] || [],
     footerContent: globals?.footer || {},
     headerNavItems: data?.[`pageTree${isEspanol ? "_es" : ""}`] || [],
