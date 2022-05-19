@@ -20,7 +20,7 @@ export default function CalloutTwoTone({ callout }) {
     backgroundImage,
     captionRichText,
     header,
-    image,
+    damAsset: image,
     links,
     text,
   } = callout;
@@ -73,7 +73,7 @@ CalloutTwoTone.propTypes = {
     backgroundImage: PropTypes.arrayOf(imageShape).isRequired,
     captionRichText: PropTypes.node,
     header: PropTypes.string,
-    image: PropTypes.arrayOf(imageShape).isRequired,
+    damAsset: PropTypes.arrayOf(imageShape).isRequired,
     links: linksShape,
     text: PropTypes.node,
   }).isRequired,
