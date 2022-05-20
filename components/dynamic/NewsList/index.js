@@ -100,6 +100,7 @@ const NewsList = ({
                         subtitle={makeDateString(date, lang)}
                         text={makeTruncatedString(description, 30)}
                         title={title}
+                        titleTag={"h2"}
                         type={gridType}
                       />
                     )

@@ -48,6 +48,7 @@ export default function GridBlock({
 
   const ContentGrid = gridMap[typeHandle] || MainGrid;
   const containerWidth = widthMap[typeHandle] || undefined;
+  const ifHeader = header !== null;
 
   return (
     <Container width={containerWidth}>
@@ -66,6 +67,7 @@ export default function GridBlock({
           listTypeId={listTypeId}
           sectionHandle={typeHandle}
           pageId={pageId}
+          ifHeader={ifHeader}
         />
         {mixedLink?.url && (
           <StyledMixedLink
