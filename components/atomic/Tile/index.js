@@ -19,6 +19,7 @@ const Tile = ({
   subtitle,
   title,
   text,
+  titleTag = "h3",
   type = "related",
 }) => {
   const uid = useUID();
@@ -37,6 +38,7 @@ const Tile = ({
   };
   const ratio = ratioMap[type];
   const isVideo = pretitle === "Video";
+  const TitleTag = titleTag;
 
   return (
     <StyledMixedLink
@@ -65,9 +67,9 @@ const Tile = ({
       )}
       {pretitle && <div className="pretitle">{pretitle}</div>}
       {title && (
-        <h2 id={uid} className="title">
+        <TitleTag id={uid} className="title">
           {title}
-        </h2>
+        </TitleTag>
       )}
       {subtitle && <div className="subtitle">{subtitle}</div>}
       {text && <div className="text">{text}</div>}

@@ -129,6 +129,7 @@ const EventList = ({
                           }
                           text={description}
                           title={`${title}${loc && " — " + loc}`}
+                          titleTag={"h2"}
                           type={gridType}
                         />
                       );
