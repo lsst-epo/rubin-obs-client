@@ -87,6 +87,7 @@ const JobList = ({
                           }
                           subtitle={Location}
                           title={title}
+                          titleTag={"h2"}
                           type={gridType}
                         />
                       );

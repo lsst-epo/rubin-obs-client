@@ -119,6 +119,7 @@ const SearchList = ({
                             : makeTruncatedString(striptags(entry.description))
                         }
                         title={entry.title}
+                        titleTag={"h2"}
                         type="search"
                       />
                     ) : null;

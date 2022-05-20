@@ -36,6 +36,7 @@ const StaffList = ({
                     <Tile
                       key={id}
                       title={title}
+                      titleTag={"h2"}
                       text={plainText}
                       image={image?.[0]}
                       link={uri}

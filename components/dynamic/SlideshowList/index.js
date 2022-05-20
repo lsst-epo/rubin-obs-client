@@ -48,6 +48,7 @@ const SlideshowList = ({
                         }
                         text={striptags(description)}
                         title={title}
+                        titleTag={"h2"}
                         type={gridType}
                       />
                     )

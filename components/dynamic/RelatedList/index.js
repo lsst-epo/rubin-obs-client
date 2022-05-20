@@ -37,6 +37,7 @@ const RelatedList = ({
                       link={uri}
                       text={striptags(description)}
                       title={title}
+                      titleTag={"h2"}
                       type={gridType}
                     />
                   ))}
