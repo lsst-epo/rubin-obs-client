@@ -16,6 +16,9 @@ module.exports = {
     "import/no-anonymous-default-export": 0,
     // would be good to use next/image but we aren't yet
     "@next/next/no-img-element": 0,
+    "no-console": 0,
+    "unused-imports/no-unused-imports": 0,
+    "prettier/prettier": 0
   },
   extends: ["@castiron", "next"],
 };

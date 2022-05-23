@@ -20,7 +20,8 @@ export default function CalloutMain({ callout }) {
     ...wrapperProps
   } = callout;
 
-  const imageAsset = useEnhancedImageAsset(image[0]);
+  // const imageAsset = useEnhancedImageAsset(image[0]);
+  const imageAsset = null;
 
   return (
     <Wrapper

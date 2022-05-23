@@ -43,6 +43,12 @@ const blockMap = {
 };
 
 export default function ContentBlockFactory({ type, data, pageId }) {
+  // console.log("\ntype:\n");
+  // console.log(type);
+  // console.log("\ndata:\n");
+  // console.log(data);
+  console.log("\npage id:\n");
+  console.log(pageId);
   const Block = blockMap[type];
   if (!Block) return null;
   return <Block {...data} pageId={pageId} />;
