@@ -55,9 +55,9 @@ const Tile = ({
         {finalImage && (
           <div className="image">
             {ratio ? (
-              <ResponsiveImage ratio={ratio} image={finalImage} />
+              <ResponsiveImage ratio={ratio} image={finalImage} alt="" />
             ) : (
-              <Image image={finalImage} />
+              <Image image={finalImage} alt="" />
             )}
             {isVideo && (
               <PlayButton>
