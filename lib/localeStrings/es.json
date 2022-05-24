@@ -149,6 +149,7 @@
       "back-to-posts": "Go Back to News Posts"
     },
     "pagination": {
+      "label": "Pagination",
       "previous": "Previous",
       "next": "Next",
       "current-slide": "Slide {{current}}",
