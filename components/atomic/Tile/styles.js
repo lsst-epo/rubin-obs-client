@@ -76,6 +76,14 @@ export const StyledMixedLink = styled(MixedLink)`
     )}
   }
 
+  &[href] {
+    &:hover,
+    &.focus-visible {
+      outline: 3px solid var(--turquoise55);
+      outline-offset: 1px;
+    }
+  }
+
   /* CTA */
   &.cta {
     grid-template-areas:
@@ -136,6 +144,17 @@ export const StyledMixedLink = styled(MixedLink)`
   &.darkSlideStaff,
   &.darkSlide {
     padding: 30px;
+
+    &[href] {
+      &:hover,
+      &.focus-visible {
+        outline: none;
+
+        .title {
+          text-decoration: underline;
+        }
+      }
+    }
 
     .image {
       position: relative;

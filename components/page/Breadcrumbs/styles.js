@@ -68,9 +68,14 @@ export const Link = styled.a`
   display: block;
   padding-right: 1em;
   padding-left: 1em;
-  text-decoration: none;
+  color: var(--turquoise55);
 
   &[aria-current="page"] {
-    color: var(--turquoise55);
+    color: #3f3f3f;
+  }
+
+  &:hover {
+    color: #062e2c;
+    font-weight: bold;
   }
 `;

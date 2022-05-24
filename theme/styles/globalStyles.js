@@ -263,6 +263,10 @@ const GlobalStyles = createGlobalStyle`
     &--educator {
       ${aButtonTheme("educator")}
     }
+
+    &--inert:hover {
+      outline: none;
+    }
   }
 `;
 

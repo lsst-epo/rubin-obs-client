@@ -77,7 +77,9 @@ const Tile = ({
         {footer && (
           <div className="footer">
             {footer.button && (
-              <div className={`c-buttonish`}>{footer.button}</div>
+              <div className={`c-buttonish c-buttonish--inert`}>
+                {footer.button}
+              </div>
             )}
             {footer.sticker && <div>{footer.sticker}</div>}
           </div>
