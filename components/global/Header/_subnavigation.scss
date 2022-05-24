@@ -8,6 +8,7 @@ $_bg-color: functions.sass-palette(neutral02);
   z-index: -5;
   width: var(--nav-width);
   max-width: 47vw;
+  max-height: calc(100vh - var(--header-height));
   overflow: auto;
   color: $_color;
   background-color: $_bg-color;
