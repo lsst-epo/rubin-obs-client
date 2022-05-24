@@ -66,7 +66,7 @@ export const Title = styled.div`
 `;
 
 export const MixedLink = styled(BaseMixedLink)`
-  --Tile-bg-color: var(--turquoise55);
+  --Tile-bg-color: var(--turquoise85);
   --Tile-color: var(--white);
   --Tile-image-bg-color: var(--neutral20);
 
@@ -99,7 +99,7 @@ export const MixedLink = styled(BaseMixedLink)`
 
   @media (max-width: ${BREAK_PHABLET}) {
     --Tile-bg-color: var(--white);
-    --Tile-color: var(--turquoise55);
+    --Tile-color: var(--turquoise85);
 
     grid-template: auto / 100px 2fr;
     grid-template-areas: "image title title";
@@ -109,6 +109,6 @@ export const MixedLink = styled(BaseMixedLink)`
   &:focus-visible:not([aria-disabled="true"]) {
     --Tile-image-bg-color: var(--turquoise10);
     --Tile-bg-color: var(--turquoise70);
-    --Tile-border-color: var(--turquoise55);
+    --Tile-border-color: var(--turquoise85);
   }
 `;

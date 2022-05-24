@@ -155,7 +155,7 @@ const SearchList = ({
 const Header = styled.h2`
   margin-bottom: ${fluidScale("40px", "20px")};
   padding-bottom: 10px;
-  border-bottom: 10px solid var(--turquoise55);
+  border-bottom: 10px solid var(--turquoise85);
 `;
 
 const Footer = styled.div`

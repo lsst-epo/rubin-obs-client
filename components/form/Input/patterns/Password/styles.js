@@ -17,7 +17,7 @@ export const Toggle = styled.button`
   color: var(--neutral30);
 
   &[aria-selected="true"] {
-    color: var(--turquoise55);
+    color: var(--turquoise85);
   }
 `;
 

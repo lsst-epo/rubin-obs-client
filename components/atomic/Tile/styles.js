@@ -79,7 +79,7 @@ export const StyledMixedLink = styled(MixedLink)`
   &[href] {
     &:hover,
     &.focus-visible {
-      outline: 3px solid var(--turquoise55);
+      outline: 3px solid var(--turquoise85);
       outline-offset: 1px;
     }
   }
@@ -92,7 +92,7 @@ export const StyledMixedLink = styled(MixedLink)`
     grid-row-gap: 0;
     justify-items: center;
     border-radius: 16px;
-    background-color: var(--turquoise55);
+    background-color: var(--turquoise85);
     color: var(--white);
     height: 100%;
 
@@ -117,7 +117,7 @@ export const StyledMixedLink = styled(MixedLink)`
     @media (max-width: ${BREAK_PHABLET}) {
       grid-template: auto / 100px 2fr;
       grid-template-areas: "image title title";
-      color: var(--turquoise55);
+      color: var(--turquoise85);
       background-color: var(--white);
 
       .image {
@@ -809,7 +809,9 @@ export const StyledMixedLink = styled(MixedLink)`
     &.pages,
     &.news,
     &.search,
-    &.slideshows,
+    &.slideshows {
+      color: var(--turquoise85);
+    }
     &.darkSlide {
       color: var(--turquoise55);
     }
@@ -827,7 +829,7 @@ export const StyledMixedLink = styled(MixedLink)`
       background-color: var(--neutral20);
     }
     &.events {
-      background-color: var(--turquoise55);
+      background-color: var(--turquoise85);
     }
     &.jobs {
       background-color: var(--turquoise50);
