@@ -12,6 +12,10 @@ export const Image = styled.div`
   padding-block-end: ${fluidScale("40px", "5px")};
   margin-block-start: var(--Tile-image-margin-top);
   width: 100%;
+  border-top: 3px solid;
+  border-right: 3px solid;
+  border-left: 3px solid;
+  border-color: var(--Tile-border-color, var(--Tile-image-bg-color));
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
   transition: backgroud-color 0.2s;
@@ -105,9 +109,6 @@ export const MixedLink = styled(BaseMixedLink)`
   &:focus-visible:not([aria-disabled="true"]) {
     --Tile-image-bg-color: var(--turquoise10);
     --Tile-bg-color: var(--turquoise70);
-
-    ${Image} {
-      outline: none;
-    }
+    --Tile-border-color: var(--turquoise55);
   }
 `;

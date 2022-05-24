@@ -80,15 +80,14 @@ export const aButton = css`
   text-decoration: none;
   transition: background-color 0.2s, color 0.2s, border-color 0.2s;
 
-  ${aFocus()}
-
-  &:hover {
+  &:not(:disabled):not([aria-disabled="true"]):hover,
+  &:not(:disabled):not([aria-disabled="true"]).focus-visible {
     outline: 3px solid var(--button-border-color);
     outline-offset: 1px;
   }
 
   &:disabled,
-  &[aria-disabled] {
+  &[aria-disabled="true"] {
     background-color: var(--neutral40);
     border-color: var(--neutral40);
     pointer-events: none;
