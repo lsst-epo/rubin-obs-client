@@ -66,7 +66,6 @@ export default function GridBlock({
           listTypeId={listTypeId}
           sectionHandle={typeHandle}
           pageId={pageId}
-          ifHeader={ifHeader}
         />
         {mixedLink?.url && (
           <StyledMixedLink
