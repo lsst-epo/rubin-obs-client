@@ -68,7 +68,7 @@ export const Link = styled.a`
   display: block;
   padding-right: 1em;
   padding-left: 1em;
-  color: var(--turquoise55);
+  color: var(--turquoise85);
 
   &[aria-current="page"] {
     color: #3f3f3f;

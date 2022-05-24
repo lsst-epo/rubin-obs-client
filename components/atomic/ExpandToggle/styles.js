@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Button = styled.button`
-  color: var(--turquoise55);
+  color: var(--turquoise85);
   transition: color 0.2s;
 
   &:hover {

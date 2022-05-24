@@ -86,7 +86,7 @@ const Header = styled.h2`
     p.addBorder &&
     `padding-bottom: 10px;
     margin-bottom: 30px;
-    border-bottom: 10px solid var(--turquoise55);`}
+    border-bottom: 10px solid var(--turquoise85);`}
 `;
 
 const StyledMixedLink = styled(MixedLink)`

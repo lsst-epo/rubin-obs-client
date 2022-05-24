@@ -113,7 +113,7 @@ const StyledPaginationList = styled.ul`
 
 const StyledContainer = styled(Container)`
   a {
-    color: var(--turquoise55);
+    color: var(--turquoise85);
 
     &:hover,
     &:focus-visible {

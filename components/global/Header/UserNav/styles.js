@@ -102,7 +102,7 @@ export const SubnavLink = styled.a`
 
 export const RegisterToggle = styled(Toggle)`
   padding: 0.5em 0.85em;
-  background-color: var(--turquoise55);
+  background-color: var(--turquoise85);
   border-radius: 6px;
   transition: background-color 0.2s;
 
