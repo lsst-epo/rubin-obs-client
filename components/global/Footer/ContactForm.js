@@ -71,6 +71,7 @@ function ContactForm({ className, setLiveRegionMessage }) {
           ref={emailInput}
           name="fromEmail"
           type="email"
+          autoComplete="email"
           value={email}
           placeholder={t("form.email")}
           onChange={(event) => setEmail(event.target.value)}
