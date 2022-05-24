@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import Container from "@/layout/Container";
 import MixedLink from "@/atomic/MixedLink";
@@ -8,6 +9,7 @@ import { usePathData } from "@/lib/utils";
 import { layoutGrid, respond } from "@/styles/globalStyles";
 
 const Pagination = ({ limit, offset, page, total }) => {
+  const { t } = useTranslation();
   const { asPath } = usePathData();
   const currentPage = parseInt(page);
   const from = offset + 1;
@@ -35,7 +37,7 @@ const Pagination = ({ limit, offset, page, total }) => {
 
   return (
     <StyledContainer width="regular">
-      <NavDesktop>
+      <NavDesktop aria-label={t("pagination.label")}>
         <div>
           <T i18nKey="pagination.showing-range">
             Showing {{ from }} to {{ to }} of {{ length: total }}
@@ -80,7 +82,7 @@ const Pagination = ({ limit, offset, page, total }) => {
           )}
         </div>
       </NavDesktop>
-      <NavMobile>
+      <NavMobile aria-label={t("pagination.label")}>
         <div>
           {prev > 0 ? (
             <MixedLink url={asPath} params={{ page: prev }}>
