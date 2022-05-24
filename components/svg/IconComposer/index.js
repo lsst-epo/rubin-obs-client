@@ -23,7 +23,7 @@ export default class IconComposer extends PureComponent {
       fill,
       stroke,
       icon,
-      role = "img",
+      role = "presentation",
     } = this.props;
     const className = classNames({
       "a-svg": true,

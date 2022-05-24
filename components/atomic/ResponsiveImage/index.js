@@ -23,7 +23,13 @@ const StyledImage = styled.div`
   }
 `;
 
-const ResponsiveImage = ({ image, ratio = "8:5", className, title }) => {
+const ResponsiveImage = ({
+  image,
+  ratio = "8:5",
+  className,
+  title,
+  ...props
+}) => {
   const paddingArray = ratio.split(":");
   const padding =
     paddingArray.length > 1
@@ -32,7 +38,7 @@ const ResponsiveImage = ({ image, ratio = "8:5", className, title }) => {
 
   return (
     <StyledImage padding={padding} className={className}>
-      <Image image={image} title={title} />
+      <Image image={image} title={title} {...props} />
     </StyledImage>
   );
 };

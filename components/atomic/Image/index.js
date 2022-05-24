@@ -6,7 +6,7 @@ const position = (x, y) => {
   return `${x || 50}% ${y || 50}%`;
 };
 
-export default function Image({ image, className, title }) {
+export default function Image({ image, className, title, ...props }) {
   const {
     url,
     url2x,
@@ -44,6 +44,7 @@ export default function Image({ image, className, title }) {
       srcSet={getSrcSet(urls)}
       style={style}
       width={width}
+      {...props}
     />
   );
 }
