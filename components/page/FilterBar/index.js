@@ -84,19 +84,15 @@ const FilterBar = ({ filterType, setLiveRegionMessage }) => {
         <div>
           <ToggleButton
             onClick={handleFilter}
-            aria-haspopup
             aria-expanded={filterOpen}
+            aria-controls="filter-dropdown"
           >
             <div></div>
             <span>Filter</span>
           </ToggleButton>
-          <ToggleDropdown opened={filterOpen}>
+          <ToggleDropdown id="filter-dropdown" opened={filterOpen}>
             <li>
-              <MixedLink
-                url={asPath}
-                params={{ filter: "" }}
-                tabIndex={filterOpen ? 0 : -1}
-              >
+              <MixedLink url={asPath} params={{ filter: "" }}>
                 <T i18nKey={`filters.all`} />
               </MixedLink>
             </li>
@@ -109,7 +105,6 @@ const FilterBar = ({ filterType, setLiveRegionMessage }) => {
                     className={active ? "active" : ""}
                     url={asPath}
                     params={{ filter: item.id }}
-                    tabIndex={filterOpen ? 0 : -1}
                   >
                     <T i18nKey={`filters.${item.slug}`} />
                   </MixedLink>
@@ -121,13 +116,13 @@ const FilterBar = ({ filterType, setLiveRegionMessage }) => {
         <div>
           <ToggleButton
             onClick={handleSort}
-            aria-haspopup
             aria-expanded={sortOpen}
+            aria-controls="sort-dropdown"
           >
             <div id="sort"></div>
             <span>Sort by</span>
           </ToggleButton>
-          <ToggleDropdown opened={sortOpen}>
+          <ToggleDropdown id="sort-dropdown" opened={sortOpen}>
             {sortItems.map((item, i) => {
               const active = query?.sort?.includes(item.slug);
 
@@ -137,7 +132,6 @@ const FilterBar = ({ filterType, setLiveRegionMessage }) => {
                     className={active ? "active" : ""}
                     url={asPath}
                     params={{ sort: item.slug }}
-                    tabIndex={sortOpen ? 0 : -1}
                   >
                     <T i18nKey={`filters.${item.slug}`} />
                   </MixedLink>
@@ -275,6 +269,7 @@ const ToggleDropdown = styled.ul`
   position: absolute;
   top: 40px;
   opacity: ${(p) => (p.opened ? 1 : 0)};
+  visibility: ${(p) => (p.opened ? "visible" : "hidden")};
   width: 300px;
   background-color: var(--neutral20);
   transition: opacity 0.2s;
