@@ -106,6 +106,7 @@ const Pagination = ({ limit, offset, page, total }) => {
 
 const StyledPaginationList = styled.ul`
   display: flex;
+  gap: 5px;
 `;
 
 const StyledContainer = styled(Container)`
