@@ -2,12 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import Carousel from "@/atomic/Carousel";
 
-function CarouselLayout({ children }) {
+function CarouselLayout({ children, carouselOptions = {}, className }) {
   if (!children) return null;
 
   return (
-    <Carousel.Provider>
-      <Carousel.Wrapper>
+    <Carousel.Provider carouselOptions={carouselOptions}>
+      <Carousel.Wrapper className={className}>
         <Carousel.Status />
         <Carousel.PrevButton />
         <Carousel.Carousel>
@@ -32,6 +32,8 @@ CarouselLayout.displayName = "Layout.Carousel";
 
 CarouselLayout.propTypes = {
   children: PropTypes.node,
+  carouselOptions: PropTypes.object,
+  className: PropTypes.string,
 };
 
 export default CarouselLayout;
