@@ -86,6 +86,7 @@ export const StyledMixedLink = styled(MixedLink)`
     border-radius: 16px;
     background-color: var(--turquoise55);
     color: var(--white);
+    height: 100%;
 
     .image {
       overflow: hidden;
