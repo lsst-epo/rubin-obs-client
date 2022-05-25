@@ -80,7 +80,7 @@ export const StyledMixedLink = styled(MixedLink)`
     &:hover,
     &.focus-visible {
       outline: 3px solid var(--turquoise85);
-      outline-offset: 1px;
+      outline-offset: var(--Tile-hover-outline-offset, 1px);
     }
   }
 

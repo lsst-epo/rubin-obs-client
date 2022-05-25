@@ -20,6 +20,10 @@ export const Button = styled.button`
     background-color: var(--neutral40);
   }
 
+  &.focus-visible {
+    outline-color: var(--Carousel-Button-outline-color);
+  }
+
   &[aria-disabled="true"] {
     pointer-events: none;
     color: var(--neutral40);

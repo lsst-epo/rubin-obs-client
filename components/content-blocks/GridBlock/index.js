@@ -6,6 +6,7 @@ import { mixedLinkShape } from "@/shapes/link";
 import CTAGrid from "./CTAGrid";
 import MainGrid from "./MainGrid";
 import NewsGrid from "./NewsGrid";
+import CarouselGrid from "./CarouselGrid";
 import { fluidScale } from "@/styles/globalStyles";
 import InvestigationGrid from "./InvestigationGrid";
 
@@ -38,6 +39,7 @@ export default function GridBlock({
     ctaGrid: CTAGrid,
     news: NewsGrid,
     investigationGrid: InvestigationGrid,
+    relatedContent: CarouselGrid,
   };
 
   const widthMap = {
