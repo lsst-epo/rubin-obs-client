@@ -47,23 +47,14 @@ export default function SlideshowPage({
   return (
     <Body {...bodyProps}>
       <Breadcrumbs breadcrumbs={[...customBreadcrumbs, pageLink]} />
+      <h1 className="a-hidden">{title}</h1>
       <Modalish>
         <Carousel>
           {allItems.map((item, i) => (
             <SlideshowGrid key={i}>
               <SlideshowMain>
-                {i === 0 ? (
-                  <>
-                    <h1>{title}</h1>
-                    <div>{`${i + 1} of ${allItems.length}`}</div>
-                  </>
-                ) : (
-                  <div>
-                    <h1>{title}</h1>
-                    <div>{`${i + 1} of ${allItems.length}`}</div>
-                    <h2>{item.title}</h2>
-                  </div>
-                )}
+                <h2 className="t-heading-primary">{item.title}</h2>
+                <div>{`${i + 1} of ${allItems.length}`}</div>
                 <div
                   className="c-content-rte"
                   dangerouslySetInnerHTML={{ __html: item.description }}
@@ -147,7 +138,7 @@ const SlideshowMain = styled.div`
   color: var(--white);
   font-size: 16px;
 
-  h1 {
+  h2 {
     margin-bottom: 1rem;
   }
 `;
