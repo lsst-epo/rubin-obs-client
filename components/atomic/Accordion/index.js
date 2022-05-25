@@ -54,6 +54,11 @@ const Icon = styled.span`
     background-color: var(--Icon-background-color, var(--turquoise85));
     transition: background-color 0.2s;
     place-content: center;
+
+    details[open] & {
+      content: "–";
+      line-height: 1.15em;
+    }
   }
 `;
 
