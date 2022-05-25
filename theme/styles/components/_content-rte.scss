@@ -10,7 +10,8 @@
   }
 
   a:not([class^="c-"]) {
-    color: functions.palette(turquoise50);
+    color: var(--link-color, functions.palette(turquoise80));
+    text-decoration: underline;
   }
 
   ul {
