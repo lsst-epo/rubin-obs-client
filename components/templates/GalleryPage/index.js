@@ -203,7 +203,7 @@ export default function GalleryPage({
             />
           </Details>
         </div>
-        <div>
+        <div className="c-content-rte">
           <SecondaryInfo />
         </div>
       </ContainerDesktop>
@@ -261,15 +261,6 @@ const ContainerDesktop = styled(Container)`
     margin-top: 1rem;
   }
 
-  a {
-    text-decoration: none;
-    color: var(--turquoise60);
-
-    &:hover {
-      color: var(--turquoise50);
-    }
-  }
-
   ${respond(`display: none;`)}
   > div {
     display: grid;
@@ -296,11 +287,6 @@ const ContainerMobile = styled(Container)`
 
     p:first-of-type {
       display: inline-block;
-    }
-
-    a {
-      text-decoration: none;
-      color: var(--turquoise60);
     }
 
     ${respond(`display: block;

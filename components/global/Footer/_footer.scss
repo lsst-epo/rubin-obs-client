@@ -7,6 +7,8 @@ $_spacing-mobile: 24px;
 $_form-breakpoint: functions.break(tablet);
 
 .c-global-footer {
+  --link-color: #{functions.palette(turquoise50)};
+
   color: functions.palette(white);
   background-color: functions.palette(neutral80);
 
