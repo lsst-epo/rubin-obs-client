@@ -56,7 +56,9 @@ export default function GridBlock({
           className={
             typeHandle === "investigationGrid" ? "t-align-center" : undefined
           }
-          addBorder={typeHandle === "relatedContent"}
+          addBorder={
+            typeHandle === "relatedContent" || typeHandle === "staffGrid"
+          }
         >
           {header}
         </Header>
@@ -90,7 +92,7 @@ const Header = styled.h2`
 `;
 
 const StyledMixedLink = styled(MixedLink)`
-  margin-top: ${fluidScale("95px", "40px")};
+  margin-top: 40px;
 `;
 
 GridBlock.displayName = "ContentBlock.GridBlock";
