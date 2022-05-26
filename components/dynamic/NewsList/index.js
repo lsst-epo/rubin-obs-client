@@ -13,8 +13,6 @@ import {
 } from "@/lib/utils";
 import { fluidScale } from "@/styles/globalStyles";
 import Buttonish from "@/components/atomic/Buttonish";
-import IconComposer from "@/svg/IconComposer";
-import { SharePopup } from "@/components/atomic";
 
 const NewsList = ({
   button,
@@ -30,26 +28,6 @@ const NewsList = ({
   const lang = localeInfo?.language || "en-US";
   const cols = initialLimit === 4 ? 4 : initialLimit === 3 ? 3 : 2;
   const canShowFeatured = initialLimit > 4;
-
-  const makeSticker = (newsAssets, title, url) => {
-    const doc = newsAssets.filter((n, i) => n.textLink);
-
-    const handleClick = (e) => {
-      e.preventDefault();
-      window.location.href = e.currentTarget.dataset.url;
-    };
-
-    return (
-      <>
-        {doc.length > 0 && doc[0].textLink && (
-          <button data-url={doc[0].textLink[0].url} onClick={handleClick}>
-            <IconComposer icon="doc" size=".8em" />
-          </button>
-        )}
-        <SharePopup title={title} url={url} />
-      </>
-    );
-  };
 
   return (
     <DataList
@@ -90,7 +68,6 @@ const NewsList = ({
                           gridType === "news"
                             ? {
                                 button: t("read-more"),
-                                sticker: makeSticker(newsAssets, title, url),
                               }
                             : null
                         }
@@ -107,6 +84,7 @@ const NewsList = ({
                         title={title}
                         titleTag={"h2"}
                         type={gridType}
+                        showSharePopup
                       />
                     )
                   )}

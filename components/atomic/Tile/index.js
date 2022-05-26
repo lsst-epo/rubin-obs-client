@@ -6,7 +6,7 @@ import Image from "@/atomic/Image";
 import MixedLink from "@/atomic/MixedLink";
 import { mixedLinkShape } from "@/shapes/link";
 import { useGlobalData } from "@/lib/utils";
-import { PlayButton, StyledMixedLink } from "./styles";
+import * as Styled from "./styles";
 import IconComposer from "@/components/svg/IconComposer";
 
 const Tile = ({
@@ -21,6 +21,7 @@ const Tile = ({
   text,
   titleTag = "h3",
   type = "related",
+  showSharePopup,
 }) => {
   const uid = useUID();
   const { siteInfo } = useGlobalData();
@@ -41,8 +42,8 @@ const Tile = ({
   const TitleTag = titleTag;
 
   return (
-    <li>
-      <StyledMixedLink
+    <Styled.ListItem>
+      <Styled.MixedLink
         as={link?.url ? MixedLink : "div"}
         {...link}
         aria-labelledby={link?.url ? uid : null}
@@ -60,9 +61,9 @@ const Tile = ({
               <Image image={finalImage} alt="" />
             )}
             {isVideo && (
-              <PlayButton>
+              <Styled.PlayButton>
                 <IconComposer icon="play" />
-              </PlayButton>
+              </Styled.PlayButton>
             )}
           </div>
         )}
@@ -84,8 +85,9 @@ const Tile = ({
             {footer.sticker && <div>{footer.sticker}</div>}
           </div>
         )}
-      </StyledMixedLink>
-    </li>
+      </Styled.MixedLink>
+      {showSharePopup && <Styled.SharePopup title={title} url={link?.url} />}
+    </Styled.ListItem>
   );
 };
 
