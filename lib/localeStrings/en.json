@@ -313,6 +313,14 @@
       "total_duration": "Investigation total duration",
       "start": "Start Investigation",
       "coming_soon": "(Coming Soon)"
+    },
+    "share": {
+      "label": "Share page",
+      "copy_url": "Copy URL",
+      "email": "Email",
+      "email_subject": " Hey! Check out this info from Rubin Observatory's website: {{title}}",
+      "facebook_quote": "Hey! Check out this info from Rubin Observatory's website: {{title}}",
+      "twitter_title": "Hey! Check out this info from Rubin Observatory's website: {{title}}"
     }
   }
 }

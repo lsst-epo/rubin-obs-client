@@ -20,6 +20,10 @@ import LogOut from "./LogOut";
 import Mail from "./Mail";
 import Search from "./Search";
 import SelectCaret from "./SelectCaret";
+import ShareCopyUrl from "./ShareCopyUrl";
+import ShareEmail from "./ShareEmail";
+import ShareFacebook from "./ShareFacebook";
+import ShareTwitter from "./ShareTwitter";
 import Phone from "./Phone";
 import Pin from "./Pin";
 import Play from "./Play";
@@ -61,6 +65,10 @@ export default {
   Play,
   Search,
   SelectCaret,
+  ShareCopyUrl,
+  ShareEmail,
+  ShareFacebook,
+  ShareTwitter,
   Team,
   Temp,
   Time,
