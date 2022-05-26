@@ -14,7 +14,7 @@ import {
 import { fluidScale } from "@/styles/globalStyles";
 import Buttonish from "@/components/atomic/Buttonish";
 import IconComposer from "@/svg/IconComposer";
-import { PopupShare } from "@/components/atomic/Share";
+import { SharePopup } from "@/components/atomic";
 
 const NewsList = ({
   button,
@@ -46,7 +46,7 @@ const NewsList = ({
             <IconComposer icon="doc" size=".8em" />
           </button>
         )}
-        <PopupShare title={title} url={url} />
+        <SharePopup title={title} url={url} />
       </>
     );
   };

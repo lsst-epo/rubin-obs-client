@@ -8,3 +8,5 @@ export { default as Buttonish } from "./Buttonish";
 export { default as ExpandToggle } from "./ExpandToggle";
 export { default as Tile } from "./Tile";
 export { default as InvestigationTile } from "./Tile/patterns/InvestigationTile";
+export { default as Share } from "./Share";
+export { default as SharePopup } from "./SharePopup";

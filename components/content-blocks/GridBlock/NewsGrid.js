@@ -9,7 +9,7 @@ import {
 import Grid from "@/layout/Grid";
 import Tile from "@/atomic/Tile";
 import IconComposer from "@/svg/IconComposer";
-import { PopupShare } from "@/components/atomic/Share";
+import { SharePopup } from "@/components/atomic";
 
 const NewsGrid = ({ items = [], limit, listTypeId, sectionHandle, pageId }) => {
   const { t } = useTranslation();
@@ -46,7 +46,7 @@ const NewsGrid = ({ items = [], limit, listTypeId, sectionHandle, pageId }) => {
             <IconComposer icon="doc" size=".8em" />
           </button>
         )}
-        <PopupShare title={title} url={url} />
+        <SharePopup title={title} url={url} />
       </>
     );
   };
