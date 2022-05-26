@@ -42,21 +42,25 @@ const Pagination = ({ limit, offset, page, total }) => {
           </T>
         </div>
         <div>
-          {pageArray.map((page, index) => {
-            return currentPage !== page && page !== "..." ? (
-              <React.Fragment key={index}>
-                {index ? ` / ` : ``}
-                <MixedLink url={asPath} params={{ page: page }}>
-                  {page}
-                </MixedLink>
-              </React.Fragment>
-            ) : (
-              <React.Fragment key={index}>
-                {index ? ` / ` : ``}
-                {page}
-              </React.Fragment>
-            );
-          })}
+          <StyledPaginationList>
+            {pageArray.map((page, index) => {
+              return currentPage !== page && page !== "..." ? (
+                <React.Fragment key={index}>
+                  {index ? ` / ` : ``}
+                  <li>
+                    <MixedLink url={asPath} params={{ page: page }}>
+                      {page}
+                    </MixedLink>
+                  </li>
+                </React.Fragment>
+              ) : (
+                <React.Fragment key={index}>
+                  {index ? ` / ` : ``}
+                  <li>{page}</li>
+                </React.Fragment>
+              );
+            })}
+          </StyledPaginationList>
         </div>
         <div>
           {prev > 0 ? (
@@ -99,6 +103,11 @@ const Pagination = ({ limit, offset, page, total }) => {
     </StyledContainer>
   );
 };
+
+const StyledPaginationList = styled.ul`
+  display: flex;
+  gap: 5px;
+`;
 
 const StyledContainer = styled(Container)`
   a {

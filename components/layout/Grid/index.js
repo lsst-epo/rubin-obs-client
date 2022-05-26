@@ -14,7 +14,7 @@ const Grid = ({ children, showFeature = false, columns = 3, tablet = 1 }) => {
   );
 };
 
-const StyledGrid = styled.div`
+const StyledGrid = styled.ul`
   ${(p) => `${layoutGrid(p.columns)}
     @media (min-width: ${BREAK_PHABLET_MIN}) and (max-width: ${BREAK_TABLET}) {
       grid-template-columns: repeat(${p.tablet}, 1fr);

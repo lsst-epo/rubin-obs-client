@@ -41,47 +41,49 @@ const Tile = ({
   const TitleTag = titleTag;
 
   return (
-    <StyledMixedLink
-      as={link?.url ? MixedLink : "div"}
-      {...link}
-      aria-labelledby={link?.url ? uid : null}
-      className={classNames(
-        `${type}`,
-        `${isFeature ? "featured" : ""} `,
-        className
-      )}
-    >
-      {finalImage && (
-        <div className="image">
-          {ratio ? (
-            <ResponsiveImage ratio={ratio} image={finalImage} />
-          ) : (
-            <Image image={finalImage} />
-          )}
-          {isVideo && (
-            <PlayButton>
-              <IconComposer icon="play" />
-            </PlayButton>
-          )}
-        </div>
-      )}
-      {pretitle && <div className="pretitle">{pretitle}</div>}
-      {title && (
-        <TitleTag id={uid} className="title">
-          {title}
-        </TitleTag>
-      )}
-      {subtitle && <div className="subtitle">{subtitle}</div>}
-      {text && <div className="text">{text}</div>}
-      {footer && (
-        <div className="footer">
-          {footer.button && (
-            <div className={`c-buttonish`}>{footer.button}</div>
-          )}
-          {footer.sticker && <div>{footer.sticker}</div>}
-        </div>
-      )}
-    </StyledMixedLink>
+    <li>
+      <StyledMixedLink
+        as={link?.url ? MixedLink : "div"}
+        {...link}
+        aria-labelledby={link?.url ? uid : null}
+        className={classNames(
+          `${type}`,
+          `${isFeature ? "featured" : ""} `,
+          className
+        )}
+      >
+        {finalImage && (
+          <div className="image">
+            {ratio ? (
+              <ResponsiveImage ratio={ratio} image={finalImage} />
+            ) : (
+              <Image image={finalImage} />
+            )}
+            {isVideo && (
+              <PlayButton>
+                <IconComposer icon="play" />
+              </PlayButton>
+            )}
+          </div>
+        )}
+        {pretitle && <div className="pretitle">{pretitle}</div>}
+        {title && (
+          <TitleTag id={uid} className="title">
+            {title}
+          </TitleTag>
+        )}
+        {subtitle && <div className="subtitle">{subtitle}</div>}
+        {text && <div className="text">{text}</div>}
+        {footer && (
+          <div className="footer">
+            {footer.button && (
+              <div className={`c-buttonish`}>{footer.button}</div>
+            )}
+            {footer.sticker && <div>{footer.sticker}</div>}
+          </div>
+        )}
+      </StyledMixedLink>
+    </li>
   );
 };
 
