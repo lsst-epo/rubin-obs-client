@@ -23,6 +23,7 @@ import SelectCaret from "./SelectCaret";
 import ShareCopyUrl from "./ShareCopyUrl";
 import ShareEmail from "./ShareEmail";
 import ShareFacebook from "./ShareFacebook";
+import ShareToggle from "./ShareToggle";
 import ShareTwitter from "./ShareTwitter";
 import Phone from "./Phone";
 import Pin from "./Pin";
@@ -68,6 +69,7 @@ export default {
   ShareCopyUrl,
   ShareEmail,
   ShareFacebook,
+  ShareToggle,
   ShareTwitter,
   Team,
   Temp,

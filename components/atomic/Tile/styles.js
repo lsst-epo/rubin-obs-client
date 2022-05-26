@@ -1,6 +1,7 @@
 /* eslint-disable */
 import styled from "styled-components";
-import MixedLink from "@/atomic/MixedLink";
+import AtomicMixedLink from "@/atomic/MixedLink";
+import SharePopupComponent from "@/layout/SharePopup";
 import {
   BREAK_PHABLET,
   BREAK_PHABLET_MIN,
@@ -15,12 +16,17 @@ Media queries are done this way for special treatment at tablet level vs phone l
 @media (min-width: ${BREAK_PHABLET_MIN}) and (max-width: ${BREAK_TABLET}) {}
 */
 
-export const StyledMixedLink = styled(MixedLink)`
+export const ListItem = styled.li`
+  position: relative;
+`;
+
+export const MixedLink = styled(AtomicMixedLink)`
   position: relative;
   display: grid;
   grid-template-columns: 1fr;
   text-decoration: none;
   grid-gap: 10px;
+  height: 100%;
 
   padding: 0;
   align-content: start;
@@ -43,6 +49,12 @@ export const StyledMixedLink = styled(MixedLink)`
   }
   .footer {
     grid-area: footer;
+
+    .c-buttonish {
+      &:hover {
+        outline: none;
+      }
+    }
   }
 
   /* FEATURED, only different for desktop */
@@ -857,5 +869,16 @@ export const PlayButton = styled.span`
     height: 100%;
     min-width: 40px;
     min-height: 40px;
+  }
+`;
+
+export const SharePopup = styled(SharePopupComponent)`
+  position: absolute;
+  inset-inline-end: 30px;
+  inset-block-end: 30px;
+  color: var(--neutral40);
+
+  @media (max-width: ${BREAK_TABLET}) {
+    display: none;
   }
 `;

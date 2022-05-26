@@ -315,7 +315,8 @@
       "coming_soon": "(Coming Soon)"
     },
     "share": {
-      "label": "Share page",
+      "label_current": "Share current page",
+      "label_item": "Share {{title}}",
       "copy_url": "Copy URL",
       "email": "Email",
       "email_subject": " Hey! Check out this info from Rubin Observatory's website: {{title}}",

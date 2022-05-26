@@ -8,8 +8,6 @@ import {
 } from "@/lib/utils";
 import Grid from "@/layout/Grid";
 import Tile from "@/atomic/Tile";
-import IconComposer from "@/svg/IconComposer";
-import { SharePopup } from "@/components/atomic";
 
 const NewsGrid = ({ items = [], limit, listTypeId, sectionHandle, pageId }) => {
   const { t } = useTranslation();
@@ -30,26 +28,6 @@ const NewsGrid = ({ items = [], limit, listTypeId, sectionHandle, pageId }) => {
     // combine with curated items
     allItems = [...allItems, ...data.entries].slice(0, limit);
   }
-
-  const makeSticker = (newsAssets, title, url) => {
-    const doc = newsAssets.filter((n, i) => n.textLink);
-
-    const handleClick = (e) => {
-      e.preventDefault();
-      window.location.href = e.currentTarget.dataset.url;
-    };
-
-    return (
-      <>
-        {doc.length > 0 && doc[0].textLink && (
-          <button data-url={doc[0].textLink[0].url} onClick={handleClick}>
-            <IconComposer icon="doc" size=".8em" />
-          </button>
-        )}
-        <SharePopup title={title} url={url} />
-      </>
-    );
-  };
 
   return (
     <>
@@ -74,7 +52,6 @@ const NewsGrid = ({ items = [], limit, listTypeId, sectionHandle, pageId }) => {
                 key={id}
                 footer={{
                   button: t("read-more"),
-                  sticker: makeSticker(newsAssets, title, url),
                 }}
                 image={image?.[0]}
                 isFeature={i === 0}
@@ -84,6 +61,7 @@ const NewsGrid = ({ items = [], limit, listTypeId, sectionHandle, pageId }) => {
                 text={description}
                 title={title}
                 type="news"
+                showSharePopup
               />
             )
           )}
