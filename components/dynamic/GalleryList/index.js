@@ -5,21 +5,23 @@ import MasonryGrid from "@/components/layout/MasonryGrid";
 
 const GalleryList = ({ excludeId = null, limit = 20 }) => {
   return (
-    <DataList excludeId={excludeId} limit={limit} section="galleryItems">
-      {({ entries, offset, page, total }) => (
-        <>
-          {entries?.length > 0 && <MasonryGrid items={entries}></MasonryGrid>}
-          {limit >= 20 && (
-            <Pagination
-              limit={limit}
-              offset={offset}
-              page={page}
-              total={total}
-            />
-          )}
-        </>
-      )}
-    </DataList>
+    <div className="l-pad-top-large">
+      <DataList excludeId={excludeId} limit={limit} section="galleryItems">
+        {({ entries, offset, page, total }) => (
+          <>
+            {entries?.length > 0 && <MasonryGrid items={entries}></MasonryGrid>}
+            {limit >= 20 && (
+              <Pagination
+                limit={limit}
+                offset={offset}
+                page={page}
+                total={total}
+              />
+            )}
+          </>
+        )}
+      </DataList>
+    </div>
   );
 };
 

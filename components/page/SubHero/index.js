@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import * as Styled from "./styles";
 
-export default function SubHero({ header, text, type, colorScheme }) {
+export default function SubHero({ header, text, type, colorScheme, nested }) {
   return text || header ? (
     <Styled.Wrapper
       $bgColor={
@@ -9,6 +9,7 @@ export default function SubHero({ header, text, type, colorScheme }) {
           ? "orange20"
           : "turquoise05"
       }
+      $nested={nested}
       className="c-content-rte"
     >
       <h2>{header}</h2>
@@ -29,4 +30,5 @@ SubHero.propTypes = {
     "investigationLandingPage",
   ]),
   colorScheme: PropTypes.oneOf(["student", "educator"]),
+  nested: PropTypes.bool,
 };
