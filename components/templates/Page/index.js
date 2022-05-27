@@ -8,7 +8,6 @@ import DynamicComponentFactory from "@/factories/DynamicComponentFactory";
 import Container from "@/layout/Container";
 import Breadcrumbs from "@/page/Breadcrumbs";
 import FilterBar from "@/components/page/FilterBar";
-import Hero from "@/page/Hero";
 import SlideBlock from "@/components/content-blocks/SlideBlock";
 import { getCategoryObject, useGlobalData, usePathData } from "@/lib/utils";
 import NavButtons from "@/components/layout/NavButtons";
@@ -18,6 +17,8 @@ import InvestigationHero from "@/components/layout/InvestigationHero";
 import ChildNavigation from "@/components/layout/ChildNavigation";
 import GuideNavigation from "@/components/layout/GuideNavigation";
 import SiblingNavigation from "@/components/layout/SiblingNavigation";
+import NestedContext from "@/contexts/Nested";
+import PageContent from "@/page/PageContent";
 
 export default function Page({
   data: {
@@ -32,6 +33,7 @@ export default function Page({
     title,
     uri,
     typeHandle,
+    overlapHero,
     subHeroHeader,
     subHeroText,
     subHeroColorScheme,
@@ -95,10 +97,9 @@ export default function Page({
   }
 
   const isInvestigationChild = investigation?.landingPage?.[0]?.uri !== uri;
-
   const showGuideNavigation = showGuideNav && parent?.children;
-
   const showSiblingNav = investigation && siblings && isInvestigationChild;
+  const shouldOverlapHero = !!hero?.length && overlapHero;
 
   return (
     <Body {...bodyProps}>
@@ -131,55 +132,59 @@ export default function Page({
           />
         )}
         {hasFilterbar && <FilterBar filterType={dynamicComponent} />}
-        <Hero data={hero} />
-        <SubHero
-          type={typeHandle}
-          header={subHeroHeader}
-          text={subHeroText}
-          colorScheme={subHeroColorScheme}
-        />
-        {!hideTitle && (
-          <Container
-            bgColor="white"
-            className="c-page-header"
-            width={isWideHeader ? "regular" : "narrow"}
-            paddingSize={isMediumPadding ? "medium" : undefined}
-          >
-            <h1>{title}</h1>
-            {isEventsPage && (
-              <NavButtons
-                linkLeft="upcoming"
-                linkRight="past"
-                textLeft={t(`events.upcoming`)}
-                textRight={t(`events.past`)}
+        <PageContent heroImage={hero} overlapHero={shouldOverlapHero}>
+          <SubHero
+            type={typeHandle}
+            header={subHeroHeader}
+            text={subHeroText}
+            colorScheme={subHeroColorScheme}
+            nested={shouldOverlapHero}
+          />
+          <NestedContext.Provider value={shouldOverlapHero}>
+            {!hideTitle && (
+              <Container
+                bgColor="white"
+                className="c-page-header"
+                width={isWideHeader ? "regular" : "narrow"}
+                paddingSize={isMediumPadding ? "medium" : undefined}
+              >
+                <h1>{title}</h1>
+                {isEventsPage && (
+                  <NavButtons
+                    linkLeft="upcoming"
+                    linkRight="past"
+                    textLeft={t(`events.upcoming`)}
+                    textRight={t(`events.past`)}
+                  />
+                )}
+              </Container>
+            )}
+            {[...contentBlocks].map((block) => {
+              if (!block.id || !block.typeHandle) return null;
+              return (
+                <ContentBlockFactory
+                  key={block.id}
+                  type={block.typeHandle}
+                  data={block}
+                  pageId={id}
+                />
+              );
+            })}
+            {pageType === "dynamic" && dynamicComponent && (
+              <DynamicComponentFactory
+                componentType={dynamicComponent}
+                pageId={id}
               />
             )}
-          </Container>
-        )}
-        {[...contentBlocks].map((block) => {
-          if (!block.id || !block.typeHandle) return null;
-          return (
-            <ContentBlockFactory
-              key={block.id}
-              type={block.typeHandle}
-              data={block}
-              pageId={id}
-            />
-          );
-        })}
-        {pageType === "dynamic" && dynamicComponent && (
-          <DynamicComponentFactory
-            componentType={dynamicComponent}
-            pageId={id}
-          />
-        )}
-        {children}
-        {showSiblingNav && (
-          <SiblingNavigation
-            siblings={siblings}
-            parent={investigation ? investigation.landingPage?.[0] : parent}
-          />
-        )}
+            {children}
+            {showSiblingNav && (
+              <SiblingNavigation
+                siblings={siblings}
+                parent={investigation ? investigation.landingPage?.[0] : parent}
+              />
+            )}
+          </NestedContext.Provider>
+        </PageContent>
       </AuthorizePage>
     </Body>
   );

@@ -10,6 +10,7 @@ const pageShape = PropTypes.shape({
   pageType: PropTypes.string,
   dynamicComponent: PropTypes.string,
   hero: PropTypes.arrayOf(imageShape),
+  overlapHero: PropTypes.bool,
   typeHandle: PropTypes.oneOf([
     "pages",
     "educatorPages",
@@ -21,6 +22,7 @@ const pageShape = PropTypes.shape({
   childNavigationTitle: PropTypes.string,
   childNavigationDescription: PropTypes.node,
   showGuideNav: PropTypes.bool,
+  layout: PropTypes.oneOf(["overlap", "full"]),
 }).isRequired;
 
 export default pageShape;

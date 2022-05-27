@@ -1,63 +1,8 @@
 import styled from "styled-components";
-import HeroComponent from "@/page/Hero";
-import {
-  fluidScale,
-  respond,
-  containerRegular,
-  tokens,
-} from "@/styles/globalStyles";
+import { fluidScale, respond, containerRegular } from "@/styles/globalStyles";
 
 const WIDE_BREAKPOINT = "1125px";
-const NARROW_BREAKPOINT = "800px";
 const MOBILE_BREAKPOINT = "475px";
-const HERO_OVERLAP = "clamp(-150px, -10vw, -80px)";
-
-export const Hero = styled(HeroComponent)`
-  --Hero-height: ${fluidScale(
-    "540px",
-    "260px",
-    WIDE_BREAKPOINT,
-    MOBILE_BREAKPOINT
-  )};
-  --Hero-object-position: 42.5% 50%;
-
-  ${respond(`--Hero-transform: translateY(-10%);`, MOBILE_BREAKPOINT)}
-`;
-
-export const Layout = styled.article`
-  ${containerRegular()}
-  display: flex;
-
-  ${({ $hasHero }) => `--hero-overlap: ${$hasHero ? HERO_OVERLAP : 0};`}
-
-  ${respond(`display: block;`, WIDE_BREAKPOINT)}
-
-  ${respond(`padding-inline: 0;`, NARROW_BREAKPOINT)}
-`;
-
-export const Main = styled.div`
-  position: relative;
-  flex-grow: 1;
-  margin-block-start: var(--hero-overlap);
-  padding: 55px ${fluidScale("50px", tokens.PADDING_SMALL)} 0;
-  background-color: var(--white);
-
-  > * + * {
-    margin-block-start: ${fluidScale("50px", tokens.PADDING_SMALL)};
-  }
-`;
-
-export const Aside = styled.aside`
-  flex-shrink: 0;
-  flex-basis: 270px;
-  margin-block-start: min(4.25vw, 64px);
-
-  ${respond(`display: none;`, WIDE_BREAKPOINT)}
-
-  > * + * {
-    margin-block-start: min(4.25vw, 64px);
-  }
-`;
 
 export const QuotePositioner = styled.div`
   position: absolute;

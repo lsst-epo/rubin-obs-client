@@ -9,6 +9,7 @@ import ContentBlockFactory from "@/factories/ContentBlockFactory";
 import NestedContext from "@/contexts/Nested";
 import Image from "@/atomic/Image";
 import Breadcrumbs from "@/page/Breadcrumbs";
+import PageContent from "@/page/PageContent";
 import * as Styled from "./styles";
 
 function getParentUri(uri) {
@@ -18,7 +19,7 @@ function getParentUri(uri) {
 
 function getParentRootPage(parentUri, rootPages) {
   return rootPages.find((page) => {
-    return page.pageEntry?.[0].uri.includes(parentUri);
+    return page.pageEntry?.[0]?.uri.includes(parentUri);
   });
 }
 
@@ -60,76 +61,83 @@ export default function StaffPage({
   return (
     <Body {...bodyProps}>
       <Breadcrumbs breadcrumbs={breadcrumbs} />
-      <Styled.Hero data={heroImage}>
-        {quote && (
-          <Styled.QuotePositioner>
-            <Styled.Quote>
-              <Styled.QuoteInner dangerouslySetInnerHTML={{ __html: quote }} />
-            </Styled.Quote>
-          </Styled.QuotePositioner>
-        )}
-      </Styled.Hero>
-      <Styled.Layout $hasHero={!!heroImage?.[0]}>
-        <Styled.Main>
-          <NestedContext.Provider value={true}>
-            <h1>{title}</h1>{" "}
-            <Styled.Bio
-              className="c-content-rte"
-              dangerouslySetInnerHTML={{ __html: bio }}
-            />
-            <Share />
-            {!!contentBlocks?.length &&
-              contentBlocks.map((block) => (
-                <ContentBlockFactory
-                  key={block.id}
-                  type={block.typeHandle}
-                  data={block}
-                  pageId={id}
+      <PageContent
+        overlapHero={!!heroImage?.length}
+        heroImage={heroImage}
+        innerHero={
+          quote && (
+            <Styled.QuotePositioner>
+              <Styled.Quote>
+                <Styled.QuoteInner
+                  dangerouslySetInnerHTML={{ __html: quote }}
                 />
-              ))}
-          </NestedContext.Provider>
-        </Styled.Main>
-        <Styled.Aside>
-          {tradingCard?.[0] && (
-            <section>
-              <Styled.SectionHeading>
-                {t("staff.trading-card")}
-              </Styled.SectionHeading>
-              <Image image={tradingCard[0]} />
-            </section>
-          )}
-          {!!tags?.length && (
-            <section>
-              <Styled.SectionHeading>{t(`tags`)}</Styled.SectionHeading>
-              <Styled.TagList>
-                {tags.map(({ id, slug, title }) => (
-                  <Styled.Tag key={id}>
-                    <Link
-                      href={{
-                        pathname: `/${parentEntry?.uri || parentUri}`,
-                        query: { search: slug },
-                      }}
-                      passHref
-                    >
-                      <Styled.Link>{title}</Styled.Link>
-                    </Link>
-                  </Styled.Tag>
-                ))}
-              </Styled.TagList>
-            </section>
-          )}
-        </Styled.Aside>
-      </Styled.Layout>
-      <StaffList
-        excludeId={id}
-        header={t(`staff.browse-more`)}
-        limit={4}
-        button={{
-          text: t(`staff.back-to-profiles`),
-          uri: parentEntry?.uri || parentUri,
-        }}
-        isWide={true}
-      />
+              </Styled.Quote>
+            </Styled.QuotePositioner>
+          )
+        }
+        sidebar={
+          <>
+            {tradingCard?.[0] && (
+              <section>
+                <Styled.SectionHeading>
+                  {t("staff.trading-card")}
+                </Styled.SectionHeading>
+                <Image image={tradingCard[0]} />
+              </section>
+            )}
+            {!!tags?.length && (
+              <section>
+                <Styled.SectionHeading>{t(`tags`)}</Styled.SectionHeading>
+                <Styled.TagList>
+                  {tags.map(({ id, slug, title }) => (
+                    <Styled.Tag key={id}>
+                      <Link
+                        href={{
+                          pathname: `/${parentEntry?.uri || parentUri}`,
+                          query: { search: slug },
+                        }}
+                        passHref
+                      >
+                        <Styled.Link>{title}</Styled.Link>
+                      </Link>
+                    </Styled.Tag>
+                  ))}
+                </Styled.TagList>
+              </section>
+            )}
+          </>
+        }
+        footer={
+          <StaffList
+            excludeId={id}
+            header={t(`staff.browse-more`)}
+            limit={4}
+            button={{
+              text: t(`staff.back-to-profiles`),
+              uri: parentEntry?.uri || parentUri,
+            }}
+            isWide={true}
+          />
+        }
+      >
+        <NestedContext.Provider value={!!heroImage?.length}>
+          <h1>{title}</h1>{" "}
+          <Styled.Bio
+            className="c-content-rte"
+            dangerouslySetInnerHTML={{ __html: bio }}
+          />
+          <Share />
+          {!!contentBlocks?.length &&
+            contentBlocks.map((block) => (
+              <ContentBlockFactory
+                key={block.id}
+                type={block.typeHandle}
+                data={block}
+                pageId={id}
+              />
+            ))}
+        </NestedContext.Provider>
+      </PageContent>
     </Body>
   );
 }

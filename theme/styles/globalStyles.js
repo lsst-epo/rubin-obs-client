@@ -200,7 +200,8 @@ export const protoContainer = (
   const minValue = stripUnit(maxWidth) + 2 * stripUnit(narrowPadding);
 
   return `
-    max-width: ${fluidScale(maxValue + unit, minValue + unit)};
+    --max-width: ${fluidScale(maxValue + unit, minValue + unit)};
+    max-width: var(--max-width);
     padding-right: ${fluidScale(widePadding, narrowPadding)};
     padding-left: ${fluidScale(widePadding, narrowPadding)};
     margin-right: auto;
