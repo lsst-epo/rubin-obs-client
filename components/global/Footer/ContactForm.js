@@ -1,14 +1,25 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
-import withLiveRegionChange from "@/hoc/withLiveRegionChange";
+import IconComposer from "@/svg/IconComposer";
 
 const EMAIL_ID = "footerContactEmail";
+const TOPIC_ID = "footerContactTopic";
 const MESSAGE_ID = "footerContactMessage";
 // const POST_URL = process.env.NEXT_PUBLIC_CONTACT_FORM_POST_URL;
 // Should be replaced with an env var
 const POST_URL = "something";
+
+const TOPICS = [
+  { value: "general", label: "General question" },
+  { value: "site_visit", label: "Site visit" },
+  { value: "speaker_request", label: "Speaker request" },
+  { value: "education", label: "Education Question" },
+  { value: "website", label: "Website question" },
+  { value: "image", label: "Image question" },
+  { value: "media", label: "Media inquiry" },
+];
 
 async function postFormData(data) {
   const url = POST_URL;
@@ -27,6 +38,8 @@ async function postFormData(data) {
 
 function ContactForm({ className }) {
   const { t } = useTranslation();
+  const formRef = useRef(null);
+  const emailInputRef = useRef(null);
   const [status, setStatus] = useState(null); // null, "sending", "error", "success"
 
   async function handleSubmit(event) {
@@ -50,8 +63,15 @@ function ContactForm({ className }) {
       });
   }
 
+  function handleReset() {
+    setStatus(null);
+    formRef.current.reset();
+    emailInputRef.current.focus();
+  }
+
   return (
     <form
+      ref={formRef}
       method="post"
       action=""
       onSubmit={handleSubmit}
@@ -65,6 +85,7 @@ function ContactForm({ className }) {
           {t("form.email")}
         </label>
         <input
+          ref={emailInputRef}
           id={EMAIL_ID}
           name="fromEmail"
           type="email"
@@ -75,8 +96,30 @@ function ContactForm({ className }) {
         />
       </div>
       <div className="c-contact-form__block">
+        <label htmlFor={TOPIC_ID} className="a-hidden">
+          {t("form.topic")}
+        </label>
+        <div className="c-contact-form__select-wrapper">
+          <select
+            id={TOPIC_ID}
+            name="topic"
+            className="c-contact-form__input c-contact-form__input--select"
+          >
+            {TOPICS.map((topic) => (
+              <option key={topic.value} value={topic.value}>
+                {topic.label}
+              </option>
+            ))}
+          </select>
+          <IconComposer
+            icon="caretThin"
+            className="c-contact-form__select-icon"
+          />
+        </div>
+      </div>
+      <div className="c-contact-form__block">
         <label htmlFor={MESSAGE_ID} className="a-hidden">
-          Inquiry
+          {t("form.inquiry")}
         </label>
         <textarea
           id={MESSAGE_ID}
@@ -100,7 +143,11 @@ function ContactForm({ className }) {
           {status === "success" && (
             <>
               {t("contact-form.success")}{" "}
-              <button type="reset" className="c-contact-form__reset">
+              <button
+                type="reset"
+                onClick={handleReset}
+                className="c-contact-form__reset"
+              >
                 {t("form.reset")}
               </button>
               {"."}
@@ -119,4 +166,4 @@ ContactForm.propTypes = {
   className: PropTypes.string,
 };
 
-export default withLiveRegionChange(ContactForm);
+export default ContactForm;

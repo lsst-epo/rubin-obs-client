@@ -37,6 +37,7 @@
       "email_required": "Email (required)",
       "first_name": "First name",
       "last_name": "Last name",
+      "topic": "Topic",
       "inquiry": "Inquiry",
       "password": "Password",
       "password_required": "Password (required)",
