@@ -14,7 +14,7 @@ const InvestigationTile = ({ investigation, useExternalLink }) => {
 
   const { image, isActive, title, externalUrl, landingPage } = investigation;
 
-  const finalImage = useDamAssetAsImage(image?.[0]);
+  const finalImage = useDamAssetAsImage(image[0]);
 
   const url = useExternalLink ? externalUrl : landingPage?.[0]?.uri;
 
