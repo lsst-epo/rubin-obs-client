@@ -13,6 +13,7 @@ import {
   StyledTwoToneImage,
 } from "./styles";
 import ResponsiveImage from "@/components/atomic/ResponsiveImage";
+import { useDamAssetAsImage } from "@/lib/utils";
 
 export default function CalloutTwoTone({ callout }) {
   const {
@@ -24,6 +25,8 @@ export default function CalloutTwoTone({ callout }) {
     links,
     text,
   } = callout;
+
+  const calloutBackgroundImage = useDamAssetAsImage(backgroundImage[0]);
 
   return (
     <>
@@ -44,8 +47,8 @@ export default function CalloutTwoTone({ callout }) {
             />
           ))}
         </Header>
-        {backgroundImage?.[0] && (
-          <StyledBackgroundImage image={backgroundImage[0]} />
+        {calloutBackgroundImage && (
+          <StyledBackgroundImage image={calloutBackgroundImage} />
         )}
       </Wrapper>
       <Wrapper order="image" ratio="33" overlay={true} stack="bottom">
