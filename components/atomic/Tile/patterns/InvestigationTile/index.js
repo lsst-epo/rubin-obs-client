@@ -3,6 +3,7 @@ import { useUID } from "react-uid";
 import Image from "@/atomic/Image";
 import * as Styled from "./styles";
 import { useTranslation } from "react-i18next";
+import { useDamAssetAsImage } from "@/lib/utils";
 
 const InvestigationTile = ({ investigation, useExternalLink }) => {
   const uid = useUID();
@@ -13,7 +14,7 @@ const InvestigationTile = ({ investigation, useExternalLink }) => {
 
   const { image, isActive, title, externalUrl, landingPage } = investigation;
 
-  const finalImage = image?.[0];
+  const finalImage = useDamAssetAsImage(image?.[0]);
 
   const url = useExternalLink ? externalUrl : landingPage?.[0]?.uri;
 
@@ -38,7 +39,7 @@ InvestigationTile.propTypes = {
   investigation: PropTypes.shape({
     uri: PropTypes.string,
     title: PropTypes.string,
-    image: PropTypes.object,
+    damAsset: PropTypes.object,
     externalUrl: PropTypes.string,
     isActive: PropTypes.bool,
     landingPage: PropTypes.shape({
