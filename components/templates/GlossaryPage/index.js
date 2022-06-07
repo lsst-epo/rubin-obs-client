@@ -1,12 +1,11 @@
 import Body from "@/global/Body";
 import Breadcrumbs from "@/page/Breadcrumbs";
-import { useCustomBreadcrumbs } from "@/lib/utils";
+import { useCustomBreadcrumbs, useDamAssetAsImage } from "@/lib/utils";
 import Container from "@/components/layout/Container";
 import { Share } from "@/content-blocks";
 import Buttonish from "@/atomic/Buttonish";
 import ResponsiveImage from "@/atomic/ResponsiveImage";
 import { useTranslation } from "react-i18next";
-import { useDamAssetAsImage } from "@/lib/utils";
 
 export default function GlossaryPage({ data }) {
   const { t } = useTranslation();
