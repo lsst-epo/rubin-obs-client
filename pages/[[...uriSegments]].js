@@ -115,7 +115,7 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
     categories: data?.[`allCategories${isEspanol ? "_es" : ""}`] || [],
     footerContent: globals?.footer || {},
     headerNavItems: data?.[`pageTree${isEspanol ? "_es" : ""}`] || [],
-    rootPages: globals?.rootPageInformation.customBreadcrumbs || [],
+    rootPages: globals?.rootPageInformation?.customBreadcrumbs || [],
     siteInfo: globals?.siteInfo || {},
     localeInfo: {
       locale: site,
