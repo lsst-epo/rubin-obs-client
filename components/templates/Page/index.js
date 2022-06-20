@@ -66,6 +66,8 @@ export default function Page({
     pageType === "dynamic" &&
     (dynamicComponent === "events" ||
       dynamicComponent === "galleryItems" ||
+      dynamicComponent === "imageGalleryItems" ||
+      dynamicComponent === "videoGalleryItems" ||
       dynamicComponent === "jobs" ||
       dynamicComponent === "news" ||
       dynamicComponent === "slideshows" ||

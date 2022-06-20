@@ -14,6 +14,8 @@ const componentMap = {
   alertStream: TempList,
   events: EventList,
   galleryItems: GalleryList,
+  imageGalleryItems: GalleryList,
+  videoGalleryItems: GalleryList,
   jobs: JobList,
   news: NewsList,
   newsPosts: NewsList,

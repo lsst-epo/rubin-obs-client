@@ -38,7 +38,6 @@ const FilterBar = ({ filterType, setLiveRegionMessage }) => {
     search: "searchFilters",
   };
   const filterItems = getCategoryGroup(categories, filterMap[filterType]);
-
   const sortItems = getCategoryGroup(categories, "sortOptions");
   const router = useRouter();
   const [searchText, setSearchText] = useState(query.search || "");
@@ -81,38 +80,40 @@ const FilterBar = ({ filterType, setLiveRegionMessage }) => {
   return (
     <FilterNav ref={ref} aria-label={`${filterType} search tools`}>
       <FilterGrid>
-        <div>
-          <ToggleButton
-            onClick={handleFilter}
-            aria-expanded={filterOpen}
-            aria-controls="filter-dropdown"
-          >
-            <div></div>
-            <span>Filter</span>
-          </ToggleButton>
-          <ToggleDropdown id="filter-dropdown" opened={filterOpen}>
-            <li>
-              <MixedLink url={asPath} params={{ filter: "" }}>
-                <T i18nKey={`filters.all`} />
-              </MixedLink>
-            </li>
-            {filterItems.map((item, i) => {
-              const active = query?.filter?.includes(item.id);
+        {!!filterItems?.length && (
+          <div>
+            <ToggleButton
+              onClick={handleFilter}
+              aria-expanded={filterOpen}
+              aria-controls="filter-dropdown"
+            >
+              <div></div>
+              <span>Filter</span>
+            </ToggleButton>
+            <ToggleDropdown id="filter-dropdown" opened={filterOpen}>
+              <li>
+                <MixedLink url={asPath} params={{ filter: "" }}>
+                  <T i18nKey={`filters.all`} />
+                </MixedLink>
+              </li>
+              {filterItems.map((item, i) => {
+                const active = query?.filter?.includes(item.id);
 
-              return (
-                <li key={i}>
-                  <MixedLink
-                    className={active ? "active" : ""}
-                    url={asPath}
-                    params={{ filter: item.id }}
-                  >
-                    <T i18nKey={`filters.${item.slug}`} />
-                  </MixedLink>
-                </li>
-              );
-            })}
-          </ToggleDropdown>
-        </div>
+                return (
+                  <li key={i}>
+                    <MixedLink
+                      className={active ? "active" : ""}
+                      url={asPath}
+                      params={{ filter: item.id }}
+                    >
+                      <T i18nKey={`filters.${item.slug}`} />
+                    </MixedLink>
+                  </li>
+                );
+              })}
+            </ToggleDropdown>
+          </div>
+        )}
         <div>
           <ToggleButton
             onClick={handleSort}
@@ -176,37 +177,21 @@ const FilterNav = styled.nav`
 const FilterGrid = styled.div`
   ${containerRegular()}
   position: relative;
-  display: grid;
-  grid-template-columns: minmax(auto, 180px) minmax(auto, 180px) 1fr max-content;
+  display: flex;
   align-items: center;
-  justify-content: left;
+  justify-content: flex-start;
+  gap: 20px;
 
   > * {
     position: relative;
+    flex: 0 1 180px;
   }
 
   @media (max-width: 720px) {
-    grid-template: auto / 1fr 1fr min-content;
-    grid-template-areas:
-      "search search search"
-      "filter sort clear";
-    grid-row-gap: 20px;
-    > :first-child {
-      grid-area: filter;
-    }
-    > :nth-child(2) {
-      grid-area: sort;
-    }
-    > :nth-child(4) {
-      grid-area: clear;
-    }
-    > :nth-child(3) {
-      grid-area: search;
-      text-align: left;
-      input {
-        min-width: 82vw;
-        width: 94%;
-      }
+    flex-wrap: wrap;
+
+    > * {
+      flex-basis: calc(33.333% - 20px);
     }
   }
 `;
@@ -298,6 +283,7 @@ const ToggleDropdown = styled.ul`
 `;
 
 const FilterSearch = styled.form`
+  flex-grow: 1;
   text-align: right;
   white-space: nowrap;
 
@@ -323,6 +309,16 @@ const FilterSearch = styled.form`
     border-radius: 0 25px 25px 0;
     color: var(--neutral80);
     background-color: white;
+  }
+
+  @media screen and (max-width: 720px) {
+    flex-basis: 100%;
+    order: -1;
+    text-align: start;
+
+    input {
+      width: calc(100% - 34px);
+    }
   }
 `;
 

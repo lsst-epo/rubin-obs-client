@@ -3,10 +3,15 @@ import Pagination from "@/page/Pagination";
 import DataList from "@/dynamic/DataList";
 import MasonryGrid from "@/components/layout/MasonryGrid";
 
-const GalleryList = ({ excludeId = null, limit = 20 }) => {
+const GalleryList = ({ excludeId = null, limit = 20, component }) => {
   return (
     <div className="l-pad-top-large">
-      <DataList excludeId={excludeId} limit={limit} section="galleryItems">
+      <DataList
+        excludeId={excludeId}
+        limit={limit}
+        section="galleryItems"
+        component={component}
+      >
         {({ entries, offset, page, total }) => (
           <>
             {entries?.length > 0 && <MasonryGrid items={entries}></MasonryGrid>}
