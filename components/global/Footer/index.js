@@ -8,7 +8,7 @@ import footerContentShape from "@/shapes/footerContent";
 
 export default function Footer({
   socialInfo,
-  content: { links, colophon, supportersLogos },
+  content: { links, colophon, supportersLogos, supportersLogosAlt },
 }) {
   const { t } = useTranslation();
   const supportersImage = supportersLogos && supportersLogos[0];
@@ -33,7 +33,9 @@ export default function Footer({
           )}
         </div>
         <div className="c-global-footer__sponsors-block">
-          {supportersImage && <Image image={supportersImage} />}
+          {supportersImage && (
+            <Image image={supportersImage} title={supportersLogosAlt} />
+          )}
         </div>
       </div>
     </footer>
