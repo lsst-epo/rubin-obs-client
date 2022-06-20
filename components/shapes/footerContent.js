@@ -6,6 +6,7 @@ const footerContentShape = PropTypes.shape({
   links: linksShape,
   colophon: PropTypes.node,
   supportersLogos: PropTypes.arrayOf(imageShape),
+  supportersLogosAlt: PropTypes.string,
 });
 
 export default footerContentShape;
