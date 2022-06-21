@@ -29,30 +29,28 @@ const SlideshowList = ({
               {header && <Header>{header}</Header>}
               {entries?.length > 0 && (
                 <Grid columns={1}>
-                  {entries.map(
-                    ({ id, description, featuredImage, title, uri }, i) => (
-                      <Tile
-                        key={id}
-                        footer={
-                          gridType === "darkSlide" || gridType === "slideshows"
-                            ? { button: t(`gallery.start-slideshow`) }
-                            : null
-                        }
-                        image={featuredImage?.[0]}
-                        isFeature={true}
-                        link={uri}
-                        pretitle={
-                          gridType === "darkSlide" || gridType === "slideshows"
-                            ? t(`gallery.slideshow`)
-                            : null
-                        }
-                        text={striptags(description)}
-                        title={title}
-                        titleTag={"h2"}
-                        type={gridType}
-                      />
-                    )
-                  )}
+                  {entries.map(({ id, description, image, title, uri }, i) => (
+                    <Tile
+                      key={id}
+                      footer={
+                        gridType === "darkSlide" || gridType === "slideshows"
+                          ? { button: t(`gallery.start-slideshow`) }
+                          : null
+                      }
+                      image={image?.[0]}
+                      isFeature={true}
+                      link={uri}
+                      pretitle={
+                        gridType === "darkSlide" || gridType === "slideshows"
+                          ? t(`gallery.slideshow`)
+                          : null
+                      }
+                      text={striptags(description)}
+                      title={title}
+                      titleTag={"h2"}
+                      type={gridType}
+                    />
+                  ))}
                 </Grid>
               )}
               {button && (
