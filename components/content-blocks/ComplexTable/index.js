@@ -15,7 +15,11 @@ export default function ComplexTable({
         $styleAs={styleAs}
         $verticalAlignment={verticalAlignment}
       >
-        {plainText && <caption className="a-hidden">{plainText}</caption>}
+        {plainText && (
+          <Styled.Caption className={isChild && "a-hidden"}>
+            {plainText}
+          </Styled.Caption>
+        )}
         <tbody>
           {complexTable.map((row, i) => (
             <Styled.TableRow key={i}>
