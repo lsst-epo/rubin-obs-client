@@ -26,6 +26,13 @@ export const Table = styled.table`
         `}
 `;
 
+export const Caption = styled.caption`
+  padding-block-end: 1em;
+  font-size: 1.136em;
+  font-weight: bold;
+  text-align: start;
+`;
+
 export const TableRow = styled.tr`
   &:nth-child(odd) {
     background-color: var(--neutral10);
