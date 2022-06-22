@@ -23,6 +23,7 @@ export const Hero = styled(HeroComponent)`
     MOBILE_BREAKPOINT
   )};
   --Hero-object-position: 42.5% 50%;
+  --hero-overlap: ${HERO_OVERLAP};
 
   ${respond(`--Hero-transform: translateY(-10%);`, MOBILE_BREAKPOINT)}
 `;
