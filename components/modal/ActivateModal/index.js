@@ -11,7 +11,7 @@ export default function ActivateModal() {
   const { closeModal } = useAuthModal();
 
   const { query } = useRouter();
-  const { activate, code, id } = query;
+  const { activate, code, id, educator } = query;
 
   const { t } = useTranslation();
 
@@ -72,7 +72,9 @@ export default function ActivateModal() {
         <>
           <AuthModal.Title>{t("activate.success")}</AuthModal.Title>
           <AuthModal.Description>
-            {t("activate.success_message")}
+            {educator === "true"
+              ? t("activate.success_message_educator")
+              : t("activate.success_message")}
           </AuthModal.Description>
           <Styled.FormButtons>
             <Button onClick={onClose}>{t("activate.confirm_button")}</Button>
