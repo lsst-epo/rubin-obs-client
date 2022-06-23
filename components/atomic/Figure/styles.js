@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import { ptToEm } from "@/styles/globalStyles";
 
-export const Figure = styled.figcaption`
+export const Figure = styled.figure`
   ${({ $withBackground }) =>
     $withBackground &&
     css`
