@@ -130,6 +130,14 @@ function ContactForm({ className }) {
         />
       </div>
       <div className="c-contact-form__block">
+        <input
+          id="honeypot"
+          name="honeypot"
+          className="c-contact-form__honeypot"
+          type="text"
+        />
+      </div>
+      <div className="c-contact-form__block">
         <button
           type="submit"
           className="c-contact-form__submit c-buttonish"

@@ -58,4 +58,8 @@ $_input-bg: functions.sass-palette(neutral08);
   &__reset {
     text-decoration: underline;
   }
+
+  &__honeypot {
+    display: none;
+  }
 }
