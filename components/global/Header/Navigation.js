@@ -20,7 +20,9 @@ export default function Navigation({
   const navList = useRef();
   const { openModal } = useAuthModal();
   const { t } = useTranslation();
-  const { isAuthenticated, signOut } = useAuthenticationContext();
+  const { isAuthenticated, status, signOut } = useAuthenticationContext();
+
+  const showUserItems = isAuthenticated && status === "active";
 
   useClickEvent(handleClick);
 
@@ -91,7 +93,7 @@ export default function Navigation({
         })}
         {theme === "mobile" && (
           <>
-            {isAuthenticated && (
+            {showUserItems && (
               <>
                 <li className="c-nav-list__item">
                   <NavItem
@@ -116,7 +118,7 @@ export default function Navigation({
                 </li>
               </>
             )}
-            {!isAuthenticated && (
+            {!showUserItems && (
               <>
                 <li className="c-nav-list__item">
                   <NavItem

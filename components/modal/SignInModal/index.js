@@ -27,6 +27,7 @@ export default function SignInModal() {
 
   const {
     isAuthenticated,
+    status,
     user,
     pendingGroup,
     setPendingGroup,
@@ -75,7 +76,7 @@ export default function SignInModal() {
       onClose={onClose}
       aria-label={t("sign_in.header")}
     >
-      {isAuthenticated ? ( // included only in case a user inadvertantly reopens the modal
+      {isAuthenticated && status === "active" ? ( // included only in case a user inadvertantly reopens the modal
         <>
           <AuthModal.Title>{t("sign_in.success")}</AuthModal.Title>
           <AuthModal.Description>
