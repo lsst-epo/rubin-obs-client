@@ -9,12 +9,14 @@ import * as Styled from "./styles";
 function UserNav({ headerVisible, userProfilePage }) {
   const { openModal } = useAuthModal();
   const { t } = useTranslation();
-  const { isAuthenticated, signOut } = useAuthenticationContext();
+  const { isAuthenticated, status, signOut } = useAuthenticationContext();
   const [box, ref] = useBoundingBox();
+
+  const showUserMenu = isAuthenticated && status === "active";
 
   return (
     <Styled.Nav aria-label="User" className="c-nav-list--desktop" ref={ref}>
-      {isAuthenticated && (
+      {showUserMenu && (
         <Popover>
           {({ open }) => (
             <Styled.DropdownWrapper>
@@ -55,7 +57,7 @@ function UserNav({ headerVisible, userProfilePage }) {
           )}
         </Popover>
       )}
-      {!isAuthenticated && (
+      {!showUserMenu && (
         <>
           <Styled.Toggle onClick={() => openModal("signIn")}>
             {t("auth.log_in")}
