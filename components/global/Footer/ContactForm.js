@@ -11,16 +11,6 @@ const MESSAGE_ID = "footerContactMessage";
 // Should be replaced with an env var
 const POST_URL = "something";
 
-const TOPICS = [
-  { value: "general", label: "General question" },
-  { value: "site_visit", label: "Site visit" },
-  { value: "speaker_request", label: "Speaker request" },
-  { value: "education", label: "Education Question" },
-  { value: "website", label: "Website question" },
-  { value: "image", label: "Image question" },
-  { value: "media", label: "Media inquiry" },
-];
-
 async function postFormData(data) {
   const url = POST_URL;
   const body = JSON.stringify(Object.fromEntries(data));
@@ -36,7 +26,7 @@ async function postFormData(data) {
   return response.json();
 }
 
-function ContactForm({ className }) {
+function ContactForm({ topics = [], className }) {
   const { t } = useTranslation();
   const formRef = useRef(null);
   const emailInputRef = useRef(null);
@@ -95,28 +85,30 @@ function ContactForm({ className }) {
           className="c-contact-form__input"
         />
       </div>
-      <div className="c-contact-form__block">
-        <label htmlFor={TOPIC_ID} className="a-hidden">
-          {t("form.topic")}
-        </label>
-        <div className="c-contact-form__select-wrapper">
-          <select
-            id={TOPIC_ID}
-            name="topic"
-            className="c-contact-form__input c-contact-form__input--select"
-          >
-            {TOPICS.map((topic) => (
-              <option key={topic.value} value={topic.value}>
-                {topic.label}
-              </option>
-            ))}
-          </select>
-          <IconComposer
-            icon="caretThin"
-            className="c-contact-form__select-icon"
-          />
+      {!!topics?.length && (
+        <div className="c-contact-form__block">
+          <label htmlFor={TOPIC_ID} className="a-hidden">
+            {t("form.topic")}
+          </label>
+          <div className="c-contact-form__select-wrapper">
+            <select
+              id={TOPIC_ID}
+              name="topic"
+              className="c-contact-form__input c-contact-form__input--select"
+            >
+              {topics.map((topic) => (
+                <option key={topic.id} value={topic.value}>
+                  {topic.label}
+                </option>
+              ))}
+            </select>
+            <IconComposer
+              icon="caretThin"
+              className="c-contact-form__select-icon"
+            />
+          </div>
         </div>
-      </div>
+      )}
       <div className="c-contact-form__block">
         <label htmlFor={MESSAGE_ID} className="a-hidden">
           {t("form.inquiry")}
@@ -172,6 +164,13 @@ ContactForm.displayName = "Global.Footer.ContactForm";
 
 ContactForm.propTypes = {
   className: PropTypes.string,
+  topics: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      value: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+    })
+  ),
 };
 
 export default ContactForm;

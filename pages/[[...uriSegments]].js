@@ -114,6 +114,7 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
   const globalData = {
     categories: data?.[`allCategories${isEspanol ? "_es" : ""}`] || [],
     footerContent: globals?.footer || {},
+    contactForm: globals?.contactForm || {},
     headerNavItems: data?.[`pageTree${isEspanol ? "_es" : ""}`] || [],
     rootPages: globals?.rootPageInformation?.customBreadcrumbs || [],
     siteInfo: globals?.siteInfo || {},
@@ -166,6 +167,7 @@ Page.propTypes = {
     rootPages: rootPagesShape,
     siteInfo: siteInfoShape,
     userProfilePage: PropTypes.object,
+    contactForm: PropTypes.object,
   }),
   breadcrumbs: PropTypes.arrayOf(internalLinkShape),
 };
