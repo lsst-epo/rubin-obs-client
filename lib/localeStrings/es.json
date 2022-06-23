@@ -232,7 +232,8 @@
     },
     "activate": {
       "success": "Success!",
-      "success_message": "Your account has been activated.",
+      "success_message": "Your account has been activated. Please log in to begin using the site as a registered user.",
+      "success_message_educator": "Your account has been activated, but it will need to be approved by an administrator before you can access educator content. You will receive an email when you have been approved.",
       "error": "Error!",
       "error_message": "There was an error activating your account.",
       "loading": "Activating your account…",

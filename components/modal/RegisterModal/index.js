@@ -13,7 +13,8 @@ export default function RegisterModal() {
 
   const { openModal, closeModal } = useAuthModal();
 
-  const { isAuthenticated, pendingGroup, user } = useAuthenticationContext();
+  const { isAuthenticated, hasActivated, pendingGroup, user } =
+    useAuthenticationContext();
 
   const { t } = useTranslation();
 
@@ -36,7 +37,7 @@ export default function RegisterModal() {
       aria-label={t("register.header")}
       image={isAuthenticated ? undefined : pendingGroup}
     >
-      {isAuthenticated ? (
+      {isAuthenticated && !hasActivated ? (
         <>
           <AuthModal.Title>
             {t("register.success", { context: user?.group || pendingGroup })}

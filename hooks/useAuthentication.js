@@ -28,6 +28,7 @@ const SESSION_STORAGE_KEYS = [
   "refreshTokenExpiresAt",
   "status",
   "pendingDeletion",
+  "hasActivated",
 ];
 const CRAFT_HOMEPAGE_URI = "__home__";
 
@@ -77,6 +78,11 @@ export default function useAuthentication(data) {
   const [pendingGroup, setPendingGroup] = useState(
     getTokenFromStorage("pendingGroup") || "students"
   );
+  // user has completed activation process (but may still have a `pending`
+  // status if they haven't logged in post-activation yet)
+  const [hasActivated, setHasActivated] = useState(
+    getTokenFromStorage("hasActivated") === "true"
+  );
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -118,6 +124,7 @@ export default function useAuthentication(data) {
     setStatus(null);
     setPendingDeletion(false);
     setPendingGroup("students");
+    setHasActivated(false);
     setLoading(false);
     setError(false);
     unstoreTokens();
@@ -127,8 +134,14 @@ export default function useAuthentication(data) {
     setLoading(false);
     setError(false);
 
-    const { jwt, jwtExpiresAt, refreshToken, refreshTokenExpiresAt, user } =
-      authData;
+    const {
+      jwt,
+      jwtExpiresAt,
+      refreshToken,
+      refreshTokenExpiresAt,
+      user,
+      hasActivated,
+    } = authData;
 
     if (jwt) {
       setToken(jwt);
@@ -142,6 +155,13 @@ export default function useAuthentication(data) {
         refreshTokenExpiresAt,
         status: user?.status,
         pendingDeletion: hasPendingDeletion(user),
+      });
+    }
+
+    if (hasActivated) {
+      setHasActivated(true);
+      storeTokens({
+        hasActivated,
       });
     }
 
@@ -291,7 +311,7 @@ export default function useAuthentication(data) {
     const data = await activate({ code, id });
 
     return data?.activateUser
-      ? handleSuccess(data.activateUser)
+      ? handleSuccess({ hasActivated: true })
       : handleError(data);
   }
 
@@ -396,6 +416,7 @@ export default function useAuthentication(data) {
     status,
     pendingDeletion,
     pendingGroup,
+    hasActivated,
     loading,
     error,
     setPendingGroup,
