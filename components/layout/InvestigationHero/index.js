@@ -3,11 +3,13 @@ import * as Styled from "./styles";
 import { Button, Image } from "@/components/atomic";
 import IconComposer from "@/components/svg/IconComposer";
 import T from "@/page/Translate";
+import { useDamAssetAsImage } from "@/lib/utils";
 
 export default function InvestigationHero({ investigation }) {
-  if (!investigation) return null;
+  const { damAsset, title, externalUrl, duration } = investigation || {};
+  const image = useDamAssetAsImage(damAsset?.[0]);
 
-  const { image, title, externalUrl, duration } = investigation;
+  if (!investigation) return null;
 
   return (
     <Styled.Wrapper>
