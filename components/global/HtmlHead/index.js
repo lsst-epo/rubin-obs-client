@@ -10,7 +10,7 @@ export default function HtmlHead({
   siteInfo: { siteTitle, siteDescription, siteImage },
   children,
 }) {
-  const image = featuredImage?.[0] ? featuredImage[0] : siteImage[0];
+  const image = featuredImage?.[0] ? featuredImage[0] : siteImage?.[0];
   return (
     <Head>
       <title>{`${title} | ${siteTitle}`}</title>

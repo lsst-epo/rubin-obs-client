@@ -29,6 +29,7 @@ GlobalDataProvider.propTypes = {
     siteInfo: siteInfoShape,
     userProfilePage: PropTypes.object,
     investigation: PropTypes.object,
+    contactForm: PropTypes.object,
   }),
 };
 

@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Social from "./Social";
 import Nav from "./Nav";
@@ -9,6 +10,7 @@ import footerContentShape from "@/shapes/footerContent";
 export default function Footer({
   socialInfo,
   content: { links, colophon, supportersLogos, supportersLogosAlt },
+  contactForm: { contactFormTopics },
 }) {
   const { t } = useTranslation();
   const supportersImage = supportersLogos && supportersLogos[0];
@@ -22,7 +24,10 @@ export default function Footer({
           <h3 className="c-global-footer__heading">
             {t("contact-form.contact-us")}
           </h3>
-          <ContactForm className="c-global-footer__form" />
+          <ContactForm
+            topics={contactFormTopics}
+            className="c-global-footer__form"
+          />
         </div>
         <div className="c-global-footer__colophon-block">
           {colophon && (
@@ -47,4 +52,5 @@ Footer.displayName = "Global.Footer";
 Footer.propTypes = {
   socialInfo: socialInfoShape,
   content: footerContentShape,
+  contactForm: PropTypes.object,
 };
