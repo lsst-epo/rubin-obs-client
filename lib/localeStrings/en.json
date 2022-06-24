@@ -93,7 +93,7 @@
     "events": {
       "open": "Registration Open",
       "closed": "Registration Closed",
-      "related-events": "Related Events",
+      "related-events": "Other Events",
       "go-to-events": "Go to events",
       "upcoming": "Upcoming events",
       "past": "Past events"
