@@ -17,14 +17,10 @@ function getParentUri(uri) {
   return pathFragments.slice(0, -1).join("/");
 }
 
-function getParentRootPage(parentUri, rootPages) {
-  return rootPages.find((page) => {
-    return page.pageEntry?.[0]?.uri.includes(parentUri);
+function getParentEntry(rootPages) {
+  const parentRootPage = rootPages.find((page) => {
+    return page.header === "Staff Profiles";
   });
-}
-
-function getParentEntry(parentUri, rootPages) {
-  const parentRootPage = getParentRootPage(parentUri, rootPages);
   return parentRootPage?.pageEntry?.[0];
 }
 
@@ -45,7 +41,7 @@ export default function StaffPage({
   const { t } = useTranslation();
   const rootPages = useGlobalData("rootPages");
   const parentUri = getParentUri(uri);
-  const parentEntry = getParentEntry(parentUri, rootPages);
+  const parentEntry = getParentEntry(rootPages);
   const bodyProps = {
     featuredImage,
     title,
