@@ -7,12 +7,6 @@ COPY . /app
 
 RUN apk add --no-cache libc6-compat git
 RUN yarn install --frozen-lockfile
-
-ARG NEXT_PUBLIC_API_URL=https://rubin-obs-api-e3g4rcii3q-uc.a.run.app/api
-ARG NEXT_PUBLIC_ASSETS_BASE_URL=https://rubin-obs-api-e3g4rcii3q-uc.a.run.app/assets
-ARG NEXT_PUBLIC_ASTRO_API_URL=https://us-central1-skyviewer.cloudfunctions.net/astro-objects-api
-ARG NEXT_PUBLIC_GOOGLE_APP_ID=688095955960-t0fpaj4ec3gh5vsr9lhg8govapk2oeo9.apps.googleusercontent.com
-
 RUN npx browserslist@latest --update-db && yarn static:build
 
 # Production image, copy all the files and run next
