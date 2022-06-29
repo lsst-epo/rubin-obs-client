@@ -14,9 +14,9 @@ export default function InvestigationHero({ investigation }) {
   return (
     <Styled.Wrapper>
       <Styled.Inner>
-        {image?.[0] && (
+        {image && (
           <Styled.Image>
-            <Image image={image?.[0]} />
+            <Image image={image} />
           </Styled.Image>
         )}
         <Styled.Text>
