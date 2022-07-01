@@ -2,10 +2,7 @@ import Document, { Html, Head, Main, NextScript } from "next/document";
 import { ServerStyleSheet } from "styled-components";
 import { getLangString } from "@/lib/utils";
 
-// const GOOGLE_APP_ID = process.env.NEXT_PUBLIC_GOOGLE_APP_ID;
-// Should be replaced with an env var
-const GOOGLE_APP_ID =
-  "688095955960-t0fpaj4ec3gh5vsr9lhg8govapk2oeo9.apps.googleusercontent.com";
+const GOOGLE_APP_ID = process.env.NEXT_PUBLIC_GOOGLE_APP_ID;
 
 class CustomDocument extends Document {
   static async getInitialProps(ctx) {

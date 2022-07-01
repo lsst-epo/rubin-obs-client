@@ -8,9 +8,7 @@ import IconComposer from "@/components/svg/IconComposer";
 import * as Styled from "./styles";
 import { isAbsoluteUrl } from "@/helpers";
 
-// const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
-// Should be replaced with an env var
-const BASE_URL = "https://dev.rubinobs.com";
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 function createFinalUrl(url) {
   if (isAbsoluteUrl(url)) return url;
