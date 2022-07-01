@@ -10,9 +10,7 @@ export function isAbsoluteUrl(url) {
   return /^https?:\/\//i.test(url);
 }
 
-// const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
-// Should be replaced with an env var
-const BASE_URL = "https://dev.rubinobs.com";
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export function isInternalUrl(url) {
   if (!isAbsoluteUrl(url)) return true;

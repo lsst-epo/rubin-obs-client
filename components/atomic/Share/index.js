@@ -7,13 +7,11 @@ import TwitterButton from "./TwitterButton";
 import EmailButton from "./EmailButton";
 import * as Styled from "./styles";
 
-// const FALLBACK_URL = process.env.NEXT_PUBLIC_BASE_URL;
-// Should be replaced with an env var
-const FALLBACK_URL = "https://dev.rubinobs.com";
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 function getShareUrl(url) {
   if (url) return url;
-  return typeof window !== "undefined" ? window.location.href : FALLBACK_URL;
+  return typeof window !== "undefined" ? window.location.href : BASE_URL;
 }
 
 function getShareTitle(title, siteTitle) {
