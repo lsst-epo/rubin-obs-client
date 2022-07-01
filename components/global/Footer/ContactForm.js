@@ -7,9 +7,7 @@ import IconComposer from "@/svg/IconComposer";
 const EMAIL_ID = "footerContactEmail";
 const TOPIC_ID = "footerContactTopic";
 const MESSAGE_ID = "footerContactMessage";
-// const POST_URL = process.env.NEXT_PUBLIC_CONTACT_FORM_POST_URL;
-// Should be replaced with an env var
-const POST_URL = "something";
+const POST_URL = process.env.NEXT_PUBLIC_CONTACT_FORM_POST_URL;
 
 async function postFormData(data) {
   const url = POST_URL;
