@@ -28,11 +28,9 @@ jobs:
         docker build \
         -t "gcr.io/${{ secrets.SV_PROJ_NAME }}/rubin-obs-client:${{ github.sha }}" \
         --build-arg NEXT_PUBLIC_API_URL=https://api-dev.rubinobs.com/api \
-        --build-arg NEXT_PUBLIC_ASSETS_BASE_URL=https://api-dev.rubinobs.com/assets \
-        --build-arg NEXT_PUBLIC_ASTRO_API_URL=https://us-central1-rubin-obs.cloudfunctions.net/astro-objects-api \
+        --build-arg NEXT_PUBLIC_BASE_URL=https://dev.rubinobs.com \
         --build-arg NEXT_PUBLIC_GOOGLE_APP_ID=688095955960-t0fpaj4ec3gh5vsr9lhg8govapk2oeo9.apps.googleusercontent.com \
         --build-arg NEXT_PUBLIC_PAGEPROOFER_ID=0a40ceaf-340d-5e6a-adc7-898f09823859 \
-        --build-arg NEXT_PUBLIC_SHARETHIS_PROPERTY=5f57f7661db73a00129d7d03 \
         --build-arg NEXT_PUBLIC_CONTACT_FORM_POST_URL=something \
         .
     - name: Configure Docker Auth
