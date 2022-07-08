@@ -13,7 +13,8 @@ ARG NEXT_PUBLIC_BASE_URL=https://rubinobs.org
 ARG NEXT_PUBLIC_GOOGLE_APP_ID=688095955960-t0fpaj4ec3gh5vsr9lhg8govapk2oeo9.apps.googleusercontent.com
 ARG NEXT_PUBLIC_PAGEPROOFER_ID=false
 ARG NEXT_PUBLIC_LEVELACCESS_ID=false
-ARG NEXT_PUBLIC_CONTACT_FORM_POST_URL=https://rubinobs.org
+ARG NEXT_PUBLIC_CONTACT_FORM_POST_URL=https://api.rubinobs.org/actions/contact-form/send
+ARG NEXT_PLAUSIBLE_DOMAIN=https://rubinobs.org
 
 RUN npx browserslist@latest --update-db && yarn static:build
 

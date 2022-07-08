@@ -10,7 +10,7 @@ import useAuthentication from "@/hooks/useAuthentication";
 import GlobalStyles from "@/styles/globalStyles";
 import styles from "@/styles/styles.scss";
 
-const PLAUSIBLE_DOMAIN = process.env.NEXT_PUBLIC_BASE_URL;
+const PLAUSIBLE_DOMAIN = process.env.NEXT_PLAUSIBLE_DOMAIN;
 const PAGEPROOFER_ID = process.env.NEXT_PUBLIC_PAGEPROOFER_ID;
 const LEVELACCESS_ID = process.env.NEXT_PUBLIC_LEVELACCESS_ID;
 

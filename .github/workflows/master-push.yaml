@@ -33,6 +33,7 @@ jobs:
         --build-arg NEXT_PUBLIC_CONTACT_FORM_POST_URL=https://api-int.rubinobs.com/actions/contact-form/send \
         --build-arg NEXT_PUBLIC_LEVELACCESS_ID= \
         --build-arg NEXT_PUBLIC_PAGEPROOFER_ID= \
+        --build-arg NEXT_PLAUSIBLE_DOMAIN= \
         .
     - name: Configure Docker Auth
       run: gcloud --quiet auth configure-docker
