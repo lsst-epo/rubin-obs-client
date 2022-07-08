@@ -10,7 +10,7 @@ import footerContentShape from "@/shapes/footerContent";
 export default function Footer({
   socialInfo,
   content: { links, colophon, supportersLogos, supportersLogosAlt },
-  contactForm: { contactFormTopics },
+  contactForm,
 }) {
   const { t } = useTranslation();
   const supportersImage = supportersLogos && supportersLogos[0];
@@ -24,10 +24,12 @@ export default function Footer({
           <h3 className="c-global-footer__heading">
             {t("contact-form.contact-us")}
           </h3>
-          <ContactForm
-            topics={contactFormTopics}
-            className="c-global-footer__form"
-          />
+          {contactForm && (
+            <ContactForm
+              topics={contactForm.contactFormTopics}
+              className="c-global-footer__form"
+            />
+          )}
         </div>
         <div className="c-global-footer__colophon-block">
           {colophon && (
