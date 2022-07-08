@@ -38,7 +38,7 @@ jobs:
         --build-arg NEXT_PUBLIC_GOOGLE_APP_ID=688095955960-t0fpaj4ec3gh5vsr9lhg8govapk2oeo9.apps.googleusercontent.com \
         --build-arg NEXT_PUBLIC_PAGEPROOFER_ID=0a40ceaf-340d-5e6a-adc7-898f09823859 \
         --build-arg NEXT_PUBLIC_LEVELACCESS_ID=YW1wMTMxMzY \
-        --build-arg NEXT_PUBLIC_CONTACT_FORM_POST_URL=https://api.rubinobs.org \
+        --build-arg NEXT_PUBLIC_CONTACT_FORM_POST_URL=https://api.rubinobs.com/actions/contact-form/send \
         .
     - name: Configure Docker Auth
       run: gcloud --quiet auth configure-docker
