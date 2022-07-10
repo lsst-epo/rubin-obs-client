@@ -21,6 +21,7 @@ async function postFormData(data) {
     withCredentials: true,
     body,
   });
+
   return response.json();
 }
 
@@ -38,7 +39,7 @@ function ContactForm({ topics = [], className }) {
     const formData = new FormData(event.target);
 
     await postFormData(formData)
-      .then(({ data }) => {
+      .then((data) => {
         if (data.success) {
           setStatus("success");
         } else {
