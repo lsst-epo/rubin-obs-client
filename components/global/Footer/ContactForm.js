@@ -11,7 +11,14 @@ const POST_URL = process.env.NEXT_PUBLIC_CONTACT_FORM_POST_URL;
 
 async function postFormData(data) {
   const url = POST_URL;
-  const body = JSON.stringify(Object.fromEntries(data));
+  const objectifiedData = Object.fromEntries(data);
+  const body = JSON.stringify({
+    ...objectifiedData,
+    message: {
+      body: objectifiedData.message,
+      Topic: objectifiedData.topic,
+    },
+  });
   const response = await fetch(url, {
     method: "POST",
     headers: {
