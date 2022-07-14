@@ -66,7 +66,7 @@ const FilterBar = ({ filterType, setLiveRegionMessage }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     router.push({
-      pathname: pathname,
+      pathname,
       query: { ...pathParams, page: 1, search: searchText },
     });
   };

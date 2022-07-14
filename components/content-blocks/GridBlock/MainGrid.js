@@ -18,7 +18,7 @@ const MainGrid = ({ items = [], limit, listTypeId, sectionHandle, pageId }) => {
   const { data } = useList({
     limit,
     listTypeId,
-    section: section,
+    section,
     excludeId: pageId,
   }) || {
     data: {},
