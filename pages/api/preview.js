@@ -1,6 +1,6 @@
 import { getPageUrlByUid } from "@/api/pages";
 
-export default async (req, res) => {
+const preview = async (req, res) => {
   const { query } = req;
   const isCraftPreview =
     query["x-craft-preview"] || query["x-craft-live-preview"];
@@ -39,3 +39,5 @@ export default async (req, res) => {
   res.writeHead(307, { Location: parsedUrl.pathname });
   res.end();
 };
+
+export default preview;

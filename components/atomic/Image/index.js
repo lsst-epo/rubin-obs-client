@@ -7,19 +7,7 @@ const position = (x, y) => {
 };
 
 export default function Image({ image, className, title, ...props }) {
-  const {
-    url,
-    url2x,
-    url3x,
-    width,
-    height,
-    altText,
-    focalPointX,
-    focalPointY,
-  } = image;
-  const style = {
-    objectPosition: position(focalPointX, focalPointY),
-  };
+  const { url, url2x, url3x, width, height, altText } = image;
 
   const urls = [url, url2x, url3x];
 
@@ -34,6 +22,7 @@ export default function Image({ image, className, title, ...props }) {
   };
 
   return (
+    // eslint-disable-next-line @next/next/no-img-element
     <img
       alt={altText || title}
       className={classNames({
@@ -42,7 +31,6 @@ export default function Image({ image, className, title, ...props }) {
       height={height}
       src={url}
       srcSet={getSrcSet(urls)}
-      style={style}
       width={width}
       {...props}
     />

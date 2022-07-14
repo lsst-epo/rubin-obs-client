@@ -1,3 +1,4 @@
+// eslint-disable-next-line react/prop-types
 export default function EducatorsMobileSvg({ image, ...props }) {
   return (
     <svg

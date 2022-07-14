@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { fileSize } from "@/helpers";
 import * as Styled from "./styles";
 import Container from "@/components/layout/Container";
@@ -44,3 +45,7 @@ export default function DownloadList({ assetsList, ...props }) {
     </Container>
   ) : null;
 }
+
+DownloadList.propTypes = {
+  assetsList: PropTypes.array,
+};

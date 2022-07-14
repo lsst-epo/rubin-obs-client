@@ -98,6 +98,7 @@ Tile.propTypes = {
   isFeature: PropTypes.bool,
   pretitle: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   title: PropTypes.string,
+  titleTag: PropTypes.string,
   subtitle: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object,
@@ -105,6 +106,7 @@ Tile.propTypes = {
   ]),
   text: PropTypes.string,
   type: PropTypes.string,
+  showSharePopup: PropTypes.bool,
   link: PropTypes.oneOfType([PropTypes.string, mixedLinkShape]),
 };
 

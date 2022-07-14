@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import { Button, Link as BaseLink, SSOButton } from "@/components/atomic";
@@ -65,3 +66,7 @@ export default function JoinForm({ onEmailSignup }) {
     </>
   );
 }
+
+JoinForm.propTypes = {
+  onEmailSignup: PropTypes.func,
+};

@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import Body from "@/global/Body";
 import Breadcrumbs from "@/page/Breadcrumbs";
 import { useCustomBreadcrumbs, useDamAssetAsImage } from "@/lib/utils";
@@ -59,3 +60,17 @@ export default function GlossaryPage({ data }) {
     </Body>
   );
 }
+
+GlossaryPage.propTypes = {
+  data: PropTypes.shape({
+    entry: PropTypes.shape({
+      id: PropTypes.string,
+      title: PropTypes.string,
+      description: PropTypes.string,
+      uri: PropTypes.string,
+      text: PropTypes.node,
+      damAsset: PropTypes.array,
+      caption: PropTypes.string,
+    }),
+  }),
+};

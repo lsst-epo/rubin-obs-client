@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 export default function ExternalLink({
   href,
   children,
+  // eslint-disable-next-line react/prop-types
   type: typeIgnored,
   ...restProps
 }) {
