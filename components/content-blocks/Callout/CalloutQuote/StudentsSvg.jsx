@@ -1,4 +1,4 @@
-// eslint-disable-next-line react/prop-types
+/* eslint-disable react/prop-types */
 export default function StudentsSvg({ image, ...props }) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width={249} height={449} {...props}>
