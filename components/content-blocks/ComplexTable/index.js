@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import Container from "@/components/layout/Container";
 import * as Styled from "./styles";
 
@@ -46,3 +47,11 @@ export default function ComplexTable({
     <Container width="narrow">{renderTable()}</Container>
   );
 }
+
+ComplexTable.propTypes = {
+  complexTable: PropTypes.array,
+  plainText: PropTypes.string,
+  verticalAlignment: PropTypes.string,
+  styleAs: PropTypes.string,
+  isChild: PropTypes.bool,
+};

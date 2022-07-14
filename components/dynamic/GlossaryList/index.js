@@ -7,6 +7,7 @@ import Container from "@/components/layout/Container";
 import Columns from "@/components/layout/Columns";
 import * as Styled from "./styles";
 
+// eslint-disable-next-line react/prop-types
 export default function GlossaryList({ excludeId = null, limit = null }) {
   const alpha = Array.from(Array(26)).map((e, i) => i + 65);
   const alphabet = alpha.map((x) => String.fromCharCode(x));

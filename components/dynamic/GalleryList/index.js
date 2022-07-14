@@ -33,6 +33,7 @@ const GalleryList = ({ excludeId = null, limit = 20, component }) => {
 GalleryList.propTypes = {
   excludeId: PropTypes.string,
   limit: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  component: PropTypes.node,
   header: PropTypes.string,
   button: PropTypes.object,
   isWide: PropTypes.bool,

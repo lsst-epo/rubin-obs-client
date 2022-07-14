@@ -77,8 +77,10 @@ DataList.propTypes = {
     PropTypes.func,
     PropTypes.node,
   ]).isRequired,
+  component: PropTypes.node,
   excludeId: PropTypes.string,
   isSitewideSearch: PropTypes.bool,
+  showsFeatured: PropTypes.bool,
   limit: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   section: PropTypes.string,
 };

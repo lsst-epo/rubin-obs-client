@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import Container from "@/components/layout/Container";
 import { Tab } from "@headlessui/react";
 import ComplexTable from "../ComplexTable";
@@ -31,3 +32,7 @@ export default function TableGroup({ items }) {
     </Container>
   );
 }
+
+TableGroup.propTypes = {
+  items: PropTypes.array,
+};

@@ -4,6 +4,7 @@ import classNames from "classnames";
 import IconComposer from "@/svg/IconComposer";
 
 function NavItem({ href, onClick, title, theme, className, icon }) {
+  // eslint-disable-next-line react/prop-types
   const WrapperTag = ({ href, children }) =>
     href ? (
       <Link href={href} passHref>

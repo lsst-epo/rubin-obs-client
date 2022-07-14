@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Container from "@/components/layout/Container";
 import * as Styled from "./styles";
 
@@ -23,6 +24,10 @@ const SimpleTable = ({ simpleTable }) => {
       </Styled.List>
     </Container>
   );
+};
+
+SimpleTable.propTypes = {
+  simpleTable: PropTypes.array,
 };
 
 export default SimpleTable;

@@ -69,5 +69,6 @@ CalloutQuote.propTypes = {
     quote: PropTypes.string,
     attribution: PropTypes.string,
     imageQuote: PropTypes.arrayOf(imageShape),
+    colorScheme: PropTypes.string,
   }),
 };

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import * as Styled from "./styles";
 import ExpandCollapse from "@/components/svg/unique/ExpandCollapse";
 
