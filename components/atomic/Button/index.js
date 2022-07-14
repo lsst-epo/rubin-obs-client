@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { forwardRef } from "react";
 import PropTypes from "prop-types";
 import IconComposer from "@/components/svg/IconComposer";

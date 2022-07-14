@@ -2,6 +2,7 @@ import styled from "styled-components";
 import CommonJsBreadcrumbs from "@castiron/components-breadcrumbs";
 import { containerRegular, respond } from "@/styles/globalStyles";
 
+// eslint-disable-next-line react/prop-types
 const BreadcrumbsWrapper = ({ className, ...restProps }) => {
   const classes = {
     ol: `${className}__ol`,

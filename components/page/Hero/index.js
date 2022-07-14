@@ -35,4 +35,5 @@ Hero.displayName = "Global.Hero";
 Hero.propTypes = {
   data: PropTypes.arrayOf(imageShape),
   children: PropTypes.node,
+  className: PropTypes.string,
 };

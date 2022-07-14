@@ -2,6 +2,7 @@ import { createContext, useContext } from "react";
 
 const AuthenticationContext = createContext(null);
 
+// eslint-disable-next-line react/prop-types
 export function AuthenticationContextProvider({ data, children }) {
   return (
     <AuthenticationContext.Provider value={data}>

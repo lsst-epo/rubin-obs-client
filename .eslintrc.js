@@ -40,6 +40,18 @@ module.exports = {
     quotes: 0,
     // This rule doesn't work well with jsconfig
     "import/no-unresolved": 0,
+    "import/no-anonymous-default-export": [
+      "warn",
+      {
+        allowArray: true,
+        allowArrowFunction: true,
+        allowAnonymousClass: false,
+        allowAnonymousFunction: false,
+        allowCallExpression: true, // The true value here is for backward compatibility
+        allowLiteral: true,
+        allowObject: true,
+      },
+    ],
     "jsx-quotes": 2,
     "block-scoped-var": 0,
     "comma-dangle": 0,
