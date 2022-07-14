@@ -23,7 +23,7 @@ class CustomDocument extends Document {
       const lang = getLangString(uriSegments);
       return {
         ...initialProps,
-        lang: lang,
+        lang,
         styles: (
           <>
             {initialProps.styles}

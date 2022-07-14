@@ -35,7 +35,7 @@ export default function MixedLink({
     const { pathname, pathParams } = normalizePathData(pathnameInput);
 
     const href = {
-      pathname: pathname,
+      pathname,
       query: { ...pathParams, ...params },
     };
 

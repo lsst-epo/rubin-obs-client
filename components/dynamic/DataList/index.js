@@ -56,7 +56,7 @@ const DataList = ({
   // if our page is out of bounds, we must instead go to the last page with data
   if (offset > total) {
     router.push({
-      pathname: pathname,
+      pathname,
       query: { ...pathParams, page: numberOfPages },
     });
   }
