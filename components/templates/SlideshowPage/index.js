@@ -36,9 +36,9 @@ export default function SlideshowPage({
   // prepend main slide to content slides
   const allItems = [
     {
-      id: id,
-      title: title,
-      description: description,
+      id,
+      title,
+      description,
       image: featuredImage,
     },
     ...items,
