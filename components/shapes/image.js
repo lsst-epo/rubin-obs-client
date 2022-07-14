@@ -10,8 +10,6 @@ const imageShape = PropTypes.shape({
   thumb: PropTypes.string,
   thumb2x: PropTypes.string,
   className: PropTypes.string,
-  focalPointX: PropTypes.integer,
-  focalPointY: PropTypes.integer,
 }).isRequired;
 
 export default imageShape;
