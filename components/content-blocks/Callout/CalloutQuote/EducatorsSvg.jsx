@@ -1,4 +1,4 @@
-// eslint-disable-next-line react/prop-types
+/* eslint-disable react/prop-types */
 export default function EducatorsSvg({ image, ...props }) {
   return (
     <svg
