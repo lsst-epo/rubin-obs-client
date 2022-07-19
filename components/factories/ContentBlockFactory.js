@@ -16,6 +16,7 @@ import {
   TableGroup,
   Video,
   DownloadList,
+  Embed,
 } from "@/content-blocks";
 
 const blockMap = {
@@ -40,6 +41,7 @@ const blockMap = {
   video: Video,
   downloadList: DownloadList,
   investigationGrid: GridBlock,
+  iframe: Embed,
 };
 
 export default function ContentBlockFactory({ type, data, pageId }) {
