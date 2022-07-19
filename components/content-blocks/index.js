@@ -5,6 +5,7 @@ import Link from "./Link";
 import ComplexTable from "./ComplexTable";
 import Contact from "./Contact";
 import ContactStaff from "./ContactStaff";
+import Embed from "./Embed";
 import Share from "./ShareBlock";
 import AccordionGroup from "./AccordionGroup";
 import GridBlock from "./GridBlock";
@@ -23,6 +24,7 @@ export {
   ComplexTable,
   Contact,
   ContactStaff,
+  Embed,
   Share,
   AccordionGroup,
   GridBlock,
