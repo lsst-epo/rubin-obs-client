@@ -29,7 +29,7 @@ export const Title = styled.div`
     display: none;
     flex-shrink: 0;
 
-    ${respond(`display: block;`, tokens.BREAK_PHABLET)}
+    ${respond(`display: flex;`, tokens.BREAK_PHABLET)}
   }
 `;
 

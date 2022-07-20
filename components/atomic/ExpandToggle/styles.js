@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Button = styled.button`
+  display: flex;
   color: var(--turquoise85);
   transition: color 0.2s;
 

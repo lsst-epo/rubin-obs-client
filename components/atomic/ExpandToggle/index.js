@@ -17,7 +17,7 @@ export default function ExpandToggle({
       aria-hidden={isHidden}
       {...buttonProps}
     >
-      <ExpandCollapse isOpen={isOpen} />
+      <ExpandCollapse className="expand-collapse" isOpen={isOpen} />
     </Styled.Button>
   );
 }
