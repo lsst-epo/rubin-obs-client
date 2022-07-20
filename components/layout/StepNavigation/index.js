@@ -1,4 +1,6 @@
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 import ExpandToggle from "@/components/atomic/ExpandToggle";
 import useToggle from "@/hooks/useToggle";
 import { tokens } from "@/styles/globalStyles";
@@ -25,13 +27,18 @@ export default function StepNavigation({
   columns = 2,
 }) {
   const [isOpen, onToggle, setIsOpen] = useToggle(!expandable);
+  const [isBreakpoint, setIsBreakpoint] = useState(false);
 
   const { ref } = useResizeObserver({
     onResize: ({ width }) => {
-      if (width >= BREAKPOINT) {
-        setIsOpen(true);
-      }
+      setIsBreakpoint(width >= BREAKPOINT);
     },
+  });
+
+  useEffect(() => {
+    if (isBreakpoint) {
+      setIsOpen(true);
+    }
   });
 
   if (!pages?.length) return null;
@@ -41,7 +48,9 @@ export default function StepNavigation({
       width="regular"
       bgColor="orange02"
       paddingSize="medium"
-      className="l-mar-bottom-large"
+      className={classNames({
+        "l-mar-bottom-medium": isBreakpoint,
+      })}
     >
       <Styled.Wrapper ref={ref}>
         <Styled.Title>
