@@ -99,8 +99,7 @@ export default function Page({
   }
 
   const isInvestigationChild = investigation?.landingPage?.[0]?.uri !== uri;
-  const showGuideNavigation = showGuideNav && parent?.children;
-  const showSiblingNav = investigation && siblings && isInvestigationChild;
+  const showSiblingNav = parent?.children && showGuideNav;
   const shouldOverlapHero = !!hero?.length && overlapHero;
 
   return (
@@ -110,7 +109,7 @@ export default function Page({
           <Breadcrumbs breadcrumbs={[...breadcrumbs, pageLink]} />
         )}
         {investigation && <InvestigationHero investigation={investigation} />}
-        {showGuideNavigation && (
+        {showSiblingNav && (
           <GuideNavigation
             title={parent.title}
             pages={parent.children}
