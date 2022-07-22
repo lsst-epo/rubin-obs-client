@@ -3,14 +3,16 @@ import styled, { css } from "styled-components";
 
 // TODO: Add these to the color tokens after auth branch is merged in
 const colors = {
-  blue: "#C7D4F4",
-  green: "#D7E6CF",
-  orange: "#FFEDD9",
-  paleOrange: "#FFF8F0",
+  none: tokens.neutral10,
+  blue: tokens.blue20,
+  green: tokens.green05,
+  orange: tokens.orange10,
+  paleOrange: tokens.orange04,
 };
 
 // a11y link colors
 const linkColors = {
+  none: tokens.turquoise80,
   blue: tokens.turquoise90,
   green: tokens.turquoise90,
   orange: tokens.turquoise80,
