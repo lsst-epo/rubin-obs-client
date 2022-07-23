@@ -42,7 +42,7 @@ export default function InvestigationHero({ investigation }) {
 InvestigationHero.propTypes = {
   investigation: PropTypes.shape({
     title: PropTypes.string,
-    duration: PropTypes.duration,
+    duration: PropTypes.string,
     externalUrl: PropTypes.string,
     isActive: PropTypes.bool,
     landingPage: PropTypes.arrayOf(
