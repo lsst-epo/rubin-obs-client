@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { useAuthenticationContext } from "@/contexts/Authentication";
 import { Button } from "@/components/atomic";
-import { Error, FormField, Input, Password } from "@/components/form";
+import { Error, FormField, Input, PasswordField } from "@/components/form";
 import * as Styled from "./styles";
 import AuthModal from "../../AuthModal";
 
@@ -91,19 +91,7 @@ export default function RegisterForm({ onCancel }) {
             {...register("lastName")}
           />
         </FormField>
-        <FormField
-          htmlFor="createPassword"
-          label="form.create_password"
-          description={t("form.create_password_instructions")}
-        >
-          <Password
-            id="createPassword"
-            pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
-            autoComplete="new-password"
-            required
-            {...register("password")}
-          />
-        </FormField>
+        <PasswordField {...register("password")} />
         <Styled.FormButtons>
           <Button isInactive={!isDirty} disabled={isSubmitting}>
             {isSubmitting ? t("form.submitting") : t("register.submit_button")}
