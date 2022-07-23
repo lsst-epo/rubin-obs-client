@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { useAuthenticationContext } from "@/contexts/Authentication";
 import useAuthModal from "@/hooks/useAuthModal";
 import { Button } from "@/components/atomic";
-import { Password, FormField, Error } from "@/components/form";
+import { PasswordField, Error } from "@/components/form";
 import AuthModal from "../AuthModal";
 import * as Styled from "./styles";
 
@@ -87,19 +87,7 @@ export default function SetPasswordModal() {
             onSubmit={handleSubmit(onSubmit)}
             aria-describedby="setPasswordFormError"
           >
-            <FormField
-              htmlFor="createPassword"
-              label="form.create_password"
-              description={t("form.create_password_instructions")}
-            >
-              <Password
-                id="createPassword"
-                pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
-                autoComplete="new-password"
-                required
-                {...register("password")}
-              />
-            </FormField>
+            <PasswordField {...register("password")} />
             <Styled.FormButtons>
               <Button isInactive={!isDirty} disabled={isSubmitting}>
                 {isSubmitting ? t("form.submitting") : t("set_password.submit")}

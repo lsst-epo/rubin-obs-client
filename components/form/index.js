@@ -4,3 +4,4 @@ export { default as FormButtons } from "./FormButtons";
 export { default as Error } from "./Error";
 export { default as Select } from "./Select";
 export { default as Switch } from "./Switch";
+export { default as PasswordField } from "./AuthModalPasswordField";
