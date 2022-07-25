@@ -93,7 +93,7 @@ module.exports = {
     "spaced-comment": 2,
     "unused-imports/no-unused-imports": 2,
   },
-  plugins: ["jsx-a11y", "react", "react-hooks", "unused-imports"],
+  plugins: ["jsx-a11y", "react", "react-hooks", "unused-imports", "testcafe"],
   extends: [
     "standard",
     "next",
@@ -102,5 +102,6 @@ module.exports = {
     "plugin:react/recommended",
     "plugin:prettier/recommended",
     "plugin:import/errors",
+    "plugin:testcafe/recommended",
   ],
 };
