@@ -15,6 +15,7 @@ import SlideBlock from "./SlideBlock";
 import TableGroup from "./TableGroup";
 import Video from "./Video";
 import DownloadList from "./DownloadList";
+import Game from "./Game";
 
 export {
   Callout,
@@ -25,6 +26,7 @@ export {
   Contact,
   ContactStaff,
   Embed,
+  Game,
   Share,
   AccordionGroup,
   GridBlock,
