@@ -6,6 +6,5 @@ module.exports = {
     "firefox:headless",
     "chrome:emulation:device=iphone X",
     "safari",
-  ],
-  "color": true
+  ]
 }
