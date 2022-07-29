@@ -93,7 +93,14 @@ module.exports = {
     "spaced-comment": 2,
     "unused-imports/no-unused-imports": 2,
   },
-  plugins: ["jsx-a11y", "react", "react-hooks", "unused-imports", "testcafe"],
+  plugins: [
+    "jsx-a11y",
+    "react",
+    "react-hooks",
+    "unused-imports",
+    "testcafe",
+    "testing-library",
+  ],
   extends: [
     "standard",
     "next",
@@ -102,6 +109,17 @@ module.exports = {
     "plugin:react/recommended",
     "plugin:prettier/recommended",
     "plugin:import/errors",
-    "plugin:testcafe/recommended",
+  ],
+  overrides: [
+    // Only uses Testing Library lint rules in test files
+    {
+      files: ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)"],
+      extends: ["plugin:testing-library/react"],
+    },
+    // Only uses Test Cafe lint rules in test files
+    {
+      files: ["tests/**/*.[jt]s?(x)"],
+      extends: ["plugin:testcafe/recommended"],
+    },
   ],
 };
