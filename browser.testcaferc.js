@@ -1,10 +1,11 @@
-// const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
-
 module.exports = {
+  src: "e2e/browser-tests/**/*.js",
+  baseUrl: "https://rubinobs.org",
   browsers: [
     "chrome:headless",
     "firefox:headless",
     "chrome:emulation:device=iphone X",
     "safari",
+    "edge",
   ]
 }
