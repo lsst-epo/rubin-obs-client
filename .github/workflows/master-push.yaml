@@ -1,4 +1,4 @@
-name: 'Build and deploy Rubin Obs Client to Int GAE'
+name: 'Deploy to Int'
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-push-deploy:
-    name: 'Build, Publish, and Deploy'
+    name: 'Build and Deploy to Integration'
     runs-on: ubuntu-latest
 
     # Checkout the repository to the GitHub Actions runner

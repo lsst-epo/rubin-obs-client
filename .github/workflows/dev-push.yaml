@@ -1,4 +1,4 @@
-name: 'Rubin Obs Client to Dev GAE'
+name: 'Deploy to Dev'
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-push-deploy:
-    name: 'Build, Publish, and Deploy'
+    name: 'Build and Deploy to Development'
     runs-on: ubuntu-latest
 
     # Checkout the repository to the GitHub Actions runner
