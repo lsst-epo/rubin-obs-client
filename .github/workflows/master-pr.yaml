@@ -1,4 +1,4 @@
-name: 'Rubin Obs Client PR preview to Int GAE'
+name: 'PR preview to Int'
 
 on:
   pull_request:
@@ -12,7 +12,7 @@ on:
 
 jobs:
   build-push-deploy:
-    name: 'Build, Publish, and Deploy'
+    name: 'Build and Deploy PR preview to Integration'
     runs-on: ubuntu-latest
     if: ${{ github.event.action != 'closed'}}
 
