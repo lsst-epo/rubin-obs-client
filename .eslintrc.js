@@ -15,6 +15,7 @@ module.exports = {
   },
   env: {
     browser: true,
+    "jest/globals": true,
   },
   settings: {
     react: {
@@ -99,6 +100,7 @@ module.exports = {
     "react-hooks",
     "unused-imports",
     "testcafe",
+    "jest",
     "testing-library",
   ],
   extends: [
@@ -118,7 +120,7 @@ module.exports = {
     },
     // Only uses Test Cafe lint rules in test files
     {
-      files: ["tests/**/*.[jt]s?(x)"],
+      files: ["e2e/**/*.[jt]s?(x)"],
       extends: ["plugin:testcafe/recommended"],
     },
   ],

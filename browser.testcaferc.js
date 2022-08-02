@@ -7,5 +7,5 @@ module.exports = {
     "chrome:emulation:device=iphone X",
     "safari",
     "edge",
-  ]
-}
+  ],
+};

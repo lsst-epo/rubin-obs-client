@@ -33,6 +33,7 @@ export default function SSOButton({
       isBlock
       onClick={handleClick}
       {...buttonProps}
+      data-testid="sso-button"
     >
       {pending ? t("sign_in.redirecting", { context: service }) : children}
     </Button>
