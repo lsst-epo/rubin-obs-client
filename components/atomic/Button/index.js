@@ -26,6 +26,7 @@ const Button = forwardRef(
         $hasIcon={!!icon}
         aria-disabled={isInactive || undefined}
         className={className}
+        data-testid="button"
         {...buttonProps}
       >
         {icon && (
