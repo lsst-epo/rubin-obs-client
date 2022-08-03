@@ -4,7 +4,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/castiron/rubin"
+    "url": "https://github.com/lsst-epo/rubin-obs-client"
   },
   "scripts": {
     "dev": "npm-run-all --parallel dev:*",
@@ -121,5 +121,9 @@
     "stylelint-config-recess-order": "^3.0.0",
     "stylelint-config-standard-scss": "^4.0.0",
     "testcafe": "^1.20.0"
+  },
+  "resolutions": {
+    "shell-quote": "^1.7.3",
+    "minimist": "^1.2.6"
   }
 }
