@@ -127,6 +127,7 @@
     "minimist": "^1.2.6",
     "ansi-regex": "^6.0.1",
     "node-fetch": "^2.6.7",
-    "trim-newlines": "^3.0.1"
+    "trim-newlines": "^3.0.1",
+    "lodash": "^4.17.21"
   }
 }
