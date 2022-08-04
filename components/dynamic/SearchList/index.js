@@ -29,16 +29,15 @@ const SearchList = ({
   const localeInfo = useGlobalData("localeInfo");
   const rootPages = useGlobalData("rootPages");
   const lang = localeInfo?.language || "en-US";
-
   const makePretitle = (entry) => {
     if (entry.eventType) {
-      return t(`filters.${entry.eventType[0].slug}`);
+      return entry.eventType[0].title;
     }
     if (entry.postType) {
-      return t(`filters.${entry.postType[0].slug}`);
+      return entry.postType[0].title;
     }
     if (entry.jobPosition) {
-      return t(`jobs.jobs`) + " - " + t(`filters.${entry.jobPosition[0].slug}`);
+      return t(`jobs.jobs`) + " - " + `${entry.jobPosition[0].title}`;
     }
 
     const pageLink = {

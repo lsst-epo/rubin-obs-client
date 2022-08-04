@@ -106,7 +106,7 @@ const FilterBar = ({ filterType, setLiveRegionMessage }) => {
                       url={asPath}
                       params={{ filter: item.id }}
                     >
-                      <T i18nKey={`filters.${item.slug}`} />
+                      {item.title}
                     </MixedLink>
                   </li>
                 );
@@ -134,7 +134,7 @@ const FilterBar = ({ filterType, setLiveRegionMessage }) => {
                     url={asPath}
                     params={{ sort: item.slug }}
                   >
-                    <T i18nKey={`filters.${item.slug}`} />
+                    {item.title}
                   </MixedLink>
                 </li>
               );

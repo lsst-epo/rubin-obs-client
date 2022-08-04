@@ -60,30 +60,13 @@
       "confirm": "Got it!"
     },
     "filters": {
-      "ascending": "Ascending",
-      "descending": "Descending",
       "all": "All",
       "pages": "Pages",
       "events": "Events",
       "gallery-items": "Gallery Items",
       "jobs": "Jobs",
       "news": "News",
-      "staff-profiles": "Staff Profiles",
-      "slideshows": "Slideshows",
-      "image": "Image",
-      "video": "Video",
-      "3d": "3D Files",
-      "non-scientific-staff": "Non-Scientific",
-      "scientific-staff": "Scientific",
-      "press-release": "Press Release",
-      "news-post": "News Post",
-      "administrative": "Administrative",
-      "engineering": "Engineering",
-      "science": "Science",
-      "technical": "Technical",
-      "special-event": "Special Event",
-      "scientific-event": "Scientific Event",
-      "press-event": "Press Event"
+      "staff-profiles": "Staff Profiles"
     },
     "alert": {
       "solar-systems-found": "Solar systems found",
