@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Password, FormField } from "@/components/form";
+import { forwardRef } from "react";
 
 const PATTERN = [
   "^(?=(.*[A-Za-z]){1,})(?=(.*[0-9]){1,})(?=(.*[!",
@@ -16,7 +17,7 @@ const PATTERN = [
   "^_`{}|~-]){1,}).{8,}$",
 ].join("");
 
-export default function PasswordField(props) {
+function PasswordField(props, ref) {
   const { t } = useTranslation();
   return (
     <FormField
@@ -25,6 +26,7 @@ export default function PasswordField(props) {
       description={t("form.create_password_instructions")}
     >
       <Password
+        ref={ref}
         id="createPassword"
         pattern={PATTERN}
         autoComplete="new-password"
@@ -34,3 +36,5 @@ export default function PasswordField(props) {
     </FormField>
   );
 }
+
+export default forwardRef(PasswordField);
