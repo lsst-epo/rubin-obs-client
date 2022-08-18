@@ -50,7 +50,7 @@ const StyledEmbed = styled.iframe`
   height: 100vh;
 `;
 
-Embed.displayName = "ContentBlock.Text";
+Embed.displayName = "ContentBlock.Embed";
 
 Embed.propTypes = {
   embed: PropTypes.object,
