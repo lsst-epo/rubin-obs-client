@@ -4,7 +4,7 @@ import striptags from "striptags";
 import { useTranslation } from "react-i18next";
 import Container from "@/layout/Container";
 import Carousel from "@/components/layout/Carousel";
-import Tile from "@/atomic/Tile";
+import { SlideTile } from "@/components/atomic";
 import {
   makeTruncatedString,
   normalizeItemData,
@@ -100,7 +100,7 @@ const SlideBlock = ({
               typeHandle,
               uri,
             }) => (
-              <Tile
+              <SlideTile
                 key={id}
                 image={image?.[0]}
                 isFeature={true}
