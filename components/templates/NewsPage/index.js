@@ -158,7 +158,7 @@ export default function NewsPage({
                 } else if (a.image?.length > 0) {
                   manualMedia = true;
                   return (
-                    <a href={a.image[0].url} key={i}>
+                    <a href={a.image[0].url} download key={i}>
                       <ResponsiveImage image={a.image[0]} />
                     </a>
                   );
@@ -224,7 +224,7 @@ const Subtitle = styled.div`
 
 const Aside = styled.aside`
   padding: 100px 0;
-  ${respond(`display: none;`)}
+  ${respond(`padding: 30px 0 0 0;`)}
 
   h3 {
     position: relative;
