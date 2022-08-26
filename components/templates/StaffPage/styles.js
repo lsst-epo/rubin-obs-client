@@ -58,6 +58,11 @@ export const SectionHeading = styled.h2`
   border-block-end: 10px solid var(--turquoise50);
 `;
 
+export const TradingCardLink = styled.a`
+  display: block;
+  max-width: 270px;
+`;
+
 export const TagList = styled.ul``;
 
 export const Tag = styled.li`
