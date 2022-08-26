@@ -69,7 +69,7 @@ export default function Header({ navItems, userProfilePage }) {
         <SearchBar />
       </div>
       <div className="c-global-header__toggle-block">
-        {!mobileNavActive && <LanguageSelect />}
+        {!mobileNavActive && <LanguageSelect id="langSelect" />}
       </div>
       <div className="c-global-header__user-nav-block">
         <UserNavigation

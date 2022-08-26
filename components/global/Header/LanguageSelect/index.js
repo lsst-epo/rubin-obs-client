@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import PropTypes from "prop-types";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 import { useGlobalData } from "@/lib/utils";
@@ -6,7 +7,7 @@ import * as Styled from "./styles";
 
 const CRAFT_HOMEPAGE_URI = "__home__";
 
-export default function LanguageSelect() {
+export default function LanguageSelect({ id }) {
   const router = useRouter();
   const { t } = useTranslation();
   const {
@@ -51,13 +52,13 @@ export default function LanguageSelect() {
   return (
     <Styled.Fieldset>
       <legend className="a-hidden">{t("localize-content")}</legend>
-      <Styled.Label htmlFor="langSelect" $disabled={loading}>
+      <Styled.Label htmlFor={id} $disabled={loading}>
         <Styled.MobileLabelText role="presentation">
           {t("language-select-label")}
         </Styled.MobileLabelText>
         <span className="a-hidden">{t("espanol-site-name")}</span>
         <Styled.Switch
-          id="langSelect"
+          id={id}
           checked={toEs}
           aria-disabled={loading}
           onClick={handleClick}
@@ -68,3 +69,7 @@ export default function LanguageSelect() {
 }
 
 LanguageSelect.displayName = "Global.LanguageSelect";
+
+LanguageSelect.propTypes = {
+  id: PropTypes.string.isRequired,
+};
