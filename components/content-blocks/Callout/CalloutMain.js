@@ -48,7 +48,11 @@ export default function CalloutMain({ callout }) {
         ))}
       </Header>
       {calloutImage && (
-        <StyledImage image={calloutImage} $padImage={padImage} />
+        <StyledImage
+          role="presentation"
+          image={calloutImage}
+          $padImage={padImage}
+        />
       )}
       {dynamicComponent === "alertStream" && (
         <TempList dynamicComponent={dynamicComponent} />

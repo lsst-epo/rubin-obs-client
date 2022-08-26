@@ -11,7 +11,7 @@ export default function Hero({ data, className, children }) {
 
   return (
     <StyledHero className={className}>
-      <StyledImage image={imageData} alt="" />
+      <StyledImage role="presentation" image={imageData} alt="" />
       {children}
     </StyledHero>
   );

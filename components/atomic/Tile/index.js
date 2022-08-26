@@ -56,9 +56,14 @@ const Tile = ({
         {finalImage && (
           <div className="image">
             {ratio ? (
-              <ResponsiveImage ratio={ratio} image={finalImage} alt="" />
+              <ResponsiveImage
+                role="presentation"
+                ratio={ratio}
+                image={finalImage}
+                alt=""
+              />
             ) : (
-              <Image image={finalImage} alt="" />
+              <Image role="presentation" image={finalImage} alt="" />
             )}
             {isVideo && (
               <Styled.PlayButton>
