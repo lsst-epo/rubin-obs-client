@@ -60,7 +60,7 @@ export default function Navigation({
       <ul className="c-nav-list__list">
         {theme === "mobile" && (
           <li className="c-nav-list__lang">
-            <LanguageSelect />
+            <LanguageSelect id="mobileLangSelect" />
           </li>
         )}
         {items.map(({ id, title, uri, children }) => {
