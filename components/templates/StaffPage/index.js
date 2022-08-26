@@ -78,7 +78,9 @@ export default function StaffPage({
                 <Styled.SectionHeading>
                   {t("staff.trading-card")}
                 </Styled.SectionHeading>
-                <Image image={tradingCard[0]} />
+                <Styled.TradingCardLink href={tradingCard[0].url3x} download>
+                  <Image image={tradingCard[0]} />
+                </Styled.TradingCardLink>
               </section>
             )}
             {!!tags?.length && (

@@ -63,6 +63,7 @@ export default function SlideshowPage({
               <SlideshowFooter>
                 <Buttonish
                   url={item.image?.[0]?.url}
+                  download
                   text={t(`gallery.download-image`)}
                 />
               </SlideshowFooter>
