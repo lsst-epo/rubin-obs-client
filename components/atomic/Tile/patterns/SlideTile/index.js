@@ -53,9 +53,9 @@ const SlideTile = ({
         {finalImage && (
           <div className="image">
             {ratio ? (
-              <ResponsiveImage ratio={ratio} image={finalImage} alt="" />
+              <ResponsiveImage ratio={ratio} image={finalImage} />
             ) : (
-              <Image image={finalImage} alt="" />
+              <Image image={finalImage} />
             )}
             {isVideo && (
               <Styled.PlayButton>

@@ -60,10 +60,9 @@ const Tile = ({
                 role="presentation"
                 ratio={ratio}
                 image={finalImage}
-                alt=""
               />
             ) : (
-              <Image role="presentation" image={finalImage} alt="" />
+              <Image role="presentation" image={finalImage} />
             )}
             {isVideo && (
               <Styled.PlayButton>
