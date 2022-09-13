@@ -68,6 +68,7 @@ $_link-gap: 14px;
 
   &__lang {
     width: var(--nav-width);
+    max-width: 53vw;
     padding-left: functions.header(nav-link-padding-lateral) * 1.5;
     padding-right: functions.header(nav-link-padding-lateral);
     background-color: functions.palette(turquoise60);
@@ -108,6 +109,7 @@ $_link-gap: 14px;
       grid-template: "icon text" auto / 24px auto;
       gap: $_link-gap;
       width: var(--nav-width);
+      max-width: 53vw;
     }
   }
 
