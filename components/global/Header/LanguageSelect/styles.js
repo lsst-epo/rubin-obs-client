@@ -21,7 +21,7 @@ export const Label = styled.label`
 
 export const MobileLabelText = styled.span`
   display: none;
-  padding-inline-end: 1.75em;
+  padding-inline-end: min(5vw, 1.75em);
 
   ${respond(`display: block;`, BREAK_HEADER_LAYOUT)}
 `;
