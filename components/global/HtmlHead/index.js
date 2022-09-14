@@ -52,6 +52,24 @@ export default function HtmlHead({
         href="/favicon-16x16.png"
       />
       <link rel="manifest" href="/site.webmanifest" />
+      <link
+        rel="alternate"
+        type="application/rss+xml"
+        title={`${siteTitle} RSS Feed`}
+        href="/feed/feed.xml"
+      />
+      <link
+        rel="alternate"
+        type="application/atom+xml"
+        title={`${siteTitle} Atom Feed`}
+        href="/feed/atom.xml"
+      />
+      <link
+        rel="alternate"
+        type="application/json"
+        title={`${siteTitle} JSON Feed`}
+        href="/feed/feed.json"
+      />
       {children}
     </Head>
   );
