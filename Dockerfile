@@ -9,6 +9,7 @@ RUN apk add --no-cache libc6-compat git
 RUN yarn install --frozen-lockfile
 
 ARG NEXT_PUBLIC_API_URL=https://api.rubinobs.org/api
+ARG EDC_LOGGER_API_URL=https://us-central1-skyviewer.cloudfunctions.net/edc-logger
 ARG NEXT_PUBLIC_BASE_URL=https://rubinobs.org
 ARG NEXT_PUBLIC_GOOGLE_APP_ID=688095955960-t0fpaj4ec3gh5vsr9lhg8govapk2oeo9.apps.googleusercontent.com
 ARG NEXT_PUBLIC_PAGEPROOFER_ID=false
