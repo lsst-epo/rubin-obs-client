@@ -25,6 +25,7 @@ import siteInfoShape from "@/shapes/siteInfo";
 import footerContentShape from "@/shapes/footerContent";
 import rootPagesShape from "@/shapes/rootPages";
 import { updateI18n } from "@/lib/i18n";
+import { setEdcLog } from "@/lib/edc-log";
 
 const CRAFT_HOMEPAGE_URI = "__home__";
 
@@ -70,6 +71,13 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params: { uriSegments }, previewData }) {
+  const runId = Date.now().toString();
+  const uriSegmentsStr = uriSegments.join(", ");
+  await setEdcLog(
+    runId,
+    "Starting new client build for " + uriSegmentsStr,
+    "BUILD_START"
+  );
   const site = getSiteString(uriSegments);
   const uri =
     uriSegments && uriSegments.length
@@ -105,6 +113,18 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
 
   const currentId = entryData?.id || entryData?.entry?.id;
 
+  // Handle 404 if there is no data
+  if (!currentId) {
+    await setEdcLog(
+      runId,
+      "404 encountered building for " + uriSegmentsStr,
+      "BUILD_ERROR_404"
+    );
+    return {
+      notFound: true,
+    };
+  }
+
   const breadcrumbs = await getBreadcrumbs(
     currentId,
     site,
@@ -128,6 +148,11 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
 
   // Handle redirect if the entry has one
   if (entryData?.typeHandle === "redirectPage" && entryData?.linkTo?.url) {
+    await setEdcLog(
+      runId,
+      "Redirect build done for " + uriSegmentsStr,
+      "BUILD_REDIRECT"
+    );
     return {
       redirect: {
         destination: entryData.linkTo.url,
@@ -136,13 +161,11 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
     };
   }
 
-  // Handle 404 if there is no data
-  if (!currentId) {
-    return {
-      notFound: true,
-    };
-  }
-
+  await setEdcLog(
+    runId,
+    "Done building for " + uriSegmentsStr,
+    "BUILD_COMPLETE"
+  );
   return {
     props: {
       data: entryData,
