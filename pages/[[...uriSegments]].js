@@ -25,6 +25,7 @@ import siteInfoShape from "@/shapes/siteInfo";
 import footerContentShape from "@/shapes/footerContent";
 import rootPagesShape from "@/shapes/rootPages";
 import { updateI18n } from "@/lib/i18n";
+import generateFeed from "@/lib/api/feed";
 
 const CRAFT_HOMEPAGE_URI = "__home__";
 
@@ -141,6 +142,10 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
     return {
       notFound: true,
     };
+  }
+
+  if (uri === CRAFT_HOMEPAGE_URI) {
+    await generateFeed({ siteInfo: globalData.siteInfo });
   }
 
   return {
