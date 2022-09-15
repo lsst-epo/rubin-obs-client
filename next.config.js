@@ -1,5 +1,4 @@
 const path = require("path");
-const nextBuildId = require("next-build-id");
 
 let API_URL;
 
@@ -15,9 +14,6 @@ if (
 }
 
 module.exports = {
-  async generateBuildId() {
-    return nextBuildId({ dir: __dirname });
-  },
   async rewrites() {
     return [
       {
