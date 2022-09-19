@@ -1,11 +1,18 @@
-import { generateFeed, getStaffEntryData, writeFeedsToDisk } from "@/api/feeds";
+import {
+  generateFeed,
+  getStaffEntryData,
+  getNewsEntryData,
+  writeFeedsToDisk,
+} from "@/api/feeds";
 
-const SUPPORTED_TYPES = ["staff"];
+const SUPPORTED_TYPES = ["staff", "news"];
 
 function getFetchMethodForType(type) {
   switch (type) {
     case "staff":
       return getStaffEntryData;
+    case "news":
+      return getNewsEntryData;
     default:
       throw new Error(`No fetch method exists for entry type "${type}"`);
   }
@@ -22,9 +29,13 @@ async function handler(req, res) {
   try {
     const fetchMethod = getFetchMethodForType(entryType);
     const entryData = await fetchMethod();
-    const feed = await generateFeed({ entries: entryData?.entries });
+    const publicPath = `feeds/${entryType}/`;
+    const feed = await generateFeed({
+      entries: entryData?.entries,
+      publicPath,
+    });
 
-    const writePath = `./public/feeds/${entryType}/`;
+    const writePath = `./public/${publicPath}`;
     writeFeedsToDisk({ path: writePath, feed }).then(() => {
       res.status(200).json({
         message: `Feeds for entry type "${entryType}" have been successfully written to ${writePath}.`,
