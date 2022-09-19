@@ -1,34 +1,20 @@
 import {
+  supportedTypes,
+  getEntries,
   generateFeed,
-  getStaffEntryData,
-  getNewsEntryData,
   writeFeedsToDisk,
 } from "@/api/feeds";
-
-const SUPPORTED_TYPES = ["staff", "news"];
-
-function getFetchMethodForType(type) {
-  switch (type) {
-    case "staff":
-      return getStaffEntryData;
-    case "news":
-      return getNewsEntryData;
-    default:
-      throw new Error(`No fetch method exists for entry type "${type}"`);
-  }
-}
 
 async function handler(req, res) {
   const { entryType } = req.query;
 
-  if (!SUPPORTED_TYPES.includes(entryType))
+  if (!supportedTypes.includes(entryType))
     return res.status(501).json({
       error: `Feed generation for entry type "${entryType}" is not currently supported.`,
     });
 
   try {
-    const fetchMethod = getFetchMethodForType(entryType);
-    const entryData = await fetchMethod();
+    const entryData = await getEntries([entryType]);
     const publicPath = `feeds/${entryType}/`;
     const feed = await generateFeed({
       entries: entryData?.entries,
