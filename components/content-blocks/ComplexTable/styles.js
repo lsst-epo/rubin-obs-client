@@ -45,6 +45,8 @@ export const TableCell = styled.td`
       background-color: ${$background || "var(--ComplexTable-cell-bg)"};
       color: ${$background ? "var(--black)" : "inherit"};
     `};
+  ${({ $hasFlexibleCellWidth }) =>
+    $hasFlexibleCellWidth && `white-space: nowrap;`}
 
   min-width: ${fluidScale("180px", "110px")};
   border: var(--ComplexTable-border);
