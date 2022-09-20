@@ -1,5 +1,6 @@
 import {
   supportedTypes,
+  formattedTypesList,
   getEntries,
   generateFeed,
   writeFeedsToDisk,
@@ -10,7 +11,7 @@ async function handler(req, res) {
 
   if (!supportedTypes.includes(entryType))
     return res.status(501).json({
-      error: `Feed generation for entry type "${entryType}" is not currently supported.`,
+      error: `Feed generation for entry type "${entryType}" is not currently supported. Try one of the following: ${formattedTypesList}.`,
     });
 
   try {
