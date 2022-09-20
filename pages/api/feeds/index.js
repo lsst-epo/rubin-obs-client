@@ -1,11 +1,10 @@
 import {
   supportedTypes,
+  formattedTypesList,
   getEntries,
   generateFeed,
   writeFeedsToDisk,
 } from "@/api/feeds";
-
-const formattedTypeList = supportedTypes.map((t) => `"${t}"`).join(", ");
 
 async function handler(req, res) {
   try {
@@ -19,13 +18,13 @@ async function handler(req, res) {
     const writePath = `./public/${publicPath}`;
     writeFeedsToDisk({ path: writePath, feed }).then(() => {
       res.status(200).json({
-        message: `Index feed for entry types ${formattedTypeList} has been successfully written to ${writePath}.`,
+        message: `Index feed for entry types ${formattedTypesList} has been successfully written to ${writePath}.`,
       });
     });
   } catch (error) {
     console.error(error);
     return res.status(500).json({
-      error: `Failed to generate index feed for entry types "${formattedTypeList}".`,
+      error: `Failed to generate index feed for entry types "${formattedTypesList}".`,
     });
   }
 }
