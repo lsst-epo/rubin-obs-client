@@ -5,6 +5,15 @@ import {
   writeFeedsToDisk,
 } from "@/api/feeds";
 
+function titleFromEntryType(entryType) {
+  const titleMap = {
+    staffProfiles: "Staff Profiles",
+    news: "News",
+    events: "Events"
+  };
+  return titleMap[entryType];
+}
+
 async function handler(req, res) {
   const { entryType } = req.query;
 
@@ -19,6 +28,7 @@ async function handler(req, res) {
     const feed = await generateFeed({
       entries: entryData?.entries,
       publicPath,
+      feedTitle: titleFromEntryType(entryType)
     });
 
     const writePath = `./public/${publicPath}`;
