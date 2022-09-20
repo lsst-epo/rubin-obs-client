@@ -164,7 +164,7 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
       globalData,
       breadcrumbs,
     },
-    revalidate: 30,
+    revalidate: 300,
   };
 }
 
