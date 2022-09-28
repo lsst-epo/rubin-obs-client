@@ -137,7 +137,10 @@
       "1080p": "1080p",
       "720p": "720p",
       "480p": "480p",
-      "320p": "320p"
+      "320p": "320p",
+      "results": "Results",
+      "loading": "Loading",
+      "error": "There was an error fetching the gallery contents. Try reloading the page or clearing the search filters."
     },
     "jobs": {
       "jobs": "Jobs",

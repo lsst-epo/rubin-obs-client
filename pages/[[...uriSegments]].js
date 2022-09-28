@@ -3,7 +3,7 @@ import { getGlobalData } from "@/api/global";
 import { getAllEntries, getEntrySectionByUri } from "@/api/entries";
 import { getEntryDataByUri } from "@/api/entry";
 import { getBreadcrumbs } from "@/api/pages";
-import { getGalleryItemDataByUri } from "@/lib/api/gallery-items";
+import { getGalleryItemDataByUri } from "@/lib/api/gallery";
 import { getGlossaryTermDataByUri } from "@/lib/api/glossary-terms";
 import { getSlideshowDataByUri } from "@/api/slideshows";
 import { getSiteString } from "@/lib/utils";
