@@ -44,6 +44,7 @@ export default function Page({
     childNavigation,
     childNavigationTitle,
     childNavigationDescription,
+    gallery,
   },
   breadcrumbs,
   children,
@@ -175,6 +176,7 @@ export default function Page({
               <DynamicComponentFactory
                 componentType={dynamicComponent}
                 pageId={id}
+                fallbackData={gallery}
               />
             )}
             {children}

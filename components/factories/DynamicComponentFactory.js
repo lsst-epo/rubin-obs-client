@@ -30,10 +30,14 @@ const componentMap = {
   glossaryTerms: GlossaryList,
 };
 
-export default function DynamicComponentFactory({ componentType, pageId }) {
+export default function DynamicComponentFactory({
+  componentType,
+  pageId,
+  ...props
+}) {
   const Component = componentMap[componentType];
   if (!Component) return null;
-  return <Component pageId={pageId} component={componentType} />;
+  return <Component pageId={pageId} component={componentType} {...props} />;
 }
 
 DynamicComponentFactory.propTypes = {
