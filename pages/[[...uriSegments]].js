@@ -72,17 +72,16 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params: { uriSegments }, previewData }) {
   const runId = Date.now().toString();
-  const uriSegmentsStr = uriSegments.join(", ");
-  await setEdcLog(
-    runId,
-    "Starting new client build for " + uriSegmentsStr,
-    "BUILD_START"
-  );
   const site = getSiteString(uriSegments);
   const uri =
     uriSegments && uriSegments.length
       ? uriSegments.join("/")
       : CRAFT_HOMEPAGE_URI;
+  await setEdcLog(
+    runId,
+    "Starting new client build for " + site,
+    "BUILD_START"
+  );
 
   const data = await getGlobalData();
   // add _es to property names if site is "es"
@@ -117,7 +116,7 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
   if (!currentId) {
     await setEdcLog(
       runId,
-      "404 encountered building for " + uriSegmentsStr,
+      "404 encountered building for " + uri,
       "BUILD_ERROR_404"
     );
     return {
@@ -148,11 +147,7 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
 
   // Handle redirect if the entry has one
   if (entryData?.typeHandle === "redirectPage" && entryData?.linkTo?.url) {
-    await setEdcLog(
-      runId,
-      "Redirect build done for " + uriSegmentsStr,
-      "BUILD_REDIRECT"
-    );
+    await setEdcLog(runId, "Redirect build done for " + uri, "BUILD_REDIRECT");
     return {
       redirect: {
         destination: entryData.linkTo.url,
@@ -161,11 +156,7 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
     };
   }
 
-  await setEdcLog(
-    runId,
-    "Done building for " + uriSegmentsStr,
-    "BUILD_COMPLETE"
-  );
+  await setEdcLog(runId, "Done building for " + uri, "BUILD_COMPLETE");
   return {
     props: {
       data: entryData,
