@@ -1,11 +1,6 @@
 import classNames from "classnames";
 import imageShape from "@/shapes/image";
 
-const position = (x, y) => {
-  if (!x && !y) return null;
-  return `${x || 50}% ${y || 50}%`;
-};
-
 export default function Image({ image, className, title, ...props }) {
   const { url, url2x, url3x, width, height, altText } = image;
 
@@ -28,10 +23,11 @@ export default function Image({ image, className, title, ...props }) {
       className={classNames({
         [`${className}`]: !!className,
       })}
-      height={height}
       src={url}
       srcSet={getSrcSet(urls)}
       width={width}
+      height={height}
+      loading="lazy"
       {...props}
     />
   );
