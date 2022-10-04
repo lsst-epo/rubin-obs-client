@@ -140,7 +140,17 @@
       "320p": "320p",
       "results": "Results",
       "loading": "Loading",
-      "error": "There was an error fetching the gallery items. Try reloading the page or clearing the search filters."
+      "error": "There was an error fetching the gallery items. Try reloading the page or clearing the search filters.",
+      "metadata": {
+        "credit": "Credit",
+        "location": "Location",
+        "metadataDate": "Metadata Date",
+        "metadataVersion": "Metadata Version",
+        "publisher": "Publisher",
+        "publisherId": "Publisher ID",
+        "dateCreated": "Date Created",
+        "usageTerms": "Usage Terms"
+      }
     },
     "jobs": {
       "jobs": "Trabajos",

@@ -3,7 +3,6 @@ import { getGlobalData } from "@/api/global";
 import { getAllEntries, getEntrySectionByUri } from "@/api/entries";
 import { getEntryDataByUri } from "@/api/entry";
 import { getBreadcrumbs } from "@/api/pages";
-import { getGalleryItemDataByUri } from "@/lib/api/gallery";
 import { getGlossaryTermDataByUri } from "@/lib/api/glossary-terms";
 import { getSlideshowDataByUri } from "@/api/slideshows";
 import { getSiteString } from "@/lib/utils";
@@ -55,7 +54,6 @@ export default function Page({ section, globalData, ...entryProps }) {
 
 async function getEntryData(uri, section, site, previewToken) {
   const dataMap = {
-    galleryItems: getGalleryItemDataByUri,
     slideshows: getSlideshowDataByUri,
     glossaryTerms: getGlossaryTermDataByUri,
   };
@@ -83,24 +81,6 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
     "BUILD_START"
   );
 
-  const data = await getGlobalData();
-  // add _es to property names if site is "es"
-  const isEspanol = site === "es";
-
-  // Beginning of bug fix
-  // .reduce() needs to check for null before attempting to use
-  const globalKey = `globals${isEspanol ? "_es" : ""}`;
-  let globals;
-  if (data[globalKey] === undefined || data[globalKey] === null) {
-    globals = {};
-  } else {
-    globals = data[globalKey].reduce(
-      (obj, item) =>
-        Object.assign(obj, Object.keys(item).length && { [item.handle]: item }),
-      {}
-    );
-  }
-
   const section = await getEntrySectionByUri(uri, site);
 
   const entryData = await getEntryData(
@@ -117,21 +97,7 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
     site,
     previewData?.previewToken
   );
-
-  const globalData = {
-    categories: data?.[`allCategories${isEspanol ? "_es" : ""}`] || [],
-    footerContent: globals?.footer || {},
-    contactForm: globals?.contactForm || {},
-    headerNavItems: data?.[`pageTree${isEspanol ? "_es" : ""}`] || [],
-    rootPages: globals?.rootPageInformation?.customBreadcrumbs || [],
-    siteInfo: globals?.siteInfo || {},
-    localeInfo: {
-      locale: site,
-      language: entryData?.language || entryData?.entry?.language || "",
-      localized: entryData?.localized || entryData?.entry?.localized || [],
-    },
-    userProfilePage: data?.[`userProfilePage${isEspanol ? "_es" : ""}`] || {},
-  };
+  const globalData = await getGlobalData({ site, entryData });
 
   // Handle redirect if the entry has one
   if (entryData?.typeHandle === "redirectPage" && entryData?.linkTo?.url) {
