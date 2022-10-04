@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import { useGlobalData } from "@/lib/utils";
+import { shapeGalleryAssetData } from "@/lib/api/gallery";
 import * as Styled from "./styles";
 
 function template(i, width) {
@@ -24,11 +25,22 @@ function getBrickSizes(limit) {
   return str;
 }
 
-const Tile = ({ image, isVideo, link, title }) => {
+const Tile = ({
+  image: { url, width, height, altText },
+  isVideo,
+  link,
+  title,
+}) => {
   return (
     <Link href={link} passHref>
       <Styled.TileLink aria-label={title}>
-        <Styled.Image loading="lazy" {...image} />
+        <Styled.Image
+          src={url}
+          width={width}
+          height={height}
+          alt={altText}
+          loading="lazy"
+        />
         {isVideo && <Styled.Icon icon="play" />}
       </Styled.TileLink>
     </Link>
@@ -41,8 +53,6 @@ export default function MasonryGrid({ items, limit = 10, isLoading = false }) {
     localeInfo: { language },
   } = useGlobalData();
   const { t } = useTranslation();
-  const titleKey = language === "es" ? "Title **ES**" : "Title **EN**";
-  const altTextKey = language === "es" ? "Alt Text **ES**" : "Alt Text **EN**";
   const skeleton = [...Array(limit).keys()].map((_, i) => (
     <Styled.SkeletonTile key={i} aria-hidden />
   ));
@@ -62,26 +72,15 @@ export default function MasonryGrid({ items, limit = 10, isLoading = false }) {
       )}
       {!isLoading &&
         items.map((item) => {
-          const {
-            id,
-            scheme,
-            url: { directUrlPreview },
-            additional: { [titleKey]: title, [altTextKey]: altText },
-            width,
-            height,
-            uri,
-          } = item;
-          const image = {
-            src: directUrlPreview,
-            width: 800,
-            height: parseInt((800 * height) / width),
-            alt: altText,
-          };
+          const { id, uri, scheme, title, image } = shapeGalleryAssetData({
+            assetData: item,
+            language,
+          });
           return (
             <Tile
               key={id}
               image={image}
-              link={`/${uri}`}
+              link={uri}
               title={title}
               isVideo={scheme === "video"}
             />
@@ -91,7 +90,7 @@ export default function MasonryGrid({ items, limit = 10, isLoading = false }) {
   );
 }
 
-Tile.displayName = "Layout.MasonryGridTile";
+Tile.displayName = "GalleryList.MasonryGrid.Tile";
 
 Tile.propTypes = {
   image: PropTypes.object,
@@ -100,7 +99,7 @@ Tile.propTypes = {
   title: PropTypes.string,
 };
 
-MasonryGrid.displayName = "Layout.MasonryGrid";
+MasonryGrid.displayName = "GalleryList.MasonryGrid";
 
 MasonryGrid.propTypes = {
   items: PropTypes.array,

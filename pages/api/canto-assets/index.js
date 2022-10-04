@@ -66,7 +66,19 @@ export default handler;
  * [X] get initial data on server and pass to fallbackData
  * [X] refine rendered markup for gallery items
  * [X] add loading and error UI
+ * [X] implement detail page API
+ * [X] implement detail page components
+ * [X] add ES detail page
+ * [ ] add linked tags to detail
  * [ ] deal with search/filter UI (remove?)
- * [ ] implement detail page API
- * [ ] implement detail page components
+ * [ ] add support for videos. other schema too?
+ *
+ * image size: only option besides original is preview (800w)
+ * videos: any examples to work with?
+ *
+ * Metadata to resolve:
+ * [ ] location (no straighforward field in API response)
+ * [ ] metadataDate (metadata["Date modified"]? or Craft default)
+ * [ ] publisher (additional["Publisher"]?)
+ * [ ] variants (nothing similar in API response)
  */

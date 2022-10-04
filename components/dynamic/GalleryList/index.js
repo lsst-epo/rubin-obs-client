@@ -2,9 +2,9 @@ import PropTypes from "prop-types";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 import Container from "@/layout/Container";
-import MasonryGrid from "@/components/layout/MasonryGrid";
 import Pagination from "@/page/Pagination";
 import { useCantoAssets } from "@/hooks";
+import MasonryGrid from "./MasonryGrid";
 
 const LIMIT = 10;
 
