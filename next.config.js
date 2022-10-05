@@ -44,4 +44,9 @@ module.exports = {
     };
     return config;
   },
+  images: {
+    domains: ["rubin.canto.com"],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2320],
+    imageSizes: [400, 500],
+  },
 };
