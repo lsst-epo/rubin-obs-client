@@ -112,18 +112,6 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
 
   const currentId = entryData?.id || entryData?.entry?.id;
 
-  // Handle 404 if there is no data
-  if (!currentId) {
-    await setEdcLog(
-      runId,
-      "404 encountered building for " + uri,
-      "BUILD_ERROR_404"
-    );
-    return {
-      notFound: true,
-    };
-  }
-
   const breadcrumbs = await getBreadcrumbs(
     currentId,
     site,
@@ -153,6 +141,18 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
         destination: entryData.linkTo.url,
         permanent: false,
       },
+    };
+  }
+
+  // Handle 404 if there is no data
+  if (!currentId) {
+    await setEdcLog(
+      runId,
+      "404 encountered building for " + uri,
+      "BUILD_ERROR_404"
+    );
+    return {
+      notFound: true,
     };
   }
 
