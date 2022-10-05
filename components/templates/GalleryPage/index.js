@@ -5,6 +5,7 @@ import Breadcrumbs from "@/page/Breadcrumbs";
 import Container from "@/layout/Container";
 import Accordion from "@/atomic/Accordion";
 import Buttonish from "@/atomic/Buttonish";
+import CantoImage from "@/atomic/CantoImage";
 import { shapeGalleryAssetData } from "@/lib/api/gallery";
 import { useCustomBreadcrumbs } from "@/lib/utils";
 import Metadata from "./Metadata";
@@ -38,12 +39,9 @@ function GalleryPage({ assetData, metadataDefaults, language }) {
         ) : (
           <ResponsiveImage image={image} ratio="4:3" />
         )} */}
-        <Styled.Image
-          src={image.url}
-          width={image.width}
-          height={image.height}
-          alt={image.altText}
-          loading="lazy"
+        <CantoImage
+          {...image}
+          sizes="calc(100vw - 60px), (min-width: 1030px) 970px"
         />
         <div className="c-content-rte">
           <p>{description}</p>

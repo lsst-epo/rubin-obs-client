@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import IconComposer from "@/components/svg/IconComposer";
+import CantoImage from "@/atomic/CantoImage";
 import { containerRegular } from "@/styles/globalStyles";
 
 export const TileLink = styled.a`
@@ -22,7 +23,7 @@ export const SkeletonTile = styled.div`
   background-color: var(--neutral20);
 `;
 
-export const Image = styled.img`
+export const Image = styled(CantoImage)`
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -43,15 +44,18 @@ export const Icon = styled(IconComposer)`
 `;
 
 export const Grid = styled.div`
+  --gap: 1rem;
+
   ${containerRegular()}
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: var(--gap);
+
+  ${(props) => props.$childSizes}
 
   > * {
-    flex: 1 0 auto;
+    flex-grow: 1;
     min-width: 200px;
     max-height: 400px;
   }
-  ${(p) => p.$brickSizes}
 `;

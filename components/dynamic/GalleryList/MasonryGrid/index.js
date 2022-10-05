@@ -5,41 +5,54 @@ import { useGlobalData } from "@/lib/utils";
 import { shapeGalleryAssetData } from "@/lib/api/gallery";
 import * as Styled from "./styles";
 
+function getWidthArray(limit) {
+  const widthMap = [0.25, 0.25, 0.25, 0.25, 0.333, 0.333, 0.333, 0.5, 0.5, 1];
+  const repeats = Math.round(limit / widthMap.length);
+  return Array(repeats).fill(widthMap).flat();
+}
+
+function getColumnCount(index, limit) {
+  const widthArray = getWidthArray(limit);
+  const decimal = widthArray[index];
+  return Math.round(1 / decimal);
+}
+
 function template(i, width) {
+  const percent = `${Math.round(width * 10000) / 100}%`;
+  const columns = Math.round(1 / width);
   return `
     > :nth-child(${i + 1}n + ${i + 1}) {
-      width: ${width}%;
+      flex-basis: calc(${percent} - var(--gap) * ${columns - 1});
     }
   `;
 }
 
-function getBrickSizes(limit) {
-  const widthMap = [20, 20, 20, 20, 30, 30, 30, 40, 40, 80];
+function getTileSizes(limit) {
+  const widthArray = getWidthArray(limit);
   let str = "";
-  for (let i = 0; i < limit; i++) {
-    // random:
-    //   let width = widthMap[Math.floor(Math.random() * widthMap.length)];
-    const width = widthMap[i];
+  for (let i = 0; i < limit - 1; i++) {
+    const width = widthArray[i];
     str += template(i, width);
   }
   return str;
 }
 
-const Tile = ({
-  image: { url, width, height, altText },
-  isVideo,
-  link,
-  title,
-}) => {
+const Tile = ({ image, isVideo, link, title, index, limit }) => {
+  const containerWidth = 1160;
+  const columns = getColumnCount(index, limit);
   return (
     <Link href={link} passHref>
       <Styled.TileLink aria-label={title}>
         <Styled.Image
-          src={url}
-          width={width}
-          height={height}
-          alt={altText}
-          loading="lazy"
+          {...image}
+          layout="fill"
+          sizes={`
+            ${Math.round(containerWidth / columns)}px,
+            (max-width: 1359px) calc(100vw / ${columns} - 2rem),
+            (max-width: 968px) calc(100vw / ${Math.max(1, columns - 1)} - 2rem),
+            (max-width: 678px) calc(100vw / ${Math.max(1, columns - 2)} - 2rem),
+            (max-width: 456px) calc(100vw - 40px)
+          `}
         />
         {isVideo && <Styled.Icon icon="play" />}
       </Styled.TileLink>
@@ -48,21 +61,20 @@ const Tile = ({
 };
 
 export default function MasonryGrid({ items, limit = 10, isLoading = false }) {
-  const brickSizes = getBrickSizes(limit);
   const {
     localeInfo: { language },
   } = useGlobalData();
   const { t } = useTranslation();
-  const skeleton = [...Array(limit).keys()].map((_, i) => (
-    <Styled.SkeletonTile key={i} aria-hidden />
-  ));
+  const skeleton = [...Array(limit).keys()].map((_, index) => {
+    return <Styled.SkeletonTile key={index} aria-hidden />;
+  });
 
   return (
     <Styled.Grid
       role="region"
       aria-label={t("gallery.results")}
       aria-busy={isLoading}
-      $brickSizes={brickSizes}
+      $childSizes={getTileSizes(limit)}
     >
       {isLoading && (
         <>
@@ -71,7 +83,7 @@ export default function MasonryGrid({ items, limit = 10, isLoading = false }) {
         </>
       )}
       {!isLoading &&
-        items.map((item) => {
+        items.map((item, index) => {
           const { id, uri, scheme, title, image } = shapeGalleryAssetData({
             assetData: item,
             language,
@@ -79,10 +91,12 @@ export default function MasonryGrid({ items, limit = 10, isLoading = false }) {
           return (
             <Tile
               key={id}
+              index={index}
               image={image}
               link={uri}
               title={title}
               isVideo={scheme === "video"}
+              limit={limit}
             />
           );
         })}
@@ -97,6 +111,8 @@ Tile.propTypes = {
   isVideo: PropTypes.bool,
   link: PropTypes.string,
   title: PropTypes.string,
+  index: PropTypes.number,
+  limit: PropTypes.number,
 };
 
 MasonryGrid.displayName = "GalleryList.MasonryGrid";

@@ -60,21 +60,8 @@ export default handler;
 
 /**
  * TODO
- *
- * [X] add `page` query param to track pagination
- * [X] fix pagination numbers
- * [X] get initial data on server and pass to fallbackData
- * [X] refine rendered markup for gallery items
- * [X] add loading and error UI
- * [X] implement detail page API
- * [X] implement detail page components
- * [X] add ES detail page
- * [ ] add linked tags to detail
  * [ ] deal with search/filter UI (remove?)
- * [ ] add support for videos. other schema too?
- *
- * image size: only option besides original is preview (800w)
- * videos: any examples to work with?
+ * [ ] add support for videos. any examples to work with? other schema too?
  *
  * Metadata to resolve:
  * [ ] location (no straighforward field in API response)
