@@ -1,8 +1,9 @@
+import { Fragment } from "react";
 import PropTypes from "prop-types";
 import Head from "next/head";
+import { supportedTypes, titleFromEntryType } from "@/lib/api/feeds";
 import siteInfoShape from "@/shapes/siteInfo";
 import imageShape from "@/shapes/image";
-
 export default function HtmlHead({
   title,
   description,
@@ -52,6 +53,46 @@ export default function HtmlHead({
         href="/favicon-16x16.png"
       />
       <link rel="manifest" href="/site.webmanifest" />
+      <link
+        rel="alternate"
+        type="application/rss+xml"
+        title={`${siteTitle} RSS Feed`}
+        href="/feeds/feed.xml"
+      />
+      <link
+        rel="alternate"
+        type="application/atom+xml"
+        title={`${siteTitle} Atom Feed`}
+        href="/feeds/atom.xml"
+      />
+      <link
+        rel="alternate"
+        type="application/json"
+        title={`${siteTitle} JSON Feed`}
+        href="/feeds/feed.json"
+      />
+      {supportedTypes.map((entryType) => (
+        <Fragment key={entryType}>
+          <link
+            rel="alternate"
+            type="application/rss+xml"
+            title={`${siteTitle} RSS Feed — ${titleFromEntryType(entryType)}`}
+            href={`/feeds/${entryType}/feed.xml`}
+          />
+          <link
+            rel="alternate"
+            type="application/atom+xml"
+            title={`${siteTitle} Atom Feed — ${titleFromEntryType(entryType)}`}
+            href={`/feeds/${entryType}/atom.xml`}
+          />
+          <link
+            rel="alternate"
+            type="application/json"
+            title={`${siteTitle} JSON Feed — ${titleFromEntryType(entryType)}`}
+            href={`/feeds/${entryType}/feed.json`}
+          />
+        </Fragment>
+      ))}
       {children}
     </Head>
   );

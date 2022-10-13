@@ -30,6 +30,7 @@ export default function ComplexTable({
                   key={cell.id}
                   $row={i + 1}
                   $background={cell.cellBackground}
+                  $hasFlexibleCellWidth={cell.hasFlexibleCellWidth}
                   colSpan={cell.cellWidth}
                   dangerouslySetInnerHTML={{ __html: cell.cellContent }}
                 />
