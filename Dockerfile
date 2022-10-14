@@ -16,6 +16,7 @@ ARG NEXT_PUBLIC_PAGEPROOFER_ID=false
 ARG NEXT_PUBLIC_LEVELACCESS_ID=false
 ARG NEXT_PUBLIC_CONTACT_FORM_POST_URL=https://api.rubinobs.org/actions/contact-form/send
 ARG NEXT_PUBLIC_PLAUSIBLE_DOMAIN=rubinobs.org
+ARG CLOUD_ENV=PROD
 
 RUN npx browserslist@latest --update-db && yarn static:build
 
