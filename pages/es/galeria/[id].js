@@ -3,15 +3,13 @@ import { GlobalDataProvider } from "@/contexts/GlobalData";
 import { getGlobalData } from "@/api/global";
 import GalleryPageTemplate from "@/templates/GalleryPage";
 import { updateI18n } from "@/lib/i18n";
-import { getGalleryAssetMetadataDefaults } from "@/lib/api/gallery";
 
-export default function Page({ assetData, metadataDefaults, globalData }) {
+export default function Page({ assetData, globalData }) {
   updateI18n("es");
   return (
     <GlobalDataProvider data={globalData}>
       <GalleryPageTemplate
         assetData={assetData}
-        metadataDefaults={metadataDefaults}
         language={globalData.localeInfo.language}
       />
     </GlobalDataProvider>
@@ -20,7 +18,6 @@ export default function Page({ assetData, metadataDefaults, globalData }) {
 
 Page.propTypes = {
   assetData: PropTypes.object,
-  metadataDefaults: PropTypes.object,
   globalData: PropTypes.object,
 };
 
@@ -45,7 +42,6 @@ export async function getStaticProps({ params: { id } }) {
       localized: [{ language: "en-US", uri: `gallery/${id}` }],
     },
   });
-  const metadataDefaults = await getGalleryAssetMetadataDefaults(site);
 
   if (!data) {
     return {
@@ -57,7 +53,6 @@ export async function getStaticProps({ params: { id } }) {
   return {
     props: {
       assetData: json,
-      metadataDefaults,
       globalData,
     },
   };

@@ -12,12 +12,10 @@ import Metadata from "./Metadata";
 import SecondaryInfo from "./SecondaryInfo";
 import * as Styled from "./styles";
 
-function GalleryPage({ assetData, metadataDefaults, language }) {
+function GalleryPage({ assetData, language }) {
   const { t } = useTranslation();
   const { id, uri, scheme, title, description, image, tags, metadata } =
-    shapeGalleryAssetData({ assetData, language, metadataDefaults });
-  console.info(tags);
-
+    shapeGalleryAssetData({ assetData, language });
   const customBreadcrumbs = useCustomBreadcrumbs("Gallery");
   const parentPage = customBreadcrumbs.slice(-1)[0];
   const pageLink = {
@@ -110,7 +108,6 @@ GalleryPage.propTypes = {
     tags: PropTypes.arrayOf(PropTypes.string),
     metadata: PropTypes.object,
   }),
-  metadataDefaults: PropTypes.object,
   language: PropTypes.string,
 };
 
