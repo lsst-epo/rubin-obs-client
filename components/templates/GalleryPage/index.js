@@ -65,7 +65,7 @@ function GalleryPage({ assetData, language }) {
           </Styled.Details>
         </div>
         <div>
-          <SecondaryInfo variants={[]} tags={tags} parentPage={parentPage} />
+          <SecondaryInfo tags={tags} parentPage={parentPage} />
         </div>
       </Styled.ContainerDesktop>
       <Styled.ContainerMobile>
@@ -76,11 +76,7 @@ function GalleryPage({ assetData, language }) {
               <Metadata data={metadata} />
             </div>
             <div>
-              <SecondaryInfo
-                variants={[]}
-                tags={tags}
-                parentPage={parentPage}
-              />
+              <SecondaryInfo tags={tags} parentPage={parentPage} />
             </div>
           </Styled.AccordionInner>
         </Accordion>

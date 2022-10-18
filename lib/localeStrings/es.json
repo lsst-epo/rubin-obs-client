@@ -143,13 +143,18 @@
       "error": "There was an error fetching the gallery items. Try reloading the page or clearing the search filters.",
       "metadata": {
         "credit": "Credit",
-        "location": "Location",
-        "metadataDate": "Metadata Date",
-        "metadataVersion": "Metadata Version",
+        "metadata_date": "Metadata Date",
+        "metadata_version": "Metadata Version",
         "publisher": "Publisher",
-        "publisherId": "Publisher ID",
-        "dateCreated": "Date Created",
-        "usageTerms": "Usage Terms"
+        "publisher_id": "Publisher ID",
+        "date_created": "Date Created",
+        "usage_terms": "Usage Terms",
+        "spatial_coordinate_frame": "Spatial Coordinate Frame",
+        "spatial_coordinate_system_projection": "Spatial Coordinate System Projection",
+        "spatial_reference_dimension": "Spatial Reference Dimension",
+        "spatial_reference_value": "Spatial Reference Value",
+        "spatial_rotation": "Spatial Rotation",
+        "spatial_scale": "Spatial Scale"
       }
     },
     "jobs": {
@@ -261,7 +266,7 @@
       "description_students": "Únase para aprender cómo los astrónomos aprenden e interactúan con datos astronómicos reales. Gratis para siempre.",
       "description_educators": "Únase para acceder a datos y herramientas astronómicas reales para su clase. Gratis para siempre.",
       "sign_in_link": "¿Ya tiene una cuenta?",
-      "continue_with_google": "Continuar con Google", 
+      "continue_with_google": "Continuar con Google",
       "continue_with_facebook": "Continuar con Facebook",
       "sign_up_with_email": "Registrarse con un correo"
     },
@@ -336,7 +341,7 @@
       "email": "Correo",
       "email_subject": "¡Hola! Mira esta información de la web del Observatorio Rubin: {{title}}",
       "facebook_quote": "¡Hola! Mira esta información de la web del Observatorio Rubin: {{title}}",
-      "twitter_title": "¡Hola! Mira esta información de la web del Observatorio Rubin: {{title}}" 
+      "twitter_title": "¡Hola! Mira esta información de la web del Observatorio Rubin: {{title}}"
     }
   }
 }

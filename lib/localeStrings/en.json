@@ -143,13 +143,18 @@
       "error": "There was an error fetching the gallery contents. Try reloading the page or clearing the search filters.",
       "metadata": {
         "credit": "Credit",
-        "location": "Location",
-        "metadataDate": "Metadata Date",
-        "metadataVersion": "Metadata Version",
+        "metadata_date": "Metadata Date",
+        "metadata_version": "Metadata Version",
         "publisher": "Publisher",
-        "publisherId": "Publisher ID",
-        "dateCreated": "Date Created",
-        "usageTerms": "Usage Terms"
+        "publisher_id": "Publisher ID",
+        "date_created": "Date Created",
+        "usage_terms": "Usage Terms",
+        "spatial_coordinate_frame": "Spatial Coordinate Frame",
+        "spatial_coordinate_system_projection": "Spatial Coordinate System Projection",
+        "spatial_reference_dimension": "Spatial Reference Dimension",
+        "spatial_reference_value": "Spatial Reference Value",
+        "spatial_rotation": "Spatial Rotation",
+        "spatial_scale": "Spatial Scale"
       }
     },
     "jobs": {
