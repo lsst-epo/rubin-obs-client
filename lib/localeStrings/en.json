@@ -101,7 +101,7 @@
     "gallery": {
       "about-the-image": "About the Image",
       "about-the-video": "About the Video",
-      "about-the-3d": "About the 3d Model",
+      "about-the-other": "About the 3d Model",
       "about-the-gallery": "About the Gallery",
       "additional-information": "Additional information",
       "available-sizes": "Available Sizes",
@@ -113,7 +113,7 @@
       "tags": "Tags",
       "back-to-image": "Back to images",
       "back-to-video": "Back to videos",
-      "back-to-3d": "Back to 3D models",
+      "back-to-other": "Back to 3D models",
       "back-to-gallery": "Back to galleries",
       "back-to-slideshows": "Back to slideshows",
       "image": "Image",

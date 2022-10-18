@@ -1,7 +1,8 @@
 import NextImage from "next/image";
 import PropTypes from "prop-types";
 
-function CantoImage({
+function CantoMedia({
+  scheme,
   url,
   width,
   height,
@@ -9,8 +10,22 @@ function CantoImage({
   quality = 50,
   layout = "responsive",
   sizes,
+  poster,
   className,
 }) {
+  if (scheme === "video") {
+    return (
+      <video
+        src={url}
+        controls={true}
+        width={width}
+        height={height}
+        poster={poster}
+        loading="lazy"
+      />
+    );
+  }
+
   // next/image won't accept width/height values if layout === "fill"
   const dimensionProps = layout === "fill" ? {} : { width, height };
 
@@ -28,17 +43,19 @@ function CantoImage({
   );
 }
 
-CantoImage.displayName = "Atomic.Image";
+CantoMedia.displayName = "Atomic.CantoMedia";
 
-CantoImage.propTypes = {
+CantoMedia.propTypes = {
   url: PropTypes.string.isRequired,
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
+  scheme: PropTypes.string,
   altText: PropTypes.string,
   quality: PropTypes.number,
   layout: PropTypes.string,
   sizes: PropTypes.string,
+  poster: PropTypes.string,
   className: PropTypes.string,
 };
 
-export default CantoImage;
+export default CantoMedia;

@@ -37,14 +37,15 @@ function getTileSizes(limit) {
   return str;
 }
 
-const Tile = ({ image, isVideo, link, title, index, limit }) => {
+const Tile = ({ media, scheme, link, title, index, limit }) => {
   const containerWidth = 1160;
   const columns = getColumnCount(index, limit);
   return (
     <Link href={link} passHref>
       <Styled.TileLink aria-label={title}>
         <Styled.Image
-          {...image}
+          {...media}
+          url={scheme === "video" ? media.poster : media.url}
           layout="fill"
           sizes={`
             ${Math.round(containerWidth / columns)}px,
@@ -54,7 +55,7 @@ const Tile = ({ image, isVideo, link, title, index, limit }) => {
             (max-width: 456px) calc(100vw - 40px)
           `}
         />
-        {isVideo && <Styled.Icon icon="play" />}
+        {scheme === "video" && <Styled.Icon icon="play" />}
       </Styled.TileLink>
     </Link>
   );
@@ -84,7 +85,7 @@ export default function MasonryGrid({ items, limit = 10, isLoading = false }) {
       )}
       {!isLoading &&
         items.map((item, index) => {
-          const { id, uri, scheme, title, image } = shapeGalleryAssetData({
+          const { id, uri, scheme, title, media } = shapeGalleryAssetData({
             assetData: item,
             language,
           });
@@ -92,10 +93,10 @@ export default function MasonryGrid({ items, limit = 10, isLoading = false }) {
             <Tile
               key={id}
               index={index}
-              image={image}
+              media={media}
               link={uri}
               title={title}
-              isVideo={scheme === "video"}
+              scheme={scheme}
               limit={limit}
             />
           );
@@ -107,8 +108,8 @@ export default function MasonryGrid({ items, limit = 10, isLoading = false }) {
 Tile.displayName = "GalleryList.MasonryGrid.Tile";
 
 Tile.propTypes = {
-  image: PropTypes.object,
-  isVideo: PropTypes.bool,
+  media: PropTypes.object,
+  scheme: PropTypes.string,
   link: PropTypes.string,
   title: PropTypes.string,
   index: PropTypes.number,

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import IconComposer from "@/components/svg/IconComposer";
-import CantoImage from "@/atomic/CantoImage";
+import CantoMedia from "@/atomic/CantoMedia";
 import { containerRegular } from "@/styles/globalStyles";
 
 export const TileLink = styled.a`
@@ -23,7 +23,7 @@ export const SkeletonTile = styled.div`
   background-color: var(--neutral20);
 `;
 
-export const Image = styled(CantoImage)`
+export const Image = styled(CantoMedia)`
   width: 100%;
   height: 100%;
   object-fit: cover;

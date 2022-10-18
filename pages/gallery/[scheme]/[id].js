@@ -28,8 +28,7 @@ export async function getStaticPaths() {
   };
 }
 
-export async function getStaticProps({ params: { id } }) {
-  const scheme = "image";
+export async function getStaticProps({ params: { scheme, id } }) {
   const data = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/canto-assets/${id}?scheme=${scheme}`
   );

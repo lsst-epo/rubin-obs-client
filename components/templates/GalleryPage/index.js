@@ -5,7 +5,7 @@ import Breadcrumbs from "@/page/Breadcrumbs";
 import Container from "@/layout/Container";
 import Accordion from "@/atomic/Accordion";
 import Buttonish from "@/atomic/Buttonish";
-import CantoImage from "@/atomic/CantoImage";
+import CantoMedia from "@/atomic/CantoMedia";
 import { shapeGalleryAssetData } from "@/lib/api/gallery";
 import { useCustomBreadcrumbs } from "@/lib/utils";
 import Metadata from "./Metadata";
@@ -14,7 +14,7 @@ import * as Styled from "./styles";
 
 function GalleryPage({ assetData, language }) {
   const { t } = useTranslation();
-  const { id, uri, scheme, title, description, image, tags, metadata } =
+  const { id, uri, scheme, title, description, media, tags, metadata } =
     shapeGalleryAssetData({ assetData, language });
   const customBreadcrumbs = useCustomBreadcrumbs("Gallery");
   const parentPage = customBreadcrumbs.slice(-1)[0];
@@ -26,19 +26,15 @@ function GalleryPage({ assetData, language }) {
   };
 
   return (
-    <Body title={title} description={description} featuredImage={[image]}>
+    <Body title={title} description={description} featuredImage={[media]}>
       <Breadcrumbs breadcrumbs={[...customBreadcrumbs, pageLink]} />
       <Container width="regular">
         <h1>{title}</h1>
       </Container>
       <Styled.Tile>
-        {/* {videoUrl ? (
-          <Video url={videoUrl} />
-        ) : (
-          <ResponsiveImage image={image} ratio="4:3" />
-        )} */}
-        <CantoImage
-          {...image}
+        <CantoMedia
+          {...media}
+          scheme={scheme}
           sizes="calc(100vw - 60px), (min-width: 1030px) 970px"
         />
         <div className="c-content-rte">
@@ -47,7 +43,7 @@ function GalleryPage({ assetData, language }) {
         {scheme === "image" && (
           <div>
             <Buttonish
-              url={image.url}
+              url={media.url}
               text={t(`gallery.download-${scheme}`)}
               target="_blank"
               rel="noreferrer"
@@ -100,7 +96,7 @@ GalleryPage.propTypes = {
     scheme: PropTypes.string,
     title: PropTypes.string,
     description: PropTypes.string,
-    image: PropTypes.object,
+    media: PropTypes.object,
     tags: PropTypes.arrayOf(PropTypes.string),
     metadata: PropTypes.object,
   }),
