@@ -1,44 +1,45 @@
-import NextImage from "next/image";
 import PropTypes from "prop-types";
-
 function CantoMedia({
-  scheme,
-  url,
+  scheme = "image",
+  srcset,
+  src,
+  video,
+  poster,
   width,
   height,
-  altText = "",
-  quality = 50,
-  layout = "responsive",
+  alt = "",
   sizes,
-  poster,
   className,
 }) {
+  const srcsetToString = () =>
+    Object.keys(srcset)
+      .map((src) => `${srcset[src]} ${src}w`)
+      .join(",");
+
   if (scheme === "video") {
     return (
       <video
-        src={url}
+        src={src}
         controls={true}
         width={width}
         height={height}
         poster={poster}
         loading="lazy"
+        className={className}
       />
     );
   }
 
-  // next/image won't accept width/height values if layout === "fill"
-  const dimensionProps = layout === "fill" ? {} : { width, height };
-
   return (
-    <NextImage
-      src={url}
-      alt={altText}
-      quality={quality}
-      layout={layout}
-      objectFit={layout === "fill" ? "cover" : null}
+    <img
+      srcSet={srcsetToString()}
+      src={src}
       sizes={sizes}
+      width={width}
+      height={height}
+      alt={alt}
+      loading="lazy"
       className={className}
-      {...dimensionProps}
     />
   );
 }
@@ -46,15 +47,13 @@ function CantoMedia({
 CantoMedia.displayName = "Atomic.CantoMedia";
 
 CantoMedia.propTypes = {
-  url: PropTypes.string.isRequired,
+  src: PropTypes.string.isRequired,
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
-  scheme: PropTypes.string,
-  altText: PropTypes.string,
-  quality: PropTypes.number,
-  layout: PropTypes.string,
-  sizes: PropTypes.string,
+  srcset: PropTypes.object,
   poster: PropTypes.string,
+  scheme: PropTypes.string,
+  alt: PropTypes.string,
   className: PropTypes.string,
 };
 

@@ -45,8 +45,7 @@ const Tile = ({ media, scheme, link, title, index, limit }) => {
       <Styled.TileLink aria-label={title}>
         <Styled.Image
           {...media}
-          url={scheme === "video" ? media.poster : media.url}
-          layout="fill"
+          scheme="image"
           sizes={`
             ${Math.round(containerWidth / columns)}px,
             (max-width: 1359px) calc(100vw / ${columns} - 2rem),

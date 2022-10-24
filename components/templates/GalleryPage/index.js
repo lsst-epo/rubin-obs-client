@@ -43,7 +43,7 @@ function GalleryPage({ assetData, language }) {
         {scheme === "image" && (
           <div>
             <Buttonish
-              url={media.url}
+              url={media.original}
               text={t(`gallery.download-${scheme}`)}
               target="_blank"
               rel="noreferrer"
