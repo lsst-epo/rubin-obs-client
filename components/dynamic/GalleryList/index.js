@@ -8,18 +8,39 @@ import MasonryGrid from "./MasonryGrid";
 
 const LIMIT = 10;
 
+// align Canto API search params with those coming from generic FilterBar component
+function mapParamKey(key) {
+  switch (key) {
+    case "filter":
+      return "scheme";
+    case "sort":
+      return "sortDirection";
+    case "search":
+      return "keyword";
+    default:
+      return key;
+  }
+}
+
+const mapParamsToAPI = (params) => {
+  return Object.keys(params).reduce((accumulator, value) => {
+    return { ...accumulator, [mapParamKey(value)]: params[value] };
+  }, {});
+};
+
 const GalleryList = ({ albumId = "HDSNU", fallbackData }) => {
   const router = useRouter();
   const {
-    query: { page },
+    query: { page, ...restParams },
   } = router;
+  const restFetchParams = mapParamsToAPI(restParams);
   const {
     data: { results = [], start, total },
     isLoading,
     isError,
   } = useCantoAssets({
     albumId,
-    fetchParams: { limit: LIMIT },
+    fetchParams: { limit: LIMIT, ...restFetchParams },
     fallbackData: page === 1 ? fallbackData : null, // don't show server-fetched results as fallback if page > 1
   });
   const { t } = useTranslation();

@@ -26,7 +26,7 @@ const FilterBar = ({ filterType, setLiveRegionMessage }) => {
   const { t } = useTranslation();
   const ref = useRef();
   const { asPath, query } = usePathData();
-  const { pathname, pathParams } = normalizePathData(asPath);
+  const { pathname, pathParams } = normalizePathData(asPath.slice(1));
   delete query.uriSegments;
   const { categories } = useGlobalData();
   const filterMap = {
@@ -43,6 +43,7 @@ const FilterBar = ({ filterType, setLiveRegionMessage }) => {
   const [searchText, setSearchText] = useState(query.search || "");
   const [filterOpen, setFilterOpen] = useState(false);
   const [sortOpen, setSortOpen] = useState(false);
+  const barId = "filter-bar";
 
   useOnClickOutside(ref, () => {
     setFilterOpen(false);
@@ -65,20 +66,36 @@ const FilterBar = ({ filterType, setLiveRegionMessage }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    router.push({
-      pathname,
-      query: { ...pathParams, page: 1, search: searchText },
-    });
+    router.push(
+      {
+        pathname,
+        query: { ...pathParams, page: 1, search: searchText },
+        hash: barId,
+      },
+      null,
+      {
+        shallow: true,
+      }
+    );
   };
 
   const handleReset = () => {
     setSearchText("");
     setLiveRegionMessage("Search cleared.");
-    router.push(pathname);
+    router.push(
+      {
+        pathname,
+        hash: barId,
+      },
+      null,
+      {
+        shallow: true,
+      }
+    );
   };
 
   return (
-    <FilterNav ref={ref} aria-label={`${filterType} search tools`}>
+    <FilterNav ref={ref} id={barId} aria-label={t("filters.label")}>
       <FilterGrid>
         {!!filterItems?.length && (
           <div>
@@ -92,7 +109,7 @@ const FilterBar = ({ filterType, setLiveRegionMessage }) => {
             </ToggleButton>
             <ToggleDropdown id="filter-dropdown" opened={filterOpen}>
               <li>
-                <MixedLink url={asPath} params={{ filter: "" }}>
+                <MixedLink url={asPath} params={{ filter: "" }} hash={barId}>
                   <T i18nKey={`filters.all`} />
                 </MixedLink>
               </li>
@@ -105,6 +122,9 @@ const FilterBar = ({ filterType, setLiveRegionMessage }) => {
                       className={active ? "active" : ""}
                       url={asPath}
                       params={{ filter: item.id }}
+                      hash={barId}
+                      shallow
+                      onClick={() => setFilterOpen(false)}
                     >
                       <T i18nKey={`filters.${item.slug}`} />
                     </MixedLink>
@@ -133,6 +153,9 @@ const FilterBar = ({ filterType, setLiveRegionMessage }) => {
                     className={active ? "active" : ""}
                     url={asPath}
                     params={{ sort: item.slug }}
+                    hash={barId}
+                    shallow
+                    onClick={() => setSortOpen(false)}
                   >
                     <T i18nKey={`filters.${item.slug}`} />
                   </MixedLink>

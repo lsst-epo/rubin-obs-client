@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import IconComposer from "@/components/svg/IconComposer";
 import CantoMedia from "@/atomic/CantoMedia";
-import { containerRegular } from "@/styles/globalStyles";
+import { containerRegular, tokens } from "@/styles/globalStyles";
 
 export const TileLink = styled.a`
   position: relative;
@@ -52,6 +52,10 @@ export const Grid = styled.div`
   gap: var(--gap);
 
   ${(props) => props.$childSizes}
+
+  &:last-child {
+    padding-bottom: ${tokens.PADDING_LARGE};
+  }
 
   > * {
     flex-grow: 1;

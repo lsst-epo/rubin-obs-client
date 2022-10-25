@@ -60,6 +60,7 @@
       "confirm": "Got it!"
     },
     "filters": {
+      "label": "Filter, sort, and search records",
       "ascending": "Ascending",
       "descending": "Descending",
       "all": "All",
@@ -72,7 +73,7 @@
       "slideshows": "Slideshows",
       "image": "Image",
       "video": "Video",
-      "3d": "3D Files",
+      "other": "3D Files",
       "non-scientific-staff": "Non-Scientific",
       "scientific-staff": "Scientific",
       "press-release": "Press Release",

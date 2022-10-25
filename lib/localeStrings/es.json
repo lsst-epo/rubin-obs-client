@@ -60,6 +60,7 @@
       "confirm": "¡Entendido!"
     },
     "filters": {
+      "label": "Filter, sort, and search records",
       "ascending": "Ascendente",
       "descending": "Descendente",
       "all": "Todo",
@@ -72,7 +73,7 @@
       "slideshows": "Diapositivas",
       "image": "Imagen",
       "video": "Video",
-      "3d": "Archivos 3D",
+      "other": "Archivos 3D",
       "non-scientific-staff": "No científicos",
       "scientific-staff": "Científicos",
       "press-release": "Boletín",
