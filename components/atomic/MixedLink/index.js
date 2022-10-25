@@ -18,9 +18,11 @@ export default function MixedLink({
   customText,
   element,
   params,
+  hash,
   text,
   url,
   type: typeIgnored,
+  shallow = false,
   ...restProps
 }) {
   if (!isInternalUrl(url)) {
@@ -37,10 +39,11 @@ export default function MixedLink({
     const href = {
       pathname,
       query: { ...pathParams, ...params },
+      hash,
     };
 
     return (
-      <Link href={href} passHref>
+      <Link href={href} passHref shallow={shallow}>
         <a className={className} {...restProps}>
           {!children && (customText ?? text)}
           {children}

@@ -17,10 +17,7 @@ class CustomDocument extends Document {
         });
 
       const initialProps = await Document.getInitialProps(ctx);
-      const {
-        query: { uriSegments },
-      } = ctx;
-      const lang = getLangString(uriSegments);
+      const lang = getLangString(ctx.asPath);
       return {
         ...initialProps,
         lang,

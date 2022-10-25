@@ -23,6 +23,7 @@ const pageShape = PropTypes.shape({
   childNavigationDescription: PropTypes.node,
   showGuideNav: PropTypes.bool,
   layout: PropTypes.oneOf(["overlap", "full"]),
+  gallery: PropTypes.object,
 }).isRequired;
 
 export default pageShape;
