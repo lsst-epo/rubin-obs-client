@@ -22,7 +22,7 @@ export default function LanguageSelect({ id }) {
     if (switchCount.current > 0) {
       const newLang = toEs ? "es" : "en-US";
       const newRoute = getNewRoute(newLang);
-      if (!newRoute) return null;
+      if (!newRoute) return;
       router.push(newRoute);
     }
 
