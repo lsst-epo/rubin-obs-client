@@ -16,6 +16,7 @@ export default function Navigation({
   mobileActive,
   mobileSetter,
 }) {
+  const mobileLangSelectId = "mobileLangSelect";
   const [active, setActive] = useState(null);
   const navList = useRef();
   const { openModal } = useAuthModal();
@@ -29,7 +30,8 @@ export default function Navigation({
   function handleClick(e) {
     const isLink =
       e.target.nodeName === "A" || e.target.parentElement?.nodeName === "A";
-    if (mobileSetter && mobileActive && isLink) {
+    const isMobileLangSelect = e.target.id === mobileLangSelectId;
+    if (mobileSetter && mobileActive && (isLink || isMobileLangSelect)) {
       mobileSetter(false);
     }
     if (navList?.current?.contains(e.target)) return;
@@ -60,7 +62,7 @@ export default function Navigation({
       <ul className="c-nav-list__list">
         {theme === "mobile" && (
           <li className="c-nav-list__lang">
-            <LanguageSelect id="mobileLangSelect" />
+            <LanguageSelect id={mobileLangSelectId} />
           </li>
         )}
         {items.map(({ id, title, uri, children }) => {
