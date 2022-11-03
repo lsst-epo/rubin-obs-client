@@ -68,9 +68,7 @@ export default function NewsPage({
           if (asset.image?.[0].url) {
             return (
               <Link key={i} href={asset.image?.[0].url}>
-                <a>
-                  <ResponsiveImage image={asset.image?.[0]} ratio="8:5" />
-                </a>
+                <ResponsiveImage image={asset.image?.[0]} ratio="8:5" />
               </Link>
             );
           }
@@ -87,7 +85,7 @@ export default function NewsPage({
           if (rootHomeLink?.uri && tag.slug) {
             return (
               <Link key={i} href={`/${rootHomeLink?.uri}?search=${tag.slug}`}>
-                <a>{`#${tag.title}`}</a>
+                {`#${tag.title}`}
               </Link>
             );
           }
@@ -139,7 +137,7 @@ export default function NewsPage({
                   if (a.textLink[0].url) {
                     return (
                       <Link href={a.textLink[0].url} key={i}>
-                        <a>{a.text}</a>
+                        {a.text}
                       </Link>
                     );
                   }
@@ -167,13 +165,9 @@ export default function NewsPage({
                   if (a.galleryItem[0].uri) {
                     return (
                       <Link href={`/${a.galleryItem[0].uri}`} key={i}>
-                        <a>
-                          <ResponsiveImage
-                            image={
-                              a.galleryItem[0].representativeAssetVariant[0]
-                            }
-                          />
-                        </a>
+                        <ResponsiveImage
+                          image={a.galleryItem[0].representativeAssetVariant[0]}
+                        />
                       </Link>
                     );
                   }

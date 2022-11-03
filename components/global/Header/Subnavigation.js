@@ -18,14 +18,13 @@ export default function Subnavigation({ items, active, onClick }) {
     >
       {items.map(({ id, title, uri }) => (
         <li key={id} className="c-subnav-list__item">
-          <Link href={`/${uri}`}>
-            <a
-              className="c-subnav-list__link"
-              tabIndex={active ? 0 : -1}
-              onClick={onClick}
-            >
-              {title}
-            </a>
+          <Link
+            href={`/${uri}`}
+            className="c-subnav-list__link"
+            tabIndex={active ? 0 : -1}
+            onClick={onClick}
+          >
+            {title}
           </Link>
         </li>
       ))}

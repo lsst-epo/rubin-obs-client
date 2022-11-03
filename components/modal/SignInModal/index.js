@@ -145,10 +145,20 @@ export default function SignInModal() {
               />
             </FormField>
             <Styled.AccountLinks>
-              <Link href={getModalUrl("forgotPassword")} shallow passHref>
+              <Link
+                legacyBehavior
+                href={getModalUrl("forgotPassword")}
+                shallow
+                passHref
+              >
                 <BaseLink>{t("sign_in.forgot_password_link")}</BaseLink>
               </Link>
-              <Link href={getModalUrl("register")} shallow passHref>
+              <Link
+                legacyBehavior
+                href={getModalUrl("register")}
+                shallow
+                passHref
+              >
                 <BaseLink>{t("sign_in.create_account_link")}</BaseLink>
               </Link>
             </Styled.AccountLinks>

@@ -90,6 +90,7 @@ export default function StaffPage({
                   {tags.map(({ id, slug, title }) => (
                     <Styled.Tag key={id}>
                       <Link
+                        legacyBehavior
                         href={{
                           pathname: `/${parentEntry?.uri || parentUri}`,
                           query: { search: slug },

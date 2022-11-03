@@ -23,6 +23,7 @@ const NavButtons = ({
   return (
     <Nav>
       <Link
+        legacyBehavior
         href={{
           pathname,
           query: { ...pathParams, page: 1, type: linkLeft },
@@ -39,6 +40,7 @@ const NavButtons = ({
         </NavButton>
       </Link>
       <Link
+        legacyBehavior
         href={{
           pathname,
           query: { ...pathParams, page: 1, type: linkRight },
