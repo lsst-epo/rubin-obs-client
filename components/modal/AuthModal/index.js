@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import IconComposer from "@/components/svg/IconComposer";
 import * as Styled from "./styles";
 
@@ -34,7 +34,7 @@ export default function AuthModal({
         </Styled.CloseButton>
         {imageProps && (
           <Styled.ImageWrapper $image={image} role="presentation">
-            <Image {...imageProps} />
+            <Image role="presentation" alt="" {...imageProps} />
           </Styled.ImageWrapper>
         )}
         <Styled.Content aria-live="polite">{children}</Styled.Content>

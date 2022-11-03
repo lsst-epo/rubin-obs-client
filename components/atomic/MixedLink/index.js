@@ -40,11 +40,9 @@ export default function MixedLink({
     };
 
     return (
-      <Link href={href} passHref>
-        <a className={className} {...restProps}>
-          {!children && (customText ?? text)}
-          {children}
-        </a>
+      <Link href={href} passHref className={className} {...restProps}>
+        {!children && (customText ?? text)}
+        {children}
       </Link>
     );
   }
