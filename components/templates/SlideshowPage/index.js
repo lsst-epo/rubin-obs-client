@@ -54,7 +54,7 @@ export default function SlideshowPage({
             <SlideshowGrid key={i}>
               <SlideshowMain>
                 <h2 className="t-heading-primary">{item.title}</h2>
-                <div>{`${i + 1} of ${allItems.length}`}</div>
+                <div>{`${i + 1} ${t("pagination.of")} ${allItems.length}`}</div>
                 <div
                   className="c-content-rte"
                   dangerouslySetInnerHTML={{ __html: item.description }}

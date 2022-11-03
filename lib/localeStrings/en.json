@@ -60,6 +60,9 @@
       "confirm": "Got it!"
     },
     "filters": {
+      "sort": "Sort by",
+      "ascending": "Ascending",
+      "descending": "Descending",
       "all": "All",
       "pages": "Pages",
       "events": "Events",
@@ -136,6 +139,7 @@
       "label": "Pagination",
       "previous": "Previous",
       "next": "Next",
+      "of": "of",
       "current-slide": "Slide {{current}}",
       "showing-current-slide": "Showing slide {{current}} of {{length}}",
       "showing-range": "Showing {{from}} to {{to}} of {{length}}",
