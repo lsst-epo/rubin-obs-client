@@ -12,7 +12,7 @@ export default function Buttonish({ text, url, ...props }) {
     );
   } else if (url) {
     return (
-      <Link href={url} passHref>
+      <Link legacyBehavior href={url} passHref>
         <Button as="a" {...props}>
           {text}
         </Button>

@@ -9,7 +9,7 @@ export default function Breadcrumbs({ breadcrumbs, type }) {
   return (
     <Styled.Breadcrumbs breadcrumbs={breadcrumbs} $type={type}>
       {({ id, uri, title, ...restProps }) => (
-        <Link href={`/${uri}`} passHref>
+        <Link legacyBehavior href={`/${uri}`} passHref>
           <Styled.Link {...restProps}>{title}</Styled.Link>
         </Link>
       )}

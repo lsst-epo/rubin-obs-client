@@ -60,7 +60,7 @@ export default function JoinForm({ onEmailSignup }) {
           {t("join.sign_up_with_email")}
         </SSOButton>
       </Styled.SSOButtons>
-      <Link href={getModalUrl("signIn")} shallow passHref>
+      <Link legacyBehavior href={getModalUrl("signIn")} shallow passHref>
         <BaseLink>{t("join.sign_in_link")}</BaseLink>
       </Link>
     </>

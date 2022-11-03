@@ -7,7 +7,7 @@ import IconComposer from "@/components/svg/IconComposer";
 
 const Tile = ({ image, isVideo, link, title }) => {
   return (
-    <Link href={link} passHref>
+    <Link legacyBehavior href={link} passHref>
       <StyledTileLink>
         <ResponsiveImage image={image} ratio="16:9" title={title} />
         {isVideo && (

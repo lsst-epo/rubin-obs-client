@@ -38,9 +38,7 @@ export default function ContactStaff({ header, staffEntry }) {
               <div>
                 {t(`email`)}
                 {`: `}
-                <Link href={`mailto:${staff.email}`}>
-                  <a>{staff.email}</a>
-                </Link>
+                <Link href={`mailto:${staff.email}`}>{staff.email}</Link>
               </div>
             )}
           </Main>
