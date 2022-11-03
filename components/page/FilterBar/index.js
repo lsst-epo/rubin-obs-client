@@ -121,7 +121,7 @@ const FilterBar = ({ filterType, setLiveRegionMessage }) => {
             aria-controls="sort-dropdown"
           >
             <div id="sort"></div>
-            <span>Sort by</span>
+            <span>{t(`filters.sort`)}</span>
           </ToggleButton>
           <ToggleDropdown id="sort-dropdown" opened={sortOpen}>
             {sortItems.map((item, i) => {
