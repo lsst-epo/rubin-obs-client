@@ -1,22 +1,3 @@
-import PropTypes from "prop-types";
+import { ExternalLink } from "@rubin-epo/epo-react-lib";
 
-export default function ExternalLink({
-  href,
-  children,
-  // eslint-disable-next-line react/prop-types
-  type: typeIgnored,
-  ...restProps
-}) {
-  return (
-    <a href={href} target="_blank" rel="noopener noreferrer" {...restProps}>
-      {children}
-    </a>
-  );
-}
-
-ExternalLink.displayName = "Atomic.ExternalLink";
-
-ExternalLink.propTypes = {
-  href: PropTypes.string.isRequired,
-  children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
-};
+export default ExternalLink;
