@@ -28,6 +28,7 @@ module.exports = {
       },
     ];
   },
+  staticPageGenerationTimeout: 2000,
   typescript: {
     ignoreBuildErrors: true,
   },
