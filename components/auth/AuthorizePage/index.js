@@ -6,6 +6,7 @@ import { useAuthModal, useIsMounted } from "@/hooks";
 import { useAuthenticationContext } from "@/contexts/Authentication";
 import Container from "@/components/layout/Container";
 import { Button, Buttonish } from "@/components/atomic";
+import * as Styled from "./styles";
 
 function isAuthorized(typeHandle, user, status) {
   if (typeHandle === "educatorPages") return user?.group === "educators";
@@ -66,13 +67,23 @@ export default function AuthorizePage({ typeHandle, children }) {
         {isAuthenticated ? (
           <Buttonish url="./" text={t("restricted.button_confirm")} />
         ) : (
-          <Button
-            onClick={() => {
-              openModal("signIn");
-            }}
-          >
-            {t("auth.log_in")}
-          </Button>
+          <Styled.AuthButtons>
+            <Button
+              onClick={() => {
+                openModal("signIn");
+              }}
+            >
+              {t("auth.log_in")}
+            </Button>
+            <Button
+              styleAs="educator"
+              onClick={() => {
+                openModal("register");
+              }}
+            >
+              {t("auth.sign_up")}
+            </Button>
+          </Styled.AuthButtons>
         )}
       </div>
     </Container>

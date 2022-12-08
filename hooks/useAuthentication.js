@@ -73,7 +73,7 @@ export default function useAuthentication(data) {
     getTokenFromStorage("pendingDeletion") === "true"
   );
   const [pendingGroup, setPendingGroup] = useState(
-    getTokenFromStorage("pendingGroup") || "students"
+    getTokenFromStorage("pendingGroup") || "educators"
   );
   // user has completed activation process (but may still have a `pending`
   // status if they haven't logged in post-activation yet)
@@ -120,7 +120,7 @@ export default function useAuthentication(data) {
     setUser(null);
     setStatus(null);
     setPendingDeletion(false);
-    setPendingGroup("students");
+    setPendingGroup("educators");
     setHasActivated(false);
     setLoading(false);
     setError(false);

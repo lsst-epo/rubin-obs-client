@@ -89,10 +89,10 @@ export default function SignInModal() {
       ) : (
         <>
           <AuthModal.Title>{t("sign_in.header")}</AuthModal.Title>
-          <AuthModal.Description>
+          {/* <AuthModal.Description>
             {t("sign_in.sso_description")}
-          </AuthModal.Description>
-          <Styled.SignInAsButtons>
+          </AuthModal.Description> */}
+          {/* <Styled.SignInAsButtons>
             <Button
               styleAs={pendingGroup === "students" ? "primary" : "tertiary"}
               onClick={() => setPendingGroup("students")}
@@ -109,7 +109,7 @@ export default function SignInModal() {
             >
               {t("join.as", { context: "educators" })}
             </Button>
-          </Styled.SignInAsButtons>
+          </Styled.SignInAsButtons> */}
           <Styled.SSOButtons>
             <SSOButton service="google" onClick={goToGoogleSignIn}>
               {t("sign_in.continue_with_google")}
