@@ -1,7 +1,8 @@
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
-import { Button, Link as BaseLink, SSOButton } from "@/components/atomic";
+// import { Button, Link as BaseLink, SSOButton } from "@/components/atomic";
+import { Link as BaseLink, SSOButton } from "@/components/atomic";
 import useAuthModal from "@/hooks/useAuthModal";
 import { useAuthenticationContext } from "@/contexts/Authentication";
 import AuthModal from "../../AuthModal";
@@ -19,7 +20,7 @@ export default function JoinForm({ onEmailSignup }) {
 
   return (
     <>
-      <Styled.JoinAsButtons>
+      {/* <Styled.JoinAsButtons>
         <Button
           styleAs={pendingGroup === "students" ? "primary" : "tertiary"}
           onClick={() => setPendingGroup("students")}
@@ -36,14 +37,14 @@ export default function JoinForm({ onEmailSignup }) {
         >
           {t("join.as", { context: "educators" })}
         </Button>
-      </Styled.JoinAsButtons>
+      </Styled.JoinAsButtons> */}
       <div id="signUpDescription">
         <AuthModal.Title>
           {t("join.header", { context: pendingGroup })}
         </AuthModal.Title>
-        <AuthModal.Description>
+        {/* <AuthModal.Description>
           {t("join.description", { context: pendingGroup })}
-        </AuthModal.Description>
+        </AuthModal.Description> */}
       </div>
       <Styled.SSOButtons>
         <SSOButton service="google" type="button" onClick={goToGoogleSignIn}>
