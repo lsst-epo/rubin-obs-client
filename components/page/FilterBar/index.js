@@ -18,7 +18,6 @@ import {
   getCategoryGroup,
   useGlobalData,
 } from "@/lib/utils";
-import SearchIcon from "@/svg/icons/Search";
 import withLiveRegionChange from "@/hoc/withLiveRegionChange";
 import IconComposer from "@/components/svg/IconComposer";
 
@@ -143,7 +142,7 @@ const FilterBar = ({ filterType, setLiveRegionMessage }) => {
         </div>
         <FilterSearch onSubmit={handleSubmit}>
           <button type="submit">
-            <SearchIcon />
+            <IconComposer icon="search" />
             <span className="a-hidden">{t("submit-search")}</span>
           </button>
           <label htmlFor="filterSearchInput" className="a-hidden">
