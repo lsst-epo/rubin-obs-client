@@ -1,8 +1,9 @@
 import { svgInternalShape } from "@/shapes/svg";
-import defaultProps from "../icons/defaultProps";
 
 const ExpandToggle = ({ className, size = 31, fill, isOpen = false }) => {
-  const uniqueProps = {
+  const svgProps = {
+    xmlns: "http://www.w3.org/2000/svg",
+    role: "presentation",
     viewBox: "0 0 31 31",
     width: size,
     height: size,
@@ -10,9 +11,8 @@ const ExpandToggle = ({ className, size = 31, fill, isOpen = false }) => {
     className,
   };
 
-  const mergedSvgProps = Object.assign(defaultProps, uniqueProps);
   return (
-    <svg {...mergedSvgProps}>
+    <svg {...svgProps}>
       <title>{isOpen ? "Collapse" : "Expand"}</title>
       <rect
         data-name="Rectangle 3703"
@@ -47,5 +47,3 @@ ExpandToggle.displayName = "SVG.ExpandToggle";
 ExpandToggle.propTypes = {
   ...svgInternalShape,
 };
-
-ExpandToggle.defaultProps = defaultProps;
