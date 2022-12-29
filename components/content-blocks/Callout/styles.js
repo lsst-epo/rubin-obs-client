@@ -1,4 +1,4 @@
-import Image from "@/atomic/Image";
+import { Image } from "@/components/atomic/";
 import MixedLink from "@/atomic/MixedLink";
 import styled from "styled-components";
 import {

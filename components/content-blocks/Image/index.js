@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import Image from "@/atomic/Image";
+import { Image } from "@/components/atomic/";
 import imageShape from "@/shapes/image";
 import Container from "@/layout/Container";
 import { Figure } from "@/components/atomic";

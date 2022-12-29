@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import ExpandToggle from "@/components/atomic/ExpandToggle";
+import { ExpandToggle } from "@/components/atomic/";
 import useToggle from "@/hooks/useToggle";
 import { tokens } from "@/styles/globalStyles";
 import { stripUnit } from "@castiron/style-mixins/dist/base";

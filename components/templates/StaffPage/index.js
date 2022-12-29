@@ -7,7 +7,7 @@ import { Share } from "@/content-blocks";
 import StaffList from "@/dynamic/StaffList";
 import ContentBlockFactory from "@/factories/ContentBlockFactory";
 import NestedContext from "@/contexts/Nested";
-import Image from "@/atomic/Image";
+import { Image } from "@/components/atomic/";
 import Breadcrumbs from "@/page/Breadcrumbs";
 import PageContent from "@/page/PageContent";
 import * as Styled from "./styles";
