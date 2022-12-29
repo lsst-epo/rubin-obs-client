@@ -38,10 +38,11 @@ Item.propTypes = {
 };
 
 export default function Social({ socialInfo }) {
+  const { t } = useTranslation();
   return (
     <div className="c-social-list">
       <div className="c-social-list__inner">
-        <h3 className="c-social-list__heading">Let’s Connect</h3>
+        <h3 className="c-social-list__heading">{t("social.connect")}</h3>
         <ul className="c-social-list__list">
           {Object.keys(socialInfo).map((account) => (
             <Item key={account} account={account} url={socialInfo[account]} />
