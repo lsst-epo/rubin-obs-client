@@ -1621,10 +1621,10 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.6.tgz#cee20bd55e68a1720bdab363ecf0c821ded4cd45"
   integrity sha512-50/17A98tWUfQ176raKiOGXuYpLyyVMkxxG6oylzL3BPOlA6ADGdK7EYunSa4I064xerltq9TGXs8HmOk5E+vw==
 
-"@rubin-epo/epo-react-lib@^1.0.11":
-  version "1.0.11"
-  resolved "https://registry.yarnpkg.com/@rubin-epo/epo-react-lib/-/epo-react-lib-1.0.11.tgz#8aff44be65f447ea25f18fccc79fcd1613712849"
-  integrity sha512-Hkn/ZnmuhE/tY+2W44ANEuqu9jGkkYVhmroyQ72/ZL6thtKNoPFxpX5ZDPP8+X4k6fHZw35vw85qSMTL7c9sWA==
+"@rubin-epo/epo-react-lib@^1.0.12":
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/@rubin-epo/epo-react-lib/-/epo-react-lib-1.0.12.tgz#38de9fb930ef5a45b915d09786684b9b241e0705"
+  integrity sha512-3VnvPJV0ujdRRgX0g5KgVsSnGpwH80SLjHuZZTQDKCGXl4mCV/QhEkunCQkoCLI78IMdGlakPKjrHw1nplB+Iw==
   dependencies:
     flickity "^3.0.0"
     react-player "^2.11.0"
@@ -6798,7 +6798,7 @@ react-is@^18.0.0, react-is@^18.2.0:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-18.2.0.tgz#199431eeaaa2e09f86427efbb4f1473edb47609b"
   integrity sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==
 
-react-player@^2.10.1, react-player@^2.11.0:
+react-player@^2.11.0:
   version "2.11.0"
   resolved "https://registry.yarnpkg.com/react-player/-/react-player-2.11.0.tgz#9afc75314eb915238e8d6615b2891fbe7170aeaa"
   integrity sha512-fIrwpuXOBXdEg1FiyV9isKevZOaaIsAAtZy5fcjkQK9Nhmk1I2NXzY/hkPos8V0zb/ZX416LFy8gv7l/1k3a5w==

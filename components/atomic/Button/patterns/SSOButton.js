@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useAuthenticationContext } from "@/contexts/Authentication";
-import Button from "../";
+import { Button } from "@rubin-epo/epo-react-lib";
 
 export default function SSOButton({
   service,
