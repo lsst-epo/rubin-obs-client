@@ -26,12 +26,6 @@
     "test:unit": "jest --config jest.config.js"
   },
   "babel": {
-    "extensions": [
-      ".js",
-      ".jsx",
-      ".ts",
-      ".tsx"
-    ],
     "presets": [
       "next/babel"
     ],
