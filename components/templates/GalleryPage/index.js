@@ -14,7 +14,7 @@ import Body from "@/global/Body";
 import Breadcrumbs from "@/page/Breadcrumbs";
 import Container from "@/layout/Container";
 import ResponsiveImage from "@/atomic/ResponsiveImage";
-import Video from "@/atomic/Video";
+import { Video } from "@/components/atomic";
 import Accordion from "@/atomic/Accordion";
 import Buttonish from "@/components/atomic/Buttonish";
 import { containerNarrow, respond } from "@/styles/globalStyles";
