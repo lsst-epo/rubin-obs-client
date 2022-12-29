@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import Image from "@/atomic/Image";
+import { Image } from "@/components/atomic/";
 import imageShape from "@/shapes/image";
 import { fluidScale, containerFullBleed } from "@/styles/globalStyles";
 

@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import Social from "./Social";
 import Nav from "./Nav";
 import ContactForm from "./ContactForm";
-import Image from "@/atomic/Image";
+import { Image } from "@/components/atomic/";
 import { socialInfoShape } from "@/shapes/siteInfo";
 import footerContentShape from "@/shapes/footerContent";
 

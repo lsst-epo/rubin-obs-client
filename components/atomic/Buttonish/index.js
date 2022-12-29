@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import Link from "next/link";
 import { isInternalUrl } from "@/helpers";
-import Button from "../Button";
+import { Button } from "@rubin-epo/epo-react-lib";
 
 export default function Buttonish({ text, url, ...props }) {
   if (!isInternalUrl(url)) {
