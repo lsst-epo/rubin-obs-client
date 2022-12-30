@@ -45,4 +45,8 @@ module.exports = {
     };
     return config;
   },
+  swcMinify: true,
+  compiler: {
+    styledComponents: true,
+  },
 };

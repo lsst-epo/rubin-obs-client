@@ -25,20 +25,6 @@
     "test-int-local": "testcafe --config-file int.testcaferc.js --hostname localhost",
     "test:unit": "jest --config jest.config.js"
   },
-  "babel": {
-    "presets": [
-      "next/babel"
-    ],
-    "plugins": [
-      [
-        "styled-components",
-        {
-          "ssr": true,
-          "displayName": true
-        }
-      ]
-    ]
-  },
   "browserslist": [
     "defaults",
     "not IE 11"
