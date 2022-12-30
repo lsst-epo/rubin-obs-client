@@ -1,8 +1,12 @@
 import PropTypes from "prop-types";
 import Container from "@/layout/Container";
 import { Video, Figure } from "@/components/atomic";
+import { useIsMounted } from "@/hooks";
 
 export default function VideoBlock({ caption, url }) {
+  const isMounted = useIsMounted();
+  if (!isMounted) return null;
+
   return (
     <Container>
       <Figure caption={caption} withBackground>
