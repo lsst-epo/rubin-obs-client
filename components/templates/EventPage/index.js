@@ -100,6 +100,7 @@ export default function EventPage({
 
       {contentBlocks.length > 0 &&
         [...contentBlocks].map((block) => {
+          if (!block.id || !block.typeHandle) return null;
           return (
             <ContentBlockFactory
               key={block.id}

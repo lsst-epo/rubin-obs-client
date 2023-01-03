@@ -160,17 +160,18 @@ export default function Page({
                 )}
               </Container>
             )}
-            {[...contentBlocks].map((block) => {
-              if (!block.id || !block.typeHandle) return null;
-              return (
-                <ContentBlockFactory
-                  key={block.id}
-                  type={block.typeHandle}
-                  data={block}
-                  pageId={id}
-                />
-              );
-            })}
+            {contentBlocks.length > 0 &&
+              [...contentBlocks].map((block) => {
+                if (!block.id || !block.typeHandle) return null;
+                return (
+                  <ContentBlockFactory
+                    key={block.id}
+                    type={block.typeHandle}
+                    data={block}
+                    pageId={id}
+                  />
+                );
+              })}
             {pageType === "dynamic" && dynamicComponent && (
               <DynamicComponentFactory
                 componentType={dynamicComponent}

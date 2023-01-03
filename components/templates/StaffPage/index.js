@@ -127,14 +127,17 @@ export default function StaffPage({
           />
           <Share />
           {!!contentBlocks?.length &&
-            contentBlocks.map((block) => (
-              <ContentBlockFactory
-                key={block.id}
-                type={block.typeHandle}
-                data={block}
-                pageId={id}
-              />
-            ))}
+            contentBlocks.map((block) => {
+              if (!block.id || !block.typeHandle) return null;
+              return (
+                <ContentBlockFactory
+                  key={block.id}
+                  type={block.typeHandle}
+                  data={block}
+                  pageId={id}
+                />
+              );
+            })}
         </NestedContext.Provider>
       </PageContent>
     </Body>

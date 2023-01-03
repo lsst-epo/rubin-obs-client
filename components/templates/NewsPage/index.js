@@ -112,6 +112,7 @@ export default function NewsPage({
           <Share />
           {contentBlocksNews.length > 0 &&
             [...contentBlocksNews].map((block) => {
+              if (!block.id || !block.typeHandle) return null;
               return (
                 <ContentBlockFactory
                   key={block.id}
