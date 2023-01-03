@@ -1,12 +1,24 @@
+import { isCraftPreview } from "@/helpers";
+
 async function handler(req, res) {
-  if (req.query.secret !== process.env.CRAFT_REVALIDATE_SECRET_TOKEN)
+  const { query } = req;
+  const isPreview = isCraftPreview(query);
+
+  if (isPreview) {
+    return res.status(401).json({
+      message:
+        "Revalidate failed because request included Craft Preview header",
+    });
+  }
+
+  if (query.secret !== process.env.CRAFT_REVALIDATE_SECRET_TOKEN)
     return res.status(401).json({ error: "Invalid token" });
 
-  if (!req.query.uri)
+  if (!query.uri)
     return res.status(500).json({ error: `The parameter "uri" is required.` });
 
   try {
-    await res.revalidate(`/${req.query.uri}`);
+    await res.revalidate(`/${query.uri}`);
     return res.json({ revalidated: true });
   } catch (error) {
     console.error(error);
