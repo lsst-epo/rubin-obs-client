@@ -97,7 +97,11 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
     );
   }
 
-  const section = await getEntrySectionByUri(uri, site);
+  const section = await getEntrySectionByUri(
+    uri,
+    site,
+    previewData?.previewToken
+  );
 
   const entryData = await getEntryData(
     uri,
@@ -113,7 +117,6 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
     site,
     previewData?.previewToken
   );
-
   const globalData = {
     categories: data?.[`allCategories${isEspanol ? "_es" : ""}`] || [],
     footerContent: globals?.footer || {},
