@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { getGlobalData } from "@/api/global";
-import { getAllEntries, getEntrySectionByUri } from "@/api/entries";
-import { getEntryDataByUri } from "@/api/entry";
+import { getAllEntries } from "@/api/entries";
+import { getEntryDataByUri, getEntrySectionTypeByUri } from "@/api/entry";
 import { getBreadcrumbs } from "@/api/pages";
 import { getGalleryItemDataByUri } from "@/lib/api/gallery-items";
 import { getGlossaryTermDataByUri } from "@/lib/api/glossary-terms";
@@ -53,14 +53,19 @@ export default function Page({ section, globalData, ...entryProps }) {
   );
 }
 
-async function getEntryData(uri, section, site, previewToken) {
+async function getEntryData(uri, section, type, site, previewToken) {
   const dataMap = {
     galleryItems: getGalleryItemDataByUri,
     slideshows: getSlideshowDataByUri,
     glossaryTerms: getGlossaryTermDataByUri,
   };
-  const getData = dataMap[section] || getEntryDataByUri;
-  return await getData(uri, site, previewToken);
+
+  if (dataMap[section]) {
+    const getData = dataMap[section];
+    return await dataMap[section](uri, site, previewToken);
+  }
+
+  return await getEntryDataByUri(uri, section, type, site, previewToken);
 }
 
 export async function getStaticPaths() {
@@ -97,15 +102,13 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
     );
   }
 
-  const section = await getEntrySectionByUri(
-    uri,
-    site,
-    previewData?.previewToken
-  );
+  const { sectionHandle: section, typeHandle: type } =
+    await getEntrySectionTypeByUri(uri, site, previewData?.previewToken);
 
   const entryData = await getEntryData(
     uri,
     section,
+    type,
     site,
     previewData?.previewToken
   );
