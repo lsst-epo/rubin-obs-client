@@ -26,3 +26,7 @@ export function fileSize(size) {
     ["B", "kB", "MB", "GB", "TB"][i]
   );
 }
+
+export function isCraftPreview(query) {
+  return query["x-craft-preview"] || query["x-craft-live-preview"];
+}
