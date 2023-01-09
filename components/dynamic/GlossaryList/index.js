@@ -73,7 +73,11 @@ export default function GlossaryList({ excludeId = null, limit = null }) {
                       <Styled.TermList>
                         {groupedEntries[char].map(({ id, title, uri }) => (
                           <li key={id}>
-                            <Styled.TermLink as={MixedLink} url={uri}>
+                            <Styled.TermLink
+                              className="glossaryTerms"
+                              as={MixedLink}
+                              url={uri}
+                            >
                               {title}
                             </Styled.TermLink>
                           </li>
