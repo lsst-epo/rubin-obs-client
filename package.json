@@ -23,6 +23,7 @@
     "test": "npm-run-all test:*",
     "test:int": "testcafe --config-file int.testcaferc.js",
     "test-int-local": "testcafe --config-file int.testcaferc.js --hostname localhost",
+    "test-int-local-live": "testcafe --config-file int.testcaferc.js --hostname localhost --live",
     "test:unit": "jest --config jest.config.js"
   },
   "babel": {
