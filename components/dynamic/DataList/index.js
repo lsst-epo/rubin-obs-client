@@ -17,6 +17,7 @@ const DataList = ({
   limit = 10,
   showsFeatured = false,
   section = null,
+  isRelatedList = false,
 }) => {
   const { t } = useTranslation();
   const { asPath, query } = usePathData();
@@ -61,6 +62,8 @@ const DataList = ({
     });
   }
 
+  if (total === 0 && isRelatedList) return null;
+
   if (total === 0)
     return (
       <Container>
@@ -83,6 +86,7 @@ DataList.propTypes = {
   showsFeatured: PropTypes.bool,
   limit: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   section: PropTypes.string,
+  isRelatedList: PropTypes.bool,
 };
 
 export default DataList;
