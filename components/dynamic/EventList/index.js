@@ -22,13 +22,19 @@ const EventList = ({
   limit = 8,
   isWide = false,
   gridType = "events",
+  isRelatedList = false,
 }) => {
   const { t } = useTranslation();
   const localeInfo = useGlobalData("localeInfo");
   const lang = localeInfo?.language || "en-US";
 
   return (
-    <DataList excludeId={excludeId} limit={limit} section="events">
+    <DataList
+      isRelatedList={isRelatedList}
+      excludeId={excludeId}
+      limit={limit}
+      section="events"
+    >
       {({ entries, offset, page, total }) => (
         <>
           <Container width={isWide ? "regular" : "narrow"}>
@@ -169,6 +175,7 @@ EventList.propTypes = {
   button: PropTypes.object,
   isWide: PropTypes.bool,
   gridType: PropTypes.string,
+  isRelatedList: PropTypes.bool,
 };
 
 EventList.displayName = "Dynamic.EventList";

@@ -118,7 +118,8 @@ export default function EventPage({
           text: t(`events.go-to-events`),
           uri: `${rootHomeLink?.uri}`,
         }}
-        isWide={true}
+        isWide
+        isRelatedList
       />
     </Body>
   );
