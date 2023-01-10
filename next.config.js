@@ -38,6 +38,10 @@ module.exports = {
       path.join(__dirname, "components"),
     ],
   },
+  swcMinify: true,
+  compiler: {
+    styledComponents: true,
+  },
   webpack: (config) => {
     config.resolve.fallback = {
       ...config.resolve.fallback,

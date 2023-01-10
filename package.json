@@ -1,6 +1,6 @@
 {
   "name": "rubin-client",
-  "version": "0.1.0",
+  "version": "1.2.2",
   "private": true,
   "repository": {
     "type": "git",
@@ -14,30 +14,16 @@
     "static:export": "next export",
     "start": "next start -p 8080",
     "lint": "npm-run-all lint:*",
-    "lint:js": "eslint -c .eslintrc.js \"**/*.{js,jsx}\"",
+    "lint:js": "eslint \"**/*.{js,jsx}\"",
     "lint:scss": "stylelint --config .stylelintrc.js \"**/*.scss\"",
     "fix": "npm-run-all fix:js fix:scss",
-    "fix:js": "eslint -c .eslintrc.js \"**/*.{js,jsx}\" --fix",
+    "fix:js": "eslint \"**/*.{js,jsx}\" --fix",
     "fix:scss": "stylelint --config .stylelintrc.js \"**/*.scss\" --fix",
     "fix:staged": "lint-staged",
     "test": "npm-run-all test:*",
     "test:int": "testcafe --config-file int.testcaferc.js",
     "test-int-local": "testcafe --config-file int.testcaferc.js --hostname localhost",
     "test:unit": "jest --config jest.config.js"
-  },
-  "babel": {
-    "presets": [
-      "next/babel"
-    ],
-    "plugins": [
-      [
-        "styled-components",
-        {
-          "ssr": true,
-          "displayName": true
-        }
-      ]
-    ]
   },
   "browserslist": [
     "defaults",
@@ -83,15 +69,12 @@
     "use-resize-observer": "^9.0.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.18.6",
     "@babel/eslint-parser": "^7.18.2",
     "@babel/plugin-proposal-class-properties": "^7.18.6",
     "@babel/plugin-transform-react-jsx": "^7.18.6",
-    "@rushstack/eslint-patch": "^1.1.4",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^14.3.0",
-    "babel-plugin-styled-components": "^2.0.7",
     "browserslist": "^4.21.2",
     "eslint": "^8.26.0",
     "eslint-config-next": "^13.0.1",
