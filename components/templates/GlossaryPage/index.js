@@ -11,9 +11,7 @@ import { useTranslation } from "react-i18next";
 export default function GlossaryPage({ data }) {
   const { t } = useTranslation();
 
-  const { entry } = data;
-
-  const { id, title, description, uri, text, damAsset, caption } = entry;
+  const { id, title, description, uri, text, damAsset, caption } = data;
 
   const customBreadcrumbs = useCustomBreadcrumbs("Glossary");
 
@@ -63,14 +61,12 @@ export default function GlossaryPage({ data }) {
 
 GlossaryPage.propTypes = {
   data: PropTypes.shape({
-    entry: PropTypes.shape({
-      id: PropTypes.string,
-      title: PropTypes.string,
-      description: PropTypes.string,
-      uri: PropTypes.string,
-      text: PropTypes.node,
-      damAsset: PropTypes.array,
-      caption: PropTypes.string,
-    }),
+    id: PropTypes.string,
+    title: PropTypes.string,
+    description: PropTypes.string,
+    uri: PropTypes.string,
+    text: PropTypes.node,
+    damAsset: PropTypes.array,
+    caption: PropTypes.string,
   }),
 };
