@@ -4,7 +4,6 @@ import { getAllEntries } from "@/api/entries";
 import { getEntryDataByUri, getEntrySectionTypeByUri } from "@/api/entry";
 import { getBreadcrumbs } from "@/api/pages";
 import { getGalleryItemDataByUri } from "@/lib/api/gallery-items";
-import { getGlossaryTermDataByUri } from "@/lib/api/glossary-terms";
 import { getSlideshowDataByUri } from "@/api/slideshows";
 import { getSiteString } from "@/lib/utils";
 import { GlobalDataProvider } from "@/contexts/GlobalData";
@@ -57,7 +56,6 @@ async function getEntryData(uri, section, type, site, previewToken) {
   const dataMap = {
     galleryItems: getGalleryItemDataByUri,
     slideshows: getSlideshowDataByUri,
-    glossaryTerms: getGlossaryTermDataByUri,
   };
 
   if (dataMap[section]) {
