@@ -28,6 +28,16 @@ const EventList = ({
   const localeInfo = useGlobalData("localeInfo");
   const lang = localeInfo?.language || "en-US";
 
+  function renderDate({ month, day, year }) {
+    return (
+      <Styled.Date>
+        <Styled.DateMonth>{month}</Styled.DateMonth>
+        <Styled.DateDay>{day}</Styled.DateDay>
+        <Styled.DateYear>{year}</Styled.DateYear>
+      </Styled.Date>
+    );
+  }
+
   return (
     <DataList
       isRelatedList={isRelatedList}
@@ -47,7 +57,7 @@ const EventList = ({
                       address,
                       city,
                       country,
-                      date,
+                      startDate,
                       endDate,
                       description,
                       id,
@@ -74,14 +84,10 @@ const EventList = ({
                       const lock =
                         registration === "open" ? "LockOpen" : "LockClosed";
 
-                      const { year, month, day } = makeDateObject(
-                        date,
-                        lang,
-                        true
-                      );
+                      const endDateObject = makeDateObject(endDate, lang, true);
 
-                      const endDateObject = endDate
-                        ? makeDateObject(endDate, lang, true)
+                      const startDateObject = startDate
+                        ? makeDateObject(startDate, lang, true)
                         : null;
 
                       return (
@@ -109,28 +115,16 @@ const EventList = ({
                               : " "
                           }
                           subtitle={
-                            <Styled.DateWrapper $hasEndDate={!!endDateObject}>
-                              <Styled.Date>
-                                <Styled.DateMonth>{month}</Styled.DateMonth>
-                                <Styled.DateDay>{day}</Styled.DateDay>
-                                <Styled.DateYear>{year}</Styled.DateYear>
-                              </Styled.Date>
-                              {endDateObject && (
+                            <Styled.DateWrapper
+                              $hasStartDate={!!startDateObject}
+                            >
+                              {startDateObject && (
                                 <>
+                                  {renderDate(startDateObject)}
                                   <Styled.DateEmDash>—</Styled.DateEmDash>
-                                  <Styled.Date>
-                                    <Styled.DateMonth>
-                                      {endDateObject.month}
-                                    </Styled.DateMonth>
-                                    <Styled.DateDay>
-                                      {endDateObject.day}
-                                    </Styled.DateDay>
-                                    <Styled.DateYear>
-                                      {endDateObject.year}
-                                    </Styled.DateYear>
-                                  </Styled.Date>
                                 </>
                               )}
+                              {renderDate(endDateObject)}
                             </Styled.DateWrapper>
                           }
                           text={description}
