@@ -21,7 +21,7 @@ export default function EventPage({
     city,
     contentBlocks,
     country,
-    date,
+    startDate,
     endDate,
     description,
     eventType = [],
@@ -49,7 +49,7 @@ export default function EventPage({
     title,
     active: true,
   };
-  const localizedDate = useDateString(date);
+  const localizedStartDate = useDateString(startDate);
   const localizedEndDate = useDateString(endDate);
   // logic for displaying city/state in US, city/country outside
   const location = `${address ? address + "," : ""} ${createLocationString(
@@ -81,8 +81,8 @@ export default function EventPage({
           <Subtitle>
             <div>{location}</div>
             <div>
-              {localizedDate}
-              {endDate ? ` — ${localizedEndDate}` : ""}
+              {startDate ? `${localizedStartDate} — ` : ""}
+              {localizedEndDate}
             </div>
             {isThereRegistration && <div>{t(`events.${registration}`)}</div>}
           </Subtitle>
