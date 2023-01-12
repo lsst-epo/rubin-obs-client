@@ -6,10 +6,6 @@ const preview = async (req, res) => {
   const isPreview = isCraftPreview(query);
   const previewToken = query.token || null;
 
-  if (!isPreview) {
-    return res.status(401).json({ message: "Missing Craft Preview header" });
-  }
-
   if (!query.entryUid) {
     return res
       .status(401)
@@ -30,7 +26,7 @@ const preview = async (req, res) => {
   }
 
   // Enable Preview Mode by setting the cookies
-  if (isPreview && previewToken) {
+  if (previewToken) {
     res.setPreviewData({
       previewToken,
     });

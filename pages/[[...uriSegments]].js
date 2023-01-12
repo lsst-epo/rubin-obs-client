@@ -100,9 +100,21 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
     );
   }
 
-  const { sectionHandle: section, typeHandle: type } =
-    await getEntrySectionTypeByUri(uri, site, previewData?.previewToken);
+  const entrySectionType = await getEntrySectionTypeByUri(
+    uri,
+    site,
+    previewData?.previewToken
+  );
 
+  // Handle 404 if there is no data
+  if (!entrySectionType) {
+    setEdcLog(runId, "404 encountered building for " + uri, "BUILD_ERROR_404");
+    return {
+      notFound: true,
+    };
+  }
+
+  const { sectionHandle: section, typeHandle: type } = entrySectionType;
   const entryData = await getEntryData(
     uri,
     section,
