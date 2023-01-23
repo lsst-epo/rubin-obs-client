@@ -7,7 +7,7 @@ import { useCustomBreadcrumbs } from "@/lib/utils";
 import Body from "@/global/Body";
 import Breadcrumbs from "@/page/Breadcrumbs";
 import Container from "@/layout/Container";
-import Carousel from "@/layout/Carousel";
+import { CarouselLayout as Carousel } from "@rubin-epo/epo-react-lib";
 import ResponsiveImage from "@/atomic/ResponsiveImage";
 import Buttonish from "@/components/atomic/Buttonish";
 import { containerFull, respond } from "@/styles/globalStyles";
