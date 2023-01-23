@@ -3,7 +3,7 @@ import styled from "styled-components";
 import striptags from "striptags";
 import { useTranslation } from "react-i18next";
 import Container from "@/layout/Container";
-import Carousel from "@/components/layout/Carousel";
+import { CarouselLayout as Carousel } from "@rubin-epo/epo-react-lib";
 import { SlideTile } from "@/components/atomic";
 import {
   makeTruncatedString,
