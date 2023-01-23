@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import CarouselComponent from "@/components/layout/Carousel";
+import { CarouselLayout as CarouselComponent } from "@rubin-epo/epo-react-lib";
 
 export const Carousel = styled(CarouselComponent)`
   --PrevButton-right: calc(100% + 30px);
