@@ -38,12 +38,12 @@ export default function AuthorizePage({ typeHandle, children }) {
     isAuthenticated
   );
 
-  // redirect to homepage when a user is no longer authenticated (signs out)
-  useEffect(() => {
-    if (!mounted || isAuthenticated) return;
+  // // redirect to homepage when a user is no longer authenticated (signs out)
+  // useEffect(() => {
+  //   if (!mounted || isAuthenticated) return;
 
-    router.push("/");
-  }, [isAuthenticated]); // eslint-disable-line react-hooks/exhaustive-deps
+  //   router.push("/");
+  // }, [isAuthenticated]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Show child content if authorized
   return authorized ? (
