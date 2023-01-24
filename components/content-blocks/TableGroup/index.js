@@ -1,10 +1,20 @@
 import PropTypes from "prop-types";
 import Container from "@/components/layout/Container";
 import { Tab } from "@headlessui/react";
+import { useGlobalData } from "@/lib/utils";
 import ComplexTable from "../ComplexTable";
 import * as Styled from "./styles";
 
-export default function TableGroup({ items }) {
+export default function TableGroup({ sites, items }) {
+  // Think of a cleaner way to handle this site-specific
+  // tables visibility blah
+  const {
+    siteInfo: { language },
+  } = useGlobalData();
+  const showTable = sites.includes(language);
+
+  if (!showTable) return null;
+
   return (
     <Container width="wide">
       <Tab.Group>
@@ -34,5 +44,6 @@ export default function TableGroup({ items }) {
 }
 
 TableGroup.propTypes = {
+  sites: PropTypes.array,
   items: PropTypes.array,
 };

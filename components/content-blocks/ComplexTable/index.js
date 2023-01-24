@@ -1,14 +1,23 @@
 import PropTypes from "prop-types";
 import Container from "@/components/layout/Container";
+import { useGlobalData } from "@/lib/utils";
 import * as Styled from "./styles";
 
 export default function ComplexTable({
   complexTable,
   plainText,
   verticalAlignment,
+  sites = [],
   styleAs = "primary",
   isChild = false,
 }) {
+  // Think of a cleaner way to handle this site-specific
+  // tables visibility blah
+  const {
+    siteInfo: { language },
+  } = useGlobalData();
+  const showTable = sites.includes(language);
+
   const renderTable = () => (
     <Styled.TableWrapper>
       <Styled.Table
@@ -42,6 +51,8 @@ export default function ComplexTable({
     </Styled.TableWrapper>
   );
 
+  if (!showTable) return null;
+
   return isChild ? (
     renderTable()
   ) : (
@@ -53,6 +64,7 @@ ComplexTable.propTypes = {
   complexTable: PropTypes.array,
   plainText: PropTypes.string,
   verticalAlignment: PropTypes.string,
+  sites: PropTypes.array,
   styleAs: PropTypes.string,
   isChild: PropTypes.bool,
 };
