@@ -42,6 +42,7 @@ export default function ComplexTable({
                   $hasFlexibleCellWidth={cell.hasFlexibleCellWidth}
                   colSpan={cell.cellWidth}
                   dangerouslySetInnerHTML={{ __html: cell.cellContent }}
+                  className="c-content-rte"
                 />
               ))}
             </Styled.TableRow>
