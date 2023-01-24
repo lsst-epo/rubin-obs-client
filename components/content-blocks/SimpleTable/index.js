@@ -1,9 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Container from "@/components/layout/Container";
+import { useGlobalData } from "@/lib/utils";
 import * as Styled from "./styles";
 
-const SimpleTable = ({ simpleTable }) => {
+const SimpleTable = ({ simpleTable, sites = [] }) => {
+  // Think of a cleaner way to handle this site-specific
+  // tables visibility blah
+  const {
+    siteInfo: { language },
+  } = useGlobalData();
+  const showTable = sites.includes(language);
+
+  if (!showTable) return null;
+
   return (
     <Container width="narrow">
       <Styled.List>
@@ -27,6 +37,7 @@ const SimpleTable = ({ simpleTable }) => {
 };
 
 SimpleTable.propTypes = {
+  sites: PropTypes.array,
   simpleTable: PropTypes.array,
 };
 
