@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import PropTypes from "prop-types";
 import { Trans, useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
