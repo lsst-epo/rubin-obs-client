@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useTranslation, Trans } from "react-i18next";
 import Body from "@/global/Body";
+import { useIsMounted } from "@/hooks";
 import Container from "@/components/layout/Container";
 import IconComposer from "@/components/svg/IconComposer";
 import AuthorizePage from "@/components/auth/AuthorizePage";
@@ -16,25 +17,33 @@ function UserProfilePageTemplate({
   data: { id, title, text, uri, typeHandle },
 }) {
   const { t } = useTranslation();
-  const { maybeRefreshToken, fetchUserData, requestAccountDeletion } =
-    useAuthenticationContext();
-  const [userData, setUserData] = useState(null);
+  const {
+    isAuthenticated,
+    maybeRefreshToken,
+    fetchUserData,
+    requestAccountDeletion,
+  } = useAuthenticationContext();
+  const [userData, setUserData] = useState();
   const [error, setError] = useState(null);
   const [showModal, setShowModal] = useState(null);
   const [isSubmittingDelete, setIsSubmittingDelete] = useState(false);
-
-  const isLoading = !userData && !error;
+  const [isLoading, setIsLoading] = useState(true);
+  const mounted = useIsMounted();
 
   useEffect(() => {
     (async () => {
       const data = await fetchUserData();
+      if (!isAuthenticated) return;
       if (data?.viewer) {
         setUserData(data.viewer);
+        setError(null);
+        setIsLoading(false);
       } else if (data?.error) {
         setError(data.errorType);
+        setIsLoading(false);
       }
     })();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [isAuthenticated]); // eslint-disable-line react-hooks/exhaustive-deps
 
   async function onConfirmDelete() {
     setIsSubmittingDelete(true);
@@ -48,6 +57,10 @@ function UserProfilePageTemplate({
       setShowModal("success");
       setIsSubmittingDelete(false);
     }
+  }
+
+  if (!mounted) {
+    return null;
   }
 
   return (
