@@ -5,7 +5,7 @@ import { useGlobalData } from "@/lib/utils";
 import ComplexTable from "../ComplexTable";
 import * as Styled from "./styles";
 
-export default function TableGroup({ sites, items }) {
+export default function TableGroup({ sites = [], items }) {
   // Think of a cleaner way to handle this site-specific
   // tables visibility blah
   const {
@@ -26,17 +26,20 @@ export default function TableGroup({ sites, items }) {
           ))}
         </Tab.List>
         <Tab.Panels>
-          {items.map(({ complexTable, plainText, verticalAlignment }, i) => (
-            <Tab.Panel key={`panel${i}`}>
-              <ComplexTable
-                complexTable={complexTable}
-                plainText={plainText}
-                verticalAlignment={verticalAlignment}
-                styleAs="secondary"
-                isChild
-              />
-            </Tab.Panel>
-          ))}
+          {items.map(
+            ({ complexTable, sites, plainText, verticalAlignment }, i) => (
+              <Tab.Panel key={`panel${i}`}>
+                <ComplexTable
+                  sites={sites}
+                  complexTable={complexTable}
+                  plainText={plainText}
+                  verticalAlignment={verticalAlignment}
+                  styleAs="secondary"
+                  isChild
+                />
+              </Tab.Panel>
+            )
+          )}
         </Tab.Panels>
       </Tab.Group>
     </Container>
