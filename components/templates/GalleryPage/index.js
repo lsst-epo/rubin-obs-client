@@ -16,7 +16,7 @@ import Container from "@/layout/Container";
 import ResponsiveImage from "@/atomic/ResponsiveImage";
 import { Video } from "@/components/atomic";
 import Accordion from "@/atomic/Accordion";
-import Buttonish from "@/components/atomic/Buttonish";
+import { Buttonish } from "@/components/atomic";
 import { containerNarrow, respond } from "@/styles/globalStyles";
 
 export default function GalleryPage({

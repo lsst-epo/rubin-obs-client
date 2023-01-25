@@ -10,7 +10,7 @@ import {
   normalizeItemData,
   useListForBlock,
 } from "@/lib/utils";
-import MixedLink from "@/components/atomic/MixedLink";
+import { MixedLink } from "@/components/atomic/";
 import { mixedLinkShape } from "@/components/shapes/link";
 
 const SlideBlock = ({

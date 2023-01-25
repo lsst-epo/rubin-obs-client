@@ -7,7 +7,7 @@ import StudentsSvg from "./CalloutQuote/StudentsSvg";
 import StudentsMobileSvg from "./CalloutQuote/StudentsMobileSvg";
 import EducatorsSvg from "./CalloutQuote/EducatorsSvg";
 import EducatorsMobileSvg from "./CalloutQuote/EducatorsMobileSvg";
-import Buttonish from "@/components/atomic/Buttonish";
+import { Buttonish } from "@/components/atomic";
 
 export default function CalloutQuote({ callout }) {
   const { header, text, links, quote, attribution, imageQuote, colorScheme } =

@@ -1,6 +1,6 @@
 /* eslint-disable */
 import styled from "styled-components";
-import AtomicMixedLink from "@/atomic/MixedLink";
+import { MixedLink as BaseMixedLink } from "@rubin-epo/epo-react-lib";
 import SharePopupComponent from "@/layout/SharePopup";
 import {
   BREAK_PHABLET,
@@ -20,7 +20,7 @@ export const ListItem = styled.li`
   position: relative;
 `;
 
-export const MixedLink = styled(AtomicMixedLink)`
+export const MixedLink = styled(BaseMixedLink)`
   position: relative;
   display: grid;
   grid-template-columns: 1fr;

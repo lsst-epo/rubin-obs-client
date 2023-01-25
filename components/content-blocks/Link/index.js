@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import MixedLink from "@/atomic/MixedLink";
+import { MixedLink } from "@/components/atomic/";
 import Container from "@/layout/Container";
 import { mixedLinkShape } from "@/shapes/link";
 

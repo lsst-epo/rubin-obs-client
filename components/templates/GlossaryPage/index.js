@@ -4,7 +4,7 @@ import Breadcrumbs from "@/page/Breadcrumbs";
 import { useCustomBreadcrumbs, useDamAssetAsImage } from "@/lib/utils";
 import Container from "@/components/layout/Container";
 import { Share } from "@/content-blocks";
-import Buttonish from "@/atomic/Buttonish";
+import { Buttonish } from "@/components/atomic";
 import ResponsiveImage from "@/atomic/ResponsiveImage";
 import { useTranslation } from "react-i18next";
 
