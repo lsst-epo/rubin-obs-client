@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import Container from "@/layout/Container";
-import MixedLink from "@/atomic/MixedLink";
+import { MixedLink } from "@/components/atomic/";
 import T from "@/page/Translate";
 import { usePathData } from "@/lib/utils";
 import { layoutGrid, respond } from "@/styles/globalStyles";

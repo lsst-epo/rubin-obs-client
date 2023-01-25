@@ -1,10 +1,10 @@
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import groupBy from "lodash/groupBy";
 import sortBy from "lodash/sortBy";
-import MixedLink from "@/atomic/MixedLink";
+import { MixedLink } from "@/components/atomic/";
 import DataList from "@/dynamic/DataList";
 import Container from "@/components/layout/Container";
-import Columns from "@/components/layout/Columns";
+import { Columns } from "@rubin-epo/epo-react-lib";
 import * as Styled from "./styles";
 
 // eslint-disable-next-line react/prop-types

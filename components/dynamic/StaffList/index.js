@@ -6,7 +6,7 @@ import Grid from "@/layout/Grid";
 import Tile from "@/atomic/Tile";
 import Pagination from "@/page/Pagination";
 import { fluidScale } from "@/styles/globalStyles";
-import Buttonish from "@/components/atomic/Buttonish";
+import { Buttonish } from "@/components/atomic";
 
 const StaffList = ({
   component,

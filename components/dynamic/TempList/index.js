@@ -3,7 +3,7 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Container from "@/layout/Container";
-import MixedLink from "@/components/atomic/MixedLink";
+import { MixedLink } from "@/components/atomic/";
 import { respond } from "@/styles/globalStyles";
 import { allData } from "./data";
 import { mixedLinkShape } from "@/components/shapes/link";
