@@ -9,7 +9,7 @@ import {
   respond,
 } from "@/styles/globalStyles";
 import { useTranslation } from "react-i18next";
-import MixedLink from "@/atomic/MixedLink";
+import { MixedLink } from "@/components/atomic/";
 import T from "@/page/Translate";
 import { useOnClickOutside } from "@/hooks/listeners";
 import {

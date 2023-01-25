@@ -12,7 +12,7 @@ import {
   useGlobalData,
 } from "@/lib/utils";
 import IconComposer from "@/svg/IconComposer";
-import Buttonish from "@/components/atomic/Buttonish";
+import { Buttonish } from "@/components/atomic";
 import * as Styled from "./styles";
 
 const EventList = ({

@@ -1,5 +1,4 @@
-import { Image } from "@/components/atomic/";
-import MixedLink from "@/atomic/MixedLink";
+import { Image, MixedLink } from "@/components/atomic/";
 import styled from "styled-components";
 import {
   fluidScale,

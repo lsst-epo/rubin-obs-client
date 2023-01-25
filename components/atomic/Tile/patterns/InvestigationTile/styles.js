@@ -1,6 +1,6 @@
 /* eslint-disable */
 import styled from "styled-components";
-import BaseMixedLink from "@/atomic/MixedLink";
+import { MixedLink as BaseMixedLink } from "@rubin-epo/epo-react-lib";
 import { BREAK_PHABLET, fluidScale } from "@/styles/globalStyles";
 
 export const Image = styled.div`
@@ -18,7 +18,7 @@ export const Image = styled.div`
   border-color: var(--Tile-border-color, var(--Tile-image-bg-color));
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
-  transition: backgroud-color 0.2s;
+  transition: background-color 0.2s;
 
   img {
     width: ${fluidScale("200px", "150px")};

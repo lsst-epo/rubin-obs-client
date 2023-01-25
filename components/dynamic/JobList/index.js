@@ -9,7 +9,7 @@ import Pagination from "@/page/Pagination";
 import IconComposer from "@/svg/IconComposer";
 import { checkIfBetweenDates, createLocationString } from "@/lib/utils";
 import { fluidScale } from "@/styles/globalStyles";
-import Buttonish from "@/components/atomic/Buttonish";
+import { Buttonish } from "@/components/atomic";
 
 const JobList = ({
   button,
