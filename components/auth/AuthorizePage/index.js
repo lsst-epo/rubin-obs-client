@@ -60,7 +60,7 @@ export default function AuthorizePage({ typeHandle, children }) {
             i18nKey="restricted.message"
             values={{ context }}
             components={[
-              <a href="mailto:webmaster@lsst.org" key="link">
+              <a href="mailto:epo-feedback@lsst.org" key="link">
                 link
               </a>,
             ]}
