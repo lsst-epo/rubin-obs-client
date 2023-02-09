@@ -64,7 +64,7 @@ function normalizeLanguage(language) {
 
 // TODO: store refresh token in cookie so token can be refreshed after browser session ends
 export default function useAuthentication(data) {
-  const { query, push } = useRouter();
+  const { query, push, asPath } = useRouter();
 
   const [token, setToken] = useState(getTokenFromStorage("jwt"));
   const [user, setUser] = useState(getUserFromJwt());
@@ -111,7 +111,6 @@ export default function useAuthentication(data) {
 
   useEffect(() => {
     if (!query.code || !query.facebook) return;
-
     (async () => await authenticateWithFacebook({ code: query.code }))();
   }, [query]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -249,6 +248,7 @@ export default function useAuthentication(data) {
     maybeRedirectToPreferredLanguage(
       data.authenticate?.user?.preferredLanguage
     );
+
     return handleSuccess(data.authenticate);
   }
 
@@ -349,9 +349,21 @@ export default function useAuthentication(data) {
     setError(false);
 
     const data = await getFacebookOauthUrl();
-
     if (data?.facebookOauthUrl) {
-      window.open(data.facebookOauthUrl, "_self");
+      const facebookOauthUrl = data.facebookOauthUrl;
+      const state = asPath.split("?")[0];
+      const startSplitter = "&state=";
+      const endSplitter = "&response_type";
+      const startOfFacebookOauthUrl = facebookOauthUrl.split(startSplitter)[0];
+      const endOfFacebookOauthUrl = facebookOauthUrl.split(endSplitter).pop();
+      const reAssembledFacebookOauthUrl = [
+        startOfFacebookOauthUrl,
+        startSplitter,
+        state,
+        endSplitter,
+        endOfFacebookOauthUrl,
+      ].join("");
+      window.open(reAssembledFacebookOauthUrl, "_self");
     } else {
       handleError(data);
     }
