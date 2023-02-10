@@ -1,5 +1,5 @@
 import { Share } from "@/components/atomic";
-import Container from "@/layout/Container";
+import { Container } from "@rubin-epo/epo-react-lib";
 
 export default function ShareContentBlock() {
   return (

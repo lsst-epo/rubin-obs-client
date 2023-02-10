@@ -6,7 +6,7 @@ import useToggle from "@/hooks/useToggle";
 import { tokens } from "@/styles/globalStyles";
 import { stripUnit } from "@castiron/style-mixins/dist/base";
 import useResizeObserver from "use-resize-observer";
-import Container from "../Container";
+import { Container } from "@rubin-epo/epo-react-lib";
 import * as Styled from "./styles";
 
 const BREAKPOINT = stripUnit(tokens.BREAK_PHABLET);

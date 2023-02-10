@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import imageShape from "@/shapes/image";
 import { linksShape } from "@/shapes/link";
-import Container from "@/components/layout/Container";
+import { Container } from "@rubin-epo/epo-react-lib";
 import * as Styled from "./CalloutQuote/styles";
 import StudentsSvg from "./CalloutQuote/StudentsSvg";
 import StudentsMobileSvg from "./CalloutQuote/StudentsMobileSvg";
