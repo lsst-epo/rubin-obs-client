@@ -53,7 +53,7 @@
     "@castiron/style-mixins": "^1.0.6",
     "@headlessui/react": "^1.6.6",
     "@popperjs/core": "^2.11.5",
-    "@rubin-epo/epo-react-lib": "^1.0.12",
+    "@rubin-epo/epo-react-lib": "^1.0.16",
     "add": "^2.0.6",
     "classnames": "^2.3.1",
     "feed": "^4.2.2",

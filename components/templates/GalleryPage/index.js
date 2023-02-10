@@ -12,7 +12,7 @@ import {
 } from "@/lib/utils";
 import Body from "@/global/Body";
 import Breadcrumbs from "@/page/Breadcrumbs";
-import Container from "@/layout/Container";
+import { Container } from "@rubin-epo/epo-react-lib";
 import ResponsiveImage from "@/atomic/ResponsiveImage";
 import { Video } from "@/components/atomic";
 import Accordion from "@/atomic/Accordion";

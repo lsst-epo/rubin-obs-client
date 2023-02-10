@@ -5,7 +5,7 @@ import pageShape from "@/shapes/page";
 import Body from "@/global/Body";
 import ContentBlockFactory from "@/factories/ContentBlockFactory";
 import DynamicComponentFactory from "@/factories/DynamicComponentFactory";
-import Container from "@/layout/Container";
+import { Container } from "@rubin-epo/epo-react-lib";
 import Breadcrumbs from "@/page/Breadcrumbs";
 import FilterBar from "@/components/page/FilterBar";
 import SlideBlock from "@/components/content-blocks/SlideBlock";

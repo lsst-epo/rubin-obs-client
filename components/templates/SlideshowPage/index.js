@@ -6,8 +6,10 @@ import { useTranslation } from "react-i18next";
 import { useCustomBreadcrumbs } from "@/lib/utils";
 import Body from "@/global/Body";
 import Breadcrumbs from "@/page/Breadcrumbs";
-import Container from "@/layout/Container";
-import { CarouselLayout as Carousel } from "@rubin-epo/epo-react-lib";
+import {
+  CarouselLayout as Carousel,
+  Container,
+} from "@rubin-epo/epo-react-lib";
 import ResponsiveImage from "@/atomic/ResponsiveImage";
 import { Buttonish } from "@/components/atomic";
 import { containerFull, respond } from "@/styles/globalStyles";

@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import Pagination from "@/page/Pagination";
 import DataList from "@/dynamic/DataList";
-import MasonryGrid from "@/components/layout/MasonryGrid";
+import { MasonryGrid } from "@rubin-epo/epo-react-lib";
 
 const GalleryList = ({ excludeId = null, limit = 20, component }) => {
   return (

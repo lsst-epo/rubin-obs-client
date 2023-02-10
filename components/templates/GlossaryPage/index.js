@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import Body from "@/global/Body";
 import Breadcrumbs from "@/page/Breadcrumbs";
 import { useCustomBreadcrumbs, useDamAssetAsImage } from "@/lib/utils";
-import Container from "@/components/layout/Container";
+import { Container } from "@rubin-epo/epo-react-lib";
 import { Share } from "@/content-blocks";
 import { Buttonish } from "@/components/atomic";
 import ResponsiveImage from "@/atomic/ResponsiveImage";

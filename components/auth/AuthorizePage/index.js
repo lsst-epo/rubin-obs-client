@@ -3,7 +3,7 @@ import { Trans, useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
 import { useAuthModal, useIsMounted } from "@/hooks";
 import { useAuthenticationContext } from "@/contexts/Authentication";
-import Container from "@/components/layout/Container";
+import { Container } from "@rubin-epo/epo-react-lib";
 import { Button, Buttonish } from "@/components/atomic";
 import * as Styled from "./styles";
 

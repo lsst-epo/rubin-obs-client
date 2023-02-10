@@ -12,9 +12,8 @@ import {
 import { fluidScale } from "@/styles/globalStyles";
 import Breadcrumbs from "@/components/page/Breadcrumbs";
 import { Buttonish } from "@/components/atomic";
-import Container from "@/layout/Container";
+import { Container, Grid } from "@rubin-epo/epo-react-lib";
 import DataList from "@/dynamic/DataList";
-import Grid from "@/layout/Grid";
 import Tile from "@/atomic/Tile";
 import Pagination from "@/page/Pagination";
 
