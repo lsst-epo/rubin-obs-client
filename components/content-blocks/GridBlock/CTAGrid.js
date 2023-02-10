@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import Grid from "@/layout/Grid";
+import { Grid } from "@rubin-epo/epo-react-lib";
 import Tile from "@/atomic/Tile";
 
 const CTAGrid = ({ items, limit }) => {

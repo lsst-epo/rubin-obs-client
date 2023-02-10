@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
-import Container from "@/layout/Container";
+import { Container } from "@rubin-epo/epo-react-lib";
 import { MixedLink } from "@/components/atomic/";
 import T from "@/page/Translate";
 import { usePathData } from "@/lib/utils";

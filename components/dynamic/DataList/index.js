@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import Container from "@/layout/Container";
+import { Container } from "@rubin-epo/epo-react-lib";
 import {
   usePathData,
   normalizePathData,

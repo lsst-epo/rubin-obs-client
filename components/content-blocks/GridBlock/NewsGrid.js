@@ -6,7 +6,7 @@ import {
   useGlobalData,
   useList,
 } from "@/lib/utils";
-import Grid from "@/layout/Grid";
+import { Grid } from "@rubin-epo/epo-react-lib";
 import Tile from "@/atomic/Tile";
 
 const NewsGrid = ({ items = [], limit, listTypeId, sectionHandle, pageId }) => {

@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { useCustomBreadcrumbs, useDateString } from "@/lib/utils";
 import Body from "@/global/Body";
 import ContentBlockFactory from "@/factories/ContentBlockFactory";
-import Container from "@/layout/Container";
+import { Container } from "@rubin-epo/epo-react-lib";
 import { Share } from "@/content-blocks";
 import Breadcrumbs from "@/page/Breadcrumbs";
 import Hero from "@/page/Hero";

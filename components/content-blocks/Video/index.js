@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import Container from "@/layout/Container";
+import { Container } from "@rubin-epo/epo-react-lib";
 import { Video, Figure } from "@/components/atomic";
 import { useIsMounted } from "@/hooks";
 

@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { Image } from "@/components/atomic/";
 import imageShape from "@/shapes/image";
-import Container from "@/layout/Container";
+import { Container } from "@rubin-epo/epo-react-lib";
 import { Figure } from "@/components/atomic";
 import * as Styled from "./styles";
 

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useTranslation, Trans } from "react-i18next";
 import Body from "@/global/Body";
 import { useIsMounted } from "@/hooks";
-import Container from "@/components/layout/Container";
+import { Container } from "@rubin-epo/epo-react-lib";
 import IconComposer from "@/components/svg/IconComposer";
 import AuthorizePage from "@/components/auth/AuthorizePage";
 import { useAuthenticationContext } from "@/contexts/Authentication";

@@ -12,7 +12,7 @@ import Hero from "@/page/Hero";
 import ContentBlockFactory from "@/factories/ContentBlockFactory";
 import { Share } from "@/content-blocks";
 import Breadcrumbs from "@/page/Breadcrumbs";
-import Container from "@/layout/Container";
+import { Container } from "@rubin-epo/epo-react-lib";
 import EventList from "@/dynamic/EventList";
 
 export default function EventPage({

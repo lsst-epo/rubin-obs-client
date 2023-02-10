@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import Container from "@/components/layout/Container";
+import { Container } from "@rubin-epo/epo-react-lib";
 import { useGlobalData } from "@/lib/utils";
 import * as Styled from "./styles";
 

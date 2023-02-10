@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import striptags from "striptags";
 import chunk from "lodash/chunk";
 import Tile from "@/atomic/Tile";
-import Grid from "@/layout/Grid";
+import { Grid } from "@rubin-epo/epo-react-lib";
 import { normalizeItemData, useList } from "@/lib/utils";
 import * as Styled from "./styles";
 

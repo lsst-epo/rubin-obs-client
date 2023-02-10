@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { fileSize } from "@/helpers";
 import * as Styled from "./styles";
-import Container from "@/components/layout/Container";
+import { Container } from "@rubin-epo/epo-react-lib";
 import { Buttonish } from "@/components/atomic";
 
 export default function DownloadList({ assetsList, ...props }) {

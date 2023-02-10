@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { MixedLink } from "@/components/atomic/";
-import Container from "@/layout/Container";
+import { Container } from "@rubin-epo/epo-react-lib";
 import { mixedLinkShape } from "@/shapes/link";
 
 export default function LinkContentBlock({ mixedLink, url, text }) {
