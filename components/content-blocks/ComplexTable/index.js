@@ -1,16 +1,8 @@
 import PropTypes from "prop-types";
-import { Container } from "@rubin-epo/epo-react-lib";
+import * as EPOLib from "@rubin-epo/epo-react-lib";
 import { useGlobalData } from "@/lib/utils";
-import * as Styled from "./styles";
 
-export default function ComplexTable({
-  complexTable,
-  plainText,
-  verticalAlignment,
-  sites = [],
-  styleAs = "primary",
-  isChild = false,
-}) {
+export default function ComplexTable({ sites = [], ...props }) {
   // Think of a cleaner way to handle this site-specific
   // tables visibility blah
   const {
@@ -18,51 +10,11 @@ export default function ComplexTable({
   } = useGlobalData();
   const showTable = sites.includes(language);
 
-  const renderTable = () => (
-    <Styled.TableWrapper>
-      <Styled.Table
-        as="table"
-        $styleAs={styleAs}
-        $verticalAlignment={verticalAlignment}
-      >
-        {plainText && (
-          <Styled.Caption className={isChild && "a-hidden"}>
-            {plainText}
-          </Styled.Caption>
-        )}
-        <tbody>
-          {complexTable.map((row, i) => (
-            <Styled.TableRow key={i}>
-              {row.tableRow.map((cell, j) => (
-                <Styled.TableCell
-                  as={i === 0 ? "th" : "td"}
-                  key={cell.id}
-                  $row={i + 1}
-                  $background={cell.cellBackground}
-                  $hasFlexibleCellWidth={cell.hasFlexibleCellWidth}
-                  colSpan={cell.cellWidth}
-                  dangerouslySetInnerHTML={{ __html: cell.cellContent }}
-                  className="c-content-rte"
-                />
-              ))}
-            </Styled.TableRow>
-          ))}
-        </tbody>
-      </Styled.Table>
-    </Styled.TableWrapper>
-  );
-
-  if (!showTable) return null;
-
-  return isChild ? (
-    renderTable()
-  ) : (
-    <Container width="narrow">{renderTable()}</Container>
-  );
+  return showTable ? <EPOLib.ComplexTable {...props} /> : null;
 }
 
 ComplexTable.propTypes = {
-  complexTable: PropTypes.array,
+  complexTable: PropTypes.array.isRequired,
   plainText: PropTypes.string,
   verticalAlignment: PropTypes.string,
   sites: PropTypes.array,
