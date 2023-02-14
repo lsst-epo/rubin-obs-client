@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
-// import { Button, Link as BaseLink, SSOButton } from "@/components/atomic";
-import { Link as BaseLink, SSOButton } from "@/components/atomic";
+import { Link as BaseLink } from "@rubin-epo/epo-react-lib";
+import { SSOButton } from "@/components/atomic";
 import useAuthModal from "@/hooks/useAuthModal";
 import { useAuthenticationContext } from "@/contexts/Authentication";
 import AuthModal from "../../AuthModal";

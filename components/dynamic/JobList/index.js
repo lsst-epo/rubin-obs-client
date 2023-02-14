@@ -1,14 +1,17 @@
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
-import { Container, Grid } from "@rubin-epo/epo-react-lib";
+import {
+  Container,
+  Grid,
+  Buttonish,
+  IconComposer,
+} from "@rubin-epo/epo-react-lib";
 import DataList from "@/dynamic/DataList";
 import Tile from "@/atomic/Tile";
 import Pagination from "@/page/Pagination";
-import IconComposer from "@/svg/IconComposer";
 import { checkIfBetweenDates, createLocationString } from "@/lib/utils";
 import { fluidScale } from "@/styles/globalStyles";
-import { Buttonish } from "@/components/atomic";
 
 const JobList = ({
   button,

@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useUID } from "react-uid";
-import { Image } from "@/components/atomic/";
+import { Image } from "@rubin-epo/epo-react-lib";
 import * as Styled from "./styles";
 import { useTranslation } from "react-i18next";
 import { useDamAssetAsImage } from "@/lib/utils";

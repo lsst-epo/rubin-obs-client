@@ -1,6 +1,6 @@
 import { fluidScale, pxToEm, respond, tokens } from "@/styles/globalStyles";
 import styled from "styled-components";
-import { MixedLink } from "@/components/atomic/";
+import { MixedLink } from "@rubin-epo/epo-react-lib";
 
 export const Wrapper = styled.div`
   display: flex;

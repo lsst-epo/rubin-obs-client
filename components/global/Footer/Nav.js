@@ -1,4 +1,4 @@
-import { MixedLink } from "@/components/atomic/";
+import { MixedLink } from "@rubin-epo/epo-react-lib";
 import { linksShape } from "@/shapes/link";
 
 export default function Nav({ links }) {

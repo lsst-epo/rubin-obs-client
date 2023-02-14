@@ -4,7 +4,7 @@ import { Popover } from "@headlessui/react";
 import { usePopper } from "react-popper";
 import { useTranslation } from "react-i18next";
 import ShareButtons from "@/atomic/Share";
-import IconComposer from "@/components/svg/IconComposer";
+import { IconComposer } from "@rubin-epo/epo-react-lib";
 import * as Styled from "./styles";
 import { isAbsoluteUrl } from "@/helpers";
 

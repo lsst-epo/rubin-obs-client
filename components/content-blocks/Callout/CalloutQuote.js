@@ -1,13 +1,12 @@
 import PropTypes from "prop-types";
 import imageShape from "@/shapes/image";
 import { linksShape } from "@/shapes/link";
-import { Container } from "@rubin-epo/epo-react-lib";
+import { Container, Buttonish } from "@rubin-epo/epo-react-lib";
 import * as Styled from "./CalloutQuote/styles";
 import StudentsSvg from "./CalloutQuote/StudentsSvg";
 import StudentsMobileSvg from "./CalloutQuote/StudentsMobileSvg";
 import EducatorsSvg from "./CalloutQuote/EducatorsSvg";
 import EducatorsMobileSvg from "./CalloutQuote/EducatorsMobileSvg";
-import { Buttonish } from "@/components/atomic";
 
 export default function CalloutQuote({ callout }) {
   const { header, text, links, quote, attribution, imageQuote, colorScheme } =

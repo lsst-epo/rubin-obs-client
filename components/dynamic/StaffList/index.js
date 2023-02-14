@@ -1,11 +1,10 @@
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { Container, Grid } from "@rubin-epo/epo-react-lib";
+import { Container, Grid, Buttonish } from "@rubin-epo/epo-react-lib";
 import DataList from "@/dynamic/DataList";
 import Tile from "@/atomic/Tile";
 import Pagination from "@/page/Pagination";
 import { fluidScale } from "@/styles/globalStyles";
-import { Buttonish } from "@/components/atomic";
 
 const StaffList = ({
   component,

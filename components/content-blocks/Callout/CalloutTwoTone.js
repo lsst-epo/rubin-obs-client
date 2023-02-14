@@ -12,7 +12,7 @@ import {
   StyledBackgroundImage,
   StyledTwoToneImage,
 } from "./styles";
-import ResponsiveImage from "@/components/atomic/ResponsiveImage";
+import { ResponsiveImage } from "@rubin-epo/epo-react-lib";
 import { useDamAssetAsImage } from "@/lib/utils";
 
 export default function CalloutTwoTone({ callout }) {

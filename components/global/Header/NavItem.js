@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import Link from "next/link";
 import classNames from "classnames";
-import IconComposer from "@/svg/IconComposer";
+import { IconComposer } from "@rubin-epo/epo-react-lib";
 
 function NavItem({ href, onClick, title, theme, className, icon }) {
   // eslint-disable-next-line react/prop-types

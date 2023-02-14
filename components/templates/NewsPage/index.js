@@ -5,13 +5,15 @@ import { useTranslation } from "react-i18next";
 import { useCustomBreadcrumbs, useDateString } from "@/lib/utils";
 import Body from "@/global/Body";
 import ContentBlockFactory from "@/factories/ContentBlockFactory";
-import { Container } from "@rubin-epo/epo-react-lib";
+import {
+  Container,
+  ResponsiveImage,
+  IconComposer,
+} from "@rubin-epo/epo-react-lib";
 import { Share } from "@/content-blocks";
 import Breadcrumbs from "@/page/Breadcrumbs";
 import Hero from "@/page/Hero";
 import NewsList from "@/dynamic/NewsList";
-import ResponsiveImage from "@/atomic/ResponsiveImage";
-import IconComposer from "@/components/svg/IconComposer";
 import {
   containerWide,
   containerFullBleed,
