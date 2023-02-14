@@ -3,7 +3,7 @@ import { useTranslation, Trans } from "react-i18next";
 import { useAuthenticationContext } from "@/contexts/Authentication";
 import RegisterForm from "./RegisterForm";
 import useAuthModal from "@/hooks/useAuthModal";
-import { Button } from "@/components/atomic";
+import { Button } from "@rubin-epo/epo-react-lib";
 import AuthModal from "../AuthModal";
 import JoinForm from "./JoinForm";
 import * as Styled from "./RegisterForm/styles";

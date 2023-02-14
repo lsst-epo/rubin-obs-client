@@ -5,8 +5,15 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { useAuthenticationContext } from "@/contexts/Authentication";
 import useAuthModal from "@/hooks/useAuthModal";
-import { Link as BaseLink, Button, SSOButton } from "@/components/atomic";
-import { Input, FormField, Error, Password } from "@/components/form";
+import { SSOButton } from "@/components/atomic";
+import {
+  Link as BaseLink,
+  Button,
+  Input,
+  FormField,
+  Error,
+  Password,
+} from "@rubin-epo/epo-react-lib";
 import AuthModal from "../AuthModal";
 import * as Styled from "./styles";
 

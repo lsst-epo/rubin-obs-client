@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 import { useOnClickOutside, useKeyDownEvent } from "@/hooks/listeners";
-import IconComposer from "@/svg/IconComposer";
+import { IconComposer } from "@rubin-epo/epo-react-lib";
 import { getSiteString } from "@/lib/utils";
 
 const INPUT_ID = "headerSearchBar";

@@ -3,8 +3,7 @@ import { Trans, useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
 import { useAuthModal } from "@/hooks";
 import { useAuthenticationContext } from "@/contexts/Authentication";
-import { Container } from "@rubin-epo/epo-react-lib";
-import { Button, Buttonish } from "@/components/atomic";
+import { Button, Buttonish, Container } from "@rubin-epo/epo-react-lib";
 import * as Styled from "./styles";
 
 const AUTHORIZED_TYPES = {

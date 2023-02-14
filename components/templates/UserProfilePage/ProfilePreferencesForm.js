@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
-import { Input, Select, Switch, Error } from "@/components/form";
+import { Input, Select, Switch, Error } from "@rubin-epo/epo-react-lib";
 import { updateUser } from "@/lib/api/auth";
 import * as Styled from "./styles";
 

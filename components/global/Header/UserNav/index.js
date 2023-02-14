@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { Popover, Portal } from "@headlessui/react";
 import { useAuthModal, useBoundingBox } from "@/hooks";
-import IconComposer from "@/svg/IconComposer";
+import { IconComposer } from "@rubin-epo/epo-react-lib";
 import { useAuthenticationContext } from "@/contexts/Authentication";
 import * as Styled from "./styles";
 

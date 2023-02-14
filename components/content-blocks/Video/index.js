@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
-import { Container } from "@rubin-epo/epo-react-lib";
-import { Video, Figure } from "@/components/atomic";
+import { Container, Video, Figure } from "@rubin-epo/epo-react-lib";
 import { useIsMounted } from "@/hooks";
 
 export default function VideoBlock({ caption, url }) {

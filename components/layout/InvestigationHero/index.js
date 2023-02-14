@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import * as Styled from "./styles";
-import { Button, Image } from "@/components/atomic";
-import IconComposer from "@/components/svg/IconComposer";
+import { Button, Image, IconComposer } from "@rubin-epo/epo-react-lib";
 import T from "@/page/Translate";
 import { useDamAssetAsImage } from "@/lib/utils";
 

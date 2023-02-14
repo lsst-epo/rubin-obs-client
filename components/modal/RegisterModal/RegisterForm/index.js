@@ -2,8 +2,8 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { useAuthenticationContext } from "@/contexts/Authentication";
-import { Button } from "@/components/atomic";
-import { Error, FormField, Input, PasswordField } from "@/components/form";
+import { Button, Error, FormField, Input } from "@rubin-epo/epo-react-lib";
+import { PasswordField } from "@/components/form/index.js";
 import * as Styled from "./styles";
 import AuthModal from "../../AuthModal";
 

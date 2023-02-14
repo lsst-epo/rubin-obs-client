@@ -7,7 +7,7 @@ import { Share } from "@/content-blocks";
 import StaffList from "@/dynamic/StaffList";
 import ContentBlockFactory from "@/factories/ContentBlockFactory";
 import NestedContext from "@/contexts/Nested";
-import { Image } from "@/components/atomic/";
+import { Image } from "@rubin-epo/epo-react-lib";
 import Breadcrumbs from "@/page/Breadcrumbs";
 import PageContent from "@/page/PageContent";
 import * as Styled from "./styles";

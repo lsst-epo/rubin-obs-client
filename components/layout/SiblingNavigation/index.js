@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
-import { Button } from "@/components/atomic";
 import T from "@/page/Translate";
-import { Container, Grid } from "@rubin-epo/epo-react-lib";
+import { Container, Grid, Button } from "@rubin-epo/epo-react-lib";
 
 export default function SiblingNavigation({ siblings, parent }) {
   if (!siblings) return null;
