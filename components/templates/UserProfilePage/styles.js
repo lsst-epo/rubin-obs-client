@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import { Button as AtomicButton } from "@/components/atomic";
-import { FormField } from "@/components/form";
+import { Button as AtomicButton, FormField } from "@rubin-epo/epo-react-lib";
 import { fluidScale, respond } from "@/styles/globalStyles";
 
 const BREAKPOINT = "600px";

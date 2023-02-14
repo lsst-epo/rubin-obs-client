@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { Button } from "@/components/atomic";
+import { Button } from "@rubin-epo/epo-react-lib";
 import AuthModal from "../AuthModal";
 import * as Styled from "./styles";
 

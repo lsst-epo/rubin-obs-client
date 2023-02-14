@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { Container } from "@rubin-epo/epo-react-lib";
-import { MixedLink } from "@/components/atomic/";
+import { Container, MixedLink } from "@rubin-epo/epo-react-lib";
 import { mixedLinkShape } from "@/shapes/link";
 import CTAGrid from "./CTAGrid";
 import MainGrid from "./MainGrid";

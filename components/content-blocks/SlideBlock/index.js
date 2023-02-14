@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import {
   CarouselLayout as Carousel,
   Container,
+  MixedLink,
 } from "@rubin-epo/epo-react-lib";
 import { SlideTile } from "@/components/atomic";
 import {
@@ -12,7 +13,6 @@ import {
   normalizeItemData,
   useListForBlock,
 } from "@/lib/utils";
-import { MixedLink } from "@/components/atomic/";
 import { mixedLinkShape } from "@/components/shapes/link";
 
 const SlideBlock = ({

@@ -9,9 +9,9 @@ import Breadcrumbs from "@/page/Breadcrumbs";
 import {
   CarouselLayout as Carousel,
   Container,
+  ResponsiveImage,
+  Buttonish,
 } from "@rubin-epo/epo-react-lib";
-import ResponsiveImage from "@/atomic/ResponsiveImage";
-import { Buttonish } from "@/components/atomic";
 import { containerFull, respond } from "@/styles/globalStyles";
 
 export default function SlideshowPage({

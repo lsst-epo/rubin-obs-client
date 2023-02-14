@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { FormButtons as BaseFormButtons } from "@/components/form";
+import { FormButtons as BaseFormButtons } from "@rubin-epo/epo-react-lib";
 import { fluidScale } from "@/styles/globalStyles";
 
 export const JoinAsButtons = styled(BaseFormButtons)`

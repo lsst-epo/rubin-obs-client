@@ -6,7 +6,7 @@ import {
   zStack,
 } from "@/styles/globalStyles";
 import { Dialog as BaseDialog } from "@headlessui/react";
-import { FormButtons as BaseFormButtons } from "@/components/form";
+import { FormButtons as BaseFormButtons } from "@rubin-epo/epo-react-lib";
 
 export const Overlay = styled(BaseDialog.Overlay)`
   background-color: rgba(0, 0, 0, 0.7);

@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { Container } from "@rubin-epo/epo-react-lib";
-import Accordion from "@/atomic/Accordion";
+import { Accordion, Container } from "@rubin-epo/epo-react-lib";
 
 export default function AccordionGroup({ header, accordions }) {
   return (

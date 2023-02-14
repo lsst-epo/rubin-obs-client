@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { Password, FormField } from "@/components/form";
+import { Password, FormField } from "@rubin-epo/epo-react-lib";
 import { forwardRef } from "react";
 
 const PATTERN = [

@@ -1,9 +1,8 @@
 import { useState } from "react";
 import groupBy from "lodash/groupBy";
 import sortBy from "lodash/sortBy";
-import { MixedLink } from "@/components/atomic/";
 import DataList from "@/dynamic/DataList";
-import { Columns, Container } from "@rubin-epo/epo-react-lib";
+import { Columns, Container, MixedLink } from "@rubin-epo/epo-react-lib";
 import * as Styled from "./styles";
 
 // eslint-disable-next-line react/prop-types

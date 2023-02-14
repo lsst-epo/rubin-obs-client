@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useTranslation, Trans } from "react-i18next";
 import { useAuthenticationContext } from "@/contexts/Authentication";
 import useAuthModal from "@/hooks/useAuthModal";
-import { Button } from "@/components/atomic";
+import { Button } from "@rubin-epo/epo-react-lib";
 import AuthModal from "../AuthModal";
 import * as Styled from "./styles";
 

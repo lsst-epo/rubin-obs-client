@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import IconComposer from "@/svg/IconComposer";
-import ExternalLink from "@/atomic/ExternalLink";
+import { ExternalLink, IconComposer } from "@rubin-epo/epo-react-lib";
 import { capitalize } from "@/helpers";
 import { socialInfoShape } from "@/shapes/siteInfo";
 

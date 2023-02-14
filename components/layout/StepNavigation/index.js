@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { ExpandToggle } from "@/components/atomic/";
+import { ExpandToggle, Container } from "@rubin-epo/epo-react-lib";
 import useToggle from "@/hooks/useToggle";
 import { tokens } from "@/styles/globalStyles";
 import { stripUnit } from "@castiron/style-mixins/dist/base";
 import useResizeObserver from "use-resize-observer";
-import { Container } from "@rubin-epo/epo-react-lib";
 import * as Styled from "./styles";
 
 const BREAKPOINT = stripUnit(tokens.BREAK_PHABLET);

@@ -5,7 +5,7 @@ import Body from "@/global/Body";
 import ContentBlockFactory from "@/factories/ContentBlockFactory";
 import Hero from "@/page/Hero";
 import { respond } from "@/styles/globalStyles";
-import { Buttonish, MixedLink } from "@/components/atomic";
+import { Buttonish, MixedLink } from "@rubin-epo/epo-react-lib";
 import { makeDateString, makeTruncatedString } from "@/lib/utils";
 import { SlideBlock } from "@/components/content-blocks";
 import Tabs from "@/components/layout/Tabs";

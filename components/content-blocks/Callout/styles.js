@@ -1,4 +1,4 @@
-import { Image, MixedLink } from "@/components/atomic/";
+import { Image, MixedLink } from "@rubin-epo/epo-react-lib";
 import styled from "styled-components";
 import {
   fluidScale,

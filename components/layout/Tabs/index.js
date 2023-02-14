@@ -2,7 +2,7 @@ import React, { useState, useRef, Children, cloneElement } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { respond } from "@/styles/globalStyles";
-import IconComposer from "@/components/svg/IconComposer";
+import { IconComposer } from "@rubin-epo/epo-react-lib";
 
 const Tabs = ({ children, labels, defaultTab = 0 }) => {
   const [active, setActive] = useState(defaultTab);
