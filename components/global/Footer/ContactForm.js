@@ -47,12 +47,8 @@ function ContactForm({ topics = [], className }) {
     const formData = new FormData(event.target);
 
     await postFormData(formData)
-      .then((data) => {
-        if (data.success) {
-          setStatus("success");
-        } else {
-          setStatus("error");
-        }
+      .then(() => {
+        setStatus("success");
       })
       .catch((error) => {
         setStatus("error");
