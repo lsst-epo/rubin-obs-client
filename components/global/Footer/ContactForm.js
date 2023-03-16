@@ -14,6 +14,7 @@ async function postFormData(data) {
   const objectifiedData = Object.fromEntries(data);
   const body = JSON.stringify({
     ...objectifiedData,
+    fromName: "",
     message: {
       body: objectifiedData.message,
       Topic: objectifiedData.topic,
