@@ -29,6 +29,6 @@ SubHero.propTypes = {
     "educatorPages",
     "investigationLandingPage",
   ]),
-  colorScheme: PropTypes.oneOf(["student", "educator"]),
+  colorScheme: PropTypes.oneOf(["default", "student", "educator"]),
   nested: PropTypes.bool,
 };
