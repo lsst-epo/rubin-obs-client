@@ -38,9 +38,6 @@ module.exports = withPWA({
   typescript: {
     ignoreBuildErrors: true,
   },
-  images: {
-    unoptimized: true
-  },
   sassOptions: {
     includePaths: [
       path.join(__dirname, "theme/styles"),
