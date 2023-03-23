@@ -11,8 +11,6 @@ import GlobalStyles from "@/styles/globalStyles";
 import styles from "@/styles/styles.scss";
 
 const PLAUSIBLE_DOMAIN = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
-const PAGEPROOFER_ID = process.env.NEXT_PUBLIC_PAGEPROOFER_ID;
-const LEVELACCESS_ID = process.env.NEXT_PUBLIC_LEVELACCESS_ID;
 
 function Client({ Component, pageProps }) {
   const authData = useAuthentication({
@@ -30,20 +28,6 @@ function Client({ Component, pageProps }) {
             data-domain={PLAUSIBLE_DOMAIN}
             src="https://plausible.io/js/plausible.js"
             strategy="afterInteractive"
-          />
-        )}
-        {PAGEPROOFER_ID && (
-          <Script
-            id="page-proofer-snippet"
-            src={`https://app.pageproofer.com/embed/${PAGEPROOFER_ID}`}
-            strategy="lazyOnload"
-          />
-        )}
-        {LEVELACCESS_ID && (
-          <Script
-            id="level-access-snippet"
-            src={`https://cdn.levelaccess.net/accessjs/${LEVELACCESS_ID}/access.js`}
-            strategy="lazyOnload"
           />
         )}
         <GlobalStyles />
