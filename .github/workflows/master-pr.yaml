@@ -39,8 +39,6 @@ jobs:
         --build-arg NEXT_PUBLIC_BASE_URL=https://int.rubinobs.org \
         --build-arg NEXT_PUBLIC_GOOGLE_APP_ID=688095955960-t0fpaj4ec3gh5vsr9lhg8govapk2oeo9.apps.googleusercontent.com \
         --build-arg NEXT_PUBLIC_CONTACT_FORM_POST_URL=https://api-int.rubinobs.org/actions/contact-form/send \
-        --build-arg NEXT_PUBLIC_LEVELACCESS_ID= \
-        --build-arg NEXT_PUBLIC_PAGEPROOFER_ID= \
         --build-arg NEXT_PUBLIC_PLAUSIBLE_DOMAIN= \
         .
     - name: Configure Docker Auth
