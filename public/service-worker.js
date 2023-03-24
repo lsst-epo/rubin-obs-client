@@ -75,7 +75,8 @@ self.addEventListener('fetch', event => {
             }).catch(reason => {
               console.log("inside of catch")
               console.log(reason);
-              return fetch(event.request);
+              // return fetch(event.request);
+              return
             });
         } else {
           console.log("url: ", event.request.url);
