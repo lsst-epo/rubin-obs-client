@@ -1,13 +1,13 @@
 const path = require("path");
 const nextBuildId = require("next-build-id");
-const cacheStrategy = require("./public/cache.js");
+// const cacheStrategy = require("./public/cache.js");
 
 let API_URL;
 
-const withPWA = require('next-pwa')({
-  dest: 'public',
-  runtimeCaching: cacheStrategy
-});
+// const withPWA = require('next-pwa')({
+//   dest: 'public',
+//   runtimeCaching: cacheStrategy
+// });
 
 // Check to see if the environment variable DOCKER_GATEWAY_IP is populated, if so
 // then the URL should be constructed for a Docker static build
@@ -20,7 +20,8 @@ const withPWA = require('next-pwa')({
 //   API_URL = `http://${process.env.DOCKER_GATEWAY_IP}:${process.env.DOCKER_GATEWAY_PORT}`;
 // }
 
-module.exports = withPWA({
+// module.exports = withPWA({
+  module.exports = {
   async generateBuildId() {
     return nextBuildId({ dir: __dirname });
   },
@@ -51,4 +52,5 @@ module.exports = withPWA({
     };
     return config;
   }
-});
+// });
+  };
