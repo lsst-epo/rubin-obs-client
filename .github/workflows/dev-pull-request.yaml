@@ -50,7 +50,7 @@ jobs:
       run: docker push gcr.io/${{ secrets.SV_PROJ_NAME }}/rubin-obs-client:${{ github.sha }}
 
     - name: Get app.yaml
-      run: gcloud secrets versions access latest --secret=rubin-obs-client-appyaml > app.yaml
+      run: gcloud secrets versions access latest --secret=service-worker-rubin-obs-client > app.yaml
 
     - name: Format version name
       id: version_name
