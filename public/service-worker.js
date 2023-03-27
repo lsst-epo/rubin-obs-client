@@ -102,8 +102,8 @@ self.addEventListener('fetch', event => {
         //   console.log("url: ", event.request.url);
         // }
         console.log("at the end of the method");
-        // return fetch(event.request);
-        return
+        return fetch(event.request);
+        // return
       })
   );  
   
