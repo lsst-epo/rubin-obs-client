@@ -66,32 +66,38 @@ self.addEventListener('fetch', event => {
               // return fetch(event.request);
               return
             });
-        } else { // For everything else
-          caches.match(event.request).then(cacheResponse => {
-            if(cacheResponse) {
-              caches.match(`rubin_obs_cache_${event.request.url}`).then(cacheTimeoutResponse => {
-                cacheTimeoutResponse.json().then(cacheTimeoutResponseObj => {
-                  console.log("cacheTimeoutResponseObj", cacheTimeoutResponseObj);
-                  let ONE_MINUTE = 60 * 1000; 
-                  if((Date.now() - cacheTimeoutResponseObj) < ONE_MINUTE) {
-                    return cacheResponse
-                  } else {
-                    return fetch(event.request);
-                  }
-                })
-              });
-            }
-            caches.open(CACHE_NAME).then(cache => {
-                cache.add(event.request.url);
-                cache.put(`rubin_obs_cache_${event.request.url}`, new Response(Date.now()));
-            });
+          }
+
+          /**
+           * Commented out for now
+           */
+
+        // } else { // For everything else
+        //   caches.match(event.request).then(cacheResponse => {
+        //     if(cacheResponse) {
+        //       caches.match(`rubin_obs_cache_${event.request.url}`).then(cacheTimeoutResponse => {
+        //         cacheTimeoutResponse.json().then(cacheTimeoutResponseObj => {
+        //           console.log("cacheTimeoutResponseObj", cacheTimeoutResponseObj);
+        //           let ONE_MINUTE = 60 * 1000; 
+        //           if((Date.now() - cacheTimeoutResponseObj) < ONE_MINUTE) {
+        //             return cacheResponse
+        //           } else {
+        //             return fetch(event.request);
+        //           }
+        //         })
+        //       });
+        //     }
+        //     caches.open(CACHE_NAME).then(cache => {
+        //         cache.add(event.request.url);
+        //         cache.put(`rubin_obs_cache_${event.request.url}`, new Response(Date.now()));
+        //     });
             
-            return fetch(event.request);
-          }).catch(reason => {
-            console.log(reason);
-            return
-          });
-        } 
+        //     return fetch(event.request);
+        //   }).catch(reason => {
+        //     console.log(reason);
+        //     return
+        //   });
+        // } 
         // else {
         //   console.log("url: ", event.request.url);
         // }
