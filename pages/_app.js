@@ -25,7 +25,8 @@ function Client({ Component, pageProps }) {
   useEffect(() => {
     if ("serviceWorker" in navigator) {
       // navigator.serviceWorker.register("service-worker.js");
-      navigator.serviceWorker.register(`${window.location.origin}/service-worker.js`);
+      const serverWorkerUrl = `${window.location.origin}/service-worker.js`;
+      navigator.serviceWorker.register(serverWorkerUrl);
     }
   }, []);
 
