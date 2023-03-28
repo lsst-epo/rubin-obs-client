@@ -32,6 +32,10 @@ module.exports = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  compiler: {
+    // Enables the styled-components SWC transform
+    styledComponents: true,
+  },
   sassOptions: {
     includePaths: [
       path.join(__dirname, "theme/styles"),
