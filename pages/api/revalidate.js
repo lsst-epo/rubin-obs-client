@@ -19,7 +19,7 @@ async function handler(req, res) {
 
   try {
     await res.revalidate(`/${query.uri}`);
-    return res.json({ revalidated: true });
+    return res.status(200).json({ revalidated: true });
   } catch (error) {
     console.error(error);
     // If there was an error, Next.js will continue
