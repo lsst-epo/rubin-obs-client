@@ -76,18 +76,20 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params: { uriSegments }, previewData }) {
   const runId = Date.now().toString();
   const site = getSiteString(uriSegments);
-  const uri =
-    uriSegments && uriSegments.length
-      ? uriSegments.join("/")
-      : CRAFT_HOMEPAGE_URI;
-  setEdcLog(runId, "Starting new client build for " + site, "BUILD_START");
+  const isPreview = previewData && uriSegments[0] === "preview-in-craft-cms";
+  let uri = CRAFT_HOMEPAGE_URI;
 
+  if (isPreview) {
+    uri = previewData.uri;
+  } else if (uriSegments && uriSegments.length) {
+    uri = uriSegments.join("/");
+  }
+
+  setEdcLog(runId, "Starting new client build for " + site, "BUILD_START");
   const data = await getGlobalData();
   // add _es to property names if site is "es"
   const isEspanol = site === "es";
 
-  // Beginning of bug fix
-  // .reduce() needs to check for null before attempting to use
   const globalKey = `globals${isEspanol ? "_es" : ""}`;
   let globals;
   if (data[globalKey] === undefined || data[globalKey] === null) {
@@ -100,12 +102,7 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
     );
   }
 
-  const entrySectionType = await getEntrySectionTypeByUri(
-    uri,
-    site,
-    previewData?.previewToken
-  );
-
+  const entrySectionType = await getEntrySectionTypeByUri(uri, site);
   // Handle 404 if there is no data
   if (!entrySectionType) {
     setEdcLog(runId, "404 encountered building for " + uri, "BUILD_ERROR_404");
@@ -120,16 +117,12 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
     section,
     type,
     site,
-    previewData?.previewToken
+    isPreview ? previewData?.previewToken : undefined
   );
 
   const currentId = entryData?.id || entryData?.entry?.id;
 
-  const breadcrumbs = await getBreadcrumbs(
-    currentId,
-    site,
-    previewData?.previewToken
-  );
+  const breadcrumbs = await getBreadcrumbs(currentId, site);
   const globalData = {
     categories: data?.[`allCategories${isEspanol ? "_es" : ""}`] || [],
     footerContent: globals?.footer || {},

@@ -1,42 +1,46 @@
 import { isCraftPreview } from "@/helpers";
-import { getPageUrlByUid } from "@/api/pages";
+import { getEntryDataByUid } from "@/api/entry";
 
 const preview = async (req, res) => {
   const { query } = req;
   const isPreview = isCraftPreview(query);
-  const previewToken = query.token || null;
+  const previewToken = query.token || undefined;
 
-  if (!query.entryUid) {
+  if (!query.entryUid)
     return res
       .status(401)
       .json({ message: "Not allowed to access this route" });
-  }
 
-  let site = "default";
-  if (query.site === "ES") {
-    site = "es";
-  }
+  if (!isPreview || !previewToken)
+    return res.status(401).json({
+      message: `Preview token must be provided to view entry "${query.entryUid}"`,
+    });
 
   // Fetch the headless CMS to check if the provided entry exists
-  const entry = await getPageUrlByUid(query.entryUid, site, previewToken);
-  if (!entry?.url) {
+  const site = query.site === "ES" ? "es" : "default";
+  const entry = await getEntryDataByUid(query.entryUid, site, previewToken);
+  if (!entry?.uri)
     return res.status(401).json({
-      message: `URL of the entry "${query.entryUid}" could not be fetched`,
+      message: `URI of the entry "${query.entryUid}" could not be fetched`,
     });
-  }
 
+  // const { pathname } = new URL(entry.url.replace("/es/es", "/es"));
+  const { uri } = entry;
+  const previewUri = `/preview-in-craft-cms/${uri}`;
   // Enable Preview Mode by setting the cookies
-  if (previewToken) {
-    res.setPreviewData({
+  res.setPreviewData(
+    {
       previewToken,
-    });
-  }
-
-  const parsedUrl = new URL(entry.url.replace("/es/es", "/es"));
+      uri,
+    },
+    {
+      maxAge: 120,
+      path: previewUri,
+    }
+  );
 
   // Redirect to the path from the fetched url
-  res.writeHead(307, { Location: parsedUrl.pathname });
-  res.end();
+  res.redirect(previewUri);
 };
 
 export default preview;
