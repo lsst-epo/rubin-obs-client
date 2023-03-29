@@ -11,9 +11,9 @@ const preview = async (req, res) => {
       .status(401)
       .json({ message: "Not allowed to access this route" });
 
-  if (!isPreview || !previewToken)
+  if (!isPreview)
     return res.status(401).json({
-      message: `Preview token must be provided to view entry "${query.entryUid}"`,
+      message: `Preview Mode must be enabled to view entry "${query.entryUid}"`,
     });
 
   // Fetch the headless CMS to check if the provided entry exists
@@ -27,20 +27,24 @@ const preview = async (req, res) => {
   // const { pathname } = new URL(entry.url.replace("/es/es", "/es"));
   const { uri } = entry;
   const previewUri = `/preview-in-craft-cms/${uri}`;
-  // Enable Preview Mode by setting the cookies
-  res.setPreviewData(
-    {
-      previewToken,
-      uri,
-    },
-    {
-      maxAge: 120,
-      path: previewUri,
-    }
-  );
 
-  // Redirect to the path from the fetched url
-  res.redirect(previewUri);
+  if (previewToken) {
+    // Enable Preview Mode by setting the cookies
+    res.setPreviewData(
+      {
+        previewToken,
+        uri,
+      },
+      {
+        maxAge: 120,
+        path: previewUri,
+      }
+    );
+    // Redirect to the path from the fetched url
+    res.redirect(previewUri);
+  } else {
+    res.redirect(uri);
+  }
 };
 
 export default preview;
