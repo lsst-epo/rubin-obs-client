@@ -3,7 +3,8 @@ import { isCraftPreview } from "@/helpers";
 async function handler(req, res) {
   const { query } = req;
   const isPreview = isCraftPreview(query);
-
+  // eslint-disable-next-line no-console
+  console.log("Revalidation requested", query.uri, query.secret);
   if (isPreview) {
     return res.status(401).json({
       message:
@@ -11,14 +12,20 @@ async function handler(req, res) {
     });
   }
 
-  if (query.secret !== process.env.CRAFT_REVALIDATE_SECRET_TOKEN)
+  if (query.secret !== process.env.CRAFT_REVALIDATE_SECRET_TOKEN) {
+    console.warn("Invalid token");
     return res.status(401).json({ error: "Invalid token" });
+  }
 
-  if (!query.uri)
+  if (!query.uri) {
+    console.warn(`The parameter "uri" is required.`);
     return res.status(500).json({ error: `The parameter "uri" is required.` });
+  }
 
   try {
     await res.revalidate(`/${query.uri}`);
+    // eslint-disable-next-line no-console
+    console.log(`Revalidated ${query.uri}`);
     return res.status(200).json({ revalidated: true });
   } catch (error) {
     console.error(error);
