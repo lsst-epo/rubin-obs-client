@@ -13,6 +13,7 @@
     "static:build": "next build --debug",
     "static:export": "next export",
     "start": "next start -p 8080",
+    "bs": "next build && next start -p 3000",
     "lint": "npm-run-all lint:*",
     "lint:js": "eslint -c .eslintrc.js \"**/*.{js,jsx}\"",
     "lint:scss": "stylelint --config .stylelintrc.js \"**/*.scss\"",
