@@ -3,6 +3,8 @@ import { isCraftPreview } from "@/helpers";
 async function handler(req, res) {
   const { query } = req;
   const isPreview = isCraftPreview(query);
+  // eslint-disable-next-line no-console
+  console.log("Revalidation requested", query.uri, query.secret);
 
   if (isPreview) {
     return res.status(401).json({
@@ -23,6 +25,8 @@ async function handler(req, res) {
 
   try {
     await res.revalidate(`/${query.uri}`);
+    // eslint-disable-next-line no-console
+    console.log(`Revalidated ${query.uri}`);
     return res.status(200).json({ revalidated: true });
   } catch (error) {
     console.error(error);
