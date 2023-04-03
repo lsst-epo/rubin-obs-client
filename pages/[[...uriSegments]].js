@@ -84,8 +84,7 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
   } else if (uriSegments && uriSegments.length) {
     uri = uriSegments.join("/");
   }
-  // eslint-disable-next-line no-console
-  console.log(`getStaticProps for ${uri}`);
+
   setEdcLog(runId, "Starting new client build for " + site, "BUILD_START");
   const data = await getGlobalData();
   // add _es to property names if site is "es"
@@ -120,20 +119,6 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
     site,
     isPreview ? previewData?.previewToken : undefined
   );
-
-  if (entryData) {
-    const { title, contentBlocks } = entryData;
-    // eslint-disable-next-line no-console
-    console.log("EntryData:", title);
-    if (contentBlocks) {
-      contentBlocks.forEach((block) => {
-        if (block.text) {
-          // eslint-disable-next-line no-console
-          console.log(block.text);
-        }
-      });
-    }
-  }
 
   const currentId = entryData?.id || entryData?.entry?.id;
 
