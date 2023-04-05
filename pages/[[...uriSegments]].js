@@ -120,20 +120,6 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
     isPreview ? previewData?.previewToken : undefined
   );
 
-  if (entryData) {
-    const { title, contentBlocks } = entryData;
-    // eslint-disable-next-line no-console
-    console.log("EntryData:", title);
-    if (contentBlocks) {
-      contentBlocks.forEach((block) => {
-        if (block.text) {
-          // eslint-disable-next-line no-console
-          console.log(block.text);
-        }
-      });
-    }
-  }
-
   const currentId = entryData?.id || entryData?.entry?.id;
 
   const breadcrumbs = await getBreadcrumbs(currentId, site);
