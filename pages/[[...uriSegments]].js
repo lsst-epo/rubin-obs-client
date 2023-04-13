@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { getGlobalData } from "@/api/global";
-import { getAllEntries } from "@/api/entries";
+// import { getAllEntries } from "@/api/entries";
 import { getEntryDataByUri, getEntrySectionTypeByUri } from "@/api/entry";
 import { getBreadcrumbs } from "@/api/pages";
 import { getGalleryItemDataByUri } from "@/lib/api/gallery-items";
@@ -66,14 +66,17 @@ async function getEntryData(uri, section, type, site, previewToken) {
   return await getEntryDataByUri(uri, section, type, site, previewToken);
 }
 
-export async function getStaticPaths() {
-  return {
-    paths: await getAllEntries(),
-    fallback: "blocking",
-  };
-}
+// export async function getStaticPaths() {
+//   return {
+//     paths: await getAllEntries(),
+//     fallback: "blocking",
+//   };
+// }
 
-export async function getStaticProps({ params: { uriSegments }, previewData }) {
+export async function getServerSideProps({
+  params: { uriSegments },
+  previewData,
+}) {
   const runId = Date.now().toString();
   const site = getSiteString(uriSegments);
   const isPreview = previewData && uriSegments[0] === "preview-in-craft-cms";
@@ -165,7 +168,6 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
       globalData,
       breadcrumbs,
     },
-    revalidate: 300,
   };
 }
 
