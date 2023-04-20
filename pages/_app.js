@@ -22,13 +22,13 @@ function Client({ Component, pageProps }) {
     localized: pageProps?.data?.localized || [],
   });
 
-  useEffect(() => {
-    if ("serviceWorker" in navigator) {
-      // navigator.serviceWorker.register("service-worker.js");
-      const serverWorkerUrl = `${window.location.origin}/service-worker.js`;
-      navigator.serviceWorker.register(serverWorkerUrl);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if ("serviceWorker" in navigator) {
+  //     // navigator.serviceWorker.register("service-worker.js");
+  //     const serverWorkerUrl = `${window.location.origin}/service-worker.js`;
+  //     navigator.serviceWorker.register(serverWorkerUrl);
+  //   }
+  // }, []);
 
   return (
     <UIDReset>

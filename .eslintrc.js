@@ -60,7 +60,7 @@ module.exports = {
     "generator-star-spacing": 0,
     indent: 0,
     "no-alert": 2,
-    "no-console": ["error", { allow: ["warn", "error", "info"] }],
+    // "no-console": ["error", { allow: ["warn", "error", "info"] }],
     "no-debugger": 2,
     semi: 0,
     "no-empty-pattern": 1,

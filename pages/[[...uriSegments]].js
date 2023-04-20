@@ -78,7 +78,6 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
   console.log("kinggizzard");
   console.log("global: ", global);
 
-
   const runId = Date.now().toString();
   const site = getSiteString(uriSegments);
   const uri =
