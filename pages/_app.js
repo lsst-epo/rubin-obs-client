@@ -9,6 +9,7 @@ import { AuthenticationContextProvider } from "@/contexts/Authentication";
 import useAuthentication from "@/hooks/useAuthentication";
 import GlobalStyles from "@/styles/globalStyles";
 import styles from "@/styles/styles.scss";
+import { useEffect } from "react";
 
 const PLAUSIBLE_DOMAIN = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
 
@@ -18,6 +19,14 @@ function Client({ Component, pageProps }) {
     language: pageProps?.data?.language || "en-US",
     localized: pageProps?.data?.localized || [],
   });
+
+  // useEffect(() => {
+  //   if ("serviceWorker" in navigator) {
+  //     // navigator.serviceWorker.register("service-worker.js");
+  //     const serverWorkerUrl = `${window.location.origin}/service-worker.js`;
+  //     navigator.serviceWorker.register(serverWorkerUrl);
+  //   }
+  // }, []);
 
   return (
     <UIDReset>

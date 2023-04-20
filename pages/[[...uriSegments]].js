@@ -74,6 +74,10 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params: { uriSegments }, previewData }) {
+  console.log("inside of getStaticProps()");
+  console.log("kinggizzard");
+  console.log("global: ", global);
+
   const runId = Date.now().toString();
   const site = getSiteString(uriSegments);
   const isPreview = previewData && uriSegments[0] === "preview-in-craft-cms";

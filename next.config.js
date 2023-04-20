@@ -14,7 +14,7 @@ if (
   API_URL = `http://${process.env.DOCKER_GATEWAY_IP}:${process.env.DOCKER_GATEWAY_PORT}`;
 }
 
-module.exports = {
+  module.exports = {
   async generateBuildId() {
     return nextBuildId({ dir: __dirname });
   },
@@ -48,5 +48,5 @@ module.exports = {
       fs: false,
     };
     return config;
-  },
+  }
 };
