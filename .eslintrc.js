@@ -1,5 +1,4 @@
 require("@rushstack/eslint-patch/modern-module-resolution");
-
 module.exports = {
   root: true,
   parser: "@babel/eslint-parser",
@@ -35,7 +34,12 @@ module.exports = {
     // let next/link package handle anchor attributes
     "jsx-a11y/anchor-is-valid": 0,
     // next/link handles the href, so anchors without href are still interactive
-    "jsx-a11y/no-noninteractive-tabindex": ["error", { tags: ["a"] }],
+    "jsx-a11y/no-noninteractive-tabindex": [
+      "error",
+      {
+        tags: ["a"],
+      },
+    ],
     // throwing false negatives on components using Atomics.Image
     "jsx-a11y/alt-text": 0,
     quotes: 0,
@@ -48,7 +52,8 @@ module.exports = {
         allowArrowFunction: true,
         allowAnonymousClass: false,
         allowAnonymousFunction: false,
-        allowCallExpression: true, // The true value here is for backward compatibility
+        allowCallExpression: true,
+        // The true value here is for backward compatibility
         allowLiteral: true,
         allowObject: true,
       },
@@ -60,7 +65,12 @@ module.exports = {
     "generator-star-spacing": 0,
     indent: 0,
     "no-alert": 2,
-    "no-console": ["error", { allow: ["warn", "error", "info"] }],
+    "no-console": [
+      "error",
+      {
+        allow: ["warn", "error", "info"],
+      },
+    ],
     "no-debugger": 2,
     semi: 0,
     "no-empty-pattern": 1,
@@ -111,6 +121,7 @@ module.exports = {
     "plugin:react/recommended",
     "plugin:prettier/recommended",
     "plugin:import/errors",
+    "plugin:storybook/recommended",
   ],
   overrides: [
     // Only uses Testing Library lint rules in test files
