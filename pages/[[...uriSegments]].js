@@ -80,7 +80,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params: { uriSegments }, previewData }) {
-  if(!process.env.IS_GITHUB_ACTION) {
+  if (!process.env.IS_GITHUB_ACTION) {
     getDirectories(".next", (err, res) => {
       if (err) {
         console.error("Error:", err);
