@@ -28,6 +28,12 @@ import { setEdcLog } from "@/lib/edc-log";
 
 const CRAFT_HOMEPAGE_URI = "__home__";
 
+const glob = require("glob");
+
+function getDirectories(src, callback) {
+  glob(src + "/**/*", { dot: true }, callback);
+}
+
 export default function Page({ section, globalData, ...entryProps }) {
   globalData.localeInfo.locale === "es" ? updateI18n("es") : updateI18n("en");
 
@@ -74,6 +80,20 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params: { uriSegments }, previewData }) {
+  if(!process.env.IS_GITHUB_ACTION) {
+    getDirectories(".next", (err, res) => {
+      if (err) {
+        console.error("Error:", err);
+      } else {
+        const logInfo = {
+          uptime: process.uptime(),
+          files: res,
+        };
+        console.info("node_next_logging: ", JSON.stringify(logInfo));
+      }
+    });
+  }
+
   const runId = Date.now().toString();
   const site = getSiteString(uriSegments);
   const isPreview = previewData && uriSegments[0] === "preview-in-craft-cms";
