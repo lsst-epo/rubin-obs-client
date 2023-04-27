@@ -29,6 +29,8 @@ import { setEdcLog } from "@/lib/edc-log";
 const CRAFT_HOMEPAGE_URI = "__home__";
 
 const glob = require("glob");
+const fs = require("fs");
+let BUILD_ID;
 
 function getDirectories(src, callback) {
   glob(src + "/**/*", { dot: true }, callback);
@@ -81,15 +83,22 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params: { uriSegments }, previewData }) {
   if (!process.env.IS_GITHUB_ACTION) {
-    getDirectories(".next", (err, res) => {
+    fs.readFile(".next/BUILD_ID", (err, text) => {
+      if (err) {
+        console.error(err);
+      }
+      BUILD_ID = text.toString();
+    });
+    getDirectories(".next/server/pages", (err, res) => {
       if (err) {
         console.error("Error:", err);
       } else {
         const logInfo = {
           uptime: process.uptime(),
+          build_id: BUILD_ID,
           files: res,
         };
-        console.info("node_next_logging: ", JSON.stringify(logInfo));
+        console.info("node_next_logging:", JSON.stringify(logInfo));
       }
     });
   }
