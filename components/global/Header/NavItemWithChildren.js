@@ -41,7 +41,7 @@ export default function NavItemWithChildren({
           [`c-nav-list__link--${theme}`]: !!theme,
         })}
       >
-        <IconComposer icon="CaretThin" className="c-nav-list__link-icon" />
+        <IconComposer icon="ChevronThin" className="c-nav-list__link-icon" />
         <span className="c-nav-list__link-text">{title}</span>
       </button>
       <Subnavigation

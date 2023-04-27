@@ -106,7 +106,7 @@ function ContactForm({ topics = [], className }) {
               ))}
             </select>
             <IconComposer
-              icon="caretThin"
+              icon="ChevronThin"
               className="c-contact-form__select-icon"
             />
           </div>
