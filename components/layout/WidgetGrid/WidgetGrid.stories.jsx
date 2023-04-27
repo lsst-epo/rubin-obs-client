@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import WidgetGrid from ".";
+import WidgetPreview from "@/layout/WidgetPreview";
 
 const meta = {
   component: WidgetGrid,
@@ -14,13 +15,55 @@ const MockWidget = styled.div`
   width: 100%;
 `;
 
-const MockRows = [[2, 2, 2], [1, 4, 1], [6]];
+const MockRows = [
+  [
+    {
+      size: "medium",
+      title: "How am I feeling today?",
+      callout: "Rubin's rocking!",
+    },
+    {
+      size: "medium",
+      title: "Observation-related information",
+      callout: "We are successfully surveying the southwest sky",
+    },
+    {
+      size: "medium",
+      title: "Weather at the summit",
+      callout: "It is nice out there!",
+    },
+  ],
+  [
+    {
+      size: "small",
+      title: "Alerts",
+      callout: "That's a lot!",
+    },
+    {
+      size: "large",
+      title: "Astroweather",
+      callout: "It will be a good night for infrared observations",
+    },
+    {
+      size: "small",
+      title: "In-summit cameras",
+      callout: "The sky over Rubin",
+    },
+  ],
+  [
+    {
+      size: "full",
+      title: "Special announcements",
+      callout: "This is our special and cosmic announcement for you tonight",
+    },
+  ],
+];
 
 const Template = ({ ...args }) => {
   return (
     <WidgetGrid>
       {MockRows.map((cells, i) =>
-        cells.map((cell, j) => <MockWidget key={`${i}-${j}`} $span={cell} />)
+        cells.map((props, j) => <WidgetPreview key={`${i}-${j}`} {...props} />)
       )}
     </WidgetGrid>
   );
