@@ -41,6 +41,9 @@ jobs:
         --build-arg NEXT_PUBLIC_CONTACT_FORM_POST_URL=https://api-dev.rubinobs.com/actions/contact-form/send \
         --build-arg NEXT_PUBLIC_PLAUSIBLE_DOMAIN= \
         .
+      env:
+        IS_GITHUB_ACTION: true 
+        
     - name: Configure Docker Auth
       run: gcloud --quiet auth configure-docker
 
