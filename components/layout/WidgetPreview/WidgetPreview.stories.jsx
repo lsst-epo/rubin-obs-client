@@ -3,7 +3,22 @@ import WidgetPreview from ".";
 
 const meta = {
   component: WidgetPreview,
-  argTypes: {},
+  argTypes: {
+    title: {
+      description: "Title of preview section, shown in top header.",
+    },
+    callout: {
+      description: "Callout text shown at bottom of preview section.",
+    },
+    openModalCallback: {
+      action: "Opened modal",
+      description: "Callback to open additional content",
+    },
+    size: {
+      description:
+        "Size that the preview container will take up along with the number of columns that will be available inside of it.",
+    },
+  },
 };
 export default meta;
 
@@ -16,7 +31,11 @@ const MockWidget = styled.div`
 
 export const Primary = {
   args: {
-    children: [<MockWidget />, <MockWidget />],
+    children: (
+      <>
+        <MockWidget /> <MockWidget />
+      </>
+    ),
     title: "How am I feeling today?",
     callout: "Rubin's rocking!",
   },
