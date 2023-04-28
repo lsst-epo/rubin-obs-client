@@ -1,3 +1,4 @@
+import IconButton from "@/components/atomic/Button/IconButton";
 import styled from "styled-components";
 
 const columns = {
@@ -25,7 +26,7 @@ export const PreviewPanel = styled.section`
   border-bottom-left-radius: 0.75rem;
 `;
 
-export const PreviewHeader = styled.header`
+export const PreviewHeader = styled.h2`
   color: var(--black, #000);
   grid-area: header;
   display: flex;
@@ -33,19 +34,10 @@ export const PreviewHeader = styled.header`
   align-items: center;
   background-color: #d9d9d9;
   padding: 0 0.5rem;
-`;
-
-export const PreviewTitle = styled.h2`
   font-size: 80%;
 `;
 
-export const IconButton = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  margin: 0;
-
+export const PreviewIconButton = styled(IconButton)`
   > svg {
     transition: stroke-width 0.2s;
   }
