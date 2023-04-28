@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import * as Styled from "./styles";
-import { IconComposer } from "@rubin-epo/epo-react-lib";
 
 const WidgetPreview = ({
   title,
@@ -14,14 +13,16 @@ const WidgetPreview = ({
   return (
     <Styled.PreviewPanel $size={size}>
       <Styled.PreviewHeader>
-        <Styled.PreviewTitle>{title}</Styled.PreviewTitle>
-        {openModalCallback && (
-          <Styled.IconButton
-            aria-label={t("summit_dashboard.open_modal")}
-            onClick={() => openModalCallback()}
-          >
-            <IconComposer icon="Plus" />
-          </Styled.IconButton>
+        {openModalCallback ? (
+          <Styled.PreviewIconButton
+            onClickCallback={openModalCallback}
+            visibleText={title}
+            accessibleText={t("summit_dashboard.open_modal")}
+            icon="Plus"
+            isBlock
+          />
+        ) : (
+          title
         )}
       </Styled.PreviewHeader>
       <Styled.PreviewContent $size={size}>{children}</Styled.PreviewContent>
