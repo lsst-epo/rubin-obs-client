@@ -82,6 +82,8 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params: { uriSegments }, previewData }) {
+  const PREVIEW_SLUG = process.env.NEXT_PREVIEW_SLUG;
+
   if (!process.env.IS_GITHUB_ACTION) {
     fs.readFile(".next/BUILD_ID", (err, text) => {
       if (err) {
@@ -104,12 +106,13 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
   }
 
   const runId = Date.now().toString();
-  const site = getSiteString(uriSegments);
-  const isPreview = previewData && uriSegments[0] === "preview-in-craft-cms";
+  const isPreview = previewData && uriSegments[0] === PREVIEW_SLUG;
+  const site = getSiteString(isPreview ? previewData.uriSegments : uriSegments);
   let uri = CRAFT_HOMEPAGE_URI;
-
+  // N.B. Because previewToken presence is unreliable this workaround with a dedicated "preview uriSegments" is used.
+  // If previewToken becomes reliable, deprecate previewData.uriSegments in favor of always using the uriSegments in the query params
   if (isPreview) {
-    uri = previewData.uri;
+    uri = previewData.uriSegments.join("/");
   } else if (uriSegments && uriSegments.length) {
     uri = uriSegments.join("/");
   }
