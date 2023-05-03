@@ -4,6 +4,7 @@
     "paths": {
       "@/lib/*": ["lib/*"],
       "@/api/*": ["lib/api/*"],
+      "@/charts/*": ["charts/*"],
       "@/components/*": ["components/*"],
       "@/content-blocks": ["components/content-blocks"],
       "@/dynamic/*": ["components/dynamic/*"],
