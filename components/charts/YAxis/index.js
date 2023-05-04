@@ -17,7 +17,6 @@ const YAxis = ({
 
   const tickMap = Array.from(Array(ticks)).map((tick, i) => {
     const value = yDomain[0] + interval * (i + 1);
-    console.log(value);
     const label = labelFormatter ? labelFormatter(value) : value;
     const labelPosition = secondary
       ? xScale(xDomain[1]) + padding
