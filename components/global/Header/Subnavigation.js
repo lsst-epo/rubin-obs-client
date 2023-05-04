@@ -19,6 +19,7 @@ export default function Subnavigation({ items, active, onClick }) {
       {items.map(({ id, title, uri }) => (
         <li key={id} className="c-subnav-list__item">
           <Link
+            prefetch={false}
             href={`/${uri}`}
             className="c-subnav-list__link"
             tabIndex={active ? 0 : -1}
