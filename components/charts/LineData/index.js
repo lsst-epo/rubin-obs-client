@@ -19,7 +19,7 @@ const LineData = ({
     return nextPoint;
   }, "");
 
-  return <Styled.Line points={points} />;
+  return <Styled.Line points={points} aria-labelledby={labelledById} />;
 };
 
 LineData.displayName = "Charts.LineData";
