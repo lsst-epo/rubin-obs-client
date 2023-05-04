@@ -74,6 +74,9 @@ export const Header = styled.header`
 
 export const Text = styled.div`
   margin-top: 0.727em;
+  a {
+    overflow-wrap: anywhere;
+  }
 `;
 
 export const StyledMixedLink = styled(MixedLink)`
@@ -106,7 +109,7 @@ export const StyledBackgroundImage = styled(Image)`
   width: 100%;
 
   ${respond(
-    `      width: auto;
+    `width: auto;
       max-height: 200px;
 `
   )}
@@ -135,6 +138,6 @@ export const StyledTwoToneImage = styled.div`
 
 export const Caption = styled.div`
   font-size: 18px;
-  font-weight: bold;
+  font-weight: 700;
   color: var(--neutral60);
 `;
