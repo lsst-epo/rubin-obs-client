@@ -117,7 +117,7 @@ export default function GalleryPage({
           } else if (a.assetLink?.length > 0) {
             return (
               <React.Fragment key={i}>
-                <Link href={a.assetLink[0].url}>
+                <Link prefetch={false} href={a.assetLink[0].url}>
                   {a.assetName || t(`gallery.${a.commonName}`)}
                 </Link>
                 {a.assetLink[0].kind === "image"
@@ -135,7 +135,7 @@ export default function GalleryPage({
         <>
           <h2 className="t-heading-quaternary">{t(`gallery.tags`)}</h2>
           {galleryItemTags.map((tag, i) => (
-            <Link key={i} href={`/${galleryHomeLink?.uri}?search=${tag.slug}`}>
+            <Link key={i} prefetch={false} href={`/${galleryHomeLink?.uri}?search=${tag.slug}`}>
               {`#${tag.title} `}
             </Link>
           ))}

@@ -154,6 +154,7 @@ export default function SignInModal() {
             <Styled.AccountLinks>
               <Link
                 legacyBehavior
+                prefetch={false}
                 href={getModalUrl("forgotPassword")}
                 shallow
                 passHref
@@ -162,6 +163,7 @@ export default function SignInModal() {
               </Link>
               <Link
                 legacyBehavior
+                prefetch={false}
                 href={getModalUrl("register")}
                 shallow
                 passHref
