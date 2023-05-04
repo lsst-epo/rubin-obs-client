@@ -64,7 +64,11 @@ export default function Header({ navItems, userProfilePage }) {
       </a>
       <SRAuthStatus />
       <div className="c-global-header__logo-block">
-        <Link href={homeUrl} className="c-global-header__logo-link">
+        <Link
+          prefetch={false}
+          href={homeUrl}
+          className="c-global-header__logo-link"
+        >
           <span className="a-hidden">{t("homepage")}</span>
           {mobileLogoActive ? (
             <Logo className="c-global-header__logo" />
