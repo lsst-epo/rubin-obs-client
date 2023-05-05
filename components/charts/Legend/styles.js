@@ -17,5 +17,7 @@ export const Legend = styled.div`
 export const LegendTitle = styled.span``;
 
 export const LegendColor = styled(ColorSwatch)`
-  border-color: var(--white, #fff);
+  > span {
+    border-color: var(--white, #fff);
+  }
 `;
