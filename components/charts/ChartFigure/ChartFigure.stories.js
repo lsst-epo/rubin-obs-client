@@ -55,8 +55,6 @@ const PrimaryTemplate = ({ ...args }) => {
                   timeStyle: "short",
                   hourCycle: "h23",
                 });
-              } else {
-                return;
               }
             },
             padding,
@@ -140,7 +138,6 @@ const OverflowTemplate = ({ ...args }) => {
             labelFormatter: (value) => {
               const now = new Date();
               const nowOffset = 13;
-              console.log(now.getHours());
               const date = new Date();
               date.setHours(now.getHours() - nowOffset + value);
               date.setMinutes(0);
