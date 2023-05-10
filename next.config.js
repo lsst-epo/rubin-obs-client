@@ -16,7 +16,7 @@ if (
 
 module.exports = {
   async generateBuildId() {
-    return nextBuildId({ dir: __dirname });
+    return "rubin-obs-client-next-build-id";
   },
   async rewrites() {
     return [
