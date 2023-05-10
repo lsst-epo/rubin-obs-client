@@ -27,10 +27,10 @@ function SharePopup({ title, url, className }) {
 
   return (
     <Popover className={className}>
-      <Popover.Button ref={setReferenceElement}>
+      <Styled.Button ref={setReferenceElement}>
         <IconComposer icon="shareToggle" />
         <span className="a-hidden">{t("share.label_item", { title })}</span>
-      </Popover.Button>
+      </Styled.Button>
       <Popover.Panel
         ref={setPopperElement}
         style={{ ...styles.popper, zIndex: 5 }}
