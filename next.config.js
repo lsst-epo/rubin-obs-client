@@ -28,6 +28,9 @@ module.exports = {
       },
     ];
   },
+  experimental: {
+    isrMemoryCacheSize: 0,
+  },
   staticPageGenerationTimeout: 2000,
   typescript: {
     ignoreBuildErrors: true,
