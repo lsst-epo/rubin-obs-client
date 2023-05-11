@@ -3,13 +3,17 @@
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { makeDateString, useGlobalData } from "@/lib/utils";
-import { Text } from "../styles";
 import {
-  Section,
-  Inner,
-  SharePopup,
-  ImageWrapper,
-  ImageSticker,
+  StyledSection,
+  StyledInner,
+  StyledHeading,
+  StyledSubheading,
+  StyledText,
+  StyledFooter,
+  StyledFooterButton,
+  StyledSharePopup,
+  StyledImageWrapper,
+  StyledImageSticker,
 } from "./styles";
 import { Image } from "@rubin-epo/epo-react-lib";
 
@@ -51,36 +55,34 @@ export default function CalloutEntry({ callout }) {
   const calloutDateString = getDateString(date, startDate, endDate, lang);
 
   return (
-    <Section $bgColor={backgroundColor} $width="full" $overlay={false}>
-      <Inner href={uri} aria-labelledby={titleId}>
+    <StyledSection $bgColor={backgroundColor} $width="full" $overlay={false}>
+      <StyledInner href={uri} aria-labelledby={titleId}>
         {image.length && (
-          <ImageWrapper className="image">
+          <StyledImageWrapper>
             <Image role="presentation" ratio="4:3" image={image[0]} />
-            <ImageSticker>{type}</ImageSticker>
-          </ImageWrapper>
+            <StyledImageSticker>{type}</StyledImageSticker>
+          </StyledImageWrapper>
         )}
-        <h2 className="title" id={titleId}>
-          {title}
-        </h2>
+        <StyledHeading id={titleId}>{title}</StyledHeading>
         {calloutDateString && (
-          <div className="subtitle t-heading-quaternary">
+          <StyledSubheading className="t-heading-quaternary">
             {calloutDateString}
-          </div>
+          </StyledSubheading>
         )}
         {description && (
-          <Text
-            className="text c-content-rte"
+          <StyledText
+            className="c-content-rte"
             dangerouslySetInnerHTML={{ __html: description }}
           />
         )}
-        <div className="footer">
-          <div className={`c-buttonish c-buttonish--inert`}>
+        <StyledFooter>
+          <StyledFooterButton className={`c-buttonish c-buttonish--inert`}>
             {t("read-more")}
-          </div>
-        </div>
-      </Inner>
-      {typeSlug === "news-post" && <SharePopup title={title} url={uri} />}
-    </Section>
+          </StyledFooterButton>
+        </StyledFooter>
+      </StyledInner>
+      {typeSlug === "news-post" && <StyledSharePopup title={title} url={uri} />}
+    </StyledSection>
   );
 }
 
