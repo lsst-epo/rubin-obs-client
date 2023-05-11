@@ -10,8 +10,8 @@ export const Wrapper = styled.div`
   margin-block-end: -18px;
 
   > * {
-    margin-inline-start: 50px;
     margin-block-end: 18px;
+    margin-inline-start: 50px;
   }
 `;
 
@@ -50,8 +50,8 @@ export const NavList = styled.ol`
   ${respond(`columns: 1`, tokens.BREAK_PHABLET)}
 
   &[open] {
-    visibility: visible;
     max-height: none;
+    visibility: visible;
   }
 `;
 
@@ -100,8 +100,9 @@ export const NavLink = styled(MixedLink)`
     > span {
       color: #db5400;
     }
-    &:before {
-      background-color: #ff8800;
+
+    &::before {
+      background-color: #f80;
     }
   }
 
@@ -112,24 +113,23 @@ export const NavLink = styled(MixedLink)`
     }
   }
 
-  &:before {
-    content: counter(guide-nav-counter);
-    flex: none;
+  &::before {
+    z-index: 1;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     width: ${NUM_HEIGHT};
     height: ${NUM_HEIGHT};
     margin-inline-end: ${fluidScale("30px", "7px")};
-    border-radius: 100%;
+    content: counter(guide-nav-counter);
     background-color: ${({ $active }) =>
       $active ? "#ff8800" : "var(--orange20)"};
+    border-radius: 100%;
     transition: background-color 0.2s;
-    z-index: 1;
   }
 
-  &:hover:before,
-  &.focus-visible:before {
+  &:hover::before,
+  &.focus-visible::before {
     background-color: ${({ $active }) =>
       $active ? "#ff8800" : "var(--orange55)"};
   }

@@ -13,12 +13,7 @@ export const PreviewPanel = styled.section`
   --panel-columns: ${({ $size }) => columns[$size]};
 
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 2rem 10rem 2rem;
-  grid-template-areas:
-    "header"
-    "content"
-    "callout";
+  grid-template: "header" 2rem "content" 10rem "callout" 2rem / 1fr;
   grid-gap: var(--widget-grid-gap);
   grid-column: span min(var(--panel-columns), var(--widget-columns));
   background-color: var(--black, #000);
@@ -42,9 +37,9 @@ export const PreviewIconButton = styled(IconButton)`
     transition: stroke-width 0.2s;
   }
 
-  &:not(:disabled):not([aria-disabled="true"]):hover,
-  &:not(:disabled):not([aria-disabled="true"]):focus-visible,
-  &:not(:disabled):not([aria-disabled="true"]).focus-visible {
+  &:not(:disabled, [aria-disabled="true"]):hover,
+  &:not(:disabled, [aria-disabled="true"]):focus-visible,
+  &:not(:disabled, [aria-disabled="true"]).focus-visible {
     > svg {
       stroke-width: 2;
     }

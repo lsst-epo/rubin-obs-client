@@ -34,7 +34,6 @@ export const StyledInner = styled(MixedLink)`
   position: ${(p) => p.$position};
   display: grid;
   gap: 40px;
-  grid-template-columns: 1fr;
   grid-template-areas:
     "image title"
     "image subtitle"
@@ -201,8 +200,8 @@ export const StyledFooter = styled.div`
 `;
 
 export const StyledFooterButton = styled.div`
-  &.c-buttonish:not(:disabled):not([aria-disabled="true"]):hover,
-  &.c-buttonish:not(:disabled):not([aria-disabled="true"]).focus-visible {
+  &.c-buttonish:not(:disabled, [aria-disabled="true"]):hover,
+  &.c-buttonish:not(:disabled, [aria-disabled="true"]).focus-visible {
     outline: none;
   }
 

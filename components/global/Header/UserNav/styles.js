@@ -67,9 +67,9 @@ export const SubnavList = styled.ul`
   }
 
   &[open] {
+    z-index: 1000;
     opacity: 1;
     transform: translateY(0);
-    z-index: 1000;
   }
 `;
 

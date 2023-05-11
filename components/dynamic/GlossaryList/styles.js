@@ -20,14 +20,14 @@ export const AlphaButton = styled.button`
   transition: color 0.2s, background-color 0.2s;
 
   &:disabled {
-    opacity: 0.5;
     pointer-events: none;
+    opacity: 0.5;
   }
 
   &[aria-pressed="true"] {
-    border-color: var(--turquoise60);
-    background: var(--turquoise60);
     color: var(--white);
+    background: var(--turquoise60);
+    border-color: var(--turquoise60);
   }
 `;
 

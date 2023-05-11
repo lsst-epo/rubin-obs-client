@@ -29,8 +29,10 @@ export const Section = styled.section`
 export const Inner = styled.div`
   ${containerRegular()}
   display: grid;
+  /* stylelint-disable named-grid-areas-no-invalid */
   grid-template-areas: ${(p) =>
     p.$order === "text" ? `"text image"` : `"image text"`};
+  /* stylelint-enable named-grid-areas-no-invalid */
   ${(p) => `grid-template-columns: ${p.$ratio}% 1fr;`}
   gap: ${gap};
   min-height: 360px;
@@ -66,7 +68,7 @@ export const Inner = styled.div`
 `;
 
 export const Header = styled.header`
-  flex-basis: percentage(1 / 3);
+  flex-basis: calc(100% / 3);
   grid-area: text;
   align-self: center;
   ${(p) => p.$align === "end" && `align-self: end;`};
@@ -74,6 +76,7 @@ export const Header = styled.header`
 
 export const Text = styled.div`
   margin-top: 0.727em;
+
   a {
     overflow-wrap: anywhere;
   }

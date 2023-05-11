@@ -17,7 +17,6 @@ export const Wrapper = styled.div`
 `;
 
 export const Inner = styled.div`
-  
   display: grid;
   grid-template:
     "image text duration"
@@ -26,8 +25,8 @@ export const Inner = styled.div`
   column-gap: 60px;
   align-items: stretch;
   max-width: 1158px;
-  margin 0 auto;
-  
+  margin: 0 auto;
+
   ${respond(
     `
       grid-template:
@@ -94,9 +93,9 @@ export const Duration = styled.div`
       padding: 10px;
 
       svg {
-        margin-inline-end: 9px;
-        height: 17px;
         width: 15px;
+        height: 17px;
+        margin-inline-end: 9px;
       }
     `,
     tokens.BREAK_TABLET

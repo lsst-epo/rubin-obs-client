@@ -17,13 +17,13 @@ export const Inner = styled.div`
     ". quote quote" auto
     / auto minmax(42px, 148px) 1fr;
 
-  // Accent color is always across the first row
-  &:before {
+  /* Accent color is always across the first row */
+  &::before {
+    grid-row: 1;
+    grid-column: 1 / -1;
     content: "";
     background-color: ${({ $colorScheme }) =>
       $colorScheme === "educator" ? tokens.orange20 : tokens.turqouise07};
-    grid-row: 1;
-    grid-column: 1 / -1;
   }
 
   ${tablet(
