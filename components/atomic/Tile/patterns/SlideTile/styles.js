@@ -27,26 +27,30 @@ export const MixedLink = styled(BaseMixedLink)`
   text-decoration: none;
   grid-gap: 10px;
   height: 100%;
-
   padding: 0;
   align-content: start;
 
-  // set the grid areas for various bits
+  /* set the grid areas for various bits */
   .image {
     grid-area: image;
   }
+
   .pretitle {
     grid-area: pretitle;
   }
+
   .title {
     grid-area: title;
   }
+
   .subtitle {
     grid-area: subtitle;
   }
+
   .text {
     grid-area: text;
   }
+
   .footer {
     grid-area: footer;
 
@@ -103,10 +107,10 @@ export const MixedLink = styled(BaseMixedLink)`
       "title";
     grid-row-gap: 0;
     justify-items: center;
-    border-radius: 16px;
-    background-color: var(--turquoise85);
-    color: var(--white);
     height: 100%;
+    color: var(--white);
+    background-color: var(--turquoise85);
+    border-radius: 16px;
 
     .image {
       overflow: hidden;
@@ -143,12 +147,10 @@ export const MixedLink = styled(BaseMixedLink)`
       }
 
       .title {
-        text-align: left;
         align-self: center;
         justify-self: left;
+        text-align: left;
       }
-    }
-    @media (min-width: ${BREAK_PHABLET_MIN}) and (max-width: ${BREAK_TABLET}) {
     }
   }
 
@@ -161,10 +163,6 @@ export const MixedLink = styled(BaseMixedLink)`
       &:hover,
       &.focus-visible {
         outline: none;
-
-        .title {
-          text-decoration: underline;
-        }
       }
     }
 
@@ -183,6 +181,7 @@ export const MixedLink = styled(BaseMixedLink)`
       font-size: 24px;
       font-weight: 800;
       line-height: 1.2;
+      text-decoration: underline;
     }
 
     .subtitle {
@@ -221,10 +220,12 @@ export const MixedLink = styled(BaseMixedLink)`
       .subtitle {
         display: none;
       }
+
       && .footer {
         display: none;
       }
     }
+
     @media (max-width: ${BREAK_PHABLET}) {
       .text {
         display: none;
@@ -314,6 +315,7 @@ export const MixedLink = styled(BaseMixedLink)`
         display: none;
       }
     }
+
     @media (min-width: ${BREAK_PHABLET_MIN}) and (max-width: ${BREAK_TABLET}) {
       grid-template: repeat(3, max-content) auto / 1fr 2fr;
       grid-template-areas:
@@ -328,6 +330,7 @@ export const MixedLink = styled(BaseMixedLink)`
           padding-top: 100%;
         }
       }
+
       .footer {
         > div {
           position: absolute;
@@ -341,25 +344,24 @@ export const MixedLink = styled(BaseMixedLink)`
   /* darkSlide / slideshows make black */
   &.slideshows,
   &.darkSlide {
-    background-color: var(--black);
     color: var(--white);
+    background-color: var(--black);
   }
 
   /* darkSlideStaff only */
   &.darkSlideStaff {
-    background-color: var(--black);
-    color: var(--white);
     grid-template-areas:
       "title image"
       "text image"
       "footer image";
-
     grid-template-columns: 2fr 1fr;
     grid-column-gap: 40px;
+    color: var(--white);
+    background-color: var(--black);
 
     .image {
-      clip-path: circle(50%);
       max-width: 300px;
+      clip-path: circle(50%);
     }
 
     .text {
@@ -372,12 +374,13 @@ export const MixedLink = styled(BaseMixedLink)`
         "title"
         "text";
       grid-template-columns: 1fr;
-
       grid-row-gap: 20px;
       place-items: center;
+
       .image {
         width: 80vw;
       }
+
       .title {
         font-size: 24px;
       }
@@ -416,24 +419,24 @@ export const MixedLink = styled(BaseMixedLink)`
       display: grid;
       align-items: center;
       padding: 1em;
-      text-align: center;
       color: var(--neutral80);
+      text-align: center;
       background-color: var(--neutral10);
     }
 
     .footer {
       display: grid;
-      grid-auto-flow: column;
       grid-template: auto / auto;
+      grid-auto-flow: column;
+      grid-gap: 4px;
       align-items: center;
       justify-self: end;
-      grid-gap: 4px;
       padding: 0 10px;
       margin-right: -10px;
       font-size: 14px;
       font-weight: 700;
-      white-space: nowrap;
       color: var(--neutral80);
+      white-space: nowrap;
 
       svg {
         position: relative;
@@ -454,19 +457,16 @@ export const MixedLink = styled(BaseMixedLink)`
     }
 
     @media (max-width: ${BREAK_PHABLET}) {
-      grid-template-areas:
-        "pretitle footer subtitle"
-        "title title subtitle";
-      grid-template-columns: 1fr max-content max-content;
-      grid-template-rows: max-content auto;
+      grid-template:
+        "pretitle footer subtitle" max-content "title title subtitle" auto / 1fr max-content max-content;
 
       .image {
         display: none;
       }
 
       .pretitle {
-        font-weight: 400;
         font-size: 20px;
+        font-weight: 400;
       }
 
       .text {
@@ -483,15 +483,18 @@ export const MixedLink = styled(BaseMixedLink)`
         }
       }
     }
+
     @media (min-width: ${BREAK_PHABLET_MIN}) and (max-width: ${BREAK_TABLET}) {
       grid-template-areas:
         "pretitle footer subtitle"
         "title title subtitle"
         "text text subtitle";
       grid-template-columns: 1fr max-content max-content;
+
       .image {
         display: none;
       }
+
       .subtitle {
         width: min-content;
       }
@@ -538,8 +541,8 @@ export const MixedLink = styled(BaseMixedLink)`
 
     .footer {
       display: grid;
-      grid-auto-flow: column;
       grid-template: auto / auto;
+      grid-auto-flow: column;
       place-items: center;
       padding: 10px;
       font-size: 14px;
@@ -555,6 +558,7 @@ export const MixedLink = styled(BaseMixedLink)`
         color: var(--black);
         background-color: var(--neutral20);
       }
+
       .footer {
         background-color: var(--neutral15);
       }
@@ -567,12 +571,15 @@ export const MixedLink = styled(BaseMixedLink)`
         }
       }
     }
+
     @media (max-width: ${BREAK_PHABLET}) {
       padding: 0 0 20px 20px;
+
       .pretitle {
-        font-weight: normal;
         font-size: 18px;
+        font-weight: normal;
       }
+
       .title,
       .subtitle {
         font-size: 18px;
@@ -582,13 +589,15 @@ export const MixedLink = styled(BaseMixedLink)`
 
   /* news */
   &&.news {
-    background-color: var(--neutral10);
     color: var(--neutral80);
+    background-color: var(--neutral10);
+
     .footer {
       display: grid;
       grid-template-columns: max-content 1fr;
       place-items: end;
       margin-top: 15px;
+
       > div {
         color: var(--neutral40);
       }
@@ -602,6 +611,7 @@ export const MixedLink = styled(BaseMixedLink)`
       "subtitle"
       "title"
       "text";
+
     .image {
       width: 100%;
       opacity: 1;
@@ -619,8 +629,8 @@ export const MixedLink = styled(BaseMixedLink)`
     }
 
     @media (max-width: ${BREAK_PHABLET}) {
-      background-color: var(--neutral10);
       grid-template-rows: minmax(0, max-content) max-content;
+      background-color: var(--neutral10);
 
       .title,
       .subtitle {
@@ -635,6 +645,7 @@ export const MixedLink = styled(BaseMixedLink)`
         display: none;
       }
     }
+
     @media (min-width: ${BREAK_PHABLET_MIN}) and (max-width: ${BREAK_TABLET}) {
       grid-template: minmax(0, max-content) max-content auto / 1fr 2fr;
       grid-template-areas:
@@ -659,8 +670,9 @@ export const MixedLink = styled(BaseMixedLink)`
       "image text"
       "image subtitle";
     grid-template-columns: 200px 1fr;
-    border: 1px solid var(--neutral10);
     padding: 1em;
+    border: 1px solid var(--neutral10);
+
     .image {
       margin-right: 30px;
     }
@@ -668,6 +680,7 @@ export const MixedLink = styled(BaseMixedLink)`
     .pretitle {
       font-size: 16px;
       font-weight: 700;
+
       li:last-of-type {
         display: none;
       }
@@ -682,6 +695,7 @@ export const MixedLink = styled(BaseMixedLink)`
       font-size: 18px;
       font-weight: 400;
     }
+
     .subtitle {
       font-size: 16px;
       font-weight: 700;
@@ -694,29 +708,36 @@ export const MixedLink = styled(BaseMixedLink)`
         "text"
         "subtitle";
       grid-template-columns: 1fr;
+
       .image {
         display: none;
       }
     }
+
     @media (max-width: ${BREAK_PHABLET}) {
       .pretitle {
-        font-weight: normal;
         font-size: 18px;
+        font-weight: normal;
+
         a {
-          font-weight: normal;
           font-size: 18px;
+          font-weight: normal;
         }
+
         ul {
           display: inline;
         }
-        li + li:after {
+
+        li + li::after {
           padding-left: 20px;
           content: ">";
         }
       }
+
       .title {
         font-size: 18px;
       }
+
       .subtitle,
       .text {
         display: none;
@@ -742,14 +763,14 @@ export const MixedLink = styled(BaseMixedLink)`
       "image"
       "text"
       "title";
-    padding: 24px;
-    justify-items: center;
     align-items: start;
+    justify-items: center;
+    padding: 24px;
     background-color: var(--neutral10);
 
     .image {
-      clip-path: circle(50%);
       order: 1;
+      clip-path: circle(50%);
     }
 
     .title {
@@ -795,6 +816,7 @@ export const MixedLink = styled(BaseMixedLink)`
 
   /* HOVER STATES */
   transition: color 0.2s, background-color 0.2s;
+
   &.pages:hover,
   &.pages:focus-visible,
   &.darkSlide:hover,
@@ -811,6 +833,7 @@ export const MixedLink = styled(BaseMixedLink)`
       outline: none;
       opacity: 0.7;
     }
+
     .title {
       color: var(--turquoise60);
     }
@@ -824,25 +847,31 @@ export const MixedLink = styled(BaseMixedLink)`
     &.slideshows {
       color: var(--turquoise85);
     }
+
     &.darkSlide {
       color: var(--turquoise55);
     }
+
     &.events,
     &.jobs {
       color: var(--white);
     }
+
     &.cta {
       .image {
         outline: none;
         opacity: 0.7;
       }
     }
+
     &.staffProfiles {
       background-color: var(--neutral20);
     }
+
     &.events {
       background-color: var(--turquoise85);
     }
+
     &.jobs {
       background-color: var(--turquoise50);
     }
@@ -864,10 +893,11 @@ export const PlayButton = styled.span`
   &:hover {
     color: var(--neutral15);
   }
+
   svg {
     width: 100%;
-    height: 100%;
     min-width: 40px;
+    height: 100%;
     min-height: 40px;
   }
 `;

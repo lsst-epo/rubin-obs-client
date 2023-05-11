@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 export const WidgetSection = styled.section`
   --section-color: var(--white, #fff);
+
   background-color: var(--black, #000);
   border-radius: 10px;
   color: var(--section-color);
@@ -20,14 +21,14 @@ export const WidgetSection = styled.section`
 
 export const SectionIconButton = styled(IconButton)`
   > svg {
-    border-radius: 50%;
-    border: 1px solid var(--section-color);
     padding: 7px;
+    border: 1px solid var(--section-color);
+    border-radius: 50%;
   }
 
-  &:not(:disabled):not([aria-disabled="true"]):hover,
-  &:not(:disabled):not([aria-disabled="true"]):focus-visible,
-  &:not(:disabled):not([aria-disabled="true"]).focus-visible {
+  &:not(:disabled, [aria-disabled="true"]):hover,
+  &:not(:disabled, [aria-disabled="true"]):focus-visible,
+  &:not(:disabled, [aria-disabled="true"]).focus-visible {
     > svg {
       outline: 1px solid var(--section-color);
     }

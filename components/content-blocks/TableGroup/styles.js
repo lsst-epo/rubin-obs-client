@@ -23,7 +23,7 @@ export const Tab = styled.button`
   transition: color 0.2s, background-color 0.2s, border-color 0.2s;
 
   &[aria-selected="true"] {
-    background-color: #ff8800;
+    background-color: #f80;
     border-color: #db5400;
   }
 `;

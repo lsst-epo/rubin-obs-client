@@ -7,7 +7,6 @@ export const Image = styled.div`
   --Tile-image-margin-top: ${fluidScale("77px", "22px")};
 
   grid-area: image;
-
   background-color: var(--Tile-image-bg-color);
   padding-block-end: ${fluidScale("40px", "5px")};
   margin-block-start: var(--Tile-image-margin-top);
@@ -29,22 +28,21 @@ export const Image = styled.div`
 
   @media (max-width: ${BREAK_PHABLET}) {
     height: 100px;
-    border-radius: 16px;
-    border-bottom-left-radius: 16px;
-    border-bottom-right-radius: 16px;
     padding: 10px;
+    border-radius: 16px;
+    border-bottom-right-radius: 16px;
+    border-bottom-left-radius: 16px;
 
     img {
-      margin: auto;
       width: 80px;
       height: 80px;
+      margin: auto;
     }
   }
 `;
 
 export const Title = styled.div`
   grid-area: title;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -59,9 +57,9 @@ export const Title = styled.div`
   transition: backgroud-color 0.2s;
 
   @media (max-width: ${BREAK_PHABLET}) {
-    text-align: left;
     align-self: center;
     justify-self: left;
+    text-align: left;
   }
 `;
 
@@ -72,11 +70,13 @@ export const MixedLink = styled(BaseMixedLink)`
 
   position: relative;
   display: grid;
+  /* stylelint-disable declaration-block-no-redundant-longhand-properties */
   grid-template-columns: 1fr;
   grid-template-rows: ${fluidScale("234px", "164px")} 1fr;
   grid-template-areas:
     "image"
     "title";
+  /* stylelint-enable declaration-block-no-redundant-longhand-properties */
   align-content: start;
   justify-items: center;
   padding: 0;
@@ -88,8 +88,8 @@ export const MixedLink = styled(BaseMixedLink)`
     --Tile-bg-color: #6a6e6e;
     --Tile-image-filter: grayscale(100%);
 
-    cursor: default;
     pointer-events: none;
+    cursor: default;
 
     @media (max-width: ${BREAK_PHABLET}) {
       --Tile-bg-color: transparent;

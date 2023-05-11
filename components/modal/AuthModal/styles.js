@@ -9,7 +9,7 @@ import { Dialog as BaseDialog } from "@headlessui/react";
 import { FormButtons as BaseFormButtons } from "@rubin-epo/epo-react-lib";
 
 export const Overlay = styled(BaseDialog.Overlay)`
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 70%);
   position: fixed;
   top: 0;
   width: 100%;
@@ -18,10 +18,7 @@ export const Overlay = styled(BaseDialog.Overlay)`
 
 export const Dialog = styled(BaseDialog)`
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   z-index: ${zStack.dialog};
   overflow: auto;
   padding: 1rem;

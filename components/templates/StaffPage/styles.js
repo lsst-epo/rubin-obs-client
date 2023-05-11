@@ -24,12 +24,7 @@ export const QuoteInner = styled.div`
   font-weight: bold;
 
   &::before {
-    content: "“";
     position: absolute;
-    inset-block-start: 0;
-    inset-inline-end: 100%;
-    transform: translateX(50%);
-    color: var(--turquoise50);
     font-size: ${fluidScale(
       "250px",
       "132px",
@@ -38,6 +33,11 @@ export const QuoteInner = styled.div`
     )};
     font-weight: normal;
     line-height: 0;
+    color: var(--turquoise50);
+    content: "“";
+    transform: translateX(50%);
+    inset-block-start: 0;
+    inset-inline-end: 100%;
 
     ${respond(
       `
