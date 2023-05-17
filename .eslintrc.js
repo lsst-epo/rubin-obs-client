@@ -119,7 +119,6 @@ module.exports = {
     "prettier",
     "plugin:jsx-a11y/recommended",
     "plugin:react/recommended",
-    "plugin:prettier/recommended",
     "plugin:import/errors",
     "plugin:storybook/recommended",
   ],
