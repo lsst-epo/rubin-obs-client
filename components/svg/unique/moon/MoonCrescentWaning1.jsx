@@ -1,9 +1,11 @@
 import defaultProps from "../defaultProps";
+import svgShape from "@/shapes/svg";
 
 const MoonCrescentWaning1 = ({
   className,
   size = 24,
   fill = "currentColor",
+  ...props
 }) => {
   const uniqueProps = {
     viewBox: "0 0 46 46",
@@ -37,5 +39,7 @@ const MoonCrescentWaning1 = ({
 };
 
 MoonCrescentWaning1.displayName = "SVG.MoonCrescentWaning1";
+
+MoonCrescentWaning1.propTypes = svgShape;
 
 export default MoonCrescentWaning1;

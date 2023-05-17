@@ -1,4 +1,5 @@
 import defaultProps from "../defaultProps";
+import svgShape from "@/shapes/svg";
 
 const Snow = ({ className, size = 24, fill = "currentColor" }) => {
   const uniqueProps = {
@@ -41,5 +42,7 @@ const Snow = ({ className, size = 24, fill = "currentColor" }) => {
 };
 
 Snow.displayName = "SVG.Snow";
+
+Snow.propTypes = svgShape;
 
 export default Snow;

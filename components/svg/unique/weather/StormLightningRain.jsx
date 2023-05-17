@@ -1,4 +1,5 @@
 import defaultProps from "../defaultProps";
+import svgShape from "@/shapes/svg";
 
 const StormLightningRain = ({
   className,
@@ -50,5 +51,7 @@ const StormLightningRain = ({
 };
 
 StormLightningRain.displayName = "SVG.StormLightningRain";
+
+StormLightningRain.propTypes = svgShape;
 
 export default StormLightningRain;

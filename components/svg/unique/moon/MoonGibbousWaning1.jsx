@@ -1,4 +1,5 @@
 import defaultProps from "../defaultProps";
+import svgShape from "@/shapes/svg";
 
 const MoonGibbousWaning1 = ({
   className,
@@ -37,5 +38,7 @@ const MoonGibbousWaning1 = ({
 };
 
 MoonGibbousWaning1.displayName = "SVG.MoonGibbousWaning1";
+
+MoonGibbousWaning1.propTypes = svgShape;
 
 export default MoonGibbousWaning1;

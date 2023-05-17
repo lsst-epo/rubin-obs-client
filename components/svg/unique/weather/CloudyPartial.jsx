@@ -1,4 +1,5 @@
 import defaultProps from "../defaultProps";
+import svgShape from "@/shapes/svg";
 
 const CloudyPartial = ({ className, size = 24, fill = "currentColor" }) => {
   const uniqueProps = {
@@ -35,5 +36,7 @@ const CloudyPartial = ({ className, size = 24, fill = "currentColor" }) => {
 };
 
 CloudyPartial.displayName = "SVG.CloudyPartial";
+
+CloudyPartial.propTypes = svgShape;
 
 export default CloudyPartial;
