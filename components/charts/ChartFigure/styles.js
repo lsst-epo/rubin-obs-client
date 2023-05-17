@@ -16,20 +16,19 @@ export const Caption = styled.figcaption`
 export const Content = styled.div`
   overflow-x: auto;
   position: relative;
-
-  scrollbar-color: var(--white, #fff) rgba(255, 255, 255, 0.2);
+  scrollbar-color: var(--white, #fff) rgba(255, 255, 255, 20%);
   scrollbar-width: thin;
 
   &::-webkit-scrollbar {
     height: 8px;
+    background-color: rgba(255, 255, 255, 50%); /* or add it to the track */
     background-clip: padding-box;
     border-top: 3px solid transparent;
     border-bottom: 3px solid transparent;
-    background-color: rgba(255, 255, 255, 0.5); /* or add it to the track */
   }
 
   &::-webkit-scrollbar-thumb {
-    border-radius: 4px;
     background-color: var(--white, #fff);
+    border-radius: 4px;
   }
 `;

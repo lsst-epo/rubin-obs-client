@@ -75,6 +75,6 @@ module.exports = {
     "no-empty-source": null,
     indentation: null,
     "max-empty-lines": 3,
-    "no-eol-whitespace": true,
+    "no-eol-whitespace": null,
   },
 };
