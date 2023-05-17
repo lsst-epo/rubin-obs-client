@@ -1,4 +1,5 @@
 import defaultProps from "../defaultProps";
+import svgShape from "@/shapes/svg";
 
 const RainHeavy = ({ className, size = 24, fill = "currentColor" }) => {
   const uniqueProps = {
@@ -71,5 +72,7 @@ const RainHeavy = ({ className, size = 24, fill = "currentColor" }) => {
 };
 
 RainHeavy.displayName = "SVG.RainHeavy";
+
+RainHeavy.propTypes = svgShape;
 
 export default RainHeavy;

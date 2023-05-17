@@ -1,4 +1,5 @@
 import defaultProps from "../defaultProps";
+import svgShape from "@/shapes/svg";
 
 const StormLightning = ({ className, size = 24, fill = "currentColor" }) => {
   const uniqueProps = {
@@ -30,5 +31,7 @@ const StormLightning = ({ className, size = 24, fill = "currentColor" }) => {
 };
 
 StormLightning.displayName = "SVG.StormLightning";
+
+StormLightning.propTypes = svgShape;
 
 export default StormLightning;

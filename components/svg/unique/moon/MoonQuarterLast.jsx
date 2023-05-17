@@ -1,4 +1,5 @@
 import defaultProps from "../defaultProps";
+import svgShape from "@/shapes/svg";
 
 const MoonQuarterLast = ({ className, size = 24, fill = "currentColor" }) => {
   const uniqueProps = {
@@ -33,5 +34,7 @@ const MoonQuarterLast = ({ className, size = 24, fill = "currentColor" }) => {
 };
 
 MoonQuarterLast.displayName = "SVG.MoonQuarterLast";
+
+MoonQuarterLast.propTypes = svgShape;
 
 export default MoonQuarterLast;

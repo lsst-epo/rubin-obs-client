@@ -1,4 +1,5 @@
 import defaultProps from "../defaultProps";
+import svgShape from "@/shapes/svg";
 
 const Sun = ({ className, size = 24, fill = "currentColor" }) => {
   const uniqueProps = {
@@ -19,5 +20,7 @@ const Sun = ({ className, size = 24, fill = "currentColor" }) => {
 };
 
 Sun.displayName = "SVG.Sun";
+
+Sun.propTypes = svgShape;
 
 export default Sun;

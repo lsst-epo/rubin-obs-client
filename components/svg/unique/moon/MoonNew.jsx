@@ -1,4 +1,5 @@
 import defaultProps from "../defaultProps";
+import svgShape from "@/shapes/svg";
 
 const MoonNew = ({ className, size = 24, fill = "currentColor" }) => {
   const uniqueProps = {
@@ -36,5 +37,7 @@ const MoonNew = ({ className, size = 24, fill = "currentColor" }) => {
 };
 
 MoonNew.displayName = "SVG.MoonNew";
+
+MoonNew.propTypes = svgShape;
 
 export default MoonNew;
