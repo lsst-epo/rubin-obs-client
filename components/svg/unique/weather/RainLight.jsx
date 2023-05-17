@@ -1,4 +1,5 @@
 import defaultProps from "../defaultProps";
+import svgShape from "@/shapes/svg";
 
 const RainLight = ({ className, size = 24, fill = "currentColor" }) => {
   const uniqueProps = {
@@ -39,5 +40,7 @@ const RainLight = ({ className, size = 24, fill = "currentColor" }) => {
 };
 
 RainLight.displayName = "SVG.RainLight";
+
+RainLight.propTypes = svgShape;
 
 export default RainLight;
