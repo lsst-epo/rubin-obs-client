@@ -1,5 +1,6 @@
 import Cloudy from "./weather/Cloudy";
 import CloudyPartial from "./weather/CloudyPartial";
+import Gear from "./Gear";
 import Logo from "./site/Logo";
 import LogoFullSize from "./site/LogoFullSize";
 import MoonCrescentWaning1 from "./moon/MoonCrescentWaning1";
@@ -33,6 +34,7 @@ import Sun from "./weather/Sun";
 export default {
   Cloudy,
   CloudyPartial,
+  Gear,
   Logo,
   LogoFullSize,
   MoonCrescentWaning1,
