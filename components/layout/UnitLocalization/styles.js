@@ -10,17 +10,19 @@ export const StyledLocalizationBar = styled.div`
   margin: 0;
   padding: 0;
   width: 100%;
-  gap: 1ch;
 `;
-export const StyledHeading = styled.span`
+export const StyledHeading = styled.div`
   display: flex;
   align-items: center;
   gap: 1ch;
+  padding-inline: 1rem;
 `;
 export const StyledRadioGroup = styled(RadioGroup)`
   display: flex;
   align-items: center;
   gap: 1ch;
+  border-left: 1px solid #6a6e6e;
+  padding-inline: 1rem;
 `;
 export const StyledRadioGroupLabel = styled(RadioGroup.Label)`
   font-size: 60%;
