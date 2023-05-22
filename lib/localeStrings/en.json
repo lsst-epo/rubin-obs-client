@@ -319,7 +319,17 @@
       "twitter_title": "Hey! Check out this info from Rubin Observatory's website: {{title}}"
     },
     "summit_dashboard": {
-      "open_modal": "Expand content"
+      "open_modal": "Expand content",
+      "unit_localization": {
+        "settings": "Settings",
+        "label_temp": "Temperature",
+        "label_windspeed": "Windspeed",
+        "fahrenheit": "Fahrenheit",
+        "celsius": "Celsius",
+        "knots": "kn",
+        "miles_per_hour": "mph",
+        "meters_per_second": "m/s"
+      }
     }
   }
 }
