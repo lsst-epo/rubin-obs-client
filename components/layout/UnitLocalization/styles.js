@@ -34,34 +34,35 @@ export const StyledRadioGroupOption = styled(RadioGroup.Option)`
   --radio-option-checked-offset: calc(var(--radio-option-size) * (1 / 6));
 
   cursor: pointer;
+  position: relative;
   display: flex;
   align-items: center;
-  position: relative;
   padding-inline-start: calc(var(--radio-option-size) + 1ch);
   outline: none;
 
   &::before,
   &::after {
-    border-radius: 50%;
+    position: absolute;
     display: inline-block;
     content: "";
-    position: absolute;
+    border-radius: 50%;
   }
 
   &::before {
-    aspect-ratio: 1;
-    background-color: var(--white, #fff);
+    left: 0;
     width: var(--radio-option-size);
     height: var(--radio-option-size);
-    outline: var(--radio-option-outline);
-    left: 0;
-  }
-  &::after {
     aspect-ratio: 1;
-    background-color: var(--radio-option-checked-background);
+    background-color: var(--white, #fff);
+    outline: var(--radio-option-outline);
+  }
+
+  &::after {
+    left: var(--radio-option-checked-offset);
     width: var(--radio-option-checked-size);
     height: var(--radio-option-checked-size);
-    left: var(--radio-option-checked-offset);
+    aspect-ratio: 1;
+    background-color: var(--radio-option-checked-background);
   }
 
   &[aria-checked="true"] {
@@ -73,7 +74,7 @@ export const StyledRadioGroupOption = styled(RadioGroup.Option)`
     }
   }
 
-  &:not(:disabled):not([aria-checked="true"]):hover {
+  &:not(:disabled, [aria-checked="true"]):hover {
     --radio-option-outline: var(--radio-option-checked-offset) solid #0f8fff;
   }
 `;
