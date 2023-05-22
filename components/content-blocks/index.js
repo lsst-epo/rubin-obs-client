@@ -12,6 +12,7 @@ import GridBlock from "./GridBlock";
 import Schedule from "./Schedule";
 import SimpleTable from "./SimpleTable";
 import SlideBlock from "./SlideBlock";
+import SummitStatus from "./SummitStatus";
 import TableGroup from "./TableGroup";
 import Video from "./Video";
 import DownloadList from "./DownloadList";
@@ -31,6 +32,7 @@ export {
   Schedule,
   SimpleTable,
   SlideBlock,
+  SummitStatus,
   TableGroup,
   Video,
   DownloadList,
