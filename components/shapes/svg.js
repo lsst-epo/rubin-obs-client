@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-export const svgInternalShape = {
+const svgInternalShape = {
   className: PropTypes.string,
   size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   stroke: PropTypes.string,
@@ -8,8 +8,4 @@ export const svgInternalShape = {
   svgProps: PropTypes.object,
 };
 
-const svgShape = PropTypes.shape({
-  ...svgInternalShape,
-});
-
-export default svgShape;
+export default svgInternalShape;
