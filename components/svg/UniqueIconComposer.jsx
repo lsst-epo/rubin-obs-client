@@ -1,5 +1,6 @@
+import PropTypes from "prop-types";
 import { IconComposer } from "@rubin-epo/epo-react-lib";
-import svgShape from "@/shapes/svg";
+import svgInternalShape from "@/shapes/svg";
 import UniqueIcons from "./unique";
 
 /** adds the unique icons for rubin-obs-client to the icons
@@ -11,6 +12,9 @@ const UniqueIconComposer = (props) => (
 
 UniqueIconComposer.displayName = "SVG.UniqueIconComposer";
 
-UniqueIconComposer.propTypes = svgShape;
+UniqueIconComposer.propTypes = {
+  icon: PropTypes.string.isRequired,
+  ...svgInternalShape,
+};
 
 export default UniqueIconComposer;
