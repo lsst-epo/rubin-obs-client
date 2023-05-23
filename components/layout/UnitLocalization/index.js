@@ -46,7 +46,7 @@ const UnitLocalization = ({
   return (
     <StyledLocalizationBar role="group" aria-labelledby={heading}>
       <StyledHeading id={heading}>
-        <UniqueIconComposer icon="gear" />
+        <UniqueIconComposer icon="gear" size="calc(1em * (5/3))" />
         {t("summit_dashboard.unit_localization.settings")}
       </StyledHeading>
       <StyledRadioGroup
