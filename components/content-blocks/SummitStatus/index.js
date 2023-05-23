@@ -28,6 +28,7 @@ const SummitStatus = ({ summitStatusLayout, widgetPreviews = [] }) => {
           onWindChangeCallback={(value) => setWindspeedUnit(value)}
         />
         <WidgetGrid>
+          {/* eslint-disable-next-line no-empty-pattern */}
           {widgetPreviews.map(({}, i) => (
             <WidgetPreview key={i}></WidgetPreview>
           ))}

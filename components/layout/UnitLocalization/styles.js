@@ -14,8 +14,10 @@ export const StyledLocalizationBar = styled.div`
 export const StyledHeading = styled.div`
   display: flex;
   align-items: center;
+  font-size: calc(100% * (5 / 6));
   gap: 1ch;
   padding-inline: 1rem;
+  line-height: 1;
 `;
 export const StyledRadioGroup = styled(RadioGroup)`
   display: flex;
@@ -25,7 +27,8 @@ export const StyledRadioGroup = styled(RadioGroup)`
   padding-inline: 1rem;
 `;
 export const StyledRadioGroupLabel = styled(RadioGroup.Label)`
-  font-size: 60%;
+  line-height: 1;
+  font-size: 50%;
 `;
 
 export const StyledRadioGroupOption = styled(RadioGroup.Option)`
@@ -39,6 +42,7 @@ export const StyledRadioGroupOption = styled(RadioGroup.Option)`
   position: relative;
   display: flex;
   align-items: center;
+  line-height: 1;
   padding-inline-start: calc(var(--radio-option-size) + 1ch);
   outline: none;
 
