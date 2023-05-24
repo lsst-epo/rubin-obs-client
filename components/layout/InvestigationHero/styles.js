@@ -1,27 +1,38 @@
 import styled, { css } from "styled-components";
 import { fluidScale, respond, tokens } from "@/styles/globalStyles";
 import { aHidden } from "@/styles/mixins/appearance";
+import { EarlyAccess } from "@/components/atomic";
+import { FlagBody, OffsetWrapper } from "@/atomic/Flag/styles";
 
 const WRAPPER_PADDING = fluidScale(
   "60px",
-  "15px",
+  "0px",
   tokens.BREAK_DESKTOP_SMALL,
+  tokens.BREAK_TABLET
+);
+
+const BUTTON_WRAPPER_PADDING = fluidScale(
+  "60px",
+  "15px",
+  tokens.BREAK_TABLET,
   tokens.BREAK_MOBILE
 );
 
+const DURATION_WIDTH = "197px";
+
 export const Wrapper = styled.div`
-  position: relative;
   padding-inline-start: ${WRAPPER_PADDING};
   padding-inline-end: ${WRAPPER_PADDING};
   background-color: ${tokens.orange05};
 `;
 
 export const Inner = styled.div`
+  position: relative;
   display: grid;
   grid-template:
     "image text duration"
     "image button duration"
-    / 200px 1fr 197px;
+    / 200px 1fr ${DURATION_WIDTH};
   column-gap: 60px;
   align-items: stretch;
   max-width: 1158px;
@@ -36,7 +47,7 @@ export const Inner = styled.div`
         / 1fr;
       row-gap: ${fluidScale("30px", "15px")};
       justify-items: center;
-      padding-block-start: 50px;
+      padding-block-start: 62px;
       padding-block-end: 30px;
     `,
     tokens.BREAK_TABLET
@@ -56,19 +67,71 @@ export const Text = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
+
+  ${respond(
+    `
+    margin-right: 60px;
+    margin-left: 60px;
+    `,
+    tokens.BREAK_TABLET
+  )}
+
+  ${respond(
+    `
+    margin-right: 15px;
+    margin-left: 15px;
+    `,
+    tokens.BREAK_MOBILE
+  )}
 `;
 
 export const ButtonWrapper = styled.div`
   grid-area: button;
 
   ${respond(
-    css`
+    `
       width: 100%;
       display: flex;
       flex-direction: column;
+      padding-inline-start: ${BUTTON_WRAPPER_PADDING};
+      padding-inline-end: ${BUTTON_WRAPPER_PADDING};
     `,
     tokens.BREAK_TABLET
   )}
+`;
+
+export const EarlyAccessFlag = styled(EarlyAccess)`
+  position: absolute;
+  top: 0;
+  right: ${DURATION_WIDTH};
+
+  @media (max-width: ${tokens.BREAK_TABLET}) {
+    right: auto;
+    left: 0;
+  }
+
+  ${OffsetWrapper} {
+    transform: translateX(50%);
+
+    @media (max-width: ${tokens.BREAK_TABLET}) {
+      transform: unset;
+    }
+  }
+
+  ${FlagBody} {
+    padding-right: ${fluidScale(
+      "14px",
+      "8px",
+      tokens.BREAK_TABLET,
+      tokens.BREAK_MOBILE
+    )};
+    padding-left: ${fluidScale(
+      "14px",
+      "8px",
+      tokens.BREAK_TABLET,
+      tokens.BREAK_MOBILE
+    )};
+  }
 `;
 
 export const Duration = styled.div`

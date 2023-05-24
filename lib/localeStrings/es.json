@@ -317,7 +317,12 @@
     "investigation": {
       "total_duration": "Duración total de la investigación",
       "start": "Comenzar investigación",
-      "coming_soon": "(Pronto)"
+      "coming_soon": "(Pronto)",
+      "early_access": {
+        "full": "Acceso Anticipado",
+        "line_1_text": "Acceso",
+        "line_2_text": "Anticipado"
+      }
     },
     "share": {
       "label_current": "Compartir la página actual",

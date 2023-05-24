@@ -460,8 +460,7 @@ export const MixedLink = styled(BaseMixedLink)`
     }
 
     @media (max-width: ${BREAK_PHABLET}) {
-      grid-template:
-        "pretitle footer subtitle" max-content "title title subtitle" auto / 1fr max-content max-content;
+      grid-template: "pretitle footer subtitle" max-content "title title subtitle" auto / 1fr max-content max-content;
 
       .image {
         display: none;
