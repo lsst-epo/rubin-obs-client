@@ -302,7 +302,12 @@
     "investigation": {
       "total_duration": "Investigation total duration",
       "start": "Start Investigation",
-      "coming_soon": "(Coming Soon)"
+      "coming_soon": "(Coming Soon)",
+      "early_access": {
+        "full": "Early Access",
+        "line_1_text": "Early",
+        "line_2_text": "Access"
+      }
     },
     "share": {
       "label_current": "Share current page",
