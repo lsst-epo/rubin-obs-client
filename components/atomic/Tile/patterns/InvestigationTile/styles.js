@@ -1,23 +1,85 @@
 /* eslint-disable */
 import styled from "styled-components";
 import { MixedLink as BaseMixedLink } from "@rubin-epo/epo-react-lib";
-import { BREAK_PHABLET, fluidScale } from "@/styles/globalStyles";
+import {
+  BREAK_DESKTOP,
+  BREAK_DESKTOP_SMALL,
+  BREAK_TABLET,
+  BREAK_MOBILE,
+  BREAK_PHABLET,
+  fluidScale,
+} from "@/styles/globalStyles";
+import { EarlyAccess } from "@/components/atomic";
+import { FlagBody, OffsetWrapper } from "@/atomic/Flag/styles";
+
+export const MixedLink = styled(BaseMixedLink)`
+  --Tile-image-margin-top: ${fluidScale("77px", "22px")};
+  --Tile-bg-color: var(--turquoise85);
+  --Tile-color: var(--white);
+  --Tile-image-bg-color: var(--neutral20);
+  --Tile-border-color: var(--neutral20);
+
+  position: relative;
+  display: grid;
+  /* stylelint-disable declaration-block-no-redundant-longhand-properties */
+  grid-template-columns: 1fr;
+  grid-template-rows: ${fluidScale("234px", "164px")} 1fr;
+  grid-template-areas:
+    "image"
+    "title";
+  /* stylelint-enable declaration-block-no-redundant-longhand-properties */
+  align-content: start;
+  justify-items: center;
+  padding: 0;
+  border-radius: 16px;
+  color: var(--Tile-color);
+  text-decoration: none;
+
+  &[aria-disabled="true"] {
+    --Tile-bg-color: #6a6e6e;
+    --Tile-image-filter: grayscale(100%);
+
+    pointer-events: none;
+    cursor: default;
+
+    @media (max-width: ${BREAK_PHABLET}) {
+      --Tile-bg-color: transparent;
+      --Tile-color: #6a6e6e;
+    }
+  }
+
+  &:hover:not([aria-disabled="true"]),
+  &:focus-visible:not([aria-disabled="true"]) {
+    --Tile-image-bg-color: var(--turquoise10);
+    --Tile-bg-color: var(--turquoise85);
+    --Tile-border-color: var(--turquoise85);
+
+    @media (max-width: ${BREAK_PHABLET}) {
+      --Tile-bg-color: transparent;
+    }
+  }
+
+  @media (max-width: ${BREAK_PHABLET}) {
+    --Tile-bg-color: var(--white);
+    --Tile-color: var(--turquoise85);
+
+    grid-template: auto / 100px 2fr;
+    grid-template-areas: "image title title";
+  }
+`;
 
 export const Image = styled.div`
-  --Tile-image-margin-top: ${fluidScale("77px", "22px")};
-
   grid-area: image;
   background-color: var(--Tile-image-bg-color);
   padding-block-end: ${fluidScale("40px", "5px")};
   margin-block-start: var(--Tile-image-margin-top);
   width: 100%;
-  border-top: 3px solid;
-  border-right: 3px solid;
-  border-left: 3px solid;
-  border-color: var(--Tile-border-color, var(--Tile-image-bg-color));
+  border-top: 3px solid var(--Tile-border-color);
+  border-right: 3px solid var(--Tile-border-color);
+  border-left: 3px solid var(--Tile-border-color);
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, border-color 0.2s;
 
   img {
     width: ${fluidScale("200px", "150px")};
@@ -29,6 +91,8 @@ export const Image = styled.div`
   @media (max-width: ${BREAK_PHABLET}) {
     height: 100px;
     padding: 10px;
+    margin: 0 auto;
+    border-bottom: 3px solid var(--Tile-border-color);
     border-radius: 16px;
     border-bottom-right-radius: 16px;
     border-bottom-left-radius: 16px;
@@ -63,52 +127,34 @@ export const Title = styled.div`
   }
 `;
 
-export const MixedLink = styled(BaseMixedLink)`
-  --Tile-bg-color: var(--turquoise85);
-  --Tile-color: var(--white);
-  --Tile-image-bg-color: var(--neutral20);
+export const EarlyAccessFlag = styled(EarlyAccess)`
+  position: absolute;
+  top: var(--Tile-image-margin-top);
+  right: 16px;
+  left: auto;
 
-  position: relative;
-  display: grid;
-  /* stylelint-disable declaration-block-no-redundant-longhand-properties */
-  grid-template-columns: 1fr;
-  grid-template-rows: ${fluidScale("234px", "164px")} 1fr;
-  grid-template-areas:
-    "image"
-    "title";
-  /* stylelint-enable declaration-block-no-redundant-longhand-properties */
-  align-content: start;
-  justify-items: center;
-  padding: 0;
-  border-radius: 16px;
-  color: var(--Tile-color);
-  text-decoration: none;
-
-  &[aria-disabled="true"] {
-    --Tile-bg-color: #6a6e6e;
-    --Tile-image-filter: grayscale(100%);
-
-    pointer-events: none;
-    cursor: default;
-
-    @media (max-width: ${BREAK_PHABLET}) {
-      --Tile-bg-color: transparent;
-      --Tile-color: #6a6e6e;
-    }
+  @media (max-width: ${BREAK_DESKTOP}) {
+    right: 0;
+    border-top-right-radius: 16px;
   }
 
   @media (max-width: ${BREAK_PHABLET}) {
-    --Tile-bg-color: var(--white);
-    --Tile-color: var(--turquoise85);
-
-    grid-template: auto / 100px 2fr;
-    grid-template-areas: "image title title";
+    top: 0;
+    right: auto;
+    left: 100px;
   }
 
-  &:hover:not([aria-disabled="true"]),
-  &:focus-visible:not([aria-disabled="true"]) {
-    --Tile-image-bg-color: var(--turquoise10);
-    --Tile-bg-color: var(--turquoise70);
-    --Tile-border-color: var(--turquoise85);
+  ${OffsetWrapper} {
+    @media (max-width: ${BREAK_PHABLET}) {
+      transform: translateX(-100%);
+    }
+  }
+
+  ${FlagBody} {
+    padding: ${fluidScale("8px", "4px", BREAK_TABLET, BREAK_MOBILE)};
+
+    @media (max-width: ${BREAK_DESKTOP}) {
+      border-top-right-radius: 16px;
+    }
   }
 `;
