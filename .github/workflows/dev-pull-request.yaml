@@ -98,9 +98,10 @@ jobs:
     - name: Cypress run
       uses: cypress-io/github-action@v5
       with:
-        spec: cypress/e2e/spec.cy.js
+        spec: e2e/browser-tests/cypress/e2e/spec.cy.js
         config-file: cypress.config.js
-        working-directory: e2e/browser-tests/
+        working-directory: .
+        # working-directory: e2e/browser-tests/
 
   cleanup:
     name: 'Cleanup PR Preview'
