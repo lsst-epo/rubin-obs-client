@@ -36,7 +36,7 @@ jobs:
         --build-arg NEXT_PUBLIC_API_URL=https://api.rubinobs.org/api \
         --build-arg NEXT_PUBLIC_BASE_URL=https://rubinobservatory.org \
         --build-arg EDC_LOGGER_API_URL=https://us-central1-skyviewer.cloudfunctions.net/edc-logger \
-        --build-arg NEXT_DEBUG_LOGGING=false \
+        --build-arg NEXT_PUBLIC_DEBUG_LOGGING=false \
         --build-arg CLOUD_ENV=PROD \
         --build-arg NEXT_PUBLIC_GOOGLE_APP_ID=596747551410-vcqlrp7erg5c5gm0dkvc0k21mgi0ilg0.apps.googleusercontent.com \
         --build-arg NEXT_PUBLIC_CONTACT_FORM_POST_URL=https://api.rubinobs.org/actions/contact-form/send \
