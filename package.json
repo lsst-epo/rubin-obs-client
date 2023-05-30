@@ -61,6 +61,7 @@
     "@rubin-epo/epo-react-lib": "^1.2.5",
     "add": "^2.0.6",
     "classnames": "^2.3.1",
+    "convert": "^4.13.0",
     "feed": "^4.2.2",
     "focus-trap": "^7.0.0",
     "focus-visible": "^5.1.0",
