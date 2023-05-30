@@ -44,6 +44,7 @@
     "@castiron/components-breadcrumbs": "^1.1.0",
     "@castiron/style-mixins": "^1.0.6",
     "@headlessui/react": "^1.6.6",
+    "@influxdata/influxdb-client": "^1.33.2",
     "@popperjs/core": "^2.11.5",
     "@rubin-epo/epo-react-lib": "^1.2.9",
     "add": "^2.0.6",
