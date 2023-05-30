@@ -92,18 +92,15 @@ jobs:
       with:
         node-version: 16
     
-    - name: Install Cypress dependencies
-      run: ls -l && pwd && cd tests && npm i
-    
     - name: Create .env Secret
-      run: echo "${{ env.version_url }}" >> tests/.env
+      run: echo "${{ env.version_url }}" >> e2e/browser-tests/.env
 
     - name: Cypress run
       uses: cypress-io/github-action@v5
       with:
         spec: cypress/e2e/spec.cy.js
         config-file: cypress.config.js
-        working-directory: tests
+        working-directory: e2e/browser-tests/
 
   cleanup:
     name: 'Cleanup PR Preview'
