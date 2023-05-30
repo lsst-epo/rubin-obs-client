@@ -32,14 +32,14 @@ const UnitLocalization = ({
   ];
 
   const windspeedOptions = [
-    { value: "kn", label: t("summit_dashboard.unit_localization.knots") },
+    { value: "NM", label: t("summit_dashboard.unit_localization.NM") },
     {
-      value: "mph",
-      label: t("summit_dashboard.unit_localization.miles_per_hour"),
+      value: "mi",
+      label: t("summit_dashboard.unit_localization.mi"),
     },
     {
-      value: "m/s",
-      label: t("summit_dashboard.unit_localization.meters_per_second"),
+      value: "m",
+      label: t("summit_dashboard.unit_localization.m"),
     },
   ];
 
@@ -87,7 +87,7 @@ const UnitLocalization = ({
 
 UnitLocalization.propTypes = {
   tempUnit: PropTypes.oneOf(["celsius", "fahrenheit"]),
-  windspeedUnit: PropTypes.oneOf(["kn", "mph", "m/s"]),
+  windspeedUnit: PropTypes.oneOf(["NM", "mi", "m"]),
   onTempChangeCallback: PropTypes.func,
   onWindChangeCallback: PropTypes.func,
 };

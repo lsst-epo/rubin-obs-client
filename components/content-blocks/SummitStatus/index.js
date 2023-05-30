@@ -13,7 +13,7 @@ const SummitStatus = ({ summitStatusLayout, widgetPreviews = [] }) => {
     i18n: { language = "en" },
   } = useTranslation();
   const [windspeedUnit, setWindspeedUnit] = useState(
-    language === "en" ? "kn" : "m/s"
+    language === "en" ? "NM" : "m"
   );
   const [tempUnit, setTempUnit] = useState(
     language === "en" ? "fahrenheit" : "celsius"
