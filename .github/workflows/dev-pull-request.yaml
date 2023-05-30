@@ -99,7 +99,7 @@ jobs:
       uses: cypress-io/github-action@v5
       with:
         spec: e2e/browser-tests/cypress/e2e/spec.cy.js
-        config-file: cypress.config.js
+        config-file: e2e/browser-tests/cypress.config.js
         working-directory: .
         # working-directory: e2e/browser-tests/
 
