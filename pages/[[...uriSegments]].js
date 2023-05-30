@@ -105,7 +105,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params: { uriSegments }, previewData }) {
   const PREVIEW_SLUG = process.env.NEXT_PREVIEW_SLUG;
 
-  if (process.env.NEXT_DEBUG_LOGGING) {
+  if (process.env.NEXT_DEBUG_LOGGING === "true") {
     logNextDir();
   }
 

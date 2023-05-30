@@ -9,6 +9,7 @@ import WidgetPreview from "@/components/layout/WidgetPreview";
 import TemperatureCurrent from "@/components/widgets/TemperatureCurrent";
 import PrecipitationCurrent from "@/components/widgets/PrecipitationCurrent";
 import TemperatureHistoric from "@/components/widgets/TemperatureHIstoric";
+import { useEfd } from "@/api/efd";
 
 const SummitStatus = ({ summitStatusLayout, widgetPreviews = [] }) => {
   /** this logic should be changed to useRouter after i18n refactor */
@@ -22,6 +23,9 @@ const SummitStatus = ({ summitStatusLayout, widgetPreviews = [] }) => {
     language === "en" ? "fahrenheit" : "celsius"
   );
 
+  const [data, loading] = useEfd();
+  // eslint-disable-next-line no-console
+  console.log({ data, loading });
   return (
     <Container bgColor="neutral95" width="wide" paddingSize="small">
       <WeatherUnitContext.Provider value={{ tempUnit, windspeedUnit }}>
