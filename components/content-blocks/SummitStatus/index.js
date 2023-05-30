@@ -87,6 +87,9 @@ const SummitStatus = ({ summitStatusLayout, widgetPreviews = [] }) => {
     }
   );
 
+  const [data, loading] = useEfd();
+  // eslint-disable-next-line no-console
+  console.log({ data, loading });
   return (
     <Container bgColor="neutral95" width="wide" paddingSize="small">
       <WeatherUnitContext.Provider value={{ tempUnit, windspeedUnit }}>
