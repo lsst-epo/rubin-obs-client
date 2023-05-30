@@ -84,7 +84,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params: { uriSegments }, previewData }) {
   const PREVIEW_SLUG = process.env.NEXT_PREVIEW_SLUG;
 
-  if (!process.env.IS_GITHUB_ACTION) {
+  if (process.env.NEXT_DEBUG_LOGGING) {
     fs.readFile(".next/BUILD_ID", (err, text) => {
       if (err) {
         console.error(err);
