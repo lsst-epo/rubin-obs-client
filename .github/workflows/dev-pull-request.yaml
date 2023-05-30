@@ -93,7 +93,7 @@ jobs:
         node-version: 16
     
     - name: Create .env Secret
-      run: echo "${{ env.version_url }}" >> e2e/browser-tests/.env
+      run: echo "WEBSITE_URL=${{ env.version_url }}" >> e2e/browser-tests/.env
 
     - name: Cypress run
       uses: cypress-io/github-action@v5
