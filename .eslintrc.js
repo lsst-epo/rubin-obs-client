@@ -121,6 +121,7 @@ module.exports = {
     "plugin:react/recommended",
     "plugin:import/errors",
     "plugin:storybook/recommended",
+    "plugin:cypress/recommended",
   ],
   overrides: [
     // Only uses Testing Library lint rules in test files
