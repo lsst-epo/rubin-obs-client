@@ -105,7 +105,6 @@
     "@testing-library/user-event": "^14.3.0",
     "babel-plugin-styled-components": "^2.0.7",
     "browserslist": "^4.21.2",
-    "cypress": "^12.13.0",
     "dotenv": "^16.0.3",
     "eslint": "^8.26.0",
     "eslint-config-next": "^13.0.1",
