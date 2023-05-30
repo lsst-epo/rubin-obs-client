@@ -326,9 +326,9 @@
         "label_windspeed": "Windspeed",
         "fahrenheit": "Fahrenheit",
         "celsius": "Celsius",
-        "knots": "kn",
-        "miles_per_hour": "mph",
-        "meters_per_second": "m/s"
+        "NM": "kn",
+        "mi": "mph",
+        "m": "m/s"
       }
     }
   }
