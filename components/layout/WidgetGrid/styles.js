@@ -11,6 +11,10 @@ export const WidgetGrid = styled.div`
   grid-template-columns: repeat(var(--widget-columns), 1fr);
   grid-gap: var(--widget-row-gap);
 
+  &:not(:first-child) {
+    margin-block-start: var(--widget-row-gap);
+  }
+
   @media screen and (min-width: ${token("BREAK_TABLET_MIN")}) {
     --widget-columns: 3;
   }

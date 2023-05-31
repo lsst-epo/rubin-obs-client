@@ -2,6 +2,10 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import UniqueIconComposer from "@/components/svg/UniqueIconComposer";
 import * as Styled from "./styles";
+import {
+  temperatureUnitType,
+  windspeedUnitType,
+} from "@/components/shapes/units";
 
 const UnitLocalization = ({
   tempUnit,
@@ -16,12 +20,12 @@ const UnitLocalization = ({
 
   const tempOptions = [
     {
-      value: "C",
-      label: t("summit_dashboard.unit_localization.C"),
+      value: "celsius",
+      label: t("summit_dashboard.unit_localization.celsius"),
     },
     {
-      value: "F",
-      label: t("summit_dashboard.unit_localization.F"),
+      value: "fahrenheit",
+      label: t("summit_dashboard.unit_localization.fahrenheit"),
     },
   ];
 
@@ -80,8 +84,8 @@ const UnitLocalization = ({
 };
 
 UnitLocalization.propTypes = {
-  tempUnit: PropTypes.oneOf(["C", "F"]),
-  windspeedUnit: PropTypes.oneOf(["NM", "mi", "m"]),
+  tempUnit: temperatureUnitType,
+  windspeedUnit: windspeedUnitType,
   onTempChangeCallback: PropTypes.func,
   onWindChangeCallback: PropTypes.func,
 };
