@@ -14,6 +14,8 @@ jobs:
   build-push-deploy:
     name: 'Build and Deploy PR preview to Development'
     runs-on: ubuntu-latest
+    outputs:
+      output1: ${{ steps.outputVars.outputs.preview_url }}
     if: ${{ github.event.action != 'closed'}}
 
     # Checkout the repository to the GitHub Actions runner
@@ -78,6 +80,10 @@ jobs:
           A preview of this PR will be available at ${{ env.version_url }} until the request is closed.
         reactions: '+1'
 
+    - name: Output Preview URL for E2E Step
+      id: outputVars
+      run: echo "preview_url=${{ env.version_url }}" >> "$GITHUB_OUTPUT"
+
   run-e2e-tests:
     name: 'Run End-to-End Tests on Preview Instance'
     runs-on: ubuntu-latest
@@ -92,8 +98,17 @@ jobs:
       with:
         node-version: 16
     
+    - name: Login to GCP
+      uses: google-github-actions/setup-gcloud@v0
+      with:
+        service_account_key: ${{ secrets.DEV_SA_KEY }}
+        project_id: ${{ secrets.SV_PROJ_NAME }}
+        export_default_credentials: true
+    
     - name: Create .env Secret
-      run: echo ${{ env.version_url }} && echo "WEBSITE_URL=${{ env.version_url }}" >> e2e/browser-tests/.env && cat e2e/browser-tests/.env
+      env:
+        PREVIEW_URL: ${{ needs.build-push-deploy.outputs.preview_url }}
+      run: echo ${{ env.version_url }} && echo "WEBSITE_URL=$PREVIEW_URL" >> e2e/browser-tests/.env && cat e2e/browser-tests/.env
 
     - name: Cypress run
       uses: cypress-io/github-action@v5
