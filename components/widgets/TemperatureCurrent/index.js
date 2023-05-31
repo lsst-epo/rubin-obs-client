@@ -1,6 +1,7 @@
 import { temperatureUnitType } from "@/components/shapes/units";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
+import WidgetBackground from "@/components/atomic/WidgetBackground";
 import * as Styled from "./styles";
 
 const TemperatureCurrent = ({ temperature, unit = "celsius" }) => {
@@ -29,7 +30,7 @@ const TemperatureCurrent = ({ temperature, unit = "celsius" }) => {
   };
 
   return (
-    <Styled.WidgetWrapper>
+    <WidgetBackground>
       <Styled.WidgetLabel>
         {t("summit_dashboard.unit_localization.label_temp")}
       </Styled.WidgetLabel>
@@ -37,7 +38,7 @@ const TemperatureCurrent = ({ temperature, unit = "celsius" }) => {
       <Styled.WidgetUnit>
         {t(`summit_dashboard.unit_localization.${unit}`)}
       </Styled.WidgetUnit>
-    </Styled.WidgetWrapper>
+    </WidgetBackground>
   );
 };
 
