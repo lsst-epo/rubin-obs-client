@@ -6,6 +6,7 @@ import WeatherUnitContext from "@/contexts/WeatherUnit";
 import UnitLocalization from "@/components/layout/UnitLocalization";
 import WidgetGrid from "@/components/layout/WidgetGrid";
 import WidgetPreview from "@/components/layout/WidgetPreview";
+import TemperatureCurrent from "@/components/widgets/TemperatureCurrent";
 
 const SummitStatus = ({ summitStatusLayout, widgetPreviews = [] }) => {
   /** this logic should be changed to useRouter after i18n refactor */
@@ -15,7 +16,9 @@ const SummitStatus = ({ summitStatusLayout, widgetPreviews = [] }) => {
   const [windspeedUnit, setWindspeedUnit] = useState(
     language === "en" ? "NM" : "m"
   );
-  const [tempUnit, setTempUnit] = useState(language === "en" ? "F" : "C");
+  const [tempUnit, setTempUnit] = useState(
+    language === "en" ? "fahrenheit" : "celsius"
+  );
 
   return (
     <Container bgColor="neutral95" width="wide" paddingSize="small">
@@ -26,10 +29,9 @@ const SummitStatus = ({ summitStatusLayout, widgetPreviews = [] }) => {
           onWindChangeCallback={(value) => setWindspeedUnit(value)}
         />
         <WidgetGrid>
-          {/* eslint-disable-next-line no-empty-pattern */}
-          {widgetPreviews.map(({}, i) => (
-            <WidgetPreview key={i}></WidgetPreview>
-          ))}
+          <WidgetPreview>
+            <TemperatureCurrent temperature={23.934982394238943984} />
+          </WidgetPreview>
         </WidgetGrid>
       </WeatherUnitContext.Provider>
     </Container>
