@@ -12,7 +12,12 @@ const TemperatureCurrent = ({ temperature, unit = "celsius" }) => {
         {t("summit_dashboard.unit_localization.label_temp")}
       </Styled.WidgetLabel>
       <Styled.WidgetValue>
-        {temperature.toLocaleString(language, { maximumFractionDigits: 0 })}
+        {temperature.toLocaleString(language, {
+          style: "unit",
+          unit,
+          unitDisplay: "narrow",
+          maximumFractionDigits: 0,
+        })}
       </Styled.WidgetValue>
       <Styled.WidgetUnit>
         {t(`summit_dashboard.unit_localization.${unit}`)}
