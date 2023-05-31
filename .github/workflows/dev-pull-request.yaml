@@ -15,7 +15,7 @@ jobs:
     name: 'Build and Deploy PR preview to Development'
     runs-on: ubuntu-latest
     outputs:
-      output1: ${{ steps.outputVars.outputs.preview_url }}
+      preview_url: ${{ steps.output_vars.outputs.preview_url }}
     if: ${{ github.event.action != 'closed'}}
 
     # Checkout the repository to the GitHub Actions runner
@@ -81,8 +81,8 @@ jobs:
         reactions: '+1'
 
     - name: Output Preview URL for E2E Step
-      id: outputVars
-      run: echo "preview_url=${{ env.version_url }}" >> "$GITHUB_OUTPUT"
+      id: output_vars
+      run: echo "preview_url=${{ env.version_url }}" >> "$GITHUB_OUTPUT" && echo $GITHUB_OUTPUT
 
   run-e2e-tests:
     name: 'Run End-to-End Tests on Preview Instance'
