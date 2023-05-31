@@ -25,15 +25,36 @@ import footerContentShape from "@/shapes/footerContent";
 import rootPagesShape from "@/shapes/rootPages";
 import { updateI18n } from "@/lib/i18n";
 import { setEdcLog } from "@/lib/edc-log";
+const glob = require("glob");
+const fs = require("fs");
 
 const CRAFT_HOMEPAGE_URI = "__home__";
 
-const glob = require("glob");
-const fs = require("fs");
-let BUILD_ID;
-
 function getDirectories(src, callback) {
   glob(src + "/**/*", { dot: true }, callback);
+}
+
+function logNextDir() {
+  let BUILD_ID = "";
+
+  fs.readFile(".next/BUILD_ID", (err, text) => {
+    if (err) {
+      console.error(err);
+    }
+    BUILD_ID = text.toString();
+  });
+  getDirectories(".next/server/pages", (err, res) => {
+    if (err) {
+      console.error("Error:", err);
+    } else {
+      const logInfo = {
+        uptime: process.uptime(),
+        build_id: BUILD_ID,
+        files: res,
+      };
+      console.info("node_next_logging:", JSON.stringify(logInfo));
+    }
+  });
 }
 
 export default function Page({ section, globalData, ...entryProps }) {
@@ -85,34 +106,18 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
   const PREVIEW_SLUG = process.env.NEXT_PREVIEW_SLUG;
 
   if (process.env.NEXT_DEBUG_LOGGING) {
-    fs.readFile(".next/BUILD_ID", (err, text) => {
-      if (err) {
-        console.error(err);
-      }
-      BUILD_ID = text.toString();
-    });
-    getDirectories(".next/server/pages", (err, res) => {
-      if (err) {
-        console.error("Error:", err);
-      } else {
-        const logInfo = {
-          uptime: process.uptime(),
-          build_id: BUILD_ID,
-          files: res,
-        };
-        console.info("node_next_logging:", JSON.stringify(logInfo));
-      }
-    });
+    logNextDir();
   }
 
   const runId = Date.now().toString();
   const isPreview = previewData && uriSegments[0] === PREVIEW_SLUG;
   const site = getSiteString(isPreview ? previewData.uriSegments : uriSegments);
   let uri = CRAFT_HOMEPAGE_URI;
-  // N.B. Because previewToken presence is unreliable this workaround with a dedicated "preview uriSegments" is used.
-  // If previewToken becomes reliable, deprecate previewData.uriSegments in favor of always using the uriSegments in the query params
+  let previewToken;
+
   if (isPreview) {
     uri = previewData.uriSegments.join("/");
+    previewToken = previewData?.previewToken;
   } else if (uriSegments && uriSegments.length) {
     uri = uriSegments.join("/");
   }
@@ -134,7 +139,12 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
     );
   }
 
-  const entrySectionType = await getEntrySectionTypeByUri(uri, site);
+  const entrySectionType = await getEntrySectionTypeByUri(
+    uri,
+    site,
+    previewToken
+  );
+
   // Handle 404 if there is no data
   if (!entrySectionType) {
     setEdcLog(runId, "404 encountered building for " + uri, "BUILD_ERROR_404");
@@ -149,7 +159,7 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
     section,
     type,
     site,
-    isPreview ? previewData?.previewToken : undefined
+    previewToken
   );
 
   const currentId = entryData?.id || entryData?.entry?.id;
@@ -188,8 +198,8 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
       notFound: true,
     };
   }
-
   setEdcLog(runId, "Done building for " + uri, "BUILD_COMPLETE");
+
   return {
     props: {
       data: entryData,
