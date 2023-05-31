@@ -13,7 +13,7 @@ export const PreviewPanel = styled.section`
   --panel-columns: ${({ $size }) => columns[$size]};
 
   display: grid;
-  grid-template: "header" 2rem "content" 10rem "callout" 2rem / 1fr;
+  grid-template: "header" 2rem "content" 12rem "callout" 2rem / 1fr;
   grid-gap: var(--widget-grid-gap);
   grid-column: span min(var(--panel-columns), var(--widget-columns));
   background-color: var(--black, #000);
