@@ -7,6 +7,7 @@ import UnitLocalization from "@/components/layout/UnitLocalization";
 import WidgetGrid from "@/components/layout/WidgetGrid";
 import WidgetPreview from "@/components/layout/WidgetPreview";
 import TemperatureCurrent from "@/components/widgets/TemperatureCurrent";
+import PrecipitationCurrent from "@/components/widgets/PrecipitationCurrent";
 
 const SummitStatus = ({ summitStatusLayout, widgetPreviews = [] }) => {
   /** this logic should be changed to useRouter after i18n refactor */
@@ -31,6 +32,10 @@ const SummitStatus = ({ summitStatusLayout, widgetPreviews = [] }) => {
         <WidgetGrid>
           <WidgetPreview>
             <TemperatureCurrent unit={tempUnit} temperature={23.9349824} />
+            <PrecipitationCurrent
+              precipitation={0.0354}
+              humidity={0.45234991292923}
+            />
           </WidgetPreview>
         </WidgetGrid>
       </WeatherUnitContext.Provider>
