@@ -18,5 +18,6 @@ export const WidgetUnit = styled.span`
 `;
 export const WidgetValue = styled.span`
   font-size: 400%;
+  font-variant-numeric: tabular-nums;
   line-height: 1;
 `;
