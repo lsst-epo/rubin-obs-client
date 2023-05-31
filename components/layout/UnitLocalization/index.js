@@ -1,13 +1,7 @@
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import {
-  StyledLocalizationBar,
-  StyledHeading,
-  StyledRadioGroup,
-  StyledRadioGroupLabel,
-  StyledRadioGroupOption,
-} from "./styles";
 import UniqueIconComposer from "@/components/svg/UniqueIconComposer";
+import * as Styled from "./styles";
 
 const UnitLocalization = ({
   tempUnit,
@@ -22,12 +16,12 @@ const UnitLocalization = ({
 
   const tempOptions = [
     {
-      value: "celsius",
-      label: t("summit_dashboard.unit_localization.celsius"),
+      value: "C",
+      label: t("summit_dashboard.unit_localization.C"),
     },
     {
-      value: "fahrenheit",
-      label: t("summit_dashboard.unit_localization.fahrenheit"),
+      value: "F",
+      label: t("summit_dashboard.unit_localization.F"),
     },
   ];
 
@@ -44,49 +38,49 @@ const UnitLocalization = ({
   ];
 
   return (
-    <StyledLocalizationBar role="group" aria-labelledby={heading}>
-      <StyledHeading id={heading}>
-        <UniqueIconComposer icon="gear" size="calc(1em * (5/3))" />
+    <Styled.LocalizationBar role="group" aria-labelledby={heading}>
+      <Styled.Heading id={heading}>
+        <UniqueIconComposer icon="gear" />
         {t("summit_dashboard.unit_localization.settings")}
-      </StyledHeading>
-      <StyledRadioGroup
+      </Styled.Heading>
+      <Styled.RadioGroup
         value={tempUnit}
         aria-labelledby={temperatureLabel}
         onChange={(value) =>
           onTempChangeCallback && onTempChangeCallback(value)
         }
       >
-        <StyledRadioGroupLabel id={temperatureLabel}>
+        <Styled.RadioGroupLabel id={temperatureLabel}>
           {t("summit_dashboard.unit_localization.label_temp")}
-        </StyledRadioGroupLabel>
+        </Styled.RadioGroupLabel>
         {tempOptions.map(({ value, label }) => (
-          <StyledRadioGroupOption key={value} value={value}>
+          <Styled.RadioGroupOption key={value} value={value}>
             {label}
-          </StyledRadioGroupOption>
+          </Styled.RadioGroupOption>
         ))}
-      </StyledRadioGroup>
-      <StyledRadioGroup
+      </Styled.RadioGroup>
+      <Styled.RadioGroup
         value={windspeedUnit}
         aria-labelledby={windspeedLabel}
         onChange={(value) =>
           onWindChangeCallback && onWindChangeCallback(value)
         }
       >
-        <StyledRadioGroupLabel id={windspeedLabel}>
+        <Styled.RadioGroupLabel id={windspeedLabel}>
           {t("summit_dashboard.unit_localization.label_windspeed")}
-        </StyledRadioGroupLabel>
+        </Styled.RadioGroupLabel>
         {windspeedOptions.map(({ value, label }) => (
-          <StyledRadioGroupOption key={value} value={value}>
+          <Styled.RadioGroupOption key={value} value={value}>
             {label}
-          </StyledRadioGroupOption>
+          </Styled.RadioGroupOption>
         ))}
-      </StyledRadioGroup>
-    </StyledLocalizationBar>
+      </Styled.RadioGroup>
+    </Styled.LocalizationBar>
   );
 };
 
 UnitLocalization.propTypes = {
-  tempUnit: PropTypes.oneOf(["celsius", "fahrenheit"]),
+  tempUnit: PropTypes.oneOf(["C", "F"]),
   windspeedUnit: PropTypes.oneOf(["NM", "mi", "m"]),
   onTempChangeCallback: PropTypes.func,
   onWindChangeCallback: PropTypes.func,

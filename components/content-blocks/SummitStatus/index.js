@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import { Container } from "@rubin-epo/epo-react-lib";
 import { useTranslation } from "react-i18next";
-import NestedContext from "@/contexts/Nested";
+import WeatherUnitContext from "@/contexts/WeatherUnit";
 import UnitLocalization from "@/components/layout/UnitLocalization";
 import WidgetGrid from "@/components/layout/WidgetGrid";
 import WidgetPreview from "@/components/layout/WidgetPreview";
@@ -15,13 +15,11 @@ const SummitStatus = ({ summitStatusLayout, widgetPreviews = [] }) => {
   const [windspeedUnit, setWindspeedUnit] = useState(
     language === "en" ? "NM" : "m"
   );
-  const [tempUnit, setTempUnit] = useState(
-    language === "en" ? "fahrenheit" : "celsius"
-  );
+  const [tempUnit, setTempUnit] = useState(language === "en" ? "F" : "C");
 
   return (
     <Container bgColor="neutral95" width="wide" paddingSize="small">
-      <NestedContext.Provider value={{ tempUnit, windspeedUnit }}>
+      <WeatherUnitContext.Provider value={{ tempUnit, windspeedUnit }}>
         <UnitLocalization
           {...{ tempUnit, windspeedUnit }}
           onTempChangeCallback={(value) => setTempUnit(value)}
@@ -33,7 +31,7 @@ const SummitStatus = ({ summitStatusLayout, widgetPreviews = [] }) => {
             <WidgetPreview key={i}></WidgetPreview>
           ))}
         </WidgetGrid>
-      </NestedContext.Provider>
+      </WeatherUnitContext.Provider>
     </Container>
   );
 };

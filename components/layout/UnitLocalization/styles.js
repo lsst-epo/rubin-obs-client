@@ -1,38 +1,39 @@
 import styled from "styled-components";
-import { RadioGroup } from "@headlessui/react";
+import { RadioGroup as BaseRadioGroup } from "@headlessui/react";
 
-export const StyledLocalizationBar = styled.div`
+export const LocalizationBar = styled.div`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+  row-gap: var(--PADDING_SMALL, 20px);
   color: var(--white, #fff);
   border: none;
   margin: 0;
   padding: 0;
   width: 100%;
 `;
-export const StyledHeading = styled.div`
+export const Heading = styled.div`
   display: flex;
   align-items: center;
   font-size: calc(100% * (5 / 6));
   gap: 1ch;
-  padding-inline: 1rem;
+  padding-inline: var(--PADDING_SMALL, 20px);
   line-height: 1;
 `;
-export const StyledRadioGroup = styled(RadioGroup)`
+export const RadioGroup = styled(BaseRadioGroup)`
   display: flex;
   align-items: center;
   gap: 1ch;
   border-left: 1px solid #6a6e6e;
-  padding-inline: 1rem;
+  padding-inline: var(--PADDING_SMALL, 20px);
 `;
-export const StyledRadioGroupLabel = styled(RadioGroup.Label)`
+export const RadioGroupLabel = styled(BaseRadioGroup.Label)`
   line-height: 1;
   font-size: 50%;
 `;
 
-export const StyledRadioGroupOption = styled(RadioGroup.Option)`
-  --radio-option-size: 1em;
+export const RadioGroupOption = styled(BaseRadioGroup.Option)`
+  --radio-option-size: 18px;
   --radio-option-outline: none;
   --radio-option-checked-background: transparent;
   --radio-option-checked-size: calc(var(--radio-option-size) * (2 / 3));
