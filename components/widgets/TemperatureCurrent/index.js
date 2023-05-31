@@ -8,7 +8,9 @@ const TemperatureCurrent = ({ temperature, unit = "celsius" }) => {
   const { language = "en" } = i18n;
   return (
     <Styled.WidgetWrapper>
-      <Styled.WidgetLabel>Temperature</Styled.WidgetLabel>
+      <Styled.WidgetLabel>
+        {t("summit_dashboard.unit_localization.label_temp")}
+      </Styled.WidgetLabel>
       <Styled.WidgetValue>
         {temperature.toLocaleString(language, { maximumFractionDigits: 0 })}
       </Styled.WidgetValue>
