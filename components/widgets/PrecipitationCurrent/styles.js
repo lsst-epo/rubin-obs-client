@@ -9,6 +9,9 @@ export const WidgetUnit = styled.span`
   line-height: 0.75;
 `;
 export const WidgetValue = styled.span`
+  display: inline-flex;
+  align-items: center;
   font-size: 275%;
+  font-variant-numeric: tabular-nums;
   line-height: 0.75;
 `;
