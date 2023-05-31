@@ -324,8 +324,8 @@
         "settings": "Settings",
         "label_temp": "Temperature",
         "label_windspeed": "Windspeed",
-        "fahrenheit": "Fahrenheit",
-        "celsius": "Celsius",
+        "F": "Fahrenheit",
+        "C": "Celsius",
         "NM": "kn",
         "mi": "mph",
         "m": "m/s"
