@@ -7,18 +7,32 @@ const PrecipitationCurrent = ({ precipitation = 0, humidity = 0 }) => {
   const { t, i18n } = useTranslation();
   const { language = "en" } = i18n;
 
+  const styledFormatter = (value) => {
+    const formatter = new Intl.NumberFormat(language, { style: "percent" });
+
+    const parts = formatter.formatToParts(value).map(({ type, value }) => {
+      if (type === "percentSign") {
+        return `<span style="font-size: 50%;">${value}</span>`;
+      }
+
+      return value;
+    });
+
+    return parts.join("");
+  };
+
   return (
     <WidgetBackground $variant="secondary">
-      <Styled.WidgetValue>
-        {precipitation.toLocaleString(language, { style: "percent" })}
-      </Styled.WidgetValue>
+      <Styled.WidgetValue
+        dangerouslySetInnerHTML={{ __html: styledFormatter(precipitation) }}
+      />
       <Styled.WidgetUnit>
         {t("summit_dashboard.unit_localization.label_precipitation")}
       </Styled.WidgetUnit>
       <Styled.WidgetSeparator />
-      <Styled.WidgetValue>
-        {humidity.toLocaleString(language, { style: "percent" })}
-      </Styled.WidgetValue>
+      <Styled.WidgetValue
+        dangerouslySetInnerHTML={{ __html: styledFormatter(humidity) }}
+      />
       <Styled.WidgetUnit>
         {t("summit_dashboard.unit_localization.label_humidity")}
       </Styled.WidgetUnit>
