@@ -14,8 +14,6 @@ jobs:
   build-push-deploy:
     name: 'Build and Deploy PR preview to Development'
     runs-on: ubuntu-latest
-    # outputs:
-    #   preview_url: ${{ steps.output_vars.outputs.preview_url }}
     if: ${{ github.event.action != 'closed'}}
 
     # Checkout the repository to the GitHub Actions runner
@@ -68,7 +66,6 @@ jobs:
         --project=${{ secrets.SV_PROJ_NAME }}
     
     - name: Get the version URL
-      id: get_version
       run: echo "version_url=$(gcloud app versions list --uri --service=default --filter=version.id:${{ env.version_name }})" >> $GITHUB_ENV
 
     - name: Post the URL to the PR
@@ -78,10 +75,6 @@ jobs:
         body: |
           A preview of this PR will be available at ${{ env.version_url }} until the request is closed.
         reactions: '+1'
-
-    # - name: Output Preview URL for E2E Step
-    #   id: output_vars
-    #   run: echo "preview_url=${{ env.version_url }}" >> "$GITHUB_OUTPUT" && echo $GITHUB_OUTPUT
 
   run-e2e-tests:
     name: 'Run End-to-End Tests on Preview Instance'
