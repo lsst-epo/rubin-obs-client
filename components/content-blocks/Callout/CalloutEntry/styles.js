@@ -63,26 +63,10 @@ export const StyledInner = styled(MixedLink)`
     text-align: center;
   `
   )}
-
-  &:hover,
-  &:focus-visible {
-    outline: 3px solid var(--turquoise85);
-    outline-offset: var(--Tile-hover-outline-offset, 1px);
-  }
-`;
-
-const innerHoverChildStyles = () =>
-  `
-  ${StyledInner}:hover &,
-  ${StyledInner}:focus-visible & {
-    color: var(--turquoise60);
-  }
 `;
 
 export const StyledHeading = styled.h2`
   grid-area: title;
-
-  ${innerHoverChildStyles()}
 
   ${respond(
     ` ${mobileMargins()}
@@ -102,8 +86,6 @@ export const StyledSubheading = styled.div`
   font-size: 18px;
   font-weight: 700;
 
-  ${innerHoverChildStyles()}
-
   ${respond(
     ` ${mobileMargins()}
       margin-top: 2px;
@@ -120,8 +102,6 @@ export const StyledSubheading = styled.div`
 
 export const StyledText = styled(Text)`
   grid-area: text;
-
-  ${innerHoverChildStyles()}
 
   ${respond(
     ` ${mobileMargins()}
@@ -203,6 +183,12 @@ export const StyledFooterButton = styled.div`
   &.c-buttonish:not(:disabled, [aria-disabled="true"]):hover,
   &.c-buttonish:not(:disabled, [aria-disabled="true"]).focus-visible {
     outline: none;
+  }
+
+  ${StyledInner}:hover &,
+  ${StyledInner}:focus-visible & {
+    outline: 3px solid var(--button-border-color);
+    outline-offset: 1px;
   }
 
   ${respond(

@@ -45,7 +45,7 @@ export default function CalloutEntry({ callout }) {
     date,
     startDate,
     endDate,
-    uri,
+    url,
     description,
     image,
     entryType,
@@ -56,7 +56,7 @@ export default function CalloutEntry({ callout }) {
 
   return (
     <StyledSection $bgColor={backgroundColor} $width="full" $overlay={false}>
-      <StyledInner href={uri} aria-labelledby={titleId}>
+      <StyledInner href={url} aria-labelledby={titleId}>
         {image.length && (
           <StyledImageWrapper>
             <Image role="presentation" ratio="4:3" image={image[0]} />
@@ -81,7 +81,7 @@ export default function CalloutEntry({ callout }) {
           </StyledFooterButton>
         </StyledFooter>
       </StyledInner>
-      {typeSlug === "news-post" && <StyledSharePopup title={title} url={uri} />}
+      {typeSlug === "news-post" && <StyledSharePopup title={title} url={url} />}
     </StyledSection>
   );
 }
