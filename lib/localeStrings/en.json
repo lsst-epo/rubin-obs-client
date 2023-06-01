@@ -331,6 +331,10 @@
         "NM": "kn",
         "mi": "mph",
         "m": "m/s"
+      },
+      "weather": {
+        "temp_daily_max": "High",
+        "temp_daily_min": "Low"
       }
     }
   }
