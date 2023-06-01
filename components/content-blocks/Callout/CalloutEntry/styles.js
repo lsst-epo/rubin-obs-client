@@ -180,11 +180,6 @@ export const StyledFooter = styled.div`
 `;
 
 export const StyledFooterButton = styled.div`
-  &.c-buttonish:not(:disabled, [aria-disabled="true"]):hover,
-  &.c-buttonish:not(:disabled, [aria-disabled="true"]).focus-visible {
-    outline: none;
-  }
-
   ${StyledInner}:hover &,
   ${StyledInner}:focus-visible & {
     outline: 3px solid var(--button-border-color);
