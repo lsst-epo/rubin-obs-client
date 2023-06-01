@@ -30,10 +30,7 @@ const SummitStatus = ({ summitStatusLayout, widgetPreviews = [] }) => {
         />
         <WidgetGrid>
           <WidgetPreview>
-            <TemperatureCurrent
-              unit={tempUnit}
-              temperature={23.934982394238943984}
-            />
+            <TemperatureCurrent unit={tempUnit} temperature={23.9349824} />
           </WidgetPreview>
         </WidgetGrid>
       </WeatherUnitContext.Provider>
