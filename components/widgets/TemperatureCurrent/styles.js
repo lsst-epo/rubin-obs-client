@@ -20,4 +20,5 @@ export const WidgetValue = styled.span`
   font-size: 400%;
   font-variant-numeric: tabular-nums;
   line-height: 1;
+  white-space: nowrap;
 `;
