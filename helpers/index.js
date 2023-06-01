@@ -36,3 +36,22 @@ export function wait(seconds) {
     setTimeout(resolve, seconds * 1000);
   });
 }
+
+export const formatTemperature = (value, locale = "en", unit = "celsius") => {
+  const formatter = new Intl.NumberFormat(locale, {
+    style: "unit",
+    unit,
+    maximumFractionDigits: 0,
+  });
+
+  return formatter
+    .formatToParts(value)
+    .map(({ type, value }) => {
+      if (type === "unit") {
+        return value.replace(/[a-z]/gi, "");
+      }
+
+      return value;
+    })
+    .join("");
+};
