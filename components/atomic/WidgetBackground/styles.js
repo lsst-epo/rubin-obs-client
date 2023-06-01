@@ -11,6 +11,7 @@ export const WidgetBackground = styled.div`
 
   background-color: var(--widget-background-color);
   border-radius: calc(var(--PADDING_SMALL, 20px) / 2);
+  font-size: 0.75rem;
   display: flex;
   flex-direction: column;
   align-items: center;
