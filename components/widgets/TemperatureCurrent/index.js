@@ -1,6 +1,7 @@
 import { temperatureUnitType } from "@/components/shapes/units";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
+import { formatTemperature } from "@/helpers";
 import WidgetBackground from "@/components/atomic/WidgetBackground";
 import * as Styled from "./styles";
 
@@ -10,31 +11,14 @@ const TemperatureCurrent = ({ temperature, unit = "celsius" }) => {
     i18n: { language = "en" },
   } = useTranslation();
 
-  const formatTemperature = (value) => {
-    const formatter = new Intl.NumberFormat(language, {
-      style: "unit",
-      unit,
-      maximumFractionDigits: 0,
-    });
-
-    return formatter
-      .formatToParts(value)
-      .map(({ type, value }) => {
-        if (type === "unit") {
-          return value.replace(/[a-z]/gi, "");
-        }
-
-        return value;
-      })
-      .join("");
-  };
-
   return (
     <WidgetBackground>
       <Styled.WidgetLabel>
         {t("summit_dashboard.unit_localization.label_temp")}
       </Styled.WidgetLabel>
-      <Styled.WidgetValue>{formatTemperature(temperature)}</Styled.WidgetValue>
+      <Styled.WidgetValue>
+        {formatTemperature(temperature, language, unit)}
+      </Styled.WidgetValue>
       <Styled.WidgetUnit>
         {t(`summit_dashboard.unit_localization.${unit}`)}
       </Styled.WidgetUnit>
