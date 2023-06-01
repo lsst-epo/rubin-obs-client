@@ -4,8 +4,10 @@ import PropTypes from "prop-types";
 import * as Styled from "./styles";
 
 const TemperatureCurrent = ({ temperature, unit = "celsius" }) => {
-  const { t, i18n } = useTranslation();
-  const { language = "en" } = i18n;
+  const {
+    t,
+    i18n: { language = "en" },
+  } = useTranslation();
 
   const formatTemperature = (value) => {
     const formatter = new Intl.NumberFormat(language, {
