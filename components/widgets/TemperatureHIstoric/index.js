@@ -41,7 +41,7 @@ const TemperatureHistoric = ({
           {temperatureData && (
             <tr>
               <Styled.TemperatureHeader scope="row">
-                High
+                {t("summit_dashboard.weather.temp_daily_max")}
               </Styled.TemperatureHeader>
               {temperatureData.map(({ high }, i) => (
                 <Styled.TemperatureCell
@@ -56,7 +56,7 @@ const TemperatureHistoric = ({
           {temperatureData && (
             <tr>
               <Styled.TemperatureHeader scope="row">
-                Low
+                {t("summit_dashboard.weather.temp_daily_min")}
               </Styled.TemperatureHeader>
               {temperatureData.map(({ low }, i) => (
                 <Styled.TemperatureCell
