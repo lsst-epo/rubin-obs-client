@@ -8,6 +8,7 @@ import WidgetGrid from "@/components/layout/WidgetGrid";
 import WidgetPreview from "@/components/layout/WidgetPreview";
 import TemperatureCurrent from "@/components/widgets/TemperatureCurrent";
 import PrecipitationCurrent from "@/components/widgets/PrecipitationCurrent";
+import TemperatureHistoric from "@/components/widgets/TemperatureHIstoric";
 
 const SummitStatus = ({ summitStatusLayout, widgetPreviews = [] }) => {
   /** this logic should be changed to useRouter after i18n refactor */
@@ -39,6 +40,20 @@ const SummitStatus = ({ summitStatusLayout, widgetPreviews = [] }) => {
             <PrecipitationCurrent
               precipitation={0.0354}
               humidity={0.45234991292923}
+            />
+          </WidgetPreview>
+          <WidgetPreview size="large">
+            <TemperatureHistoric
+              temperatureData={[
+                { weekday: 1, high: 23, low: 15 },
+                { weekday: 2, high: 26, low: 17 },
+                { weekday: 3, high: 28, low: 15 },
+                { weekday: 4, high: 31, low: 16 },
+                { weekday: 5, high: 29, low: 14 },
+                { weekday: 6, high: 29, low: 11 },
+                { weekday: 0, high: 32, low: 14 },
+              ]}
+              unit={tempUnit}
             />
           </WidgetPreview>
         </WidgetGrid>
