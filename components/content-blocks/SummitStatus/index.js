@@ -37,10 +37,6 @@ const SummitStatus = ({ summitStatusLayout, widgetPreviews = [] }) => {
               precipitation={0.0354}
               humidity={0.45234991292923}
             />
-            <PrecipitationCurrent
-              precipitation={0.0354}
-              humidity={0.45234991292923}
-            />
           </WidgetPreview>
           <WidgetPreview size="large">
             <TemperatureHistoric

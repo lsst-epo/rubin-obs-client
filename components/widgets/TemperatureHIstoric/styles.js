@@ -2,7 +2,6 @@ import styled from "styled-components";
 import WidgetBackground from "@/components/atomic/WidgetBackground";
 
 export const TemperatureHistoricBackground = styled(WidgetBackground)`
-  font-size: 0.75rem;
   grid-column: 1/-1;
 `;
 
