@@ -32,6 +32,20 @@
     "build-storybook": "storybook build",
     "proxy": "env-cmd -x lcp --proxyUrl \\$EFD_URL_PROXY"
   },
+  "babel": {
+    "presets": [
+      "next/babel"
+    ],
+    "plugins": [
+      [
+        "styled-components",
+        {
+          "ssr": true,
+          "displayName": true
+        }
+      ]
+    ]
+  },
   "browserslist": [
     "defaults",
     "not IE 11"
