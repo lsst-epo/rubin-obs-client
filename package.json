@@ -29,7 +29,8 @@
     "test:e2e": "cypress run --e2e --headless",
     "cypress": "CYPRESS_BASE_URL=http://localhost:3000 cypress open",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "proxy": "env-cmd -x lcp --proxyUrl \\$EFD_URL_PROXY"
   },
   "browserslist": [
     "defaults",
@@ -86,6 +87,7 @@
     "@storybook/react": "^7.0.6",
     "browserslist": "^4.21.2",
     "cypress": "^12.15.0",
+    "env-cmd": "^10.1.0",
     "eslint": "^8.26.0",
     "eslint-config-next": "^13.0.1",
     "eslint-config-prettier": "^8.5.0",
@@ -100,6 +102,7 @@
     "i18next-http-backend": "^2.2.0",
     "jsconfig-paths-jest-mapper": "^1.0.0",
     "lint-staged": "^13.0.3",
+    "local-cors-proxy": "^1.1.0",
     "postcss": "^8.4.14",
     "postcss-normalize": "^10.0.1",
     "postcss-preset-env": "^7.7.2",
