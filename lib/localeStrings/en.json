@@ -339,11 +339,17 @@
         "celsius": "Celsius",
         "NM": "kn",
         "mi": "mph",
-        "m": "m/s"
+        "m": "m/s",
+        "NM_full": "Knots",
+        "mi_full": "Miles per hour",
+        "m_full": "Meters per second"
       },
       "weather": {
         "temp_daily_max": "High",
-        "temp_daily_min": "Low"
+        "temp_daily_min": "Low",
+        "windspeed_title": "Hourly wind speed report - {{unit}}",
+        "condition_now": "Now",
+        "no_data_yet": "No data yet"
       }
     }
   }
