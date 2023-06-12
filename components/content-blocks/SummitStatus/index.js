@@ -9,6 +9,7 @@ import WidgetPreview from "@/components/layout/WidgetPreview";
 import TemperatureCurrent from "@/components/widgets/TemperatureCurrent";
 import PrecipitationCurrent from "@/components/widgets/PrecipitationCurrent";
 import TemperatureHistoric from "@/components/widgets/TemperatureHIstoric";
+import WindspeedHourly from "@/components/widgets/WindspeedHourly";
 
 const SummitStatus = ({ summitStatusLayout, widgetPreviews = [] }) => {
   /** this logic should be changed to useRouter after i18n refactor */
@@ -20,6 +21,39 @@ const SummitStatus = ({ summitStatusLayout, widgetPreviews = [] }) => {
   );
   const [tempUnit, setTempUnit] = useState(
     language === "en" ? "fahrenheit" : "celsius"
+  );
+
+  const mockWindspeedData = [
+    { windspeed: 5.2342342, direction: 120 },
+    { windspeed: 4.7, direction: 112 },
+    { windspeed: 6.1, direction: 98 },
+    { windspeed: 3.8, direction: 105 },
+    { windspeed: 5.5, direction: 117 },
+    { windspeed: 7.2, direction: 125 },
+    { windspeed: 4.3, direction: 103 },
+    { windspeed: 6.8, direction: 108 },
+    { windspeed: 5.14343, direction: 115 },
+    { windspeed: 4.9, direction: 98 },
+    { windspeed: 5.7, direction: 105 },
+    { windspeed: 6.5, direction: 114 },
+    { windspeed: 3.9, direction: 99 },
+    { windspeed: 4.1, direction: 102 },
+    { windspeed: 5.3, direction: 108 },
+    { windspeed: 6.3, direction: 116 },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+  ];
+
+  const timedWindpeedData = mockWindspeedData.map(
+    ({ windspeed, direction }, i) => {
+      return { windspeed, direction, time: new Date().setHours(i, 0, 0, 0) };
+    }
   );
 
   return (
@@ -50,6 +84,12 @@ const SummitStatus = ({ summitStatusLayout, widgetPreviews = [] }) => {
                 { weekday: 0, high: 32, low: 14 },
               ]}
               unit={tempUnit}
+            />
+          </WidgetPreview>
+          <WidgetPreview size="large">
+            <WindspeedHourly
+              unit={windspeedUnit}
+              windspeedData={timedWindpeedData}
             />
           </WidgetPreview>
         </WidgetGrid>
