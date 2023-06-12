@@ -1,3 +1,4 @@
+import Arrow from "./Arrow";
 import Cloudy from "./weather/Cloudy";
 import CloudyPartial from "./weather/CloudyPartial";
 import Gear from "./Gear";
@@ -32,6 +33,7 @@ import StormLightningRain from "./weather/StormLightningRain";
 import Sun from "./weather/Sun";
 
 export default {
+  Arrow,
   Cloudy,
   CloudyPartial,
   Gear,
