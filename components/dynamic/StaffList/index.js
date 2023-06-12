@@ -1,10 +1,8 @@
 import PropTypes from "prop-types";
-import styled from "styled-components";
-import { Container, Grid, Buttonish } from "@rubin-epo/epo-react-lib";
+import { useTranslation } from "react-i18next";
+import { Grid } from "@rubin-epo/epo-react-lib";
 import DataList from "@/dynamic/DataList";
 import Tile from "@/atomic/Tile";
-import Pagination from "@/page/Pagination";
-import { fluidScale } from "@/styles/globalStyles";
 
 const StaffList = ({
   component,
@@ -13,7 +11,9 @@ const StaffList = ({
   limit = 15,
   button,
   isWide = false,
+  isRelatedList = false,
 }) => {
+  const { t } = useTranslation();
   const cols = limit === 4 ? 4 : 3;
 
   return (
@@ -22,61 +22,34 @@ const StaffList = ({
       excludeId={excludeId}
       limit={limit}
       section="staffProfiles"
+      header={header}
+      width={isWide ? "regular" : "narrow"}
+      footerButton={button}
+      isRelatedList={isRelatedList}
+      loaderDescription={t("staff.loading")}
     >
-      {({ entries, offset, page, total }) => (
+      {({ entries }) => (
         <>
-          <Container width={isWide ? "regular" : "narrow"}>
-            <div>
-              {header && <Header>{header}</Header>}
-              {entries?.length > 0 && (
-                <Grid columns={cols}>
-                  {entries.map(({ id, plainText, image, title, uri }) => (
-                    <Tile
-                      key={id}
-                      title={title}
-                      titleTag={"h2"}
-                      text={plainText}
-                      image={image?.[0]}
-                      link={uri}
-                      type={"staffProfiles"}
-                    />
-                  ))}
-                </Grid>
-              )}
-              {button && (
-                <Footer>
-                  <Buttonish
-                    isBlock={true}
-                    text={button.text}
-                    url={`/${button.uri}`}
-                  />
-                </Footer>
-              )}
-            </div>
-          </Container>
-          {limit >= 15 && (
-            <Pagination
-              limit={limit}
-              offset={offset}
-              page={page}
-              total={total}
-            />
+          {entries?.length > 0 && (
+            <Grid columns={cols}>
+              {entries.map(({ id, plainText, image, title, uri }) => (
+                <Tile
+                  key={id}
+                  title={title}
+                  titleTag={"h2"}
+                  text={plainText}
+                  image={image?.[0]}
+                  link={uri}
+                  type={"staffProfiles"}
+                />
+              ))}
+            </Grid>
           )}
         </>
       )}
     </DataList>
   );
 };
-
-const Header = styled.h2`
-  margin-bottom: ${fluidScale("40px", "20px")};
-  padding-bottom: 10px;
-  border-bottom: 10px solid var(--turquoise85);
-`;
-
-const Footer = styled.div`
-  padding-top: 40px;
-`;
 
 StaffList.propTypes = {
   component: PropTypes.string,
@@ -85,6 +58,7 @@ StaffList.propTypes = {
   header: PropTypes.string,
   button: PropTypes.object,
   isWide: PropTypes.bool,
+  isRelatedList: PropTypes.bool,
 };
 
 export default StaffList;

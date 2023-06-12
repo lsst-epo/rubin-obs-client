@@ -7,9 +7,11 @@
     "breaking-news": "Últimas noticias",
     "cell": "Celda",
     "localize-content": "Localizar el contenido del sitio",
+    "loading": "Cargando…",
     "media": "Multimedia",
     "read-more": "Leer más",
     "related-content": "Contenido relacionado",
+    "related-content-loading": "Cargando contenido relacionado",
     "error-title": "Error",
     "error-text": "Ha ocurrido un error.",
     "page-not-found-title": "Página no encontrada",
@@ -97,7 +99,8 @@
       "related-events": "Otros eventos",
       "go-to-events": "Ir a eventos",
       "upcoming": "Próximos eventos",
-      "past": "Eventos anteriores"
+      "past": "Eventos anteriores",
+      "loading": "Cargando el Calendario..."
     },
     "gallery": {
       "about-the-image": "Acerca de la imagen",
@@ -107,6 +110,7 @@
       "additional-information": "Información adicional",
       "available-sizes": "Tamaños disponibles",
       "curated-slideshows": "Presentaciones curadas",
+      "loading-slideshows": "Cargando las Presentaciones...",
       "download-image": "Descargar imagen",
       "download-video": "Descargar video",
       "download-3d": "Descargar modelo 3D",
@@ -138,17 +142,20 @@
       "1080p": "1080p",
       "720p": "720p",
       "480p": "480p",
-      "320p": "320p"
+      "320p": "320p",
+      "loading": "Cargando la Galería..."
     },
     "jobs": {
       "jobs": "Trabajos",
       "read-more": "Leer más sobre este trabajo.",
       "open": "Vacante",
-      "closed": "Cerrado"
+      "closed": "Cerrado",
+      "loading": "Cargando los Trabajos..."
     },
     "news": {
       "related-posts": "Noticias relacionadas",
-      "back-to-posts": "Volver a noticias"
+      "back-to-posts": "Volver a noticias",
+      "loading": "Cargando las noticias..."
     },
     "pagination": {
       "label": "Paginación",
@@ -172,7 +179,8 @@
       "non-scientific-staff": "Perfil del equipo no científico",
       "browse-more": "Navegar más perfiles",
       "back-to-profiles": "Volver a perfiles",
-      "trading-card": "Carta coleccionable"
+      "trading-card": "Carta coleccionable",
+      "loading": "Cargando las Voces de Rubin..."
     },
     "telescope": {
       "state": "Estado",
@@ -301,7 +309,8 @@
       "delete_error_header": "¡Error!"
     },
     "glossary": {
-      "back_button": "Volver al glosario"
+      "back_button": "Volver al glosario",
+      "loading": "Cargando el Glosario..."
     },
     "restricted": {
       "header_approval_pending": "Contenido no disponible aún",

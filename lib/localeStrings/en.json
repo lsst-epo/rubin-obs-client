@@ -7,9 +7,11 @@
     "breaking-news": "Breaking News",
     "cell": "Cell",
     "localize-content": "Localize site content",
+    "loading": "Loading…",
     "media": "Media",
     "read-more": "Read more",
     "related-content": "Related content",
+    "related-content-loading": "Loading related content",
     "error-title": "Error",
     "error-text": "There has been an error.",
     "page-not-found-title": "Page not found",
@@ -82,7 +84,8 @@
       "related-events": "Other Events",
       "go-to-events": "Go to events",
       "upcoming": "Upcoming events",
-      "past": "Past events"
+      "past": "Past events",
+      "loading": "Loading the Calendar..."
     },
     "gallery": {
       "about-the-image": "About the Image",
@@ -92,6 +95,7 @@
       "additional-information": "Additional information",
       "available-sizes": "Available Sizes",
       "curated-slideshows": "Curated Slideshows",
+      "loading-slideshows": "Loading the Slideshows...",
       "download-image": "Download image",
       "download-video": "Download video",
       "download-3d": "Download 3d model",
@@ -123,17 +127,20 @@
       "1080p": "1080p",
       "720p": "720p",
       "480p": "480p",
-      "320p": "320p"
+      "320p": "320p",
+      "loading": "Loading the Gallery..."
     },
     "jobs": {
       "jobs": "Jobs",
       "read-more": "Read more about this position.",
       "open": "Open",
-      "closed": "Closed"
+      "closed": "Closed",
+      "loading": "Loading the Jobs..."
     },
     "news": {
       "related-posts": "Related News Posts",
-      "back-to-posts": "Go Back to News Posts"
+      "back-to-posts": "Go Back to News Posts",
+      "loading": "Loading the News..."
     },
     "pagination": {
       "label": "Pagination",
@@ -157,7 +164,8 @@
       "non-scientific-staff": "Non-scientific Staff Profile",
       "browse-more": "Browse More Profiles",
       "back-to-profiles": "Go Back to Profiles",
-      "trading-card": "Trading card"
+      "trading-card": "Trading card",
+      "loading": "Loading the Rubin Voices..."
     },
     "telescope": {
       "state": "State",
@@ -286,7 +294,8 @@
       "delete_error_header": "Error!"
     },
     "glossary": {
-      "back_button": "Go back to Glossary"
+      "back_button": "Go back to Glossary",
+      "loading": "Loading the Glossary..."
     },
     "restricted": {
       "header_approval_pending": "Content not yet available",
