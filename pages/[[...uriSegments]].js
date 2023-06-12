@@ -154,13 +154,7 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
   }
 
   const { sectionHandle: section, typeHandle: type } = entrySectionType;
-  const entryData = await getEntryData(
-    uri,
-    section,
-    type,
-    site,
-    previewToken
-  );
+  const entryData = await getEntryData(uri, section, type, site, previewToken);
 
   const currentId = entryData?.id || entryData?.entry?.id;
 

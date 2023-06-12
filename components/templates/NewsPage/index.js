@@ -199,8 +199,9 @@ export default function NewsPage({
         excludeId={id}
         header={t(`news.related-posts`)}
         limit={3}
-        isWide={true}
+        isWide
         gridType="pages"
+        isRelatedList
       />
     </Body>
   );
