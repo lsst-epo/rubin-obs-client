@@ -1,12 +1,9 @@
 import PropTypes from "prop-types";
-import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import striptags from "striptags";
-import { Container, Grid, Buttonish } from "@rubin-epo/epo-react-lib";
+import { Grid } from "@rubin-epo/epo-react-lib";
 import DataList from "@/dynamic/DataList";
 import Tile from "@/atomic/Tile";
-import Pagination from "@/page/Pagination";
-import { fluidScale } from "@/styles/globalStyles";
 
 const RelatedList = ({
   button,
@@ -20,61 +17,37 @@ const RelatedList = ({
   const cols = limit === 4 ? 4 : 3;
 
   return (
-    <DataList excludeId={excludeId} limit={limit} section="pages">
-      {({ entries, offset, page, total }) => (
+    <DataList
+      excludeId={excludeId}
+      limit={limit}
+      section="pages"
+      header={header}
+      width={isWide ? "regular" : "narrow"}
+      footerButton={button}
+      loaderDescription={t("related-content-loading")}
+    >
+      {({ entries }) => (
         <>
-          <Container width={isWide ? "regular" : "narrow"}>
-            <div>
-              {<Header>{header || t(`related-content`)}</Header>}
-              {entries?.length > 0 && (
-                <Grid columns={cols}>
-                  {entries.map(({ id, description, image, title, uri }, i) => (
-                    <Tile
-                      key={id}
-                      image={image?.[0]}
-                      link={uri}
-                      text={striptags(description)}
-                      title={title}
-                      titleTag={"h2"}
-                      type={gridType}
-                    />
-                  ))}
-                </Grid>
-              )}
-              {button && (
-                <Footer>
-                  <Buttonish
-                    isBlock={true}
-                    text={button.text}
-                    url={`/${button.uri}`}
-                  />
-                </Footer>
-              )}
-            </div>
-          </Container>
-          {limit >= 10 && (
-            <Pagination
-              limit={limit}
-              offset={offset}
-              page={page}
-              total={total}
-            />
+          {entries?.length > 0 && (
+            <Grid columns={cols}>
+              {entries.map(({ id, description, image, title, uri }, i) => (
+                <Tile
+                  key={id}
+                  image={image?.[0]}
+                  link={uri}
+                  text={striptags(description)}
+                  title={title}
+                  titleTag={"h2"}
+                  type={gridType}
+                />
+              ))}
+            </Grid>
           )}
         </>
       )}
     </DataList>
   );
 };
-
-const Header = styled.h2`
-  margin-bottom: ${fluidScale("40px", "20px")};
-  padding-bottom: 10px;
-  border-bottom: 10px solid var(--turquoise85);
-`;
-
-const Footer = styled.div`
-  padding-top: 40px;
-`;
 
 RelatedList.propTypes = {
   excludeId: PropTypes.string,

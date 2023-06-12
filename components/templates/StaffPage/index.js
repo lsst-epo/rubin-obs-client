@@ -116,7 +116,8 @@ export default function StaffPage({
               text: t(`staff.back-to-profiles`),
               uri: parentEntry?.uri || parentUri,
             }}
-            isWide={true}
+            isWide
+            isRelatedList
           />
         }
       >
