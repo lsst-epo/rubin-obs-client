@@ -8,7 +8,7 @@ import WidgetGrid from "@/components/layout/WidgetGrid";
 import WidgetPreview from "@/components/layout/WidgetPreview";
 import TemperatureCurrent from "@/components/widgets/TemperatureCurrent";
 import PrecipitationCurrent from "@/components/widgets/PrecipitationCurrent";
-import TemperatureHistoric from "@/components/widgets/TemperatureHIstoric";
+import TemperatureHistoric from "@/components/widgets/TemperatureHistoric";
 import WindspeedHourly from "@/components/widgets/WindspeedHourly";
 
 const SummitStatus = ({ summitStatusLayout, widgetPreviews = [] }) => {
