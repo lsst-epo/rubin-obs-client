@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import ScrollableHorizontalWrapper from "@/components/atomic/ScrollableHorizontalWrapper";
 import { temperatureUnitType } from "@/components/shapes/units";
-import { formatTemperature } from "@/helpers";
+import { formatTemperature } from "@/helpers/formatters";
 import * as Styled from "./styles";
 
 const TemperatureHistoric = ({

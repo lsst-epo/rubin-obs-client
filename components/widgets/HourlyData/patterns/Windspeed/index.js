@@ -1,20 +1,16 @@
 import PropTypes from "prop-types";
 import { windspeedUnitType } from "@/components/shapes/units";
 import { useTranslation } from "react-i18next";
+import { formatTime } from "@/helpers/formatters";
 import * as Styled from "./styles";
 import UniqueIconComposer from "@/components/svg/UniqueIconComposer";
 import { ScreenreaderText } from "@rubin-epo/epo-react-lib";
 
-const WindspeedHourly = ({ unit, windspeedData = [], labelledById }) => {
+const Windspeed = ({ unit, windspeedData = [], labelledById }) => {
   const {
     t,
     i18n: { language = "en" },
   } = useTranslation();
-
-  const timeFormatter = new Intl.DateTimeFormat(language, {
-    timeStyle: "short",
-    hourCycle: "h23",
-  });
 
   const directionFormatter = new Intl.NumberFormat(language, {
     notation: "compact",
@@ -45,23 +41,19 @@ const WindspeedHourly = ({ unit, windspeedData = [], labelledById }) => {
   };
 
   return (
-    <Styled.WindspeedHourlyBackground>
-      <Styled.WindspeedHourlyTitle>
+    <Styled.HourlyDataBackground>
+      <Styled.HourlyDataTitle>
         {t("summit_dashboard.weather.windspeed_title", {
           unit: t(`summit_dashboard.unit_localization.${unit}`, {
             context: "full",
           }),
         })}
-      </Styled.WindspeedHourlyTitle>
-      <Styled.WindspeedHourlyList
-        as="ol"
-        role="list"
-        aria-labelledby={labelledById}
-      >
+      </Styled.HourlyDataTitle>
+      <Styled.HourlyDataList as="ol" role="list" aria-labelledby={labelledById}>
         {windspeedData &&
           windspeedData.map(({ windspeed, direction, time }) => (
-            <Styled.WindspeedHourlyItem key={time} role="listitem">
-              <Styled.Time dateTime={timeFormatter.format(time)}>
+            <Styled.HourlyDataItem key={time} role="listitem">
+              <Styled.Time dateTime={formatTime(time, language)}>
                 {new Date(time).getHours() === new Date().getHours() ? (
                   <strong>
                     {t(
@@ -69,7 +61,7 @@ const WindspeedHourly = ({ unit, windspeedData = [], labelledById }) => {
                     ).toLocaleUpperCase(language)}
                   </strong>
                 ) : (
-                  timeFormatter.format(time)
+                  formatTime(time, language)
                 )}
               </Styled.Time>
               <Styled.Direction style={{ "--angle": `${direction}deg` }}>
@@ -91,16 +83,16 @@ const WindspeedHourly = ({ unit, windspeedData = [], labelledById }) => {
               <Styled.Speed>
                 {windspeed ? speedFormatters[unit](windspeed) : "\u00A0"}
               </Styled.Speed>
-            </Styled.WindspeedHourlyItem>
+            </Styled.HourlyDataItem>
           ))}
-      </Styled.WindspeedHourlyList>
-    </Styled.WindspeedHourlyBackground>
+      </Styled.HourlyDataList>
+    </Styled.HourlyDataBackground>
   );
 };
 
-WindspeedHourly.displayName = "Widgets.WindspeedHourly";
+Windspeed.displayName = "Widgets.HourlyData.Windspeed";
 
-WindspeedHourly.propTypes = {
+Windspeed.propTypes = {
   unit: windspeedUnitType,
   windspeedData: PropTypes.arrayOf(
     PropTypes.shape({
@@ -112,4 +104,4 @@ WindspeedHourly.propTypes = {
   labelledById: PropTypes.string,
 };
 
-export default WindspeedHourly;
+export default Windspeed;
