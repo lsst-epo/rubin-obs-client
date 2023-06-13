@@ -348,6 +348,7 @@
         "temp_daily_max": "High",
         "temp_daily_min": "Low",
         "windspeed_title": "Hourly wind speed report - {{unit}}",
+        "windspeed_direction": "Direction: {{direction}}",
         "condition_now": "Now",
         "no_data_yet": "No data yet"
       }
