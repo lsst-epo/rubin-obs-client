@@ -1,7 +1,7 @@
 import { temperatureUnitType } from "@/components/shapes/units";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
-import { formatTemperature } from "@/helpers";
+import { formatTemperature } from "@/helpers/formatters";
 import WidgetBackground from "@/components/atomic/WidgetBackground";
 import * as Styled from "./styles";
 
