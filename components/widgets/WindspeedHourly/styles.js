@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import WidgetBackground from "@/components/atomic/WidgetBackground";
+import ScrollableHorizontalWrapper from "@/components/atomic/ScrollableHorizontalWrapper";
 
 export const WindspeedHourlyBackground = styled(WidgetBackground)`
   grid-column: 1/-1;
@@ -10,7 +11,7 @@ export const WindspeedHourlyTitle = styled.h3`
   font-weight: var(--FONT_WEIGHT_NORMAL, 400);
 `;
 
-export const WindspeedHourlyList = styled.ol`
+export const WindspeedHourlyList = styled(ScrollableHorizontalWrapper)`
   display: flex;
   gap: var(--PADDING_SMALL, 20px);
   height: 100%;
