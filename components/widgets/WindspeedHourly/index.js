@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 import { windspeedUnitType } from "@/components/shapes/units";
 import { useTranslation } from "react-i18next";
 import * as Styled from "./styles";
-import ScrollableHorizontalWrapper from "@/components/atomic/ScrollableHorizontalWrapper";
 import UniqueIconComposer from "@/components/svg/UniqueIconComposer";
 import { ScreenreaderText } from "@rubin-epo/epo-react-lib";
 
@@ -54,45 +53,47 @@ const WindspeedHourly = ({ unit, windspeedData = [], labelledById }) => {
           }),
         })}
       </Styled.WindspeedHourlyTitle>
-      <ScrollableHorizontalWrapper>
-        <Styled.WindspeedHourlyList role="list" aria-labelledby={labelledById}>
-          {windspeedData &&
-            windspeedData.map(({ windspeed, direction, time }) => (
-              <Styled.WindspeedHourlyItem key={time} role="listitem">
-                <Styled.Time dateTime={timeFormatter.format(time)}>
-                  {new Date(time).getHours() === new Date().getHours() ? (
-                    <strong>
-                      {t(
-                        "summit_dashboard.weather.condition_now"
-                      ).toLocaleUpperCase(language)}
-                    </strong>
-                  ) : (
-                    timeFormatter.format(time)
-                  )}
-                </Styled.Time>
-                <Styled.Direction style={{ "--angle": `${direction}deg` }}>
-                  {direction ? (
-                    <>
-                      <UniqueIconComposer icon="arrow" />
-                      <ScreenreaderText>
-                        {t("summit_dashboard.weather.windspeed_direction", {
-                          direction: directionFormatter.format(direction),
-                        })}
-                      </ScreenreaderText>
-                    </>
-                  ) : (
-                    <Styled.NoData>
-                      {t("summit_dashboard.weather.no_data_yet")}
-                    </Styled.NoData>
-                  )}
-                </Styled.Direction>
-                <Styled.Speed>
-                  {windspeed ? speedFormatters[unit](windspeed) : "\u00A0"}
-                </Styled.Speed>
-              </Styled.WindspeedHourlyItem>
-            ))}
-        </Styled.WindspeedHourlyList>
-      </ScrollableHorizontalWrapper>
+      <Styled.WindspeedHourlyList
+        as="ol"
+        role="list"
+        aria-labelledby={labelledById}
+      >
+        {windspeedData &&
+          windspeedData.map(({ windspeed, direction, time }) => (
+            <Styled.WindspeedHourlyItem key={time} role="listitem">
+              <Styled.Time dateTime={timeFormatter.format(time)}>
+                {new Date(time).getHours() === new Date().getHours() ? (
+                  <strong>
+                    {t(
+                      "summit_dashboard.weather.condition_now"
+                    ).toLocaleUpperCase(language)}
+                  </strong>
+                ) : (
+                  timeFormatter.format(time)
+                )}
+              </Styled.Time>
+              <Styled.Direction style={{ "--angle": `${direction}deg` }}>
+                {direction ? (
+                  <>
+                    <UniqueIconComposer icon="arrow" />
+                    <ScreenreaderText>
+                      {t("summit_dashboard.weather.windspeed_direction", {
+                        direction: directionFormatter.format(direction),
+                      })}
+                    </ScreenreaderText>
+                  </>
+                ) : (
+                  <Styled.NoData>
+                    {t("summit_dashboard.weather.no_data_yet")}
+                  </Styled.NoData>
+                )}
+              </Styled.Direction>
+              <Styled.Speed>
+                {windspeed ? speedFormatters[unit](windspeed) : "\u00A0"}
+              </Styled.Speed>
+            </Styled.WindspeedHourlyItem>
+          ))}
+      </Styled.WindspeedHourlyList>
     </Styled.WindspeedHourlyBackground>
   );
 };
