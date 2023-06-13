@@ -6,7 +6,7 @@ import ScrollableHorizontalWrapper from "@/components/atomic/ScrollableHorizonta
 import UniqueIconComposer from "@/components/svg/UniqueIconComposer";
 import { ScreenreaderText } from "@rubin-epo/epo-react-lib";
 
-const WindspeedHourly = ({ unit, windspeedData = [] }) => {
+const WindspeedHourly = ({ unit, windspeedData = [], labelledById }) => {
   const {
     t,
     i18n: { language = "en" },
@@ -18,6 +18,7 @@ const WindspeedHourly = ({ unit, windspeedData = [] }) => {
   });
 
   const directionFormatter = new Intl.NumberFormat(language, {
+    notation: "compact",
     style: "unit",
     unit: "degree",
   });
@@ -54,7 +55,10 @@ const WindspeedHourly = ({ unit, windspeedData = [] }) => {
         })}
       </Styled.WindspeedHourlyTitle>
       <ScrollableHorizontalWrapper>
-        <Styled.WindspeedHourlyList role="list">
+        <Styled.WindspeedHourlyList
+          role="list"
+          aria-labelledById={labelledById}
+        >
           {windspeedData &&
             windspeedData.map(({ windspeed, direction, time }) => (
               <Styled.WindspeedHourlyItem key={time} role="listitem">
@@ -74,7 +78,9 @@ const WindspeedHourly = ({ unit, windspeedData = [] }) => {
                     <>
                       <UniqueIconComposer icon="arrow" />
                       <ScreenreaderText>
-                        {directionFormatter.format(direction)}
+                        {t("summit_dashboard.weather.windspeed_direction", {
+                          direction: directionFormatter.format(direction),
+                        })}
                       </ScreenreaderText>
                     </>
                   ) : (
@@ -105,6 +111,7 @@ WindspeedHourly.propTypes = {
       time: PropTypes.number,
     })
   ),
+  labelledById: PropTypes.string,
 };
 
 export default WindspeedHourly;
