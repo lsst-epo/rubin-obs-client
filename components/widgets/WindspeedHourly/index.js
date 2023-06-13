@@ -55,10 +55,7 @@ const WindspeedHourly = ({ unit, windspeedData = [], labelledById }) => {
         })}
       </Styled.WindspeedHourlyTitle>
       <ScrollableHorizontalWrapper>
-        <Styled.WindspeedHourlyList
-          role="list"
-          aria-labelledById={labelledById}
-        >
+        <Styled.WindspeedHourlyList role="list" aria-labelledBy={labelledById}>
           {windspeedData &&
             windspeedData.map(({ windspeed, direction, time }) => (
               <Styled.WindspeedHourlyItem key={time} role="listitem">
