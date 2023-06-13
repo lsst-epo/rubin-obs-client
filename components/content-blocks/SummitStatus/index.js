@@ -9,8 +9,8 @@ import WidgetPreview from "@/components/layout/WidgetPreview";
 import TemperatureCurrent from "@/components/widgets/TemperatureCurrent";
 import PrecipitationCurrent from "@/components/widgets/PrecipitationCurrent";
 import TemperatureHistoric from "@/components/widgets/TemperatureHistoric";
-import WindspeedHourly from "@/components/widgets/WindspeedHourly";
-import PrecipitationHourly from "@/components/widgets/PrecipitationHourly";
+import WindspeedHourly from "@/components/widgets/HourlyData/patterns/Windspeed";
+import PrecipitationHourly from "@/components/widgets/HourlyData/patterns/Precipitation";
 
 const SummitStatus = ({ summitStatusLayout, widgetPreviews = [] }) => {
   /** this logic should be changed to useRouter after i18n refactor */
@@ -67,7 +67,7 @@ const SummitStatus = ({ summitStatusLayout, widgetPreviews = [] }) => {
     { probability: 0.05 },
     { probability: 0.03 },
     { probability: 0.02 },
-    { probability: 0.03 },
+    { probability: 0.1 },
     { probability: 0.04 },
     { probability: 0.03 },
     { probability: 0.0 },
@@ -76,7 +76,6 @@ const SummitStatus = ({ summitStatusLayout, widgetPreviews = [] }) => {
     { probability: 0.02 },
     { probability: 0.03 },
     { probability: 0.02 },
-    { probability: 0.01 },
   ];
 
   const timedWindpeedData = mockWindspeedData.map(
@@ -86,8 +85,8 @@ const SummitStatus = ({ summitStatusLayout, widgetPreviews = [] }) => {
   );
 
   const timedPrecipitationData = mockPrecipitationData.map(
-    ({ windspeed, direction }, i) => {
-      return { windspeed, direction, time: new Date().setHours(i, 0, 0, 0) };
+    ({ probability }, i) => {
+      return { probability, time: new Date().setHours(i, 0, 0, 0) };
     }
   );
 
