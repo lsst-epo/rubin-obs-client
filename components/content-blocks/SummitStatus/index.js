@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { Container } from "@rubin-epo/epo-react-lib";
 import { useTranslation } from "react-i18next";
 import WeatherUnitContext from "@/contexts/WeatherUnit";
@@ -10,8 +10,8 @@ import TemperatureCurrent from "@/components/widgets/CurrentData/patterns/Temper
 import TemperatureHistoric from "@/components/widgets/TemperatureHistoric";
 import WindspeedHourly from "@/components/widgets/HourlyData/patterns/Windspeed";
 import PrecipitationHourly from "@/components/widgets/HourlyData/patterns/Precipitation";
-import WindspeedCurrent from "@/components/widgets/CurrentData/patterns/Windspeed";
-import { useEfd } from "@/api/efd";
+import { SummitDataProvider } from "@/contexts/SummitData";
+import Weather from "@/components/dynamic/SummitData/Weather";
 
 const SummitStatus = ({ summitStatusLayout, widgetPreviews = [] }) => {
   /** this logic should be changed to useRouter after i18n refactor */
@@ -91,9 +91,9 @@ const SummitStatus = ({ summitStatusLayout, widgetPreviews = [] }) => {
     }
   );
 
-  const [data, loading] = useEfd();
+  // const [data, loading] = useEfd();
   // eslint-disable-next-line no-console
-  console.log({ data, loading });
+  // console.log({ data, loading });
   return (
     <Container bgColor="neutral95" width="wide" paddingSize="small">
       <WeatherUnitContext.Provider value={{ tempUnit, windspeedUnit }}>
@@ -102,35 +102,41 @@ const SummitStatus = ({ summitStatusLayout, widgetPreviews = [] }) => {
           onTempChangeCallback={(value) => setTempUnit(value)}
           onWindChangeCallback={(value) => setWindspeedUnit(value)}
         />
-        <WidgetGrid>
-          <WidgetPreview>
-            <TemperatureCurrent unit={tempUnit} temperature={23.9349824} />
-            <WindspeedCurrent unit={windspeedUnit} windspeed={4.234234234} />
-          </WidgetPreview>
-          <WidgetPreview size="large">
-            <TemperatureHistoric
-              temperatureData={[
-                { weekday: 1, high: 23, low: 15 },
-                { weekday: 2, high: 26, low: 17 },
-                { weekday: 3, high: 28, low: 15 },
-                { weekday: 4, high: 31, low: 16 },
-                { weekday: 5, high: 29, low: 14 },
-                { weekday: 6, high: 29, low: 11 },
-                { weekday: 0, high: 32, low: 14 },
-              ]}
-              unit={tempUnit}
-            />
-          </WidgetPreview>
-          <WidgetPreview size="large">
-            <WindspeedHourly
-              unit={windspeedUnit}
-              windspeedData={timedWindpeedData}
-            />
-          </WidgetPreview>
-          <WidgetPreview size="large">
-            <PrecipitationHourly precipitationData={timedPrecipitationData} />
-          </WidgetPreview>
-        </WidgetGrid>
+        <SummitDataProvider>
+          <WidgetGrid>
+            <Weather />
+            {/* <WidgetPreview>
+              <TemperatureCurrent unit={tempUnit} temperature={23.9349824} />
+              <PrecipitationCurrent
+                precipitation={0.0354}
+                humidity={0.45234991292923}
+              />
+            </WidgetPreview>
+            <WidgetPreview size="large">
+              <TemperatureHistoric
+                temperatureData={[
+                  { weekday: 1, high: 23, low: 15 },
+                  { weekday: 2, high: 26, low: 17 },
+                  { weekday: 3, high: 28, low: 15 },
+                  { weekday: 4, high: 31, low: 16 },
+                  { weekday: 5, high: 29, low: 14 },
+                  { weekday: 6, high: 29, low: 11 },
+                  { weekday: 0, high: 32, low: 14 },
+                ]}
+                unit={tempUnit}
+              />
+            </WidgetPreview>
+            <WidgetPreview size="large">
+              <WindspeedHourly
+                unit={windspeedUnit}
+                windspeedData={timedWindpeedData}
+              />
+            </WidgetPreview>
+            <WidgetPreview size="large">
+              <PrecipitationHourly precipitationData={timedPrecipitationData} />
+            </WidgetPreview> */}
+          </WidgetGrid>
+        </SummitDataProvider>
       </WeatherUnitContext.Provider>
     </Container>
   );
