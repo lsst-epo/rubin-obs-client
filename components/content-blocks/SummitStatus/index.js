@@ -1,15 +1,10 @@
 import PropTypes from "prop-types";
-import { useState, Suspense } from "react";
+import { useState } from "react";
 import { Container } from "@rubin-epo/epo-react-lib";
 import { useTranslation } from "react-i18next";
 import WeatherUnitContext from "@/contexts/WeatherUnit";
 import UnitLocalization from "@/components/layout/UnitLocalization";
 import WidgetGrid from "@/components/layout/WidgetGrid";
-import WidgetPreview from "@/components/layout/WidgetPreview";
-import TemperatureCurrent from "@/components/widgets/CurrentData/patterns/Temperature";
-import TemperatureHistoric from "@/components/widgets/TemperatureHistoric";
-import WindspeedHourly from "@/components/widgets/HourlyData/patterns/Windspeed";
-import PrecipitationHourly from "@/components/widgets/HourlyData/patterns/Precipitation";
 import { SummitDataProvider } from "@/contexts/SummitData";
 import Weather from "@/components/dynamic/SummitData/Weather";
 
@@ -91,9 +86,6 @@ const SummitStatus = ({ summitStatusLayout, widgetPreviews = [] }) => {
     }
   );
 
-  // const [data, loading] = useEfd();
-  // eslint-disable-next-line no-console
-  // console.log({ data, loading });
   return (
     <Container bgColor="neutral95" width="wide" paddingSize="small">
       <WeatherUnitContext.Provider value={{ tempUnit, windspeedUnit }}>
