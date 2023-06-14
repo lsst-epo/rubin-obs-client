@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import { formatTemperature } from "@/helpers/formatters";
 import WidgetBackground from "@/components/atomic/WidgetBackground";
-import * as Styled from "./styles";
+import * as Styled from "../../styles";
 
 const TemperatureCurrent = ({ temperature, unit = "celsius" }) => {
   const {
@@ -13,20 +13,20 @@ const TemperatureCurrent = ({ temperature, unit = "celsius" }) => {
 
   return (
     <WidgetBackground>
-      <Styled.WidgetLabel>
+      <Styled.Label>
         {t("summit_dashboard.unit_localization.label_temp")}
-      </Styled.WidgetLabel>
-      <Styled.WidgetValue>
+      </Styled.Label>
+      <Styled.Value $variant="large">
         {formatTemperature(temperature, language, unit)}
-      </Styled.WidgetValue>
-      <Styled.WidgetUnit>
+      </Styled.Value>
+      <Styled.Unit>
         {t(`summit_dashboard.unit_localization.${unit}`)}
-      </Styled.WidgetUnit>
+      </Styled.Unit>
     </WidgetBackground>
   );
 };
 
-TemperatureCurrent.displayName = "Widgets.TemperatureCurrent";
+TemperatureCurrent.displayName = "Widgets.Current.Temperature";
 
 TemperatureCurrent.propTypes = {
   temperature: PropTypes.number.isRequired,
