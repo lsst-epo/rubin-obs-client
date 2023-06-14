@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { formatPercent } from "helpers/formatters";
 import WidgetBackground from "@/components/atomic/WidgetBackground";
-import * as Styled from "./styles";
+import * as Styled from "../../styles";
 
 const PrecipitationCurrent = ({ precipitation = 0, humidity = 0 }) => {
   const { t, i18n } = useTranslation();
@@ -10,26 +10,26 @@ const PrecipitationCurrent = ({ precipitation = 0, humidity = 0 }) => {
 
   return (
     <WidgetBackground $variant="secondary">
-      <Styled.WidgetValue
+      <Styled.Value
         dangerouslySetInnerHTML={{
           __html: formatPercent(precipitation, language),
         }}
       />
-      <Styled.WidgetUnit>
+      <Styled.Unit>
         {t("summit_dashboard.unit_localization.label_precipitation")}
-      </Styled.WidgetUnit>
-      <Styled.WidgetSeparator />
-      <Styled.WidgetValue
+      </Styled.Unit>
+      <Styled.Separator />
+      <Styled.Value
         dangerouslySetInnerHTML={{ __html: formatPercent(humidity, language) }}
       />
-      <Styled.WidgetUnit>
+      <Styled.Unit>
         {t("summit_dashboard.unit_localization.label_humidity")}
-      </Styled.WidgetUnit>
+      </Styled.Unit>
     </WidgetBackground>
   );
 };
 
-PrecipitationCurrent.displayName = "Widgets.PrecipitationCurrent";
+PrecipitationCurrent.displayName = "Widgets.Current.Precipitation";
 
 PrecipitationCurrent.propTypes = {
   precipitation: PropTypes.number,
