@@ -1,4 +1,5 @@
 import WidgetPreview from "@/components/layout/WidgetPreview";
+import PrecipitationCurrent from "@/components/widgets/PrecipitationCurrent";
 import TemperatureCurrent from "@/components/widgets/TemperatureCurrent";
 import { useSummitData } from "@/contexts/SummitData";
 import { defaultUnits, useWeatherUnit } from "@/contexts/WeatherUnit";
@@ -10,17 +11,27 @@ const Weather = () => {
 
   if (loading || !data) return null;
 
-  console.log({ data });
+  const { temperature0: temperature, relativeHumidity, windSpeed } = data;
 
-  const {
-    temperature0: { _value: currentTemperature },
-  } = data;
+  const temperatureData = {
+    temperature,
+  };
 
-  const temperatureData = { currentTemperature };
+  const windspeedData = {
+    windSpeed,
+  };
 
-  if ({ tempUnit, windspeedUnit } !== defaultUnits) {
+  if (tempUnit !== defaultUnits.tempUnit) {
     Object.entries(temperatureData).forEach(([key, value]) => {
       temperatureData[key] = convert(value, defaultUnits.tempUnit).to(tempUnit);
+    });
+  }
+
+  if (windspeedUnit !== defaultUnits.windspeedUnit) {
+    Object.entries(windspeedData).forEach(([key, value]) => {
+      windspeedData[key] = convert(value, defaultUnits.windspeedUnit).to(
+        windspeedUnit
+      );
     });
   }
 
@@ -31,8 +42,9 @@ const Weather = () => {
     >
       <TemperatureCurrent
         unit={tempUnit}
-        temperature={temperatureData.currentTemperature}
+        temperature={temperatureData.temperature}
       />
+      <PrecipitationCurrent humidity={relativeHumidity / 100} />
     </WidgetPreview>
   );
 };
