@@ -2,7 +2,7 @@ import { createContext, useContext } from "react";
 
 export const defaultUnits = {
   tempUnit: "C",
-  windSpeedUnit: "m",
+  windspeedUnit: "m",
 };
 
 const WeatherUnitContext = createContext(defaultUnits);

@@ -1,5 +1,6 @@
-import getEfd from "@/lib/api/efd";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import PropTypes from "prop-types";
+import getEfd from "@/lib/api/efd";
 
 export const SummitDataContext = createContext({});
 
@@ -37,5 +38,7 @@ export const SummitDataProvider = ({ children }) => {
     </SummitDataContext.Provider>
   );
 };
+
+SummitDataProvider.propTypes = { children: PropTypes.node };
 
 export const useSummitData = () => useContext(SummitDataContext);
