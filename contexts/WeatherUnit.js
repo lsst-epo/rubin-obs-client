@@ -1,13 +1,13 @@
 import { createContext, useContext } from "react";
 
-const defaultUnits = {
+export const defaultUnits = {
   tempUnit: "C",
   windSpeedUnit: "m",
 };
 
-const WeatherUnitContext = createContext();
+const WeatherUnitContext = createContext(defaultUnits);
 
-export function useWeatherUnitContext() {
+export function useWeatherUnit() {
   return useContext(WeatherUnitContext);
 }
 
