@@ -17,7 +17,7 @@ export const Wrapper = styled.div`
 
 export const Title = styled.div`
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   flex: 666 1 0%;
   justify-content: space-between;
 
@@ -28,6 +28,8 @@ export const Title = styled.div`
   button {
     display: none;
     flex-shrink: 0;
+    align-self: center;
+    padding-left: 10px;
 
     ${respond(`display: flex;`, tokens.BREAK_PHABLET)}
   }
