@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
 import { ExpandToggle, Container } from "@rubin-epo/epo-react-lib";
 import useToggle from "@/hooks/useToggle";
 import { tokens } from "@/styles/globalStyles";
@@ -25,7 +24,7 @@ export default function StepNavigation({
   expandable = false,
   columns = 2,
 }) {
-  const [isOpen, onToggle, setIsOpen] = useToggle(!expandable);
+  const [isOpen, onToggle, setIsOpen] = useToggle(true);
   const [isBreakpoint, setIsBreakpoint] = useState(false);
 
   const { ref } = useResizeObserver({
@@ -47,9 +46,6 @@ export default function StepNavigation({
       width="regular"
       bgColor="orange02"
       paddingSize="medium"
-      className={classNames({
-        "l-mar-bottom-medium": isBreakpoint,
-      })}
     >
       <Styled.Wrapper ref={ref}>
         <Styled.Title>
