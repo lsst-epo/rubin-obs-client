@@ -329,6 +329,7 @@
     },
     "summit_dashboard": {
       "open_modal": "Expand content",
+
       "unit_localization": {
         "settings": "Settings",
         "label_temp": "Temperature",
@@ -347,11 +348,16 @@
       "weather": {
         "temp_daily_max": "High",
         "temp_daily_min": "Low",
-        "windspeed_title": "Hourly wind speed report - {{unit}}",
-        "precipitation_title": "Hourly precipitation probability report - Probability percentage",
         "windspeed_direction": "Direction: {{direction}}",
         "condition_now": "Now",
         "no_data_yet": "No data yet"
+      },
+      "widgets": {
+        "hourly": {
+          "windspeed": "Hourly wind speed report - {{unit}}",
+          "precipitation": "Hourly precipitation probability report - Probability percentage"
+        },
+        "current": { "windspeed": "Average windspeed" }
       }
     }
   }

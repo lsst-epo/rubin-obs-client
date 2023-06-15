@@ -12,7 +12,7 @@ const PrecipitationHourly = ({ precipitationData = [] }) => {
   return (
     <Styled.HourlyDataBackground $variant="secondary">
       <Styled.HourlyDataTitle>
-        {t("summit_dashboard.weather.precipitation_title")}
+        {t("summit_dashboard.widgets.hourly.precipitation")}
       </Styled.HourlyDataTitle>
       <Styled.HourlyDataList as="ol" role="list">
         {precipitationData.map(({ probability, time }) => (
