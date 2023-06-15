@@ -43,7 +43,7 @@ const Windspeed = ({ unit, windspeedData = [], labelledById }) => {
   return (
     <Styled.HourlyDataBackground>
       <Styled.HourlyDataTitle>
-        {t("summit_dashboard.weather.windspeed_title", {
+        {t("summit_dashboard.widgets.hourly.windspeed", {
           unit: t(`summit_dashboard.unit_localization.${unit}`, {
             context: "full",
           }),
