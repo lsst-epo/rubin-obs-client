@@ -12,7 +12,9 @@ const WindspeedCurrent = ({ windspeed = 0, unit = "m" }) => {
 
   return (
     <WidgetBackground>
-      <Styled.Label>Average Windspeed</Styled.Label>
+      <Styled.Label>
+        {t("summit_dashboard.widgets.current.windspeed")}
+      </Styled.Label>
       <Styled.Value $variant="large">
         {new Intl.NumberFormat(language, {
           style: "decimal",
