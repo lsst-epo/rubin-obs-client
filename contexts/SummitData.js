@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { currentWeather, dailyWeather } from "@/lib/api/queries/weather";
 import PropTypes from "prop-types";
-import getEfd from "@/lib/api/efd";
+import queryEfd from "@/lib/api/efd";
 
 export const SummitDataContext = createContext({});
 
@@ -11,8 +12,11 @@ export const SummitDataProvider = ({ children }) => {
 
   useEffect(() => {
     setLoading(true);
-    getEfd()
+
+    // Promise.all(queryEfd(currentWeather), queryEfd(dailyWeather))
+    queryEfd(dailyWeather)
       .then((value) => {
+        console.log({ value });
         setData(value);
       })
       .catch(() => {
