@@ -1,3 +1,4 @@
+import Loader from "@/components/atomic/Loader";
 import WidgetPreview from "@/components/layout/WidgetPreview";
 import PrecipitationCurrent from "@/components/widgets/PrecipitationCurrent";
 import TemperatureCurrent from "@/components/widgets/TemperatureCurrent";
@@ -7,9 +8,9 @@ import convert from "convert";
 
 const Weather = () => {
   const { tempUnit, windspeedUnit } = useWeatherUnit();
-  const { data, loading } = useSummitData();
+  const { currentData: data, loading = true } = useSummitData();
 
-  if (loading || !data) return null;
+  if (loading && !data) return <Loader isVisible={true} />;
 
   const { temperature0: temperature, relativeHumidity, windSpeed } = data;
 
@@ -36,16 +37,13 @@ const Weather = () => {
   }
 
   return (
-    <WidgetPreview
-      title="Weather at the summit"
-      callout="It is nice out there!"
-    >
+    <>
       <TemperatureCurrent
         unit={tempUnit}
         temperature={temperatureData.temperature}
       />
       <PrecipitationCurrent humidity={relativeHumidity / 100} />
-    </WidgetPreview>
+    </>
   );
 };
 
