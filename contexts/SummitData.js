@@ -1,25 +1,67 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { currentWeather, dailyWeather } from "@/lib/api/queries/weather";
+import {
+  currentWeather,
+  dailyWeather,
+  hourlyWeather,
+} from "@/lib/api/queries/weather";
 import PropTypes from "prop-types";
 import queryEfd from "@/lib/api/efd";
 
 export const SummitDataContext = createContext({});
 
 export const SummitDataProvider = ({ children }) => {
-  const [data, setData] = useState();
+  const [currentData, setCurrentData] = useState();
+  const [hourlyData, setHourlyData] = useState();
+  const [dailyData, setDailyData] = useState();
   const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  const fetchCurrentWeather = () =>
+    new Promise((resolve, reject) => {
+      queryEfd(currentWeather)
+        .then((value) => {
+          setCurrentData(...value);
+          resolve(...value);
+        })
+        .catch((e) => {
+          reject(e);
+        });
+    });
+
+  const fetchHourlyWeather = () =>
+    new Promise((resolve, reject) => {
+      queryEfd(hourlyWeather)
+        .then((value) => {
+          setHourlyData(value);
+          resolve(value);
+        })
+        .catch((e) => {
+          reject(e);
+        });
+    });
+
+  const fetchDailyWeather = () =>
+    new Promise((resolve, reject) => {
+      queryEfd(dailyWeather)
+        .then((value) => {
+          setDailyData(value);
+          resolve(value);
+        })
+        .catch((e) => {
+          reject(e);
+        });
+    });
 
   useEffect(() => {
     setLoading(true);
 
-    // Promise.all(queryEfd(currentWeather), queryEfd(dailyWeather))
-    queryEfd(dailyWeather)
-      .then((value) => {
-        console.log({ value });
-        setData(value);
-      })
-      .catch(() => {
+    Promise.allSettled([
+      fetchCurrentWeather(),
+      fetchHourlyWeather(),
+      fetchDailyWeather(),
+    ])
+      .catch((e) => {
+        console.error(e);
         setError(true);
       })
       .finally(() => {
@@ -29,11 +71,13 @@ export const SummitDataProvider = ({ children }) => {
 
   const value = useMemo(
     () => ({
-      data,
+      currentData,
+      hourlyData,
+      dailyData,
       loading,
       error,
     }),
-    [data, loading, error]
+    [currentData, hourlyData, dailyData, loading, error]
   );
 
   return (
