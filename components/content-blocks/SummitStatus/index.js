@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import WeatherUnitContext from "@/contexts/WeatherUnit";
 import UnitLocalization from "@/components/layout/UnitLocalization";
 import WidgetGrid from "@/components/layout/WidgetGrid";
+import WidgetPreview from "@/components/layout/WidgetPreview";
 import { SummitDataProvider } from "@/contexts/SummitData";
 import Weather from "@/components/dynamic/SummitData/Weather";
 
@@ -96,7 +97,12 @@ const SummitStatus = ({ summitStatusLayout, widgetPreviews = [] }) => {
         />
         <SummitDataProvider>
           <WidgetGrid>
-            <Weather />
+            <WidgetPreview
+              title="Weather at the summit"
+              callout="It is nice out there!"
+            >
+              <Weather />
+            </WidgetPreview>
             {/* <WidgetPreview>
               <TemperatureCurrent unit={tempUnit} temperature={23.9349824} />
               <PrecipitationCurrent
