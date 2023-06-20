@@ -103,36 +103,6 @@ const SummitStatus = ({ summitStatusLayout, widgetPreviews = [] }) => {
             >
               <Weather />
             </WidgetPreview>
-            {/* <WidgetPreview>
-              <TemperatureCurrent unit={tempUnit} temperature={23.9349824} />
-              <PrecipitationCurrent
-                precipitation={0.0354}
-                humidity={0.45234991292923}
-              />
-            </WidgetPreview>
-            <WidgetPreview size="large">
-              <TemperatureHistoric
-                temperatureData={[
-                  { weekday: 1, high: 23, low: 15 },
-                  { weekday: 2, high: 26, low: 17 },
-                  { weekday: 3, high: 28, low: 15 },
-                  { weekday: 4, high: 31, low: 16 },
-                  { weekday: 5, high: 29, low: 14 },
-                  { weekday: 6, high: 29, low: 11 },
-                  { weekday: 0, high: 32, low: 14 },
-                ]}
-                unit={tempUnit}
-              />
-            </WidgetPreview>
-            <WidgetPreview size="large">
-              <WindspeedHourly
-                unit={windspeedUnit}
-                windspeedData={timedWindpeedData}
-              />
-            </WidgetPreview>
-            <WidgetPreview size="large">
-              <PrecipitationHourly precipitationData={timedPrecipitationData} />
-            </WidgetPreview> */}
           </WidgetGrid>
         </SummitDataProvider>
       </WeatherUnitContext.Provider>
