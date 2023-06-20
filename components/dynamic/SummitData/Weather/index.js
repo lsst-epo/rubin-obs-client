@@ -1,5 +1,4 @@
 import Loader from "@/components/atomic/Loader";
-import WidgetPreview from "@/components/layout/WidgetPreview";
 import PrecipitationCurrent from "@/components/widgets/PrecipitationCurrent";
 import TemperatureCurrent from "@/components/widgets/TemperatureCurrent";
 import { useSummitData } from "@/contexts/SummitData";
