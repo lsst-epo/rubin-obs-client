@@ -49,11 +49,10 @@ const Tile = ({
         as={link?.url ? MixedLink : "div"}
         {...link}
         aria-labelledby={link?.url ? uid : null}
-        className={classNames(
-          `${type}`,
-          `${isFeature ? "featured" : ""} `,
-          className
-        )}
+        className={classNames(className, type, {
+          featured: isFeature,
+          "padded-bottom": showSharePopup,
+        })}
       >
         {finalImage && (
           <div className="image">
