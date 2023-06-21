@@ -6,14 +6,11 @@ import {
   temperatureUnitType,
   windspeedUnitType,
 } from "@/components/shapes/units";
+import { useWeatherUnit } from "@/contexts/WeatherUnit";
 
-const UnitLocalization = ({
-  tempUnit,
-  windspeedUnit,
-  onTempChangeCallback,
-  onWindChangeCallback,
-}) => {
-  const { t, i18n } = useTranslation();
+const UnitLocalization = () => {
+  const [{ tempUnit, windspeedUnit }, dispatch] = useWeatherUnit();
+  const { t } = useTranslation();
   const heading = "unitLocalizationHeading";
   const temperatureLabel = "temperatureLabel";
   const windspeedLabel = "windspeedLabel";
@@ -50,9 +47,7 @@ const UnitLocalization = ({
       <Styled.RadioGroup
         value={tempUnit}
         aria-labelledby={temperatureLabel}
-        onChange={(value) =>
-          onTempChangeCallback && onTempChangeCallback(value)
-        }
+        onChange={(value) => dispatch({ type: value })}
       >
         <Styled.RadioGroupLabel id={temperatureLabel}>
           {t("summit_dashboard.unit_localization.label_temp")}
@@ -66,9 +61,7 @@ const UnitLocalization = ({
       <Styled.RadioGroup
         value={windspeedUnit}
         aria-labelledby={windspeedLabel}
-        onChange={(value) =>
-          onWindChangeCallback && onWindChangeCallback(value)
-        }
+        onChange={(value) => dispatch({ type: value })}
       >
         <Styled.RadioGroupLabel id={windspeedLabel}>
           {t("summit_dashboard.unit_localization.label_windspeed")}
