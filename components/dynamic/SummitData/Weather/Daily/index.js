@@ -29,11 +29,11 @@ const DailyWeather = () => {
 
   const temperatureData = dailyData
     .slice(0, -1)
-    .map(({ _time, temperature0_max, temperature0_min }) => {
+    .map(({ _time, temperature0_max: max, temperature0_min: min }) => {
       return {
         weekday: new Date(_time).getDay(),
-        low: convertTemperature(temperature0_min, tempUnit),
-        high: convertTemperature(temperature0_max, tempUnit),
+        low: convertTemperature(min, tempUnit),
+        high: convertTemperature(max, tempUnit),
       };
     });
 
