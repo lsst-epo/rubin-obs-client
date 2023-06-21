@@ -1,29 +1,29 @@
 import { useState } from "react";
-<<<<<<< HEAD
 import Loader from "@/components/atomic/Loader";
 import WidgetPreview from "@/components/layout/WidgetPreview";
-import WidgetSection from "@/components/layout/WidgetSection";
 import SummitStatusModal from "@/components/modal/SummitStatusModal";
-import PrecipitationCurrent from "@/components/widgets/PrecipitationCurrent";
-import TemperatureCurrent from "@/components/widgets/TemperatureCurrent";
->>>>>>> ebb054c ([F] SummitData provider)
+import PrecipitationCurrent from "@/components/widgets/CurrentData/patterns/Precipitation";
+import TemperatureCurrent from "@/components/widgets/CurrentData/patterns/Temperature";
 import { useSummitData } from "@/contexts/SummitData";
 import { useWeatherUnit } from "@/contexts/WeatherUnit";
 import { convertTemperature } from "@/helpers/converters";
 import DailyWeather from "./Daily";
 import HourlyWeather from "./Hourly";
+import CurrentWeather from "./Current";
 
 const Weather = () => {
+  const { t } = useTranslation();
   const [isModalOpen, setModalOpen] = useState(false);
   const [{ tempUnit, windspeedUnit }] = useWeatherUnit();
   const { currentData, loading = true } = useSummitData();
 
+  const previewProps = {
+    title: t("summit_dashboard.sections.weather.preview"),
+  };
+
   if (loading && !currentData)
     return (
-      <WidgetPreview
-        title="Weather at the summit"
-        callout="It is nice out there!"
-      >
+      <WidgetPreview {...previewProps}>
         <Loader isVisible={true} />
       </WidgetPreview>
     );
@@ -33,8 +33,7 @@ const Weather = () => {
 
   return (
     <WidgetPreview
-      title="Weather at the summit"
-      callout="It is nice out there!"
+      {...previewProps}
       openModalCallback={() => {
         setModalOpen(true);
       }}
@@ -46,10 +45,7 @@ const Weather = () => {
         onClose={() => setModalOpen(false)}
         {...{ tempUnit, windspeedUnit }}
       >
-        <WidgetSection title="Weather at the summit now">
-          <TemperatureCurrent unit={tempUnit} temperature={temperature} />
-          <PrecipitationCurrent humidity={relativeHumidity / 100} />
-        </WidgetSection>
+        <CurrentWeather />
         <HourlyWeather />
         <DailyWeather />
       </SummitStatusModal>

@@ -13,7 +13,7 @@ const DailyWeather = () => {
   const [{ tempUnit }] = useWeatherUnit();
   const { dailyData, loading = true } = useSummitData();
   const sectionProps = {
-    title: t("summit_dashboard.sections.daily", {
+    title: t("summit_dashboard.sections.weather.daily", {
       unit: t(`summit_dashboard.unit_localization.${tempUnit}`),
     }),
     onToggleCallback: (value) => setOpen(value),

@@ -13,7 +13,7 @@ const HourlyWeather = () => {
   const [{ windspeedUnit }] = useWeatherUnit();
   const { hourlyData, loading = true } = useSummitData();
   const sectionProps = {
-    title: t("summit_dashboard.sections.hourly"),
+    title: t("summit_dashboard.sections.weather.hourly"),
     onToggleCallback: (value) => setOpen(value),
     isOpen,
   };
