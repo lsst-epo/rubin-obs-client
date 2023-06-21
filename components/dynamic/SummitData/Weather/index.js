@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import Loader from "@/components/atomic/Loader";
 import WidgetPreview from "@/components/layout/WidgetPreview";
 import SummitStatusModal from "@/components/modal/SummitStatusModal";
