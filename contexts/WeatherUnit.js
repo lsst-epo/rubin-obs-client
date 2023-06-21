@@ -5,11 +5,6 @@ import { useTranslation } from "react-i18next";
 export const defaultTempUnit = "celsius";
 export const defaultWindspeedUnit = "m";
 
-export const defaultUnits = {
-  tempUnit: defaultTempUnit,
-  windspeedUnit: defaultWindspeedUnit,
-};
-
 const WeatherUnitContext = createContext();
 
 const unitReducer = (state, action) => {
@@ -36,8 +31,8 @@ export const WeatherUnitProvider = ({ children }) => {
     i18n: { language = "en" },
   } = useTranslation();
   const [state, dispatch] = useReducer(unitReducer, {
-    tempUnit: language === "en" ? "fahrenheit" : defaultUnits.tempUnit,
-    windspeedUnit: language === "en" ? "NM" : defaultUnits.windspeedUnit,
+    tempUnit: language === "en" ? "fahrenheit" : defaultTempUnit,
+    windspeedUnit: language === "en" ? "NM" : defaultWindspeedUnit,
   });
 
   return (

@@ -22,12 +22,14 @@ const Weather = () => {
     title: t("summit_dashboard.sections.weather.preview"),
   };
 
-  if (loading && !currentData)
+  if (loading || !currentData)
     return (
       <WidgetPreview {...previewProps}>
         <Loader isVisible={true} />
       </WidgetPreview>
     );
+
+  console.log({ currentData });
 
   const { temperature0, relativeHumidity } = currentData;
   const temperature = convertTemperature(temperature0, tempUnit);
