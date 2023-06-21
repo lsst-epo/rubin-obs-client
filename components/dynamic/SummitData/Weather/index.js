@@ -1,6 +1,6 @@
 import Loader from "@/components/atomic/Loader";
-import PrecipitationCurrent from "@/components/widgets/PrecipitationCurrent";
-import TemperatureCurrent from "@/components/widgets/TemperatureCurrent";
+import PrecipitationCurrent from "@/components/widgets/CurrentData/patterns/Precipitation";
+import TemperatureCurrent from "@/components/widgets/CurrentData/patterns/Temperature";
 import { useSummitData } from "@/contexts/SummitData";
 import { defaultUnits, useWeatherUnit } from "@/contexts/WeatherUnit";
 import convert from "convert";
