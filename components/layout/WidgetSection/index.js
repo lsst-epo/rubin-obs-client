@@ -9,7 +9,7 @@ const WidgetSection = ({
   onToggleCallback,
 }) => {
   const handleToggle = () => {
-    onToggleCallback(!isOpen);
+    onToggleCallback && onToggleCallback(!isOpen);
   };
 
   return (
