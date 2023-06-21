@@ -27,11 +27,11 @@ const HourlyWeather = () => {
 
   const windspeedData = hourlyData
     .slice(0, -1)
-    .map(({ _time, direction_mean: direction, speed_mean }) => {
+    .map(({ _time, direction_mean: direction, speed_mean: windspeed }) => {
       return {
         direction,
         time: new Date(_time),
-        windspeed: convertWindspeed(speed_mean, windspeedUnit),
+        windspeed: convertWindspeed(windspeed, windspeedUnit),
       };
     });
 
