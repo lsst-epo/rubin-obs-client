@@ -816,6 +816,14 @@ export const MixedLink = styled(BaseMixedLink)`
     }
   }
 
+  &.padded-bottom {
+    padding-bottom: 49px;
+
+    @media (max-width: ${BREAK_TABLET}) {
+      padding-bottom: 0;
+    }
+  }
+
   /* HOVER STATES */
   transition: color 0.2s, background-color 0.2s;
 
@@ -906,8 +914,8 @@ export const PlayButton = styled.span`
 
 export const SharePopup = styled(SharePopupComponent)`
   position: absolute;
-  inset-inline-end: 30px;
-  inset-block-end: 30px;
+  bottom: 0;
+  right: 12px;
   color: var(--neutral40);
 
   @media (max-width: ${BREAK_TABLET}) {
