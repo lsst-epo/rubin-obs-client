@@ -42,11 +42,7 @@ export default function StepNavigation({
   if (!pages?.length) return null;
 
   return (
-    <Container
-      width="regular"
-      bgColor="orange02"
-      paddingSize="medium"
-    >
+    <Container width="regular" bgColor="orange02" paddingSize="medium">
       <Styled.Wrapper ref={ref}>
         <Styled.Title>
           <h2>{title}</h2>
