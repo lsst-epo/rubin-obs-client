@@ -1,10 +1,11 @@
 import PropTypes from "prop-types";
-import { windspeedUnitType } from "@/components/shapes/units";
 import { useTranslation } from "react-i18next";
+import { windspeedUnitType } from "@/components/shapes/units";
+import { defaultWindspeedUnit } from "@/contexts/WeatherUnit";
 import WidgetBackground from "@/components/atomic/WidgetBackground";
 import * as Styled from "../../styles";
 
-const WindspeedCurrent = ({ windspeed = 0, unit = "m" }) => {
+const WindspeedCurrent = ({ windspeed = 0, unit = defaultWindspeedUnit }) => {
   const {
     t,
     i18n: { language = "en" },
@@ -18,7 +19,7 @@ const WindspeedCurrent = ({ windspeed = 0, unit = "m" }) => {
       <Styled.Value $variant="large">
         {new Intl.NumberFormat(language, {
           style: "decimal",
-          maximumFractionDigits: 0,
+          maximumFractionDigits: unit === defaultWindspeedUnit ? 1 : 0,
         }).format(windspeed)}
       </Styled.Value>
       <Styled.Unit>
