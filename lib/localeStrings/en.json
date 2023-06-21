@@ -349,6 +349,11 @@
         "mi_full": "Miles per hour",
         "m_full": "Meters per second"
       },
+      "sections": {
+        "current": "Weather at the summit now",
+        "hourly": "Hourly weather stats",
+        "daily": "Daily temperature variations - {{unit}} degrees (last week)"
+      },
       "weather": {
         "temp_daily_max": "High",
         "temp_daily_min": "Low",
