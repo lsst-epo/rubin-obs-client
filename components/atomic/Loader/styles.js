@@ -5,4 +5,5 @@ export const Loader = styled(CircularLoader)`
   display: flex;
   align-items: center;
   justify-content: center;
+  grid-column: 1/-1;
 `;
