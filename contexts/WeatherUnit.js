@@ -1,4 +1,5 @@
 import { createContext, useContext, useReducer } from "react";
+import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 
 export const defaultTempUnit = "celsius";
@@ -12,7 +13,6 @@ export const defaultUnits = {
 const WeatherUnitContext = createContext();
 
 const unitReducer = (state, action) => {
-  console.log(state, action);
   const { type } = action;
 
   switch (type) {
@@ -45,6 +45,10 @@ export const WeatherUnitProvider = ({ children }) => {
       {children}
     </WeatherUnitContext.Provider>
   );
+};
+
+WeatherUnitProvider.propTypes = {
+  children: PropTypes.node,
 };
 
 export function useWeatherUnit() {
