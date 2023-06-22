@@ -15,7 +15,7 @@ import CurrentWeather from "./Current";
 const Weather = () => {
   const { t } = useTranslation();
   const [isModalOpen, setModalOpen] = useState(false);
-  const [{ tempUnit, windspeedUnit }] = useWeatherUnit();
+  const [{ tempUnit }] = useWeatherUnit();
   const {
     currentData,
     loading: { currentData: loading },
@@ -44,11 +44,7 @@ const Weather = () => {
     >
       <TemperatureCurrent unit={tempUnit} temperature={temperature} />
       <PrecipitationCurrent humidity={relativeHumidity / 100} />
-      <SummitStatusModal
-        open={isModalOpen}
-        onClose={() => setModalOpen(false)}
-        {...{ tempUnit, windspeedUnit }}
-      >
+      <SummitStatusModal open={isModalOpen} onClose={() => setModalOpen(false)}>
         <CurrentWeather />
         <HourlyWeather />
         <DailyWeather />
