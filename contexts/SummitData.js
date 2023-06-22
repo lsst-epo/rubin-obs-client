@@ -1,4 +1,11 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+  useReducer,
+} from "react";
 import {
   currentWeather,
   dailyWeather,
@@ -9,12 +16,31 @@ import queryEfd from "@/lib/api/efd";
 
 export const SummitDataContext = createContext({});
 
+const loadingReducer = (state, action) => {
+  const { type, dataSet } = action;
+
+  switch (type) {
+    case "complete":
+      return { ...state, [dataSet]: false };
+    case "loading":
+      return { ...state, [dataSet]: true };
+    default:
+      throw new Error(`Unhandled action type: ${type}`);
+  }
+};
+
+const defaultLoadState = {
+  currentData: true,
+  hourlyData: true,
+  dailyData: true,
+};
+
 export const SummitDataProvider = ({ children }) => {
   const [currentData, setCurrentData] = useState();
   const [hourlyData, setHourlyData] = useState();
   const [dailyData, setDailyData] = useState();
   const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, dispatch] = useReducer(loadingReducer, defaultLoadState);
 
   const fetchCurrentWeather = () =>
     new Promise((resolve, reject) => {
@@ -25,6 +51,9 @@ export const SummitDataProvider = ({ children }) => {
         })
         .catch((e) => {
           reject(e);
+        })
+        .finally(() => {
+          dispatch({ type: "complete", dataSet: "currentData" });
         });
     });
 
@@ -37,6 +66,9 @@ export const SummitDataProvider = ({ children }) => {
         })
         .catch((e) => {
           reject(e);
+        })
+        .finally(() => {
+          dispatch({ type: "complete", dataSet: "hourlyData" });
         });
     });
 
@@ -49,24 +81,21 @@ export const SummitDataProvider = ({ children }) => {
         })
         .catch((e) => {
           reject(e);
+        })
+        .finally(() => {
+          dispatch({ type: "complete", dataSet: "dailyData" });
         });
     });
 
   useEffect(() => {
-    setLoading(true);
-
     Promise.allSettled([
       fetchCurrentWeather(),
       fetchHourlyWeather(),
       fetchDailyWeather(),
-    ])
-      .catch((e) => {
-        console.error(e);
-        setError(true);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    ]).catch((e) => {
+      console.error(e);
+      setError(true);
+    });
   }, []);
 
   const value = useMemo(

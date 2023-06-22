@@ -54,7 +54,7 @@ const Windspeed = ({ unit, windspeedData = [], labelledById }) => {
           windspeedData.map(({ windspeed, direction, time }) => (
             <Styled.HourlyDataItem key={time} role="listitem">
               <Styled.Time dateTime={formatTime(time, language)}>
-                {new Date(time).getHours() === new Date().getHours() ? (
+                {time.getHours() === new Date().getHours() ? (
                   <strong>
                     {t(
                       "summit_dashboard.weather.condition_now"
@@ -98,7 +98,7 @@ Windspeed.propTypes = {
     PropTypes.shape({
       windspeed: PropTypes.number,
       direction: PropTypes.number,
-      time: PropTypes.number,
+      time: PropTypes.instanceOf(Date),
     })
   ),
   labelledById: PropTypes.string,

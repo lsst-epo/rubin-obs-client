@@ -18,7 +18,7 @@ const PrecipitationHourly = ({ precipitationData = [] }) => {
         {precipitationData.map(({ probability, time }) => (
           <Styled.PreciptationHourlyItem key={time}>
             <Styled.Time dateTime={formatTime(time, language)}>
-              {new Date(time).getHours() === new Date().getHours() ? (
+              {time.getHours() === new Date().getHours() ? (
                 <strong>
                   {t(
                     "summit_dashboard.weather.condition_now"
@@ -46,7 +46,7 @@ PrecipitationHourly.propTypes = {
   precipitationData: PropTypes.arrayOf(
     PropTypes.shape({
       probability: PropTypes.number,
-      time: PropTypes.number,
+      time: PropTypes.instanceOf(Date),
     })
   ).isRequired,
 };
