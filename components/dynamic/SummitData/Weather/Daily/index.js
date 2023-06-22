@@ -11,7 +11,10 @@ const DailyWeather = () => {
   const { t } = useTranslation();
   const [isOpen, setOpen] = useState(true);
   const [{ tempUnit }] = useWeatherUnit();
-  const { dailyData, loading = true } = useSummitData();
+  const {
+    dailyData,
+    loading: { dailyData: loading },
+  } = useSummitData();
   const sectionProps = {
     title: t("summit_dashboard.sections.weather.daily", {
       unit: t(`summit_dashboard.unit_localization.${tempUnit}`),
