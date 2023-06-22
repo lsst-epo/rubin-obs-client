@@ -1,4 +1,5 @@
 import IconButton from "@/components/atomic/Button/IconButton";
+import { BREAK_PHABLET_MIN } from "@/styles/globalStyles";
 import styled from "styled-components";
 
 export const WidgetSection = styled.section`
@@ -20,7 +21,10 @@ export const WidgetSection = styled.section`
 `;
 
 export const SectionIconButton = styled(IconButton)`
+  text-align: left;
+
   > svg {
+    flex-shrink: 0;
     padding: 7px;
     border: 1px solid var(--section-color);
     border-radius: 50%;
@@ -42,12 +46,18 @@ export const SectionHeader = styled.h2`
 `;
 
 export const SectionContent = styled.div`
-  grid-template-columns: 1fr;
-  grid-auto-rows: min-content;
+  --grid-columns: repeat(2, 1fr);
+
   grid-gap: var(--PADDING_SMALL, 20px);
+  grid-template-columns: var(--grid-columns);
+  grid-auto-rows: 10rem;
   margin-block-start: var(--PADDING_SMALL, 20px);
 
   &:not([hidden]) {
     display: grid;
+  }
+
+  @media screen and (min-width: ${BREAK_PHABLET_MIN}) {
+    --grid-columns: repeat(4, 1fr);
   }
 `;
