@@ -109,9 +109,6 @@ module.exports = {
     "react",
     "react-hooks",
     "unused-imports",
-    "testcafe",
-    "jest",
-    "testing-library",
   ],
   extends: [
     "standard",
@@ -122,17 +119,5 @@ module.exports = {
     "plugin:import/errors",
     "plugin:storybook/recommended",
     "plugin:cypress/recommended",
-  ],
-  overrides: [
-    // Only uses Testing Library lint rules in test files
-    {
-      files: ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)"],
-      extends: ["plugin:testing-library/react"],
-    },
-    // Only uses Test Cafe lint rules in test files
-    {
-      files: ["e2e/**/*.[jt]s?(x)"],
-      extends: ["plugin:testcafe/recommended"],
-    },
   ],
 };
