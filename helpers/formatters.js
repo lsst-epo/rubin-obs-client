@@ -1,4 +1,4 @@
-const observatoryTZ = "America/Santiago";
+import { timezone } from "@/lib/observatory";
 
 export const formatTemperature = (value, locale = "en", unit = "celsius") => {
   const formatter = new Intl.NumberFormat(locale, {
@@ -36,6 +36,6 @@ export const formatPercent = (value, locale = "en") => {
 export const formatTime = (value, locale = "en", observatoryTime = "true") => {
   return new Intl.DateTimeFormat(locale, {
     timeStyle: "short",
-    ...(observatoryTime && { timeZone: observatoryTZ }),
+    ...(observatoryTime && { timeZone: timezone }),
   }).format(value);
 };
