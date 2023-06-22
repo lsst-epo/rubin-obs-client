@@ -16,7 +16,10 @@ const Weather = () => {
   const { t } = useTranslation();
   const [isModalOpen, setModalOpen] = useState(false);
   const [{ tempUnit, windspeedUnit }] = useWeatherUnit();
-  const { currentData, loading = true } = useSummitData();
+  const {
+    currentData,
+    loading: { currentData: loading },
+  } = useSummitData();
 
   const previewProps = {
     title: t("summit_dashboard.sections.weather.preview"),
@@ -28,8 +31,6 @@ const Weather = () => {
         <Loader isVisible={true} />
       </WidgetPreview>
     );
-
-  console.log({ currentData });
 
   const { temperature0, relativeHumidity } = currentData;
   const temperature = convertTemperature(temperature0, tempUnit);

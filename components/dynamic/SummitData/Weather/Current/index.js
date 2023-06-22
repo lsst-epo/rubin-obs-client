@@ -13,7 +13,10 @@ const CurrentWeather = () => {
   const { t } = useTranslation();
   const [isOpen, setOpen] = useState(true);
   const [{ tempUnit, windspeedUnit }] = useWeatherUnit();
-  const { currentData, loading = true } = useSummitData();
+  const {
+    currentData,
+    loading: { currentData: loading },
+  } = useSummitData();
   const sectionProps = {
     title: t("summit_dashboard.sections.weather.current"),
     onToggleCallback: (value) => setOpen(value),
