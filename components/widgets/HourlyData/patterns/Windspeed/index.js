@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { windspeedUnitType } from "@/components/shapes/units";
 import { useTranslation } from "react-i18next";
@@ -7,6 +8,7 @@ import UniqueIconComposer from "@/components/svg/UniqueIconComposer";
 import { ScreenreaderText } from "@rubin-epo/epo-react-lib";
 
 const Windspeed = ({ unit, windspeedData = [], labelledById }) => {
+  const currentTimeRef = useRef();
   const {
     t,
     i18n: { language = "en" },
@@ -40,6 +42,12 @@ const Windspeed = ({ unit, windspeedData = [], labelledById }) => {
       }).toLocaleLowerCase(language)}`,
   };
 
+  useEffect(() => {
+    if (currentTimeRef.current) {
+      currentTimeRef.current.scrollIntoView();
+    }
+  }, []);
+
   return (
     <Styled.HourlyDataBackground>
       <Styled.HourlyDataTitle>
@@ -51,40 +59,47 @@ const Windspeed = ({ unit, windspeedData = [], labelledById }) => {
       </Styled.HourlyDataTitle>
       <Styled.HourlyDataList as="ol" role="list" aria-labelledby={labelledById}>
         {windspeedData &&
-          windspeedData.map(({ windspeed, direction, time }) => (
-            <Styled.HourlyDataItem key={time} role="listitem">
-              <Styled.Time dateTime={formatTime(time, language)}>
-                {time.getHours() === new Date().getHours() ? (
-                  <strong>
-                    {t(
-                      "summit_dashboard.weather.condition_now"
-                    ).toLocaleUpperCase(language)}
-                  </strong>
-                ) : (
-                  formatTime(time, language)
-                )}
-              </Styled.Time>
-              <Styled.Direction style={{ "--angle": `${direction}deg` }}>
-                {direction ? (
-                  <>
-                    <UniqueIconComposer icon="arrow" />
-                    <ScreenreaderText>
-                      {t("summit_dashboard.weather.windspeed_direction", {
-                        direction: directionFormatter.format(direction),
-                      })}
-                    </ScreenreaderText>
-                  </>
-                ) : (
-                  <Styled.NoData>
-                    {t("summit_dashboard.weather.no_data_yet")}
-                  </Styled.NoData>
-                )}
-              </Styled.Direction>
-              <Styled.Speed>
-                {windspeed ? speedFormatters[unit](windspeed) : "\u00A0"}
-              </Styled.Speed>
-            </Styled.HourlyDataItem>
-          ))}
+          windspeedData.map(({ windspeed, direction, time }) => {
+            const isNow = time.getHours() === new Date().getHours();
+            return (
+              <Styled.HourlyDataItem
+                key={time}
+                role="listitem"
+                ref={isNow ? currentTimeRef : undefined}
+              >
+                <Styled.Time dateTime={formatTime(time, language)}>
+                  {isNow ? (
+                    <strong>
+                      {t(
+                        "summit_dashboard.weather.condition_now"
+                      ).toLocaleUpperCase(language)}
+                    </strong>
+                  ) : (
+                    formatTime(time, language)
+                  )}
+                </Styled.Time>
+                <Styled.Direction style={{ "--angle": `${direction}deg` }}>
+                  {direction ? (
+                    <>
+                      <UniqueIconComposer icon="arrow" />
+                      <ScreenreaderText>
+                        {t("summit_dashboard.weather.windspeed_direction", {
+                          direction: directionFormatter.format(direction),
+                        })}
+                      </ScreenreaderText>
+                    </>
+                  ) : (
+                    <Styled.NoData>
+                      {t("summit_dashboard.weather.no_data_yet")}
+                    </Styled.NoData>
+                  )}
+                </Styled.Direction>
+                <Styled.Speed>
+                  {windspeed ? speedFormatters[unit](windspeed) : "\u00A0"}
+                </Styled.Speed>
+              </Styled.HourlyDataItem>
+            );
+          })}
       </Styled.HourlyDataList>
     </Styled.HourlyDataBackground>
   );
