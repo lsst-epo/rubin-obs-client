@@ -1,3 +1,5 @@
+const observatoryTZ = "America/Santiago";
+
 export const formatTemperature = (value, locale = "en", unit = "celsius") => {
   const formatter = new Intl.NumberFormat(locale, {
     style: "unit",
@@ -31,8 +33,9 @@ export const formatPercent = (value, locale = "en") => {
   return parts.join("");
 };
 
-export const formatTime = (value, locale = "en") => {
+export const formatTime = (value, locale = "en", observatoryTime = "true") => {
   return new Intl.DateTimeFormat(locale, {
     timeStyle: "short",
+    ...(observatoryTime && { timeZone: observatoryTZ }),
   }).format(value);
 };
