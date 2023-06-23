@@ -333,7 +333,6 @@
     },
     "summit_dashboard": {
       "open_modal": "Expand content",
-
       "unit_localization": {
         "settings": "Settings",
         "label_temp": "Temperature",
@@ -364,12 +363,27 @@
         "condition_now": "Now",
         "no_data_yet": "No data yet"
       },
+      "astro": {
+        "moon": {
+          "new": "New Moon",
+          "full": "Full Moon",
+          "crescent_waxing": "Waxing Crescent",
+          "crescent_waning": "Waning Crescent",
+          "gibbous_waxing": "Waxing Gibbous",
+          "gibbous_waning": "Waning Gibbous",
+          "quarter_first": "First Quarter",
+          "quarter_last": "Last Quarter"
+        }
+      },
       "widgets": {
         "hourly": {
           "windspeed": "Hourly wind speed report - {{unit}}",
           "precipitation": "Hourly precipitation probability report - Probability percentage"
         },
-        "current": { "windspeed": "Average windspeed" }
+        "current": {
+          "windspeed": "Average windspeed",
+          "moon": "Tonight we will have a"
+        }
       }
     }
   }
