@@ -117,24 +117,137 @@ const QuarterLast = {
 };
 
 export default [
-  New,
-  CrescentWaxing1,
-  CrescentWaxing2,
-  CrescentWaxing3,
-  CrescentWaxing4,
-  QuarterFirst,
-  GibbousWaxing1,
-  GibbousWaxing2,
-  GibbousWaxing3,
-  GibbousWaxing4,
-  Full,
-  GibbousWaning1,
-  GibbousWaning2,
-  GibbousWaning3,
-  GibbousWaning4,
-  QuarterLast,
-  CrescentWaning1,
-  CrescentWaning2,
-  CrescentWaning3,
-  CrescentWaning4,
+  { pathProps: New, label: { i18nKey: "summit_dashboard.astro.moon.new" } },
+  {
+    pathProps: CrescentWaxing1,
+    label: {
+      i18nKey: "summit_dashboard.astro.moon.crescent",
+      context: "waxing",
+    },
+  },
+  {
+    pathProps: CrescentWaxing2,
+    label: {
+      i18nKey: "summit_dashboard.astro.moon.crescent",
+      context: "waxing",
+    },
+  },
+  {
+    pathProps: CrescentWaxing3,
+    label: {
+      i18nKey: "summit_dashboard.astro.moon.crescent",
+      context: "waxing",
+    },
+  },
+  {
+    pathProps: CrescentWaxing4,
+    label: {
+      i18nKey: "summit_dashboard.astro.moon.crescent",
+      context: "waxing",
+    },
+  },
+  {
+    pathProps: QuarterFirst,
+    label: {
+      i18nKey: "summit_dashboard.astro.moon.quarter",
+      context: "first",
+    },
+  },
+  {
+    pathProps: GibbousWaxing1,
+    label: {
+      i18nKey: "summit_dashboard.astro.moon.gibbous",
+      context: "waxing",
+    },
+  },
+  {
+    pathProps: GibbousWaxing2,
+    label: {
+      i18nKey: "summit_dashboard.astro.moon.gibbous",
+      context: "waxing",
+    },
+  },
+  {
+    pathProps: GibbousWaxing3,
+    label: {
+      i18nKey: "summit_dashboard.astro.moon.gibbous",
+      context: "waxing",
+    },
+  },
+  {
+    pathProps: GibbousWaxing4,
+    label: {
+      i18nKey: "summit_dashboard.astro.moon.gibbous",
+      context: "waxing",
+    },
+  },
+  {
+    pathProps: Full,
+    label: {
+      i18nKey: "summit_dashboard.astro.moon.full",
+    },
+  },
+  {
+    pathProps: GibbousWaning1,
+    label: {
+      i18nKey: "summit_dashboard.astro.moon.gibbous",
+      context: "waning",
+    },
+  },
+  {
+    pathProps: GibbousWaning2,
+    label: {
+      i18nKey: "summit_dashboard.astro.moon.gibbous",
+      context: "waning",
+    },
+  },
+  {
+    pathProps: GibbousWaning3,
+    label: {
+      i18nKey: "summit_dashboard.astro.moon.gibbous",
+      context: "waning",
+    },
+  },
+  {
+    pathProps: GibbousWaning4,
+    label: {
+      i18nKey: "summit_dashboard.astro.moon.gibbous",
+      context: "waning",
+    },
+  },
+  {
+    pathProps: QuarterLast,
+    label: {
+      i18nKey: "summit_dashboard.astro.moon.quarter",
+      context: "last",
+    },
+  },
+  {
+    pathProps: CrescentWaning1,
+    label: {
+      i18nKey: "summit_dashboard.astro.moon.crescent",
+      context: "waning",
+    },
+  },
+  {
+    pathProps: CrescentWaning2,
+    label: {
+      i18nKey: "summit_dashboard.astro.moon.crescent",
+      context: "waning",
+    },
+  },
+  {
+    pathProps: CrescentWaning3,
+    label: {
+      i18nKey: "summit_dashboard.astro.moon.crescent",
+      context: "waning",
+    },
+  },
+  {
+    pathProps: CrescentWaning4,
+    label: {
+      i18nKey: "summit_dashboard.astro.moon.crescent",
+      context: "waning",
+    },
+  },
 ];
