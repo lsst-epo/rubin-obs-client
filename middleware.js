@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-const NEXT_PUBLIC_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 // This function can be marked `async` if using `await` inside
 export function middleware(request) {
