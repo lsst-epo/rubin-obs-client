@@ -104,12 +104,7 @@ module.exports = {
     "spaced-comment": 2,
     "unused-imports/no-unused-imports": 2,
   },
-  plugins: [
-    "jsx-a11y",
-    "react",
-    "react-hooks",
-    "unused-imports",
-  ],
+  plugins: ["jsx-a11y", "react", "react-hooks", "unused-imports"],
   extends: [
     "standard",
     "next",

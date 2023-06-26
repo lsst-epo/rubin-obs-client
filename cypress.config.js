@@ -5,7 +5,7 @@ module.exports = defineConfig({
   chromeWebSecurity: false,
   video: false,
   e2e: {
-    baseUrl: "http://localhost:3000"
+    baseUrl: "http://localhost:3000",
   },
   component: {
     devServer: {
