@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 import * as Styled from "./styles";
 
-const ChartFigure = ({ caption, children, legend }) => {
+const ChartFigure = ({ caption, children, legend, className }) => {
   return (
-    <Styled.Figure>
+    <Styled.Figure as="figure" {...{ className }}>
       <Styled.Caption>{caption}</Styled.Caption>
       <Styled.Content>{children}</Styled.Content>
       {legend}
@@ -17,6 +17,7 @@ ChartFigure.propTypes = {
   caption: PropTypes.string,
   children: PropTypes.node,
   legend: PropTypes.node,
+  className: PropTypes.string,
 };
 
 export default ChartFigure;
