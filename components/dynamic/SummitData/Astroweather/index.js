@@ -11,7 +11,6 @@ import CurrentAstroweather from "./Current";
 import ForecastAstroweather from "./Forecast";
 
 const Astroweather = () => {
-  const { t } = useTranslation();
   const [isModalOpen, setModalOpen] = useState(false);
 
   const now = new Date();
