@@ -6,7 +6,8 @@ const ChartBase = ({ children, className, width = 900, height = 300 }) => {
       preserveAspectRatio="xMidYMid meet"
       viewBox={`0 0 ${width} ${height}`}
       className={className}
-      style={{ minHeight: height, height: "100%" }}
+      style={{ minHeight: height, aspectRatio: `${width} / ${height}` }}
+      role="group"
     >
       {children}
     </svg>
