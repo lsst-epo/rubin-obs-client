@@ -56,17 +56,17 @@ export const Inner = styled.div`
 
 export const Image = styled.div`
   grid-area: image;
+  align-self: center;
   width: ${fluidScale("200px", "160px")};
   height: ${fluidScale("200px", "160px")};
-  align-self: center;
 `;
 
 export const Text = styled.div`
-  grid-area: text;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  grid-area: text;
   align-items: flex-start;
+  justify-content: center;
 
   ${respond(
     `
@@ -135,16 +135,16 @@ export const EarlyAccessFlag = styled(EarlyAccess)`
 `;
 
 export const Duration = styled.div`
-  grid-area: duration;
-  background-color: #ffe7cc;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  grid-area: duration;
   align-items: center;
+  justify-content: center;
+  min-height: 265px;
   padding-inline-start: 5px;
   padding-inline-end: 5px;
-  min-height: 265px;
   text-align: center;
+  background-color: #ffe7cc;
 
   ${respond(
     css`

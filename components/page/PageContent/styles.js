@@ -66,9 +66,9 @@ export const Main = styled.div`
 
   position: relative;
   flex-grow: 1;
-  margin-block-start: var(--hero-overlap);
   padding: var(--PageContent-Main-padding-block-start)
     var(--PageContent-Main-padding-inline) 0;
+  margin-block-start: var(--hero-overlap);
   background-color: var(--white);
 
   > * + * {
@@ -79,8 +79,8 @@ export const Main = styled.div`
 export const Aside = styled.aside`
   --PageContent-Aside-padding-inline: ${MAIN_INLINE_PADDING};
 
-  flex-shrink: 0;
   flex-basis: 270px;
+  flex-shrink: 0;
   margin-block-start: min(4.25vw, 64px);
 
   ${respond(

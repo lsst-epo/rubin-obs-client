@@ -9,11 +9,11 @@ export const TooltipBackground = styled.rect`
 `;
 
 export const TooltipText = styled.text`
-  color: var(--black, #000);
-  fill: var(--black, #000);
-  dominant-baseline: central;
   font-size: 12px;
+  color: var(--black, #000);
+  dominant-baseline: central;
   text-anchor: middle;
+  fill: var(--black, #000);
 `;
 
 export const TooltipArrow = styled.polygon`

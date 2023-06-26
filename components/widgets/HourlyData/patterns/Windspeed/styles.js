@@ -6,18 +6,18 @@ export const Speed = styled.span`
 `;
 
 export const Direction = styled.div`
-  background-color: var(--black, #000);
-  border-radius: 50%;
-  color: #30e0e3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 46px;
   height: 46px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  color: #30e0e3;
+  background-color: var(--black, #000);
+  border-radius: 50%;
   transform: rotate(var(--angle, 0deg));
 `;
 
 export const NoData = styled.span`
-  color: var(--white, #fff);
   font-size: 0.5em;
+  color: var(--white, #fff);
 `;

@@ -6,9 +6,9 @@ export const WidgetGrid = styled.div`
   --widget-columns: 2;
 
   display: grid;
-  grid-auto-flow: row dense;
-  grid-auto-rows: 1fr;
   grid-template-columns: repeat(var(--widget-columns), 1fr);
+  grid-auto-rows: 1fr;
+  grid-auto-flow: row dense;
   grid-gap: var(--widget-row-gap);
 
   &:not(:first-child) {

@@ -21,19 +21,19 @@ export const MixedLink = styled(BaseMixedLink)`
 
   position: relative;
   display: grid;
-  /* stylelint-disable declaration-block-no-redundant-longhand-properties */
-  grid-template-columns: 1fr;
-  grid-template-rows: ${fluidScale("234px", "164px")} 1fr;
   grid-template-areas:
     "image"
     "title";
+  grid-template-rows: ${fluidScale("234px", "164px")} 1fr;
+  /* stylelint-disable declaration-block-no-redundant-longhand-properties */
+  grid-template-columns: 1fr;
   /* stylelint-enable declaration-block-no-redundant-longhand-properties */
   align-content: start;
   justify-items: center;
   padding: 0;
-  border-radius: 16px;
   color: var(--Tile-color);
   text-decoration: none;
+  border-radius: 16px;
 
   &[aria-disabled="true"] {
     --Tile-bg-color: #6a6e6e;
@@ -70,10 +70,10 @@ export const MixedLink = styled(BaseMixedLink)`
 
 export const Image = styled.div`
   grid-area: image;
-  background-color: var(--Tile-image-bg-color);
+  width: 100%;
   padding-block-end: ${fluidScale("40px", "5px")};
   margin-block-start: var(--Tile-image-margin-top);
-  width: 100%;
+  background-color: var(--Tile-image-bg-color);
   border-top: 3px solid var(--Tile-border-color);
   border-right: 3px solid var(--Tile-border-color);
   border-left: 3px solid var(--Tile-border-color);
@@ -106,18 +106,18 @@ export const Image = styled.div`
 `;
 
 export const Title = styled.div`
-  grid-area: title;
   display: flex;
   flex-direction: column;
+  grid-area: title;
   justify-content: center;
   width: 100%;
-  background-color: var(--Tile-bg-color);
   padding: 20px 10px;
   font-size: 16px;
   font-weight: 700;
   text-align: center;
-  border-bottom-left-radius: 16px;
+  background-color: var(--Tile-bg-color);
   border-bottom-right-radius: 16px;
+  border-bottom-left-radius: 16px;
   transition: backgroud-color 0.2s;
 
   @media (max-width: ${BREAK_PHABLET}) {

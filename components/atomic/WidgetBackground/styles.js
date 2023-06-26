@@ -9,12 +9,12 @@ export const WidgetBackground = styled.div`
   --widget-background-color: ${({ $variant = "primary" }) =>
     variants[$variant]};
 
-  background-color: var(--widget-background-color);
-  border-radius: calc(var(--PADDING_SMALL, 20px) / 2);
-  font-size: 0.75rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   padding: var(--PADDING_SMALL, 20px);
+  font-size: 0.75rem;
+  background-color: var(--widget-background-color);
+  border-radius: calc(var(--PADDING_SMALL, 20px) / 2);
 `;

@@ -13,10 +13,10 @@ export const AlphaButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 40px;
   width: 40px;
-  border: 1px solid #707070;
+  height: 40px;
   font-weight: bold;
+  border: 1px solid #707070;
   transition: color 0.2s, background-color 0.2s;
 
   &:disabled {
