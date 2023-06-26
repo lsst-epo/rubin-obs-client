@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import WidgetBackground from "@/components/atomic/WidgetBackground";
 
 export const Caption = styled.figcaption`
   text-align: center;
