@@ -50,7 +50,8 @@
   ],
   "lint-staged": {
     "*.{js,jsx}": "yarn fix:js",
-    "*.scss": "yarn fix:scss"
+    "*.scss": "yarn fix:scss",
+    "**/styles.js": "yarn fix:styled"
   },
   "dependencies": {
     "@castiron/components-breadcrumbs": "^1.1.0",
@@ -129,9 +130,10 @@
     "storybook-react-i18next": "^2.0.1",
     "stylelint": "^15.6.1",
     "stylelint-config-prettier": "^9.0.5",
-    "stylelint-config-recess-order": "^3.0.0",
+    "stylelint-config-recess-order": "^4.2.0",
     "stylelint-config-standard": "^33.0.0",
-    "stylelint-config-standard-scss": "^6.0.0",
-    "tsconfig-paths-webpack-plugin": "^4.0.1"
+    "stylelint-config-standard-scss": "^9.0.0",
+    "tsconfig-paths-webpack-plugin": "^4.0.1",
+    "typescript": "5.0.4"
   }
 }

@@ -3,23 +3,23 @@ import { fluidScale } from "@/styles/globalStyles";
 
 export const TabList = styled.div`
   display: flex;
-  justify-content: end;
   flex-wrap: wrap;
-  margin-inline-start: -20px;
+  justify-content: end;
   margin-block-end: -10px;
+  margin-inline-start: -20px;
 `;
 
 export const Tab = styled.button`
   display: block;
   flex: 1 1 auto;
+  max-width: 373px;
+  min-height: ${fluidScale("90px", "70px")};
+  padding: 15px 32px;
+  margin-block-end: 10px;
+  margin-inline-start: 20px;
+  font-weight: bold;
   background-color: var(--orange20);
   border: 4px solid var(--orange20);
-  padding: 15px 32px;
-  min-height: ${fluidScale("90px", "70px")};
-  max-width: 373px;
-  font-weight: bold;
-  margin-inline-start: 20px;
-  margin-block-end: 10px;
   transition: color 0.2s, background-color 0.2s, border-color 0.2s;
 
   &[aria-selected="true"] {

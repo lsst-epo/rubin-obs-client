@@ -14,22 +14,22 @@ export const PreviewPanel = styled.section`
 
   display: grid;
   grid-template: "header" 2rem "content" 10rem "callout" 2rem / 1fr;
-  grid-gap: var(--widget-grid-gap);
   grid-column: span min(var(--panel-columns), var(--widget-columns));
+  grid-gap: var(--widget-grid-gap);
   background-color: var(--black, #000);
   border-bottom-right-radius: 0.75rem;
   border-bottom-left-radius: 0.75rem;
 `;
 
 export const PreviewHeader = styled.h2`
-  color: var(--black, #000);
-  grid-area: header;
   display: flex;
-  justify-content: space-between;
+  grid-area: header;
   align-items: center;
-  background-color: #d9d9d9;
+  justify-content: space-between;
   padding: 0 0.5rem;
   font-size: 80%;
+  color: var(--black, #000);
+  background-color: #d9d9d9;
 `;
 
 export const PreviewIconButton = styled(IconButton)`
@@ -47,8 +47,8 @@ export const PreviewIconButton = styled(IconButton)`
 `;
 
 export const PreviewContent = styled.div`
-  grid-area: content;
   display: grid;
+  grid-area: content;
   grid-template-rows: 1fr;
   grid-template-columns: repeat(var(--panel-columns), 1fr);
   grid-gap: var(--widget-grid-gap);
@@ -57,10 +57,10 @@ export const PreviewContent = styled.div`
 `;
 
 export const PreviewCallout = styled.p`
-  grid-area: callout;
-  color: var(--white, #fff);
-  font-size: 90%;
   display: flex;
-  justify-content: center;
+  grid-area: callout;
   align-items: center;
+  justify-content: center;
+  font-size: 90%;
+  color: var(--white, #fff);
 `;

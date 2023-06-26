@@ -24,9 +24,9 @@ export const Form = styled.form`
 
 export const AccountLinks = styled.div`
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
   gap: 1rem;
+  justify-content: space-between;
   margin-block-start: 10px;
   margin-block-end: 30px;
 `;

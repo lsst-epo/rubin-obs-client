@@ -1,5 +1,9 @@
 module.exports = {
-  extends: ["stylelint-config-standard-scss", "stylelint-config-recess-order"],
+  extends: [
+    "stylelint-config-standard-scss",
+    "stylelint-config-prettier",
+    "stylelint-config-recess-order",
+  ],
   ignoreFiles: ["theme/styles/base/_resets.scss"],
   defaultSeverity: "error",
   rules: {

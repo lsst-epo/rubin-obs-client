@@ -21,8 +21,8 @@ export const DateWrapper = styled.div`
 
   ${respond(
     css`
-      min-width: auto;
       flex-wrap: wrap;
+      min-width: auto;
     `,
     BREAK_MOBILE_MIN
   )}

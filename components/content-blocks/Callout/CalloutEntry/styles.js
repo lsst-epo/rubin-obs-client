@@ -33,7 +33,6 @@ export const StyledInner = styled(MixedLink)`
   ${containerRegular()}
   position: ${(p) => p.$position};
   display: grid;
-  gap: 40px;
   grid-template-areas:
     "image title"
     "image subtitle"
@@ -42,11 +41,12 @@ export const StyledInner = styled(MixedLink)`
   grid-template-columns: 1fr 1fr;
   grid-gap: 10px;
   grid-column-gap: 30px;
-  min-height: 360px;
+  gap: 40px;
+  align-content: start;
   height: 100%;
+  min-height: 360px;
   padding-top: ${fluidScale("50px", "30px")};
   padding-bottom: ${fluidScale("50px", "40px")};
-  align-content: start;
   text-decoration: none;
   transition: color 0.2s, background-color 0.2s;
 
@@ -113,8 +113,8 @@ export const StyledText = styled(Text)`
 export const StyledImageWrapper = styled.div`
   position: relative;
   grid-area: image;
-  overflow: hidden;
   min-height: 300px;
+  overflow: hidden;
   opacity: 1;
   transition: filter 0.2s, opacity 0.2s;
 
@@ -155,10 +155,10 @@ export const StyledImageSticker = styled.div`
   top: 0;
   left: 0;
   padding: 16px 24px;
-  color: var(--white);
-  background-color: var(--turquoise85);
   font-size: 18px;
   font-weight: 700;
+  color: var(--white);
+  background-color: var(--turquoise85);
 
   ${respond(
     `

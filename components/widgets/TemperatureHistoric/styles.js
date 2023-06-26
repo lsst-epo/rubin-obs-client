@@ -12,14 +12,14 @@ export const TemperatureTable = styled.table`
 `;
 
 export const TemperatureHeader = styled.th`
-  font-weight: normal;
   padding: 0;
+  font-weight: normal;
 `;
 
 export const TemperatureCell = styled.td`
+  padding: 0;
   font-size: var(--cell-font-size, 1em);
   font-variant-numeric: tabular-nums;
   line-height: 1;
   white-space: nowrap;
-  padding: 0;
 `;
