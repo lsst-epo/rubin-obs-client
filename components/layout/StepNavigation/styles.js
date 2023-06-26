@@ -120,6 +120,7 @@ export const NavLink = styled(MixedLink)`
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
     width: ${NUM_HEIGHT};
     height: ${NUM_HEIGHT};
     margin-inline-end: ${fluidScale("30px", "7px")};
