@@ -1,6 +1,6 @@
-export const capitalize = (string) => {
+export const capitalize = (string, locale = "en-US") => {
   if (typeof string !== "string") return "";
-  return string.charAt(0).toUpperCase() + string.slice(1);
+  return string.charAt(0).toLocaleUpperCase(locale) + string.slice(1);
 };
 
 export const hasImage = (imageArray) =>
@@ -36,3 +36,13 @@ export function wait(seconds) {
     setTimeout(resolve, seconds * 1000);
   });
 }
+
+export const timezoneOffset = (timezone) => {
+  const now = new Date();
+  now.setUTCHours(0, 0, 0, 0);
+  const localeDate = new Date(
+    now.toLocaleString("en-US", { timeZone: timezone })
+  );
+
+  return 24 - localeDate.getHours();
+};
