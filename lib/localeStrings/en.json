@@ -360,6 +360,13 @@
         "no_data_yet": "No data yet"
       },
       "astro": {
+        "daylight": {
+          "observing": "Dark enough to observe from {{from}} to {{to}}",
+          "twilight": "Twilight from {{from}} to {{to}}",
+          "daylight": "Daylight from {{from}} to {{to}}",
+          "current": "Current local time {{time}}. It is too light to observe right now.",
+          "current_observable": "Current local time {{time}}. It is dark enough to observe right now."
+        },
         "moon": {
           "new": "New Moon",
           "full": "Full Moon",

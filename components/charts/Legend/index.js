@@ -9,9 +9,9 @@ const colors = {
 const ChartLegend = ({ legends = [] }) => {
   return (
     <Styled.Legends>
-      {legends.map(({ title, type, id }) => (
+      {legends.map(({ title, type, id, color }) => (
         <Styled.Legend key={id}>
-          <Styled.LegendColor color={colors[type]} />
+          <Styled.LegendColor color={color || colors[type]} />
           <Styled.LegendTitle id={id}>{title}</Styled.LegendTitle>
         </Styled.Legend>
       ))}
@@ -26,6 +26,7 @@ ChartLegend.propTypes = {
     PropTypes.shape({
       title: PropTypes.string,
       type: PropTypes.oneOf("line", "bar"),
+      color: PropTypes.string,
       id: PropTypes.string,
     })
   ),
