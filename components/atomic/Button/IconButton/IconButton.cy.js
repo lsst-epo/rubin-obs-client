@@ -17,7 +17,9 @@ describe("<IconButton>", () => {
   });
 
   it("IconButton has Screen Reader Text", () => {
-    cy.mount(<IconButton icon="CaretDown" accessibleText="Screen Reader only text" />);
+    cy.mount(
+      <IconButton icon="CaretDown" accessibleText="Screen Reader only text" />
+    );
     cy.get("[data-cy=icon-button]").contains("Screen Reader only text");
   });
 });

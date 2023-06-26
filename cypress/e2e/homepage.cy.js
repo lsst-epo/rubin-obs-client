@@ -12,8 +12,8 @@ describe("Search from Homepage", () => {
     cy.get("#headerSearchBar").should("be.visible").type("rubin{enter}");
     cy.intercept("http://localhost:3000/search?search=rubin").as("search");
     cy.on("url:changed", (newUrl) => {
-      expect(newUrl).to.contain("?search=rubin")
-    })
-    cy.get('ul li').its('length').should('be.gte', 1)
+      expect(newUrl).to.contain("?search=rubin");
+    });
+    cy.get("ul li").its("length").should("be.gte", 1);
   });
 });
