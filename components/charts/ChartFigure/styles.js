@@ -1,19 +1,14 @@
 import styled from "styled-components";
+import WidgetBackground from "@/components/atomic/WidgetBackground";
 
-export const Figure = styled.figure`
-  padding: var(--PADDING_SMALL, 20px);
-  color: var(--white, #fff);
-  background-color: var(--turquoise85, #12726c);
-  border-radius: 10px;
-
-  & > * + * {
-    margin-block-start: var(--PADDING_SMALL, 20px);
-  }
-`;
+export const Figure = styled(WidgetBackground)``;
 export const Caption = styled.figcaption`
   text-align: center;
 `;
 export const Content = styled.div`
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
   position: relative;
   overflow-x: auto;
   scrollbar-color: var(--white, #fff) rgba(255, 255, 255, 20%);
