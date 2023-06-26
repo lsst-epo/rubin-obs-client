@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 export const Figure = styled.figure`
+  padding: var(--PADDING_SMALL, 20px);
+  color: var(--white, #fff);
   background-color: var(--turquoise85, #12726c);
   border-radius: 10px;
-  color: var(--white, #fff);
-  padding: var(--PADDING_SMALL, 20px);
 
   & > * + * {
     margin-block-start: var(--PADDING_SMALL, 20px);
@@ -14,8 +14,8 @@ export const Caption = styled.figcaption`
   text-align: center;
 `;
 export const Content = styled.div`
-  overflow-x: auto;
   position: relative;
+  overflow-x: auto;
   scrollbar-color: var(--white, #fff) rgba(255, 255, 255, 20%);
   scrollbar-width: thin;
 

@@ -6,8 +6,8 @@ export const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  margin-inline-start: -50px;
   margin-block-end: -18px;
+  margin-inline-start: -50px;
 
   > * {
     margin-block-end: 18px;
@@ -17,8 +17,8 @@ export const Wrapper = styled.div`
 
 export const Title = styled.div`
   display: flex;
-  flex-wrap: nowrap;
   flex: 666 1 0%;
+  flex-wrap: nowrap;
   justify-content: space-between;
 
   h2 {
@@ -46,8 +46,8 @@ export const NavList = styled.ol`
       fluidScale(`${400 * $columns}px`, `${300 * $columns}px`)};
   columns: ${({ $columns }) => $columns};
   column-gap: ${fluidScale("50px", "30px")};
-  visibility: hidden;
   max-height: 0;
+  visibility: hidden;
 
   ${respond(`columns: 1`, tokens.BREAK_PHABLET)}
 
@@ -73,9 +73,9 @@ const itemBorder = `
 
 export const NavItem = styled.li`
   position: relative;
-  counter-increment: guide-nav-counter;
   font-size: ${fluidScale("20px", "16px")};
   font-weight: bold;
+  counter-increment: guide-nav-counter;
   break-inside: avoid;
   border: 1px solid transparent;
 
@@ -94,9 +94,9 @@ export const NavItem = styled.li`
 `;
 
 export const NavLink = styled(MixedLink)`
-  text-decoration: none;
-  line-height: ${NUM_HEIGHT};
   display: flex;
+  line-height: ${NUM_HEIGHT};
+  text-decoration: none;
 
   &[aria-current="page"] {
     > span {
@@ -118,9 +118,9 @@ export const NavLink = styled(MixedLink)`
   &::before {
     z-index: 1;
     display: inline-flex;
+    flex-shrink: 0;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0;
     width: ${NUM_HEIGHT};
     height: ${NUM_HEIGHT};
     margin-inline-end: ${fluidScale("30px", "7px")};

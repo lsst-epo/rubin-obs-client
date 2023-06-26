@@ -24,11 +24,14 @@ export const MixedLink = styled(BaseMixedLink)`
   position: relative;
   display: grid;
   grid-template-columns: 1fr;
-  text-decoration: none;
   grid-gap: 10px;
+  align-content: start;
   height: 100%;
   padding: 0;
-  align-content: start;
+  text-decoration: none;
+
+  /* HOVER STATES */
+  transition: color 0.2s, background-color 0.2s;
 
   /* set the grid areas for various bits */
   .image {
@@ -813,9 +816,6 @@ export const MixedLink = styled(BaseMixedLink)`
     }
   }
 
-  /* HOVER STATES */
-  transition: color 0.2s, background-color 0.2s;
-
   &.pages:hover,
   &.pages:focus-visible,
   &.darkSlide:hover,
@@ -879,14 +879,14 @@ export const MixedLink = styled(BaseMixedLink)`
 
 export const PlayButton = styled.span`
   position: absolute;
-  display: block;
-  width: 6%;
-  height: auto;
-  min-width: 40px;
-  min-height: 40px;
-  color: var(--white);
   top: 50%;
   left: 50%;
+  display: block;
+  width: 6%;
+  min-width: 40px;
+  height: auto;
+  min-height: 40px;
+  color: var(--white);
   transform: translate(-50%, -50%);
 
   &:hover {

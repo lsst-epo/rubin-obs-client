@@ -16,9 +16,9 @@ const gap = "40px";
 const linkPadding = pxToEm("18px", "16px");
 
 export const Section = styled.section`
-  background-color: ${(p) => tokens[p.$bgColor]};
   color: ${(p) =>
     needsDarkColor(tokens[p.$bgColor]) ? tokens.neutral80 : tokens.white};
+  background-color: ${(p) => tokens[p.$bgColor]};
   ${(p) => p.$width === "block" && containerFullBleed("CONTAINER_REGULAR")};
   ${(p) =>
     p.$overlay &&

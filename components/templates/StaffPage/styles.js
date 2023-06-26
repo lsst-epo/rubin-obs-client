@@ -53,8 +53,8 @@ export const Bio = styled.div`
 `;
 
 export const SectionHeading = styled.h2`
-  margin-block-end: 0.5em;
   padding-block-end: 0.5em;
+  margin-block-end: 0.5em;
   border-block-end: 10px solid var(--turquoise50);
 `;
 

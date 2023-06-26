@@ -73,9 +73,9 @@ export const Buttons = styled.div`
 
 export const Quote = styled.blockquote`
   grid-area: quote;
-  font-weight: bold;
-  padding-inline-end: 60px;
   padding-block-start: 15px;
+  padding-inline-end: 60px;
+  font-weight: bold;
 
   ${mobile(
     css`
@@ -90,12 +90,12 @@ export const Attribution = styled.cite`
 `;
 
 export const QuoteImageWrapper = styled.figure`
-  grid-area: image;
   position: relative;
+  grid-area: image;
   align-self: end;
-  margin-inline-start: ${fluidScale("69px", "0px")};
   margin-block-start: ${({ $colorScheme }) =>
     $colorScheme === "educator" ? "15px" : "0"};
+  margin-inline-start: ${fluidScale("69px", "0px")};
 
   ${tablet(`margin-inline-start: -30px`)}
 
