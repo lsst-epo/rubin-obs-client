@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
-import IconComposer from "@/svg/IconComposer";
+import { IconComposer } from "@rubin-epo/epo-react-lib";
 
 const EMAIL_ID = "footerContactEmail";
 const TOPIC_ID = "footerContactTopic";
@@ -14,6 +14,7 @@ async function postFormData(data) {
   const objectifiedData = Object.fromEntries(data);
   const body = JSON.stringify({
     ...objectifiedData,
+    fromName: "",
     message: {
       body: objectifiedData.message,
       Topic: objectifiedData.topic,
@@ -46,12 +47,8 @@ function ContactForm({ topics = [], className }) {
     const formData = new FormData(event.target);
 
     await postFormData(formData)
-      .then((data) => {
-        if (data.success) {
-          setStatus("success");
-        } else {
-          setStatus("error");
-        }
+      .then(() => {
+        setStatus("success");
       })
       .catch((error) => {
         setStatus("error");
@@ -109,7 +106,7 @@ function ContactForm({ topics = [], className }) {
               ))}
             </select>
             <IconComposer
-              icon="caretThin"
+              icon="ChevronThin"
               className="c-contact-form__select-icon"
             />
           </div>

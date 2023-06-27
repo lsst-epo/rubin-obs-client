@@ -1,10 +1,12 @@
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useGlobalData } from "@/lib/utils";
-import CopyUrlButton from "./CopyUrlButton";
-import FacebookButton from "./FacebookButton";
-import TwitterButton from "./TwitterButton";
-import EmailButton from "./EmailButton";
+import {
+  CopyUrlButton,
+  FacebookButton,
+  TwitterButton,
+  EmailButton,
+} from "@rubin-epo/epo-react-lib";
 import * as Styled from "./styles";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;

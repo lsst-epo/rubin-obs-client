@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import Body from "@/global/Body";
 import Breadcrumbs from "@/components/page/Breadcrumbs";
-import Container from "@/components/layout/Container";
+import { Container } from "@rubin-epo/epo-react-lib";
 import DynamicComponentFactory from "@/components/factories/DynamicComponentFactory";
 import FilterBar from "@/components/page/FilterBar";
 import { usePathData } from "@/lib/utils";

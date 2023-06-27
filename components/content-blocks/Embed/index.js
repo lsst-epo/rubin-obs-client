@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { containerFullBleed } from "@/styles/globalStyles";
-import Container from "@/layout/Container";
+import { Container } from "@rubin-epo/epo-react-lib";
 
 export default function Embed(props) {
   const {

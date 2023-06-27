@@ -1,18 +1,14 @@
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import Container from "@/layout/Container";
+import { Grid, IconComposer } from "@rubin-epo/epo-react-lib";
 import DataList from "@/dynamic/DataList";
-import Grid from "@/layout/Grid";
 import Tile from "@/atomic/Tile";
-import Pagination from "@/page/Pagination";
 import {
   checkIfBetweenDates,
   createLocationString,
   makeDateObject,
   useGlobalData,
 } from "@/lib/utils";
-import IconComposer from "@/svg/IconComposer";
-import Buttonish from "@/components/atomic/Buttonish";
 import * as Styled from "./styles";
 
 const EventList = ({
@@ -44,117 +40,97 @@ const EventList = ({
       excludeId={excludeId}
       limit={limit}
       section="events"
+      width={isWide ? "regular" : "narrow"}
+      header={header}
+      footerButton={button}
+      loaderDescription={t("events.loading")}
     >
-      {({ entries, offset, page, total }) => (
+      {({ entries }) => (
         <>
-          <Container width={isWide ? "regular" : "narrow"}>
-            <div>
-              {header && <Styled.Header>{header}</Styled.Header>}
-              {entries?.length > 0 && (
-                <Grid columns={1}>
-                  {entries.map(
-                    ({
-                      address,
-                      city,
-                      country,
-                      startDate,
-                      endDate,
-                      description,
-                      id,
-                      image,
-                      eventType,
-                      registrationCloseDate,
-                      registrationOpenDate,
-                      title,
-                      state,
-                      uri,
-                    }) => {
-                      // logic for displaying city/state in US, city/country outside
-                      const loc = createLocationString(city, state, country);
+          {entries?.length > 0 && (
+            <Grid columns={1}>
+              {entries.map(
+                ({
+                  address,
+                  city,
+                  country,
+                  startDate,
+                  endDate,
+                  description,
+                  id,
+                  image,
+                  eventType,
+                  registrationCloseDate,
+                  registrationOpenDate,
+                  title,
+                  state,
+                  uri,
+                }) => {
+                  // logic for displaying city/state in US, city/country outside
+                  const loc = createLocationString(city, state, country);
 
-                      // check registration
-                      const isThereRegistration = !!registrationCloseDate;
-                      const registration = checkIfBetweenDates(
-                        registrationOpenDate,
-                        registrationCloseDate
-                      )
-                        ? "open"
-                        : "closed";
+                  // check registration
+                  const isThereRegistration = !!registrationCloseDate;
+                  const registration = checkIfBetweenDates(
+                    registrationOpenDate,
+                    registrationCloseDate
+                  )
+                    ? "open"
+                    : "closed";
 
-                      const lock =
-                        registration === "open" ? "LockOpen" : "LockClosed";
+                  const lock =
+                    registration === "open" ? "LockOpen" : "LockClosed";
 
-                      const endDateObject = makeDateObject(endDate, lang, true);
+                  const endDateObject = makeDateObject(endDate, lang, true);
 
-                      const startDateObject = startDate
-                        ? makeDateObject(startDate, lang, true)
-                        : null;
+                  const startDateObject = startDate
+                    ? makeDateObject(startDate, lang, true)
+                    : null;
 
-                      return (
-                        /* eslint-disable */
-                        <Tile
-                          className={isThereRegistration ? registration : null}
-                          key={id}
-                          footer={
-                            isThereRegistration
-                              ? {
-                                  sticker: (
-                                    <Styled.Sticker>
-                                      <IconComposer icon={lock} size={18} />
-                                      <span>{t(`events.${registration}`)}</span>
-                                    </Styled.Sticker>
-                                  ),
-                                }
-                              : null
-                          }
-                          image={image?.[0]}
-                          link={uri}
-                          pretitle={
-                            gridType === "events" && eventType?.[0]?.title
-                              ? eventType?.[0]?.title
-                              : " "
-                          }
-                          subtitle={
-                            <Styled.DateWrapper
-                              $hasStartDate={!!startDateObject}
-                            >
-                              {startDateObject && (
-                                <>
-                                  {renderDate(startDateObject)}
-                                  <Styled.DateEmDash>—</Styled.DateEmDash>
-                                </>
-                              )}
-                              {renderDate(endDateObject)}
-                            </Styled.DateWrapper>
-                          }
-                          text={description}
-                          title={`${title}${loc && " — " + loc}`}
-                          titleTag={"h2"}
-                          type={gridType}
-                        />
-                      );
-                    }
-                  )}
-                </Grid>
+                  return (
+                    /* eslint-disable */
+                    <Tile
+                      className={isThereRegistration ? registration : null}
+                      key={id}
+                      footer={
+                        isThereRegistration
+                          ? {
+                              sticker: (
+                                <Styled.Sticker>
+                                  <IconComposer icon={lock} size={18} />
+                                  <span>{t(`events.${registration}`)}</span>
+                                </Styled.Sticker>
+                              ),
+                            }
+                          : null
+                      }
+                      image={image?.[0]}
+                      link={uri}
+                      pretitle={
+                        gridType === "events" && eventType?.[0]?.title
+                          ? eventType?.[0]?.title
+                          : " "
+                      }
+                      subtitle={
+                        <Styled.DateWrapper $hasStartDate={!!startDateObject}>
+                          {startDateObject && (
+                            <>
+                              {renderDate(startDateObject)}
+                              <Styled.DateEmDash>—</Styled.DateEmDash>
+                            </>
+                          )}
+                          {renderDate(endDateObject)}
+                        </Styled.DateWrapper>
+                      }
+                      text={description}
+                      title={`${title}${loc && " — " + loc}`}
+                      titleTag={"h2"}
+                      type={gridType}
+                    />
+                  );
+                }
               )}
-              {button && (
-                <Styled.Footer>
-                  <Buttonish
-                    isBlock={true}
-                    text={button.text}
-                    url={`/${button.uri}`}
-                  />
-                </Styled.Footer>
-              )}
-            </div>
-          </Container>
-          {limit >= 8 && (
-            <Pagination
-              limit={limit}
-              offset={offset}
-              page={page}
-              total={total}
-            />
+            </Grid>
           )}
         </>
       )}

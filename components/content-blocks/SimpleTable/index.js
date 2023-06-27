@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Container from "@/components/layout/Container";
+import * as EPOLib from "@rubin-epo/epo-react-lib";
 import { useGlobalData } from "@/lib/utils";
-import * as Styled from "./styles";
 
 const SimpleTable = ({ simpleTable, sites = [] }) => {
   // Think of a cleaner way to handle this site-specific
@@ -12,33 +11,12 @@ const SimpleTable = ({ simpleTable, sites = [] }) => {
   } = useGlobalData();
   const showTable = sites.includes(language);
 
-  if (!showTable) return null;
-
-  return (
-    <Container width="narrow">
-      <Styled.List>
-        {simpleTable.map((row, i) => (
-          <React.Fragment key={i}>
-            <Styled.Title
-              $color={row.rowColor}
-              className="c-content-rte"
-              dangerouslySetInnerHTML={{ __html: row.rowTitle }}
-            />
-            <Styled.Description
-              $color={row.rowColor}
-              className="c-content-rte"
-              dangerouslySetInnerHTML={{ __html: row.rowContent }}
-            />
-          </React.Fragment>
-        ))}
-      </Styled.List>
-    </Container>
-  );
+  return showTable ? <EPOLib.SimpleTable {...{ simpleTable }} /> : null;
 };
 
 SimpleTable.propTypes = {
   sites: PropTypes.array,
-  simpleTable: PropTypes.array,
+  simpleTable: PropTypes.array.isRequired,
 };
 
 export default SimpleTable;

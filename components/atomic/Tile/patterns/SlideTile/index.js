@@ -1,13 +1,15 @@
 import PropTypes from "prop-types";
 import { useUID } from "react-uid";
 import classNames from "classnames";
-import ResponsiveImage from "@/atomic/ResponsiveImage";
-import { Image } from "@/components/atomic/";
-import MixedLink from "@/atomic/MixedLink";
+import {
+  ResponsiveImage,
+  Image,
+  MixedLink,
+  IconComposer,
+} from "@rubin-epo/epo-react-lib";
 import { mixedLinkShape } from "@/shapes/link";
 import { useGlobalData } from "@/lib/utils";
 import * as Styled from "./styles";
-import IconComposer from "@/components/svg/IconComposer";
 
 const SlideTile = ({
   className,

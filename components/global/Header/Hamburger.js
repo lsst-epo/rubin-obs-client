@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
-import IconComposer from "@/svg/IconComposer";
+import { IconComposer } from "@rubin-epo/epo-react-lib";
 
 export default function Hamburger({ mobileNavActive, onClick }) {
   const { t } = useTranslation();

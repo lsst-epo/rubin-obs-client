@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import striptags from "striptags";
 import chunk from "lodash/chunk";
 import Tile from "@/atomic/Tile";
-import Grid from "@/layout/Grid";
+import Loader from "@/atomic/Loader";
+import { Grid } from "@rubin-epo/epo-react-lib";
 import { normalizeItemData, useList } from "@/lib/utils";
 import * as Styled from "./styles";
 
@@ -19,7 +20,7 @@ function CarouselGrid({
   // get manually-curated data first
   const curatedItems = normalizeItemData(items);
 
-  const { data } = useList({
+  const { data, isLoading } = useList({
     limit,
     listTypeId,
     section,
@@ -64,6 +65,7 @@ function CarouselGrid({
     );
   }
 
+  if (isLoading) return <Loader speed="fast" isVisible />;
   if (!allItems?.length) return null;
 
   if (allItems.length <= 3)

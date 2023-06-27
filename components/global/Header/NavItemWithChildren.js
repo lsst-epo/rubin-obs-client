@@ -2,7 +2,7 @@ import { useRef } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import Subnavigation from "./Subnavigation";
-import IconComposer from "@/svg/IconComposer";
+import { IconComposer } from "@rubin-epo/epo-react-lib";
 import { useKeyDownEvent, useFocusTrap } from "@/hooks";
 import internalLinkShape, { internalLinkInternalShape } from "@/shapes/link";
 
@@ -41,7 +41,7 @@ export default function NavItemWithChildren({
           [`c-nav-list__link--${theme}`]: !!theme,
         })}
       >
-        <IconComposer icon="CaretThin" className="c-nav-list__link-icon" />
+        <IconComposer icon="ChevronThin" className="c-nav-list__link-icon" />
         <span className="c-nav-list__link-text">{title}</span>
       </button>
       <Subnavigation

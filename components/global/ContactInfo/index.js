@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import GlobalDataContext from "@/contexts/GlobalData";
-import IconComposer from "@/svg/IconComposer";
+import { IconComposer } from "@rubin-epo/epo-react-lib";
 
 export default function ContactInfo({ className }) {
   return (

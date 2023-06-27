@@ -2,15 +2,17 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import striptags from "striptags";
 import { useTranslation } from "react-i18next";
-import Container from "@/layout/Container";
-import { CarouselLayout as Carousel } from "@rubin-epo/epo-react-lib";
+import {
+  CarouselLayout as Carousel,
+  Container,
+  MixedLink,
+} from "@rubin-epo/epo-react-lib";
 import { SlideTile } from "@/components/atomic";
 import {
   makeTruncatedString,
   normalizeItemData,
   useListForBlock,
 } from "@/lib/utils";
-import MixedLink from "@/components/atomic/MixedLink";
 import { mixedLinkShape } from "@/components/shapes/link";
 
 const SlideBlock = ({

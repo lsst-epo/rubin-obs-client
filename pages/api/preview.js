@@ -1,42 +1,49 @@
 import { isCraftPreview } from "@/helpers";
-import { getPageUrlByUid } from "@/api/pages";
+import { getEntryDataByUid } from "@/api/entry";
 
 const preview = async (req, res) => {
+  const PREVIEW_SLUG = process.env.NEXT_PREVIEW_SLUG;
   const { query } = req;
   const isPreview = isCraftPreview(query);
-  const previewToken = query.token || null;
-
-  if (!query.entryUid) {
+  // N.B. previewToken isn't consistently available
+  const previewToken = query.token || undefined;
+  if (!query.entryUid)
     return res
       .status(401)
       .json({ message: "Not allowed to access this route" });
-  }
 
-  let site = "default";
-  if (query.site === "ES") {
-    site = "es";
-  }
+  if (!isPreview)
+    return res.status(401).json({
+      message: `Preview Mode must be enabled to view entry "${query.entryUid}"`,
+    });
 
   // Fetch the headless CMS to check if the provided entry exists
-  const entry = await getPageUrlByUid(query.entryUid, site, previewToken);
-  if (!entry?.url) {
+  const site = query.site === "ES" ? "es" : "default";
+  const entry = await getEntryDataByUid(query.entryUid, site, previewToken);
+  if (!entry?.uri)
     return res.status(401).json({
-      message: `URL of the entry "${query.entryUid}" could not be fetched`,
+      message: `URI of the entry "${query.entryUid}" could not be fetched`,
     });
-  }
+
+  // const { pathname } = new URL(entry.url.replace("/es/es", "/es"));
+  const { uri } = entry;
+  // N.B. Because previewToken presence is unreliable, we're always redirecting to previewUri so real pages are never inadvertently updated.
+  // If a previewToken becomes reliable, inclusion of previewToken in the preview data should be enough (and could use real page uri as redirect)
+  const previewUri = `/${PREVIEW_SLUG}`;
 
   // Enable Preview Mode by setting the cookies
-  if (previewToken) {
-    res.setPreviewData({
+  res.setPreviewData(
+    {
       previewToken,
-    });
-  }
-
-  const parsedUrl = new URL(entry.url.replace("/es/es", "/es"));
-
+      uriSegments: uri.split("/"),
+    },
+    {
+      maxAge: 120,
+      path: previewUri,
+    }
+  );
   // Redirect to the path from the fetched url
-  res.writeHead(307, { Location: parsedUrl.pathname });
-  res.end();
+  res.redirect(previewUri);
 };
 
 export default preview;

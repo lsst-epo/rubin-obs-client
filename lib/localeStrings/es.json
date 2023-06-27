@@ -7,9 +7,11 @@
     "breaking-news": "Últimas noticias",
     "cell": "Celda",
     "localize-content": "Localizar el contenido del sitio",
+    "loading": "Cargando…",
     "media": "Multimedia",
     "read-more": "Leer más",
     "related-content": "Contenido relacionado",
+    "related-content-loading": "Cargando contenido relacionado",
     "error-title": "Error",
     "error-text": "Ha ocurrido un error.",
     "page-not-found-title": "Página no encontrada",
@@ -97,7 +99,8 @@
       "related-events": "Otros eventos",
       "go-to-events": "Ir a eventos",
       "upcoming": "Próximos eventos",
-      "past": "Eventos anteriores"
+      "past": "Eventos anteriores",
+      "loading": "Cargando el Calendario..."
     },
     "gallery": {
       "about-the-image": "Acerca de la imagen",
@@ -107,6 +110,7 @@
       "additional-information": "Información adicional",
       "available-sizes": "Tamaños disponibles",
       "curated-slideshows": "Presentaciones curadas",
+      "loading-slideshows": "Cargando las Presentaciones...",
       "download-image": "Descargar imagen",
       "download-video": "Descargar video",
       "download-3d": "Descargar modelo 3D",
@@ -138,17 +142,20 @@
       "1080p": "1080p",
       "720p": "720p",
       "480p": "480p",
-      "320p": "320p"
+      "320p": "320p",
+      "loading": "Cargando la Galería..."
     },
     "jobs": {
       "jobs": "Trabajos",
       "read-more": "Leer más sobre este trabajo.",
       "open": "Vacante",
-      "closed": "Cerrado"
+      "closed": "Cerrado",
+      "loading": "Cargando los Trabajos..."
     },
     "news": {
       "related-posts": "Noticias relacionadas",
-      "back-to-posts": "Volver a noticias"
+      "back-to-posts": "Volver a noticias",
+      "loading": "Cargando las noticias..."
     },
     "pagination": {
       "label": "Paginación",
@@ -172,7 +179,8 @@
       "non-scientific-staff": "Perfil del equipo no científico",
       "browse-more": "Navegar más perfiles",
       "back-to-profiles": "Volver a perfiles",
-      "trading-card": "Carta coleccionable"
+      "trading-card": "Carta coleccionable",
+      "loading": "Cargando las Voces de Rubin..."
     },
     "telescope": {
       "state": "Estado",
@@ -301,23 +309,29 @@
       "delete_error_header": "¡Error!"
     },
     "glossary": {
-      "back_button": "Volver al glosario"
+      "back_button": "Volver al glosario",
+      "loading": "Cargando el Glosario..."
     },
     "restricted": {
       "header_approval_pending": "Contenido no disponible aún",
-      "message_approval_pending": "Este contenido aún no está disponible, pues su aprobación está pendiente. Si desea acelerar el proceso, por favor envíe un correo a <0>webmaster@lsst.org</0>.",
+      "message_approval_pending": "Este contenido aún no está disponible, pues su aprobación está pendiente. Si desea acelerar el proceso, por favor envíe un correo a <0>epo-feedback@lsst.org</0>.",
       "header_restricted": "Contenido no disponible",
-      "message_restricted": "Ese contenido no está disponible para usted. Si cree que esto es un error, por favor envíe un correo a <0>webmaster@lsst.org</0>.",
+      "message_restricted": "Ese contenido no está disponible para usted. Si cree que esto es un error, por favor envíe un correo a <0>epo-feedback@lsst.org</0>.",
       "header_not_authorized": "Contenido no disponible",
       "message_not_authorized": "Debe iniciar session para acceder a esta página.",
       "header_deletion_pending": "Contenido no disponible",
-      "message_deletion_pending": "Ha solicitado eliminar su cuenta. El proceso está pendiente. Si cree que está visualizando este mensaje por error, por favor envíe un correo a <0>webmaster@lsst.org</0>.",
+      "message_deletion_pending": "Ha solicitado eliminar su cuenta. El proceso está pendiente. Si cree que está visualizando este mensaje por error, por favor envíe un correo a <0>epo-feedback@lsst.org</0>.",
       "button_confirm": "¡Entendido!"
     },
     "investigation": {
       "total_duration": "Duración total de la investigación",
       "start": "Comenzar investigación",
-      "coming_soon": "(Pronto)"
+      "coming_soon": "(Pronto)",
+      "early_access": {
+        "full": "Acceso Anticipado",
+        "line_1_text": "Acceso",
+        "line_2_text": "Anticipado"
+      }
     },
     "share": {
       "label_current": "Compartir la página actual",

@@ -1,9 +1,8 @@
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import ContactInfo from "@/global/ContactInfo";
-import Container from "@/layout/Container";
 import internalLinkShape from "@/shapes/link";
-import Buttonish from "@/atomic/Buttonish";
+import { Buttonish, Container } from "@rubin-epo/epo-react-lib";
 export default function ContactContentBlock({ header, pageEntry, linkText }) {
   const showLink = pageEntry && pageEntry.length > 0;
   return (

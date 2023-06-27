@@ -9,7 +9,7 @@ import {
   respond,
 } from "@/styles/globalStyles";
 import { useTranslation } from "react-i18next";
-import MixedLink from "@/atomic/MixedLink";
+import { MixedLink, IconComposer } from "@rubin-epo/epo-react-lib";
 import T from "@/page/Translate";
 import { useOnClickOutside } from "@/hooks/listeners";
 import {
@@ -19,7 +19,6 @@ import {
   useGlobalData,
 } from "@/lib/utils";
 import withLiveRegionChange from "@/hoc/withLiveRegionChange";
-import IconComposer from "@/components/svg/IconComposer";
 
 const FilterBar = ({ filterType, setLiveRegionMessage }) => {
   const { t } = useTranslation();

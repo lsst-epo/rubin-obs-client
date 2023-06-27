@@ -6,28 +6,25 @@ import {
   zStack,
 } from "@/styles/globalStyles";
 import { Dialog as BaseDialog } from "@headlessui/react";
-import { FormButtons as BaseFormButtons } from "@/components/form";
+import { FormButtons as BaseFormButtons } from "@rubin-epo/epo-react-lib";
 
 export const Overlay = styled(BaseDialog.Overlay)`
-  background-color: rgba(0, 0, 0, 0.7);
   position: fixed;
   top: 0;
   width: 100%;
   height: 100%;
+  background-color: rgba(0, 0, 0, 70%);
 `;
 
 export const Dialog = styled(BaseDialog)`
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   z-index: ${zStack.dialog};
-  overflow: auto;
-  padding: 1rem;
   display: flex;
   align-items: start;
   justify-content: center;
+  padding: 1rem;
+  overflow: auto;
 `;
 
 export const Title = styled(BaseDialog.Title)``;
@@ -44,8 +41,8 @@ export const Description = styled(BaseDialog.Description)`
 export const Inner = styled.div`
   position: relative;
   display: flex;
-  background: var(--white);
   max-width: 100vw;
+  background: var(--white);
 
   ${({ $darkMode }) =>
     $darkMode &&
@@ -57,45 +54,45 @@ export const Inner = styled.div`
 
 export const Content = styled.div`
   flex: 1 1 auto;
-  padding: ${fluidScale("60px", "15px")};
-  padding-block-start: 60px;
   width: calc(100vw - 30px);
   max-width: 550px;
+  padding: ${fluidScale("60px", "15px")};
+  padding-block-start: 60px;
 `;
 
 export const CloseButton = styled.button`
   position: absolute;
+  top: ${fluidScale("10px", "15px")};
+  right: ${fluidScale("10px", "15px")};
   display: flex;
   align-items: center;
   justify-content: center;
-  right: ${fluidScale("10px", "15px")};
-  top: ${fluidScale("10px", "15px")};
   width: 42px;
   height: 42px;
-  border-radius: 100%;
   background: var(--neutral10);
+  border-radius: 100%;
 `;
 
 export const ImageWrapper = styled.div`
-  flex: 0 0 auto;
   display: flex;
+  flex: 0 0 auto;
   align-items: start;
   width: ${fluidScale("277px", "200px")};
 
   ${({ $image }) =>
     $image === "educators"
       ? css`
-          background: var(--orange20);
           justify-content: center;
           padding-block-start: 134px;
           padding-inline-start: 20px;
           padding-inline-end: 20px;
+          background: var(--orange20);
         `
       : css`
-          background: var(--turquoise10);
           padding-block-start: 90px;
           padding-inline-start: 6px;
           padding-inline-end: 20px;
+          background: var(--turquoise10);
         `};
 
   ${respond(`display: none;`, BREAK_PHABLET)}

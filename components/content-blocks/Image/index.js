@@ -1,8 +1,6 @@
 import PropTypes from "prop-types";
-import { Image } from "@/components/atomic/";
 import imageShape from "@/shapes/image";
-import Container from "@/layout/Container";
-import { Figure } from "@/components/atomic";
+import { Container, Figure, Image } from "@rubin-epo/epo-react-lib";
 import * as Styled from "./styles";
 
 export default function ImageContentBlock({ image, caption, floatDirection }) {

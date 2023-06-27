@@ -1,18 +1,13 @@
 import PropTypes from "prop-types";
-import styled from "styled-components";
 import { useTranslation } from "react-i18next";
-import Container from "@/layout/Container";
+import { Grid } from "@rubin-epo/epo-react-lib";
 import DataList from "@/dynamic/DataList";
-import Grid from "@/layout/Grid";
 import Tile from "@/atomic/Tile";
-import Pagination from "@/page/Pagination";
 import {
   makeDateString,
   makeTruncatedString,
   useGlobalData,
 } from "@/lib/utils";
-import { fluidScale } from "@/styles/globalStyles";
-import Buttonish from "@/components/atomic/Buttonish";
 
 const NewsList = ({
   button,
@@ -22,6 +17,7 @@ const NewsList = ({
   limit: initialLimit = 10,
   isWide = false,
   gridType = "news",
+  isRelatedList = false,
 }) => {
   const { t } = useTranslation();
   const localeInfo = useGlobalData("localeInfo");
@@ -36,94 +32,64 @@ const NewsList = ({
       limit={initialLimit}
       showsFeatured={canShowFeatured}
       section="news"
+      header={header}
+      width={isWide ? "regular" : "narrow"}
+      footerButton={button}
+      isRelatedList={isRelatedList}
+      loaderDescription={t("news.loading")}
     >
-      {({ entries, limit, offset, page, total }) => (
+      {({ entries, page }) => (
         <>
-          <Container width={isWide ? "regular" : "narrow"}>
-            <div>
-              {header && <Header>{header}</Header>}
-              {entries?.length > 0 && (
-                <Grid
-                  showFeature={canShowFeatured && page === 1}
-                  columns={cols}
-                >
-                  {entries.map(
-                    (
-                      {
-                        date,
-                        description,
-                        id,
-                        image,
-                        newsAssets,
-                        postType,
-                        title,
-                        uri,
-                        url,
-                      },
-                      i
-                    ) => (
-                      <Tile
-                        key={id}
-                        footer={
-                          gridType === "news"
-                            ? {
-                                button: t("read-more"),
-                              }
-                            : null
-                        }
-                        image={image?.[0]}
-                        isFeature={canShowFeatured && page === 1 && i === 0}
-                        link={uri}
-                        pretitle={
-                          gridType === "news" && postType?.[0]?.title
-                            ? postType[0].title
-                            : null
-                        }
-                        subtitle={makeDateString(date, lang)}
-                        text={makeTruncatedString(description, 30)}
-                        title={title}
-                        titleTag={"h2"}
-                        type={gridType}
-                        showSharePopup
-                      />
-                    )
-                  )}
-                </Grid>
-              )}
-              {button && (
-                <Footer>
-                  <Buttonish
-                    isBlock={true}
-                    text={button.text}
-                    url={`/${button.uri}`}
+          {entries?.length > 0 && (
+            <Grid showFeature={canShowFeatured && page === 1} columns={cols}>
+              {entries.map(
+                (
+                  {
+                    date,
+                    description,
+                    id,
+                    image,
+                    newsAssets,
+                    postType,
+                    title,
+                    uri,
+                    url,
+                  },
+                  i
+                ) => (
+                  <Tile
+                    key={id}
+                    footer={
+                      gridType === "news"
+                        ? {
+                            button: t("read-more"),
+                          }
+                        : null
+                    }
+                    image={image?.[0]}
+                    isFeature={canShowFeatured && page === 1 && i === 0}
+                    link={uri}
+                    pretitle={
+                      gridType === "news" && postType?.[0]?.title
+                        ? postType[0].title
+                        : null
+                    }
+                    subtitle={makeDateString(date, lang)}
+                    text={makeTruncatedString(description, 30)}
+                    title={title}
+                    titleTag={"h2"}
+                    type={gridType}
+                    showSharePopup
                   />
-                </Footer>
+                )
               )}
-            </div>
-          </Container>
-          {initialLimit >= 10 && (
-            <Pagination
-              limit={limit}
-              offset={offset}
-              page={page}
-              total={total}
-            />
+            </Grid>
           )}
         </>
       )}
     </DataList>
   );
 };
-
-const Header = styled.h2`
-  margin-bottom: ${fluidScale("40px", "20px")};
-  padding-bottom: 10px;
-  border-bottom: 10px solid var(--turquoise85);
-`;
-
-const Footer = styled.div`
-  padding-top: 40px;
-`;
 
 NewsList.propTypes = {
   component: PropTypes.string,
@@ -133,6 +99,7 @@ NewsList.propTypes = {
   button: PropTypes.object,
   isWide: PropTypes.bool,
   gridType: PropTypes.string,
+  isRelatedList: PropTypes.bool,
 };
 
 export default NewsList;

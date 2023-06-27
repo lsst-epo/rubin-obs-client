@@ -11,15 +11,19 @@ async function handler(req, res) {
     });
   }
 
-  if (query.secret !== process.env.CRAFT_REVALIDATE_SECRET_TOKEN)
+  if (query.secret !== process.env.CRAFT_REVALIDATE_SECRET_TOKEN) {
+    console.warn("Invalid token");
     return res.status(401).json({ error: "Invalid token" });
+  }
 
-  if (!query.uri)
+  if (!query.uri) {
+    console.warn(`The parameter "uri" is required.`);
     return res.status(500).json({ error: `The parameter "uri" is required.` });
+  }
 
   try {
     await res.revalidate(`/${query.uri}`);
-    return res.json({ revalidated: true });
+    return res.status(200).json({ revalidated: true });
   } catch (error) {
     console.error(error);
     // If there was an error, Next.js will continue

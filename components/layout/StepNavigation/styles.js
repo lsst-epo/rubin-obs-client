@@ -1,24 +1,24 @@
 import { fluidScale, pxToEm, respond, tokens } from "@/styles/globalStyles";
 import styled from "styled-components";
-import MixedLink from "@/components/atomic/MixedLink";
+import { MixedLink } from "@rubin-epo/epo-react-lib";
 
 export const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  margin-inline-start: -50px;
   margin-block-end: -18px;
+  margin-inline-start: -50px;
 
   > * {
-    margin-inline-start: 50px;
     margin-block-end: 18px;
+    margin-inline-start: 50px;
   }
 `;
 
 export const Title = styled.div`
   display: flex;
-  flex-wrap: wrap;
   flex: 666 1 0%;
+  flex-wrap: nowrap;
   justify-content: space-between;
 
   h2 {
@@ -28,6 +28,8 @@ export const Title = styled.div`
   button {
     display: none;
     flex-shrink: 0;
+    align-self: center;
+    padding-left: 10px;
 
     ${respond(`display: flex;`, tokens.BREAK_PHABLET)}
   }
@@ -44,14 +46,14 @@ export const NavList = styled.ol`
       fluidScale(`${400 * $columns}px`, `${300 * $columns}px`)};
   columns: ${({ $columns }) => $columns};
   column-gap: ${fluidScale("50px", "30px")};
-  visibility: hidden;
   max-height: 0;
+  visibility: hidden;
 
   ${respond(`columns: 1`, tokens.BREAK_PHABLET)}
 
   &[open] {
-    visibility: visible;
     max-height: none;
+    visibility: visible;
   }
 `;
 
@@ -71,9 +73,9 @@ const itemBorder = `
 
 export const NavItem = styled.li`
   position: relative;
-  counter-increment: guide-nav-counter;
   font-size: ${fluidScale("20px", "16px")};
   font-weight: bold;
+  counter-increment: guide-nav-counter;
   break-inside: avoid;
   border: 1px solid transparent;
 
@@ -92,16 +94,17 @@ export const NavItem = styled.li`
 `;
 
 export const NavLink = styled(MixedLink)`
-  text-decoration: none;
-  line-height: ${NUM_HEIGHT};
   display: flex;
+  line-height: ${NUM_HEIGHT};
+  text-decoration: none;
 
   &[aria-current="page"] {
     > span {
       color: #db5400;
     }
-    &:before {
-      background-color: #ff8800;
+
+    &::before {
+      background-color: #f80;
     }
   }
 
@@ -112,24 +115,24 @@ export const NavLink = styled(MixedLink)`
     }
   }
 
-  &:before {
-    content: counter(guide-nav-counter);
-    flex: none;
+  &::before {
+    z-index: 1;
     display: inline-flex;
+    flex-shrink: 0;
     align-items: center;
     justify-content: center;
     width: ${NUM_HEIGHT};
     height: ${NUM_HEIGHT};
     margin-inline-end: ${fluidScale("30px", "7px")};
-    border-radius: 100%;
+    content: counter(guide-nav-counter);
     background-color: ${({ $active }) =>
       $active ? "#ff8800" : "var(--orange20)"};
+    border-radius: 100%;
     transition: background-color 0.2s;
-    z-index: 1;
   }
 
-  &:hover:before,
-  &.focus-visible:before {
+  &:hover::before,
+  &.focus-visible::before {
     background-color: ${({ $active }) =>
       $active ? "#ff8800" : "var(--orange55)"};
   }

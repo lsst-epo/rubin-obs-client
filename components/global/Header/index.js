@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import Link from "next/link";
 import useResizeObserver from "use-resize-observer";
 import { useTranslation } from "react-i18next";
-import Logo from "@/svg/unique/Logo";
-import LogoFullSize from "@/svg/unique/LogoFullSize";
+import Logo from "@/components/svg/unique/site/Logo";
+import LogoFullSize from "@/components/svg/unique/site/LogoFullSize";
 import internalLinkShape from "@/shapes/link";
 import { useGlobalData, useNavHider } from "@/lib/utils";
 import {
@@ -64,7 +64,11 @@ export default function Header({ navItems, userProfilePage }) {
       </a>
       <SRAuthStatus />
       <div className="c-global-header__logo-block">
-        <Link href={homeUrl} className="c-global-header__logo-link">
+        <Link
+          prefetch={false}
+          href={homeUrl}
+          className="c-global-header__logo-link"
+        >
           <span className="a-hidden">{t("homepage")}</span>
           {mobileLogoActive ? (
             <Logo className="c-global-header__logo" />

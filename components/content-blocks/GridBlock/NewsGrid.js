@@ -6,8 +6,9 @@ import {
   useGlobalData,
   useList,
 } from "@/lib/utils";
-import Grid from "@/layout/Grid";
+import { Grid } from "@rubin-epo/epo-react-lib";
 import Tile from "@/atomic/Tile";
+import Loader from "@/atomic/Loader";
 
 const NewsGrid = ({ items = [], limit, listTypeId, sectionHandle, pageId }) => {
   const { t } = useTranslation();
@@ -16,7 +17,7 @@ const NewsGrid = ({ items = [], limit, listTypeId, sectionHandle, pageId }) => {
   // get manually-curated data first
   let allItems = normalizeItemData(items);
 
-  const { data } = useList({
+  const { data, isLoading } = useList({
     limit,
     listTypeId,
     section: "news",
@@ -31,7 +32,8 @@ const NewsGrid = ({ items = [], limit, listTypeId, sectionHandle, pageId }) => {
 
   return (
     <>
-      {allItems?.length > 0 && (
+      {isLoading && <Loader speed="fast" isVisible />}
+      {!isLoading && allItems?.length > 0 && (
         <Grid columns={2} showFeature={true}>
           {allItems.map(
             (

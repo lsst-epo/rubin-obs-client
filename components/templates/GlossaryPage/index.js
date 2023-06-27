@@ -2,10 +2,12 @@ import PropTypes from "prop-types";
 import Body from "@/global/Body";
 import Breadcrumbs from "@/page/Breadcrumbs";
 import { useCustomBreadcrumbs, useDamAssetAsImage } from "@/lib/utils";
-import Container from "@/components/layout/Container";
+import {
+  Container,
+  ResponsiveImage,
+  Buttonish,
+} from "@rubin-epo/epo-react-lib";
 import { Share } from "@/content-blocks";
-import Buttonish from "@/atomic/Buttonish";
-import ResponsiveImage from "@/atomic/ResponsiveImage";
 import { useTranslation } from "react-i18next";
 
 export default function GlossaryPage({ data }) {

@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import Container from "@/layout/Container";
+import { Container } from "@rubin-epo/epo-react-lib";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import { createLocationString } from "@/lib/utils";
@@ -38,7 +38,9 @@ export default function ContactStaff({ header, staffEntry }) {
               <div>
                 {t(`email`)}
                 {`: `}
-                <Link href={`mailto:${staff.email}`}>{staff.email}</Link>
+                <Link prefetch={false} href={`mailto:${staff.email}`}>
+                  {staff.email}
+                </Link>
               </div>
             )}
           </Main>

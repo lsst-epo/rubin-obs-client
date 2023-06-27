@@ -1,12 +1,12 @@
 import PropTypes from "prop-types";
 import * as Styled from "./styles";
-import { Button, Image } from "@/components/atomic";
-import IconComposer from "@/components/svg/IconComposer";
+import { Button, Image, IconComposer } from "@rubin-epo/epo-react-lib";
 import T from "@/page/Translate";
 import { useDamAssetAsImage } from "@/lib/utils";
 
 export default function InvestigationHero({ investigation }) {
-  const { damAsset, title, externalUrl, duration } = investigation || {};
+  const { damAsset, title, externalUrl, duration, status } =
+    investigation || {};
   const image = useDamAssetAsImage(damAsset?.[0]);
 
   if (!investigation) return null;
@@ -34,6 +34,7 @@ export default function InvestigationHero({ investigation }) {
           </Styled.DurationText>
           <Styled.DurationTime>{duration}</Styled.DurationTime>
         </Styled.Duration>
+        {status === "earlyAccess" && <Styled.EarlyAccessFlag />}
       </Styled.Inner>
     </Styled.Wrapper>
   );
@@ -44,7 +45,7 @@ InvestigationHero.propTypes = {
     title: PropTypes.string,
     duration: PropTypes.string,
     externalUrl: PropTypes.string,
-    isActive: PropTypes.bool,
+    status: PropTypes.string,
     landingPage: PropTypes.arrayOf(
       PropTypes.shape({
         uri: PropTypes.string,

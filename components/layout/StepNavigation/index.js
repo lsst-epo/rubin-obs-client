@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
-import { ExpandToggle } from "@/components/atomic/";
+import { ExpandToggle, Container } from "@rubin-epo/epo-react-lib";
 import useToggle from "@/hooks/useToggle";
 import { tokens } from "@/styles/globalStyles";
 import { stripUnit } from "@castiron/style-mixins/dist/base";
 import useResizeObserver from "use-resize-observer";
-import Container from "../Container";
 import * as Styled from "./styles";
 
 const BREAKPOINT = stripUnit(tokens.BREAK_PHABLET);
@@ -26,7 +24,7 @@ export default function StepNavigation({
   expandable = false,
   columns = 2,
 }) {
-  const [isOpen, onToggle, setIsOpen] = useToggle(!expandable);
+  const [isOpen, onToggle, setIsOpen] = useToggle(true);
   const [isBreakpoint, setIsBreakpoint] = useState(false);
 
   const { ref } = useResizeObserver({
@@ -44,14 +42,7 @@ export default function StepNavigation({
   if (!pages?.length) return null;
 
   return (
-    <Container
-      width="regular"
-      bgColor="orange02"
-      paddingSize="medium"
-      className={classNames({
-        "l-mar-bottom-medium": isBreakpoint,
-      })}
-    >
+    <Container width="regular" bgColor="orange02" paddingSize="medium">
       <Styled.Wrapper ref={ref}>
         <Styled.Title>
           <h2>{title}</h2>

@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
-import Container from "@/layout/Container";
-import { Video, Figure } from "@/components/atomic";
+import { Container, Video, Figure } from "@rubin-epo/epo-react-lib";
 import { useIsMounted } from "@/hooks";
 
 export default function VideoBlock({ caption, url }) {
@@ -10,7 +9,7 @@ export default function VideoBlock({ caption, url }) {
   return (
     <Container>
       <Figure caption={caption} withBackground>
-        <Video url={url} />
+        <Video url={url} controls />
       </Figure>
     </Container>
   );

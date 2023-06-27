@@ -1,5 +1,4 @@
-import { Image } from "@/components/atomic/";
-import MixedLink from "@/atomic/MixedLink";
+import { Image, MixedLink } from "@rubin-epo/epo-react-lib";
 import styled from "styled-components";
 import {
   fluidScale,
@@ -17,9 +16,9 @@ const gap = "40px";
 const linkPadding = pxToEm("18px", "16px");
 
 export const Section = styled.section`
-  background-color: ${(p) => tokens[p.$bgColor]};
   color: ${(p) =>
     needsDarkColor(tokens[p.$bgColor]) ? tokens.neutral80 : tokens.white};
+  background-color: ${(p) => tokens[p.$bgColor]};
   ${(p) => p.$width === "block" && containerFullBleed("CONTAINER_REGULAR")};
   ${(p) =>
     p.$overlay &&
@@ -30,8 +29,10 @@ export const Section = styled.section`
 export const Inner = styled.div`
   ${containerRegular()}
   display: grid;
+  /* stylelint-disable named-grid-areas-no-invalid */
   grid-template-areas: ${(p) =>
     p.$order === "text" ? `"text image"` : `"image text"`};
+  /* stylelint-enable named-grid-areas-no-invalid */
   ${(p) => `grid-template-columns: ${p.$ratio}% 1fr;`}
   gap: ${gap};
   min-height: 360px;
@@ -67,7 +68,7 @@ export const Inner = styled.div`
 `;
 
 export const Header = styled.header`
-  flex-basis: percentage(1 / 3);
+  flex-basis: calc(100% / 3);
   grid-area: text;
   align-self: center;
   ${(p) => p.$align === "end" && `align-self: end;`};
@@ -75,6 +76,10 @@ export const Header = styled.header`
 
 export const Text = styled.div`
   margin-top: 0.727em;
+
+  a {
+    overflow-wrap: anywhere;
+  }
 `;
 
 export const StyledMixedLink = styled(MixedLink)`
@@ -107,7 +112,7 @@ export const StyledBackgroundImage = styled(Image)`
   width: 100%;
 
   ${respond(
-    `      width: auto;
+    `width: auto;
       max-height: 200px;
 `
   )}
@@ -136,6 +141,6 @@ export const StyledTwoToneImage = styled.div`
 
 export const Caption = styled.div`
   font-size: 18px;
-  font-weight: bold;
+  font-weight: 700;
   color: var(--neutral60);
 `;

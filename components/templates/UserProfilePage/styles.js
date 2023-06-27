@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import { Button as AtomicButton } from "@/components/atomic";
-import { FormField } from "@/components/form";
+import { Button as AtomicButton, FormField } from "@rubin-epo/epo-react-lib";
 import { fluidScale, respond } from "@/styles/globalStyles";
 
 const BREAKPOINT = "600px";
@@ -8,8 +7,8 @@ const BREAKPOINT = "600px";
 export const Header = styled.header`
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   gap: 0.75em;
+  align-items: center;
 
   > :first-child {
     flex-grow: 999;
@@ -45,8 +44,8 @@ export const Section = styled.section`
 
 export const SectionTitle = styled.h2`
   padding-block-end: 1.2em;
-  border-bottom: 1px solid;
   font-size: ${fluidScale("25px", "20px")};
+  border-bottom: 1px solid;
 `;
 
 export const Status = styled(SectionTitle)`
@@ -84,7 +83,7 @@ export const FlexField = styled(FormField)`
 
 export const Button = styled(AtomicButton)`
   width: 100%;
-  margin-block-start: 2.727em;
   padding-block: 13px;
+  margin-block-start: 2.727em;
   font-size: 20px;
 `;

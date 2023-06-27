@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import { Switch as FormSwitch } from "@/components/form";
+import { Switch as FormSwitch } from "@rubin-epo/epo-react-lib";
 import { respond, BREAK_HEADER_LAYOUT } from "@/styles/globalStyles";
 
 export const Fieldset = styled.fieldset`
-  border: 0;
-  padding: 0;
   display: flex;
   align-items: center;
+  padding: 0;
+  border: 0;
 `;
 
 export const Label = styled.label`

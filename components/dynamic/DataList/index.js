@@ -1,13 +1,16 @@
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import Container from "@/layout/Container";
+import { Container, Buttonish } from "@rubin-epo/epo-react-lib";
+import Loader from "@/atomic/Loader";
+import Pagination from "@/page/Pagination";
 import {
   usePathData,
   normalizePathData,
   useList,
   useGlobalData,
 } from "@/lib/utils";
+import * as Styled from "./styles";
 
 const DataList = ({
   children,
@@ -18,6 +21,10 @@ const DataList = ({
   showsFeatured = false,
   section = null,
   isRelatedList = false,
+  width = "regular",
+  header,
+  footerButton,
+  loaderDescription,
 }) => {
   const { t } = useTranslation();
   const { asPath, query } = usePathData();
@@ -49,29 +56,60 @@ const DataList = ({
     section,
   });
 
-  if (isLoading || isError) return null;
+  function renderData() {
+    const { offset, total } = data;
+    const numberOfPages = Math.ceil(total / limit) || 1;
 
-  const { offset, total } = data;
-  const numberOfPages = Math.ceil(total / limit) || 1;
+    // if our page is out of bounds, we must instead go to the last page with data
+    if (offset > total) {
+      router.push({
+        pathname,
+        query: { ...pathParams, page: numberOfPages },
+      });
+    }
 
-  // if our page is out of bounds, we must instead go to the last page with data
-  if (offset > total) {
-    router.push({
-      pathname,
-      query: { ...pathParams, page: numberOfPages },
-    });
+    if (total === 0 && isRelatedList) return null;
+    if (total === 0) return <div>{t(`search-no-results`)}</div>;
+    return children(data);
   }
 
-  if (total === 0 && isRelatedList) return null;
+  function renderPagination() {
+    const { offset, page, total } = data;
 
-  if (total === 0)
+    if (limit >= total || section === "glossaryTerms" || isRelatedList)
+      return null;
     return (
-      <Container>
-        <div>{t(`search-no-results`)}</div>
-      </Container>
+      <Pagination limit={limit} offset={offset} page={page} total={total} />
     );
+  }
 
-  return children(data);
+  if (isError) return null;
+
+  return (
+    <>
+      <Container width={width}>
+        {header && <Styled.Header>{header}</Styled.Header>}
+        {isLoading && (
+          <Loader
+            speed="fast"
+            isVisible
+            description={loaderDescription || t("loading")}
+          />
+        )}
+        {!isLoading && data && renderData()}
+        {footerButton && (
+          <Styled.Footer>
+            <Buttonish
+              isBlock={true}
+              text={footerButton.text}
+              url={`/${footerButton.uri}`}
+            />
+          </Styled.Footer>
+        )}
+      </Container>
+      {!isLoading && data && renderPagination()}
+    </>
+  );
 };
 
 DataList.propTypes = {
@@ -87,6 +125,10 @@ DataList.propTypes = {
   limit: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   section: PropTypes.string,
   isRelatedList: PropTypes.bool,
+  width: PropTypes.string,
+  header: PropTypes.string,
+  footerButton: PropTypes.object,
+  loaderDescription: PropTypes.string,
 };
 
 export default DataList;

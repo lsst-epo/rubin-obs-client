@@ -1,16 +1,23 @@
 import PropTypes from "prop-types";
 import { Trans, useTranslation } from "react-i18next";
 import { useRouter } from "next/router";
-import { useAuthModal, useIsMounted } from "@/hooks";
+import { useAuthModal } from "@/hooks";
 import { useAuthenticationContext } from "@/contexts/Authentication";
-import Container from "@/components/layout/Container";
-import { Button, Buttonish } from "@/components/atomic";
+import { Button, Buttonish, Container } from "@rubin-epo/epo-react-lib";
 import * as Styled from "./styles";
+
+const AUTHORIZED_TYPES = {
+  pages: false,
+  educatorPages: true,
+  studentPages: false,
+  userProfilePage: true,
+  investigationLandingPage: false,
+};
 
 function isAuthorized(typeHandle, user, status) {
   if (typeHandle === "educatorPages") return user?.group === "educators";
   if (typeHandle === "userProfilePage") return !!user && status === "active";
-  return true;
+  return false;
 }
 
 function getRestrictedContext(status, pendingDeletion, isAuthenticated) {
@@ -26,7 +33,9 @@ export default function AuthorizePage({ typeHandle, children }) {
     useAuthenticationContext();
   const { openModal } = useAuthModal();
   const router = useRouter();
-  const mounted = useIsMounted();
+  const isAuthorizedType = AUTHORIZED_TYPES[typeHandle];
+
+  if (!isAuthorizedType) return <>{children}</>;
 
   // Check the user type against the page type
   const authorized = !pendingDeletion && isAuthorized(typeHandle, user, status);
@@ -36,13 +45,6 @@ export default function AuthorizePage({ typeHandle, children }) {
     pendingDeletion,
     isAuthenticated
   );
-
-  // // redirect to homepage when a user is no longer authenticated (signs out)
-  // useEffect(() => {
-  //   if (!mounted || isAuthenticated) return;
-
-  //   router.push("/");
-  // }, [isAuthenticated]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Show child content if authorized
   return authorized ? (
@@ -57,7 +59,7 @@ export default function AuthorizePage({ typeHandle, children }) {
             i18nKey="restricted.message"
             values={{ context }}
             components={[
-              <a href="mailto:webmaster@lsst.org" key="link">
+              <a href="mailto:epo-feedback@lsst.org" key="link">
                 link
               </a>,
             ]}

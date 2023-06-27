@@ -1,8 +1,7 @@
 import PropTypes from "prop-types";
 import { fileSize } from "@/helpers";
 import * as Styled from "./styles";
-import Container from "@/components/layout/Container";
-import Buttonish from "@/components/atomic/Buttonish";
+import { Buttonish, Container } from "@rubin-epo/epo-react-lib";
 
 export default function DownloadList({ assetsList, ...props }) {
   function getIcon(kind) {

@@ -5,13 +5,15 @@ import { useTranslation } from "react-i18next";
 import { useCustomBreadcrumbs, useDateString } from "@/lib/utils";
 import Body from "@/global/Body";
 import ContentBlockFactory from "@/factories/ContentBlockFactory";
-import Container from "@/layout/Container";
+import {
+  Container,
+  ResponsiveImage,
+  IconComposer,
+} from "@rubin-epo/epo-react-lib";
 import { Share } from "@/content-blocks";
 import Breadcrumbs from "@/page/Breadcrumbs";
 import Hero from "@/page/Hero";
 import NewsList from "@/dynamic/NewsList";
-import ResponsiveImage from "@/atomic/ResponsiveImage";
-import IconComposer from "@/components/svg/IconComposer";
 import {
   containerWide,
   containerFullBleed,
@@ -67,7 +69,7 @@ export default function NewsPage({
         {otherAssets.map((asset, i) => {
           if (asset.image?.[0].url) {
             return (
-              <Link key={i} href={asset.image?.[0].url}>
+              <Link key={i} prefetch={false} href={asset.image?.[0].url}>
                 <ResponsiveImage image={asset.image?.[0]} ratio="8:5" />
               </Link>
             );
@@ -84,7 +86,11 @@ export default function NewsPage({
         {postTags.map((tag, i) => {
           if (rootHomeLink?.uri && tag.slug) {
             return (
-              <Link key={i} href={`/${rootHomeLink?.uri}?search=${tag.slug}`}>
+              <Link
+                key={i}
+                prefetch={false}
+                href={`/${rootHomeLink?.uri}?search=${tag.slug}`}
+              >
                 {`#${tag.title}`}
               </Link>
             );
@@ -137,7 +143,7 @@ export default function NewsPage({
                 } else if (a.textLink?.length > 0) {
                   if (a.textLink[0].url) {
                     return (
-                      <Link href={a.textLink[0].url} key={i}>
+                      <Link key={i} prefetch={false} href={a.textLink[0].url}>
                         {a.text}
                       </Link>
                     );
@@ -165,7 +171,11 @@ export default function NewsPage({
                   manualMedia = true;
                   if (a.galleryItem[0].uri) {
                     return (
-                      <Link href={`/${a.galleryItem[0].uri}`} key={i}>
+                      <Link
+                        prefetch={false}
+                        href={`/${a.galleryItem[0].uri}`}
+                        key={i}
+                      >
                         <ResponsiveImage
                           image={a.galleryItem[0].representativeAssetVariant[0]}
                         />
@@ -189,8 +199,9 @@ export default function NewsPage({
         excludeId={id}
         header={t(`news.related-posts`)}
         limit={3}
-        isWide={true}
+        isWide
         gridType="pages"
+        isRelatedList
       />
     </Body>
   );

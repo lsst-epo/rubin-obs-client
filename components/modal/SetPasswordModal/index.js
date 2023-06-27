@@ -4,8 +4,8 @@ import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { useAuthenticationContext } from "@/contexts/Authentication";
 import useAuthModal from "@/hooks/useAuthModal";
-import { Button } from "@/components/atomic";
-import { PasswordField, Error } from "@/components/form";
+import { Button, Error } from "@rubin-epo/epo-react-lib";
+import { PasswordField } from "@/components/form/index.js";
 import AuthModal from "../AuthModal";
 import * as Styled from "./styles";
 

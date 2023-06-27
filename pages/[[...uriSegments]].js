@@ -25,8 +25,37 @@ import footerContentShape from "@/shapes/footerContent";
 import rootPagesShape from "@/shapes/rootPages";
 import { updateI18n } from "@/lib/i18n";
 import { setEdcLog } from "@/lib/edc-log";
+const glob = require("glob");
+const fs = require("fs");
 
 const CRAFT_HOMEPAGE_URI = "__home__";
+
+function getDirectories(src, callback) {
+  glob(src + "/**/*", { dot: true }, callback);
+}
+
+function logNextDir() {
+  let BUILD_ID = "";
+
+  fs.readFile(".next/BUILD_ID", (err, text) => {
+    if (err) {
+      console.error(err);
+    }
+    BUILD_ID = text.toString();
+  });
+  getDirectories(".next/server/pages", (err, res) => {
+    if (err) {
+      console.error("Error:", err);
+    } else {
+      const logInfo = {
+        uptime: process.uptime(),
+        build_id: BUILD_ID,
+        files: res,
+      };
+      console.info("node_next_logging:", JSON.stringify(logInfo));
+    }
+  });
+}
 
 export default function Page({ section, globalData, ...entryProps }) {
   globalData.localeInfo.locale === "es" ? updateI18n("es") : updateI18n("en");
@@ -74,20 +103,30 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params: { uriSegments }, previewData }) {
-  const runId = Date.now().toString();
-  const site = getSiteString(uriSegments);
-  const uri =
-    uriSegments && uriSegments.length
-      ? uriSegments.join("/")
-      : CRAFT_HOMEPAGE_URI;
-  setEdcLog(runId, "Starting new client build for " + site, "BUILD_START");
+  const PREVIEW_SLUG = process.env.NEXT_PREVIEW_SLUG;
 
+  if (process.env.NEXT_DEBUG_LOGGING) {
+    logNextDir();
+  }
+
+  const runId = Date.now().toString();
+  const isPreview = previewData && uriSegments[0] === PREVIEW_SLUG;
+  const site = getSiteString(isPreview ? previewData.uriSegments : uriSegments);
+  let uri = CRAFT_HOMEPAGE_URI;
+  let previewToken;
+
+  if (isPreview) {
+    uri = previewData.uriSegments.join("/");
+    previewToken = previewData?.previewToken;
+  } else if (uriSegments && uriSegments.length) {
+    uri = uriSegments.join("/");
+  }
+
+  setEdcLog(runId, "Starting new client build for " + site, "BUILD_START");
   const data = await getGlobalData();
   // add _es to property names if site is "es"
   const isEspanol = site === "es";
 
-  // Beginning of bug fix
-  // .reduce() needs to check for null before attempting to use
   const globalKey = `globals${isEspanol ? "_es" : ""}`;
   let globals;
   if (data[globalKey] === undefined || data[globalKey] === null) {
@@ -103,7 +142,7 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
   const entrySectionType = await getEntrySectionTypeByUri(
     uri,
     site,
-    previewData?.previewToken
+    previewToken
   );
 
   // Handle 404 if there is no data
@@ -115,21 +154,11 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
   }
 
   const { sectionHandle: section, typeHandle: type } = entrySectionType;
-  const entryData = await getEntryData(
-    uri,
-    section,
-    type,
-    site,
-    previewData?.previewToken
-  );
+  const entryData = await getEntryData(uri, section, type, site, previewToken);
 
   const currentId = entryData?.id || entryData?.entry?.id;
 
-  const breadcrumbs = await getBreadcrumbs(
-    currentId,
-    site,
-    previewData?.previewToken
-  );
+  const breadcrumbs = await getBreadcrumbs(currentId, site);
   const globalData = {
     categories: data?.[`allCategories${isEspanol ? "_es" : ""}`] || [],
     footerContent: globals?.footer || {},
@@ -163,8 +192,8 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
       notFound: true,
     };
   }
-
   setEdcLog(runId, "Done building for " + uri, "BUILD_COMPLETE");
+
   return {
     props: {
       data: entryData,

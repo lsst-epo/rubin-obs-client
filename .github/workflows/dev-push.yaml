@@ -29,14 +29,15 @@ jobs:
         -t "gcr.io/${{ secrets.SV_PROJ_NAME }}/rubin-obs-client:${{ github.sha }}" \
         --build-arg NEXT_PUBLIC_API_URL=https://api-dev.rubinobs.com/api \
         --build-arg EDC_LOGGER_API_URL=https://us-central1-skyviewer.cloudfunctions.net/edc-logger \
+        --build-arg NEXT_DEBUG_LOGGING=true \
         --build-arg CLOUD_ENV=DEV \
         --build-arg NEXT_PUBLIC_BASE_URL=https://dev.rubinobs.com \
         --build-arg NEXT_PUBLIC_GOOGLE_APP_ID=688095955960-t0fpaj4ec3gh5vsr9lhg8govapk2oeo9.apps.googleusercontent.com \
         --build-arg NEXT_PUBLIC_CONTACT_FORM_POST_URL=https://api-dev.rubinobs.com/actions/contact-form/send \
-        --build-arg NEXT_PUBLIC_LEVELACCESS_ID= \
-        --build-arg NEXT_PUBLIC_PAGEPROOFER_ID= \
         --build-arg NEXT_PUBLIC_PLAUSIBLE_DOMAIN= \
+        --build-arg NEXT_PREVIEW_SLUG=preview-in-craft-cms \
         .
+        
     - name: Configure Docker Auth
       run: gcloud --quiet auth configure-docker
 

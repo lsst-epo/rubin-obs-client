@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import Image from "next/legacy/image";
-import IconComposer from "@/components/svg/IconComposer";
+import { IconComposer } from "@rubin-epo/epo-react-lib";
 import * as Styled from "./styles";
 
 export default function AuthModal({

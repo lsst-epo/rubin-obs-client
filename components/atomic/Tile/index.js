@@ -1,13 +1,15 @@
 import PropTypes from "prop-types";
 import { useUID } from "react-uid";
 import classNames from "classnames";
-import ResponsiveImage from "@/atomic/ResponsiveImage";
-import { Image } from "@/components/atomic/";
-import MixedLink from "@/atomic/MixedLink";
+import {
+  ResponsiveImage,
+  Image,
+  MixedLink,
+  IconComposer,
+} from "@rubin-epo/epo-react-lib";
 import { mixedLinkShape } from "@/shapes/link";
 import { useGlobalData } from "@/lib/utils";
 import * as Styled from "./styles";
-import IconComposer from "@/components/svg/IconComposer";
 
 const Tile = ({
   className,
@@ -47,11 +49,10 @@ const Tile = ({
         as={link?.url ? MixedLink : "div"}
         {...link}
         aria-labelledby={link?.url ? uid : null}
-        className={classNames(
-          `${type}`,
-          `${isFeature ? "featured" : ""} `,
-          className
-        )}
+        className={classNames(className, type, {
+          featured: isFeature,
+          "padded-bottom": showSharePopup,
+        })}
       >
         {finalImage && (
           <div className="image">
