@@ -5,7 +5,6 @@ import {
   checkIfBetweenDates,
   createLocationString,
   useCustomBreadcrumbs,
-  useDateString,
 } from "@/lib/utils";
 import Body from "@/global/Body";
 import Hero from "@/page/Hero";
@@ -14,6 +13,7 @@ import { Share } from "@/content-blocks";
 import Breadcrumbs from "@/page/Breadcrumbs";
 import { Container } from "@rubin-epo/epo-react-lib";
 import EventList from "@/dynamic/EventList";
+import EventTime from "@/components/EventTime";
 
 export default function EventPage({
   data: {
@@ -21,8 +21,11 @@ export default function EventPage({
     city,
     contentBlocks,
     country,
+    timezone,
     startDate,
+    startTime,
     endDate,
+    endTime,
     description,
     eventType = [],
     featuredImage = [],
@@ -49,8 +52,6 @@ export default function EventPage({
     title,
     active: true,
   };
-  const localizedStartDate = useDateString(startDate);
-  const localizedEndDate = useDateString(endDate);
   // logic for displaying city/state in US, city/country outside
   const location = `${address ? address + "," : ""} ${createLocationString(
     city,
@@ -80,10 +81,15 @@ export default function EventPage({
           <h1>{title}</h1>
           <Subtitle>
             <div>{location}</div>
-            <div>
-              {startDate ? `${localizedStartDate} — ` : ""}
-              {localizedEndDate}
-            </div>
+            <EventTime
+              {...{
+                startDate,
+                startTime,
+                endDate,
+                endTime,
+                timezone,
+              }}
+            />
             {isThereRegistration && <div>{t(`events.${registration}`)}</div>}
           </Subtitle>
         </div>
@@ -132,6 +138,7 @@ const Pretitle = styled.div`
 const Subtitle = styled.div`
   padding-top: 10px;
 `;
+
 EventPage.displayName = "Template.EventPage";
 
 EventPage.propTypes = {
