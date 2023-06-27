@@ -16,10 +16,12 @@ const Daylight = ({ dawn, sunrise, sunset, night, variant = "primary" }) => {
   } = useTranslation();
   const offset = timezoneOffset(timezone);
   const minutes = 1500;
-  const width = 280;
+  const width = variant === "primary" ? 280 : 640;
   const height = 70;
   const xDomain = [0, minutes];
   const xScale = getLinearScale(xDomain, [0, width]);
+  const xHeight = 25;
+  const xPos = height - xHeight;
 
   const midnight = new Date();
   midnight.setUTCHours(offset, 0, 0, 0);
@@ -42,15 +44,31 @@ const Daylight = ({ dawn, sunrise, sunset, night, variant = "primary" }) => {
   const dayId = "legendDay";
 
   const legends = [
-    { title: "Night", color: nightFill, id: nightId },
-    { title: "Twilight", color: twilightFill, id: twilightId },
-    { title: "Day", color: dayFill, id: dayId },
+    {
+      title: t("summit_dashboard.astro.daylight.night"),
+      color: nightFill,
+      id: nightId,
+    },
+    {
+      title: t("summit_dashboard.astro.daylight.twilight"),
+      color: twilightFill,
+      id: twilightId,
+    },
+    {
+      title: t("summit_dashboard.astro.daylight.day"),
+      color: dayFill,
+      id: dayId,
+    },
   ];
 
   return (
     <Styled.Figure
       $variant={variant}
-      caption="Twilight, day, and night times."
+      caption={
+        variant === "primary"
+          ? t("summit_dashboard.sections.astro.daylight.title")
+          : undefined
+      }
       legend={<ChartLegend legends={legends} />}
     >
       <ChartBase {...{ width, height }}>
@@ -58,7 +76,7 @@ const Daylight = ({ dawn, sunrise, sunset, night, variant = "primary" }) => {
           {...{
             xDomain,
             xScale,
-            y: height - 25,
+            y: xPos,
             ticks: 25,
             labelFormatter: (value) => {
               const hours = value / 60;
@@ -72,7 +90,7 @@ const Daylight = ({ dawn, sunrise, sunset, night, variant = "primary" }) => {
                   <tspan
                     style={{
                       textAnchor: hours === 0 ? "start" : "end",
-                      fontSize: "10px",
+                      fontSize: variant === "primary" && "10px",
                     }}
                   >
                     {formatTime(date, language)}
@@ -89,7 +107,7 @@ const Daylight = ({ dawn, sunrise, sunset, night, variant = "primary" }) => {
                 return (
                   <tspan
                     style={{
-                      fontSize: "10px",
+                      fontSize: variant === "primary" && "10px",
                     }}
                   >
                     {capitalize(noon, language)}
@@ -100,91 +118,87 @@ const Daylight = ({ dawn, sunrise, sunset, night, variant = "primary" }) => {
           }}
         />
         <g role="list">
-          <g role="group" aria-labelledby={nightId}>
-            <Styled.BoundRect
-              y={0}
-              x={xScale(0)}
-              width={xScale(dawnMinutes)}
-              height={height - 25}
-              role="listitem"
-              aria-label={t("summit_dashboard.astro.daylight.observing", {
+          <Styled.BoundRect
+            y={0}
+            x={xScale(0)}
+            width={xScale(dawnMinutes)}
+            height={xPos}
+            role="listitem"
+            aria-label={t(
+              "summit_dashboard.sections.astro.daylight.observing",
+              {
                 from: formatTime(midnight, language),
                 to: formatTime(dawn, language),
-              })}
-            />
-          </g>
-          <g role="group" aria-labelledby={twilightId}>
-            <Styled.BoundRect
-              style={{ "--fill": "#006DA8" }}
-              y={0}
-              x={xScale(dawnMinutes)}
-              width={xScale(sunriseMinutes - dawnMinutes)}
-              height={height - 25}
-              role="listitem"
-              aria-label={t("summit_dashboard.astro.daylight.twilight", {
-                from: formatTime(dawn, language),
-                to: formatTime(sunrise, language),
-              })}
-            />
-          </g>
-          <g role="group" aria-labelledby={dayId}>
-            <Styled.BoundRect
-              style={{ "--fill": "#55B9F0" }}
-              y={0}
-              x={xScale(sunriseMinutes)}
-              width={xScale(sunsetMinutes - sunriseMinutes)}
-              height={height - 25}
-              role="listitem"
-              aria-label={t("summit_dashboard.astro.daylight.daylight", {
-                from: formatTime(sunrise, language),
-                to: formatTime(sunset, language),
-              })}
-            />
-          </g>
-          <g role="group" aria-labelledby={twilightId}>
-            <Styled.BoundRect
-              style={{ "--fill": "#006DA8" }}
-              y={0}
-              x={xScale(sunsetMinutes)}
-              width={xScale(nightMinutes - sunsetMinutes)}
-              height={height - 25}
-              role="listitem"
-              aria-label={t("summit_dashboard.astro.daylight.twilight", {
-                from: formatTime(sunset, language),
-                to: formatTime(night, language),
-              })}
-            />
-          </g>
-          <g role="group" aria-labelledby={nightId}>
-            <Styled.BoundRect
-              y={0}
-              x={xScale(nightMinutes)}
-              width={xScale(minutes - nightMinutes)}
-              height={height - 25}
-              role="listitem"
-              aria-label={t("summit_dashboard.astro.daylight.observing", {
+              }
+            )}
+          />
+          <Styled.BoundRect
+            style={{ "--fill": twilightFill }}
+            y={0}
+            x={xScale(dawnMinutes)}
+            width={xScale(sunriseMinutes - dawnMinutes)}
+            height={xPos}
+            role="listitem"
+            aria-label={t("summit_dashboard.sections.astro.daylight.twilight", {
+              from: formatTime(dawn, language),
+              to: formatTime(sunrise, language),
+            })}
+          />
+          <Styled.BoundRect
+            style={{ "--fill": dayFill }}
+            y={0}
+            x={xScale(sunriseMinutes)}
+            width={xScale(sunsetMinutes - sunriseMinutes)}
+            height={xPos}
+            role="listitem"
+            aria-label={t("summit_dashboard.sections.astro.daylight.daylight", {
+              from: formatTime(sunrise, language),
+              to: formatTime(sunset, language),
+            })}
+          />
+          <Styled.BoundRect
+            style={{ "--fill": twilightFill }}
+            y={0}
+            x={xScale(sunsetMinutes)}
+            width={xScale(nightMinutes - sunsetMinutes)}
+            height={xPos}
+            role="listitem"
+            aria-label={t("summit_dashboard.sections.astro.daylight.twilight", {
+              from: formatTime(sunset, language),
+              to: formatTime(night, language),
+            })}
+          />
+          <Styled.BoundRect
+            y={0}
+            x={xScale(nightMinutes)}
+            width={xScale(minutes - nightMinutes)}
+            height={xPos}
+            role="listitem"
+            aria-label={t(
+              "summit_dashboard.sections.astro.daylight.observing",
+              {
                 from: formatTime(night, language),
                 to: formatTime(midnight, language),
-              })}
-            />
-          </g>
+              }
+            )}
+          />
         </g>
-        <g role="group">
+        <g>
           <Styled.Now
             x1={xScale(now)}
             x2={xScale(now)}
             y1={0}
-            y2={height - 25}
-            aria-label={t("summit_dashboard.astro.daylight.current", {
+            y2={xPos}
+            aria-label={t("summit_dashboard.sections.astro.daylight.current", {
               time: formatTime(new Date(), language),
               context:
                 now > nightMinutes || now < dawnMinutes ? "observable" : null,
             })}
           />
           <Styled.NowTip
-            points={`${xScale(now)},${height - 25} ${xScale(now) + 5},${
-              height - 19
-            } ${xScale(now) - 5},${height - 19}`}
+            points={`${xScale(now)},${xPos} ${xScale(now) + 5},${height - 19} ${
+              xScale(now) - 5
+            },${height - 19}`}
           />
         </g>
       </ChartBase>

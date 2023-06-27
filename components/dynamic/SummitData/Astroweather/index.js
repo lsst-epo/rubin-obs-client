@@ -6,6 +6,7 @@ import MoonPhase from "@/components/widgets/CurrentData/patterns/MoonPhase";
 import Daylight from "@/components/widgets/CurrentData/patterns/Daylight";
 import { altitude, lat, long, timezone } from "@/lib/observatory";
 import { timezoneOffset } from "@/helpers";
+import CurrentAstroweather from "./Current";
 
 const Astroweather = () => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -43,10 +44,9 @@ const Astroweather = () => {
         sunset={sunset}
         night={night}
       />
-      <SummitStatusModal
-        open={isModalOpen}
-        onClose={() => setModalOpen(false)}
-      ></SummitStatusModal>
+      <SummitStatusModal open={isModalOpen} onClose={() => setModalOpen(false)}>
+        <CurrentAstroweather />
+      </SummitStatusModal>
     </WidgetPreview>
   );
 };
