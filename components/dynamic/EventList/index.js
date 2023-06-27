@@ -3,12 +3,8 @@ import { useTranslation } from "react-i18next";
 import { Grid, IconComposer } from "@rubin-epo/epo-react-lib";
 import DataList from "@/dynamic/DataList";
 import Tile from "@/atomic/Tile";
-import {
-  checkIfBetweenDates,
-  createLocationString,
-  makeDateObject,
-  useGlobalData,
-} from "@/lib/utils";
+import EventTime from "@/components/EventTime";
+import { checkIfBetweenDates, createLocationString } from "@/lib/utils";
 import * as Styled from "./styles";
 
 const EventList = ({
@@ -21,18 +17,6 @@ const EventList = ({
   isRelatedList = false,
 }) => {
   const { t } = useTranslation();
-  const localeInfo = useGlobalData("localeInfo");
-  const lang = localeInfo?.language || "en-US";
-
-  function renderDate({ month, day, year }) {
-    return (
-      <Styled.Date>
-        <Styled.DateMonth>{month}</Styled.DateMonth>
-        <Styled.DateDay>{day}</Styled.DateDay>
-        <Styled.DateYear>{year}</Styled.DateYear>
-      </Styled.Date>
-    );
-  }
 
   return (
     <DataList
@@ -81,12 +65,6 @@ const EventList = ({
                   const lock =
                     registration === "open" ? "LockOpen" : "LockClosed";
 
-                  const endDateObject = makeDateObject(endDate, lang, true);
-
-                  const startDateObject = startDate
-                    ? makeDateObject(startDate, lang, true)
-                    : null;
-
                   return (
                     /* eslint-disable */
                     <Tile
@@ -111,17 +89,7 @@ const EventList = ({
                           ? eventType?.[0]?.title
                           : " "
                       }
-                      subtitle={
-                        <Styled.DateWrapper $hasStartDate={!!startDateObject}>
-                          {startDateObject && (
-                            <>
-                              {renderDate(startDateObject)}
-                              <Styled.DateEmDash>—</Styled.DateEmDash>
-                            </>
-                          )}
-                          {renderDate(endDateObject)}
-                        </Styled.DateWrapper>
-                      }
+                      subtitle={<EventTime {...{ startDate, endDate }} short />}
                       text={description}
                       title={`${title}${loc && " — " + loc}`}
                       titleTag={"h2"}
