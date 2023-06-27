@@ -1,17 +1,6 @@
 require("@rushstack/eslint-patch/modern-module-resolution");
 module.exports = {
   root: true,
-  parser: "@babel/eslint-parser",
-  parserOptions: {
-    sourceType: "module",
-    requireConfigFile: false,
-    babelOptions: {
-      plugins: [
-        "@babel/plugin-transform-react-jsx",
-        "@babel/plugin-proposal-class-properties",
-      ],
-    },
-  },
   env: {
     browser: true,
   },

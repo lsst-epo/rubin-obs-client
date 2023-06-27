@@ -30,11 +30,13 @@ module.exports = {
   },
   experimental: {
     isrMemoryCacheSize: 0,
+    forceSwcTransforms: true,
   },
   staticPageGenerationTimeout: 2000,
   typescript: {
     ignoreBuildErrors: true,
   },
+  swcMinify: true,
   compiler: {
     // Enables the styled-components SWC transform
     styledComponents: true,
