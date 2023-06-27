@@ -25,7 +25,7 @@ ChartLegend.propTypes = {
   legends: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string,
-      type: PropTypes.oneOf("line", "bar"),
+      type: PropTypes.oneOf(["line", "bar"]),
       color: PropTypes.string,
       id: PropTypes.string,
     })

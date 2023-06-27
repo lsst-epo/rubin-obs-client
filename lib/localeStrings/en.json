@@ -350,6 +350,16 @@
           "current": "Weather at the summit now",
           "hourly": "Hourly weather stats",
           "daily": "Daily temperature variations - {{unit}} degrees (last week)"
+        },
+        "astro": {
+          "daylight": {
+            "title": "Twilight, day, and night times",
+            "observing": "Dark enough to observe from {{from}} to {{to}}",
+            "twilight": "Twilight from {{from}} to {{to}}",
+            "daylight": "Daylight from {{from}} to {{to}}",
+            "current": "Current local time {{time}}. It is too light to observe right now.",
+            "current_observable": "Current local time {{time}}. It is dark enough to observe right now."
+          }
         }
       },
       "weather": {
@@ -361,11 +371,9 @@
       },
       "astro": {
         "daylight": {
-          "observing": "Dark enough to observe from {{from}} to {{to}}",
-          "twilight": "Twilight from {{from}} to {{to}}",
-          "daylight": "Daylight from {{from}} to {{to}}",
-          "current": "Current local time {{time}}. It is too light to observe right now.",
-          "current_observable": "Current local time {{time}}. It is dark enough to observe right now."
+          "night": "Night",
+          "twilight": "Twilight",
+          "day": "Day"
         },
         "moon": {
           "new": "New Moon",

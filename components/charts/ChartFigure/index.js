@@ -1,13 +1,14 @@
 import PropTypes from "prop-types";
 import * as Styled from "./styles";
+import WidgetBackground from "@/components/atomic/WidgetBackground";
 
 const ChartFigure = ({ caption, children, legend, className }) => {
   return (
-    <Styled.Figure as="figure" {...{ className }}>
-      <Styled.Caption>{caption}</Styled.Caption>
+    <WidgetBackground as="figure" {...{ className }}>
+      {caption && <Styled.Caption>{caption}</Styled.Caption>}
       <Styled.Content>{children}</Styled.Content>
       {legend}
-    </Styled.Figure>
+    </WidgetBackground>
   );
 };
 
