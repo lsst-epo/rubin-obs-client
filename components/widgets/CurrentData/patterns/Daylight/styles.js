@@ -3,8 +3,11 @@ import { ChartFigure } from "@/components/charts";
 
 export const Figure = styled(ChartFigure)`
   --widget-background-color: ${({ $variant }) =>
-    $variant === "primary" ? "#313333" : "transparent"};
-  grid-column: span 3;
+    `--widget-background-color: ${
+      $variant === "primary" ? "#313333" : "transparent"
+    }; --widget-columns: ${$variant === "primary" ? "span 3" : "1 / -1"}`};
+
+  grid-column: var(--widget-columns, span 3);
 `;
 
 export const BoundRect = styled.rect`
