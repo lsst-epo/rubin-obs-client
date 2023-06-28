@@ -21,6 +21,7 @@ const StyledHero = styled.div`
   ${containerFullBleed("CONTAINER_FULL")}
   position: relative;
   height: var(--Hero-height, ${fluidScale("540px", "400px")});
+  overflow: auto;
 `;
 
 const StyledImage = styled(Image)`
