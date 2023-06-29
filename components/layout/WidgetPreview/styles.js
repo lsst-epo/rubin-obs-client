@@ -1,7 +1,20 @@
 import IconButton from "@/components/atomic/Button/IconButton";
 import styled from "styled-components";
+import { token } from "@/styles/globalStyles";
 
-const columns = {
+const mobileColumns = {
+  small: 1,
+  medium: 1,
+  large: 1,
+  full: 1,
+};
+const tabletColumns = {
+  small: 1,
+  medium: 1,
+  large: 2,
+  full: 3,
+};
+const desktopColumns = {
   small: 1,
   medium: 2,
   large: 4,
@@ -10,15 +23,24 @@ const columns = {
 
 export const PreviewPanel = styled.section`
   --widget-grid-gap: var(--PADDING_SMALL, 20px);
-  --panel-columns: ${({ $size }) => columns[$size]};
+  --panel-columns: ${({ $size }) => mobileColumns[$size]};
 
   display: grid;
-  grid-template: "header" 2rem "content" 10rem "callout" 2rem / 1fr;
+  grid-template: "header" 2rem "content" auto "callout" 2rem / 1fr;
+  grid-gap: var(--widget-grid-gap);
   grid-column: span min(var(--panel-columns), var(--widget-columns));
   grid-gap: var(--widget-grid-gap);
   background-color: var(--black, #000);
   border-bottom-right-radius: 0.75rem;
   border-bottom-left-radius: 0.75rem;
+
+  @media screen and (min-width: ${token("BREAK_TABLET_MIN")}) {
+    --panel-columns: ${({ $size }) => tabletColumns[$size]};
+  }
+
+  @media screen and (min-width: ${token("BREAK_DESKTOP_SMALL")}) {
+    --panel-columns: ${({ $size }) => desktopColumns[$size]};
+  }
 `;
 
 export const PreviewHeader = styled.h2`
@@ -48,8 +70,7 @@ export const PreviewIconButton = styled(IconButton)`
 
 export const PreviewContent = styled.div`
   display: grid;
-  grid-area: content;
-  grid-template-rows: 1fr;
+  grid-auto-rows: 10rem;
   grid-template-columns: repeat(var(--panel-columns), 1fr);
   grid-gap: var(--widget-grid-gap);
   padding-inline: var(--widget-grid-gap);
