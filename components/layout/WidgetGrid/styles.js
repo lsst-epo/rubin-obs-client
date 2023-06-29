@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export const WidgetGrid = styled.div`
   --widget-row-gap: var(--PADDING_SMALL, 20px);
-  --widget-columns: 2;
+  --widget-columns: 1;
 
   display: grid;
   grid-template-columns: repeat(var(--widget-columns), 1fr);
