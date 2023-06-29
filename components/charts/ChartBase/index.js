@@ -1,16 +1,17 @@
 import PropTypes from "prop-types";
+import * as Styled from "./styles";
 
 const ChartBase = ({ children, className, width = 900, height = 300 }) => {
   return (
-    <svg
+    <Styled.SVG
       preserveAspectRatio="xMidYMid meet"
       viewBox={`0 0 ${width} ${height}`}
       className={className}
-      style={{ minHeight: height, aspectRatio: `${width} / ${height}` }}
+      style={{ "--aspect-ratio": `${width} / ${height}` }}
       role="group"
     >
       {children}
-    </svg>
+    </Styled.SVG>
   );
 };
 
