@@ -17,7 +17,7 @@ export const Separator = styled.hr`
 `;
 
 export const Unit = styled.span`
-  line-height: 0.75;
+  text-align: center;
 `;
 
 export const Label = styled.h3`
