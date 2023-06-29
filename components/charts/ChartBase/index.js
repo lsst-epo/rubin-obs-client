@@ -7,7 +7,10 @@ const ChartBase = ({ children, className, width = 900, height = 300 }) => {
       preserveAspectRatio="xMidYMid meet"
       viewBox={`0 0 ${width} ${height}`}
       className={className}
-      style={{ "--aspect-ratio": `${width} / ${height}` }}
+      style={{
+        "--aspect-ratio": `${width} / ${height}`,
+        "--min-width": `${width}px`,
+      }}
       role="group"
     >
       {children}

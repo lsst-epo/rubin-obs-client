@@ -4,8 +4,6 @@ export const Caption = styled.figcaption`
   text-align: center;
 `;
 export const Content = styled.div`
-  display: flex;
-  justify-content: center;
   width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
