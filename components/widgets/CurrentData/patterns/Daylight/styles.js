@@ -1,13 +1,20 @@
 import styled from "styled-components";
+import { token } from "@/styles/globalStyles";
 import { ChartFigure } from "@/components/charts";
 
 export const Figure = styled(ChartFigure)`
-  --widget-background-color: ${({ $variant }) =>
+  --widget-columns: 1 / -1;
+  ${({ $variant }) =>
     `--widget-background-color: ${
       $variant === "primary" ? "#313333" : "transparent"
-    }; --widget-columns: ${$variant === "primary" ? "span 3" : "1 / -1"}`};
+    }`};
 
   grid-column: var(--widget-columns, span 3);
+
+  @media screen and (min-width: ${token("BREAK_TABLET_MIN")}) {
+    --widget-columns: ${({ $variant }) =>
+      $variant === "primary" ? "span 3" : "1 / -1"};
+  }
 `;
 
 export const BoundRect = styled.rect`

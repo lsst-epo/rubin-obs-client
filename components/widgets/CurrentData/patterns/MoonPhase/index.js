@@ -14,7 +14,7 @@ const MoonPhase = ({ phase = 0 }) => {
       <Styled.Label>
         <Trans>summit_dashboard.widgets.current.moon</Trans>
       </Styled.Label>
-      <Moon phase={phase} size={70} />
+      <Moon phase={phase} size="5em" />
       <Styled.Unit>
         <Trans {...label} />
       </Styled.Unit>
