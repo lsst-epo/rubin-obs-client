@@ -1,5 +1,6 @@
 import { useState } from "react";
 import SunCalc from "suncalc";
+import { useTranslation } from "react-i18next";
 import WidgetPreview from "@/components/layout/WidgetPreview";
 import SummitStatusModal from "@/components/modal/SummitStatusModal";
 import MoonPhase from "@/components/widgets/CurrentData/patterns/MoonPhase";
@@ -7,8 +8,10 @@ import Daylight from "@/components/widgets/CurrentData/patterns/Daylight";
 import { altitude, lat, long, timezone } from "@/lib/observatory";
 import { timezoneOffset } from "@/helpers";
 import CurrentAstroweather from "./Current";
+import ForecastAstroweather from "./Forecast";
 
 const Astroweather = () => {
+  const { t } = useTranslation();
   const [isModalOpen, setModalOpen] = useState(false);
 
   const now = new Date();
@@ -31,7 +34,7 @@ const Astroweather = () => {
 
   return (
     <WidgetPreview
-      title="Astroweather"
+      title={t("summit_dashboard.sections.astro.title")}
       size="large"
       openModalCallback={() => {
         setModalOpen(true);
@@ -45,6 +48,7 @@ const Astroweather = () => {
         night={night}
       />
       <SummitStatusModal open={isModalOpen} onClose={() => setModalOpen(false)}>
+        <ForecastAstroweather />
         <CurrentAstroweather />
       </SummitStatusModal>
     </WidgetPreview>
