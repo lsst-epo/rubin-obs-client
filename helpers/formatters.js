@@ -33,9 +33,10 @@ export const formatPercent = (value, locale = "en") => {
   return parts.join("");
 };
 
-export const formatTime = (value, locale = "en", observatoryTime = true) => {
+export const formatTime = (value, locale = "en", options = {}) => {
+  const defaultOptions = { timeStyle: "short", timeZone: timezone };
   return new Intl.DateTimeFormat(locale, {
-    timeStyle: "short",
-    ...(observatoryTime && { timeZone: timezone }),
+    ...defaultOptions,
+    ...options,
   }).format(value);
 };

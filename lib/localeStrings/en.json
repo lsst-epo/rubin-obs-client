@@ -356,6 +356,7 @@
           "daily": "Daily temperature variations - {{unit}} degrees (last week)"
         },
         "astro": {
+          "title": "Astroweather",
           "daylight": {
             "title": "Twilight, day, and night times",
             "observing": "Dark enough to observe from {{from}} to {{to}}",
@@ -363,6 +364,10 @@
             "daylight": "Daylight from {{from}} to {{to}}",
             "current": "Current local time {{time}}. It is too light to observe right now.",
             "current_observable": "Current local time {{time}}. It is dark enough to observe right now."
+          },
+          "moonrise": {
+            "time_moonrise": "Moonrise time",
+            "time_moonset": "Moonset time"
           }
         }
       },
