@@ -34,6 +34,9 @@ export const Content = styled.div`
 `;
 
 export const ScrollableContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: var(--PADDING_SMALL, 20px);
   overflow-x: hidden;
   overflow-y: auto;
   scrollbar-width: thin;
