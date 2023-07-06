@@ -1,5 +1,5 @@
 import { useState } from "react";
-import SunCalc from "suncalc";
+import SunCalc from "suncalc-tz";
 import { useTranslation } from "react-i18next";
 import WidgetPreview from "@/components/layout/WidgetPreview";
 import SummitStatusModal from "@/components/modal/SummitStatusModal";

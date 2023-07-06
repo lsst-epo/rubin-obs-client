@@ -46,3 +46,11 @@ export const timezoneOffset = (timezone) => {
 
   return 24 - localeDate.getHours();
 };
+
+export const timezoneOffsetLocal = (timezone) => {
+  const now = new Date();
+  const localOffset = now.getTimezoneOffset() / 60;
+  const offset = timezoneOffset(timezone);
+
+  return localOffset - offset;
+};

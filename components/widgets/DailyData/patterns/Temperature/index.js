@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import ScrollableHorizontalWrapper from "@/components/atomic/ScrollableHorizontalWrapper";
 import { temperatureUnitType } from "@/components/shapes/units";
-import { formatTemperature } from "@/helpers/formatters";
+import { formatDayName, formatTemperature } from "@/helpers/formatters";
 import * as Styled from "./styles";
 
 const TemperatureHistoric = ({
@@ -15,16 +15,6 @@ const TemperatureHistoric = ({
     i18n: { language = "en" },
   } = useTranslation();
 
-  const getDayName = (day) => {
-    const today = new Date();
-    const result = new Date(today);
-    const diff = day - today.getDay();
-
-    result.setDate(today.getDate() + diff);
-
-    return result.toLocaleDateString(language, { weekday: "long" });
-  };
-
   return (
     <Styled.TemperatureHistoricBackground>
       <ScrollableHorizontalWrapper>
@@ -35,7 +25,7 @@ const TemperatureHistoric = ({
                 <td />
                 {temperatureData.map(({ weekday }, i) => (
                   <Styled.TemperatureHeader scope="col" key={i}>
-                    {getDayName(weekday)}
+                    {formatDayName(weekday, language)}
                   </Styled.TemperatureHeader>
                 ))}
               </tr>
@@ -77,7 +67,7 @@ const TemperatureHistoric = ({
   );
 };
 
-TemperatureHistoric.displayName = "Widgets.TemperatureHistoric";
+TemperatureHistoric.displayName = "Widgets.Daily.Temperature";
 
 TemperatureHistoric.propTypes = {
   unit: temperatureUnitType,

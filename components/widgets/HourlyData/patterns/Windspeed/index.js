@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { windspeedUnitType } from "@/components/shapes/units";
 import { useTranslation } from "react-i18next";
-import { formatTime } from "@/helpers/formatters";
+import { formatAngle, formatTime } from "@/helpers/formatters";
 import * as Styled from "./styles";
 import UniqueIconComposer from "@/components/svg/UniqueIconComposer";
 import { ScreenreaderText } from "@rubin-epo/epo-react-lib";
@@ -13,12 +13,6 @@ const Windspeed = ({ unit, windspeedData = [], labelledById }) => {
     t,
     i18n: { language = "en" },
   } = useTranslation();
-
-  const directionFormatter = new Intl.NumberFormat(language, {
-    notation: "compact",
-    style: "unit",
-    unit: "degree",
-  });
 
   const speedFormatters = {
     mi: new Intl.NumberFormat(language, {
@@ -84,7 +78,7 @@ const Windspeed = ({ unit, windspeedData = [], labelledById }) => {
                       <UniqueIconComposer icon="arrow" />
                       <ScreenreaderText>
                         {t("summit_dashboard.weather.windspeed_direction", {
-                          direction: directionFormatter.format(direction),
+                          direction: formatAngle(direction, language),
                         })}
                       </ScreenreaderText>
                     </>
