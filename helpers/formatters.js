@@ -40,3 +40,21 @@ export const formatTime = (value, locale = "en", options = {}) => {
     ...options,
   }).format(value);
 };
+
+export const formatDayName = (day = 0, locale = "en") => {
+  const today = new Date();
+  const result = new Date(today);
+  const diff = day - today.getDay();
+
+  result.setDate(today.getDate() + diff);
+
+  return result.toLocaleDateString(locale, { weekday: "long" });
+};
+
+export const formatAngle = (angle = 0, locale = "en") =>
+  new Intl.NumberFormat(locale, {
+    notation: "compact",
+    style: "unit",
+    unit: "degree",
+    unitDisplay: "narrow",
+  }).format(angle);
