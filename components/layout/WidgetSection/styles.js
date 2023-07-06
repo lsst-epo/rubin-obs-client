@@ -50,7 +50,7 @@ export const SectionContent = styled.div`
 
   grid-gap: var(--PADDING_SMALL, 20px);
   grid-template-columns: var(--grid-columns);
-  grid-auto-rows: 10rem;
+  grid-auto-rows: fit-content(10rem);
   margin-block-start: var(--PADDING_SMALL, 20px);
 
   &:not([hidden]) {
@@ -60,4 +60,8 @@ export const SectionContent = styled.div`
   @media screen and (min-width: ${BREAK_PHABLET_MIN}) {
     --grid-columns: repeat(4, 1fr);
   }
+`;
+
+export const SectionSubHeader = styled.h3`
+  grid-column: 1/-1;
 `;
