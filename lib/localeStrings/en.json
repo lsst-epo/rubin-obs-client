@@ -366,6 +366,7 @@
             "current_observable": "Current local time {{time}}. It is dark enough to observe right now."
           },
           "moonrise": {
+            "forecast": "Moonrise and moonset times forecast (next fourteen days)",
             "time_moonrise": "Moonrise time",
             "time_moonset": "Moonset time"
           }
@@ -393,6 +394,10 @@
           "gibbous_waning": "Waning Gibbous",
           "quarter_first": "First Quarter",
           "quarter_last": "Last Quarter"
+        },
+        "moonlight": {
+          "moonrise": "Moonrise",
+          "moonset": "Moonset"
         }
       },
       "widgets": {
