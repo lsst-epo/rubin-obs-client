@@ -4,36 +4,38 @@ import * as Styled from "./styles";
 import { getLinearScale } from "@/lib/utils";
 import { formatTime } from "@/helpers/formatters";
 import XAxis from "@/components/charts/XAxis";
-import { capitalize, timezoneOffset } from "@/helpers";
+import { timezoneOffset } from "@/helpers";
 import { timezone } from "@/lib/observatory";
 import { useTranslation } from "react-i18next";
 import ChartLegend from "@/components/charts/Legend";
 
-const Daylight = ({ dawn, sunrise, sunset, night, variant = "primary" }) => {
+const Daylight = ({
+  dawn,
+  sunrise,
+  sunset,
+  night,
+  dates,
+  variant = "primary",
+}) => {
   const {
     t,
     i18n: { language = "en-US" },
   } = useTranslation();
+
   const offset = timezoneOffset(timezone);
-  const minutes = 1500;
+
   const width = variant === "primary" ? 280 : 640;
   const height = 70;
-  const xDomain = [0, minutes];
+  const xDomain = dates.map((date) => {
+    const hours = 12 + offset;
+    date.setUTCHours(hours, 0, 0, 0);
+    return date.getTime();
+  });
   const xScale = getLinearScale(xDomain, [0, width]);
   const xHeight = 25;
   const xPos = height - xHeight;
 
-  const midnight = new Date();
-  midnight.setUTCHours(offset, 0, 0, 0);
-
-  const getMinutes = (date) =>
-    (date.getUTCHours() - offset) * 60 + date.getMinutes();
-
-  const dawnMinutes = getMinutes(dawn);
-  const sunriseMinutes = getMinutes(sunrise);
-  const sunsetMinutes = getMinutes(sunset);
-  const nightMinutes = getMinutes(night);
-  const now = getMinutes(new Date());
+  const now = Date.now();
 
   const nightFill = "#1f2121";
   const twilightFill = "#006DA8";
@@ -77,19 +79,16 @@ const Daylight = ({ dawn, sunrise, sunset, night, variant = "primary" }) => {
             xDomain,
             xScale,
             y: xPos,
-            ticks: 25,
-            labelFormatter: (value) => {
-              const hours = value / 60;
-              const date = new Date();
-              date.setUTCHours(hours + offset, 0, 0, 0);
+            ticks: 24,
+            labelFormatter: (value, i) => {
+              const date = new Date(value);
+              const hours = date.getUTCHours() - offset;
 
-              const time = date.getUTCHours() - offset;
-
-              if (time / 24 === 0) {
+              if (hours === 12) {
                 return (
                   <tspan
                     style={{
-                      textAnchor: hours === 0 ? "start" : "end",
+                      textAnchor: i !== 24 ? "start" : "end",
                       fontSize: variant === "primary" && "10px",
                     }}
                   >
@@ -97,20 +96,14 @@ const Daylight = ({ dawn, sunrise, sunset, night, variant = "primary" }) => {
                   </tspan>
                 );
               }
-
-              if (time === 12) {
-                const noon = date.toLocaleTimeString(language, {
-                  dayPeriod: "short",
-                  timeZone: timezone,
-                });
-
+              if (hours === 0) {
                 return (
                   <tspan
                     style={{
                       fontSize: variant === "primary" && "10px",
                     }}
                   >
-                    {capitalize(noon, language)}
+                    {t("summit_dashboard.sections.astro.daylight.midnight")}
                   </tspan>
                 );
               }
@@ -119,48 +112,22 @@ const Daylight = ({ dawn, sunrise, sunset, night, variant = "primary" }) => {
         />
         <g role="list">
           <Styled.BoundRect
-            y={0}
-            x={xScale(0)}
-            width={xScale(dawnMinutes)}
-            height={xPos}
-            role="listitem"
-            aria-label={t(
-              "summit_dashboard.sections.astro.daylight.observing",
-              {
-                from: formatTime(midnight, language),
-                to: formatTime(dawn, language),
-              }
-            )}
-          />
-          <Styled.BoundRect
-            style={{ "--fill": twilightFill }}
-            y={0}
-            x={xScale(dawnMinutes)}
-            width={xScale(sunriseMinutes - dawnMinutes)}
-            height={xPos}
-            role="listitem"
-            aria-label={t("summit_dashboard.sections.astro.daylight.twilight", {
-              from: formatTime(dawn, language),
-              to: formatTime(sunrise, language),
-            })}
-          />
-          <Styled.BoundRect
             style={{ "--fill": dayFill }}
             y={0}
-            x={xScale(sunriseMinutes)}
-            width={xScale(sunsetMinutes - sunriseMinutes)}
+            x={0}
+            width={xScale(sunset.getTime())}
             height={xPos}
             role="listitem"
             aria-label={t("summit_dashboard.sections.astro.daylight.daylight", {
-              from: formatTime(sunrise, language),
+              from: formatTime(dates[0], language),
               to: formatTime(sunset, language),
             })}
           />
           <Styled.BoundRect
             style={{ "--fill": twilightFill }}
             y={0}
-            x={xScale(sunsetMinutes)}
-            width={xScale(nightMinutes - sunsetMinutes)}
+            x={xScale(sunset.getTime())}
+            width={xScale(night.getTime()) - xScale(sunset.getTime())}
             height={xPos}
             role="listitem"
             aria-label={t("summit_dashboard.sections.astro.daylight.twilight", {
@@ -170,17 +137,41 @@ const Daylight = ({ dawn, sunrise, sunset, night, variant = "primary" }) => {
           />
           <Styled.BoundRect
             y={0}
-            x={xScale(nightMinutes)}
-            width={xScale(minutes - nightMinutes)}
+            x={xScale(night.getTime())}
+            width={xScale(dawn.getTime()) - xScale(night.getTime())}
             height={xPos}
             role="listitem"
             aria-label={t(
               "summit_dashboard.sections.astro.daylight.observing",
               {
                 from: formatTime(night, language),
-                to: formatTime(midnight, language),
+                to: formatTime(dawn, language),
               }
             )}
+          />
+          <Styled.BoundRect
+            style={{ "--fill": twilightFill }}
+            y={0}
+            x={xScale(dawn.getTime())}
+            width={xScale(sunrise.getTime()) - xScale(dawn.getTime())}
+            height={xPos}
+            role="listitem"
+            aria-label={t("summit_dashboard.sections.astro.daylight.twilight", {
+              from: formatTime(sunrise, language),
+              to: formatTime(dawn, language),
+            })}
+          />
+          <Styled.BoundRect
+            style={{ "--fill": dayFill }}
+            y={0}
+            x={xScale(sunrise.getTime())}
+            width={xScale(dates[1].getTime()) - xScale(sunrise.getTime())}
+            height={xPos}
+            role="listitem"
+            aria-label={t("summit_dashboard.sections.astro.daylight.daylight", {
+              from: formatTime(sunrise, language),
+              to: formatTime(dates[1], language),
+            })}
           />
         </g>
         <g>
@@ -192,7 +183,9 @@ const Daylight = ({ dawn, sunrise, sunset, night, variant = "primary" }) => {
             aria-label={t("summit_dashboard.sections.astro.daylight.current", {
               time: formatTime(new Date(), language),
               context:
-                now > nightMinutes || now < dawnMinutes ? "observable" : null,
+                now > night.getTime() && now < dawn.getTime()
+                  ? "observable"
+                  : null,
             })}
           />
           <Styled.NowTip
@@ -206,11 +199,16 @@ const Daylight = ({ dawn, sunrise, sunset, night, variant = "primary" }) => {
   );
 };
 
-Daylight.propTypes = {
+export const DaylightDataShape = {
   dawn: PropTypes.instanceOf(Date).isRequired,
   sunrise: PropTypes.instanceOf(Date).isRequired,
   sunset: PropTypes.instanceOf(Date).isRequired,
   night: PropTypes.instanceOf(Date).isRequired,
+  dates: PropTypes.arrayOf(PropTypes.instanceOf(Date)).isRequired,
+};
+
+Daylight.propTypes = {
+  ...DaylightDataShape,
   variant: PropTypes.oneOf(["primary", "secondary"]),
 };
 
