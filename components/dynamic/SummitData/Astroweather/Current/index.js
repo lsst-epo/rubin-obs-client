@@ -1,12 +1,12 @@
+import PropTypes from "prop-types";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { getTimes } from "@/lib/suncalc";
-import { altitude, lat, long, timezone } from "@/lib/observatory";
-import { timezoneOffset } from "@/helpers";
 import WidgetSection from "@/components/layout/WidgetSection";
-import Daylight from "@/components/widgets/CurrentData/patterns/Daylight";
+import Daylight, {
+  DaylightDataShape,
+} from "@/components/widgets/CurrentData/patterns/Daylight";
 
-const CurrentAstroweather = () => {
+const CurrentAstroweather = ({ data }) => {
   const { t } = useTranslation();
   const [isOpen, setOpen] = useState(true);
   const sectionProps = {
@@ -15,35 +15,21 @@ const CurrentAstroweather = () => {
     isOpen,
   };
 
-  const now = new Date();
-  const offset = timezoneOffset(timezone);
-
-  const observatoryDate = new Date(
-    now.toLocaleString("en-US", { timeZone: timezone })
-  );
-
-  observatoryDate.setUTCHours(12 - offset, 0, 0, 0);
-
-  const { nightEnd, sunrise, sunset, night } = getTimes(
-    observatoryDate,
-    lat,
-    long,
-    altitude
-  );
+  const { daylight } = data;
 
   return (
     <WidgetSection {...sectionProps}>
-      <Daylight
-        dawn={nightEnd}
-        sunrise={sunrise}
-        sunset={sunset}
-        night={night}
-        variant="secondary"
-      />
+      <Daylight {...daylight} variant="secondary" />
     </WidgetSection>
   );
 };
 
 CurrentAstroweather.displayName = "Dynamic.Astroweather.Current";
+
+CurrentAstroweather.propTypes = {
+  data: PropTypes.shape({
+    daylight: PropTypes.shape(DaylightDataShape),
+  }),
+};
 
 export default CurrentAstroweather;
