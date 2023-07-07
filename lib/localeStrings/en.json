@@ -359,7 +359,8 @@
             "twilight": "Twilight from {{from}} to {{to}}",
             "daylight": "Daylight from {{from}} to {{to}}",
             "current": "Current local time {{time}}. It is too light to observe right now.",
-            "current_observable": "Current local time {{time}}. It is dark enough to observe right now."
+            "current_observable": "Current local time {{time}}. It is dark enough to observe right now.",
+            "midnight": "Midnight"
           },
           "moonrise": {
             "forecast": "Moonrise and moonset times forecast (next fourteen days)",
