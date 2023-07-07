@@ -6,30 +6,34 @@ import SummitStatusModal from "@/components/modal/SummitStatusModal";
 import MoonPhase from "@/components/widgets/CurrentData/patterns/MoonPhase";
 import Daylight from "@/components/widgets/CurrentData/patterns/Daylight";
 import { altitude, lat, long, timezone } from "@/lib/observatory";
-import { timezoneOffset } from "@/helpers";
+import { timezoneOffset, timezoneOffsetLocal } from "@/helpers";
 import CurrentAstroweather from "./Current";
 import ForecastAstroweather from "./Forecast";
 
 const Astroweather = () => {
+  const { t } = useTranslation();
   const [isModalOpen, setModalOpen] = useState(false);
 
-  const now = new Date();
   const offset = timezoneOffset(timezone);
+  const localOffset = timezoneOffsetLocal(timezone);
 
-  const { phase } = getMoonIllumination(now);
+  const today = new Date();
+  const tomorrow = new Date(today);
+  const yesterday = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  yesterday.setDate(yesterday.getDate() - 1);
 
-  const observatoryDate = new Date(
-    now.toLocaleString("en-US", { timeZone: timezone })
-  );
+  const isAfterNoon = today.getUTCHours() - offset > 12;
+  const dates = isAfterNoon ? [today, tomorrow] : [yesterday, today];
 
-  observatoryDate.setUTCHours(12 - offset, 0, 0, 0);
+  const { phase } = getMoonIllumination(today);
+  const { sunset, night } = getTimes(dates[0], lat, long, altitude);
+  const { nightEnd: dawn, sunrise } = getTimes(dates[1], lat, long, altitude);
 
-  const { nightEnd, sunrise, sunset, night } = getTimes(
-    observatoryDate,
-    lat,
-    long,
-    altitude
-  );
+  const times = { dawn, sunrise, sunset, night };
+  Object.keys(times).forEach((key) => {
+    times[key].setHours(times[key].getHours() - localOffset);
+  });
 
   return (
     <WidgetPreview
@@ -40,15 +44,10 @@ const Astroweather = () => {
       }}
     >
       <MoonPhase phase={phase} />
-      <Daylight
-        dawn={nightEnd}
-        sunrise={sunrise}
-        sunset={sunset}
-        night={night}
-      />
+      <Daylight {...{ ...times, dates }} />
       <SummitStatusModal open={isModalOpen} onClose={() => setModalOpen(false)}>
         <ForecastAstroweather />
-        <CurrentAstroweather />
+        <CurrentAstroweather data={{ daylight: { ...times, dates } }} />
       </SummitStatusModal>
     </WidgetPreview>
   );

@@ -11,13 +11,13 @@ const XAxis = ({
   labelledById,
 }) => {
   const tickHeight = 5;
-  const valueInterval = (xDomain[1] - xDomain[0]) / ticks;
-  const positionInterval = (xDomain[1] - xDomain[0]) / (ticks - 1);
 
-  const tickMap = Array.from(Array(ticks)).map((tick, i) => {
-    const value = xDomain[0] + valueInterval * i;
-    const label = labelFormatter ? labelFormatter(value) : value;
-    const position = xScale(xDomain[0] + positionInterval * i);
+  const interval = (xDomain[1] - xDomain[0]) / ticks;
+
+  const tickMap = Array.from(Array(ticks + 1)).map((tick, i) => {
+    const value = xDomain[0] + interval * i;
+    const label = labelFormatter ? labelFormatter(value, i) : value;
+    const position = xScale(xDomain[0] + interval * i);
 
     return { label, position };
   });
