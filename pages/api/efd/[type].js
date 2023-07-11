@@ -6,7 +6,7 @@ import {
 } from "@/lib/api/queries/weather";
 
 const types = {
-	current: currentWeather,
+  current: currentWeather,
   hourly: hourlyWeather,
   daily: dailyWeather,
 };
@@ -29,12 +29,10 @@ export default function handler(req, res) {
       data.push(tableMeta.toObject(row));
     },
     error(error) {
-      // reject(error);
-      res.status(200).json({ error })
+      return res.status(405).json(error);
     },
     complete() {
-      // resolve(data);
-      res.status(200).json({ data })
+      return res.status(200).json(type === "current" ? data[0] : data);
     },
   });
 }
