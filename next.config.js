@@ -3,6 +3,8 @@ const nextBuildId = require("next-build-id");
 
 let API_URL;
 
+API_URL = "http://rubinobs-api-svc.rubinobs:8080";
+
 // Check to see if the environment variable DOCKER_GATEWAY_IP is populated, if so
 // then the URL should be constructed for a Docker static build
 if (
@@ -13,6 +15,7 @@ if (
 ) {
   API_URL = `http://${process.env.DOCKER_GATEWAY_IP}:${process.env.DOCKER_GATEWAY_PORT}`;
 }
+
 
 module.exports = {
   async generateBuildId() {
@@ -29,6 +32,9 @@ module.exports = {
     ];
   },
   staticPageGenerationTimeout: 2000,
+  experimental: {
+    isrMemoryCacheSize: 0
+  },
   typescript: {
     ignoreBuildErrors: true,
   },
