@@ -3,8 +3,6 @@ const nextBuildId = require("next-build-id");
 
 let API_URL;
 
-API_URL = "http://rubinobs-site-api.rubinobs:8080/api";
-
 // Check to see if the environment variable DOCKER_GATEWAY_IP is populated, if so
 // then the URL should be constructed for a Docker static build
 if (
