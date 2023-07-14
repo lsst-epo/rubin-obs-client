@@ -15,6 +15,7 @@ const IconButton = ({
 }) => {
   return (
     <Styled.IconButton
+      data-cy="icon-button"
       onClick={(e) => onClickCallback && onClickCallback(e)}
       className={className}
       $isBlock={isBlock}

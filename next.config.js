@@ -19,7 +19,7 @@ if (
 
 module.exports = {
   async generateBuildId() {
-    return nextBuildId({ dir: __dirname });
+    return "rubin-obs-client-next-build-id";
   },
   async rewrites() {
     return [
@@ -31,6 +31,10 @@ module.exports = {
       },
     ];
   },
+  experimental: {
+    isrMemoryCacheSize: 0,
+    forceSwcTransforms: true,
+  },
   staticPageGenerationTimeout: 2000,
   experimental: {
     isrMemoryCacheSize: 0
@@ -38,6 +42,7 @@ module.exports = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  swcMinify: true,
   compiler: {
     // Enables the styled-components SWC transform
     styledComponents: true,

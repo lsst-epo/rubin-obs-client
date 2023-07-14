@@ -8,11 +8,13 @@ import {
 
 export const Wrapper = styled.div`
   width: 100%;
+
   ${protoContainer(tokens.CONTAINER_NARROW)}
   --max-width: ${CONTAINER_REGULAR};
-  margin-block-end: 60px;
+
   padding-block-start: ${fluidScale("50px", "30px")};
   padding-block-end: ${fluidScale("50px", "40px")};
+  margin-block-end: 60px;
   background-color: ${(p) => tokens[p.$bgColor]};
 
   ${({ $nested }) =>

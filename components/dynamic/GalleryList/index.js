@@ -1,9 +1,11 @@
 import PropTypes from "prop-types";
-import Pagination from "@/page/Pagination";
+import { useTranslation } from "react-i18next";
 import DataList from "@/dynamic/DataList";
 import { MasonryGrid } from "@rubin-epo/epo-react-lib";
 
 const GalleryList = ({ excludeId = null, limit = 20, component }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="l-pad-top-large">
       <DataList
@@ -11,18 +13,12 @@ const GalleryList = ({ excludeId = null, limit = 20, component }) => {
         limit={limit}
         section="galleryItems"
         component={component}
+        width="regular"
+        loaderDescription={t("gallery.loading")}
       >
-        {({ entries, offset, page, total }) => (
+        {({ entries }) => (
           <>
             {entries?.length > 0 && <MasonryGrid items={entries}></MasonryGrid>}
-            {limit >= 20 && (
-              <Pagination
-                limit={limit}
-                offset={offset}
-                page={page}
-                total={total}
-              />
-            )}
           </>
         )}
       </DataList>
@@ -34,9 +30,6 @@ GalleryList.propTypes = {
   excludeId: PropTypes.string,
   limit: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   component: PropTypes.node,
-  header: PropTypes.string,
-  button: PropTypes.object,
-  isWide: PropTypes.bool,
 };
 
 export default GalleryList;

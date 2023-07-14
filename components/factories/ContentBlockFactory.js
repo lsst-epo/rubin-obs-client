@@ -17,6 +17,7 @@ import {
   Video,
   DownloadList,
   Embed,
+  SummitStatus,
 } from "@/content-blocks";
 
 const blockMap = {
@@ -36,6 +37,7 @@ const blockMap = {
   simpleTable: SimpleTable,
   slideBlock: SlideBlock,
   staffGrid: GridBlock,
+  summitStatus: SummitStatus,
   tableGroup: TableGroup,
   text: Text,
   video: Video,

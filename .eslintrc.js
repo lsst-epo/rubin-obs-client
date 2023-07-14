@@ -1,20 +1,8 @@
 require("@rushstack/eslint-patch/modern-module-resolution");
 module.exports = {
   root: true,
-  parser: "@babel/eslint-parser",
-  parserOptions: {
-    sourceType: "module",
-    requireConfigFile: false,
-    babelOptions: {
-      plugins: [
-        "@babel/plugin-transform-react-jsx",
-        "@babel/plugin-proposal-class-properties",
-      ],
-    },
-  },
   env: {
     browser: true,
-    "jest/globals": true,
   },
   settings: {
     react: {
@@ -104,35 +92,15 @@ module.exports = {
     "spaced-comment": 2,
     "unused-imports/no-unused-imports": 2,
   },
-  plugins: [
-    "jsx-a11y",
-    "react",
-    "react-hooks",
-    "unused-imports",
-    "testcafe",
-    "jest",
-    "testing-library",
-  ],
+  plugins: ["jsx-a11y", "react", "react-hooks", "unused-imports", "promise"],
   extends: [
     "standard",
     "next",
     "prettier",
     "plugin:jsx-a11y/recommended",
     "plugin:react/recommended",
-    "plugin:prettier/recommended",
     "plugin:import/errors",
     "plugin:storybook/recommended",
-  ],
-  overrides: [
-    // Only uses Testing Library lint rules in test files
-    {
-      files: ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)"],
-      extends: ["plugin:testing-library/react"],
-    },
-    // Only uses Test Cafe lint rules in test files
-    {
-      files: ["e2e/**/*.[jt]s?(x)"],
-      extends: ["plugin:testcafe/recommended"],
-    },
+    "plugin:cypress/recommended",
   ],
 };

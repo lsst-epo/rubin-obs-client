@@ -3,10 +3,11 @@ import styled from "styled-components";
 
 export const WidgetSection = styled.section`
   --section-color: var(--white, #fff);
+
+  padding: var(--PADDING_SMALL, 20px);
+  color: var(--section-color);
   background-color: var(--black, #000);
   border-radius: 10px;
-  color: var(--section-color);
-  padding: var(--PADDING_SMALL, 20px);
 
   h1,
   h2,
@@ -20,14 +21,14 @@ export const WidgetSection = styled.section`
 
 export const SectionIconButton = styled(IconButton)`
   > svg {
-    border-radius: 50%;
-    border: 1px solid var(--section-color);
     padding: 7px;
+    border: 1px solid var(--section-color);
+    border-radius: 50%;
   }
 
-  &:not(:disabled):not([aria-disabled="true"]):hover,
-  &:not(:disabled):not([aria-disabled="true"]):focus-visible,
-  &:not(:disabled):not([aria-disabled="true"]).focus-visible {
+  &:not(:disabled, [aria-disabled="true"]):hover,
+  &:not(:disabled, [aria-disabled="true"]):focus-visible,
+  &:not(:disabled, [aria-disabled="true"]).focus-visible {
     > svg {
       outline: 1px solid var(--section-color);
     }
@@ -41,9 +42,9 @@ export const SectionHeader = styled.h2`
 `;
 
 export const SectionContent = styled.div`
-  grid-gap: var(--PADDING_SMALL, 20px);
   grid-template-columns: 1fr;
   grid-auto-rows: min-content;
+  grid-gap: var(--PADDING_SMALL, 20px);
   margin-block-start: var(--PADDING_SMALL, 20px);
 
   &:not([hidden]) {

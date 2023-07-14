@@ -76,7 +76,7 @@ export const Link = styled.a`
   }
 
   &:hover {
-    color: #062e2c;
     font-weight: bold;
+    color: #062e2c;
   }
 `;

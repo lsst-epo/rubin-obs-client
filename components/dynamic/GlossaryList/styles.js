@@ -13,21 +13,21 @@ export const AlphaButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 40px;
   width: 40px;
-  border: 1px solid #707070;
+  height: 40px;
   font-weight: bold;
+  border: 1px solid #707070;
   transition: color 0.2s, background-color 0.2s;
 
   &:disabled {
-    opacity: 0.5;
     pointer-events: none;
+    opacity: 0.5;
   }
 
   &[aria-pressed="true"] {
-    border-color: var(--turquoise60);
-    background: var(--turquoise60);
     color: var(--white);
+    background: var(--turquoise60);
+    border-color: var(--turquoise60);
   }
 `;
 

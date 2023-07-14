@@ -1,12 +1,9 @@
 import PropTypes from "prop-types";
-import styled from "styled-components";
 import striptags from "striptags";
 import { useTranslation } from "react-i18next";
-import { Container, Grid, Buttonish } from "@rubin-epo/epo-react-lib";
+import { Grid } from "@rubin-epo/epo-react-lib";
 import DataList from "@/dynamic/DataList";
 import Tile from "@/atomic/Tile";
-import Pagination from "@/page/Pagination";
-import { fluidScale } from "@/styles/globalStyles";
 
 const SlideshowList = ({
   button,
@@ -19,72 +16,48 @@ const SlideshowList = ({
   const { t } = useTranslation();
 
   return (
-    <DataList excludeId={excludeId} limit={limit} section="slideshows">
-      {({ entries, offset, page, total }) => (
+    <DataList
+      excludeId={excludeId}
+      limit={limit}
+      section="slideshows"
+      header={header}
+      width={isWide ? "regular" : "narrow"}
+      footerButton={button}
+      loaderDescription={t("gallery.loading-slideshows")}
+    >
+      {({ entries }) => (
         <>
-          <Container width={isWide ? "regular" : "narrow"}>
-            <div>
-              {header && <Header>{header}</Header>}
-              {entries?.length > 0 && (
-                <Grid columns={1}>
-                  {entries.map(({ id, description, image, title, uri }, i) => (
-                    <Tile
-                      key={id}
-                      footer={
-                        gridType === "darkSlide" || gridType === "slideshows"
-                          ? { button: t(`gallery.start-slideshow`) }
-                          : null
-                      }
-                      image={image?.[0]}
-                      isFeature={true}
-                      link={uri}
-                      pretitle={
-                        gridType === "darkSlide" || gridType === "slideshows"
-                          ? t(`gallery.slideshow`)
-                          : null
-                      }
-                      text={striptags(description)}
-                      title={title}
-                      titleTag={"h2"}
-                      type={gridType}
-                    />
-                  ))}
-                </Grid>
-              )}
-              {button && (
-                <Footer>
-                  <Buttonish
-                    isBlock={true}
-                    text={button.text}
-                    url={`/${button.uri}`}
-                  />
-                </Footer>
-              )}
-            </div>
-          </Container>
-          {limit >= 10 && (
-            <Pagination
-              limit={limit}
-              offset={offset}
-              page={page}
-              total={total}
-            />
+          {entries?.length > 0 && (
+            <Grid columns={1}>
+              {entries.map(({ id, description, image, title, uri }, i) => (
+                <Tile
+                  key={id}
+                  footer={
+                    gridType === "darkSlide" || gridType === "slideshows"
+                      ? { button: t(`gallery.start-slideshow`) }
+                      : null
+                  }
+                  image={image?.[0]}
+                  isFeature={true}
+                  link={uri}
+                  pretitle={
+                    gridType === "darkSlide" || gridType === "slideshows"
+                      ? t(`gallery.slideshow`)
+                      : null
+                  }
+                  text={striptags(description)}
+                  title={title}
+                  titleTag={"h2"}
+                  type={gridType}
+                />
+              ))}
+            </Grid>
           )}
         </>
       )}
     </DataList>
   );
 };
-
-const Header = styled.h2`
-  margin-bottom: ${fluidScale("40px", "20px")};
-  padding-bottom: 10px;
-  border-bottom: 10px solid var(--turquoise85);
-`;
-
-const Footer = styled.div`
-  padding-top: 40px;
-`;
 
 SlideshowList.propTypes = {
   excludeId: PropTypes.string,

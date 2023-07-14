@@ -13,7 +13,7 @@ export const IconButton = styled.button`
           width: 100%;
         `
       : css`
-          justify-content: center;
           gap: 1ch;
+          justify-content: center;
         `}
 `;

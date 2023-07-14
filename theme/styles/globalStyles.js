@@ -16,6 +16,7 @@ export const tokens = {
   neutral60: "#666666",
   neutral80: "#404040",
   neutral90: "#2b2e34",
+  neutral95: "#1F2121",
   black: "#000000",
   turquoise05: "#EDFFFE",
   turqouise07: "#EDFFFE",

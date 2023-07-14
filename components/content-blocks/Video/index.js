@@ -9,7 +9,7 @@ export default function VideoBlock({ caption, url }) {
   return (
     <Container>
       <Figure caption={caption} withBackground>
-        <Video url={url} />
+        <Video url={url} controls />
       </Figure>
     </Container>
   );

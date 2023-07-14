@@ -2,8 +2,6 @@ import Document, { Html, Head, Main, NextScript } from "next/document";
 import { ServerStyleSheet } from "styled-components";
 import { getSiteString } from "@/lib/utils";
 
-const GOOGLE_APP_ID = process.env.NEXT_PUBLIC_GOOGLE_APP_ID;
-
 class CustomDocument extends Document {
   static async getInitialProps(ctx) {
     const sheet = new ServerStyleSheet();

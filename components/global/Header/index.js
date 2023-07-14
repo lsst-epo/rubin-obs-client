@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import Link from "next/link";
 import useResizeObserver from "use-resize-observer";
 import { useTranslation } from "react-i18next";
-import Logo from "@/svg/unique/Logo";
-import LogoFullSize from "@/svg/unique/LogoFullSize";
+import Logo from "@/components/svg/unique/site/Logo";
+import LogoFullSize from "@/components/svg/unique/site/LogoFullSize";
 import internalLinkShape from "@/shapes/link";
 import { useGlobalData, useNavHider } from "@/lib/utils";
 import {

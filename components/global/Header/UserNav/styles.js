@@ -2,10 +2,10 @@ import styled from "styled-components";
 import { fluidScale, respond, tokens } from "@/styles/globalStyles";
 
 export const Nav = styled.nav`
-  height: var(--header-height);
   display: flex;
-  align-items: center;
   gap: 0.85em;
+  align-items: center;
+  height: var(--header-height);
   font-size: ${fluidScale(
     "20px",
     "18px",
@@ -29,9 +29,9 @@ export const Toggle = styled.button`
 
 export const DropdownWrapper = styled.div`
   position: relative;
-  margin-inline-end: 15px;
-  margin-inline-start: 15px;
   z-index: 5;
+  margin-inline-start: 15px;
+  margin-inline-end: 15px;
 `;
 
 export const UserButton = styled.button`
@@ -49,27 +49,27 @@ export const SubnavList = styled.ul`
   --UserNav-subnav-margin-top: ${fluidScale("16px", "6px")};
 
   position: fixed;
+  top: var(--UserNav-button-top);
+  right: var(--UserNav-button-right);
+  z-index: -1;
+  min-width: 236px;
+  margin-block-start: calc(var(--UserNav-subnav-margin-top) * -1);
+  overflow: hidden;
   background-color: var(--white);
   border: 1px solid #707070;
   border-radius: 6px;
-  right: var(--UserNav-button-right);
-  top: var(--UserNav-button-top);
-  min-width: 236px;
-  overflow: hidden;
-  transform: translateY(-30px);
   opacity: 0;
   transition: transform 0.25s ease-in-out, opacity 0.125s ease-in;
-  z-index: -1;
-  margin-block-start: calc(var(--UserNav-subnav-margin-top) * -1);
+  transform: translateY(-30px);
 
   .invisible & {
     display: none;
   }
 
   &[open] {
+    z-index: 1000;
     opacity: 1;
     transform: translateY(0);
-    z-index: 1000;
   }
 `;
 
@@ -78,13 +78,13 @@ export const SubnavItem = styled.li``;
 export const SubnavLink = styled.a`
   display: flex;
   align-items: center;
-  cursor: pointer;
-  color: ${tokens.neutral90};
-  padding: 13px;
   width: 100%;
+  padding: 13px;
+  color: ${tokens.neutral90};
   text-align: left;
-  transition: color 0.2s, background-color 0.2s;
   text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s, background-color 0.2s;
 
   &:hover {
     color: var(--white);

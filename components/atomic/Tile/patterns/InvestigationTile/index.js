@@ -9,16 +9,17 @@ const InvestigationTile = ({ investigation, useExternalLink }) => {
   const uid = useUID();
 
   const { t } = useTranslation();
-  const { damAsset, isActive, title, externalUrl, landingPage } =
+  const { damAsset, status, title, externalUrl, landingPage } =
     investigation || {};
   const image = useDamAssetAsImage(damAsset?.[0]);
   const url = useExternalLink ? externalUrl : landingPage?.[0]?.uri;
+  const isInactive = status === "inactive";
 
   return (
     investigation && (
       <Styled.MixedLink
         aria-labelledby={uid}
-        aria-disabled={!isActive}
+        aria-disabled={isInactive}
         url={url}
       >
         <Styled.Image>{image && <Image image={image} />}</Styled.Image>
@@ -26,10 +27,11 @@ const InvestigationTile = ({ investigation, useExternalLink }) => {
           <Styled.Title id={uid}>
             <span>
               {title}
-              {!isActive && <div>{t("investigation.coming_soon")}</div>}
+              {isInactive && <div>{t("investigation.coming_soon")}</div>}
             </span>
           </Styled.Title>
         )}
+        {status === "earlyAccess" && <Styled.EarlyAccessFlag />}
       </Styled.MixedLink>
     )
   );
@@ -43,7 +45,7 @@ InvestigationTile.propTypes = {
     title: PropTypes.string,
     damAsset: PropTypes.array,
     externalUrl: PropTypes.string,
-    isActive: PropTypes.bool,
+    status: PropTypes.string,
     landingPage: PropTypes.arrayOf(
       PropTypes.shape({
         uri: PropTypes.string,

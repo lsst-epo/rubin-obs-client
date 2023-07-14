@@ -4,6 +4,7 @@
     "paths": {
       "@/lib/*": ["lib/*"],
       "@/api/*": ["lib/api/*"],
+      "@/charts/*": ["charts/*"],
       "@/components/*": ["components/*"],
       "@/content-blocks": ["components/content-blocks"],
       "@/dynamic/*": ["components/dynamic/*"],
@@ -20,6 +21,7 @@
       "@/styles/*": ["theme/styles/*"],
       "@/svg/*": ["components/svg/*"],
       "@/helpers": ["helpers"],
+      "@/helpers/*": ["helpers/*"],
       "@/hoc/*": ["components/hoc/*"]
     }
   }
