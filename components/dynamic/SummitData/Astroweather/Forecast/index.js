@@ -5,13 +5,12 @@ import {
   getMoonPosition,
   getMoonTimes,
 } from "@/lib/suncalc";
-import { lat, long, timezone } from "@/lib/observatory";
+import { lat, long } from "@/lib/observatory";
 import WidgetSection from "@/components/layout/WidgetSection";
 import MoonRise from "@/components/widgets/CurrentData/patterns/MoonRise";
 import MoonPhase from "@/components/widgets/CurrentData/patterns/MoonPhase";
 import DailyMoonrise from "@/components/widgets/DailyData/patterns/Moonrise";
 import { SectionSubHeader } from "@/components/layout/WidgetSection/styles";
-import { timezoneOffset } from "@/helpers";
 
 const ForecastAstroweather = () => {
   const { t } = useTranslation();
@@ -30,12 +29,10 @@ const ForecastAstroweather = () => {
   const conversion = 180 / Math.PI;
   const getAzimuth = (time) =>
     getMoonPosition(time, lat, long).azimuth * conversion + 180;
-  const offset = timezoneOffset(timezone);
 
   const forecast = Array.apply(null, Array(14)).map((value, i) => {
     const day = new Date();
     day.setDate(now.getDate() + i);
-    day.setUTCHours(offset, 0, 0, 0);
     const { rise, set } = getMoonTimes(day.toUTCString(), lat, long);
 
     return {

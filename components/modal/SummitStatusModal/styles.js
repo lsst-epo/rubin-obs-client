@@ -4,22 +4,22 @@ import { Dialog as BaseDialog } from "@headlessui/react";
 import IconButton from "@/components/atomic/Button/IconButton";
 
 export const Overlay = styled(BaseDialog.Overlay)`
-  background-color: rgba(0, 0, 0, 80%);
   position: fixed;
   top: 0;
   width: 100%;
   height: 100%;
+  background-color: rgba(0, 0, 0, 80%);
 `;
 
 export const Dialog = styled(BaseDialog)`
   position: fixed;
   inset: 0;
   z-index: ${zStack.dialog};
-  overflow: auto;
-  padding: 1rem;
   display: flex;
   align-items: start;
   justify-content: center;
+  padding: 1rem;
+  overflow: auto;
 `;
 
 export const Content = styled.div`
@@ -27,10 +27,10 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   gap: var(--PADDING_SMALL, 20px);
-  color: var(--white, #fff);
   width: calc(100vw - 1rem);
   max-width: var(--BREAK_LARGE_TABLET, 850px);
   max-height: 100%;
+  color: var(--white, #fff);
 `;
 
 export const ScrollableContent = styled.div`
