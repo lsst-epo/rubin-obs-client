@@ -1,6 +1,6 @@
 import { useState } from "react";
-import SunCalc from "suncalc-tz";
 import { useTranslation } from "react-i18next";
+import { getMoonIllumination, getTimes } from "@/lib/suncalc";
 import WidgetPreview from "@/components/layout/WidgetPreview";
 import SummitStatusModal from "@/components/modal/SummitStatusModal";
 import MoonPhase from "@/components/widgets/CurrentData/patterns/MoonPhase";
@@ -11,12 +11,13 @@ import CurrentAstroweather from "./Current";
 import ForecastAstroweather from "./Forecast";
 
 const Astroweather = () => {
+  const { t } = useTranslation();
   const [isModalOpen, setModalOpen] = useState(false);
 
   const now = new Date();
   const offset = timezoneOffset(timezone);
 
-  const { phase } = SunCalc.getMoonIllumination(now);
+  const { phase } = getMoonIllumination(now);
 
   const observatoryDate = new Date(
     now.toLocaleString("en-US", { timeZone: timezone })
@@ -24,7 +25,7 @@ const Astroweather = () => {
 
   observatoryDate.setUTCHours(12 - offset, 0, 0, 0);
 
-  const { nightEnd, sunrise, sunset, night } = SunCalc.getTimes(
+  const { nightEnd, sunrise, sunset, night } = getTimes(
     observatoryDate,
     lat,
     long,
