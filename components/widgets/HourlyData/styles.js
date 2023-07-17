@@ -20,8 +20,8 @@ export const HourlyDataList = styled(ScrollableHorizontalWrapper)`
 export const HourlyDataItem = styled.li`
   display: flex;
   flex-direction: column-reverse;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   text-align: center;
 `;
 

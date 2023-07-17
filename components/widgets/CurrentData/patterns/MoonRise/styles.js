@@ -10,17 +10,17 @@ export const Background = styled(WidgetBackground)`
 
 export const Timecard = styled.div`
   display: flex;
+  flex: 0 1 50%;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  flex: 0 1 50%;
   height: 100%;
 `;
 
 export const Divider = styled.div`
-  background-color: var(--white, #fff);
   width: 1px;
   height: 4em;
+  background-color: var(--white, #fff);
 `;
 
 export const Time = styled(Value)`
