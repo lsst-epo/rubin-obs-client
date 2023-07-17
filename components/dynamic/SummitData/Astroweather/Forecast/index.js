@@ -33,7 +33,7 @@ const ForecastAstroweather = () => {
   const forecast = Array.apply(null, Array(14)).map((value, i) => {
     const day = new Date();
     day.setDate(now.getDate() + i);
-    const { rise, set } = getMoonTimes(day.toUTCString(), lat, long);
+    const { rise, set } = getMoonTimes(day, lat, long);
 
     return {
       day: day.getDay(),
