@@ -36,14 +36,14 @@ const DailyMoonrise = ({ data, labelledById }) => {
                 {formatDayName(day, language)}
               </Styled.HeaderCell>
               <Styled.TableCell>
-                {rise && rise < set ? (
+                {rise && (rise < set || !set) ? (
                   <MoonTime time={rise} azimuth={azimuthRise} />
                 ) : (
                   "—"
                 )}
               </Styled.TableCell>
               <Styled.TableCell>
-                {set && <MoonTime time={set} azimuth={azimuthSet} />}
+                {set ? <MoonTime time={set} azimuth={azimuthSet} /> : "—"}
               </Styled.TableCell>
               <Styled.TableCell>
                 {rise && rise > set ? (
