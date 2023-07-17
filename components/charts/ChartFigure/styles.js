@@ -1,17 +1,15 @@
 import styled from "styled-components";
-import WidgetBackground from "@/components/atomic/WidgetBackground";
 
 export const Caption = styled.figcaption`
   text-align: center;
 `;
 export const Content = styled.div`
+  position: relative;
   display: flex;
   justify-content: center;
   width: 100%;
   overflow-x: auto;
   overflow-y: hidden;
-  position: relative;
-  overflow-x: auto;
   scrollbar-color: var(--white, #fff) rgba(255, 255, 255, 20%);
   scrollbar-width: thin;
 

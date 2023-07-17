@@ -1,6 +1,6 @@
 import { useState } from "react";
-import SunCalc from "suncalc-tz";
 import { useTranslation } from "react-i18next";
+import { getTimes } from "@/lib/suncalc";
 import { altitude, lat, long, timezone } from "@/lib/observatory";
 import { timezoneOffset } from "@/helpers";
 import WidgetSection from "@/components/layout/WidgetSection";
@@ -24,7 +24,7 @@ const CurrentAstroweather = () => {
 
   observatoryDate.setUTCHours(12 - offset, 0, 0, 0);
 
-  const { nightEnd, sunrise, sunset, night } = SunCalc.getTimes(
+  const { nightEnd, sunrise, sunset, night } = getTimes(
     observatoryDate,
     lat,
     long,
