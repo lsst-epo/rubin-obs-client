@@ -48,9 +48,9 @@ export const SectionHeader = styled.h2`
 export const SectionContent = styled.div`
   --grid-columns: repeat(2, 1fr);
 
-  grid-gap: var(--PADDING_SMALL, 20px);
   grid-template-columns: var(--grid-columns);
   grid-auto-rows: fit-content(10rem);
+  grid-gap: var(--PADDING_SMALL, 20px);
   margin-block-start: var(--PADDING_SMALL, 20px);
 
   &:not([hidden]) {

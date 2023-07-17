@@ -27,7 +27,6 @@ export const PreviewPanel = styled.section`
 
   display: grid;
   grid-template: "header" 2rem "content" auto "callout" 2rem / 1fr;
-  grid-gap: var(--widget-grid-gap);
   grid-column: span min(var(--panel-columns), var(--widget-columns));
   grid-gap: var(--widget-grid-gap);
   background-color: var(--black, #000);
@@ -70,8 +69,8 @@ export const PreviewIconButton = styled(IconButton)`
 
 export const PreviewContent = styled.div`
   display: grid;
-  grid-auto-rows: 10rem;
   grid-template-columns: repeat(var(--panel-columns), 1fr);
+  grid-auto-rows: 10rem;
   grid-gap: var(--widget-grid-gap);
   padding-inline: var(--widget-grid-gap);
   color: var(--white, #fff);

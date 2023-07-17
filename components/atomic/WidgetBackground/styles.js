@@ -11,12 +11,12 @@ export const WidgetBackground = styled.div`
     variants[$variant]};
   --widget-padding: ${fluidScale("20px", "10px")};
 
-  background-color: var(--widget-background-color);
-  border-radius: calc(var(--widget-padding) / 2);
-  font-size: 0.75rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   padding: var(--widget-padding);
+  font-size: 0.75rem;
+  background-color: var(--widget-background-color);
+  border-radius: calc(var(--widget-padding) / 2);
 `;
