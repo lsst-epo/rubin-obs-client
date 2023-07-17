@@ -41,7 +41,7 @@ export const timezoneOffset = (timezone) => {
   const now = new Date();
   now.setUTCHours(0, 0, 0, 0);
   const localeDate = new Date(
-    now.toLocaleString("en-US", { timeZone: timezone })
+    now.toLocaleString("default", { timeZone: timezone })
   );
 
   return 24 - localeDate.getHours();
