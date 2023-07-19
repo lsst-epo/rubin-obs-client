@@ -22,7 +22,6 @@ export const HourlyDataItem = styled.li`
   flex-direction: column-reverse;
   align-items: center;
   justify-content: center;
-  align-items: center;
   text-align: center;
 `;
 
