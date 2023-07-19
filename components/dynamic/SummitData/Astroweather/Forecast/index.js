@@ -1,15 +1,10 @@
 import { useState } from "react";
-<<<<<<< HEAD
 import { useTranslation } from "react-i18next";
 import {
   getMoonIllumination,
   getMoonPosition,
   getMoonTimes,
 } from "@/lib/suncalc";
-=======
-import SunCalc from "suncalc-tz";
-import { useTranslation } from "react-i18next";
->>>>>>> 32d31dc ([F] Moonrise widget)
 import { lat, long } from "@/lib/observatory";
 import WidgetSection from "@/components/layout/WidgetSection";
 import MoonRise from "@/components/widgets/CurrentData/patterns/MoonRise";
