@@ -6,6 +6,7 @@ import WidgetGrid from "@/components/layout/WidgetGrid";
 import { SummitDataProvider } from "@/contexts/SummitData";
 import Weather from "@/components/dynamic/SummitData/Weather";
 import Astroweather from "@/components/dynamic/SummitData/Astroweather";
+import Observation from "@/components/dynamic/SummitData/Observation";
 
 const SummitStatus = ({ summitStatusLayout, widgetPreviews = [] }) => {
   return (
@@ -14,6 +15,7 @@ const SummitStatus = ({ summitStatusLayout, widgetPreviews = [] }) => {
         <UnitLocalization />
         <SummitDataProvider>
           <WidgetGrid>
+            <Observation />
             <Weather />
             <Astroweather />
           </WidgetGrid>

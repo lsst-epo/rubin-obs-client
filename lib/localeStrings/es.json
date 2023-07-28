@@ -259,7 +259,7 @@
       "description_students": "Únase para aprender cómo los astrónomos aprenden e interactúan con datos astronómicos reales. Gratis para siempre.",
       "description_educators": "Únase para acceder a datos y herramientas astronómicas reales para su clase. Gratis para siempre.",
       "sign_in_link": "¿Ya tiene una cuenta?",
-      "continue_with_google": "Continuar con Google", 
+      "continue_with_google": "Continuar con Google",
       "continue_with_facebook": "Continuar con Facebook",
       "sign_up_with_email": "Registrarse con un correo"
     },
@@ -340,7 +340,15 @@
       "email": "Correo",
       "email_subject": "¡Hola! Mira esta información de la web del Observatorio Rubin: {{title}}",
       "facebook_quote": "¡Hola! Mira esta información de la web del Observatorio Rubin: {{title}}",
-      "twitter_title": "¡Hola! Mira esta información de la web del Observatorio Rubin: {{title}}" 
+      "twitter_title": "¡Hola! Mira esta información de la web del Observatorio Rubin: {{title}}"
+    },
+    "summit_dashboard": {
+      "unit_localization": {
+        "north_abbr": "N",
+        "south_abbr": "S",
+        "east_abbr": "E",
+        "west_abbr": "O"
+      }
     }
   }
 }
