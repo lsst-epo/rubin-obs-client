@@ -346,9 +346,16 @@
         "m": "m/s",
         "NM_full": "Knots",
         "mi_full": "Miles per hour",
-        "m_full": "Meters per second"
+        "m_full": "Meters per second",
+        "north_abbr": "N",
+        "south_abbr": "S",
+        "east_abbr": "E",
+        "west_abbr": "W"
       },
       "sections": {
+        "observations": {
+          "instruments": "Where are the instruments pointing at?"
+        },
         "weather": {
           "preview": "Weather at the summit",
           "current": "Weather at the summit now",
@@ -408,7 +415,11 @@
         },
         "current": {
           "windspeed": "Average windspeed",
-          "moon": "Tonight we will have a"
+          "moon": "Tonight we will have a",
+          "azimuth": "Azimuth",
+          "azimuth_angle": "Azimuth: {{angle}}",
+          "zenith": "Zenith",
+          "zenith_angle": "Zenith: {{angle}}"
         }
       }
     }
