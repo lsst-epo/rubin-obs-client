@@ -2,6 +2,8 @@ import styled from "styled-components";
 import WidgetBackground from "@/components/atomic/WidgetBackground";
 import Azimuth from "@/components/widgets/CurrentData/patterns/Azimuth";
 import Zenith from "@/components/widgets/CurrentData/patterns/Zenith";
+import Slew from "@/components/widgets/CurrentData/patterns/SlewSpeed";
+import Shutter from "@/components/widgets/CurrentData/patterns/ShutterSpeed";
 import { BREAK_PHABLET_MIN } from "@/styles/globalStyles";
 
 export const InstrumentsLayout = styled(WidgetBackground)`
@@ -12,6 +14,7 @@ export const InstrumentsLayout = styled(WidgetBackground)`
   display: grid;
   grid-template: var(--instrument-layout);
   grid-column: 1/-1;
+  gap: 0.5em;
 
   @media screen and (min-width: ${BREAK_PHABLET_MIN}) {
     --instrument-columns: 2fr 2fr 1fr;
@@ -22,10 +25,16 @@ export const InstrumentsLayout = styled(WidgetBackground)`
 
 export const BigAzimuth = styled(Azimuth)`
   grid-area: azimuth;
-  aspect-ratio: 1;
 `;
 
 export const BigZenith = styled(Zenith)`
   grid-area: zenith;
-  aspect-ratio: 1;
+`;
+
+export const SlewSpeed = styled(Slew)`
+  grid-area: slew;
+`;
+
+export const ShutterSpeed = styled(Shutter)`
+  grid-area: shutter;
 `;
