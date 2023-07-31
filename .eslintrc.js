@@ -87,6 +87,7 @@ module.exports = {
     "prefer-const": 2,
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
+    "react/no-unknown-property": ["error", { ignore: ["transform-origin"] }],
     "react/react-in-jsx-scope": 0,
     "space-before-function-paren": 0,
     "spaced-comment": 2,

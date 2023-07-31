@@ -19,6 +19,8 @@ const Instruments = ({ azimuth, zenith }) => {
       <Styled.InstrumentsLayout $variant="secondary">
         <Styled.BigAzimuth azimuth={azimuth} />
         <Styled.BigZenith zenith={zenith} />
+        <Styled.SlewSpeed speed={3} />
+        <Styled.ShutterSpeed speed={2} />
       </Styled.InstrumentsLayout>
     </WidgetSection>
   );
