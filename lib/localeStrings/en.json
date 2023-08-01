@@ -140,7 +140,11 @@
     "news": {
       "related-posts": "Related News Posts",
       "back-to-posts": "Go Back to News Posts",
-      "loading": "Loading the News..."
+      "loading": "Loading the News...",
+      "more-info": "More Information",
+      "release-link": "Learn more about this release on NOIRLab.edu",
+      "links": "Links",
+      "contacts": "Contacts"
     },
     "pagination": {
       "label": "Pagination",

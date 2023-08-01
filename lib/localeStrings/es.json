@@ -155,7 +155,11 @@
     "news": {
       "related-posts": "Noticias relacionadas",
       "back-to-posts": "Volver a noticias",
-      "loading": "Cargando las noticias..."
+      "loading": "Cargando las noticias...",
+      "more-info": "Información Adicional",
+      "release-link": "Obtenga más información sobre este boletín en NOIRlab.edu",
+      "links": "Links",
+      "contacts": "Contactos"
     },
     "pagination": {
       "label": "Paginación",

@@ -1,48 +1,33 @@
 import PropTypes from "prop-types";
-import styled from "styled-components";
-import Link from "next/link";
 import { useTranslation } from "react-i18next";
-import { useCustomBreadcrumbs, useDateString } from "@/lib/utils";
+import { useCustomBreadcrumbs, makeReleaseHero } from "@/lib/utils";
 import Body from "@/global/Body";
-import ContentBlockFactory from "@/factories/ContentBlockFactory";
-import {
-  Container,
-  ResponsiveImage,
-  IconComposer,
-} from "@rubin-epo/epo-react-lib";
-import { Share } from "@/content-blocks";
 import Breadcrumbs from "@/page/Breadcrumbs";
 import Hero from "@/page/Hero";
+import NewsArticle from "./NewsArticle";
 import NewsList from "@/dynamic/NewsList";
-import {
-  containerWide,
-  containerFullBleed,
-  respond,
-} from "@/styles/globalStyles";
+import NewsAside from "./NewsAside";
+import * as Styled from "./styles";
 
-export default function NewsPage({
-  data: {
+export default function NewsPage({ data }) {
+  const {
     contentBlocksNews = [],
-    date,
     description,
     featuredImage = [],
     hero = [],
     id,
     newsAssets,
-    postType,
     postTags,
     title,
     uri,
-  },
-}) {
+    visuals,
+  } = data;
   const { t } = useTranslation();
-  const localizedDate = useDateString(date);
   const bodyProps = {
     description,
     featuredImage,
     title,
   };
-
   const customBreadcrumbs = useCustomBreadcrumbs("News");
   const rootHomeLink = customBreadcrumbs.slice(-1)[0];
   const pageLink = {
@@ -51,146 +36,35 @@ export default function NewsPage({
     title,
     active: true,
   };
-
-  // This sets up the automatic media grabber -- if there are no manual media set
-  let manualMedia = false;
-  // This adds the document icon from the designs, if there is a text-style link near the start.
-  let manualDoc = newsAssets.some(
-    (a, i) => i < 4 && (a.textLink?.length > 0 || a.externalLink?.length > 0)
+  const imageContentBlocks = [...contentBlocksNews].filter(
+    (block) => block.typeHandle === "image"
   );
-
-  const MediaAssets = () => {
-    const otherAssets = [...contentBlocksNews].filter(
-      (block, i) => block.typeHandle === "image"
-    );
-    return otherAssets.length > 0 ? (
-      <AsideSecondary>
-        <h3>{t(`media`)}</h3>
-        {otherAssets.map((asset, i) => {
-          if (asset.image?.[0].url) {
-            return (
-              <Link key={i} prefetch={false} href={asset.image?.[0].url}>
-                <ResponsiveImage image={asset.image?.[0]} ratio="8:5" />
-              </Link>
-            );
-          }
-        })}
-      </AsideSecondary>
-    ) : null;
-  };
-
-  const Tags = () => {
-    return postTags.length > 0 ? (
-      <AsideTags>
-        <h3>{t(`tags`)}</h3>
-        {postTags.map((tag, i) => {
-          if (rootHomeLink?.uri && tag.slug) {
-            return (
-              <Link
-                key={i}
-                prefetch={false}
-                href={`/${rootHomeLink?.uri}?search=${tag.slug}`}
-              >
-                {`#${tag.title}`}
-              </Link>
-            );
-          }
-        })}
-      </AsideTags>
-    ) : null;
-  };
+  const showAside =
+    newsAssets?.length > 0 ||
+    imageContentBlocks?.length > 0 ||
+    visuals?.images?.length > 0 ||
+    visuals?.videos?.length > 0 ||
+    visuals?.stockimages?.length > 0 ||
+    postTags?.length > 0;
 
   return (
     <Body {...bodyProps}>
       <Breadcrumbs breadcrumbs={[...customBreadcrumbs, pageLink]} />
-      <Hero data={hero} />
-      <NewsDetail>
-        <article>
-          <Container paddingSize="medium">
-            <div>
-              <h1>{title}</h1>
-              <Pretitle className="t-heading-quaternary">
-                {localizedDate}
-              </Pretitle>
-              {description && <Subtitle>{description}</Subtitle>}
-            </div>
-          </Container>
-          <Share />
-          {contentBlocksNews.length > 0 &&
-            [...contentBlocksNews].map((block) => {
-              if (!block.id || !block.typeHandle) return null;
-              return (
-                <ContentBlockFactory
-                  key={block.id}
-                  type={block.typeHandle}
-                  data={block}
-                  pageId={id}
-                />
-              );
-            })}
-        </article>
-        <Aside>
-          {newsAssets?.length > 0 && (
-            <AsidePrimary>
-              {newsAssets.map((a, i) => {
-                if (a.assetHeader) {
-                  return (
-                    <h3 key={i}>
-                      {a.assetHeader}{" "}
-                      {manualDoc === true && <IconComposer icon="Doc" />}
-                    </h3>
-                  );
-                } else if (a.textLink?.length > 0) {
-                  if (a.textLink[0].url) {
-                    return (
-                      <Link key={i} prefetch={false} href={a.textLink[0].url}>
-                        {a.text}
-                      </Link>
-                    );
-                  }
-                } else if (a.externalLink) {
-                  manualDoc = true;
-                  return (
-                    <a
-                      href={a.externalLink}
-                      key={i}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      {a.text}
-                    </a>
-                  );
-                } else if (a.image?.length > 0) {
-                  manualMedia = true;
-                  return (
-                    <a href={a.image[0].url} download key={i}>
-                      <ResponsiveImage image={a.image[0]} />
-                    </a>
-                  );
-                } else if (a.galleryItem?.length > 0) {
-                  manualMedia = true;
-                  if (a.galleryItem[0].uri) {
-                    return (
-                      <Link
-                        prefetch={false}
-                        href={`/${a.galleryItem[0].uri}`}
-                        key={i}
-                      >
-                        <ResponsiveImage
-                          image={a.galleryItem[0].representativeAssetVariant[0]}
-                        />
-                      </Link>
-                    );
-                  }
-                }
-              })}
-            </AsidePrimary>
-          )}
-
-          {!manualMedia && <MediaAssets />}
-          {postTags && <Tags />}
-        </Aside>
-      </NewsDetail>
+      <Hero data={hero?.length > 0 ? hero : makeReleaseHero(visuals?.images)} />
+      <Styled.NewsDetail $showAside={showAside}>
+        {data && <NewsArticle data={data} />}
+        {showAside && (
+          <NewsAside
+            newsAssets={newsAssets}
+            contentBlockAssets={imageContentBlocks}
+            releaseImages={visuals?.images}
+            releaseVideos={visuals?.videos}
+            releaseStockImages={visuals?.stockimages}
+            tags={postTags}
+            rootHomeLink={rootHomeLink}
+          />
+        )}
+      </Styled.NewsDetail>
       <NewsList
         button={{
           text: t(`news.back-to-posts`),
@@ -206,88 +80,6 @@ export default function NewsPage({
     </Body>
   );
 }
-
-const NewsDetail = styled.div`
-  ${containerFullBleed("CONTAINER_REGULAR")}
-  display: grid;
-  grid-template-columns: minmax(75%, 1fr) minmax(25%, 250px);
-  ${respond(`${containerWide()}`, "1360px")}
-  ${respond(`grid-template-columns: 1fr;`)}
-  article > section > div {
-    padding-left: 0;
-    margin-left: 0;
-    ${respond(`max-width: 94vw;`, "720px")}
-  }
-`;
-
-const Pretitle = styled.div`
-  padding-bottom: 10px;
-`;
-
-const Subtitle = styled.div`
-  padding-top: 10px;
-`;
-
-const Aside = styled.aside`
-  padding: 100px 0;
-  ${respond(`padding: 30px 0 0 0;`)}
-
-  h3 {
-    position: relative;
-    padding-right: 32px;
-    padding-bottom: 0.5rem;
-    margin-bottom: 0.5rem;
-    border-bottom: 8px solid var(--neutral15);
-    svg {
-      display: none;
-    }
-  }
-
-  a {
-    display: block;
-    text-decoration: none;
-    font-size: 14px;
-    color: var(--turquoise60);
-    margin: 10px 0;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-`;
-
-const AsidePrimary = styled.div`
-  h3 {
-    &:first-of-type {
-      border-bottom: 8px solid var(--turquoise60);
-      svg {
-        display: block;
-        position: absolute;
-        top: 4px;
-        right: 0;
-        background-color: var(--turquoise60);
-        border-radius: 50%;
-        padding: 8px;
-        width: 32px;
-        height: 32px;
-        fill: var(--white);
-        overflow: visible;
-      }
-    }
-  }
-`;
-
-const AsideSecondary = styled.div`
-  margin-top: 1em;
-`;
-
-const AsideTags = styled.div`
-  margin-top: 1em;
-  a {
-    display: inline-block;
-    margin-right: 6px;
-  }
-`;
 
 NewsPage.displayName = "Template.NewsPage";
 

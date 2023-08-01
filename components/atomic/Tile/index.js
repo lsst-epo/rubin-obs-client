@@ -79,7 +79,9 @@ const Tile = ({
           </TitleTag>
         )}
         {subtitle && <div className="subtitle">{subtitle}</div>}
-        {text && <div className="text">{text}</div>}
+        {text && (
+          <div className="text" dangerouslySetInnerHTML={{ __html: text }} />
+        )}
         {footer && (
           <div className="footer">
             {footer.button && (
