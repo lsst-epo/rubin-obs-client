@@ -6,9 +6,13 @@ const RadialMeter = ({ min, max, value, text, step = 1, labelledById }) => {
   const width = 100;
   const height = width;
 
-  const baseRotation = 135;
+  const baseRotation = -135;
   const range = arrayRange(min, max, step);
   const degreeStep = 270 / (range.length - 1);
+
+  const centerX = width / 2;
+  const centerY = height / 2;
+  const origin = `${centerX} ${centerY}`;
 
   return (
     <Styled.Meter
@@ -27,8 +31,8 @@ const RadialMeter = ({ min, max, value, text, step = 1, labelledById }) => {
         <path d="M25,80 A40,40 0 1 1 75,80" id="meterArc" />
       </defs>
       <circle
-        cx={width / 2}
-        cy={height / 2}
+        cx={centerX}
+        cy={centerY}
         r={width / 2}
         fill="#1f2121"
         stroke="#707070"
@@ -36,34 +40,29 @@ const RadialMeter = ({ min, max, value, text, step = 1, labelledById }) => {
       />
       <g stroke="#f5f5f5">
         <line
-          x1={height / 2}
-          x2={height / 2}
-          y1={27}
-          y2={width / 2}
+          x1={centerX}
+          x2={centerX}
+          y1={centerY - 20}
+          y2={centerY}
           fill="none"
           strokeWidth="4"
-          transform-origin={`${width / 2} ${height / 2}`}
-          transform={`rotate(${value * degreeStep + baseRotation + 90})`}
+          transform-origin={origin}
+          transform={`rotate(${value * degreeStep + baseRotation})`}
         />
         <g fill="#c3c3c3" strokeWidth="2">
-          <circle cx={width / 2} cy={height / 2} r="4" stroke="none" />
-          <circle cx={width / 2} cy={height / 2} r="3" fill="none" />
+          <circle cx={centerX} cy={centerY} r="4" stroke="none" />
+          <circle cx={centerX} cy={centerY} r="3" fill="none" />
         </g>
       </g>
-      <g
-        strokeWidth="2"
-        stroke="#F5F5F5"
-        strokeDasharray="6 24"
-        strokeDashoffset="-24"
-      >
+      <g strokeWidth="2" stroke="#F5F5F5" strokeDasharray="6 24">
         {range.map((v, i) => (
           <line
             key={v}
-            x1={width / 2}
-            x2={width / 2 + 30}
-            y1={height / 2}
-            y2={height / 2}
-            transform-origin={`${width / 2} ${height / 2}`}
+            x1={centerX}
+            x2={centerX}
+            y1={centerY - 30}
+            y2={centerY}
+            transform-origin={origin}
             transform={`rotate(${i * degreeStep + baseRotation})`}
           />
         ))}
