@@ -84,7 +84,6 @@ const DataList = ({
   }
 
   if (isError) return null;
-
   return (
     <>
       <Container width={width}>
