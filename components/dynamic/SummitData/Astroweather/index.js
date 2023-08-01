@@ -23,7 +23,7 @@ const Astroweather = () => {
   tomorrow.setDate(tomorrow.getDate() + 1);
   yesterday.setDate(yesterday.getDate() - 1);
 
-  const isAfterNoon = today.getUTCHours() - offset > 12;
+  const isAfterNoon = today.getUTCHours() - offset >= 12;
   const dates = isAfterNoon ? [today, tomorrow] : [yesterday, today];
 
   const { phase } = getMoonIllumination(today);
