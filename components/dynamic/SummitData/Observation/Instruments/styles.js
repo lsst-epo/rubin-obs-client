@@ -14,7 +14,7 @@ export const InstrumentsLayout = styled(WidgetBackground)`
   display: grid;
   grid-template: var(--instrument-layout);
   grid-column: 1/-1;
-  gap: 0.5em;
+  gap: var(--widget-padding);
 
   @media screen and (min-width: ${BREAK_PHABLET_MIN}) {
     --instrument-columns: 2fr 2fr 1fr;
