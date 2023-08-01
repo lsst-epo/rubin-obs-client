@@ -7,6 +7,10 @@ const Azimuth = ({ azimuth = 0, isCondensed = false, className }) => {
   const { t } = useTranslation();
   const width = 100;
   const height = width;
+
+  const centerX = width / 2;
+  const centerY = height / 2;
+  const origin = `${centerX} ${centerY}`;
   return (
     <Styled.Container className={className}>
       {!isCondensed && (
@@ -22,34 +26,34 @@ const Azimuth = ({ azimuth = 0, isCondensed = false, className }) => {
         role="presentation"
       >
         <g stroke="#707070" strokeWidth="1">
-          <circle cx={width / 2} cy={height / 2} r={width / 2} fill="#373b3b" />
-          <line x1={width} y1={height / 2} y2={height / 2} />
+          <circle cx={centerX} cy={centerY} r={width / 2} fill="#373b3b" />
+          <line x1={width} y1={centerY} y2={centerY} />
           <line
             x1={width}
-            y1={height / 2}
-            y2={height / 2}
-            transform-origin={`${width / 2} ${height / 2}`}
+            y1={centerY}
+            y2={centerY}
+            transform-origin={origin}
             transform="rotate(45)"
           />
           <line
             x1={width}
-            y1={height / 2}
-            y2={height / 2}
-            transform-origin={`${width / 2} ${height / 2}`}
+            y1={centerY}
+            y2={centerY}
+            transform-origin={origin}
             transform="rotate(90)"
           />
 
           <line
             x1={width}
-            y1={height / 2}
-            y2={height / 2}
-            transform-origin={`${width / 2} ${height / 2}`}
+            y1={centerY}
+            y2={centerY}
+            transform-origin={origin}
             transform="rotate(-45)"
           />
         </g>
         <g fill="#fff" fontSize="9">
           <text
-            x={width / 2}
+            x={centerX}
             dy="3"
             textAnchor="middle"
             dominantBaseline="hanging"
@@ -59,7 +63,7 @@ const Azimuth = ({ azimuth = 0, isCondensed = false, className }) => {
           </text>
           <text
             x={width}
-            y={height / 2}
+            y={centerY}
             dx="-3"
             textAnchor="end"
             dominantBaseline="middle"
@@ -68,7 +72,7 @@ const Azimuth = ({ azimuth = 0, isCondensed = false, className }) => {
             {t("summit_dashboard.unit_localization.east", { context: "abbr" })}
           </text>
           <text
-            x={width / 2}
+            x={centerX}
             y={height}
             dy="-3"
             textAnchor="middle"
@@ -78,7 +82,7 @@ const Azimuth = ({ azimuth = 0, isCondensed = false, className }) => {
           </text>
           <text
             x={0}
-            y={height / 2}
+            y={centerY}
             dx="3"
             textAnchor="start"
             dominantBaseline="middle"
@@ -90,18 +94,18 @@ const Azimuth = ({ azimuth = 0, isCondensed = false, className }) => {
 
         <g stroke="#f5f5f5">
           <line
-            x1={height / 2}
-            x2={height / 2}
-            y1={5}
-            y2={width / 2}
+            x1={centerX}
+            x2={centerX}
+            y1={centerY - 45}
+            y2={centerY}
             fill="none"
             strokeWidth="4"
-            transform-origin={`${width / 2} ${height / 2}`}
+            transform-origin={origin}
             transform={`rotate(${azimuth})`}
           />
           <g fill="#c3c3c3" strokeWidth="2">
-            <circle cx={width / 2} cy={height / 2} r="4" stroke="none" />
-            <circle cx={width / 2} cy={height / 2} r="3" fill="none" />
+            <circle cx={centerX} cy={centerY} r="4" stroke="none" />
+            <circle cx={centerX} cy={centerY} r="3" fill="none" />
           </g>
         </g>
       </Styled.Compass>
