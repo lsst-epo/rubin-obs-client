@@ -3,12 +3,11 @@ import { useTranslation } from "react-i18next";
 import Loader from "@/components/atomic/Loader";
 import WidgetPreview from "@/components/layout/WidgetPreview";
 import SummitStatusModal from "@/components/modal/SummitStatusModal";
-import PrecipitationCurrent from "@/components/widgets/CurrentData/patterns/Precipitation";
+import DewpointCurrent from "@/components/widgets/CurrentData/patterns/Dewpoint";
 import TemperatureCurrent from "@/components/widgets/CurrentData/patterns/Temperature";
 import { useSummitData } from "@/contexts/SummitData";
 import { useWeatherUnit } from "@/contexts/WeatherUnit";
 import { convertTemperature } from "@/helpers/converters";
-import DailyWeather from "./Daily";
 import HourlyWeather from "./Hourly";
 import CurrentWeather from "./Current";
 
@@ -32,8 +31,9 @@ const Weather = () => {
       </WidgetPreview>
     );
 
-  const { temperature0, relativeHumidity } = currentData;
+  const { temperature0, dewPoint } = currentData;
   const temperature = convertTemperature(temperature0, tempUnit);
+  const dewpoint = convertTemperature(dewPoint, tempUnit);
 
   return (
     <WidgetPreview
@@ -43,11 +43,11 @@ const Weather = () => {
       }}
     >
       <TemperatureCurrent unit={tempUnit} temperature={temperature} />
-      <PrecipitationCurrent humidity={relativeHumidity / 100} />
+      <DewpointCurrent dewpoint={dewpoint} unit={tempUnit} />
       <SummitStatusModal open={isModalOpen} onClose={() => setModalOpen(false)}>
         <CurrentWeather />
         <HourlyWeather />
-        <DailyWeather />
+        {/* <DailyWeather /> */}
       </SummitStatusModal>
     </WidgetPreview>
   );
