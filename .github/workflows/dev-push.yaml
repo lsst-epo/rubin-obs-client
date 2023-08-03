@@ -36,8 +36,8 @@ jobs:
         --build-arg NEXT_PUBLIC_CONTACT_FORM_POST_URL=https://api-dev.rubinobs.com/actions/contact-form/send \
         --build-arg NEXT_PUBLIC_PLAUSIBLE_DOMAIN= \
         --build-arg NEXT_PREVIEW_SLUG=preview-in-craft-cms \
-        --build-arg NEXT_PUBLIC_PRESS_RELEASE_URL_EN=https://noirlab.edu/public/news/{{id}}/api/json \
-        --build-arg NEXT_PUBLIC_PRESS_RELEASE_URL_ES=https://noirlab.edu/public/news/{{id}}/api/json \
+        --build-arg NEXT_PUBLIC_PRESS_RELEASE_URL_EN=https://noirlab.edu/public/api/v2/releases/{{ID}} \
+        --build-arg NEXT_PUBLIC_PRESS_RELEASE_URL_ES=https://noirlab.edu/public/api/v2/releases/{{ID}} \
         .
         
     - name: Configure Docker Auth
