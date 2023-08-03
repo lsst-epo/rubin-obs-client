@@ -6,7 +6,7 @@ import Loader from "@/components/atomic/Loader";
 import WidgetSection from "@/components/layout/WidgetSection";
 import TemperatureCurrent from "@/components/widgets/CurrentData/patterns/Temperature";
 import WindspeedCurrent from "@/components/widgets/CurrentData/patterns/Windspeed";
-import PrecipitationCurrent from "@/components/widgets/CurrentData/patterns/Precipitation";
+import DewpointCurrent from "@/components/widgets/CurrentData/patterns/Dewpoint";
 import { convertTemperature, convertWindspeed } from "@/helpers/converters";
 
 const CurrentWeather = () => {
@@ -30,8 +30,9 @@ const CurrentWeather = () => {
       </WidgetSection>
     );
 
-  const { temperature0, windspeed, relativeHumidity } = currentData;
+  const { temperature0, windspeed, dewPoint } = currentData;
   const temperature = convertTemperature(temperature0, tempUnit);
+  const dewpoint = convertTemperature(dewPoint, tempUnit);
 
   return (
     <WidgetSection {...sectionProps}>
@@ -40,7 +41,7 @@ const CurrentWeather = () => {
         unit={windspeedUnit}
         windspeed={convertWindspeed(windspeed, windspeedUnit)}
       />
-      <PrecipitationCurrent humidity={relativeHumidity / 100} />
+      <DewpointCurrent unit={tempUnit} dewpoint={dewpoint} />
     </WidgetSection>
   );
 };
