@@ -7,6 +7,7 @@ import Zenith from "@/components/widgets/CurrentData/patterns/Zenith";
 import Instruments from "./Instruments";
 
 import * as Styled from "./styles";
+import Related from "./Related";
 
 const Observation = () => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -25,6 +26,7 @@ const Observation = () => {
         <Zenith zenith={zenith} isCondensed />
       </Styled.CondensedBackground>
       <SummitStatusModal open={isModalOpen} onClose={() => setModalOpen(false)}>
+        <Related />
         <Instruments {...{ azimuth, zenith }} />
       </SummitStatusModal>
     </WidgetPreview>
