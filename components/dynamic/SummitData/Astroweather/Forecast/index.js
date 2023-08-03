@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useWeatherUnit } from "@/contexts/WeatherUnit";
+import { useSummitData } from "@/contexts/SummitData";
+import { convertTemperature } from "@/helpers/converters";
 import {
   getMoonIllumination,
   getMoonPosition,
@@ -11,15 +14,30 @@ import MoonRise from "@/components/widgets/CurrentData/patterns/MoonRise";
 import MoonPhase from "@/components/widgets/CurrentData/patterns/MoonPhase";
 import DailyMoonrise from "@/components/widgets/DailyData/patterns/Moonrise";
 import { SectionSubHeader } from "@/components/layout/WidgetSection/styles";
+import Loader from "@/components/atomic/Loader";
+import DewpointCurrent from "@/components/widgets/CurrentData/patterns/Dewpoint";
 
 const ForecastAstroweather = () => {
   const { t } = useTranslation();
   const [isOpen, setOpen] = useState(true);
+  const [{ tempUnit }] = useWeatherUnit();
+  const {
+    currentData,
+    loading: { currentData: loading },
+  } = useSummitData();
+
   const sectionProps = {
     title: t("summit_dashboard.sections.astro.title"),
     onToggleCallback: (value) => setOpen(value),
     isOpen,
   };
+
+  if (loading || !currentData)
+    return (
+      <WidgetSection {...sectionProps}>
+        <Loader isVisible={true} />
+      </WidgetSection>
+    );
 
   const moonriseId = "moonriseTitle";
   const now = new Date();
@@ -44,6 +62,9 @@ const ForecastAstroweather = () => {
     };
   });
 
+  const { dewPoint } = currentData;
+  const dewpoint = convertTemperature(dewPoint, tempUnit);
+
   return (
     <WidgetSection {...sectionProps}>
       <MoonPhase phase={phase} />
@@ -51,6 +72,7 @@ const ForecastAstroweather = () => {
         rise={forecast[0].rise < now ? forecast[1].rise : forecast[0].rise}
         set={forecast[0].set < now ? forecast[1].set : forecast[0].set}
       />
+      <DewpointCurrent dewpoint={dewpoint} unit={tempUnit} />
       <SectionSubHeader id={moonriseId}>
         {t("summit_dashboard.sections.astro.moonrise.forecast")}
       </SectionSubHeader>
