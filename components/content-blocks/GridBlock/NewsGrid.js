@@ -2,6 +2,8 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import {
   makeDateString,
+  makeTruncatedString,
+  makeReleaseHero,
   normalizeItemData,
   useGlobalData,
   useList,
@@ -39,9 +41,12 @@ const NewsGrid = ({ items = [], limit, listTypeId, sectionHandle, pageId }) => {
             (
               {
                 date,
+                release_date: releaseDate,
                 description,
+                headline,
                 id,
                 image,
+                visuals,
                 newsAssets,
                 postType,
                 title,
@@ -55,12 +60,12 @@ const NewsGrid = ({ items = [], limit, listTypeId, sectionHandle, pageId }) => {
                 footer={{
                   button: t("read-more"),
                 }}
-                image={image?.[0]}
+                image={image?.[0] || makeReleaseHero(visuals?.images)?.[0]}
                 isFeature={i === 0}
                 link={uri}
                 pretitle={postType?.[0]?.title ? postType[0].title : " "}
-                subtitle={makeDateString(date, lang)}
-                text={description}
+                subtitle={makeDateString(date || releaseDate, lang)}
+                text={makeTruncatedString(headline || description, 30)}
                 title={title}
                 type="news"
                 showSharePopup
