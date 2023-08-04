@@ -9,14 +9,7 @@ import { timezone } from "@/lib/observatory";
 import { useTranslation } from "react-i18next";
 import ChartLegend from "@/components/charts/Legend";
 
-const Daylight = ({
-  dawn,
-  sunrise,
-  sunset,
-  night,
-  dates,
-  variant = "primary",
-}) => {
+const Daylight = ({ times, variant = "primary" }) => {
   const {
     t,
     i18n: { language = "en-US" },
@@ -24,13 +17,18 @@ const Daylight = ({
 
   const offset = timezoneOffset(timezone);
 
+  const firstDay = new Date(times[0].date);
+  firstDay.setUTCHours(12 + offset, 0, 0, 0);
+  const secondDay = new Date(times[1].date);
+  secondDay.setUTCHours(12 + offset, 0, 0, 0);
+  const sunset = new Date(times[0].times[0]);
+  const night = new Date(times[0].times[1]);
+  const dawn = new Date(times[1].times[0]);
+  const sunrise = new Date(times[1].times[1]);
+
   const width = variant === "primary" ? 280 : 640;
   const height = 70;
-  const xDomain = dates.map((date) => {
-    const hours = 12 + offset;
-    date.setUTCHours(hours, 0, 0, 0);
-    return date.getTime();
-  });
+  const xDomain = [firstDay.getTime(), secondDay.getTime()];
   const xScale = getLinearScale(xDomain, [0, width]);
   const xHeight = 25;
   const xPos = height - xHeight;
@@ -119,7 +117,7 @@ const Daylight = ({
             height={xPos}
             role="listitem"
             aria-label={t("summit_dashboard.sections.astro.daylight.daylight", {
-              from: formatTime(dates[0], language),
+              from: formatTime(firstDay, language),
               to: formatTime(sunset, language),
             })}
           />
@@ -165,12 +163,12 @@ const Daylight = ({
             style={{ "--fill": dayFill }}
             y={0}
             x={xScale(sunrise.getTime())}
-            width={xScale(dates[1].getTime()) - xScale(sunrise.getTime())}
+            width={xScale(secondDay.getTime()) - xScale(sunrise.getTime())}
             height={xPos}
             role="listitem"
             aria-label={t("summit_dashboard.sections.astro.daylight.daylight", {
               from: formatTime(sunrise, language),
-              to: formatTime(dates[1], language),
+              to: formatTime(secondDay, language),
             })}
           />
         </g>
@@ -200,11 +198,22 @@ const Daylight = ({
 };
 
 export const DaylightDataShape = {
-  dawn: PropTypes.instanceOf(Date).isRequired,
-  sunrise: PropTypes.instanceOf(Date).isRequired,
-  sunset: PropTypes.instanceOf(Date).isRequired,
-  night: PropTypes.instanceOf(Date).isRequired,
-  dates: PropTypes.arrayOf(PropTypes.instanceOf(Date)).isRequired,
+  times: PropTypes.arrayOf(
+    PropTypes.shape({
+      date: PropTypes.oneOfType([
+        PropTypes.instanceOf(Date),
+        PropTypes.string,
+        PropTypes.number,
+      ]).isRequired,
+      times: PropTypes.arrayOf(
+        PropTypes.oneOfType([
+          PropTypes.instanceOf(Date),
+          PropTypes.string,
+          PropTypes.number,
+        ])
+      ),
+    })
+  ).isRequired,
 };
 
 Daylight.propTypes = {

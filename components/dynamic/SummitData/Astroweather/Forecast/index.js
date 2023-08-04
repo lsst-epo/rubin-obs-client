@@ -39,44 +39,26 @@ const ForecastAstroweather = () => {
       </WidgetSection>
     );
 
+  // const { lunarPhase: phase, lunarTimes: times } = astroweatherData;
+
   const moonriseId = "moonriseTitle";
   const now = new Date();
-
-  const { phase } = getMoonIllumination(now);
-
-  const conversion = 180 / Math.PI;
-  const getAzimuth = (time) =>
-    getMoonPosition(time, lat, long).azimuth * conversion + 180;
-
-  const forecast = Array.apply(null, Array(14)).map((value, i) => {
-    const day = new Date();
-    day.setDate(now.getDate() + i);
-    const { rise, set } = getMoonTimes(day, lat, long);
-
-    return {
-      day: day.getDay(),
-      rise,
-      set,
-      azimuthRise: rise ? getAzimuth(rise) : null,
-      azimuthSet: set ? getAzimuth(set) : null,
-    };
-  });
 
   const { dewPoint } = current;
   const dewpoint = convertTemperature(dewPoint, tempUnit);
 
   return (
     <WidgetSection {...sectionProps}>
-      <MoonPhase phase={phase} />
+      {/* <MoonPhase phase={phase} />
       <MoonRise
-        rise={forecast[0].rise < now ? forecast[1].rise : forecast[0].rise}
-        set={forecast[0].set < now ? forecast[1].set : forecast[0].set}
-      />
+        rise={times[0].rise < now ? times[1].rise : times[0].rise}
+        set={times[0].set < now ? times[1].set : times[0].set}
+      /> */}
       <DewpointCurrent dewpoint={dewpoint} unit={tempUnit} />
       <SectionSubHeader id={moonriseId}>
         {t("summit_dashboard.sections.astro.moonrise.forecast")}
       </SectionSubHeader>
-      <DailyMoonrise data={forecast} labelledById={moonriseId} />
+      {/* <DailyMoonrise data={times} labelledById={moonriseId} /> */}
     </WidgetSection>
   );
 };
