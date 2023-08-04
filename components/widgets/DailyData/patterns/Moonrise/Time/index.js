@@ -6,7 +6,9 @@ import * as Styled from "./styles";
 const MoonTime = ({ time, azimuth }) => {
   return (
     <Styled.Container>
-      <time dateTime={time.toISOString()}>{formatTime(time)}</time>
+      <time dateTime={new Date(time).toISOString()}>
+        {formatTime(new Date(time))}
+      </time>
       <DirectionalArrow angle={azimuth} />({formatAngle(azimuth)})
     </Styled.Container>
   );
@@ -15,7 +17,11 @@ const MoonTime = ({ time, azimuth }) => {
 MoonTime.displayName = "Widgets.Daily.MoonTime";
 
 MoonTime.propTypes = {
-  time: PropTypes.instanceOf(Date),
+  time: PropTypes.oneOfType([
+    PropTypes.instanceOf(Date),
+    PropTypes.string,
+    PropTypes.number,
+  ]),
   azimuth: PropTypes.number,
 };
 

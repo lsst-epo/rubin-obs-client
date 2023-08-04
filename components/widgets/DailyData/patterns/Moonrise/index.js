@@ -29,9 +29,9 @@ const DailyMoonrise = ({ data, labelledById }) => {
         </tr>
       </thead>
       <tbody>
-        {data.map(({ day, rise, set, azimuthRise, azimuthSet }) => {
+        {data.map(({ day, rise, set, azimuthRise, azimuthSet }, i) => {
           return (
-            <tr key={rise}>
+            <tr key={i}>
               <Styled.HeaderCell scope="row">
                 {formatDayName(day, language)}
               </Styled.HeaderCell>
@@ -64,8 +64,16 @@ DailyMoonrise.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
       day: PropTypes.number,
-      rise: PropTypes.instanceOf(Date),
-      set: PropTypes.instanceOf(Date),
+      rise: PropTypes.oneOfType([
+        PropTypes.instanceOf(Date),
+        PropTypes.string,
+        PropTypes.number,
+      ]),
+      set: PropTypes.oneOfType([
+        PropTypes.instanceOf(Date),
+        PropTypes.string,
+        PropTypes.number,
+      ]),
       azimuthRise: PropTypes.number,
       azimuthSet: PropTypes.number,
     })

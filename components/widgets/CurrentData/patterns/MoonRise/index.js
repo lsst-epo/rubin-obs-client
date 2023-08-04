@@ -23,26 +23,29 @@ const MoonRise = ({ rise, set }) => {
       language
     );
 
+  const riseDate = new Date(rise);
+  const setDate = new Date(set);
+
   return (
     <Styled.Background $variant="secondary">
       <Styled.Timecard>
         <Styled.Label>
           {t("summit_dashboard.sections.astro.moonrise.time_moonrise")}
         </Styled.Label>
-        <Styled.Time as="time" dateTime={rise.toISOString()}>
-          {formatTime(rise, language, { hourCycle: "h24" })}
+        <Styled.Time as="time" dateTime={riseDate.toISOString()}>
+          {formatTime(riseDate, language, { hourCycle: "h24" })}
         </Styled.Time>
-        <Styled.Unit>{getRelativeTime(rise, now)}</Styled.Unit>
+        <Styled.Unit>{getRelativeTime(riseDate, now)}</Styled.Unit>
       </Styled.Timecard>
       <Styled.Divider role="presentation" />
       <Styled.Timecard>
         <Styled.Label>
           {t("summit_dashboard.sections.astro.moonrise.time_moonset")}
         </Styled.Label>
-        <Styled.Time as="time" dateTime={set.toISOString()}>
-          {formatTime(set, language, { hourCycle: "h24" })}
+        <Styled.Time as="time" dateTime={setDate.toISOString()}>
+          {formatTime(setDate, language, { hourCycle: "h24" })}
         </Styled.Time>
-        <Styled.Unit>{getRelativeTime(set, now)}</Styled.Unit>
+        <Styled.Unit>{getRelativeTime(setDate, now)}</Styled.Unit>
       </Styled.Timecard>
     </Styled.Background>
   );
@@ -51,8 +54,16 @@ const MoonRise = ({ rise, set }) => {
 MoonRise.displayName = "Widgets.Current.MoonRise";
 
 MoonRise.propTypes = {
-  rise: PropTypes.instanceOf(Date),
-  set: PropTypes.instanceOf(Date),
+  rise: PropTypes.oneOfType([
+    PropTypes.instanceOf(Date),
+    PropTypes.string,
+    PropTypes.number,
+  ]),
+  set: PropTypes.oneOfType([
+    PropTypes.instanceOf(Date),
+    PropTypes.string,
+    PropTypes.number,
+  ]),
 };
 
 export default MoonRise;

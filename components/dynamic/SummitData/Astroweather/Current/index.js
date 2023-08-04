@@ -1,12 +1,10 @@
-import PropTypes from "prop-types";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useSummitData } from "@/contexts/SummitData";
 import WidgetSection from "@/components/layout/WidgetSection";
-import Daylight, {
-  DaylightDataShape,
-} from "@/components/widgets/CurrentData/patterns/Daylight";
+import Daylight from "@/components/widgets/CurrentData/patterns/Daylight";
 
-const CurrentAstroweather = ({ data }) => {
+const CurrentAstroweather = () => {
   const { t } = useTranslation();
   const [isOpen, setOpen] = useState(true);
   const sectionProps = {
@@ -14,22 +12,24 @@ const CurrentAstroweather = ({ data }) => {
     onToggleCallback: (value) => setOpen(value),
     isOpen,
   };
+  const {
+    astroweatherData,
+    loading: { astroweatherData: loading },
+  } = useSummitData();
 
-  const { daylight } = data;
+  if (loading) {
+    return null;
+  }
+
+  const { solarTimes: times } = astroweatherData;
 
   return (
     <WidgetSection {...sectionProps}>
-      <Daylight {...daylight} variant="secondary" />
+      <Daylight times={times} variant="secondary" />
     </WidgetSection>
   );
 };
 
 CurrentAstroweather.displayName = "Dynamic.Astroweather.Current";
-
-CurrentAstroweather.propTypes = {
-  data: PropTypes.shape({
-    daylight: PropTypes.shape(DaylightDataShape),
-  }),
-};
 
 export default CurrentAstroweather;
