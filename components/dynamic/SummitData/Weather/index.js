@@ -16,8 +16,8 @@ const Weather = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [{ tempUnit }] = useWeatherUnit();
   const {
-    currentData,
-    loading: { currentData: loading },
+    data: { current: currentData },
+    isLoading: loading,
   } = useSummitData();
 
   const previewProps = {
