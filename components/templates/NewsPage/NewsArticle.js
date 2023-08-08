@@ -45,57 +45,64 @@ export default function NewsArticle({ data }) {
           </Styled.Pretitle>
           <Styled.Subtitle>{description || headline}</Styled.Subtitle>
         </div>
-        <Share />
-        {/* only a releaseDescription if isNoirlabRelease */}
-        {releaseDescription && (
+      </Container>
+      <Share />
+      {/* only a releaseDescription if isNoirlabRelease */}
+      {releaseDescription && (
+        <Container paddingSize="medium">
           <div
             dangerouslySetInnerHTML={{ __html: releaseDescription }}
             className="c-content-rte"
           />
-        )}
-        {!pressReleaseId &&
-          contentBlocksNews.length > 0 &&
-          [...contentBlocksNews].map((block) => {
-            if (!block.id || !block.typeHandle) return null;
-            return (
-              <ContentBlockFactory
-                key={block.id}
-                type={block.typeHandle}
-                data={block}
-                pageId={id}
-              />
-            );
-          })}
-        {/* only a headline if isNoirlabRelease */}
-        {(moreInformation || releaseUrl) && (
-          <>
-            <Styled.ArticleHeading>{t(`news.more-info`)}</Styled.ArticleHeading>
-            {moreInformation && (
-              <div
-                dangerouslySetInnerHTML={{ __html: moreInformation }}
-                className="c-content-rte"
-              />
-            )}
-            <div className="c-content-rte">
-              <Link prefetch={false} href={releaseUrl}>
-                {t(`news.release-link`)}
-              </Link>
-            </div>
-          </>
-        )}
-        {/* only a headline if isNoirlabRelease */}
-        {links && (
-          <>
-            <Styled.ArticleHeading>{t(`news.links`)}</Styled.ArticleHeading>
+        </Container>
+      )}
+
+      {!pressReleaseId &&
+        contentBlocksNews.length > 0 &&
+        [...contentBlocksNews].map((block) => {
+          if (!block.id || !block.typeHandle) return null;
+          return (
+            <ContentBlockFactory
+              key={block.id}
+              type={block.typeHandle}
+              data={block}
+              pageId={id}
+            />
+          );
+        })}
+      {/* only a headline if isNoirlabRelease */}
+      {(moreInformation || releaseUrl) && (
+        <Container paddingSize="medium">
+          <Styled.ArticleHeading>{t(`news.more-info`)}</Styled.ArticleHeading>
+          {moreInformation && (
             <div
-              dangerouslySetInnerHTML={{ __html: links }}
+              dangerouslySetInnerHTML={{ __html: moreInformation }}
               className="c-content-rte"
             />
-          </>
-        )}
-        {/* only a headline if isNoirlabRelease */}
-        {contacts && <Contacts contacts={contacts} />}
-      </Container>
+          )}
+          <div className="c-content-rte">
+            <Link prefetch={false} href={releaseUrl}>
+              {t(`news.release-link`)}
+            </Link>
+          </div>
+        </Container>
+      )}
+      {/* only a headline if isNoirlabRelease */}
+      {links && (
+        <Container paddingSize="medium">
+          <Styled.ArticleHeading>{t(`news.links`)}</Styled.ArticleHeading>
+          <div
+            dangerouslySetInnerHTML={{ __html: links }}
+            className="c-content-rte"
+          />
+        </Container>
+      )}
+      {/* only contacts if isNoirlabRelease */}
+      {contacts && (
+        <Container paddingSize="medium">
+          <Contacts contacts={contacts} />
+        </Container>
+      )}
     </article>
   );
 }
