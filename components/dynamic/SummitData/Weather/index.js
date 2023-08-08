@@ -16,22 +16,22 @@ const Weather = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [{ tempUnit }] = useWeatherUnit();
   const {
-    data: { current: currentData },
-    isLoading: loading,
+    data: { current },
+    isLoading,
   } = useSummitData();
 
   const previewProps = {
     title: t("summit_dashboard.sections.weather.preview"),
   };
 
-  if (loading || !currentData)
+  if (isLoading || !current)
     return (
       <WidgetPreview {...previewProps}>
         <Loader isVisible={true} />
       </WidgetPreview>
     );
 
-  const { temperature0, dewPoint } = currentData;
+  const { temperature0, dewPoint } = current;
   const temperature = convertTemperature(temperature0, tempUnit);
   const dewpoint = convertTemperature(dewPoint, tempUnit);
 

@@ -12,8 +12,8 @@ const DailyWeather = () => {
   const [isOpen, setOpen] = useState(true);
   const [{ tempUnit }] = useWeatherUnit();
   const {
-    dailyData,
-    loading: { dailyData: loading },
+    data: { daily },
+    isLoading,
   } = useSummitData();
   const sectionProps = {
     title: t("summit_dashboard.sections.weather.daily", {
@@ -23,14 +23,14 @@ const DailyWeather = () => {
     isOpen,
   };
 
-  if (loading || !dailyData)
+  if (isLoading || !daily)
     return (
       <WidgetSection {...sectionProps}>
         <Loader isVisible={true} />
       </WidgetSection>
     );
 
-  const temperatureData = dailyData
+  const temperatureData = daily
     .slice(0, -1)
     .map(({ _time, temperature0_max: max, temperature0_min: min }) => {
       return {
