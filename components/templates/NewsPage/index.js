@@ -21,7 +21,8 @@ export default function NewsPage({ data }) {
     postTags,
     title,
     uri,
-    visuals,
+    images: releaseImages,
+    videos: releaseVideos,
   } = data;
   const { t } = useTranslation();
   const bodyProps = {
@@ -40,27 +41,26 @@ export default function NewsPage({ data }) {
   const imageContentBlocks = [...contentBlocksNews].filter(
     (block) => block.typeHandle === "image"
   );
+
   const showAside =
     newsAssets?.length > 0 ||
     imageContentBlocks?.length > 0 ||
-    visuals?.images?.length > 0 ||
-    visuals?.videos?.length > 0 ||
-    visuals?.stockimages?.length > 0 ||
+    releaseImages?.length > 0 ||
+    releaseVideos?.length > 0 ||
     postTags?.length > 0;
 
   return (
     <Body {...bodyProps}>
       <Breadcrumbs breadcrumbs={[...customBreadcrumbs, pageLink]} />
-      <Hero data={hero?.length > 0 ? hero : makeReleaseHero(visuals?.images)} />
+      <Hero data={hero?.length > 0 ? hero : makeReleaseHero(releaseImages)} />
       <Styled.NewsDetail $showAside={showAside}>
         {data && <NewsArticle data={data} />}
         {showAside && (
           <NewsAside
             newsAssets={newsAssets}
             contentBlockAssets={imageContentBlocks}
-            releaseImages={visuals?.images}
-            releaseVideos={visuals?.videos}
-            releaseStockImages={visuals?.stockimages}
+            releaseImages={releaseImages}
+            releaseVideos={releaseVideos}
             tags={postTags}
             rootHomeLink={rootHomeLink}
           />

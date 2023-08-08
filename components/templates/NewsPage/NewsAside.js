@@ -10,7 +10,6 @@ export default function NewsAside({
   contentBlockAssets,
   releaseImages,
   releaseVideos,
-  releaseStockImages,
   tags,
   rootHomeLink,
 }) {
@@ -83,7 +82,6 @@ export default function NewsAside({
         contentBlockAssets={contentBlockAssets}
         releaseImages={releaseImages}
         releaseVideos={releaseVideos}
-        releaseStockImages={releaseStockImages}
       />
       <Tags tags={tags} rootHomeLink={rootHomeLink} />
     </Styled.Aside>
@@ -95,7 +93,6 @@ NewsAside.propTypes = {
   contentBlockAssets: PropTypes.array,
   releaseImages: PropTypes.array,
   releaseVideos: PropTypes.array,
-  releaseStockImages: PropTypes.array,
   tags: PropTypes.array,
   rootHomeLink: PropTypes.object,
 };

@@ -49,10 +49,10 @@ const NewsList = ({
                     date,
                     release_date: releaseDate,
                     description,
-                    headline,
+                    subtitle,
                     id,
                     image,
-                    visuals,
+                    images: releaseImages,
                     newsAssets,
                     postType,
                     title,
@@ -70,7 +70,7 @@ const NewsList = ({
                           }
                         : null
                     }
-                    image={image?.[0] || makeReleaseHero(visuals?.images)?.[0]}
+                    image={image?.[0] || makeReleaseHero(releaseImages)?.[0]}
                     isFeature={canShowFeatured && page === 1 && i === 0}
                     link={uri}
                     pretitle={
@@ -79,7 +79,7 @@ const NewsList = ({
                         : null
                     }
                     subtitle={makeDateString(date || releaseDate, lang)}
-                    text={makeTruncatedString(description || headline, 30)}
+                    text={makeTruncatedString(description || subtitle, 30)}
                     title={title}
                     titleTag={"h2"}
                     type={gridType}

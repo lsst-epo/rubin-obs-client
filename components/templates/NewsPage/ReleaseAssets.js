@@ -16,7 +16,7 @@ export default function ReleaseAssets({ assets }) {
           url,
           height,
           width,
-          formats_url: { newsfeature },
+          formats: { newsfeature },
         } = asset;
 
         return (
