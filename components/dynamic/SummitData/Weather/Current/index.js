@@ -14,8 +14,8 @@ const CurrentWeather = () => {
   const [isOpen, setOpen] = useState(true);
   const [{ tempUnit, windspeedUnit }] = useWeatherUnit();
   const {
-    currentData,
-    loading: { currentData: loading },
+    data: { current },
+    isLoading,
   } = useSummitData();
   const sectionProps = {
     title: t("summit_dashboard.sections.weather.current"),
@@ -23,14 +23,14 @@ const CurrentWeather = () => {
     isOpen,
   };
 
-  if (loading || !currentData)
+  if (isLoading || !current)
     return (
       <WidgetSection {...sectionProps}>
         <Loader isVisible={true} />
       </WidgetSection>
     );
 
-  const { temperature0, windspeed, dewPoint } = currentData;
+  const { temperature0, windspeed, dewPoint } = current;
   const temperature = convertTemperature(temperature0, tempUnit);
   const dewpoint = convertTemperature(dewPoint, tempUnit);
 

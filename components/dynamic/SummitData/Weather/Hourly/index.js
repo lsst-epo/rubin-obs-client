@@ -12,8 +12,8 @@ const HourlyWeather = () => {
   const [isOpen, setOpen] = useState(true);
   const [{ windspeedUnit }] = useWeatherUnit();
   const {
-    hourlyData,
-    loading: { hourlyData: loading },
+    data: { hourly },
+    isLoading,
   } = useSummitData();
   const sectionProps = {
     title: t("summit_dashboard.sections.weather.hourly"),
@@ -21,14 +21,14 @@ const HourlyWeather = () => {
     isOpen,
   };
 
-  if (loading || !hourlyData)
+  if (isLoading || !hourly)
     return (
       <WidgetSection {...sectionProps}>
         <Loader isVisible={true} />
       </WidgetSection>
     );
 
-  const windspeedData = hourlyData
+  const windspeedData = hourly
     .slice(0, -1)
     .map(({ _time, direction_mean: direction, speed_mean: windspeed }) => {
       return {
