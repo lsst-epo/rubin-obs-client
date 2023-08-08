@@ -9,23 +9,15 @@ export default function MediaAssets({
   contentBlockAssets,
   releaseImages,
   releaseVideos,
-  releaseStockImages,
 }) {
   const { t } = useTranslation();
 
-  if (
-    !contentBlockAssets &&
-    !releaseImages &&
-    !releaseVideos &&
-    !releaseStockImages
-  )
-    return null;
+  if (!contentBlockAssets && !releaseImages && !releaseVideos) return null;
 
   if (
     contentBlockAssets?.length <= 0 &&
     releaseImages?.length <= 0 &&
-    releaseVideos?.length <= 0 &&
-    releaseStockImages?.length <= 0
+    releaseVideos?.length <= 0
   )
     return null;
   return (
@@ -42,7 +34,6 @@ export default function MediaAssets({
       })}
       <ReleaseAssets assets={releaseImages} />
       <ReleaseAssets assets={releaseVideos} />
-      <ReleaseAssets assets={releaseStockImages} />
     </Styled.AsideSecondary>
   );
 }
