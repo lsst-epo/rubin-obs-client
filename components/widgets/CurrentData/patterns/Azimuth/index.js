@@ -33,14 +33,14 @@ const Azimuth = ({ azimuth = 0, isCondensed = false, className }) => {
             y1={centerY}
             y2={centerY}
             transform-origin={origin}
-            transform="rotate(45)"
+            style={{ transform: "rotate(45deg)" }}
           />
           <line
             x1={width}
             y1={centerY}
             y2={centerY}
             transform-origin={origin}
-            transform="rotate(90)"
+            style={{ transform: "rotate(90deg)" }}
           />
 
           <line
@@ -48,7 +48,7 @@ const Azimuth = ({ azimuth = 0, isCondensed = false, className }) => {
             y1={centerY}
             y2={centerY}
             transform-origin={origin}
-            transform="rotate(-45)"
+            style={{ transform: "rotate(-45deg)" }}
           />
         </g>
         <g fill="#fff" fontSize="9">
@@ -101,7 +101,7 @@ const Azimuth = ({ azimuth = 0, isCondensed = false, className }) => {
             fill="none"
             strokeWidth="4"
             transform-origin={origin}
-            transform={`rotate(${azimuth})`}
+            style={{ transform: `rotate(${azimuth}deg)` }}
           />
           <g fill="#c3c3c3" strokeWidth="2">
             <circle cx={centerX} cy={centerY} r="4" stroke="none" />
