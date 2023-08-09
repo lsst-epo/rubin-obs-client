@@ -27,9 +27,6 @@ const RadialMeter = ({ min, max, value, text, step = 1, labelledById }) => {
       viewBox={`0 0 ${width} ${height}`}
       aria-labelledby={labelledById}
     >
-      <defs>
-        <path d="M25,80 A40,40 0 1 1 75,80" id="meterArc" />
-      </defs>
       <circle
         cx={centerX}
         cy={centerY}
@@ -47,31 +44,38 @@ const RadialMeter = ({ min, max, value, text, step = 1, labelledById }) => {
           fill="none"
           strokeWidth="4"
           transform-origin={origin}
-          transform={`rotate(${value * degreeStep + baseRotation})`}
+          style={{
+            transform: `rotate(${value * degreeStep + baseRotation}deg)`,
+          }}
         />
         <g fill="#c3c3c3" strokeWidth="2">
           <circle cx={centerX} cy={centerY} r="4" stroke="none" />
           <circle cx={centerX} cy={centerY} r="3" fill="none" />
         </g>
       </g>
-      <g strokeWidth="2" stroke="#F5F5F5" strokeDasharray="6 24">
+      <g stroke="#F5F5F5">
         {range.map((v, i) => (
-          <line
-            key={v}
-            x1={centerX}
-            x2={centerX}
-            y1={centerY - 30}
-            y2={centerY}
+          <g
             transform-origin={origin}
-            transform={`rotate(${i * degreeStep + baseRotation})`}
-          />
+            style={{
+              transform: `rotate(${i * degreeStep + baseRotation}deg)`,
+            }}
+            key={v}
+          >
+            <text x={centerX} y={centerY} dy={-35} textAnchor="middle">
+              {v}
+            </text>
+            <line
+              x1={centerX}
+              x2={centerX}
+              y1={centerY - 30}
+              y2={centerY}
+              strokeDasharray="6 24"
+              strokeWidth="2"
+            />
+          </g>
         ))}
       </g>
-      <text dominantBaseline="central" stroke="#F5F5F5">
-        <textPath href="#meterArc" textLength={197.323}>
-          {range.map((v) => v)}
-        </textPath>
-      </text>
     </Styled.Meter>
   );
 };
