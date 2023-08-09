@@ -33,7 +33,7 @@ const XAxis = ({
       {tickMap.map(({ label, position }, i) => (
         <g role="listitem" key={`${label}-${i}`}>
           <Styled.Tick x1={position} x2={position} y1={y} y2={y + tickHeight} />
-          <Styled.TickLabel x={position} y={y + tickHeight * 2}>
+          <Styled.TickLabel x={position} y={y + tickHeight * 3}>
             {label}
           </Styled.TickLabel>
         </g>

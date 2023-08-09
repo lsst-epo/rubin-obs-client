@@ -11,7 +11,5 @@ export const Tick = styled.line`
 
 export const TickLabel = styled.text`
   font-size: 14px;
-  alignment-baseline: hanging;
-  dominant-baseline: hanging;
   text-anchor: middle;
 `;
