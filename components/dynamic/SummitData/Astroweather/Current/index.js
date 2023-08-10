@@ -12,12 +12,9 @@ const CurrentAstroweather = () => {
     onToggleCallback: (value) => setOpen(value),
     isOpen,
   };
-  const {
-    astroweatherData,
-    loading: { astroweatherData: loading },
-  } = useSummitData();
+  const { astroweatherData, isLoading } = useSummitData();
 
-  if (loading) {
+  if (isLoading.astroweather || !astroweatherData) {
     return null;
   }
 

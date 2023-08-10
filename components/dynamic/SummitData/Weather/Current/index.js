@@ -23,7 +23,7 @@ const CurrentWeather = () => {
     isOpen,
   };
 
-  if (isLoading || !current)
+  if (isLoading.efd || !current)
     return (
       <WidgetSection {...sectionProps}>
         <Loader isVisible={true} />

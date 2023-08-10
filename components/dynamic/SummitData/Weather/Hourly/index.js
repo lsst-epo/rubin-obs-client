@@ -21,7 +21,7 @@ const HourlyWeather = () => {
     isOpen,
   };
 
-  if (isLoading || !hourly)
+  if (isLoading.efd || !hourly)
     return (
       <WidgetSection {...sectionProps}>
         <Loader isVisible={true} />

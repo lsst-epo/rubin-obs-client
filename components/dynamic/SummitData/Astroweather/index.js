@@ -10,13 +10,10 @@ import ForecastAstroweather from "./Forecast";
 
 const Astroweather = () => {
   const { t } = useTranslation();
-  const {
-    astroweatherData,
-    loading: { astroweatherData: loading },
-  } = useSummitData();
+  const { astroweatherData, isLoading } = useSummitData();
   const [isModalOpen, setModalOpen] = useState(false);
 
-  if (loading) {
+  if (isLoading.astroweather || !astroweatherData) {
     return null;
   }
 

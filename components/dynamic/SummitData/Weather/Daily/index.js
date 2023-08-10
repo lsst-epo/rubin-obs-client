@@ -23,7 +23,7 @@ const DailyWeather = () => {
     isOpen,
   };
 
-  if (isLoading || !daily)
+  if (isLoading.efd || !daily)
     return (
       <WidgetSection {...sectionProps}>
         <Loader isVisible={true} />
