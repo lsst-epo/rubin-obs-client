@@ -7,7 +7,7 @@ import {
   respond,
   tokens,
 } from "@/styles/globalStyles";
-import { Text, Section as CalloutSection } from "../styles";
+import { Text as CalloutText, Section as CalloutSection } from "../styles";
 
 const mobileMargins = () =>
   `
@@ -25,11 +25,11 @@ const mobileMargins = () =>
   )};
 `;
 
-export const StyledSection = styled(CalloutSection)`
+export const Section = styled(CalloutSection)`
   position: relative;
 `;
 
-export const StyledInner = styled(MixedLink)`
+export const Inner = styled(MixedLink)`
   ${containerRegular()}
   position: ${(p) => p.$position};
   display: grid;
@@ -65,7 +65,7 @@ export const StyledInner = styled(MixedLink)`
   )}
 `;
 
-export const StyledHeading = styled.h2`
+export const Heading = styled.h2`
   grid-area: title;
 
   ${respond(
@@ -80,7 +80,7 @@ export const StyledHeading = styled.h2`
   )}
 `;
 
-export const StyledSubheading = styled.div`
+export const Subheading = styled.div`
   grid-area: subtitle;
   margin-top: 0.727em;
   font-size: 18px;
@@ -100,7 +100,7 @@ export const StyledSubheading = styled.div`
   )}
 `;
 
-export const StyledText = styled(Text)`
+export const Text = styled(CalloutText)`
   grid-area: text;
 
   ${respond(
@@ -110,7 +110,7 @@ export const StyledText = styled(Text)`
   )}
 `;
 
-export const StyledImageWrapper = styled.div`
+export const ImageWrapper = styled.div`
   position: relative;
   grid-area: image;
   min-height: 300px;
@@ -125,8 +125,8 @@ export const StyledImageWrapper = styled.div`
     object-fit: cover;
   }
 
-  ${StyledInner}:hover &,
-  ${StyledInner}:focus-visible & {
+  ${Inner}:hover &,
+  ${Inner}:focus-visible & {
     filter: invert(25%) sepia(80%) saturate(102%) hue-rotate(130deg)
       brightness(100%) contrast(100%);
     outline: none;
@@ -150,7 +150,7 @@ export const StyledImageWrapper = styled.div`
   )}
 `;
 
-export const StyledImageSticker = styled.div`
+export const ImageSticker = styled.div`
   position: absolute;
   top: 0;
   left: 0;
@@ -169,7 +169,7 @@ export const StyledImageSticker = styled.div`
   )}
 `;
 
-export const StyledFooter = styled.div`
+export const Footer = styled.div`
   display: grid;
   grid-area: footer;
   grid-template-columns: max-content 1fr;
@@ -179,9 +179,9 @@ export const StyledFooter = styled.div`
   ${respond(`grid-template-columns: 1fr;`)}
 `;
 
-export const StyledFooterButton = styled.div`
-  ${StyledInner}:hover &,
-  ${StyledInner}:focus-visible & {
+export const FooterButton = styled.div`
+  ${Inner}:hover &,
+  ${Inner}:focus-visible & {
     outline: 3px solid var(--button-border-color);
     outline-offset: 1px;
   }
@@ -194,7 +194,7 @@ export const StyledFooterButton = styled.div`
   )}
 `;
 
-export const StyledSharePopup = styled(SharePopupComponent)`
+export const SharePopup = styled(SharePopupComponent)`
   position: absolute;
   inset-inline-end: 30px;
   inset-block-end: 30px;

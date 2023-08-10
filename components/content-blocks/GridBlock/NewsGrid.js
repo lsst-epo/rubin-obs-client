@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import {
   makeDateString,
   makeTruncatedString,
-  makeReleaseHero,
+  makeReleaseFeature,
   normalizeItemData,
   useGlobalData,
   useList,
@@ -60,7 +60,10 @@ const NewsGrid = ({ items = [], limit, listTypeId, sectionHandle, pageId }) => {
                 footer={{
                   button: t("read-more"),
                 }}
-                image={image?.[0] || makeReleaseHero(releaseImages)?.[0]}
+                image={
+                  image?.[0] ||
+                  makeReleaseFeature(releaseImages, "thumb700x")?.[0]
+                }
                 isFeature={i === 0}
                 link={uri}
                 pretitle={postType?.[0]?.title ? postType[0].title : " "}
