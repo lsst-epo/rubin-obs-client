@@ -337,12 +337,8 @@ export const MixedLink = styled(BaseMixedLink)`
         }
       }
 
-      .footer {
-        > div {
-          position: absolute;
-          top: 10px;
-          right: 10px;
-        }
+      && .footer {
+        display: none;
       }
     }
   }

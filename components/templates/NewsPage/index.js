@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { useCustomBreadcrumbs, makeReleaseHero } from "@/lib/utils";
+import { useCustomBreadcrumbs, makeReleaseFeature } from "@/lib/utils";
 import Body from "@/global/Body";
 import Breadcrumbs from "@/page/Breadcrumbs";
-import Hero from "@/page/Hero";
+import NewsHero from "./NewsHero";
 import NewsArticle from "./NewsArticle";
 import NewsList from "@/dynamic/NewsList";
 import NewsAside from "./NewsAside";
@@ -16,6 +16,7 @@ export default function NewsPage({ data }) {
     headline,
     featuredImage = [],
     hero = [],
+    heroCaption,
     id,
     newsAssets,
     postTags,
@@ -52,7 +53,15 @@ export default function NewsPage({ data }) {
   return (
     <Body {...bodyProps}>
       <Breadcrumbs breadcrumbs={[...customBreadcrumbs, pageLink]} />
-      <Hero data={hero?.length > 0 ? hero : makeReleaseHero(releaseImages)} />
+      <NewsHero
+        caption={heroCaption}
+        data={
+          hero?.length > 0
+            ? hero
+            : makeReleaseFeature(releaseImages, "banner1920")
+        }
+        narrowCaption={showAside}
+      />
       <Styled.NewsDetail $showAside={showAside}>
         {data && <NewsArticle data={data} />}
         {showAside && (

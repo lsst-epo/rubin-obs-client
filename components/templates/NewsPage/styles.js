@@ -2,10 +2,66 @@ import styled from "styled-components";
 import {
   containerWide,
   containerFullBleed,
+  fluidScale,
+  ptToEm,
   respond,
   tokens,
 } from "@/styles/globalStyles";
-import { IconComposer } from "@rubin-epo/epo-react-lib";
+import { aHidden } from "@/styles/mixins/appearance";
+import { IconComposer, Image } from "@rubin-epo/epo-react-lib";
+
+export const Hero = styled.div`
+  ${containerFullBleed("CONTAINER_FULL")}
+  position: relative;
+  height: var(--Hero-height, ${fluidScale("540px", "400px")});
+  overflow: auto;
+`;
+
+export const HeroFigure = styled.figure`
+  ${containerFullBleed("CONTAINER_FULL")}
+  position: relative;
+
+  section {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+`;
+
+export const HeroImageContainer = styled.div`
+  ${containerFullBleed("CONTAINER_FULL")}
+  position: relative;
+  height: var(--Hero-height, ${fluidScale("540px", "400px")});
+  overflow: auto;
+`;
+
+export const HeroFigCaption = styled.figcaption`
+  ${aHidden}
+`;
+
+export const HeroCaption = styled.div`
+  display: block;
+  padding-bottom: 40px;
+  font-size: ${ptToEm("12pt")};
+  line-height: 1.428;
+`;
+
+export const HeroImage = styled(Image)`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--Hero-object-position, center);
+  transform: var(--Hero-transform);
+`;
+
+export const Article = styled.article`
+  z-index: 1;
+  margin-top: var(--Hero-caption-offset);
+  background-color: white;
+
+  @media (max-width: ${tokens.BREAK_TABLET}) {
+    margin-top: auto;
+  }
+`;
 
 export const NewsDetail = styled.div`
   ${containerFullBleed("CONTAINER_REGULAR")}
@@ -18,10 +74,25 @@ export const NewsDetail = styled.div`
   ${respond(`grid-template-columns: 1fr;`)}
   ${(props) =>
     props.$showAside &&
-    `article > section > div {
-    padding-left: 0;
-    margin-left: 0;
-    ${respond(`max-width: 94vw;`, "720px")}`}
+    `${Article} > section > div {
+      padding-left: 40px;
+      padding-right: 40px;
+
+      @media (max-width: ${tokens.BREAK_LARGE_TABLET}) {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      @media (max-width: ${tokens.BREAK_TABLET}) {
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      @media (max-width: "720px") {
+        max-width: 94vw;
+      }
+    }
+  `}
 `;
 
 export const Pretitle = styled.div`
