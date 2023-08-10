@@ -3,12 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useWeatherUnit } from "@/contexts/WeatherUnit";
 import { useSummitData } from "@/contexts/SummitData";
 import { convertTemperature } from "@/helpers/converters";
-import {
-  getMoonIllumination,
-  getMoonPosition,
-  getMoonTimes,
-} from "@/lib/suncalc";
-import { lat, long } from "@/lib/observatory";
+
 import WidgetSection from "@/components/layout/WidgetSection";
 import MoonRise from "@/components/widgets/CurrentData/patterns/MoonRise";
 import MoonPhase from "@/components/widgets/CurrentData/patterns/MoonPhase";
@@ -23,6 +18,7 @@ const ForecastAstroweather = () => {
   const [{ tempUnit }] = useWeatherUnit();
   const {
     data: { current },
+    astroweatherData,
     isLoading,
   } = useSummitData();
 
@@ -32,14 +28,14 @@ const ForecastAstroweather = () => {
     isOpen,
   };
 
-  if (isLoading || !current)
+  if (isLoading.astroweather || isLoading.efd || !current || !astroweatherData)
     return (
       <WidgetSection {...sectionProps}>
         <Loader isVisible={true} />
       </WidgetSection>
     );
 
-  // const { lunarPhase: phase, lunarTimes: times } = astroweatherData;
+  const { lunarPhase: phase, lunarTimes: times } = astroweatherData;
 
   const moonriseId = "moonriseTitle";
   const now = new Date();
@@ -49,16 +45,16 @@ const ForecastAstroweather = () => {
 
   return (
     <WidgetSection {...sectionProps}>
-      {/* <MoonPhase phase={phase} />
+      <MoonPhase phase={phase} />
       <MoonRise
         rise={times[0].rise < now ? times[1].rise : times[0].rise}
         set={times[0].set < now ? times[1].set : times[0].set}
-      /> */}
+      />
       <DewpointCurrent dewpoint={dewpoint} unit={tempUnit} />
       <SectionSubHeader id={moonriseId}>
         {t("summit_dashboard.sections.astro.moonrise.forecast")}
       </SectionSubHeader>
-      {/* <DailyMoonrise data={times} labelledById={moonriseId} /> */}
+      <DailyMoonrise data={times} labelledById={moonriseId} />
     </WidgetSection>
   );
 };
