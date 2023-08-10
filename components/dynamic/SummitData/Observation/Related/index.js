@@ -6,6 +6,7 @@ import { convertTemperature } from "@/helpers/converters";
 import Loader from "@/components/atomic/Loader";
 import WidgetSection from "@/components/layout/WidgetSection";
 import DewpointCurrent from "@/components/widgets/CurrentData/patterns/Dewpoint";
+import MoonPhase from "@/components/widgets/CurrentData/patterns/MoonPhase";
 
 const Related = () => {
   const { t } = useTranslation();
@@ -13,6 +14,7 @@ const Related = () => {
   const [{ tempUnit }] = useWeatherUnit();
   const {
     data: { current },
+    astroweatherData,
     isLoading,
   } = useSummitData();
 
@@ -22,18 +24,20 @@ const Related = () => {
     isOpen,
   };
 
-  if (isLoading || !current)
+  if (isLoading.efd || isLoading.astroweather || !astroweatherData || !current)
     return (
       <WidgetSection {...sectionProps}>
         <Loader isVisible={true} />
       </WidgetSection>
     );
 
+  const { lunarPhase } = astroweatherData;
   const { dewPoint } = current;
   const dewpoint = convertTemperature(dewPoint, tempUnit);
 
   return (
     <WidgetSection {...sectionProps}>
+      <MoonPhase phase={lunarPhase} />
       <DewpointCurrent dewpoint={dewpoint} unit={tempUnit} />
     </WidgetSection>
   );
