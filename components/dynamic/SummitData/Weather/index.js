@@ -10,6 +10,7 @@ import { useWeatherUnit } from "@/contexts/WeatherUnit";
 import { convertTemperature } from "@/helpers/converters";
 import HourlyWeather from "./Hourly";
 import CurrentWeather from "./Current";
+import DailyWeather from "./Daily";
 
 const Weather = () => {
   const { t } = useTranslation();
@@ -47,7 +48,7 @@ const Weather = () => {
       <SummitStatusModal open={isModalOpen} onClose={() => setModalOpen(false)}>
         <CurrentWeather />
         <HourlyWeather />
-        {/* <DailyWeather /> */}
+        <DailyWeather />
       </SummitStatusModal>
     </WidgetPreview>
   );
