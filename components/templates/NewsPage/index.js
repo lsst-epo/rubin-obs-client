@@ -1,6 +1,11 @@
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { useCustomBreadcrumbs, makeReleaseFeature } from "@/lib/utils";
+import {
+  getSiteString,
+  useCustomBreadcrumbs,
+  makeReleaseFeature,
+} from "@/lib/utils";
+import { useRelease } from "@/lib/api/noirlabReleases";
 import Body from "@/global/Body";
 import Breadcrumbs from "@/page/Breadcrumbs";
 import NewsHero from "./NewsHero";
@@ -10,6 +15,10 @@ import NewsAside from "./NewsAside";
 import * as Styled from "./styles";
 
 export default function NewsPage({ data }) {
+  const { data: entryWithRelease } = useRelease(
+    getSiteString(data?.siteHandle || "default"),
+    data
+  );
   const {
     contentBlocksNews = [],
     description,
@@ -24,7 +33,7 @@ export default function NewsPage({ data }) {
     uri,
     images: releaseImages,
     videos: releaseVideos,
-  } = data;
+  } = entryWithRelease || data;
   const { t } = useTranslation();
   const bodyProps = {
     description: description || headline,
@@ -63,7 +72,9 @@ export default function NewsPage({ data }) {
         narrowCaption={showAside}
       />
       <Styled.NewsDetail $showAside={showAside}>
-        {data && <NewsArticle data={data} />}
+        {(entryWithRelease || data) && (
+          <NewsArticle data={entryWithRelease || data} />
+        )}
         {showAside && (
           <NewsAside
             newsAssets={newsAssets}

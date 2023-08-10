@@ -35,7 +35,8 @@ export default function CalloutEntry({ callout }) {
   const lang = localeInfo?.language || "en-US";
   const { id, entry, backgroundColor } = callout;
   // mix in the noirlabReleases from additional fetch to different endpoint
-  const { data: entryWithRelease } = useRelease(getSiteString(lang), entry);
+  const { data: entryWithRelease } = useRelease(getSiteString(lang), entry[0]);
+
   const {
     title,
     date,
@@ -48,7 +49,7 @@ export default function CalloutEntry({ callout }) {
     image,
     images: releaseImages,
     entryType,
-  } = entryWithRelease || entry[0];
+  } = entry[0];
   const { title: type, slug: typeSlug } = entryType[0];
   const titleId = `${typeSlug}-${id}`;
   const calloutDateString = getDateString(
