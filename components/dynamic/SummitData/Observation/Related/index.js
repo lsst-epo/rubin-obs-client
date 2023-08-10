@@ -12,8 +12,8 @@ const Related = () => {
   const [isOpen, setOpen] = useState(true);
   const [{ tempUnit }] = useWeatherUnit();
   const {
-    currentData,
-    loading: { currentData: loading },
+    data: { current },
+    isLoading,
   } = useSummitData();
 
   const sectionProps = {
@@ -22,14 +22,14 @@ const Related = () => {
     isOpen,
   };
 
-  if (loading || !currentData)
+  if (isLoading || !current)
     return (
       <WidgetSection {...sectionProps}>
         <Loader isVisible={true} />
       </WidgetSection>
     );
 
-  const { dewPoint } = currentData;
+  const { dewPoint } = current;
   const dewpoint = convertTemperature(dewPoint, tempUnit);
 
   return (
