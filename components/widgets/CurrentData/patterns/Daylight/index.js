@@ -9,7 +9,7 @@ import { timezone } from "@/lib/observatory";
 import { useTranslation } from "react-i18next";
 import ChartLegend from "@/components/charts/Legend";
 
-const Daylight = ({ times, variant = "primary" }) => {
+const Daylight = ({ times = [], variant = "primary" }) => {
   const {
     t,
     i18n: { language = "en-US" },

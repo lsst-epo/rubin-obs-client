@@ -7,51 +7,26 @@ export const SummitDataContext = createContext({});
 
 export const SummitDataProvider = ({ children }) => {
   const {
-    data: astroweatherData,
+    data: astroweatherData = {},
     isLoading: astroweatherIsLoading,
     isError: astroweatherIsError,
   } = useAstroweather();
-  const {
-    data: currentData,
-    isLoading: currentIsLoading,
-    isError: currentIsError,
-  } = useEfd("current");
-  const {
-    data: hourlyData,
-    isLoading: hourlyIsLoading,
-    isError: hourlyIsError,
-  } = useEfd("hourly");
-  const {
-    data: dailyData,
-    isLoading: dailyIsLoading,
-    isError: dailyIsError,
-  } = useEfd("daily");
+  const { data = {}, isLoading, isError } = useEfd();
 
   const value = useMemo(
     () => ({
-      currentData,
-      hourlyData,
-      dailyData,
+      data,
       astroweatherData,
-      error:
-        currentIsError || hourlyIsError || dailyIsError || astroweatherIsError,
-      loading: {
-        currentData: currentIsLoading,
-        hourlyData: hourlyIsLoading,
-        dailyData: dailyIsLoading,
-        astroweatherData: astroweatherIsLoading,
+      error: { efd: isError, astroweather: astroweatherIsError },
+      isLoading: {
+        efd: isLoading,
+        astroweather: astroweatherIsLoading,
       },
     }),
     [
-      currentData,
-      hourlyData,
-      dailyData,
-      currentIsLoading,
-      hourlyIsLoading,
-      dailyIsLoading,
-      currentIsError,
-      hourlyIsError,
-      dailyIsError,
+      data,
+      isLoading,
+      isError,
       astroweatherData,
       astroweatherIsLoading,
       astroweatherIsError,

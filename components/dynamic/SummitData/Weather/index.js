@@ -25,7 +25,7 @@ const Weather = () => {
     title: t("summit_dashboard.sections.weather.preview"),
   };
 
-  if (isLoading || !current)
+  if (isLoading.efd || !current)
     return (
       <WidgetPreview {...previewProps}>
         <Loader isVisible={true} />
