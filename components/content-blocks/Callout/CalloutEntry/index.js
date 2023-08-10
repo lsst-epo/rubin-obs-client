@@ -2,20 +2,15 @@
 
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { makeDateString, useGlobalData } from "@/lib/utils";
 import {
-  StyledSection,
-  StyledInner,
-  StyledHeading,
-  StyledSubheading,
-  StyledText,
-  StyledFooter,
-  StyledFooterButton,
-  StyledSharePopup,
-  StyledImageWrapper,
-  StyledImageSticker,
-} from "./styles";
+  makeDateString,
+  useGlobalData,
+  getSiteString,
+  makeReleaseFeature,
+} from "@/lib/utils";
+import * as Styled from "./styles";
 import { Image } from "@rubin-epo/epo-react-lib";
+import { useRelease } from "@/lib/api/noirlabReleases";
 
 const getDateString = (newsDate, eventStart, eventEnd, lang) => {
   if (newsDate) {
@@ -38,51 +33,64 @@ export default function CalloutEntry({ callout }) {
   const { t } = useTranslation();
   const localeInfo = useGlobalData("localeInfo");
   const lang = localeInfo?.language || "en-US";
-
   const { id, entry, backgroundColor } = callout;
+  // mix in the noirlabReleases from additional fetch to different endpoint
+  const { data: entryWithRelease } = useRelease(getSiteString(lang), entry);
   const {
     title,
     date,
+    release_date: releaseDate,
     startDate,
     endDate,
     url,
     description,
+    subtitle,
     image,
+    images: releaseImages,
     entryType,
-  } = entry[0];
+  } = entryWithRelease || entry[0];
   const { title: type, slug: typeSlug } = entryType[0];
   const titleId = `${typeSlug}-${id}`;
-  const calloutDateString = getDateString(date, startDate, endDate, lang);
+  const calloutDateString = getDateString(
+    date || releaseDate,
+    startDate,
+    endDate,
+    lang
+  );
+  const calloutImage =
+    image?.[0] || makeReleaseFeature(releaseImages, "thumb700x")?.[0];
 
   return (
-    <StyledSection $bgColor={backgroundColor} $width="full" $overlay={false}>
-      <StyledInner href={url} aria-labelledby={titleId}>
-        {image.length && (
-          <StyledImageWrapper>
-            <Image role="presentation" ratio="4:3" image={image[0]} />
-            <StyledImageSticker>{type}</StyledImageSticker>
-          </StyledImageWrapper>
+    <Styled.Section $bgColor={backgroundColor} $width="full" $overlay={false}>
+      <Styled.Inner href={url} aria-labelledby={titleId}>
+        {calloutImage && (
+          <Styled.ImageWrapper>
+            <Image role="presentation" ratio="4:3" image={calloutImage} />
+            <Styled.ImageSticker>{type}</Styled.ImageSticker>
+          </Styled.ImageWrapper>
         )}
-        <StyledHeading id={titleId}>{title}</StyledHeading>
+        <Styled.Heading id={titleId}>{title}</Styled.Heading>
         {calloutDateString && (
-          <StyledSubheading className="t-heading-quaternary">
+          <Styled.Subheading className="t-heading-quaternary">
             {calloutDateString}
-          </StyledSubheading>
+          </Styled.Subheading>
         )}
-        {description && (
-          <StyledText
+        {(description || subtitle) && (
+          <Styled.Text
             className="c-content-rte"
-            dangerouslySetInnerHTML={{ __html: description }}
+            dangerouslySetInnerHTML={{ __html: description || subtitle }}
           />
         )}
-        <StyledFooter>
-          <StyledFooterButton className={`c-buttonish c-buttonish--inert`}>
+        <Styled.Footer>
+          <Styled.FooterButton className={`c-buttonish c-buttonish--inert`}>
             {t("read-more")}
-          </StyledFooterButton>
-        </StyledFooter>
-      </StyledInner>
-      {typeSlug === "news-post" && <StyledSharePopup title={title} url={url} />}
-    </StyledSection>
+          </Styled.FooterButton>
+        </Styled.Footer>
+      </Styled.Inner>
+      {typeSlug === "news-post" && (
+        <Styled.SharePopup title={title} url={url} />
+      )}
+    </Styled.Section>
   );
 }
 

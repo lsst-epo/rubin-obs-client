@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
+import useResizeObserver from "use-resize-observer";
 import { useDateString } from "@/lib/utils";
 import ContentBlockFactory from "@/factories/ContentBlockFactory";
 import { Container } from "@rubin-epo/epo-react-lib";
@@ -12,10 +13,11 @@ export default function NewsArticle({ data }) {
   const {
     contentBlocksNews = [],
     date,
+    heroCaption,
     description,
     releaseDescription,
-    id,
     title,
+    id,
     pressReleaseId,
     subtitle,
     contacts,
@@ -30,11 +32,27 @@ export default function NewsArticle({ data }) {
 
   const { t } = useTranslation();
   const localizedDate = useDateString(date || releaseDate);
+  const { ref } = useResizeObserver({
+    box: "border-box",
+    onResize: ({ height }) => {
+      document.documentElement.style.setProperty(
+        "--Hero-caption-offset",
+        `-${height}px`
+      );
+    },
+  });
 
   return (
-    <article>
+    <Styled.Article>
       <Container paddingSize="medium">
         <div>
+          {heroCaption && (
+            <Styled.HeroCaption
+              ref={ref}
+              dangerouslySetInnerHTML={{ __html: heroCaption }}
+              aria-hidden
+            />
+          )}
           <h1>{title}</h1>
           {/* only a subtitle if isNoirlabRelease */}
           {subtitle && (
@@ -103,7 +121,7 @@ export default function NewsArticle({ data }) {
           <Contacts contacts={contacts} />
         </Container>
       )}
-    </article>
+    </Styled.Article>
   );
 }
 
