@@ -4,6 +4,7 @@ export const ScrollableHorizontalWrapper = styled.div`
   width: 100%;
   height: 100%;
   overflow-x: auto;
+  overflow-y: hidden;
   scrollbar-color: var(--white, #fff) rgba(255, 255, 255, 20%);
   scrollbar-width: thin;
 
