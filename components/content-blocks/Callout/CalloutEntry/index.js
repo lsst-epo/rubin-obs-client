@@ -49,7 +49,7 @@ export default function CalloutEntry({ callout }) {
     image,
     images: releaseImages,
     entryType,
-  } = entry[0];
+  } = entryWithRelease || entry[0];
   const { title: type, slug: typeSlug } = entryType[0];
   const titleId = `${typeSlug}-${id}`;
   const calloutDateString = getDateString(
