@@ -8,6 +8,7 @@ function Flag({ className, children, color }) {
         <Styled.FlagBody $backgroundColor={color}>{children}</Styled.FlagBody>
         <Styled.FlagTail
           xmlns="http://www.w3.org/2000/svg"
+          alt=""
           role="presentation"
           viewBox="0 0 100 24.551"
         >

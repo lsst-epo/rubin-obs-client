@@ -34,9 +34,9 @@ const NewsGrid = ({ items = [], limit, listTypeId, sectionHandle, pageId }) => {
 
   return (
     <>
-      {isLoading && <Loader speed="fast" isVisible />}
+      {isLoading && <Loader speed="fast" isVisible data-cy="loader" />}
       {!isLoading && allItems?.length > 0 && (
-        <Grid columns={2} showFeature={true}>
+        <Grid columns={2} showFeature={true} data-cy="newsgrid">
           {allItems.map(
             (
               {

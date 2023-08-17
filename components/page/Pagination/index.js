@@ -1,11 +1,10 @@
 import React from "react";
-import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
-import { Container, MixedLink } from "@rubin-epo/epo-react-lib";
+import { MixedLink } from "@rubin-epo/epo-react-lib";
 import T from "@/page/Translate";
 import { usePathData } from "@/lib/utils";
-import { layoutGrid, respond } from "@/styles/globalStyles";
+import * as Styled from "./styles";
 
 const Pagination = ({ limit, offset, page, total }) => {
   const { t } = useTranslation();
@@ -35,19 +34,18 @@ const Pagination = ({ limit, offset, page, total }) => {
   const next = currentPage < numberOfPages ? currentPage + 1 : 0;
 
   return (
-    <StyledContainer width="regular">
-      <NavDesktop aria-label={t("pagination.label")}>
+    <Styled.PaginationContainer width="regular">
+      <Styled.NavDesktop aria-label={t("pagination.label")}>
         <div>
           <T i18nKey="pagination.showing-range">
             Showing {{ from }} to {{ to }} of {{ length: total }}
           </T>
         </div>
         <div>
-          <StyledPaginationList>
+          <Styled.PaginationList>
             {pageArray.map((page, index) => {
               return currentPage !== page && page !== "..." ? (
                 <React.Fragment key={index}>
-                  {index ? ` / ` : ``}
                   <li>
                     <MixedLink url={asPath} params={{ page: page }}>
                       {page}
@@ -56,12 +54,11 @@ const Pagination = ({ limit, offset, page, total }) => {
                 </React.Fragment>
               ) : (
                 <React.Fragment key={index}>
-                  {index ? ` / ` : ``}
                   <li>{page}</li>
                 </React.Fragment>
               );
             })}
-          </StyledPaginationList>
+          </Styled.PaginationList>
         </div>
         <div>
           {prev > 0 ? (
@@ -80,8 +77,8 @@ const Pagination = ({ limit, offset, page, total }) => {
             <T translate="pagination.next" />
           )}
         </div>
-      </NavDesktop>
-      <NavMobile aria-label={t("pagination.label")}>
+      </Styled.NavDesktop>
+      <Styled.NavMobile aria-label={t("pagination.label")}>
         <div>
           {prev > 0 ? (
             <MixedLink url={asPath} params={{ page: prev }}>
@@ -100,51 +97,10 @@ const Pagination = ({ limit, offset, page, total }) => {
             <>&gt;&gt;</>
           )}
         </div>
-      </NavMobile>
-    </StyledContainer>
+      </Styled.NavMobile>
+    </Styled.PaginationContainer>
   );
 };
-
-const StyledPaginationList = styled.ul`
-  display: flex;
-  gap: 5px;
-`;
-
-const StyledContainer = styled(Container)`
-  a {
-    color: var(--turquoise85);
-
-    &:hover,
-    &:focus-visible {
-      color: var(--turquoise85);
-    }
-  }
-`;
-
-const NavDesktop = styled.nav`
-  ${layoutGrid(3)}
-  ${respond(`display: none;`)}
-  > div:nth-child(2) {
-    justify-self: center;
-  }
-  > div:nth-child(3) {
-    justify-self: end;
-    text-transform: uppercase;
-  }
-`;
-
-const NavMobile = styled.nav`
-  display: none;
-  ${respond(`    
-    display: grid;
-    width: 100%;
-    grid-template-columns: 1fr 1fr;
-
-    >div:last-child {
-      justify-self: end;
-    }
-`)}
-`;
 
 Pagination.propTypes = {
   limit: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

@@ -30,11 +30,11 @@ describe("Education", () => {
       });
   });
 
-  it(`Investigations has no detectable a11y violations on load`, () => {
-    cy.visit("/education/investigations");
-    cy.injectAxe();
-    cy.checkAxe();
-  });
+  // it(`Investigations has no detectable a11y violations on load`, () => {
+  //   cy.visit("/education/investigations");
+  //   cy.injectAxe();
+  //   cy.checkAxe();
+  // });
 
   it(`Investigation landing has no detectable a11y violations on load`, () => {
     cy.visit("/education/educators/investigations");

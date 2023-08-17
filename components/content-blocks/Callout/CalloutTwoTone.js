@@ -48,7 +48,10 @@ export default function CalloutTwoTone({ callout }) {
           ))}
         </Header>
         {calloutBackgroundImage && (
-          <StyledBackgroundImage image={calloutBackgroundImage} />
+          <StyledBackgroundImage
+            role="presentation"
+            image={{ ...calloutBackgroundImage, altText: "" }}
+          />
         )}
       </Wrapper>
       <Wrapper order="image" ratio="33" overlay={true} stack="bottom">

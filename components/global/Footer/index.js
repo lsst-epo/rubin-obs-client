@@ -16,7 +16,7 @@ export default function Footer({
   const supportersImage = supportersLogos && supportersLogos[0];
 
   return (
-    <footer className="c-global-footer">
+    <footer className="c-global-footer" role="contentinfo">
       <Social socialInfo={socialInfo} />
       <Nav links={links} />
       <div className="c-global-footer__main">

@@ -39,7 +39,7 @@ class CustomDocument extends Document {
       <Html lang={this.props.lang}>
         <Head />
         <body>
-          <Main />
+          <Main role="main" />
           <NextScript />
         </body>
       </Html>

@@ -1,5 +1,3 @@
-/* eslint-disable react/prop-types */
-
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import {
@@ -8,9 +6,9 @@ import {
   getSiteString,
   makeReleaseFeature,
 } from "@/lib/utils";
-import * as Styled from "./styles";
 import { Image } from "@rubin-epo/epo-react-lib";
 import { useRelease } from "@/lib/api/noirlabReleases";
+import * as Styled from "./styles";
 
 const getDateString = (newsDate, eventStart, eventEnd, lang) => {
   if (newsDate) {
@@ -71,7 +69,11 @@ export default function CalloutEntry({ callout }) {
       <Styled.Inner href={url} aria-labelledby={titleId}>
         {calloutImage && (
           <Styled.ImageWrapper>
-            <Image role="presentation" ratio="4:3" image={calloutImage} />
+            <Image
+              role="presentation"
+              ratio="4:3"
+              image={{ ...calloutImage, altText: "" }}
+            />
             <Styled.ImageSticker>{type}</Styled.ImageSticker>
           </Styled.ImageWrapper>
         )}
@@ -102,6 +104,7 @@ export default function CalloutEntry({ callout }) {
 
 CalloutEntry.propTypes = {
   callout: PropTypes.shape({
+    id: PropTypes.string,
     entry: PropTypes.array.isRequired,
     backgroundColor: PropTypes.string,
   }).isRequired,

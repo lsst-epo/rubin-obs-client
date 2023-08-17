@@ -38,6 +38,7 @@ const NewsList = ({
       footerButton={button}
       isRelatedList={isRelatedList}
       loaderDescription={t("news.loading")}
+      data-cy="newslist"
     >
       {({ entries, page }) => (
         <>

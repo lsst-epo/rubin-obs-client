@@ -40,7 +40,9 @@ export default function Body({ children, description, featuredImage, title }) {
                 navItems={headerNavItems}
                 userProfilePage={userProfilePage}
               />
-              <main id="page-content">{children}</main>
+              <main role="main" id="page-content">
+                {children}
+              </main>
               <Footer
                 socialInfo={socialInfo}
                 content={footerContent}
