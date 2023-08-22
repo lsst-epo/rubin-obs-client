@@ -12,7 +12,7 @@ const DailyWeather = () => {
   const [isOpen, setOpen] = useState(true);
   const [{ tempUnit }] = useWeatherUnit();
   const {
-    data: { daily },
+    summitData: { daily },
     isLoading,
   } = useSummitData();
   const sectionProps = {

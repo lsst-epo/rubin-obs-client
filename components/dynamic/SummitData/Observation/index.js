@@ -1,7 +1,8 @@
 import { useState } from "react";
+import Loader from "@/components/atomic/Loader";
 import WidgetPreview from "@/components/layout/WidgetPreview";
 import SummitStatusModal from "@/components/modal/SummitStatusModal";
-
+import { useSummitData } from "@/contexts/SummitData";
 import Azimuth from "@/components/widgets/CurrentData/patterns/Azimuth";
 import Zenith from "@/components/widgets/CurrentData/patterns/Zenith";
 import Instruments from "./Instruments";
@@ -11,8 +12,24 @@ import Related from "./Related";
 
 const Observation = () => {
   const [isModalOpen, setModalOpen] = useState(false);
-  const azimuth = 0;
-  const zenith = 0;
+  const {
+    summitData: { current },
+    isLoading,
+  } = useSummitData();
+
+  if (isLoading.efd || !current)
+    return (
+      <WidgetPreview
+        title="Observation-related information"
+        openModalCallback={() => {
+          setModalOpen(true);
+        }}
+      >
+        <Loader isVisible={true} />
+      </WidgetPreview>
+    );
+
+  const { azimuth, zenith } = current;
 
   return (
     <WidgetPreview
