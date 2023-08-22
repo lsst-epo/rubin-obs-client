@@ -4,9 +4,9 @@ import { windspeedUnitType } from "@/components/shapes/units";
 import { useTranslation } from "react-i18next";
 import { timezone } from "@/lib/observatory";
 import { formatAngle, formatTime } from "@/helpers/formatters";
-import * as Styled from "./styles";
 import UniqueIconComposer from "@/components/svg/UniqueIconComposer";
 import { ScreenreaderText } from "@rubin-epo/epo-react-lib";
+import * as Styled from "./styles";
 
 const Windspeed = ({ unit, windspeedData = [], labelledById }) => {
   const currentTimeRef = useRef();

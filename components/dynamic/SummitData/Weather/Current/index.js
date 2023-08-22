@@ -14,7 +14,7 @@ const CurrentWeather = () => {
   const [isOpen, setOpen] = useState(true);
   const [{ tempUnit, windspeedUnit }] = useWeatherUnit();
   const {
-    data: { current },
+    summitData: { current },
     isLoading,
   } = useSummitData();
   const sectionProps = {

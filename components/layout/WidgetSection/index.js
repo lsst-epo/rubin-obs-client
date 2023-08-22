@@ -42,7 +42,7 @@ WidgetSection.propTypes = {
   title: PropTypes.string,
   isCollapsible: PropTypes.bool,
   isOpen: PropTypes.bool,
-  onToggleCallback: PropTypes.func.isRequired,
+  onToggleCallback: PropTypes.func,
 };
 
 export default WidgetSection;

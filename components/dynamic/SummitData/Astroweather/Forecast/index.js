@@ -17,7 +17,7 @@ const ForecastAstroweather = () => {
   const [isOpen, setOpen] = useState(true);
   const [{ tempUnit }] = useWeatherUnit();
   const {
-    data: { current },
+    summitData: { current },
     astroweatherData,
     isLoading,
   } = useSummitData();

@@ -12,7 +12,7 @@ const HourlyWeather = () => {
   const [isOpen, setOpen] = useState(true);
   const [{ windspeedUnit }] = useWeatherUnit();
   const {
-    data: { hourly },
+    summitData: { hourly },
     isLoading,
   } = useSummitData();
   const sectionProps = {

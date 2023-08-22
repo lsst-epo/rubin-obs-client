@@ -11,13 +11,14 @@ import { convertTemperature } from "@/helpers/converters";
 import HourlyWeather from "./Hourly";
 import CurrentWeather from "./Current";
 import DailyWeather from "./Daily";
+import * as Styled from "./styles";
 
 const Weather = () => {
   const { t } = useTranslation();
   const [isModalOpen, setModalOpen] = useState(false);
   const [{ tempUnit }] = useWeatherUnit();
   const {
-    data: { current },
+    summitData: { current },
     isLoading,
   } = useSummitData();
 
@@ -43,8 +44,10 @@ const Weather = () => {
         setModalOpen(true);
       }}
     >
-      <TemperatureCurrent unit={tempUnit} temperature={temperature} />
-      <DewpointCurrent dewpoint={dewpoint} unit={tempUnit} />
+      <Styled.Preview>
+        <TemperatureCurrent unit={tempUnit} temperature={temperature} />
+        <DewpointCurrent dewpoint={dewpoint} unit={tempUnit} />
+      </Styled.Preview>
       <SummitStatusModal open={isModalOpen} onClose={() => setModalOpen(false)}>
         <CurrentWeather />
         <HourlyWeather />

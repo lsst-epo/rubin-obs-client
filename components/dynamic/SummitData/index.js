@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { Container } from "@rubin-epo/epo-react-lib";
+// import { Container } from "@rubin-epo/epo-react-lib";
 import { WeatherUnitProvider } from "@/contexts/WeatherUnit";
 import UnitLocalization from "@/components/layout/UnitLocalization";
 import WidgetGrid from "@/components/layout/WidgetGrid";
@@ -11,7 +11,7 @@ import CameraFeeds from "@/components/dynamic/SummitData/CameraFeeds";
 import * as Styled from "./styles";
 
 const SummitStatus = ({ summitStatusLayout, widgetPreviews = [] }) => {
-  return summitStatusLayout === "compact" ? (
+  return (
     <Styled.Container>
       <WeatherUnitProvider>
         <UnitLocalization />
@@ -25,20 +25,6 @@ const SummitStatus = ({ summitStatusLayout, widgetPreviews = [] }) => {
         </SummitDataProvider>
       </WeatherUnitProvider>
     </Styled.Container>
-  ) : (
-    <Container bgColor="neutral95" width="wide" paddingSize="small">
-      <WeatherUnitProvider>
-        <UnitLocalization />
-        <SummitDataProvider>
-          <WidgetGrid>
-            <Observation />
-            <CameraFeeds />
-            <Weather />
-            <Astroweather />
-          </WidgetGrid>
-        </SummitDataProvider>
-      </WeatherUnitProvider>
-    </Container>
   );
 };
 
