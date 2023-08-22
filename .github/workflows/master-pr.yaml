@@ -42,7 +42,7 @@ jobs:
         --build-arg NEXT_PUBLIC_CONTACT_FORM_POST_URL=https://api-int.rubinobs.dev/actions/contact-form/send \
         --build-arg NEXT_PUBLIC_PLAUSIBLE_DOMAIN= \
         --build-arg NEXT_PREVIEW_SLUG=preview-in-craft-cms \
-        --build-arg NEXT_PUBLIC_EFD_URL=https://us-west1-skyviewer.cloudfunctions.net/redis-client/summit-status \
+        --build-arg NEXT_PUBLIC_EFD_URL=https://hasura-e3g4rcii3q-uc.a.run.app/v1/graphql \
         --build-arg NEXT_PUBLIC_RELEASE_URL=`https://noirlab.edu/public/api/v2/releases/{{ID}}/?lang={{SITE}}&translation_mode=fallback` \
         .
         

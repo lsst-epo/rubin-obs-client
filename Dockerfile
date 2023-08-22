@@ -15,7 +15,7 @@ ARG NEXT_PUBLIC_GOOGLE_APP_ID=688095955960-t0fpaj4ec3gh5vsr9lhg8govapk2oeo9.apps
 ARG NEXT_PUBLIC_CONTACT_FORM_POST_URL=https://api.rubinobs.org/actions/contact-form/send
 ARG NEXT_PUBLIC_PLAUSIBLE_DOMAIN=rubinobs.org
 ARG CLOUD_ENV=PROD
-ARG NEXT_PUBLIC_EFD_URL=https://us-west1-skyviewer.cloudfunctions.net/redis-client/summit-status
+ARG NEXT_PUBLIC_EFD_URL=https://hasura-e3g4rcii3q-uc.a.run.app/v1/graphql
 ARG NEXT_PUBLIC_RELEASE_URL=`https://noirlab.edu/public/api/v2/releases/{{ID}}/?lang={{SITE}}&translation_mode=fallback`
 
 RUN npx browserslist@latest --update-db && yarn static:build

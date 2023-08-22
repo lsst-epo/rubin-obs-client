@@ -7,7 +7,8 @@ export const LocalizationBar = styled.div`
   row-gap: var(--PADDING_SMALL, 20px);
   align-items: center;
   width: 100%;
-  padding: 0;
+  padding: var(--PADDING_SMALL, 20px) var(--PADDING_SMALL, 20px) 0
+    var(--PADDING_SMALL, 20px);
   margin: 0;
   color: var(--white, #fff);
   border: none;

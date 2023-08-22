@@ -1,6 +1,6 @@
 import { createContext, useContext, useMemo } from "react";
 import PropTypes from "prop-types";
-import useEfd from "@/lib/api/efd";
+import { useEfd, efdQuery } from "@/lib/api/efd";
 import useAstroweather from "@/lib/api/astroweather";
 
 export const SummitDataContext = createContext({});
@@ -11,11 +11,17 @@ export const SummitDataProvider = ({ children }) => {
     isLoading: astroweatherIsLoading,
     isError: astroweatherIsError,
   } = useAstroweather();
-  const { data = {}, isLoading, isError } = useEfd();
+  const { data, isLoading, isError } = useEfd(efdQuery);
 
+  const { summitData, summitMedia } = data || {
+    summitData: {},
+    summitMedia: { items: {} },
+  };
+  //  || { summitData: {}, summitMedia: {} }
   const value = useMemo(
     () => ({
-      data,
+      summitData,
+      summitMedia,
       astroweatherData,
       error: { efd: isError, astroweather: astroweatherIsError },
       isLoading: {
@@ -24,10 +30,11 @@ export const SummitDataProvider = ({ children }) => {
       },
     }),
     [
-      data,
+      summitData,
+      summitMedia,
+      astroweatherData,
       isLoading,
       isError,
-      astroweatherData,
       astroweatherIsLoading,
       astroweatherIsError,
     ]
