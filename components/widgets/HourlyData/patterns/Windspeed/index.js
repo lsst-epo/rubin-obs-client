@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { windspeedUnitType } from "@/components/shapes/units";
 import { useTranslation } from "react-i18next";
+import { timezone } from "@/lib/observatory";
 import { formatAngle, formatTime } from "@/helpers/formatters";
 import * as Styled from "./styles";
 import UniqueIconComposer from "@/components/svg/UniqueIconComposer";
@@ -54,7 +55,15 @@ const Windspeed = ({ unit, windspeedData = [], labelledById }) => {
       <Styled.HourlyDataList as="ol" role="list" aria-labelledby={labelledById}>
         {windspeedData &&
           windspeedData.map(({ windspeed, direction, time }) => {
-            const isNow = time.getHours() === new Date().getHours();
+            const now = new Date();
+            const isYesterday =
+              time.toLocaleDateString(language, { timeZone: timezone }) !==
+              now.toLocaleDateString(language, { timeZone: timezone });
+
+            if (isYesterday) return null;
+
+            const isNow = time.getHours() === now.getHours();
+
             return (
               <Styled.HourlyDataItem
                 key={time}
