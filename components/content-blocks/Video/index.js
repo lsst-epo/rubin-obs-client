@@ -7,9 +7,9 @@ export default function VideoBlock({ caption, url }) {
   if (!isMounted) return null;
 
   return (
-    <Container>
+    <Container paddingSize="medium">
       <Figure caption={caption} withBackground>
-        <Video url={url} controls />
+        <Video url={url} controls width="100%" height="100%" />
       </Figure>
     </Container>
   );
