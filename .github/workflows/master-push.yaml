@@ -27,13 +27,13 @@ jobs:
       run: |-
         docker build \
         -t "gcr.io/edc-int-6c5e/skyviewer-client:${{ github.sha }}" \
-        --build-arg NEXT_PUBLIC_API_URL=https://api-int.rubinobs.org/api \
-        --build-arg NEXT_PUBLIC_BASE_URL=https://int.rubinobs.org \
+        --build-arg NEXT_PUBLIC_API_URL=https://api-int.rubinobs.dev/api \
+        --build-arg NEXT_PUBLIC_BASE_URL=https://int.rubinobs.dev \
         --build-arg EDC_LOGGER_API_URL=https://us-central1-skyviewer.cloudfunctions.net/edc-logger \
         --build-arg NEXT_PUBLIC_DEBUG_LOGGING=false \
         --build-arg CLOUD_ENV=INT \
         --build-arg NEXT_PUBLIC_GOOGLE_APP_ID=688095955960-t0fpaj4ec3gh5vsr9lhg8govapk2oeo9.apps.googleusercontent.com \
-        --build-arg NEXT_PUBLIC_CONTACT_FORM_POST_URL=https://api-int.rubinobs.org/actions/contact-form/send \
+        --build-arg NEXT_PUBLIC_CONTACT_FORM_POST_URL=https://api-int.rubinobs.dev/actions/contact-form/send \
         --build-arg NEXT_PUBLIC_PLAUSIBLE_DOMAIN= \
         --build-arg NEXT_PREVIEW_SLUG=preview-in-craft-cms \
         --build-arg NEXT_PUBLIC_EFD_URL=https://us-west1-skyviewer.cloudfunctions.net/redis-client/summit-status \
