@@ -27,6 +27,7 @@ const blockMap = {
   contact: Contact,
   contactStaff: ContactStaff,
   ctaGrid: GridBlock,
+  imageGrid: GridBlock,
   image: Image,
   link: Link,
   linkedAsset: Link,
