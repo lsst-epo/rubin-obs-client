@@ -103,7 +103,7 @@ export const MixedLink = styled(BaseMixedLink)`
     }
   }
 
-  /* CTA */
+  /* CTA (Also used for Image Grid) */
   &.cta {
     grid-template-areas:
       "image"
@@ -123,7 +123,7 @@ export const MixedLink = styled(BaseMixedLink)`
     }
 
     .title {
-      padding: 20px 0;
+      padding: 20px 5px;
       font-size: 16px;
       font-weight: 700;
       text-align: center;
@@ -146,6 +146,7 @@ export const MixedLink = styled(BaseMixedLink)`
         img {
           width: 100px;
           height: 100px;
+          object-fit: cover;
         }
       }
 
@@ -863,7 +864,7 @@ export const MixedLink = styled(BaseMixedLink)`
       color: var(--white);
     }
 
-    &.cta {
+    &.cta[href] {
       .image {
         outline: none;
         opacity: 0.7;

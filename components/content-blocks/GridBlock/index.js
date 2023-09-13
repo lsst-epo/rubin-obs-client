@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Container, MixedLink } from "@rubin-epo/epo-react-lib";
 import { mixedLinkShape } from "@/shapes/link";
 import CTAGrid from "./CTAGrid";
+import ImageGrid from "./ImageGrid";
 import MainGrid from "./MainGrid";
 import NewsGrid from "./NewsGrid";
 import CarouselGrid from "./CarouselGrid";
@@ -36,6 +37,7 @@ export default function GridBlock({
 
   const gridMap = {
     ctaGrid: CTAGrid,
+    imageGrid: ImageGrid,
     news: NewsGrid,
     investigationGrid: InvestigationGrid,
     relatedContent: CarouselGrid,
@@ -43,6 +45,7 @@ export default function GridBlock({
 
   const widthMap = {
     ctaGrid: undefined,
+    imageGrid: undefined,
     news: undefined,
     investigationGrid: "regular",
   };
