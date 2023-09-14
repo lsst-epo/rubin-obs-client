@@ -71,7 +71,7 @@
       "gallery-items": "Items de la galería",
       "jobs": "Trabajos",
       "news": "Noticias",
-      "staff-profiles": "Perfiles del equipo",
+      "staff-profiles": "PVoces de Rubin",
       "slideshows": "Diapositivas",
       "image": "Imagen",
       "video": "Video",
@@ -94,6 +94,7 @@
       "total-to-date": "Total a la fecha"
     },
     "events": {
+      "event": "Evento",
       "open": "Inscripciones abiertas",
       "closed": "Inscripciones cerradas",
       "related-events": "Otros eventos",
@@ -125,6 +126,7 @@
       "video": "Video",
       "3d": "3D",
       "gallery": "Galería",
+      "gallery-item": "Item de la galería",
       "plural-image": "Imágenes",
       "plural-video": "Videos",
       "plural-3d": "Archivos 3D",
@@ -146,6 +148,7 @@
       "loading": "Cargando la Galería..."
     },
     "jobs": {
+      "job": "Trabajo",
       "jobs": "Trabajos",
       "read-more": "Leer más sobre este trabajo.",
       "open": "Vacante",
@@ -153,6 +156,7 @@
       "loading": "Cargando los Trabajos..."
     },
     "news": {
+      "news": "News",
       "related-posts": "Noticias relacionadas",
       "back-to-posts": "Volver a noticias",
       "loading": "Cargando las noticias...",
@@ -160,6 +164,9 @@
       "release-link": "Obtenga más información sobre este boletín en NOIRlab.edu",
       "links": "Links",
       "contacts": "Contactos"
+    },
+    "pages": {
+      "page": "Pagina"
     },
     "pagination": {
       "label": "Paginación",
@@ -179,6 +186,7 @@
       "connect": "Conecta con nosotros"
     },
     "staff": {
+      "rubin-voices": "Voces de Rubin",
       "scientific-staff": "Perfil del equipo científico",
       "non-scientific-staff": "Perfil del equipo no científico",
       "browse-more": "Navegar más perfiles",
@@ -313,6 +321,7 @@
       "delete_error_header": "¡Error!"
     },
     "glossary": {
+      "glossary-term": "Término del glosario",
       "back_button": "Volver al glosario",
       "loading": "Cargando el Glosario..."
     },
@@ -328,6 +337,7 @@
       "button_confirm": "¡Entendido!"
     },
     "investigation": {
+      "investigation": "Investigación",
       "total_duration": "Duración total de la investigación",
       "start": "Comenzar investigación",
       "coming_soon": "(Pronto)",
