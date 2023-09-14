@@ -683,14 +683,32 @@ export const MixedLink = styled(BaseMixedLink)`
       font-size: 16px;
       font-weight: 700;
 
+      nav {
+        background-color: transparent;
+      }
+
       li:last-of-type {
         display: none;
       }
     }
 
-    .title {
-      font-size: 20px;
-      font-weight: 700;
+    .title-link {
+      text-decoration-color: var(--turquoise85);
+
+      .title {
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--turquoise85);
+      }
+
+      &:hover,
+      &:focus-visible {
+        text-decoration-color: var(--black);
+
+        .title {
+          color: var(--black);
+        }
+      }
     }
 
     .text {
@@ -705,13 +723,13 @@ export const MixedLink = styled(BaseMixedLink)`
 
     @media (max-width: ${BREAK_TABLET}) {
       grid-template-areas:
-        "pretitle"
-        "title"
-        "text"
-        "subtitle";
-      grid-template-columns: 1fr;
+        "image pretitle"
+        "image title"
+        "image text"
+        "image subtitle";
+      grid-template-columns: 100px 1fr;
 
-      .image {
+      .pretitle {
         display: none;
       }
     }
@@ -828,8 +846,6 @@ export const MixedLink = styled(BaseMixedLink)`
   &.pages:focus-visible,
   &.darkSlide:hover,
   &.darkSlide:focus-visible,
-  &.search:hover,
-  &.search:focus-visible,
   &.slideshows:hover,
   &.slideshows:focus-visible,
   &.news:hover,
@@ -850,7 +866,6 @@ export const MixedLink = styled(BaseMixedLink)`
   &:focus-visible {
     &.pages,
     &.news,
-    &.search,
     &.slideshows {
       color: var(--turquoise85);
     }

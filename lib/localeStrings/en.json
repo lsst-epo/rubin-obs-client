@@ -71,7 +71,7 @@
       "gallery-items": "Gallery Items",
       "jobs": "Jobs",
       "news": "News",
-      "staff-profiles": "Staff Profiles"
+      "staff-profiles": "Rubin Voices"
     },
     "alert": {
       "solar-systems-found": "Solar systems found",
@@ -79,6 +79,7 @@
       "total-to-date": "Total to date"
     },
     "events": {
+      "event": "Event",
       "open": "Registration Open",
       "closed": "Registration Closed",
       "related-events": "Other Events",
@@ -110,6 +111,7 @@
       "video": "Video",
       "3d": "3D",
       "gallery": "Gallery",
+      "gallery-item": "Gallery Item",
       "plural-image": "Images",
       "plural-video": "Videos",
       "plural-3d": "3D Files",
@@ -131,6 +133,7 @@
       "loading": "Loading the Gallery..."
     },
     "jobs": {
+      "job": "Job",
       "jobs": "Jobs",
       "read-more": "Read more about this position.",
       "open": "Open",
@@ -138,6 +141,7 @@
       "loading": "Loading the Jobs..."
     },
     "news": {
+      "news": "News",
       "related-posts": "Related News Posts",
       "back-to-posts": "Go Back to News Posts",
       "loading": "Loading the News...",
@@ -145,6 +149,9 @@
       "release-link": "Learn more about this release on NOIRLab.edu",
       "links": "Links",
       "contacts": "Contacts"
+    },
+    "pages": {
+      "page": "Page"
     },
     "pagination": {
       "label": "Pagination",
@@ -164,6 +171,7 @@
       "connect": "Let's Connect"
     },
     "staff": {
+      "rubin-voices": "Rubin Voices",
       "scientific-staff": "Scientific Staff Profile",
       "non-scientific-staff": "Non-scientific Staff Profile",
       "browse-more": "Browse More Profiles",
@@ -298,6 +306,7 @@
       "delete_error_header": "Error!"
     },
     "glossary": {
+      "glossary-term": "Glossary Term",
       "back_button": "Go back to Glossary",
       "loading": "Loading the Glossary..."
     },
@@ -313,6 +322,7 @@
       "button_confirm": "Got it!"
     },
     "investigation": {
+      "investigation": "Investigation",
       "total_duration": "Investigation total duration",
       "start": "Start Investigation",
       "coming_soon": "(Coming Soon)",

@@ -46,7 +46,7 @@ const Tile = ({
   return (
     <Styled.ListItem>
       <Styled.MixedLink
-        as={link?.url ? MixedLink : "div"}
+        as={link?.url && type !== "search" ? MixedLink : "div"}
         {...link}
         aria-labelledby={link?.url ? uid : null}
         className={classNames(className, type, {
@@ -73,7 +73,14 @@ const Tile = ({
           </div>
         )}
         {pretitle && <div className="pretitle">{pretitle}</div>}
-        {title && (
+        {title && type === "search" && (
+          <MixedLink {...link} className="title-link">
+            <TitleTag id={uid} className="title">
+              {title}
+            </TitleTag>
+          </MixedLink>
+        )}
+        {title && type !== "search" && (
           <TitleTag id={uid} className="title">
             {title}
           </TitleTag>
