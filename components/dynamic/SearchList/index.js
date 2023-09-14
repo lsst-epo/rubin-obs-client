@@ -12,6 +12,7 @@ import Breadcrumbs from "@/components/page/Breadcrumbs";
 import { Grid } from "@rubin-epo/epo-react-lib";
 import DataList from "@/dynamic/DataList";
 import Tile from "@/atomic/Tile";
+import * as Styled from "./styles";
 
 const SearchList = ({
   button,
@@ -24,6 +25,7 @@ const SearchList = ({
   const localeInfo = useGlobalData("localeInfo");
   const rootPages = useGlobalData("rootPages");
   const lang = localeInfo?.language || "en-US";
+
   const makePretitle = (entry) => {
     if (entry.eventType) {
       return entry.eventType[0].title;
@@ -84,6 +86,33 @@ const SearchList = ({
     return <Breadcrumbs breadcrumbs={crumbsArray} type="search" />;
   };
 
+  const makeSubtitle = (entry) => {
+    const type = {
+      galleryItem: t("gallery.gallery-item"),
+      slideshow: t("gallery.slideshow"),
+      events: t("events.event"),
+      job: t("jobs.job"),
+      post: t("news.news"),
+      pages: t("pages.page"),
+      studentPages: t("pages.page"),
+      educatorPages: t("pages.page"),
+      staffProfiles: t("staff.rubin-voices"),
+      glossaryTerm: t("glossary.glossary-term"),
+      investigationLandingPage: t("investigation.investigation"),
+    }[entry.typeHandle];
+
+    return (
+      <Styled.PretitleContainer>
+        <div>{type ? `${type} ` : ``}</div>
+        <div>
+          {entry.date
+            ? `${t("published")} ${makeDateString(entry.date, lang)}`
+            : ``}
+        </div>
+      </Styled.PretitleContainer>
+    );
+  };
+
   return (
     <DataList
       excludeId={excludeId}
@@ -104,10 +133,7 @@ const SearchList = ({
                     image={entry.image?.[0]}
                     link={entry.uri}
                     pretitle={makePretitle(entry)}
-                    subtitle={
-                      entry.date &&
-                      `${t("published")} ${makeDateString(entry.date, lang)}`
-                    }
+                    subtitle={makeSubtitle(entry)}
                     text={
                       entry.jobPosition
                         ? t(`jobs.read-more`)
