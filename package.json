@@ -68,7 +68,7 @@
     "feed": "^4.2.2",
     "focus-trap": "^7.0.0",
     "focus-visible": "^5.1.0",
-    "graphql": "^16.5.0",
+    "graphql": "^16.8.1",
     "graphql-request": "^5.0.0",
     "hoist-non-react-statics": "^3.3.2",
     "i18next": "^22.0.4",
