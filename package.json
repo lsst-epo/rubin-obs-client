@@ -119,7 +119,7 @@
     "jsconfig-paths-jest-mapper": "^1.0.0",
     "lint-staged": "^13.0.3",
     "local-cors-proxy": "^1.1.0",
-    "postcss": "^8.4.14",
+    "postcss": "^8.4.31",
     "postcss-normalize": "^10.0.1",
     "postcss-preset-env": "^7.7.2",
     "postcss-styled-syntax": "^0.4.0",
