@@ -29,6 +29,10 @@ ARG NEXT_PUBLIC_GOOGLE_APP_ID=688095955960-t0fpaj4ec3gh5vsr9lhg8govapk2oeo9.apps
 ARG NEXT_PUBLIC_CONTACT_FORM_POST_URL=https://api.rubinobs.org/actions/contact-form/send
 ARG NEXT_PUBLIC_PLAUSIBLE_DOMAIN=rubinobs.org
 ARG CLOUD_ENV=PROD
+ARG NEXT_PUBLIC_EFD_URL=https://hasura-e3g4rcii3q-uc.a.run.app/v1/graphql
+ARG NEXT_PUBLIC_HASURA_SECRET=_qfq_tMbyR4brJ@KHCzuJRU7
+ARG NEXT_PUBLIC_RELEASE_URL=`https://noirlab.edu/public/api/v2/releases/{{ID}}/?lang={{SITE}}&translation_mode=fallback`
+ARG NEXT_PUBLIC_SURVEY_SPARROW=true
 
 ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
 ENV EDC_LOGGER_API_URL=$EDC_LOGGER_API_URL
