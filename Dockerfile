@@ -18,6 +18,7 @@ ARG CLOUD_ENV=PROD
 ARG NEXT_PUBLIC_EFD_URL=https://hasura-e3g4rcii3q-uc.a.run.app/v1/graphql
 ARG NEXT_PUBLIC_HASURA_SECRET=_qfq_tMbyR4brJ@KHCzuJRU7
 ARG NEXT_PUBLIC_RELEASE_URL=`https://noirlab.edu/public/api/v2/releases/{{ID}}/?lang={{SITE}}&translation_mode=fallback`
+ARG NEXT_PUBLIC_SURVEY_SPARROW=true
 
 RUN npx browserslist@latest --update-db && yarn static:build
 
