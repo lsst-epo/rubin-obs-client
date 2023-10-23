@@ -87,7 +87,7 @@ function Client({ Component, pageProps }) {
                   rm.parentNode.removeChild(rm);
                 }
               }
-              sparrowLaunch({sparrowLang: "${lang}"});
+              sparrowLaunch({/*add custom params here*/});
             `,
               }}
             />
