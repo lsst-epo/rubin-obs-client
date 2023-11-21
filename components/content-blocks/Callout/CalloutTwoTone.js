@@ -13,7 +13,7 @@ import {
   StyledTwoToneImage,
 } from "./styles";
 import { ResponsiveImage } from "@rubin-epo/epo-react-lib";
-import { useDamAssetAsImage } from "@/lib/utils";
+import { imageShaper } from "@/lib/utils";
 
 export default function CalloutTwoTone({ callout }) {
   const {
@@ -26,7 +26,7 @@ export default function CalloutTwoTone({ callout }) {
     text,
   } = callout;
 
-  const calloutBackgroundImage = useDamAssetAsImage(backgroundImage[0]);
+  const calloutBackgroundImage = imageShaper("EN", backgroundImage[0]);
 
   return (
     <>
@@ -73,10 +73,10 @@ export default function CalloutTwoTone({ callout }) {
 CalloutTwoTone.propTypes = {
   callout: PropTypes.shape({
     backgroundColor: PropTypes.string,
-    backgroundImage: PropTypes.arrayOf(imageShape).isRequired,
+    backgroundImage: PropTypes.array,
     captionRichText: PropTypes.node,
     header: PropTypes.string,
-    image: PropTypes.arrayOf(imageShape).isRequired,
+    image: PropTypes.arrayOf(imageShape),
     links: linksShape,
     text: PropTypes.node,
   }).isRequired,
