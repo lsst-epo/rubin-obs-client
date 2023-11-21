@@ -2,12 +2,12 @@ import PropTypes from "prop-types";
 import * as Styled from "./styles";
 import { Button, Image, IconComposer } from "@rubin-epo/epo-react-lib";
 import T from "@/page/Translate";
-import { useDamAssetAsImage } from "@/lib/utils";
+import { imageShaper } from "@/lib/utils";
 
 export default function InvestigationHero({ investigation }) {
-  const { damAsset, title, externalUrl, duration, status } =
+  const { cantoAssetSingle, title, externalUrl, duration, status } =
     investigation || {};
-  const image = useDamAssetAsImage(damAsset?.[0]);
+  const image = imageShaper("EN", cantoAssetSingle?.[0]);
 
   if (!investigation) return null;
 
@@ -52,5 +52,6 @@ InvestigationHero.propTypes = {
         title: PropTypes.string,
       })
     ),
+    cantoAssetSingle: PropTypes.array,
   }),
 };

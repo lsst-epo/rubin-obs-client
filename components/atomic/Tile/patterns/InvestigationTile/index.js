@@ -3,15 +3,15 @@ import { useUID } from "react-uid";
 import { Image } from "@rubin-epo/epo-react-lib";
 import * as Styled from "./styles";
 import { useTranslation } from "react-i18next";
-import { useDamAssetAsImage } from "@/lib/utils";
+import { imageShaper } from "@/lib/utils";
 
 const InvestigationTile = ({ investigation, useExternalLink }) => {
   const uid = useUID();
 
   const { t } = useTranslation();
-  const { damAsset, status, title, externalUrl, landingPage } =
+  const { cantoAssetSingle, status, title, externalUrl, landingPage } =
     investigation || {};
-  const image = useDamAssetAsImage(damAsset?.[0]);
+  const image = imageShaper("EN", cantoAssetSingle?.[0]);
   const url = useExternalLink ? externalUrl : landingPage?.[0]?.uri;
   const isInactive = status === "inactive";
 
@@ -43,7 +43,7 @@ InvestigationTile.propTypes = {
   investigation: PropTypes.shape({
     uri: PropTypes.string,
     title: PropTypes.string,
-    damAsset: PropTypes.array,
+    cantoAssetSingle: PropTypes.array,
     externalUrl: PropTypes.string,
     status: PropTypes.string,
     landingPage: PropTypes.arrayOf(
