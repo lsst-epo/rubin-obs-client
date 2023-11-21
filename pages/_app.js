@@ -14,9 +14,11 @@ const PLAUSIBLE_DOMAIN = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
 const SURVEY_SPARROW = process.env.NEXT_PUBLIC_SURVEY_SPARROW;
 
 function Client({ Component, pageProps }) {
+  const lang = pageProps?.data?.language || "en-US";
+
   const authData = useAuthentication({
     typeHandle: pageProps?.data?.typeHandle || "",
-    language: pageProps?.data?.language || "en-US",
+    language: lang,
     localized: pageProps?.data?.localized || [],
   });
 
@@ -85,7 +87,7 @@ function Client({ Component, pageProps }) {
                   rm.parentNode.removeChild(rm);
                 }
               }
-              sparrowLaunch({/*add custom params here*/});
+              sparrowLaunch({sparrowLang: "${lang}"});
             `,
               }}
             />
