@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import Body from "@/global/Body";
 import Breadcrumbs from "@/page/Breadcrumbs";
-import { useCustomBreadcrumbs, useDamAssetAsImage } from "@/lib/utils";
+import { useCustomBreadcrumbs, imageShaper } from "@/lib/utils";
 import {
   Container,
   ResponsiveImage,
@@ -13,7 +13,7 @@ import { useTranslation } from "react-i18next";
 export default function GlossaryPage({ data }) {
   const { t } = useTranslation();
 
-  const { id, title, description, uri, text, damAsset, caption } = data;
+  const { id, title, description, uri, text, cantoAssetSingle, caption } = data;
 
   const customBreadcrumbs = useCustomBreadcrumbs("Glossary");
 
@@ -21,7 +21,7 @@ export default function GlossaryPage({ data }) {
     b.uri.includes("glossary")
   );
 
-  const image = useDamAssetAsImage(damAsset);
+  const image = imageShaper("EN", cantoAssetSingle[0]);
 
   const bodyProps = {
     description,
@@ -68,7 +68,7 @@ GlossaryPage.propTypes = {
     description: PropTypes.string,
     uri: PropTypes.string,
     text: PropTypes.node,
-    damAsset: PropTypes.array,
+    cantoAssetSingle: PropTypes.array,
     caption: PropTypes.string,
   }),
 };

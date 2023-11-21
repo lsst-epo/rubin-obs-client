@@ -2,25 +2,24 @@
 
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import imageShape from "@/shapes/image";
 import { linksShape } from "@/shapes/link";
 import Wrapper from "./Wrapper";
 import { Header, Text, StyledMixedLink, StyledImage } from "./styles";
 import TempList from "@/components/dynamic/TempList";
-import { useDamAssetAsImage } from "@/lib/utils";
+import { imageShaper } from "@/lib/utils";
 
 export default function CalloutMain({ callout }) {
   const {
     dynamicComponent,
     header,
-    damAsset,
+    cantoAssetSingle,
     links,
     padImage,
     text,
     ...wrapperProps
   } = callout;
 
-  const calloutImage = useDamAssetAsImage(damAsset[0]);
+  const calloutImage = imageShaper("EN", cantoAssetSingle[0]);
 
   return (
     <Wrapper
@@ -65,7 +64,7 @@ CalloutMain.propTypes = {
   callout: PropTypes.shape({
     header: PropTypes.string,
     text: PropTypes.node,
-    damAsset: PropTypes.arrayOf(imageShape).isRequired,
+    cantoAssetSingle: PropTypes.array,
     padImage: PropTypes.bool,
     links: linksShape,
     backgroundColor: PropTypes.string,
