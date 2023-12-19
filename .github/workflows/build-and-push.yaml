@@ -31,11 +31,11 @@ jobs:
         with:
           # list of Docker images to use as base name for tags
           images: |
-            gcr.io/skyviewer/rubinobs-client,enable=${{ github.ref != 'master' && github.ref_type != 'tag' }}
-            gcr.io/edc-int-6c5e/rubinobs-client,enable=${{ github.ref == 'master'}}
+            gcr.io/skyviewer/rubinobs-client,enable=${{ (github.ref != 'master' && github.ref_type != 'tag') || github.base_ref == 'develop' }}
+            gcr.io/edc-int-6c5e/rubinobs-client,enable=${{ github.ref == 'master' || github.base_ref == 'master'}}
             gcr.io/edc-prod-eef0/rubinobs-client,enable=${{ github.ref_type == 'tag'}}
           flavor: |
-            latest=true
+            latest=${{ github.event_name == 'push' }}
           # generate Docker tags based on the following events/attributes
           tags: |
             type=schedule
@@ -54,7 +54,7 @@ jobs:
       - 
         name: Login to GCP Dev
         uses: google-github-actions/setup-gcloud@v0
-        if: ${{ github.ref != 'master' && github.ref_type != 'tag' }}
+        if: ${{ (github.ref != 'master' && github.ref_type != 'tag') || github.base_ref == 'develop' }}
         with:
           service_account_key: ${{ secrets.DEV_SA_KEY }}
           project_id: skyviewer
@@ -62,7 +62,7 @@ jobs:
       - 
         name: Login to GCP Int
         uses: google-github-actions/setup-gcloud@v0
-        if: ${{ github.ref == 'master' }}
+        if: ${{ github.ref == 'master' || github.base_ref == 'master'}}
         with:
           service_account_key: ${{ secrets.SKYVIEWER_INT_SERVICE_ACCOUNT }}
           project_id: edc-int-6c5e
