@@ -40,7 +40,7 @@ jobs:
         --build-arg CLOUD_ENV=PROD \
         --build-arg NEXT_PUBLIC_GOOGLE_APP_ID=596747551410-vcqlrp7erg5c5gm0dkvc0k21mgi0ilg0.apps.googleusercontent.com \
         --build-arg NEXT_PUBLIC_CONTACT_FORM_POST_URL=https://api.rubinobs.org/actions/contact-form/send \
-        --build-arg NEXT_PUBLIC_PLAUSIBLE_DOMAIN=rubinobservatory.org \
+        --build-arg NEXT_PUBLIC_PLAUSIBLE_DOMAIN=rubinobservatory.org,all.epo.sites \
         --build-arg NEXT_PREVIEW_SLUG=preview-in-craft-cms \
         --build-arg NEXT_PUBLIC_EFD_URL=https://hasura-e3g4rcii3q-uc.a.run.app/v1/graphql \
         --build-arg NEXT_PUBLIC_HASURA_SECRET=_qfq_tMbyR4brJ@KHCzuJRU7 \
