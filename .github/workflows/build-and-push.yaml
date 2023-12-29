@@ -1,4 +1,4 @@
-name: build-and-push
+name: Build, Push, and Deploy
 
 on:
   push:
@@ -18,8 +18,13 @@ on:
       - 'master'
 
 jobs:
-  docker:
+  build:
+    name: Build Container Image
     runs-on: ubuntu-latest
+    outputs:
+      image_tag: ${{ steps.deploy-info.outputs.image_tag }}
+      image_name: ${{ steps.deploy-info.outputs.image_name }}
+      environment_name: ${{ steps.deploy-info.outputs.environment_name }}
     steps:
       -
         name: Checkout
@@ -31,11 +36,11 @@ jobs:
         with:
           # list of Docker images to use as base name for tags
           images: |
-            gcr.io/skyviewer/rubinobs-client,enable=${{ (github.ref != 'master' && github.ref_type != 'tag') || github.base_ref == 'develop' }}
+            gcr.io/skyviewer/rubinobs-client,enable=${{ github.ref != 'master' && github.ref_type != 'tag' && github.base_ref == 'develop' }}
             gcr.io/edc-int-6c5e/rubinobs-client,enable=${{ github.ref == 'master' || github.base_ref == 'master'}}
             gcr.io/edc-prod-eef0/rubinobs-client,enable=${{ github.ref_type == 'tag'}}
           flavor: |
-            latest=${{ github.event_name == 'push' }}
+            latest=${{ github.event_name == 'push'}}
           # generate Docker tags based on the following events/attributes
           tags: |
             type=schedule
@@ -46,35 +51,47 @@ jobs:
             type=semver,pattern={{major}}
             type=sha
       -
+        name: Parse deployment info
+        id: deploy-info
+        run: |
+          # Determine environment to deploy to
+          if ${{ github.ref != 'master' && github.ref_type != 'tag' && github.base_ref == 'develop' }}; then
+            environment_name="dev"
+            credentials_json='${{ secrets.DEV_SA_KEY }}'
+          elif ${{ github.ref == 'master' || github.base_ref == 'master'}}; then
+            environment_name="int"
+            credentials_json='${{ secrets.SKYVIEWER_INT_SERVICE_ACCOUNT }}'
+          elif ${{ github.ref_type == 'tag'}}; then
+            environment_name="prod"
+            credentials_json='${{ secrets.PIPELINE_EPO_PROD_PROJECT }}'
+          else
+            environment_name=""
+            credentials_json=""
+          fi
+          echo environment_name=$environment_name >> "$GITHUB_OUTPUT"
+          echo credentials_json=$credentials_json >> "$GITHUB_OUTPUT"
+
+          # Parse container image tag to deploy
+          full_tag=$(echo "$DOCKER_METADATA_OUTPUT_JSON" | jq -r '.tags[] | limit(1; select(. | test(":sha-|:v.")))')
+          echo "Will use tag \"$full_tag\" for deployment."
+          echo image_tag=$(echo "$full_tag" | cut -f2 -d:) >> "$GITHUB_OUTPUT"
+          echo image_name=$(echo "$full_tag" | cut -f1 -d:) >> "$GITHUB_OUTPUT"
+          echo full_tag=$full_tag >> "$GITHUB_OUTPUT"
+
+      -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       - 
-        name: Login to GCP Dev
-        uses: google-github-actions/setup-gcloud@v0
-        if: ${{ (github.ref != 'master' && github.ref_type != 'tag') || github.base_ref == 'develop' }}
+        name: Login to GCP
+        uses: 'google-github-actions/auth@v2'
         with:
-          service_account_key: ${{ secrets.DEV_SA_KEY }}
-          project_id: skyviewer
-          export_default_credentials: true
+          credentials_json: ${{ steps.deploy-info.outputs.credentials_json }}
       - 
-        name: Login to GCP Int
-        uses: google-github-actions/setup-gcloud@v0
-        if: ${{ github.ref == 'master' || github.base_ref == 'master'}}
-        with:
-          service_account_key: ${{ secrets.SKYVIEWER_INT_SERVICE_ACCOUNT }}
-          project_id: edc-int-6c5e
-          export_default_credentials: true
-      - 
-        name: Login to GCP Prod
-        uses: google-github-actions/setup-gcloud@v0
-        if: ${{ github.ref_type == 'tag' }}
-        with:
-          service_account_key: ${{ secrets.PIPELINE_EPO_PROD_PROJECT  }}
-          project_id: edc-prod-eef0
-          export_default_credentials: true
+        name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v2'
       - 
         run: gcloud --quiet auth configure-docker
       -
@@ -89,4 +106,63 @@ jobs:
             type=gha
           cache-from: |
             type=gha
-            
+          build-args: |
+            BASE_TAG=k8s
+      - 
+        name: Summary
+        run: |
+          cat <<-EOT >> "$GITHUB_STEP_SUMMARY"
+            # Container Build Completed
+
+            ## Tags
+            ${{ steps.meta.outputs.tags }}
+          EOT
+  
+  deploy:
+    name: Trigger deploy to ${{ needs.build.outputs.environment_name }}
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate Webhook Payload
+        id: payload
+        run: |-
+          PARAMETERS=(
+            client.image.tag=${{ needs.build.outputs.image_tag }}
+            client.image.repository=${{ needs.build.outputs.image_name }}
+          )
+          DATA="{
+            \"event_type\": \"app_update_values\",
+            \"client_payload\": {
+              \"app_name\": \"rubinobs-site\",
+              \"environment_name\": \"${{ needs.build.outputs.environment_name }}\",
+              \"parameters\": $(jq -c -n '$ARGS.positional' --args ${PARAMETERS[@]})
+            }
+          }"
+          echo "data=$(echo $DATA | jq -rc '.')" >> "$GITHUB_OUTPUT"
+      # - name: Call Dispatch Webhook
+      #   env:
+      #     WEBHOOK_URL: https://api.github.com/repos/lsst-epo/edc-deploy/dispatches
+      #   run: |-
+      #       curl -L --fail \
+      #       -X POST \
+      #       $WEBHOOK_URL \
+      #       -H 'Content-Type: application/json' \
+      #       -H "Accept: application/vnd.github+json" \
+      #       -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+      #       -d "${{ toJson(fromJson(steps.payload.outputs.data)) }}"
+      #       cat <<-EOT >> "$GITHUB_STEP_SUMMARY"
+      #         # Deployment Workflow Triggered
+
+      #         Access the deployment workflow at <https://github.com/lsst-epo/edc-deploy/actions/workflows/app-update-values.yaml>
+      #       EOT
+      - uses: lasith-kg/dispatch-workflow@v1.7.0
+        id: dispatch
+        name: Trigger Deployment and Wait
+        with:
+          dispatch-method: repository_dispatch
+          repo: edc-deploy
+          owner: lsst-epo
+          event-type: app_update_values 
+          token: ${{ secrets.GITHUB_TOKEN }} 
+          workflow-inputs: ${{ toJson(steps.payload.outputs.data) }}
+          discover: true
