@@ -50,7 +50,7 @@ ENV CLOUD_ENV=$CLOUD_ENV
 ARG RUN_BUILD="true"
 ENV RUN_BUILD=${RUN_BUILD}
 
-RUN bash -c "if [ $RUN_BUILD ];then yarn static:build;fi"
+RUN if $RUN_BUILD;then yarn static:build;fi
 
 # If using npm comment out above and use below instead
 # RUN npm run build
