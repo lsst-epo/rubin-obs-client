@@ -1,4 +1,6 @@
 name: Build, Push, and Deploy
+concurrency: 
+  group: $${{ github.ref_name }}
 
 on:
   push:
