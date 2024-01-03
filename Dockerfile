@@ -47,7 +47,10 @@ ENV CLOUD_ENV=$CLOUD_ENV
 # Uncomment the following line in case you want to disable telemetry during the build.
 # ENV NEXT_TELEMETRY_DISABLED 1
 
-# RUN yarn static:build
+ARG RUN_BUILD="true"
+ENV RUN_BUILD=${RUN_BUILD}
+
+RUN bash -c 'if [ $RUN_BUILD ];then yarn static:build;fi
 
 # If using npm comment out above and use below instead
 # RUN npm run build

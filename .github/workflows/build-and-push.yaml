@@ -131,38 +131,27 @@ jobs:
             client.image.repository=${{ needs.build.outputs.image_name }}
           )
           DATA="{
-            \"event_type\": \"app_update_values\",
-            \"client_payload\": {
-              \"app_name\": \"rubinobs-site\",
-              \"environment_name\": \"${{ needs.build.outputs.environment_name }}\",
-              \"parameters\": $(jq -c -n '$ARGS.positional' --args ${PARAMETERS[@]})
-            }
+            \"app_name\": \"rubinobs-site\",
+            \"environment_name\": \"${{ needs.build.outputs.environment_name }}\",
+            \"parameters\": $(jq -c -n '$ARGS.positional' --args ${PARAMETERS[@]})
           }"
           echo "data=$(echo $DATA | jq -rc '.')" >> "$GITHUB_OUTPUT"
-      # - name: Call Dispatch Webhook
-      #   env:
-      #     WEBHOOK_URL: https://api.github.com/repos/lsst-epo/edc-deploy/dispatches
-      #   run: |-
-      #       curl -L --fail \
-      #       -X POST \
-      #       $WEBHOOK_URL \
-      #       -H 'Content-Type: application/json' \
-      #       -H "Accept: application/vnd.github+json" \
-      #       -H 'Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
-      #       -d "${{ toJson(fromJson(steps.payload.outputs.data)) }}"
-      #       cat <<-EOT >> "$GITHUB_STEP_SUMMARY"
-      #         # Deployment Workflow Triggered
-
-      #         Access the deployment workflow at <https://github.com/lsst-epo/edc-deploy/actions/workflows/app-update-values.yaml>
-      #       EOT
       - uses: lasith-kg/dispatch-workflow@v1.7.0
         id: dispatch
-        name: Trigger Deployment and Wait
+        name: Trigger Deployment
         with:
           dispatch-method: repository_dispatch
           repo: edc-deploy
           owner: lsst-epo
           event-type: app_update_values 
-          token: ${{ secrets.GITHUB_TOKEN }} 
-          workflow-inputs: ${{ toJson(steps.payload.outputs.data) }}
+          token: ${{ secrets.EDC_DEPLOY_GITHUB_TOKEN_FOR_REST_API }} 
+          workflow-inputs: ${{ steps.payload.outputs.data }}
           discover: true
+      - name: Await Run ID ${{ steps.dispatch.outputs.run-id }}
+        uses: Codex-/await-remote-run@v1.10.0
+        with:
+          token: ${{ secrets.EDC_DEPLOY_GITHUB_TOKEN_FOR_REST_API }}
+          repo: edc-deploy
+          owner: lsst-epo
+          run_id: ${{ steps.dispatch.outputs.run-id }}
+          run_timeout_seconds: 1500
