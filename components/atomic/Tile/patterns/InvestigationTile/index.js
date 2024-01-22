@@ -9,9 +9,9 @@ const InvestigationTile = ({ investigation, useExternalLink }) => {
   const uid = useUID();
 
   const { t } = useTranslation();
-  const { cantoAssetSingle, status, title, externalUrl, landingPage } =
+  const { cantoSingle, status, title, externalUrl, landingPage } =
     investigation || {};
-  const image = imageShaper("EN", cantoAssetSingle?.[0]);
+  const image = imageShaper("EN", cantoSingle?.[0]);
   const url = useExternalLink ? externalUrl : landingPage?.[0]?.uri;
   const isInactive = status === "inactive";
 
@@ -43,7 +43,7 @@ InvestigationTile.propTypes = {
   investigation: PropTypes.shape({
     uri: PropTypes.string,
     title: PropTypes.string,
-    cantoAssetSingle: PropTypes.array,
+    cantoSingle: PropTypes.array,
     externalUrl: PropTypes.string,
     status: PropTypes.string,
     landingPage: PropTypes.arrayOf(

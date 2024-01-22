@@ -12,14 +12,14 @@ export default function CalloutMain({ callout }) {
   const {
     dynamicComponent,
     header,
-    cantoAssetSingle,
+    cantoSingle,
     links,
     padImage,
     text,
     ...wrapperProps
   } = callout;
 
-  const calloutImage = imageShaper("EN", cantoAssetSingle[0]);
+  const calloutImage = imageShaper("EN", cantoSingle[0]);
 
   return (
     <Wrapper
@@ -65,7 +65,7 @@ CalloutMain.propTypes = {
   callout: PropTypes.shape({
     header: PropTypes.string,
     text: PropTypes.node,
-    cantoAssetSingle: PropTypes.array,
+    cantoSingle: PropTypes.array,
     padImage: PropTypes.bool,
     links: linksShape,
     backgroundColor: PropTypes.string,
