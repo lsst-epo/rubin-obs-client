@@ -5,9 +5,9 @@ import T from "@/page/Translate";
 import { imageShaper } from "@/lib/utils";
 
 export default function InvestigationHero({ investigation }) {
-  const { cantoAssetSingle, title, externalUrl, duration, status } =
+  const { cantoSingle, title, externalUrl, duration, status } =
     investigation || {};
-  const image = imageShaper("EN", cantoAssetSingle?.[0]);
+  const image = imageShaper("EN", cantoSingle?.[0]);
 
   if (!investigation) return null;
 
@@ -52,6 +52,6 @@ InvestigationHero.propTypes = {
         title: PropTypes.string,
       })
     ),
-    cantoAssetSingle: PropTypes.array,
+    cantoSingle: PropTypes.array,
   }),
 };
