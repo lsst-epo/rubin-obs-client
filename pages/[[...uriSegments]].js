@@ -10,6 +10,7 @@ import { GlobalDataProvider } from "@/contexts/GlobalData";
 import PageTemplate from "@/templates/Page";
 import EventPageTemplate from "@/templates/EventPage";
 import GalleryPageTemplate from "@/templates/GalleryPage";
+import GalleryItemPageTemplate from "@/templates/GalleryItemPage";
 import GlossaryPageTemplate from "@/templates/GlossaryPage";
 import HomePageTemplate from "@/templates/HomePage";
 import NewsPageTemplate from "@/templates/NewsPage";
@@ -59,10 +60,18 @@ function logNextDir() {
 
 export default function Page({ section, globalData, ...entryProps }) {
   globalData.localeInfo.locale === "es" ? updateI18n("es") : updateI18n("en");
+  const {
+    data: { pageType, dynamicComponent },
+  } = entryProps;
 
+  const isGalleryPage =
+    section === "pages" &&
+    pageType === "dynamic" &&
+    dynamicComponent === "gallery";
   const sectionMap = {
     events: EventPageTemplate,
-    galleryItems: GalleryPageTemplate,
+    gallery: GalleryPageTemplate,
+    galleryItems: GalleryItemPageTemplate,
     glossaryTerms: GlossaryPageTemplate,
     homepage: HomePageTemplate,
     news: NewsPageTemplate,
@@ -72,7 +81,9 @@ export default function Page({ section, globalData, ...entryProps }) {
     userProfilePage: UserProfilePageTemplate,
   };
 
-  const Template = sectionMap[section] || PageTemplate;
+  const Template = isGalleryPage
+    ? GalleryPageTemplate
+    : sectionMap[section] || PageTemplate;
 
   return (
     <GlobalDataProvider data={globalData}>
