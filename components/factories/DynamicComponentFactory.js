@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import EventList from "@/components/dynamic/EventList";
 import GalleryList from "@/dynamic/GalleryList";
+import Gallery from "@/dynamic/Gallery";
 import JobList from "@/dynamic/JobList";
 import NewsList from "@/dynamic/NewsList";
 import RelatedList from "@/dynamic/RelatedList";
@@ -13,6 +14,7 @@ import GlossaryList from "@/dynamic/GlossaryList";
 const componentMap = {
   alertStream: TempList,
   events: EventList,
+  gallery: Gallery,
   galleryItems: GalleryList,
   imageGalleryItems: GalleryList,
   videoGalleryItems: GalleryList,
@@ -33,6 +35,7 @@ const componentMap = {
 export default function DynamicComponentFactory({ componentType, pageId }) {
   const Component = componentMap[componentType];
   if (!Component) return null;
+
   return <Component pageId={pageId} component={componentType} />;
 }
 

@@ -1,83 +1,43 @@
-/* eslint-disable */
-import React from "react";
 import PropTypes from "prop-types";
-import styled from "styled-components";
-import Link from "next/link";
-import striptags from "striptags";
 import { useTranslation } from "react-i18next";
-import {
-  createLocationString,
-  useCustomBreadcrumbs,
-  useDateString,
-} from "@/lib/utils";
+import internalLinkShape from "@/shapes/link";
+import pageShape from "@/shapes/page";
 import Body from "@/global/Body";
+import ContentBlockFactory from "@/factories/ContentBlockFactory";
+import DynamicComponentFactory from "@/factories/DynamicComponentFactory";
+import { Container } from "@rubin-epo/epo-react-lib";
 import Breadcrumbs from "@/page/Breadcrumbs";
-import {
-  Container,
-  ResponsiveImage,
-  Buttonish,
-  Accordion,
-} from "@rubin-epo/epo-react-lib";
-import { containerNarrow, respond } from "@/styles/globalStyles";
+import FilterBar from "@/components/page/FilterBar/GalleryFilterBar";
+import { usePathData } from "@/lib/utils";
+import SubHero from "@/components/page/SubHero";
+import NestedContext from "@/contexts/Nested";
+import PageContent from "@/page/PageContent";
 
 export default function GalleryPage({
   data: {
-    entry: {
-      assetVariants,
-      credit,
-      customDateCreated,
-      featuredImage,
-      galleryItemCategory,
-      galleryItemTags,
-      id,
-      metadataDate,
-      metadataVersion,
-      publisher,
-      publisherId,
-      richTextDescription,
-      subLocation,
-      title,
-      uri,
-      usageTerms,
-      videoUrl,
-    },
-    globals: {
-      creditDefault,
-      metadataVersionDefault,
-      publisherDefault,
-      publisherIdDefault,
-      usageTermsDefault,
-    },
+    contentBlocks = [],
+    description,
+    dynamicComponent,
+    featuredImage,
+    hero,
+    hideTitle,
+    id,
+    title,
+    uri,
+    typeHandle,
+    overlapHero,
+    subHeroHeader,
+    subHeroText,
+    subHeroColorScheme,
   },
+  breadcrumbs,
 }) {
   const { t } = useTranslation();
   const bodyProps = {
-    description: striptags(richTextDescription),
+    description,
     featuredImage,
     title,
   };
-
-  const customBreadcrumbs = useCustomBreadcrumbs("Gallery");
-
-  // add category strings and pre-filtered crumb: id, title, uri
-  let typeId = "";
-  let typeTitlePlural = "";
-  let typeSlug = "gallery";
-
-  if (galleryItemCategory.length > 0) {
-    typeId = galleryItemCategory[0].id;
-    typeTitlePlural = t(`gallery.plural-${galleryItemCategory[0].slug}`);
-    typeSlug = galleryItemCategory[0].slug;
-
-    customBreadcrumbs.push({
-      id: typeId,
-      title: typeTitlePlural,
-      uri: `gallery?filter=${typeId}`,
-    });
-  }
-
-  const rootHomeLink = customBreadcrumbs.slice(-1)[0];
-  const galleryHomeLink = customBreadcrumbs.slice(0, 1)[0];
   const pageLink = {
     id,
     uri,
@@ -85,229 +45,69 @@ export default function GalleryPage({
     active: true,
   };
 
-  const image = featuredImage[0];
+  const isGallerySearch = false;
+  const { query } = usePathData();
+  const categoryId = query.filter;
 
-  // localized dates
-  const localizedMetadataDate = useDateString(metadataDate);
-  const localizedCustomDate = useDateString(customDateCreated);
-
-  // logic for displaying city/state in US, city/country outside
-  let loc;
-  if (subLocation.length > 0) {
-    loc =
-      subLocation[0].title +
-      ", " +
-      createLocationString(
-        subLocation[0].city,
-        subLocation[0].state,
-        subLocation[0].country
-      );
-  }
-
-  const SecondaryInfo = () => (
-    <>
-      {assetVariants.length > 0 &&
-        assetVariants.map((a, i) => {
-          if (a.assetHeader) {
-            return (
-              <h2 className="t-heading-quaternary" key={i}>
-                {a.assetHeader}
-              </h2>
-            );
-          } else if (a.assetLink?.length > 0) {
-            return (
-              <React.Fragment key={i}>
-                <Link prefetch={false} href={a.assetLink[0].url}>
-                  {a.assetName || t(`gallery.${a.commonName}`)}
-                </Link>
-                {a.assetLink[0].kind === "image"
-                  ? ` (${a.assetLink[0].width} x ${a.assetLink[0].height})`
-                  : ` - ${(parseInt(a.assetLink[0].size) / 1000).toFixed(
-                      1
-                    )} MB`}
-              </React.Fragment>
-            );
-          } else {
-            return null;
-          }
-        })}
-      {galleryItemTags?.length > 0 && (
-        <>
-          <h2 className="t-heading-quaternary">{t(`gallery.tags`)}</h2>
-          {galleryItemTags.map((tag, i) => (
-            <Link
-              key={i}
-              prefetch={false}
-              href={`/${galleryHomeLink?.uri}?search=${tag.slug}`}
-            >
-              {`#${tag.title} `}
-            </Link>
-          ))}
-        </>
-      )}
-    </>
-  );
+  const shouldOverlapHero = !!hero?.length && overlapHero;
 
   return (
     <Body {...bodyProps}>
-      <Breadcrumbs breadcrumbs={[...customBreadcrumbs, pageLink]} />
-      <Container width="regular">
-        <h1>{title}</h1>
-      </Container>
-      <Tile>
-        {videoUrl ? (
-          <Video url={videoUrl} />
-        ) : (
-          <ResponsiveImage image={image} ratio="4:3" />
-        )}
-        <div
-          className="c-content-rte"
-          dangerouslySetInnerHTML={{ __html: richTextDescription }}
+      {breadcrumbs && <Breadcrumbs breadcrumbs={[...breadcrumbs, pageLink]} />}
+      {/* <SlideBlock
+        section="slideshows"
+        header={t(`gallery.curated-slideshows`)}
+        mixedLink={{
+          url: "/gallery/slideshows",
+          text: t(`gallery.see-all`),
+        }}
+        truncate={50}
+      /> */}
+      <FilterBar filterType={dynamicComponent} />
+      <PageContent heroImage={hero} overlapHero={shouldOverlapHero}>
+        <SubHero
+          type={typeHandle}
+          header={subHeroHeader}
+          text={subHeroText}
+          colorScheme={subHeroColorScheme}
+          nested={shouldOverlapHero}
         />
-        {!videoUrl && (
-          <div>
-            <Buttonish
-              url={image.url}
-              text={t(`gallery.download-${typeSlug}`)}
-            />
-          </div>
-        )}
-      </Tile>
-      <ContainerDesktop>
-        <div>
-          <h2 className="t-heading-quaternary">
-            {t(`gallery.about-the-${typeSlug}`)}
-          </h2>
-          <Details>
-            <div>Credit:</div>
-            <div>{credit || creditDefault}</div>
-            {loc && (
-              <>
-                <div>Location: </div>
-                <div>{loc}</div>
-              </>
-            )}
-            {metadataDate && (
-              <>
-                <div>Metadata Date:</div>
-                <div>{localizedMetadataDate}</div>
-              </>
-            )}
-            <div>Metadata Version:</div>
-            <div>{metadataVersion || metadataVersionDefault}</div>
-            <div>Publisher:</div>
-            <div>{publisher || publisherDefault}</div>
-            <div>Publisher ID:</div>
-            <div>{publisherId || publisherIdDefault}</div>
-            {customDateCreated && (
-              <>
-                <div>Date Created:</div>
-                <div>{localizedCustomDate}</div>
-              </>
-            )}
-            <div>Usage Terms:</div>
-            <div
-              className="c-content-rte"
-              dangerouslySetInnerHTML={{
-                __html: usageTerms || usageTermsDefault,
-              }}
-            />
-          </Details>
-        </div>
-        <div className="c-content-rte">
-          <SecondaryInfo />
-        </div>
-      </ContainerDesktop>
-      <ContainerMobile>
-        <Accordion key={id} summary={t(`gallery.additional-information`)}>
-          <div>
-            <h4>{t(`gallery.about-the-${typeSlug}`)}</h4>
-            <div>Credit: {credit || creditDefault}</div>
-            {loc && (
-              <>
-                <div>Location: </div>
-                <div>{loc}</div>
-              </>
-            )}
-            {metadataDate && <div>Metadata Date: {localizedMetadataDate}</div>}
-            <div>
-              Metadata Version: {metadataVersion || metadataVersionDefault}
-            </div>
-            <div>Publisher: {publisher || publisherDefault}</div>
-            <div>Publisher ID: {publisherId || publisherIdDefault}</div>
-            {customDateCreated && (
-              <div>Date Created: {localizedCustomDate}</div>
-            )}
-            <div
-              className="c-content-rte"
-              dangerouslySetInnerHTML={{
-                __html: `Usage Terms: ${usageTerms || usageTermsDefault}`,
-              }}
-            />
-            <SecondaryInfo />
-          </div>
-        </Accordion>
-      </ContainerMobile>
-      <Container width="regular">
-        <Buttonish
-          url={`/${rootHomeLink?.uri}`}
-          text={t(`gallery.back-to-${typeSlug}`)}
-          isBlock={true}
-        />
-      </Container>
+        <NestedContext.Provider value={shouldOverlapHero}>
+          {!hideTitle && (
+            <Container
+              bgColor="white"
+              className="c-page-header"
+              width="regular"
+            >
+              <h1>{title}</h1>
+            </Container>
+          )}
+          {contentBlocks.length > 0 &&
+            [...contentBlocks].map((block) => {
+              if (!block.id || !block.typeHandle) return null;
+              return (
+                <ContentBlockFactory
+                  key={block.id}
+                  type={block.typeHandle}
+                  data={block}
+                  pageId={id}
+                />
+              );
+            })}
+          <DynamicComponentFactory
+            componentType={dynamicComponent}
+            pageId={id}
+          />
+        </NestedContext.Provider>
+      </PageContent>
     </Body>
   );
 }
 
-const Tile = styled.div`
-  ${containerNarrow()}
-  display: grid;
-  grid-gap: 20px;
-  padding: 30px;
-  background-color: var(--neutral10);
-`;
-
-const ContainerDesktop = styled(Container)`
-  h4:not(:first-of-type) {
-    margin-top: 1rem;
-  }
-
-  ${respond(`display: none;`)}
-  > div {
-    display: grid;
-    grid-template: auto / 2fr 1fr;
-    grid-gap: 20px;
-    font-size: 16px;
-  }
-`;
-
-const Details = styled.div`
-  display: grid;
-  grid-template-columns: max-content 1fr;
-  grid-gap: 10px 20px;
-`;
-
-const ContainerMobile = styled(Container)`
-  > div {
-    display: none;
-    font-size: 14px;
-
-    h4:not(:first-of-type) {
-      margin-top: 1rem;
-    }
-
-    p:first-of-type {
-      display: inline-block;
-    }
-
-    ${respond(`display: block;
-      padding-top: 1rem;`)}
-  }
-`;
-
 GalleryPage.displayName = "Template.GalleryPage";
 
 GalleryPage.propTypes = {
-  data: PropTypes.object,
-  breadcrumbs: PropTypes.array,
+  data: pageShape,
+  breadcrumbs: PropTypes.arrayOf(internalLinkShape),
+  children: PropTypes.node,
 };
