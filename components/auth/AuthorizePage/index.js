@@ -8,6 +8,7 @@ import * as Styled from "./styles";
 
 const AUTHORIZED_TYPES = {
   pages: false,
+  galleryPages: false,
   educatorPages: true,
   studentPages: false,
   userProfilePage: true,
@@ -93,6 +94,7 @@ export default function AuthorizePage({ typeHandle, children }) {
 
 AuthorizePage.propTypes = {
   typeHandle: PropTypes.oneOf([
+    "galleryPages",
     "pages",
     "educatorPages",
     "studentPages",
