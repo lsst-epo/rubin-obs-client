@@ -9,7 +9,6 @@ import { Container } from "@rubin-epo/epo-react-lib";
 import Breadcrumbs from "@/page/Breadcrumbs";
 import FilterBar from "@/components/page/FilterBar/GalleryFilterBar";
 import { usePathData } from "@/lib/utils";
-import SubHero from "@/components/page/SubHero";
 import NestedContext from "@/contexts/Nested";
 import PageContent from "@/page/PageContent";
 
@@ -54,24 +53,7 @@ export default function GalleryPage({
   return (
     <Body {...bodyProps}>
       {breadcrumbs && <Breadcrumbs breadcrumbs={[...breadcrumbs, pageLink]} />}
-      {/* <SlideBlock
-        section="slideshows"
-        header={t(`gallery.curated-slideshows`)}
-        mixedLink={{
-          url: "/gallery/slideshows",
-          text: t(`gallery.see-all`),
-        }}
-        truncate={50}
-      /> */}
-      <FilterBar filterType={dynamicComponent} />
       <PageContent heroImage={hero} overlapHero={shouldOverlapHero}>
-        <SubHero
-          type={typeHandle}
-          header={subHeroHeader}
-          text={subHeroText}
-          colorScheme={subHeroColorScheme}
-          nested={shouldOverlapHero}
-        />
         <NestedContext.Provider value={shouldOverlapHero}>
           {!hideTitle && (
             <Container
@@ -94,10 +76,8 @@ export default function GalleryPage({
                 />
               );
             })}
-          <DynamicComponentFactory
-            componentType={dynamicComponent}
-            pageId={id}
-          />
+          <FilterBar />
+          <DynamicComponentFactory componentType="gallery" pageId={id} />
         </NestedContext.Provider>
       </PageContent>
     </Body>

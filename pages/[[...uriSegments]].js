@@ -63,13 +63,9 @@ const GOOGLE_APP_ID = process.env.NEXT_PUBLIC_GOOGLE_APP_ID;
 export default function Page({ section, globalData, ...entryProps }) {
   globalData.localeInfo.locale === "es" ? updateI18n("es") : updateI18n("en");
   const {
-    data: { pageType, dynamicComponent },
+    data: { typeHandle },
   } = entryProps;
-
-  const isGalleryPage =
-    section === "pages" &&
-    pageType === "dynamic" &&
-    dynamicComponent === "gallery";
+  const isGalleryPage = section === "pages" && typeHandle === "galleryPages";
   const sectionMap = {
     events: EventPageTemplate,
     gallery: GalleryPageTemplate,
