@@ -30,17 +30,19 @@ const RelatedList = ({
         <>
           {entries?.length > 0 && (
             <Grid columns={cols}>
-              {entries.map(({ id, description, image, title, uri }, i) => (
-                <Tile
-                  key={id}
-                  image={image?.[0]}
-                  link={uri}
-                  text={striptags(description)}
-                  title={title}
-                  titleTag={"h2"}
-                  type={gridType}
-                />
-              ))}
+              {entries.map(
+                ({ id, description, hero, image, title, uri }, i) => (
+                  <Tile
+                    key={id}
+                    image={image?.[0] || hero?.[0]}
+                    link={uri}
+                    text={striptags(description)}
+                    title={title}
+                    titleTag={"h2"}
+                    type={gridType}
+                  />
+                )
+              )}
             </Grid>
           )}
         </>

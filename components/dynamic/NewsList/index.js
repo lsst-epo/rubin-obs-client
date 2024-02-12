@@ -51,6 +51,7 @@ const NewsList = ({
                     description,
                     subtitle,
                     id,
+                    hero,
                     image,
                     images: releaseImages,
                     newsAssets,
@@ -70,7 +71,11 @@ const NewsList = ({
                           }
                         : null
                     }
-                    image={image?.[0] || makeReleaseFeature(releaseImages)?.[0]}
+                    image={
+                      image?.[0] ||
+                      makeReleaseFeature(releaseImages)?.[0] ||
+                      hero?.[0]
+                    }
                     isFeature={canShowFeatured && page === 1 && i === 0}
                     link={uri}
                     pretitle={
