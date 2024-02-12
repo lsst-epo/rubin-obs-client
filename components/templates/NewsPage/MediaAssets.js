@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
-import { ResponsiveImage } from "@rubin-epo/epo-react-lib";
+import { ResponsiveImage, Figure } from "@rubin-epo/epo-react-lib";
 import ReleaseAssets from "./ReleaseAssets";
 import * as Styled from "./styles";
 
@@ -15,11 +15,12 @@ export default function MediaAssets({
   if (!contentBlockAssets && !releaseImages && !releaseVideos) return null;
 
   if (
-    contentBlockAssets?.length <= 0 &&
-    releaseImages?.length <= 0 &&
-    releaseVideos?.length <= 0
+    contentBlockAssets?.length === 0 &&
+    releaseImages?.length === 0 &&
+    releaseVideos?.length === 0
   )
     return null;
+
   return (
     <Styled.AsideSecondary>
       <h3>{t(`media`)}</h3>
@@ -27,7 +28,9 @@ export default function MediaAssets({
         if (asset.image?.[0].url) {
           return (
             <Link key={i} prefetch={false} href={asset.image?.[0].url}>
-              <ResponsiveImage image={asset.image?.[0]} ratio="8:5" />
+              <Figure caption={asset.caption}>
+                <ResponsiveImage image={asset.image?.[0]} ratio="8:5" />
+              </Figure>
             </Link>
           );
         }
