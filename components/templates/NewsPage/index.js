@@ -48,13 +48,40 @@ export default function NewsPage({ data }) {
     title,
     active: true,
   };
-  const imageContentBlocks = [...contentBlocksNews].filter(
-    (block) => block.typeHandle === "image"
+  const manualAssets = [];
+  const heroBlock =
+    hero?.length > 0
+      ? {
+          id: id + "hero",
+          typeHandle: "image",
+          image: hero,
+          caption: heroCaption,
+        }
+      : null;
+  const mediaContentBlocks = [...contentBlocksNews].filter(
+    (block) => block.typeHandle === "image" || block.typeHandle === "video"
   );
 
+  newsAssets.forEach((a, i) => {
+    if (a.image?.length > 0) {
+      // If there are manually added news assets combine them with the content block media assets
+      mediaContentBlocks.push({
+        id: id + i,
+        typeHandle: "image",
+        image: a.image,
+        caption: a.caption,
+      });
+    } else {
+      manualAssets.push(a);
+    }
+  });
+  // If there is a hero then combine it with the content block media assets
+  if (heroBlock) mediaContentBlocks.unshift(heroBlock);
+
+  // Only show the aside if there are news assets
   const showAside =
-    newsAssets?.length > 0 ||
-    imageContentBlocks?.length > 0 ||
+    manualAssets?.length > 0 ||
+    mediaContentBlocks?.length > 0 ||
     releaseImages?.length > 0 ||
     releaseVideos?.length > 0 ||
     postTags?.length > 0;
@@ -77,8 +104,8 @@ export default function NewsPage({ data }) {
         )}
         {showAside && (
           <NewsAside
-            newsAssets={newsAssets}
-            contentBlockAssets={imageContentBlocks}
+            manualAssets={manualAssets}
+            contentBlockAssets={mediaContentBlocks}
             releaseImages={releaseImages}
             releaseVideos={releaseVideos}
             tags={postTags}
