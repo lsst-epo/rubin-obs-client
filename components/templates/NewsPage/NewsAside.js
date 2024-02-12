@@ -1,30 +1,32 @@
 import PropTypes from "prop-types";
 import Link from "next/link";
-import { ResponsiveImage, IconComposer } from "@rubin-epo/epo-react-lib";
+import {
+  ResponsiveImage,
+  IconComposer,
+  Figure,
+} from "@rubin-epo/epo-react-lib";
 import Tags from "./Tags";
 import MediaAssets from "./MediaAssets";
 import * as Styled from "./styles";
 
 export default function NewsAside({
-  newsAssets,
+  manualAssets,
   contentBlockAssets,
   releaseImages,
   releaseVideos,
   tags,
   rootHomeLink,
 }) {
-  // This sets up the automatic media grabber -- if there are no manual media set
-  let manualMedia = false;
   // This adds the document icon from the designs, if there is a text-style link near the start.
-  let manualDoc = newsAssets.some(
+  let manualDoc = manualAssets.some(
     (a, i) => i < 4 && (a.textLink?.length > 0 || a.externalLink?.length > 0)
   );
 
   return (
     <Styled.Aside>
-      {newsAssets?.length > 0 && (
+      {manualAssets?.length > 0 && (
         <Styled.AsidePrimary>
-          {newsAssets.map((a, i) => {
+          {manualAssets.map((a, i) => {
             if (a.assetHeader) {
               return (
                 <h3 key={i}>
@@ -53,14 +55,14 @@ export default function NewsAside({
                 </a>
               );
             } else if (a.image?.length > 0) {
-              manualMedia = true;
               return (
-                <a href={a.image[0].url} key={i}>
-                  <ResponsiveImage image={a.image[0]} />
-                </a>
+                <Link key={i} prefetch={false} href={a.image[0].url}>
+                  <Figure caption={a.caption}>
+                    <ResponsiveImage image={a.image[0]} ratio="8:5" />
+                  </Figure>
+                </Link>
               );
             } else if (a.galleryItem?.length > 0) {
-              manualMedia = true;
               if (a.galleryItem[0].uri) {
                 return (
                   <Link
@@ -89,7 +91,7 @@ export default function NewsAside({
 }
 
 NewsAside.propTypes = {
-  newsAssets: PropTypes.array,
+  manualAssets: PropTypes.array,
   contentBlockAssets: PropTypes.array,
   releaseImages: PropTypes.array,
   releaseVideos: PropTypes.array,
