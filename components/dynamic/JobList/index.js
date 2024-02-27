@@ -59,7 +59,8 @@ const JobList = ({
                   );
 
                   // logic for open/closed
-                  const checkOpen = checkIfBetweenDates(openDate, closeDate)
+                  let checkOpen = "open";
+                  checkOpen = checkIfBetweenDates(openDate, closeDate)
                     ? "open"
                     : "closed";
                   const lock = checkOpen === "open" ? "LockOpen" : "LockClosed";
