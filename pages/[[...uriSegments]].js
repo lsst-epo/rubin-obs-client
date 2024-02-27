@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import { getGlobalData } from "@/api/global";
 import { getAllEntries } from "@/api/entries";
 import { getEntryDataByUri, getEntrySectionTypeByUri } from "@/api/entry";
@@ -57,6 +58,7 @@ function logNextDir() {
   });
 }
 
+const GOOGLE_APP_ID = process.env.NEXT_PUBLIC_GOOGLE_APP_ID;
 export default function Page({ section, globalData, ...entryProps }) {
   globalData.localeInfo.locale === "es" ? updateI18n("es") : updateI18n("en");
 
@@ -75,9 +77,11 @@ export default function Page({ section, globalData, ...entryProps }) {
   const Template = sectionMap[section] || PageTemplate;
 
   return (
-    <GlobalDataProvider data={globalData}>
-      <Template {...entryProps} />
-    </GlobalDataProvider>
+    <GoogleOAuthProvider clientId={GOOGLE_APP_ID}>
+      <GlobalDataProvider data={globalData}>
+        <Template {...entryProps} />
+      </GlobalDataProvider>
+    </GoogleOAuthProvider>
   );
 }
 

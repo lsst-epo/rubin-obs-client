@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { useGoogleLogin } from "react-google-login";
 import jwtDecode from "jwt-decode";
 import {
   authenticate,
@@ -17,7 +16,6 @@ import {
   requestDeletion,
 } from "@/lib/api/auth";
 
-const GOOGLE_APP_ID = process.env.NEXT_PUBLIC_GOOGLE_APP_ID;
 const SESSION_STORAGE_KEYS = [
   "jwt",
   "jwtExpiresAt",
@@ -82,24 +80,6 @@ export default function useAuthentication(data) {
   );
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-
-  const { signIn: goToGoogleSignIn } = useGoogleLogin({
-    clientId: GOOGLE_APP_ID,
-    onSuccess: (response) => {
-      const ssoModalUrl = { pathname: "/", query: { sso: true } };
-      push(ssoModalUrl, undefined, {
-        shallow: true,
-      });
-      // eslint-disable-next-line no-console
-      console.log("onSuccess", response, "onSuccess");
-      authenticateWithGoogle({ idToken: response.tokenId });
-    },
-    onFailure: (error) => {
-      // eslint-disable-next-line no-console
-      console.log("onFailure", error, "onFailure");
-      console.error(error);
-    },
-  });
 
   useEffect(() => {
     // TODO: cancel promise if component unmounts first
@@ -442,8 +422,8 @@ export default function useAuthentication(data) {
     forgotPassword,
     setPassword,
     activateUser,
-    goToGoogleSignIn,
     goToFacebookSignIn,
+    authenticateWithGoogle,
     fetchUserData,
     requestAccountDeletion,
   };

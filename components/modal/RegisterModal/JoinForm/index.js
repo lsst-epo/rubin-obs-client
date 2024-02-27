@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Link from "next/link";
 import { Link as BaseLink } from "@rubin-epo/epo-react-lib";
-import { SSOButton } from "@/components/atomic";
+import { GoogleSSOButton, SSOButton } from "@/components/atomic";
 import useAuthModal from "@/hooks/useAuthModal";
 import { useAuthenticationContext } from "@/contexts/Authentication";
 import AuthModal from "../../AuthModal";
@@ -14,7 +14,7 @@ export default function JoinForm({ onEmailSignup }) {
   const {
     pendingGroup,
     setPendingGroup,
-    goToGoogleSignIn,
+    // goToGoogleSignIn,
     goToFacebookSignIn,
   } = useAuthenticationContext();
 
@@ -47,9 +47,9 @@ export default function JoinForm({ onEmailSignup }) {
         </AuthModal.Description> */}
       </div>
       <Styled.SSOButtons>
-        <SSOButton service="google" type="button" onClick={goToGoogleSignIn}>
+        <GoogleSSOButton service="google" type="button">
           {t("join.continue_with_google")}
-        </SSOButton>
+        </GoogleSSOButton>
         {/* <SSOButton
           service="facebook"
           type="button"
