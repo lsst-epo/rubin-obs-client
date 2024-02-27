@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { useAuthenticationContext } from "@/contexts/Authentication";
 import useAuthModal from "@/hooks/useAuthModal";
-import { SSOButton } from "@/components/atomic";
+import { GoogleSSOButton } from "@/components/atomic";
 import {
   Link as BaseLink,
   Button,
@@ -118,9 +118,9 @@ export default function SignInModal() {
             </Button>
           </Styled.SignInAsButtons> */}
           <Styled.SSOButtons>
-            <SSOButton service="google" onClick={goToGoogleSignIn}>
-              {t("sign_in.continue_with_google")}
-            </SSOButton>
+            <GoogleSSOButton service="google" type="button">
+              {t("join.continue_with_google")}
+            </GoogleSSOButton>
             {/* <SSOButton service="facebook" onClick={goToFacebookSignIn}>
               {t("sign_in.continue_with_facebook")}
             </SSOButton> */}
