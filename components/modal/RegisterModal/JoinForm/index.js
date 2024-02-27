@@ -50,13 +50,13 @@ export default function JoinForm({ onEmailSignup }) {
         <SSOButton service="google" type="button" onClick={goToGoogleSignIn}>
           {t("join.continue_with_google")}
         </SSOButton>
-        <SSOButton
+        {/* <SSOButton
           service="facebook"
           type="button"
           onClick={goToFacebookSignIn}
         >
           {t("join.continue_with_facebook")}
-        </SSOButton>
+        </SSOButton> */}
         <SSOButton service="email" type="button" onClick={onEmailSignup}>
           {t("join.sign_up_with_email")}
         </SSOButton>
