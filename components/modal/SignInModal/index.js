@@ -121,9 +121,9 @@ export default function SignInModal() {
             <SSOButton service="google" onClick={goToGoogleSignIn}>
               {t("sign_in.continue_with_google")}
             </SSOButton>
-            <SSOButton service="facebook" onClick={goToFacebookSignIn}>
+            {/* <SSOButton service="facebook" onClick={goToFacebookSignIn}>
               {t("sign_in.continue_with_facebook")}
-            </SSOButton>
+            </SSOButton> */}
           </Styled.SSOButtons>
           <Styled.Form onSubmit={handleSubmit(onSubmit)}>
             <AuthModal.Description>

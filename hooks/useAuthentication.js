@@ -90,9 +90,15 @@ export default function useAuthentication(data) {
       push(ssoModalUrl, undefined, {
         shallow: true,
       });
+      // eslint-disable-next-line no-console
+      console.log("onSuccess", response, "onSuccess");
       authenticateWithGoogle({ idToken: response.tokenId });
     },
-    onFailure: (error) => console.error(error),
+    onFailure: (error) => {
+      // eslint-disable-next-line no-console
+      console.log("onFailure", error, "onFailure");
+      console.error(error);
+    },
   });
 
   useEffect(() => {
