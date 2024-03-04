@@ -32,15 +32,39 @@ jobs:
         name: Checkout
         uses: actions/checkout@v3
       -
+        name: Parse deployment info
+        id: deploy-info
+        run: |
+          # Determine environment to deploy to
+          if ${{ github.ref == 'master' || github.base_ref == 'master'}}; then
+            environment_name="int"
+            credentials_json='${{ secrets.SKYVIEWER_INT_SERVICE_ACCOUNT }}'
+          elif ${{ github.ref_type == 'tag'}}; then
+            environment_name="prod"
+            credentials_json='${{ secrets.PIPELINE_EPO_PROD_PROJECT }}'
+          else
+            environment_name="dev"
+            credentials_json='${{ secrets.DEV_SA_KEY }}'
+          fi
+          echo environment_name=$environment_name >> "$GITHUB_OUTPUT"
+          echo credentials_json=$credentials_json >> "$GITHUB_OUTPUT"
+
+          # Parse container image tag to deploy
+          full_tag=$(echo "$DOCKER_METADATA_OUTPUT_JSON" | jq -r '.tags[] | limit(1; select(. | test(":sha-|:v.")))')
+          echo "Will use tag \"$full_tag\" for deployment."
+          echo image_tag=$(echo "$full_tag" | cut -f2 -d:) >> "$GITHUB_OUTPUT"
+          echo image_name=$(echo "$full_tag" | cut -f1 -d:) >> "$GITHUB_OUTPUT"
+          echo full_tag=$full_tag >> "$GITHUB_OUTPUT"
+      -
         name: Docker meta
         id: meta
         uses: docker/metadata-action@v4
         with:
           # list of Docker images to use as base name for tags
           images: |
-            gcr.io/skyviewer/rubinobs-client,enable=${{ github.ref != 'master' && github.ref_type != 'tag' && github.base_ref == 'develop' }}
-            gcr.io/edc-int-6c5e/rubinobs-client,enable=${{ github.ref == 'master' || github.base_ref == 'master'}}
-            gcr.io/edc-prod-eef0/rubinobs-client,enable=${{ github.ref_type == 'tag'}}
+            gcr.io/skyviewer/rubinobs-client,enable=${{ steps.deploy-info.outputs.environment_name == 'dev' }}
+            gcr.io/edc-int-6c5e/rubinobs-client,enable=${{ steps.deploy-info.outputs.environment_name == 'int' }}
+            gcr.io/edc-prod-eef0/rubinobs-client,enable=${{ steps.deploy-info.outputs.environment_name == 'prod' }}
           flavor: |
             latest=${{ github.event_name == 'push'}}
           # generate Docker tags based on the following events/attributes
@@ -52,34 +76,6 @@ jobs:
             type=semver,pattern={{major}}.{{minor}}
             type=semver,pattern={{major}}
             type=sha
-      -
-        name: Parse deployment info
-        id: deploy-info
-        run: |
-          # Determine environment to deploy to
-          if ${{ github.ref != 'master' && github.ref_type != 'tag' && github.base_ref == 'develop' }}; then
-            environment_name="dev"
-            credentials_json='${{ secrets.DEV_SA_KEY }}'
-          elif ${{ github.ref == 'master' || github.base_ref == 'master'}}; then
-            environment_name="int"
-            credentials_json='${{ secrets.SKYVIEWER_INT_SERVICE_ACCOUNT }}'
-          elif ${{ github.ref_type == 'tag'}}; then
-            environment_name="prod"
-            credentials_json='${{ secrets.PIPELINE_EPO_PROD_PROJECT }}'
-          else
-            environment_name=""
-            credentials_json=""
-          fi
-          echo environment_name=$environment_name >> "$GITHUB_OUTPUT"
-          echo credentials_json=$credentials_json >> "$GITHUB_OUTPUT"
-
-          # Parse container image tag to deploy
-          full_tag=$(echo "$DOCKER_METADATA_OUTPUT_JSON" | jq -r '.tags[] | limit(1; select(. | test(":sha-|:v.")))')
-          echo "Will use tag \"$full_tag\" for deployment."
-          echo image_tag=$(echo "$full_tag" | cut -f2 -d:) >> "$GITHUB_OUTPUT"
-          echo image_name=$(echo "$full_tag" | cut -f1 -d:) >> "$GITHUB_OUTPUT"
-          echo full_tag=$full_tag >> "$GITHUB_OUTPUT"
-
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v2
