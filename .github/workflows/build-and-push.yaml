@@ -24,8 +24,8 @@ jobs:
     name: Build Container Image
     runs-on: ubuntu-latest
     outputs:
-      image_tag: ${{ steps.deploy-info.outputs.image_tag }}
-      image_name: ${{ steps.deploy-info.outputs.image_name }}
+      image_tag: ${{ steps.deploy-tag.outputs.image_tag }}
+      image_name: ${{ steps.deploy-tag.outputs.image_name }}
       environment_name: ${{ steps.deploy-info.outputs.environment_name }}
     steps:
       -
@@ -48,13 +48,6 @@ jobs:
           fi
           echo environment_name=$environment_name >> "$GITHUB_OUTPUT"
           echo credentials_json=$credentials_json >> "$GITHUB_OUTPUT"
-
-          # Parse container image tag to deploy
-          full_tag=$(echo "$DOCKER_METADATA_OUTPUT_JSON" | jq -r '.tags[] | limit(1; select(. | test(":sha-|:v.")))')
-          echo "Will use tag \"$full_tag\" for deployment."
-          echo image_tag=$(echo "$full_tag" | cut -f2 -d:) >> "$GITHUB_OUTPUT"
-          echo image_name=$(echo "$full_tag" | cut -f1 -d:) >> "$GITHUB_OUTPUT"
-          echo full_tag=$full_tag >> "$GITHUB_OUTPUT"
       -
         name: Docker meta
         id: meta
@@ -78,6 +71,16 @@ jobs:
             type=sha
           build-args: |
             RUN_BUILD=false
+      -
+        name: Get deploy tag
+        id: deploy-tag
+        run: |
+          # Parse container image tag to deploy
+          full_tag=$(echo "$DOCKER_METADATA_OUTPUT_JSON" | jq -r '.tags[] | limit(1; select(. | test(":sha-|:v.")))')
+          echo "Will use tag \"$full_tag\" for deployment."
+          echo image_tag=$(echo "$full_tag" | cut -f2 -d:) >> "$GITHUB_OUTPUT"
+          echo image_name=$(echo "$full_tag" | cut -f1 -d:) >> "$GITHUB_OUTPUT"
+          echo full_tag=$full_tag >> "$GITHUB_OUTPUT"
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v2
