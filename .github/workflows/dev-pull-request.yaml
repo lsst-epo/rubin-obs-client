@@ -39,6 +39,7 @@ jobs:
         --build-arg NEXT_PUBLIC_DEBUG_LOGGING=false \
         --build-arg CLOUD_ENV=DEV \
         --build-arg NEXT_PUBLIC_GOOGLE_APP_ID=688095955960-t0fpaj4ec3gh5vsr9lhg8govapk2oeo9.apps.googleusercontent.com \
+        --build-arg GOOGLE_APP_SECRET=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 \
         --build-arg NEXT_PUBLIC_CONTACT_FORM_POST_URL=https://api-dev.rubinobs.com/actions/contact-form/send \
         --build-arg NEXT_PUBLIC_PLAUSIBLE_DOMAIN= \
         --build-arg NEXT_PREVIEW_SLUG=preview-in-craft-cms \
