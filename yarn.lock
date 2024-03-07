@@ -1987,10 +1987,10 @@
   resolved "https://registry.yarnpkg.com/@react-oauth/google/-/google-0.12.1.tgz#b76432c3a525e9afe076f787d2ded003fcc1bee9"
   integrity sha512-qagsy22t+7UdkYAiT5ZhfM4StXi9PPNvw0zuwNmabrWyMKddczMtBIOARflbaIj+wHiQjnMAsZmzsUYuXeyoSg==
 
-"@rubin-epo/epo-react-lib@^1.2.9":
-  version "1.2.9"
-  resolved "https://registry.yarnpkg.com/@rubin-epo/epo-react-lib/-/epo-react-lib-1.2.9.tgz#c67c071414f66d1a02381a84974f1b5692595cf5"
-  integrity sha512-JomVC+O9MBiIO5BK8wxLAHT2r1AcwrP6d1Dwus1y+D9Cv2nTDYqcz9uMzRE75azsJ/VLOlLWgZMTom0SwFK60g==
+"@rubin-epo/epo-react-lib@1.2.14":
+  version "1.2.14"
+  resolved "https://registry.yarnpkg.com/@rubin-epo/epo-react-lib/-/epo-react-lib-1.2.14.tgz#5263e578470417fd1106aecdbc1f56cc54d0da5b"
+  integrity sha512-Tbn7Ifo7MQxmg8Hk1pnEXqzP5OGobjn1Za00Tf6ffMwvcMpS3Kuj47+hptpCZcKSLQOvIyC9MJh2/IQ11VuaVg==
   dependencies:
     flickity "^3.0.0"
     focus-trap "^7.4.2"
