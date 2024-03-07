@@ -17,7 +17,7 @@ export default function GoogleSSOButton({ children, ...buttonProps }) {
           shallow: true,
         }
       );
-      fetch("/api/authGoogle", {
+      fetch("/api/charming-overlords", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ code: response.code }),
