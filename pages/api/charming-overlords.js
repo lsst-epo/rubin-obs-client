@@ -13,14 +13,14 @@ const oAuth2Client = new OAuth2Client(
 async function getTokens(code) {
   const { tokens } = await oAuth2Client.getToken(code);
   // eslint-disable-next-line no-console
-  console.log("TOKENS:", tokens);
+  // console.log("TOKENS:", tokens);
   return tokens;
 }
 
 export default async function handler(req, res) {
   try {
     // eslint-disable-next-line no-console
-    console.log("CODE:", req.body.code);
+    // console.log("CODE:", req.body.code);
     const { id_token: idToken } = await getTokens(req.body.code);
     res.status(200).json({ idToken });
   } catch (err) {
