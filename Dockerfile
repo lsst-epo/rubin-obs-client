@@ -22,17 +22,6 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-ARG NEXT_PUBLIC_API_URL=https://api.rubinobs.org/api
-ARG EDC_LOGGER_API_URL=https://us-central1-skyviewer.cloudfunctions.net/edc-logger
-ARG NEXT_PUBLIC_BASE_URL=https://rubinobs.org
-ARG NEXT_PUBLIC_GOOGLE_APP_ID=688095955960-t0fpaj4ec3gh5vsr9lhg8govapk2oeo9.apps.googleusercontent.com
-ARG NEXT_PUBLIC_CONTACT_FORM_POST_URL=https://api.rubinobs.org/actions/contact-form/send
-ARG NEXT_PUBLIC_PLAUSIBLE_DOMAIN=rubinobs.org
-ARG CLOUD_ENV=PROD
-ARG NEXT_PUBLIC_EFD_URL=https://hasura-e3g4rcii3q-uc.a.run.app/v1/graphql
-ARG NEXT_PUBLIC_HASURA_SECRET=_qfq_tMbyR4brJ@KHCzuJRU7
-ARG NEXT_PUBLIC_RELEASE_URL=`https://noirlab.edu/public/api/v2/releases/{{ID}}/?lang={{SITE}}&translation_mode=fallback`
-
 ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
 ENV EDC_LOGGER_API_URL=$EDC_LOGGER_API_URL
 ENV NEXT_PUBLIC_BASE_URL=$NEXT_PUBLIC_BASE_URL
