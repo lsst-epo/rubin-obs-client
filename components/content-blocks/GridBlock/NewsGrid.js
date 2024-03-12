@@ -45,7 +45,8 @@ const NewsGrid = ({ items = [], limit, listTypeId, sectionHandle, pageId }) => {
                 description,
                 subtitle,
                 id,
-                image,
+                image: featureImage,
+                hero,
                 images: releaseImages,
                 newsAssets,
                 postType,
@@ -61,8 +62,9 @@ const NewsGrid = ({ items = [], limit, listTypeId, sectionHandle, pageId }) => {
                   button: t("read-more"),
                 }}
                 image={
-                  image?.[0] ||
-                  makeReleaseFeature(releaseImages, "thumb700x")?.[0]
+                  featureImage?.[0] ||
+                  makeReleaseFeature(releaseImages, "thumb700x")?.[0] ||
+                  hero?.[0]
                 }
                 isFeature={i === 0}
                 link={uri}
