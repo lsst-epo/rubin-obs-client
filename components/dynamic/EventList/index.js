@@ -43,7 +43,7 @@ const EventList = ({
                   description,
                   id,
                   hero,
-                  image,
+                  image: featureImage,
                   eventType,
                   registrationCloseDate,
                   registrationOpenDate,
@@ -83,7 +83,7 @@ const EventList = ({
                             }
                           : null
                       }
-                      image={image?.[0] || hero?.[0]}
+                      image={featureImage?.[0] || hero?.[0]}
                       link={uri}
                       pretitle={
                         gridType === "events" && eventType?.[0]?.title

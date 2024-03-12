@@ -46,7 +46,8 @@ export default function CalloutEntry({ callout }) {
     url,
     description,
     subtitle,
-    image,
+    hero,
+    image: featureImage,
     images: releaseImages,
     entryType,
   } = entryWithRelease || entry[0];
@@ -59,7 +60,9 @@ export default function CalloutEntry({ callout }) {
     lang
   );
   const calloutImage =
-    image?.[0] || makeReleaseFeature(releaseImages, "thumb700x")?.[0];
+    featureImage?.[0] ||
+    makeReleaseFeature(releaseImages, "thumb700x")?.[0] ||
+    hero?.[0];
 
   return (
     <Styled.Section $bgColor={backgroundColor} $width="full" $overlay={false}>
