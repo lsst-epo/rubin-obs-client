@@ -8,6 +8,7 @@ import { checkIfBetweenDates, createLocationString } from "@/lib/utils";
 import * as Styled from "./styles";
 
 const EventList = ({
+  section = "events",
   button,
   excludeId = null,
   header,
@@ -23,7 +24,7 @@ const EventList = ({
       isRelatedList={isRelatedList}
       excludeId={excludeId}
       limit={limit}
-      section="events"
+      section={section}
       width={isWide ? "regular" : "narrow"}
       header={header}
       footerButton={button}
@@ -65,7 +66,6 @@ const EventList = ({
 
                   const lock =
                     registration === "open" ? "LockOpen" : "LockClosed";
-
                   return (
                     /* eslint-disable */
                     <Tile
@@ -115,6 +115,7 @@ EventList.propTypes = {
   isWide: PropTypes.bool,
   gridType: PropTypes.string,
   isRelatedList: PropTypes.bool,
+  section: PropTypes.string,
 };
 
 EventList.displayName = "Dynamic.EventList";

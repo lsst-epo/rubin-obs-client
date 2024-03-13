@@ -117,6 +117,7 @@ export default function EventPage({
           );
         })}
       <EventList
+        section="eventsAll"
         excludeId={id}
         header={t(`events.related-events`)}
         limit={3}
