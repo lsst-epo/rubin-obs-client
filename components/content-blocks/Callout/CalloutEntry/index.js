@@ -37,6 +37,8 @@ export default function CalloutEntry({ callout }) {
   // mix in the noirlabReleases from additional fetch to different endpoint
   const { data: entryWithRelease } = useRelease(getSiteString(lang), entry[0]);
 
+  if (!entry[0] && !entryWithRelease) return null;
+
   const {
     title,
     date,
