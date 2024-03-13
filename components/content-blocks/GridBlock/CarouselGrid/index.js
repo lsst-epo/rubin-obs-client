@@ -5,7 +5,7 @@ import chunk from "lodash/chunk";
 import Tile from "@/atomic/Tile";
 import Loader from "@/atomic/Loader";
 import { Grid } from "@rubin-epo/epo-react-lib";
-import { normalizeItemData, useList } from "@/lib/utils";
+import { normalizeItemData, makeReleaseFeature, useList } from "@/lib/utils";
 import * as Styled from "./styles";
 
 function CarouselGrid({
@@ -43,7 +43,9 @@ function CarouselGrid({
         title,
         description,
         plainText,
-        image,
+        image: featureImage,
+        hero,
+        images: releaseImages,
         mixedLink,
         externalUrl,
         uri,
@@ -51,7 +53,11 @@ function CarouselGrid({
       }) => (
         <Tile
           key={id}
-          image={image?.[0]}
+          image={
+            featureImage?.[0] ||
+            makeReleaseFeature(releaseImages, "thumb700x")?.[0] ||
+            hero?.[0]
+          }
           link={
             mixedLink || {
               url: externalUrl || uri || landingPage?.[0]?.uri,

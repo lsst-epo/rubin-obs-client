@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import striptags from "striptags";
 import { Grid } from "@rubin-epo/epo-react-lib";
+import { makeReleaseFeature } from "@/lib/utils";
 import DataList from "@/dynamic/DataList";
 import Tile from "@/atomic/Tile";
 
@@ -31,10 +32,25 @@ const RelatedList = ({
           {entries?.length > 0 && (
             <Grid columns={cols}>
               {entries.map(
-                ({ id, description, hero, image, title, uri }, i) => (
+                (
+                  {
+                    id,
+                    description,
+                    hero,
+                    image: featureImage,
+                    images: releaseImages,
+                    title,
+                    uri,
+                  },
+                  i
+                ) => (
                   <Tile
                     key={id}
-                    image={image?.[0] || hero?.[0]}
+                    image={
+                      featureImage?.[0] ||
+                      makeReleaseFeature(releaseImages, "thumb700x")?.[0] ||
+                      hero?.[0]
+                    }
                     link={uri}
                     text={striptags(description)}
                     title={title}
