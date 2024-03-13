@@ -1,14 +1,15 @@
 name: 'PR preview to Int'
 
 on:
-  pull_request:
-    types:
-      - 'opened'
-      - 'synchronize'
-      - 'reopened'
-      - 'closed'
-    branches:
-      - 'master'
+  workflow_dispatch: 
+  # pull_request:
+  #   types:
+  #     - 'opened'
+  #     - 'synchronize'
+  #     - 'reopened'
+  #     - 'closed'
+  #   branches:
+  #     - 'master'
 
 jobs:
   build-push-deploy:

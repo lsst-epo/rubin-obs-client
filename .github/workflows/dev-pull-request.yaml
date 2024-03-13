@@ -1,14 +1,15 @@
 name: 'PR preview to Dev'
 
 on:
-  pull_request:
-    types:
-      - 'opened'
-      - 'synchronize'
-      - 'reopened'
-      - 'closed'
-    branches:
-      - 'develop'
+  workflow_dispatch: 
+  # pull_request:
+  #   types:
+  #     - 'opened'
+  #     - 'synchronize'
+  #     - 'reopened'
+  #     - 'closed'
+  #   branches:
+  #     - 'develop'
 
 jobs:
   build-push-deploy:
