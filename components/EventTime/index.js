@@ -27,5 +27,5 @@ EventTime.propTypes = {
   endDate: PropTypes.string,
   endTime: PropTypes.string,
   timezone: PropTypes.string,
-  short: PropTypes.boolean,
+  short: PropTypes.bool,
 };
