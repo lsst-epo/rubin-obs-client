@@ -182,12 +182,41 @@ export const encodeColor = (string) => {
   return `%23${str}`;
 };
 
-export const needsDarkColor = (hexColor) => {
-  var color = hexColor.charAt(0) === "#" ? hexColor.substring(1, 7) : hexColor;
-  var r = parseInt(color.substring(0, 2), 16); // hexToR
-  var g = parseInt(color.substring(2, 4), 16); // hexToG
-  var b = parseInt(color.substring(4, 6), 16); // hexToB
-  return r * 0.299 + g * 0.587 + b * 0.114 > 186 ? true : false;
+function hexToRGB(hex) {
+  const color = hex.charAt(0) === "#" ? hex.substring(1, 7) : hex;
+
+  return {
+    r: parseInt(color.substring(0, 2), 16),
+    g: parseInt(color.substring(2, 4), 16),
+    b: parseInt(color.substring(4, 6), 16),
+  };
+}
+
+function hexLuminance(hex) {
+  const rgb = hexToRGB(hex);
+
+  const a = [rgb.r, rgb.g, rgb.b].map(function (v) {
+    v /= 255;
+    return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+  });
+  return a[0] * 0.2126 + a[1] * 0.7152 + a[2] * 0.0722;
+}
+
+function colorRatio(hex1, hex2) {
+  const lum1 = hexLuminance(hex1);
+  const lum2 = hexLuminance(hex2);
+  return lum1 > lum2
+    ? (lum2 + 0.05) / (lum1 + 0.05)
+    : (lum1 + 0.05) / (lum2 + 0.05);
+}
+
+export const isContrast = (
+  backgroundColor,
+  foregroundColor,
+  size = "small"
+) => {
+  const ratio = colorRatio(backgroundColor, foregroundColor);
+  return size === "large" ? ratio < 0.33 : ratio < 0.21;
 };
 
 export const palette = (color) => {

@@ -58,6 +58,7 @@ export default function Header({ navItems, userProfilePage }) {
       className={`c-global-header ${
         visible || mobileNavActive ? "" : "invisible"
       }`}
+      role="banner"
     >
       <a href="#page-content" className="c-global-header__skip-link">
         {t("skip-to-content")}

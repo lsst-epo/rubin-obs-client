@@ -1,10 +1,10 @@
-import { Image, MixedLink } from "@rubin-epo/epo-react-lib";
 import styled from "styled-components";
+import { Image, MixedLink } from "@rubin-epo/epo-react-lib";
 import {
   fluidScale,
   containerFullBleed,
   containerRegular,
-  needsDarkColor,
+  isContrast,
   pxToEm,
   respond,
   tokens,
@@ -17,7 +17,9 @@ const linkPadding = pxToEm("18px", "16px");
 
 export const Section = styled.section`
   color: ${(p) =>
-    needsDarkColor(tokens[p.$bgColor]) ? tokens.neutral80 : tokens.white};
+    isContrast(tokens[p.$bgColor], tokens.white, "small")
+      ? tokens.white
+      : tokens.neutral80};
   background-color: ${(p) => tokens[p.$bgColor]};
   ${(p) => p.$width === "block" && containerFullBleed("CONTAINER_REGULAR")};
   ${(p) =>

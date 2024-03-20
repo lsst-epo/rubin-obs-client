@@ -49,7 +49,7 @@ export default function CalloutMain({ callout }) {
       {calloutImage && (
         <StyledImage
           role="presentation"
-          image={calloutImage}
+          image={{ ...calloutImage, altText: "" }}
           $padImage={padImage}
         />
       )}
