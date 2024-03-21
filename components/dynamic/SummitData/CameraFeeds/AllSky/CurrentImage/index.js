@@ -5,7 +5,7 @@ import { timezone } from "@/lib/observatory";
 import { formatTime } from "@/helpers/formatters";
 import * as Styled from "./styles";
 
-export default function CurrentImage({ image, caption, altText }) {
+export default function CurrentImage({ image, caption, altText, isPreview }) {
   const {
     t,
     i18n: { language = "en" },
@@ -30,6 +30,14 @@ export default function CurrentImage({ image, caption, altText }) {
     url3x: mediaLink,
   };
 
+  if (isPreview) {
+    return (
+      <Styled.PreviewFigure caption={caption || defaultCaption}>
+        <Image image={currentImage} />
+      </Styled.PreviewFigure>
+    );
+  }
+
   return (
     <Styled.Figure caption={caption || defaultCaption}>
       <Image image={currentImage} />
@@ -41,4 +49,5 @@ CurrentImage.propTypes = {
   image: PropTypes.object,
   caption: PropTypes.string,
   altText: PropTypes.string,
+  isPreview: PropTypes.bool,
 };
