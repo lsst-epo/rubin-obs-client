@@ -17,7 +17,6 @@ export const SummitDataProvider = ({ children }) => {
     summitData: {},
     summitMedia: { items: {} },
   };
-  //  || { summitData: {}, summitMedia: {} }
   const value = useMemo(
     () => ({
       summitData,
