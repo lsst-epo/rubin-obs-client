@@ -1,15 +1,14 @@
 import PropTypes from "prop-types";
-import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import Body from "@/global/Body";
 import ContentBlockFactory from "@/factories/ContentBlockFactory";
 import Hero from "@/page/Hero";
-import { respond } from "@/styles/globalStyles";
 import { Buttonish, MixedLink } from "@rubin-epo/epo-react-lib";
 import { makeDateString, makeTruncatedString } from "@/lib/utils";
 import { SlideBlock } from "@/components/content-blocks";
 import Tabs from "@/components/layout/Tabs";
 import TempList from "@/components/dynamic/TempList";
+import * as Styled from "./styles";
 
 export default function HomePage({
   data: { contentBlocks, customHero, description, hero, id, newsEntry, title },
@@ -77,17 +76,17 @@ export default function HomePage({
   return (
     <Body {...bodyProps}>
       {isAlternate ? (
-        <HeroWrapper>
-          {altFlag && <Flag>{altFlag}</Flag>}
-          <StyledNewsHero>
+        <Styled.HeroWrapper>
+          {altFlag && <Styled.Flag>{altFlag}</Styled.Flag>}
+          <Styled.NewsHero>
             <Hero data={altHero} />
-          </StyledNewsHero>
-          <HeroContent>
+          </Styled.NewsHero>
+          <Styled.HeroContent>
             {!custom && news?.postType?.[0]?.title && (
               <h4>{news.postType[0].title}</h4>
             )}
             <h1>{altHeader}</h1>
-            <Details>
+            <Styled.Details>
               <span>
                 {!custom && news?.date && <h4>{makeDateString(news.date)}</h4>}
                 <div>{makeTruncatedString(altTeaser, 30)}</div>
@@ -100,24 +99,24 @@ export default function HomePage({
                   url={`/${news.uri}`}
                 ></Buttonish>
               ) : null}
-            </Details>
-          </HeroContent>
-        </HeroWrapper>
+            </Styled.Details>
+          </Styled.HeroContent>
+        </Styled.HeroWrapper>
       ) : (
-        <HeroWrapper>
-          <StyledHero>
+        <Styled.HeroWrapper>
+          <Styled.HeroContainer>
             <Hero data={hero} />
-          </StyledHero>
-          <HeroContent>
+          </Styled.HeroContainer>
+          <Styled.HeroContent>
             <h1>{title}</h1>
-            <Details>{description}</Details>
-          </HeroContent>
-        </HeroWrapper>
+            <Styled.Details>{description}</Styled.Details>
+          </Styled.HeroContent>
+        </Styled.HeroWrapper>
       )}
       {sliderArray.length > 0 && (
-        <StyledTabs>
+        <Styled.TabsContainer>
           <Tabs labels={labelMap}>{Sliders}</Tabs>
-        </StyledTabs>
+        </Styled.TabsContainer>
       )}
       {[...finalContentBlocks].map((block) => {
         return (
@@ -132,71 +131,6 @@ export default function HomePage({
     </Body>
   );
 }
-
-const HeroWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 40% 60%;
-  grid-template-rows: 50px 1fr;
-  gap: 0px 0px;
-  align-items: center;
-  background-color: var(--black);
-  ${respond(`grid-template-columns: 10% 90%;`)}
-`;
-
-const Flag = styled.h4`
-  grid-area: 1 / 1 / 2 / 3;
-  z-index: 1;
-  background-color: var(--red40);
-  color: var(--white);
-  place-self: start;
-  margin-left: 4vw;
-  padding: 1em 2em;
-`;
-
-const StyledNewsHero = styled.div`
-  border-top: 10px solid var(--red40);
-  grid-area: 1 / 1 / 3 / 3;
-  > div:first-child img {
-    filter: brightness(50%) grayscale(30%) sepia(60%) hue-rotate(320deg);
-    ${respond(`min-height: 75vh;`)}
-  }
-`;
-
-const StyledHero = styled.div`
-  grid-area: 1 / 1 / 3 / 3;
-
-  img {
-    ${respond(`min-height: 50vh;`)}
-  }
-`;
-
-const HeroContent = styled.div`
-  grid-area: 1 / 2 / 3 / 3;
-  z-index: 1;
-  padding-right: 2vw;
-  padding-bottom: 2em;
-  max-width: 40em;
-  color: var(--white);
-  text-shadow: 0px 0px 6px var(--black);
-  a {
-    text-shadow: none;
-  }
-  ${respond(`align-self: end;
-    padding-bottom: 110px;`)}
-`;
-
-const Details = styled.div`
-  a {
-    margin-top: 1em;
-  }
-  ${respond(`span {display: none;}`)}
-`;
-
-const StyledTabs = styled.div`
-  position: relative;
-  top: -60px;
-  ${respond(`top: -80px;`)}
-`;
 
 HomePage.displayName = "Template.HomePage";
 
