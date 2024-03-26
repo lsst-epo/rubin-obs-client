@@ -30,7 +30,12 @@ export default function CalloutTwoTone({ callout }) {
 
   return (
     <>
-      <Wrapper backgroundColor={backgroundColor} order="image" stack="top">
+      <Wrapper
+        backgroundColor={backgroundColor}
+        order="image"
+        stack="top"
+        isImage={!!image?.[0]}
+      >
         <Header>
           <h2>{header}</h2>
           {text && (

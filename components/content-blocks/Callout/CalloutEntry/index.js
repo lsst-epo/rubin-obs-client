@@ -68,7 +68,7 @@ export default function CalloutEntry({ callout }) {
 
   return (
     <Styled.Section $bgColor={backgroundColor} $width="full" $overlay={false}>
-      <Styled.Inner href={url} aria-labelledby={titleId}>
+      <Styled.Inner $isImage={!!calloutImage}>
         {calloutImage && (
           <Styled.ImageWrapper>
             <Image role="presentation" ratio="4:3" image={calloutImage} />
@@ -88,7 +88,11 @@ export default function CalloutEntry({ callout }) {
           />
         )}
         <Styled.Footer>
-          <Styled.FooterButton className={`c-buttonish c-buttonish--inert`}>
+          <Styled.FooterButton
+            href={url}
+            aria-labelledby={titleId}
+            className={`c-buttonish c-buttonish--inert`}
+          >
             {t("read-more")}
           </Styled.FooterButton>
         </Styled.Footer>
