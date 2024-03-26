@@ -34,48 +34,52 @@ export default function StepNavigation({
   });
 
   useEffect(() => {
-    if (isBreakpoint) {
+    if (isBreakpoint && !isOpen) {
       setIsOpen(true);
     }
-  });
+  }, [isBreakpoint, isOpen, setIsOpen]);
 
   if (!pages?.length) return null;
 
   return (
     <Container width="regular" bgColor="orange02" paddingSize="medium">
-      <Styled.Wrapper ref={ref}>
-        <Styled.Title>
-          <h2>{title}</h2>
-          {expandable && (
-            <ExpandToggle
-              onClick={onToggle}
-              isOpen={isOpen}
-              controlsId="guideNavList"
-            />
-          )}
-          {description && (
-            <Styled.Description
-              dangerouslySetInnerHTML={{ __html: description }}
-            />
-          )}
-        </Styled.Title>
-        <Styled.NavList id="guideNavList" $columns={columns} open={isOpen}>
-          {pages.map((page, i) => (
-            <Styled.NavItem
-              key={i}
-              $active={page.url === currentUri}
-              $showBorder={getShowBorder(i + 1, pages.length, columns)}
-            >
-              <Styled.NavLink
-                url={page.url}
-                aria-current={page.url === currentUri ? "page" : undefined}
+      <div ref={ref}>
+        <Styled.Wrapper>
+          <Styled.Header>
+            <Styled.TitleDescription>
+              <h2>{title}</h2>
+              {description && (
+                <Styled.Description
+                  dangerouslySetInnerHTML={{ __html: description }}
+                />
+              )}
+            </Styled.TitleDescription>
+            {expandable && (
+              <ExpandToggle
+                onClick={onToggle}
+                isOpen={isOpen}
+                controlsId="guideNavList"
+              />
+            )}
+          </Styled.Header>
+          <Styled.NavList id="guideNavList" $columns={columns} open={isOpen}>
+            {pages.map((page, i) => (
+              <Styled.NavItem
+                key={i}
+                $active={page.url === currentUri}
+                $showBorder={getShowBorder(i + 1, pages.length, columns)}
               >
-                <span>{page.title}</span>
-              </Styled.NavLink>
-            </Styled.NavItem>
-          ))}
-        </Styled.NavList>
-      </Styled.Wrapper>
+                <Styled.NavLink
+                  url={page.url}
+                  aria-current={page.url === currentUri ? "page" : undefined}
+                >
+                  <span>{page.title}</span>
+                </Styled.NavLink>
+              </Styled.NavItem>
+            ))}
+          </Styled.NavList>
+        </Styled.Wrapper>
+      </div>
     </Container>
   );
 }
