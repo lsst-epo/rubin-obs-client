@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import CommonJsBreadcrumbs from "@castiron/components-breadcrumbs";
-import { containerRegular, respond } from "@/styles/globalStyles";
+import { containerRegular, respond, tokens } from "@/styles/globalStyles";
 
 // eslint-disable-next-line react/prop-types
 const BreadcrumbsWrapper = ({ className, ...restProps }) => {
@@ -25,10 +25,11 @@ export const Breadcrumbs = styled(BreadcrumbsWrapper)`
   font-weight: 700;
   background-color: var(--neutral10);
 
-  ${respond(`display: none;`, "450px")}
+  ${respond(`display: none;`, tokens.BREAK_PHABLET)}
 
   &__ol {
     display: flex;
+    flex-wrap: wrap;
 
     ${({ $type }) =>
       $type === "search"
