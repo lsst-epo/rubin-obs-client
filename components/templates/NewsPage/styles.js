@@ -46,11 +46,13 @@ export const HeroCaption = styled.div`
 `;
 
 export const HeroImage = styled(Image)`
+  --Hero-object-position: ${({ $focalPointX, $focalPointY }) =>
+    `${$focalPointX}% ${$focalPointY}%;`}
   width: 100%;
+
   height: 100%;
   object-fit: cover;
   object-position: var(--Hero-object-position, center);
-  transform: var(--Hero-transform);
 `;
 
 export const Article = styled.article`

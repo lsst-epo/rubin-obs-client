@@ -4,6 +4,8 @@ import * as Styled from "./styles";
 function PageContent({
   innerHero,
   heroImage,
+  focalPointX,
+  focalPointY,
   children,
   sidebar,
   footer,
@@ -15,7 +17,11 @@ function PageContent({
   if (!overlapHero) {
     return (
       <>
-        {hasHero && <Styled.Hero data={heroImage}>{innerHero}</Styled.Hero>}
+        {hasHero && (
+          <Styled.Hero data={heroImage} {...{ focalPointX, focalPointY }}>
+            {innerHero}
+          </Styled.Hero>
+        )}
         <Styled.FullLayout $hasSidebar={hasSidebar}>
           <div>{children}</div>
           {!!sidebar && <Styled.Aside>{sidebar}</Styled.Aside>}
@@ -27,7 +33,11 @@ function PageContent({
 
   return (
     <>
-      {<Styled.Hero data={heroImage}>{innerHero}</Styled.Hero>}
+      {hasHero && (
+        <Styled.Hero data={heroImage} {...{ focalPointX, focalPointY }}>
+          {innerHero}
+        </Styled.Hero>
+      )}
       <Styled.OverlapLayout $hasSidebar={hasSidebar}>
         <Styled.Main>{children}</Styled.Main>
         {!!sidebar && <Styled.Aside>{sidebar}</Styled.Aside>}
@@ -44,6 +54,8 @@ PageContent.propTypes = {
   sidebar: PropTypes.node,
   footer: PropTypes.node,
   overlapHero: PropTypes.bool,
+  focalPointX: PropTypes.number,
+  focalPointY: PropTypes.number,
 };
 
 export default PageContent;

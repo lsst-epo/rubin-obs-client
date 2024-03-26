@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import {
   checkIfBetweenDates,
@@ -14,6 +13,7 @@ import Breadcrumbs from "@/page/Breadcrumbs";
 import { Container } from "@rubin-epo/epo-react-lib";
 import EventList from "@/dynamic/EventList";
 import EventTime from "@/components/EventTime";
+import * as Styled from "./styles";
 
 export default function EventPage({
   data: {
@@ -30,6 +30,8 @@ export default function EventPage({
     eventType = [],
     featuredImage = [],
     hero = [],
+    focalPointX,
+    focalPointY,
     id,
     registrationCloseDate,
     registrationOpenDate,
@@ -70,16 +72,16 @@ export default function EventPage({
   return (
     <Body {...bodyProps}>
       <Breadcrumbs breadcrumbs={[...customBreadcrumbs, pageLink]} />
-      <Hero data={hero} />
+      <Hero data={hero} {...{ focalPointX, focalPointY }} />
       <Container paddingSize="medium">
         <div>
           {eventType?.[0]?.title && (
-            <Pretitle className="t-heading-quaternary">
+            <Styled.Pretitle className="t-heading-quaternary">
               {eventType?.[0]?.title}
-            </Pretitle>
+            </Styled.Pretitle>
           )}
           <h1>{title}</h1>
-          <Subtitle>
+          <Styled.Subtitle>
             <div>{location}</div>
             <EventTime
               {...{
@@ -91,7 +93,7 @@ export default function EventPage({
               }}
             />
             {isThereRegistration && <div>{t(`events.${registration}`)}</div>}
-          </Subtitle>
+          </Styled.Subtitle>
         </div>
       </Container>
       <Share />
@@ -131,14 +133,6 @@ export default function EventPage({
     </Body>
   );
 }
-
-const Pretitle = styled.div`
-  padding-bottom: 10px;
-`;
-
-const Subtitle = styled.div`
-  padding-top: 10px;
-`;
 
 EventPage.displayName = "Template.EventPage";
 
