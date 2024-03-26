@@ -10,10 +10,17 @@ export default function CalloutWrapper({
   ratio = "50",
   stack,
   width = "full",
+  isImage,
 }) {
   return (
     <Section $bgColor={backgroundColor} $width={width} $overlay={overlay}>
-      <Inner $order={order} $ratio={ratio} $height={height} $stack={stack}>
+      <Inner
+        $isImage={isImage}
+        $order={order}
+        $ratio={ratio}
+        $height={height}
+        $stack={stack}
+      >
         {children}
       </Inner>
     </Section>
@@ -31,4 +38,5 @@ CalloutWrapper.propTypes = {
   ratio: PropTypes.string,
   stack: PropTypes.string,
   width: PropTypes.string,
+  isImage: PropTypes.bool,
 };
