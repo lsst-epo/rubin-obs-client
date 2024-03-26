@@ -11,7 +11,17 @@ import TempList from "@/components/dynamic/TempList";
 import * as Styled from "./styles";
 
 export default function HomePage({
-  data: { contentBlocks, customHero, description, hero, id, newsEntry, title },
+  data: {
+    contentBlocks,
+    customHero,
+    description,
+    hero,
+    focalPointX,
+    focalPointY,
+    id,
+    newsEntry,
+    title,
+  },
 }) {
   const { t } = useTranslation();
   const bodyProps = {
@@ -79,7 +89,7 @@ export default function HomePage({
         <Styled.HeroWrapper>
           {altFlag && <Styled.Flag>{altFlag}</Styled.Flag>}
           <Styled.NewsHero>
-            <Hero data={altHero} />
+            <Hero data={altHero} {...{ focalPointX, focalPointY }} />
           </Styled.NewsHero>
           <Styled.HeroContent>
             {!custom && news?.postType?.[0]?.title && (
@@ -105,7 +115,7 @@ export default function HomePage({
       ) : (
         <Styled.HeroWrapper>
           <Styled.HeroContainer>
-            <Hero data={hero} />
+            <Hero data={hero} {...{ focalPointX, focalPointY }} />
           </Styled.HeroContainer>
           <Styled.HeroContent>
             <h1>{title}</h1>

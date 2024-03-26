@@ -25,6 +25,8 @@ export default function NewsPage({ data }) {
     headline,
     featuredImage = [],
     hero = [],
+    focalPointX,
+    focalPointY,
     heroCaption,
     id,
     newsAssets,
@@ -97,6 +99,7 @@ export default function NewsPage({ data }) {
             : makeReleaseFeature(releaseImages, "banner1920")
         }
         narrowCaption={showAside}
+        {...{ focalPointX, focalPointY }}
       />
       <Styled.NewsDetail $showAside={showAside}>
         {(entryWithRelease || data) && (
