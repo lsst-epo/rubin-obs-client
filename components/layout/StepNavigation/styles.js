@@ -9,17 +9,27 @@ export const Wrapper = styled.div`
   margin-block-end: -18px;
   margin-inline-start: -50px;
 
+  ${respond(
+    `
+    flex-direction: column;
+    align-items: stretch;
+  `,
+    tokens.BREAK_PHABLET
+  )}
+
   > * {
     margin-block-end: 18px;
     margin-inline-start: 50px;
   }
 `;
 
-export const Title = styled.div`
+export const Header = styled.div`
   display: flex;
   flex: 666 1 0%;
-  flex-wrap: nowrap;
+  flex-flow: column nowrap;
   justify-content: space-between;
+
+  ${respond(`flex-direction: row;`, tokens.BREAK_PHABLET)}
 
   h2 {
     flex-grow: 1;
@@ -29,10 +39,20 @@ export const Title = styled.div`
     display: none;
     flex-shrink: 0;
     align-self: center;
-    padding-left: 10px;
+    padding-left: 20px;
 
     ${respond(`display: flex;`, tokens.BREAK_PHABLET)}
   }
+`;
+
+export const TitleDescription = styled.div`
+  ${respond(
+    `
+    display: flex;
+    flex-direction: column;
+  `,
+    tokens.BREAK_PHABLET
+  )}
 `;
 
 export const Description = styled.div`
@@ -41,9 +61,7 @@ export const Description = styled.div`
 
 export const NavList = styled.ol`
   position: relative;
-  flex: 1 1
-    ${({ $columns }) =>
-      fluidScale(`${400 * $columns}px`, `${300 * $columns}px`)};
+  flex: 1 1 auto;
   columns: ${({ $columns }) => $columns};
   column-gap: ${fluidScale("50px", "30px")};
   max-height: 0;
