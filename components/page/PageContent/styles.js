@@ -22,10 +22,9 @@ export const Hero = styled(HeroComponent)`
     WIDE_BREAKPOINT,
     MOBILE_BREAKPOINT
   )};
-  --Hero-object-position: 42.5% 50%;
+  --Hero-object-position: ${({ $focalPointX, $focalPointY }) =>
+    `${$focalPointX}% ${$focalPointY}%;`}
   --hero-overlap: ${HERO_OVERLAP};
-
-  ${respond(`--Hero-transform: translateY(-10%);`, MOBILE_BREAKPOINT)}
 `;
 
 export const FullLayout = styled.article`

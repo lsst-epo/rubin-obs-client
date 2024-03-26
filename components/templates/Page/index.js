@@ -27,6 +27,8 @@ export default function Page({
     dynamicComponent,
     featuredImage,
     hero,
+    focalPointX,
+    focalPointY,
     hideTitle,
     id,
     pageType = "standard",
@@ -133,7 +135,11 @@ export default function Page({
           />
         )}
         {hasFilterbar && <FilterBar filterType={dynamicComponent} />}
-        <PageContent heroImage={hero} overlapHero={shouldOverlapHero}>
+        <PageContent
+          heroImage={!showSiblingNav && hero}
+          overlapHero={showSiblingNav ? false : shouldOverlapHero}
+          {...{ focalPointX, focalPointY }}
+        >
           <SubHero
             type={typeHandle}
             header={subHeroHeader}
