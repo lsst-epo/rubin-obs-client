@@ -29,9 +29,8 @@ export const Section = styled(CalloutSection)`
   position: relative;
 `;
 
-export const Inner = styled(MixedLink)`
+export const Inner = styled.div`
   ${containerRegular()}
-  position: ${(p) => p.$position};
   display: grid;
   grid-template-areas:
     "image title"
@@ -49,6 +48,20 @@ export const Inner = styled(MixedLink)`
   padding-bottom: ${fluidScale("50px", "40px")};
   text-decoration: none;
   transition: color 0.2s, background-color 0.2s;
+
+  ${({ $isImage }) =>
+    !$isImage &&
+    `
+    grid-template-areas:
+      "image image"
+      "title title"
+      "subtitle subtitle"
+      "text text"
+      "footer footer";
+    gap: 0;
+    justify-content: center;
+    text-align: center;
+  `}
 
   ${respond(
     `
@@ -174,18 +187,19 @@ export const Footer = styled.div`
   grid-area: footer;
   grid-template-columns: max-content 1fr;
   place-items: end;
-  margin-top: 15px;
+  margin: 15px 0 0;
+
+  ${({ $isImage }) =>
+    !$isImage &&
+    `
+    margin: 15px auto 0;
+    grid-template-columns: 1fr;
+  `}
 
   ${respond(`grid-template-columns: 1fr;`)}
 `;
 
-export const FooterButton = styled.div`
-  ${Inner}:hover &,
-  ${Inner}:focus-visible & {
-    outline: 3px solid var(--button-border-color);
-    outline-offset: 1px;
-  }
-
+export const FooterButton = styled(MixedLink)`
   ${respond(
     `
     display: block;

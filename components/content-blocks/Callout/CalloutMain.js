@@ -25,6 +25,7 @@ export default function CalloutMain({ callout }) {
     <Wrapper
       {...wrapperProps}
       height={dynamicComponent === "alertStream" ? "slim" : ""}
+      isImage={!!calloutImage}
     >
       <Header>
         <h2>{header}</h2>

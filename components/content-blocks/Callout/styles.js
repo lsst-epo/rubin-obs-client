@@ -39,6 +39,16 @@ export const Inner = styled.div`
   padding-top: ${fluidScale("50px", "30px")};
   padding-bottom: ${fluidScale("50px", "40px")};
 
+  ${(p) =>
+    !p.$isImage &&
+    `
+    grid-template:
+      "text" auto / 100%;
+    gap: ${gap};
+    justify-content: center;
+    text-align: center;
+  `}
+
   ${respond(
     `
     grid-template:
