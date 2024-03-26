@@ -21,7 +21,6 @@ const Weather = () => {
     summitData: { current },
     isLoading,
   } = useSummitData();
-
   const previewProps = {
     title: t("summit_dashboard.sections.weather.preview"),
   };
@@ -33,9 +32,7 @@ const Weather = () => {
       </WidgetPreview>
     );
 
-  const { temperature0, dewPoint } = current;
-  const temperature = convertTemperature(temperature0, tempUnit);
-  const dewpoint = convertTemperature(dewPoint, tempUnit);
+  const { temperature0, dewPoint } = current?.[0];
 
   return (
     <WidgetPreview
@@ -44,10 +41,18 @@ const Weather = () => {
         setModalOpen(true);
       }}
     >
-      <Styled.Preview>
-        <TemperatureCurrent unit={tempUnit} temperature={temperature} />
-        <DewpointCurrent dewpoint={dewpoint} unit={tempUnit} />
-      </Styled.Preview>
+      {temperature0 && dewPoint && (
+        <Styled.CondensedBackground $variant="secondary">
+          <TemperatureCurrent
+            unit={tempUnit}
+            temperature={convertTemperature(temperature0, tempUnit)}
+          />
+          <DewpointCurrent
+            dewpoint={convertTemperature(dewPoint, tempUnit)}
+            unit={tempUnit}
+          />
+        </Styled.CondensedBackground>
+      )}
       <SummitStatusModal open={isModalOpen} onClose={() => setModalOpen(false)}>
         <CurrentWeather />
         <HourlyWeather />

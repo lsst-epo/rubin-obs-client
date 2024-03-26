@@ -29,7 +29,7 @@ const Observation = () => {
       </WidgetPreview>
     );
 
-  const { azimuth, zenith } = current;
+  const { azimuth, zenith } = current?.[0];
 
   return (
     <WidgetPreview
