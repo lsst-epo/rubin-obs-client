@@ -56,16 +56,18 @@ export default function GridBlock({
   return (
     <Container width={containerWidth}>
       <div>
-        <Header
-          className={
-            typeHandle === "investigationGrid" ? "t-align-center" : undefined
-          }
-          addBorder={
-            typeHandle === "relatedContent" || typeHandle === "staffGrid"
-          }
-        >
-          {header}
-        </Header>
+        {header && (
+          <Header
+            className={
+              typeHandle === "investigationGrid" ? "t-align-center" : undefined
+            }
+            addBorder={
+              typeHandle === "relatedContent" || typeHandle === "staffGrid"
+            }
+          >
+            {header}
+          </Header>
+        )}
         <ContentGrid
           items={items}
           limit={limit}
