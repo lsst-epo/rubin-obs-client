@@ -12,7 +12,9 @@ function ChildNavigation({ pages, ...props }) {
     };
   });
 
-  return <StepNavigation pages={mappedPages} columns={1} {...props} />;
+  return (
+    <StepNavigation pages={mappedPages} expandable columns={1} {...props} />
+  );
 }
 
 ChildNavigation.propTypes = {
