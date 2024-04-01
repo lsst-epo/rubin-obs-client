@@ -30,7 +30,7 @@ const CurrentWeather = () => {
       </WidgetSection>
     );
 
-  const { temperature0, windspeed, dewPoint } = current?.[0];
+  const { temperature0, windspeed, dewPoint } = current;
   const temperature = convertTemperature(temperature0, tempUnit);
   const dewpoint = convertTemperature(dewPoint, tempUnit);
 

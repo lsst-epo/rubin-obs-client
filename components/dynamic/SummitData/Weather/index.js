@@ -32,7 +32,7 @@ const Weather = () => {
       </WidgetPreview>
     );
 
-  const { temperature0, dewPoint } = current?.[0];
+  const { temperature0, dewPoint } = current;
 
   return (
     <WidgetPreview
