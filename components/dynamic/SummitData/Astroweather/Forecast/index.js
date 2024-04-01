@@ -40,7 +40,7 @@ const ForecastAstroweather = () => {
   const moonriseId = "moonriseTitle";
   const now = new Date();
 
-  const { dewPoint } = current?.[0];
+  const { dewPoint } = current;
   const dewpoint = convertTemperature(dewPoint, tempUnit);
 
   return (
