@@ -32,7 +32,7 @@ const Related = () => {
     );
 
   const { lunarPhase } = astroweatherData;
-  const { dewPoint } = current?.[0];
+  const { dewPoint } = current;
   const dewpoint = convertTemperature(dewPoint, tempUnit);
 
   return (
