@@ -7,8 +7,7 @@
     "url": "https://github.com/lsst-epo/rubin-obs-client"
   },
   "scripts": {
-    "dev": "npm-run-all --parallel dev:*",
-    "dev:next": "next dev",
+    "dev": "next dev",
     "static": "npm-run-all static:*",
     "static:build": "next build --debug",
     "static:export": "next export",
