@@ -42,7 +42,6 @@ export const tokens = {
   red20: "#f2c3c0",
   red40: "#FF8489",
   BREAK_HEADER_LAYOUT: "1625px",
-  BREAK_HEADER_LAYOUT: "1500px",
   BREAK_DESKTOP: "1280px",
   BREAK_DESKTOP_SMALL: "1130px",
   BREAK_LARGE_TABLET: "850px",

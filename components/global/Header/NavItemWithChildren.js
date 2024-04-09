@@ -9,12 +9,15 @@ import internalLinkShape, { internalLinkInternalShape } from "@/shapes/link";
 export default function NavItemWithChildren({
   id,
   active,
+  parentActive,
   title,
   uri,
   childItems,
   onToggleClick,
   onEsc,
   theme,
+  baseClassName = "c-nav-list",
+  level = 2,
 }) {
   const ref = useRef(null);
 
@@ -30,24 +33,30 @@ export default function NavItemWithChildren({
   const childrenWithParent = [parent].concat(childItems);
 
   return (
-    <div ref={ref}>
+    <div ref={ref} className={`${baseClassName}__item-inner`}>
       <button
         onClick={() => onToggleClick(id)}
         aria-expanded={active}
         aria-haspopup
         className={classNames({
-          "c-nav-list__link": true,
-          "c-nav-list__link--is-active": active,
-          [`c-nav-list__link--${theme}`]: !!theme,
+          [`${baseClassName}__link`]: true,
+          [`${baseClassName}__link--is-active`]: active,
+          [`${baseClassName}__link--${theme}`]: !!theme,
         })}
       >
-        <IconComposer icon="ChevronThin" className="c-nav-list__link-icon" />
-        <span className="c-nav-list__link-text">{title}</span>
+        <IconComposer
+          icon="ChevronThin"
+          className={`${baseClassName}__link-icon`}
+        />
+        <span className={`${baseClassName}__link-text`}>{title}</span>
       </button>
       <Subnavigation
         items={childrenWithParent}
-        active={active}
+        active={level === 3 ? parentActive && active : active}
         onClick={onEsc}
+        theme={theme}
+        level={3}
+        baseClassName={level === 3 ? baseClassName : "c-subnav-list"}
       />
     </div>
   );
@@ -59,8 +68,11 @@ NavItemWithChildren.displayName =
 NavItemWithChildren.propTypes = {
   ...internalLinkInternalShape,
   active: PropTypes.bool,
+  parentActive: PropTypes.bool,
   childItems: PropTypes.arrayOf(internalLinkShape),
   onToggleClick: PropTypes.func.isRequired,
   onEsc: PropTypes.func.isRequired,
   theme: PropTypes.oneOf(["desktop", "mobile"]),
+  baseClassName: PropTypes.string,
+  level: PropTypes.number,
 };
