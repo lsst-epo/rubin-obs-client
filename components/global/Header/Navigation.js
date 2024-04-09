@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
@@ -13,6 +13,7 @@ export default function Navigation({
   items,
   userProfilePage,
   theme,
+  isOpenSetter,
   mobileActive,
   mobileSetter,
 }) {
@@ -27,12 +28,17 @@ export default function Navigation({
 
   useClickEvent(handleClick);
 
+  useEffect(() => {
+    if (isOpenSetter) isOpenSetter(!!active);
+  }, [mobileSetter, isOpenSetter, active]);
+
   function handleClick(e) {
     const isLink =
       e.target.nodeName === "A" || e.target.parentElement?.nodeName === "A";
     const isMobileLangSelect = e.target.id === mobileLangSelectId;
     if (mobileSetter && mobileActive && (isLink || isMobileLangSelect)) {
       mobileSetter(false);
+      setActive(null);
     }
     if (navList?.current?.contains(e.target)) return;
     setActive(null);
@@ -159,6 +165,7 @@ Navigation.propTypes = {
   items: PropTypes.arrayOf(internalLinkWithChildrenShape),
   userProfilePage: PropTypes.object,
   theme: PropTypes.oneOf(["desktop", "mobile"]),
+  isOpenSetter: PropTypes.func,
   mobileActive: PropTypes.bool,
   mobileSetter: PropTypes.func,
 };
