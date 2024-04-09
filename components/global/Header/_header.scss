@@ -59,6 +59,7 @@ $_breakpoint: functions.header(layout-breakpoint);
 
   &__search-block {
     grid-area: search;
+    background-color: functions.palette(turquoise60);
 
     @include base.respond($_breakpoint) {
       justify-self: end;
@@ -70,6 +71,7 @@ $_breakpoint: functions.header(layout-breakpoint);
     display: grid;
     grid-auto-flow: column;
     place-content: center;
+    background-color: functions.palette(turquoise60);
 
     fieldset {
       border: 0;
@@ -85,6 +87,7 @@ $_breakpoint: functions.header(layout-breakpoint);
     grid-area: user-nav;
     align-self: center;
     padding-right: 20px;
+    background-color: functions.palette(turquoise60);
 
     @include base.respond($_breakpoint) {
       padding-left: 0.65em;
