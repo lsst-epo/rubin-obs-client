@@ -21,6 +21,7 @@ const CameraFeeds = () => {
   return (
     <WidgetPreview
       title="All Sky Camera Feeds"
+      callout="The Sky Over Rubin"
       openModalCallback={() => {
         setModalOpen(true);
       }}
@@ -29,7 +30,7 @@ const CameraFeeds = () => {
         {isLoading.efd ? (
           <Loader isVisible={true} />
         ) : (
-          <CurrentImage image={allSkyImage} caption="The sky over Rubin" />
+          <CurrentImage image={allSkyImage} isPreview />
         )}
       </Styled.CondensedBackground>
       <SummitStatusModal

@@ -138,14 +138,6 @@ export const ImageWrapper = styled.div`
     object-fit: cover;
   }
 
-  ${Inner}:hover &,
-  ${Inner}:focus-visible & {
-    filter: invert(25%) sepia(80%) saturate(102%) hue-rotate(130deg)
-      brightness(100%) contrast(100%);
-    outline: none;
-    opacity: 0.7;
-  }
-
   ${respond(
     ` ${mobileMargins()}
       min-height: ${fluidScale(

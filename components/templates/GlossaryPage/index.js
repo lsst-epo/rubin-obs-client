@@ -13,7 +13,7 @@ import { useTranslation } from "react-i18next";
 export default function GlossaryPage({ data }) {
   const { t } = useTranslation();
 
-  const { id, title, description, uri, text, cantoAssetSingle, caption } = data;
+  const { id, title, description, uri, text, cantoSingle, caption } = data;
 
   const customBreadcrumbs = useCustomBreadcrumbs("Glossary");
 
@@ -21,7 +21,7 @@ export default function GlossaryPage({ data }) {
     b.uri.includes("glossary")
   );
 
-  const image = imageShaper("EN", cantoAssetSingle[0]);
+  const image = imageShaper("EN", cantoSingle[0]);
 
   const bodyProps = {
     description,
@@ -68,7 +68,7 @@ GlossaryPage.propTypes = {
     description: PropTypes.string,
     uri: PropTypes.string,
     text: PropTypes.node,
-    cantoAssetSingle: PropTypes.array,
+    cantoSingle: PropTypes.array,
     caption: PropTypes.string,
   }),
 };
