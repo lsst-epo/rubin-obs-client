@@ -25,7 +25,7 @@ import SRAuthStatus from "../../auth/SRAuthStatus";
 
 export default function Header({ navItems, userProfilePage }) {
   const [mobileNavActive, setMobileNavActive] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  const [desktopNavActive, setDesktopNavActive] = useState(false);
   const [mobileLogoActive, setMobileLogoActive] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
@@ -57,7 +57,7 @@ export default function Header({ navItems, userProfilePage }) {
     <header
       ref={ref}
       className={`c-global-header ${
-        visible || mobileNavActive || isOpen ? "" : "invisible"
+        visible || mobileNavActive || desktopNavActive ? "" : "invisible"
       }`}
     >
       <a href="#page-content" className="c-global-header__skip-link">
@@ -79,7 +79,11 @@ export default function Header({ navItems, userProfilePage }) {
         </Link>
       </div>
       <nav className="c-global-header__nav-block">
-        <Navigation items={navItems} theme="desktop" isOpenSetter={setIsOpen} />
+        <Navigation
+          items={navItems}
+          theme="desktop"
+          desktopSetter={setDesktopNavActive}
+        />
       </nav>
       <div className="c-global-header__search-block">
         <SearchBar />
