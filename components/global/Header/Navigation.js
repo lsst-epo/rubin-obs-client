@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
@@ -13,7 +13,7 @@ export default function Navigation({
   items,
   userProfilePage,
   theme,
-  isOpenSetter,
+  desktopSetter,
   mobileActive,
   mobileSetter,
 }) {
@@ -28,10 +28,6 @@ export default function Navigation({
 
   useClickEvent(handleClick);
 
-  useEffect(() => {
-    if (isOpenSetter) isOpenSetter(!!active);
-  }, [mobileSetter, isOpenSetter, active]);
-
   function handleClick(e) {
     const isLink =
       e.target.nodeName === "A" || e.target.parentElement?.nodeName === "A";
@@ -42,15 +38,17 @@ export default function Navigation({
     }
     if (navList?.current?.contains(e.target)) return;
     setActive(null);
+    if (desktopSetter) desktopSetter(false);
   }
 
   function handleToggleClick(id) {
     setActive((prevActive) => (prevActive === id ? null : id));
+    if (desktopSetter) desktopSetter(true);
   }
 
   function handleSignOut() {
     setActive(null);
-    mobileSetter(false);
+    if (mobileSetter) mobileSetter(false);
     signOut();
   }
 
@@ -165,7 +163,7 @@ Navigation.propTypes = {
   items: PropTypes.arrayOf(internalLinkWithChildrenShape),
   userProfilePage: PropTypes.object,
   theme: PropTypes.oneOf(["desktop", "mobile"]),
-  isOpenSetter: PropTypes.func,
+  desktopSetter: PropTypes.func,
   mobileActive: PropTypes.bool,
   mobileSetter: PropTypes.func,
 };
