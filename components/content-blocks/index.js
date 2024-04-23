@@ -16,6 +16,7 @@ import SummitStatus from "./SummitStatus";
 import TableGroup from "./TableGroup";
 import Video from "./Video";
 import DownloadList from "./DownloadList";
+import PublicationsList from "./PublicationsList";
 
 export {
   Callout,
@@ -36,4 +37,5 @@ export {
   TableGroup,
   Video,
   DownloadList,
+  PublicationsList,
 };
