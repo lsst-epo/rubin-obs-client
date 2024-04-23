@@ -18,6 +18,7 @@ import {
   DownloadList,
   Embed,
   SummitStatus,
+  PublicationsList,
 } from "@/content-blocks";
 
 const blockMap = {
@@ -45,6 +46,7 @@ const blockMap = {
   downloadList: DownloadList,
   investigationGrid: GridBlock,
   iframe: Embed,
+  publicationsList: PublicationsList,
 };
 
 export default function ContentBlockFactory({ type, data, pageId }) {
