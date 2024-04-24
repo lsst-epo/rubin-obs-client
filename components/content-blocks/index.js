@@ -17,6 +17,7 @@ import TableGroup from "./TableGroup";
 import Video from "./Video";
 import DownloadList from "./DownloadList";
 import PublicationsList from "./PublicationsList";
+import PeopleBlock from "./PeopleBlock";
 
 export {
   Callout,
@@ -38,4 +39,5 @@ export {
   Video,
   DownloadList,
   PublicationsList,
+  PeopleBlock,
 };
