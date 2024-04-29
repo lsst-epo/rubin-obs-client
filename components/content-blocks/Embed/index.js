@@ -3,30 +3,27 @@ import styled from "styled-components";
 import { containerFullBleed } from "@/styles/globalStyles";
 import { Container } from "@rubin-epo/epo-react-lib";
 
-export default function Embed(props) {
-  const {
-    embedTitle,
-    fullWidth,
-    embed: { url },
-  } = props;
-
+export default function Embed({ embedTitle, fullWidth, embedCode, embedUrl }) {
   const EmbedContainer = fullWidth ? FullWidth : Container;
 
   return (
     <EmbedContainer>
       <HeightHack>
-        <StyledEmbed
-          className="iframe"
-          width="100%"
-          scrolling="no"
-          allowtransparency="true"
-          frameBorder="0"
-          marginWidth="0"
-          title={embedTitle}
-          allowFullScreen="allowfullscreen"
-          marginHeight="0"
-          src={url}
-        />
+        {embedCode ? (
+          <StyledEmbedWrapper dangerouslySetInnerHTML={{ __html: embedCode }} />
+        ) : (
+          <StyledEmbed
+            className="iframe"
+            width="100%"
+            allowtransparency="true"
+            frameBorder="0"
+            marginWidth="0"
+            title={embedTitle}
+            allowFullScreen="allowfullscreen"
+            marginHeight="0"
+            src={embedUrl}
+          />
+        )}
       </HeightHack>
     </EmbedContainer>
   );
@@ -47,13 +44,26 @@ const StyledEmbed = styled.iframe`
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 100%;
+  max-height: 100vh;
+`;
+
+const StyledEmbedWrapper = styled.div`
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    max-height: 100vh;
+  }
 `;
 
 Embed.displayName = "ContentBlock.Text";
 
 Embed.propTypes = {
-  embed: PropTypes.object,
+  embedCode: PropTypes.string,
+  embedUrl: PropTypes.string,
   fullWidth: PropTypes.bool,
   embedTitle: PropTypes.string,
 };
