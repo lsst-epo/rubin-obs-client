@@ -9,16 +9,16 @@ export const Header = styled.h2`
 
 export const PeopleGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
+  grid-template-columns: repeat(1, minmax(0, 1fr));
   grid-auto-rows: 1fr;
   grid-gap: 20px;
 
   @media (min-width: ${BREAK_MOBILE}) {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   @media (min-width: ${BREAK_TABLET}) {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 `;
 
@@ -56,6 +56,7 @@ export const Name = styled.div`
   font-size: ${fluidScale("25px", "22px")};
   font-weight: 600;
   line-height: 1;
+  word-break: break-word;
 
   ${Affiliation} + & {
     margin-top: 18px;
