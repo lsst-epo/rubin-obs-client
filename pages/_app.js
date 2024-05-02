@@ -11,7 +11,7 @@ import GlobalStyles from "@/styles/globalStyles";
 import styles from "@/styles/styles.scss";
 
 const PLAUSIBLE_DOMAIN = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
-// const SURVEY_SPARROW = process.env.NEXT_PUBLIC_SURVEY_SPARROW;
+const SURVEY_SPARROW = process.env.NEXT_PUBLIC_SURVEY_SPARROW;
 
 function Client({ Component, pageProps }) {
   const lang = pageProps?.data?.language || "en-US";
@@ -33,7 +33,7 @@ function Client({ Component, pageProps }) {
             strategy="afterInteractive"
           />
         )}
-        {/* {SURVEY_SPARROW && (
+        {SURVEY_SPARROW && (
           <>
             <div id="ss_survey_widget"></div>
             <Script
@@ -52,12 +52,12 @@ function Client({ Component, pageProps }) {
                   n,
                   c,
                   rm = a.getElementById("SS_SCRIPT");
-                r.SS_WIDGET_TOKEN = "tt-jCJ9T1UiXP2bVPQ1K3sF3g";
+                r.SS_WIDGET_TOKEN = "tt-tTTCZh648ZKwCNkh91aodV";
                 r.SS_ACCOUNT = "rockmanetal.surveysparrow.com";
                 r.SS_SURVEY_NAME = "rubin-pop-up---chat-survey";
                 if (
                   !a.getElementById(e) &&
-                  !l.getItem("removed-ss-widget-tt-jCJ9T1UiXP2bVPQ1K3sF3g")
+                  !l.getItem("removed-ss-widget-tt-tTTCZh648ZKwCNkh91aodV")
                 ) {
                   // eslint-disable-next-line no-var
                   var S = function () {
@@ -92,7 +92,7 @@ function Client({ Component, pageProps }) {
               }}
             />
           </>
-        )} */}
+        )}
         <GlobalStyles />
         <Component {...pageProps} />
       </AuthenticationContextProvider>
