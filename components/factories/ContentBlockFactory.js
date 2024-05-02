@@ -20,6 +20,7 @@ import {
   SummitStatus,
   PublicationsList,
   PeopleBlock,
+  KeyNumbersGridBlock,
 } from "@/content-blocks";
 
 const blockMap = {
@@ -49,6 +50,7 @@ const blockMap = {
   iframe: Embed,
   publicationsList: PublicationsList,
   peopleBlock: PeopleBlock,
+  keyNumbersGrid: KeyNumbersGridBlock,
 };
 
 export default function ContentBlockFactory({ type, data, pageId }) {
