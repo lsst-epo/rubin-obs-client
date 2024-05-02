@@ -18,6 +18,7 @@ import Video from "./Video";
 import DownloadList from "./DownloadList";
 import PublicationsList from "./PublicationsList";
 import PeopleBlock from "./PeopleBlock";
+import KeyNumbersGridBlock from "./KeyNumbersGridBlock";
 
 export {
   Callout,
@@ -40,4 +41,5 @@ export {
   DownloadList,
   PublicationsList,
   PeopleBlock,
+  KeyNumbersGridBlock,
 };
