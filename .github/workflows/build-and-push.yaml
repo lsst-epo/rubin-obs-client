@@ -1,14 +1,14 @@
 name: Build, Push, and Deploy
-concurrency: 
+concurrency:
   group: $${{ github.ref_name }}
 
 on:
   push:
     branches:
-       - 'develop'
-       - 'master'
+      - "develop"
+      - "master"
     tags:
-      - 'v*'
+      - "v*"
   # pull_request:
   #   types:
   #     - 'opened'
@@ -28,11 +28,9 @@ jobs:
       image_name: ${{ steps.deploy-tag.outputs.image_name }}
       environment_name: ${{ steps.deploy-info.outputs.environment_name }}
     steps:
-      -
-        name: Checkout
+      - name: Checkout
         uses: actions/checkout@v3
-      -
-        name: Parse deployment info
+      - name: Parse deployment info
         id: deploy-info
         run: |
           # Determine environment to deploy to
@@ -48,8 +46,7 @@ jobs:
           fi
           echo environment_name=$environment_name >> "$GITHUB_OUTPUT"
           echo credentials_json=$credentials_json >> "$GITHUB_OUTPUT"
-      -
-        name: Docker meta
+      - name: Docker meta
         id: meta
         uses: docker/metadata-action@v4
         with:
@@ -71,8 +68,7 @@ jobs:
             type=sha
           build-args: |
             RUN_BUILD=false
-      -
-        name: Get deploy tag
+      - name: Get deploy tag
         id: deploy-tag
         run: |
           # Parse container image tag to deploy
@@ -81,24 +77,18 @@ jobs:
           echo image_tag=$(echo "$full_tag" | cut -f2 -d:) >> "$GITHUB_OUTPUT"
           echo image_name=$(echo "$full_tag" | cut -f1 -d:) >> "$GITHUB_OUTPUT"
           echo full_tag=$full_tag >> "$GITHUB_OUTPUT"
-      -
-        name: Set up QEMU
+      - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
-      -
-        name: Set up Docker Buildx
+      - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      - 
-        name: Login to GCP
-        uses: 'google-github-actions/auth@v2'
+      - name: Login to GCP
+        uses: "google-github-actions/auth@v2"
         with:
           credentials_json: ${{ steps.deploy-info.outputs.credentials_json }}
-      - 
-        name: 'Set up Cloud SDK'
-        uses: 'google-github-actions/setup-gcloud@v2'
-      - 
-        run: gcloud --quiet auth configure-docker
-      -
-        name: Build and push
+      - name: "Set up Cloud SDK"
+        uses: "google-github-actions/setup-gcloud@v2"
+      - run: gcloud --quiet auth configure-docker
+      - name: Build and push
         uses: docker/build-push-action@v4
         with:
           context: .
@@ -111,8 +101,7 @@ jobs:
             type=gha
           build-args: |
             RUN_BUILD=false
-      - 
-        name: Summary
+      - name: Summary
         run: |
           cat <<-EOT >> "$GITHUB_STEP_SUMMARY"
             # Container Build Completed
@@ -120,7 +109,7 @@ jobs:
             ## Tags
             ${{ steps.meta.outputs.tags }}
           EOT
-  
+
   deploy:
     name: Trigger deploy to ${{ needs.build.outputs.environment_name }}
     needs: build
@@ -146,8 +135,8 @@ jobs:
           dispatch-method: repository_dispatch
           repo: edc-deploy
           owner: lsst-epo
-          event-type: app_update_values 
-          token: ${{ secrets.EDC_DEPLOY_GITHUB_TOKEN_FOR_REST_API }} 
+          event-type: app_update_values
+          token: ${{ secrets.EDC_DEPLOY_GITHUB_TOKEN_FOR_REST_API }}
           workflow-inputs: ${{ steps.payload.outputs.data }}
           discover: true
       - name: Await Run ID ${{ steps.dispatch.outputs.run-id }}
@@ -157,4 +146,4 @@ jobs:
           repo: edc-deploy
           owner: lsst-epo
           run_id: ${{ steps.dispatch.outputs.run-id }}
-          run_timeout_seconds: 1500
+          run_timeout_seconds: 2700
