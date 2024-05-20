@@ -3,7 +3,6 @@
 import PropTypes from "prop-types";
 import "@/lib/i18n";
 import "focus-visible";
-import { UIDReset } from "react-uid";
 import Script from "next/script";
 import { AuthenticationContextProvider } from "@/contexts/Authentication";
 import useAuthentication from "@/hooks/useAuthentication";
@@ -23,23 +22,22 @@ function Client({ Component, pageProps }) {
   });
 
   return (
-    <UIDReset>
-      <AuthenticationContextProvider data={authData}>
-        {PLAUSIBLE_DOMAIN && (
+    <AuthenticationContextProvider data={authData}>
+      {PLAUSIBLE_DOMAIN && (
+        <Script
+          id="plausible-script"
+          data-domain={PLAUSIBLE_DOMAIN}
+          src="https://plausible.io/js/plausible.js"
+          strategy="afterInteractive"
+        />
+      )}
+      {SURVEY_SPARROW && (
+        <>
+          <div id="ss_survey_widget"></div>
           <Script
-            id="plausible-script"
-            data-domain={PLAUSIBLE_DOMAIN}
-            src="https://plausible.io/js/plausible.js"
-            strategy="afterInteractive"
-          />
-        )}
-        {SURVEY_SPARROW && (
-          <>
-            <div id="ss_survey_widget"></div>
-            <Script
-              id="SS_SCRIPT"
-              dangerouslySetInnerHTML={{
-                __html: `
+            id="SS_SCRIPT"
+            dangerouslySetInnerHTML={{
+              __html: `
               function sparrowLaunch(opts) {
                 // eslint-disable-next-line no-var, one-var
                 var e = "ss-widget",
@@ -89,14 +87,13 @@ function Client({ Component, pageProps }) {
               }
               sparrowLaunch({sparrowLang: "${lang}"});
             `,
-              }}
-            />
-          </>
-        )}
-        <GlobalStyles />
-        <Component {...pageProps} />
-      </AuthenticationContextProvider>
-    </UIDReset>
+            }}
+          />
+        </>
+      )}
+      <GlobalStyles />
+      <Component {...pageProps} />
+    </AuthenticationContextProvider>
   );
 }
 
