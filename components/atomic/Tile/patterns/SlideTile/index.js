@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useUID } from "react-uid";
+import { useId } from "react";
 import classNames from "classnames";
 import {
   ResponsiveImage,
@@ -22,7 +22,7 @@ const SlideTile = ({
   titleTag = "h3",
   type = "related",
 }) => {
-  const uid = useUID();
+  const uid = useId();
   const { siteInfo } = useGlobalData();
   const finalImage =
     type === "jobs" ? image : image || siteInfo?.siteImage?.[0];
