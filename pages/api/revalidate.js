@@ -1,8 +1,14 @@
+/* eslint-disable no-console */
 import { isCraftPreview } from "@/helpers";
 
 async function handler(req, res) {
   const { query } = req;
   const isPreview = isCraftPreview(query);
+
+  console.debug({
+    serverToken: process.env.CRAFT_REVALIDATE_SECRET_TOKEN,
+    receivedToken: query.secret,
+  });
 
   if (isPreview) {
     return res.status(401).json({
