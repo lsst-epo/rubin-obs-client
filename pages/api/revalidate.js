@@ -10,6 +10,10 @@ async function handler(req, res) {
     receivedToken: query.secret,
   });
 
+  console.debug({
+    modifiedEnvVar: process.env.NEXT_PUBLIC_CRAFT_REVALIDATE_SECRET_TOKEN,
+  });
+
   if (isPreview) {
     return res.status(401).json({
       message:
