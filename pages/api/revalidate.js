@@ -5,15 +5,6 @@ async function handler(req, res) {
   const { query } = req;
   const isPreview = isCraftPreview(query);
 
-  console.debug({
-    serverToken: process.env.CRAFT_REVALIDATE_SECRET_TOKEN,
-    receivedToken: query.secret,
-  });
-
-  console.debug({
-    modifiedEnvVar: process.env.NEXT_PUBLIC_CRAFT_REVALIDATE_SECRET_TOKEN,
-  });
-
   if (isPreview) {
     return res.status(401).json({
       message:
