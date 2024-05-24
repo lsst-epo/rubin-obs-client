@@ -1,82 +1,71 @@
 import styled from "styled-components";
 import { MixedLink } from "@rubin-epo/epo-react-lib";
-import {
-  BREAK_MOBILE_MIN,
-  BREAK_PHABLET,
-  fluidScale,
-} from "@/styles/globalStyles";
 
 export const Header = styled.h2`
-  margin-bottom: ${fluidScale("100px", "60px")};
-  font-size: ${fluidScale("25px", "18px")};
+  margin-block-start: 3.166em;
+  margin-block-end: 3.166em;
+  font-size: 1.363rem;
+  line-height: 1.5;
 `;
 
 export const Link = styled(MixedLink)`
-  margin-top: 40px;
+  margin-top: 4.545rem;
 `;
 
-export const KeyNumbersGrid = styled.div`
+export const KeyNumbers = styled.dl`
   display: grid;
-  grid-template-columns: repeat(1, minmax(0, 1fr));
-  grid-auto-rows: 1fr;
-  grid-gap: 20px;
-
-  @media (min-width: ${BREAK_MOBILE_MIN}) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  @media (min-width: ${BREAK_PHABLET}) {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--PADDING_SMALL);
 `;
 
-export const KeyNumbersGridItem = styled.div`
+export const KeyNumber = styled.div`
   display: grid;
-  grid-template-rows: minmax(150px, 2fr) minmax(75px, 100px);
-  grid-gap: 0;
+  grid-template-rows: 2fr 1fr;
+  aspect-ratio: 1;
+  overflow: hidden;
   color: var(--turquoise85, #12726d);
   text-align: center;
   background-color: var(--turquoise10);
   border-radius: 18px;
 `;
 
-export const Top = styled.div`
+export const Definition = styled.dd`
   display: flex;
   flex-direction: column;
+  grid-row-start: 1;
   align-items: center;
-  justify-content: center;
-  width: 100%;
-  padding: 20px;
+  justify-content: flex-end;
+  padding-block: var(--PADDING_SMALL);
+  white-space: nowrap;
 `;
 
-export const Bottom = styled.div`
+export const Term = styled.dt`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  padding: 20px;
-  overflow: hidden;
-  font-size: ${fluidScale("20px", "16px")};
+  padding: var(--PADDING_SMALL);
+  font-size: 0.909rem;
   font-weight: 600;
   color: var(--white);
   word-break: break-word;
   background-color: var(--turquoise85, #12726d);
-  border-radius: 0 0 18px 18px;
 `;
 
-export const KeyNumber = styled.div`
-  width: 100%;
+export const Number = styled.div`
+  display: flex;
+  gap: 0.5ch;
+  align-items: baseline;
 `;
 
 export const Heading = styled.span`
-  font-size: ${fluidScale("90px", "40px")};
+  font-size: var(--size-text-heading-key-numbers, 4.09rem);
   font-weight: 800;
   line-height: 1;
 `;
 
 export const Postscript = styled.span`
-  font-size: ${fluidScale("60px", "20px")};
+  font-size: var(--size-text-postscript-key-numbers, 2.727rem);
   font-weight: 600;
   line-height: 1;
   word-break: break-word;
@@ -84,7 +73,8 @@ export const Postscript = styled.span`
 
 export const Subheading = styled.div`
   width: 100%;
-  font-size: ${fluidScale("35px", "16px")};
+  font-size: var(--size-text-subheading-key-numbers, 1.136rem);
   font-weight: 600;
   word-break: break-word;
+  white-space: normal;
 `;
