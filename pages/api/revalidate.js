@@ -1,6 +1,12 @@
 /* eslint-disable no-console */
 import { isCraftPreview } from "@/helpers";
 
+function sleep(time) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, time);
+  });
+}
+
 async function handler(req, res) {
   const { query } = req;
   const isPreview = isCraftPreview(query);
@@ -23,6 +29,9 @@ async function handler(req, res) {
   }
 
   try {
+    console.info(new Date().toString(), query.uri);
+    await sleep(120000);
+    console.info(new Date().toString(), "/// Start revalidate ///");
     await res.revalidate(`/${query.uri}`);
     return res.status(200).json({ revalidated: true });
   } catch (error) {

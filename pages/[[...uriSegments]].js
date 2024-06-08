@@ -26,6 +26,7 @@ import footerContentShape from "@/shapes/footerContent";
 import rootPagesShape from "@/shapes/rootPages";
 import { updateI18n } from "@/lib/i18n";
 import { setEdcLog } from "@/lib/edc-log";
+import { purgeNextjsStaticFiles } from "@/lib/purgeStaticFiles";
 const glob = require("glob");
 const fs = require("fs");
 
@@ -100,13 +101,19 @@ async function getEntryData(uri, section, type, site, previewToken) {
 }
 
 export async function getStaticPaths() {
+  const paths = await getAllEntries();
+
   return {
-    paths: await getAllEntries(),
+    paths,
     fallback: "blocking",
   };
 }
 
-export async function getStaticProps({ params: { uriSegments }, previewData }) {
+export async function getStaticProps({
+  params: { uriSegments },
+  previewData,
+  revalidateReason,
+}) {
   const PREVIEW_SLUG = process.env.NEXT_PREVIEW_SLUG;
 
   if (process.env.NEXT_DEBUG_LOGGING === "true") {
@@ -149,11 +156,16 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
     previewToken
   );
 
+  console.info({ uriSegments, revalidateReason, entrySectionType });
+
   // Handle 404 if there is no data
   if (!entrySectionType) {
     setEdcLog(runId, "404 encountered building for " + uri, "BUILD_ERROR_404");
+
+    await purgeNextjsStaticFiles(uriSegments);
     return {
       notFound: true,
+      revalidate: 60,
     };
   }
 
@@ -192,8 +204,10 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
   // Handle 404 if there is no data
   if (!currentId) {
     setEdcLog(runId, "404 encountered building for " + uri, "BUILD_ERROR_404");
+    await purgeNextjsStaticFiles(uriSegments);
     return {
       notFound: true,
+      revalidate: 60,
     };
   }
   setEdcLog(runId, "Done building for " + uri, "BUILD_COMPLETE");
