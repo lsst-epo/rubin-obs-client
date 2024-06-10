@@ -29,9 +29,9 @@ module.exports = {
     ];
   },
   experimental: {
-    isrMemoryCacheSize: 0,
     forceSwcTransforms: true,
   },
+  cacheMaxMemorySize: 0,
   staticPageGenerationTimeout: 2000,
   typescript: {
     ignoreBuildErrors: true,
