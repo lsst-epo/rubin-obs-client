@@ -19,29 +19,30 @@ export function middleware(request) {
       },
     };
 
-    console.info(logEntry);
+    // For SSO redirects:
+    if (request.nextUrl.pathname.includes("sso-redirect")) {
+      const {
+        nextUrl: { search },
+      } = request;
+
+      const urlSearchParams = new URLSearchParams(search);
+      const params = Object.fromEntries(urlSearchParams.entries());
+      const { state: redirectPath, facebook, code } = params;
+      if (redirectPath && facebook && code) {
+        const redirectUrl = request.nextUrl.clone();
+        redirectUrl.pathname = redirectPath;
+
+        logEntry.httpRequest.redirected = true;
+        console.info(logEntry);
+        return NextResponse.redirect(redirectUrl);
+      }
+    }
 
     const res = NextResponse.next();
-    logEntry.status = res.status;
-    logEntry.redirected = res.redirected;
-
+    logEntry.httpRequest.status = res.status;
+    logEntry.httpRequest.redirected = res.redirected;
+    console.info(logEntry);
     return res;
-  }
-
-  // For SSO redirects:
-  if (request.nextUrl.pathname.includes("/sso-redirect/")) {
-    const {
-      nextUrl: { search },
-    } = request;
-
-    const urlSearchParams = new URLSearchParams(search);
-    const params = Object.fromEntries(urlSearchParams.entries());
-    const { state: redirectPath, facebook, code } = params;
-    if (redirectPath && facebook && code) {
-      const redirectUrl = request.nextUrl.clone();
-      redirectUrl.pathname = redirectPath;
-      return NextResponse.redirect(redirectUrl);
-    }
   }
 }
 
