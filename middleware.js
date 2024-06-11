@@ -6,7 +6,10 @@ const ignorableFileExtensions = ["woff", "ico", "png", "jpeg", "jpg"];
 export function middleware(request) {
   // Filter out file extensions we don't care about
   if (
-    !ignorableFileExtensions.some((e) => request.nextUrl.pathname.includes(e))
+    !ignorableFileExtensions.some((e) =>
+      request.nextUrl.pathname.includes(e)
+    ) &&
+    !request.nextUrl.href.includes("localhost")
   ) {
     // Insight into API server:
     const logEntry = {
@@ -16,6 +19,8 @@ export function middleware(request) {
         href: request.nextUrl.href,
         method: request.method,
         client_ip: request.ip,
+        userAgent: request?.headers?.["user-agent"],
+        xForwardedFor: request?.headers?.["x-forwarded-for"],
       },
     };
 
@@ -48,5 +53,5 @@ export function middleware(request) {
 
 // Match anything and let the middleware decide to redirect or log
 export const config = {
-  matcher: "/((?!localhost).*)",
+  matcher: "/((?!_________).*)",
 };
