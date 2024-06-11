@@ -33,7 +33,7 @@ export function middleware(request) {
         redirectUrl.pathname = redirectPath;
 
         logEntry.httpRequest.redirected = true;
-        console.info(logEntry);
+        console.info(JSON.stringify(logEntry));
         return NextResponse.redirect(redirectUrl);
       }
     }
@@ -41,12 +41,12 @@ export function middleware(request) {
     const res = NextResponse.next();
     logEntry.httpRequest.status = res.status;
     logEntry.httpRequest.redirected = res.redirected;
-    console.info(logEntry);
+    console.info(JSON.stringify(logEntry));
     return res;
   }
 }
 
 // Match anything and let the middleware decide to redirect or log
 export const config = {
-  matcher: "/((?!_____).*)",
+  matcher: "/((?!localhost).*)",
 };
