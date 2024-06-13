@@ -128,6 +128,7 @@ jobs:
     name: Trigger deploy to ${{ needs.build.outputs.environment_name }}
     needs: build
     runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'pull_request' }}
     steps:
       - name: Generate Webhook Payload
         id: payload
