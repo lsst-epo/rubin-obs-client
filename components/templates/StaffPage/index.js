@@ -50,7 +50,6 @@ export default function StaffPage({
     id,
     uri,
     title,
-    active: true,
   };
   const breadcrumbs = [parentEntry, pageLink].filter(Boolean);
 

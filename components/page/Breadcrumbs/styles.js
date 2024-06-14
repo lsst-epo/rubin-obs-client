@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import BaseLink from "next/link";
 import CommonJsBreadcrumbs from "@castiron/components-breadcrumbs";
 import { containerRegular, respond, tokens } from "@/styles/globalStyles";
 
@@ -66,7 +67,7 @@ export const Breadcrumbs = styled(BreadcrumbsWrapper)`
   }
 `;
 
-export const Link = styled.a`
+export const Link = styled(BaseLink)`
   display: block;
   padding-right: 1em;
   padding-left: 1em;

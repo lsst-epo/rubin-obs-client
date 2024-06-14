@@ -48,7 +48,6 @@ export default function NewsPage({ data }) {
     id,
     uri,
     title,
-    active: true,
   };
   const manualAssets = [];
   const heroBlock =

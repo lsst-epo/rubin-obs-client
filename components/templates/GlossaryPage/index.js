@@ -33,7 +33,6 @@ export default function GlossaryPage({ data }) {
     id,
     uri,
     title,
-    active: true,
   };
 
   return (
