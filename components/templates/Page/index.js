@@ -60,7 +60,6 @@ export default function Page({
     id,
     uri,
     title,
-    active: true,
   };
 
   // add FilterBar to dynamic pages

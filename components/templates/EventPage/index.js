@@ -52,7 +52,6 @@ export default function EventPage({
     id,
     uri,
     title,
-    active: true,
   };
   // logic for displaying city/state in US, city/country outside
   const location = `${address ? address + "," : ""} ${createLocationString(

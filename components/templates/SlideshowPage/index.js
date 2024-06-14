@@ -32,7 +32,6 @@ export default function SlideshowPage({
     id,
     uri,
     title,
-    active: true,
   };
 
   // prepend main slide to content slides

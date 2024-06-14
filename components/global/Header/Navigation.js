@@ -12,7 +12,7 @@ import NavItemWithChildren from "./NavItemWithChildren";
 export default function Navigation({
   items,
   userProfilePage,
-  theme,
+  theme = "desktop",
   desktopSetter,
   mobileActive,
   mobileSetter,
@@ -166,8 +166,4 @@ Navigation.propTypes = {
   desktopSetter: PropTypes.func,
   mobileActive: PropTypes.bool,
   mobileSetter: PropTypes.func,
-};
-
-Navigation.defaultProps = {
-  theme: "desktop",
 };
