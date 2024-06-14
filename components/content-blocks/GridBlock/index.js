@@ -61,7 +61,7 @@ export default function GridBlock({
             className={
               typeHandle === "investigationGrid" ? "t-align-center" : undefined
             }
-            addBorder={
+            $addBorder={
               typeHandle === "relatedContent" || typeHandle === "staffGrid"
             }
           >
@@ -91,7 +91,7 @@ const Header = styled.h2`
   margin-bottom: ${fluidScale("100px", "60px")};
 
   ${(p) =>
-    p.addBorder &&
+    p.$addBorder &&
     `padding-bottom: 10px;
     margin-bottom: 30px;
     border-bottom: 10px solid var(--turquoise85);`}
