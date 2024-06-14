@@ -71,7 +71,7 @@ export default function CalloutEntry({ callout }) {
       <Styled.Inner $isImage={!!calloutImage}>
         {calloutImage && (
           <Styled.ImageWrapper>
-            <Image role="presentation" ratio="4:3" image={calloutImage} />
+            <Image role="presentation" image={calloutImage} />
             <Styled.ImageSticker>{type}</Styled.ImageSticker>
           </Styled.ImageWrapper>
         )}
