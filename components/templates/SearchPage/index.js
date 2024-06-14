@@ -21,7 +21,6 @@ export default function SearchPage({
     id,
     uri,
     title,
-    active: true,
   };
   const { query } = usePathData();
   const keyphrase =

@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import Link from "next/link";
 import internalLinkShape from "@/shapes/link";
 import * as Styled from "./styles";
 
@@ -8,11 +7,13 @@ export default function Breadcrumbs({ breadcrumbs, type }) {
 
   return (
     <Styled.Breadcrumbs breadcrumbs={breadcrumbs} $type={type}>
-      {({ id, uri, title, ...restProps }) => (
-        <Link legacyBehavior prefetch={false} href={`/${uri}`} passHref>
-          <Styled.Link {...restProps}>{title}</Styled.Link>
-        </Link>
-      )}
+      {({ id, uri, title, ...restProps }) => {
+        return (
+          <Styled.Link prefetch={false} href={`/${uri}`} {...restProps}>
+            {title}
+          </Styled.Link>
+        );
+      }}
     </Styled.Breadcrumbs>
   );
 }

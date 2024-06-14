@@ -82,7 +82,6 @@ export default function GalleryPage({
     id,
     uri,
     title,
-    active: true,
   };
 
   const image = featuredImage[0];
