@@ -39,7 +39,9 @@ module.exports = {
   swcMinify: true,
   compiler: {
     // Enables the styled-components SWC transform
-    styledComponents: true,
+    styledComponents: {
+      ssr: true,
+    },
   },
   sassOptions: {
     includePaths: [
