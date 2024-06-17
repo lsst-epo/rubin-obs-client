@@ -2205,10 +2205,10 @@
   resolved "https://registry.yarnpkg.com/@react-types/shared/-/shared-3.23.1.tgz#2f23c81d819d0ef376df3cd4c944be4d6bce84c3"
   integrity sha512-5d+3HbFDxGZjhbMBeFHRQhexMFt4pUce3okyRtUVKbbedQFUrtXSBg9VszgF2RTeQDKDkMCIQDtz5ccP/Lk1gw==
 
-"@rubin-epo/epo-react-lib@^2.0.31":
-  version "2.0.31"
-  resolved "https://registry.yarnpkg.com/@rubin-epo/epo-react-lib/-/epo-react-lib-2.0.31.tgz#ddfce2ec2c2179694dec31e3ee40e626987a925b"
-  integrity sha512-7oNV9rWx8V2CFdam6rWI7Pj9RyOTmuXJMayLEdvuAvPVQiNV7rHJVG4kwG1rqDlGDurh/cGZI6FmZjhBCimzMw==
+"@rubin-epo/epo-react-lib@2.0.32":
+  version "2.0.32"
+  resolved "https://registry.yarnpkg.com/@rubin-epo/epo-react-lib/-/epo-react-lib-2.0.32.tgz#ef2146ccc150cc37853584e9f191a22ac1f045eb"
+  integrity sha512-ACT0GNVQiSIWK01/38xM4SNsKU40gs2MsDkbtr7kbmb8z+RsKla5sU2J4DcdUJFmd7muAhgxuYzSGse23Nc57g==
   dependencies:
     "@castiron/style-mixins" "^1.0.6"
     "@headlessui/react" "^2.0.3"
@@ -9823,13 +9823,6 @@ react-slider@^2.0.6:
   integrity sha512-gJxG1HwmuMTJ+oWIRCmVWvgwotNCbByTwRkFZC6U4MBsHqJBmxwbYRJUmxy4Tke1ef8r9jfXjgkmY/uHOCEvbA==
   dependencies:
     prop-types "^15.8.1"
-
-react-uid@^2.3.2:
-  version "2.3.2"
-  resolved "https://registry.yarnpkg.com/react-uid/-/react-uid-2.3.2.tgz#09107543bb3184b53ca70275adb919217b94974d"
-  integrity sha512-oeaoT4YOjsqHdrEJoO8SONNNBsoGh7AJPbsNqRK6Dv8UMdctWxA4ncj9gAA/Odki5g0GZaDSR7HydBJ8HxwgNg==
-  dependencies:
-    tslib "^2.0.0"
 
 react@^18.3.1:
   version "18.3.1"
