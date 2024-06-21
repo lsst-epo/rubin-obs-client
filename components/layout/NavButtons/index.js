@@ -32,7 +32,7 @@ const NavButtons = ({
         passHref={true}
       >
         <NavButton
-          active={
+          $active={
             hasDefault ? activeType !== linkRight : activeType === linkLeft
           }
           onClick={() => setActiveType(linkLeft)}
@@ -68,7 +68,7 @@ const Nav = styled.nav`
   > * {
     margin-left: 0.5em;
   }
-  ${respond(`    
+  ${respond(`
     float: none;
     top: 40px;
     display: grid;
@@ -88,7 +88,7 @@ const NavButton = styled.a`
   padding: 1em 2em;
   background-color: var(--neutral10);
   ${(p) =>
-    p.active
+    p.$active
       ? `background-color: var(--turquoise60); color: var(--white);`
       : `&:hover {
     background-color: var(--turquoise20);
@@ -99,7 +99,7 @@ const NavButton = styled.a`
     place-content: center;
     min-width: auto;
     padding: 0.5em;
-    font-size: 24px; 
+    font-size: 24px;
   `)}
 `;
 
