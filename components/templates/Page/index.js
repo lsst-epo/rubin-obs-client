@@ -19,12 +19,14 @@ import GuideNavigation from "@/components/layout/GuideNavigation";
 import SiblingNavigation from "@/components/layout/SiblingNavigation";
 import NestedContext from "@/contexts/Nested";
 import PageContent from "@/page/PageContent";
+import { FilterParamsProvider } from "@/contexts/FilterParams";
 
 export default function Page({
   data: {
     contentBlocks = [],
     description,
     dynamicComponent,
+    eventFilter = [],
     featuredImage,
     hero,
     focalPointX,
@@ -99,9 +101,12 @@ export default function Page({
     title = t(`gallery.plural-${categoryObj.slug}`);
   }
 
-  const isInvestigationChild = investigation?.landingPage?.[0]?.uri !== uri;
   const showSiblingNav = parent?.children && showGuideNav;
   const shouldOverlapHero = !!hero?.length && overlapHero;
+
+  const serverParams = {
+    filter: [...eventFilter.map(({ id }) => id)],
+  };
 
   return (
     <Body {...bodyProps}>
@@ -133,65 +138,69 @@ export default function Page({
             truncate={50}
           />
         )}
-        {hasFilterbar && <FilterBar filterType={dynamicComponent} />}
-        <PageContent
-          heroImage={!showSiblingNav && hero}
-          overlapHero={showSiblingNav ? false : shouldOverlapHero}
-          {...{ focalPointX, focalPointY }}
-        >
-          <SubHero
-            type={typeHandle}
-            header={subHeroHeader}
-            text={subHeroText}
-            colorScheme={subHeroColorScheme}
-            nested={shouldOverlapHero}
-          />
-          <NestedContext.Provider value={shouldOverlapHero}>
-            {!hideTitle && (
-              <Container
-                bgColor="white"
-                className="c-page-header"
-                width={isWideHeader ? "regular" : "narrow"}
-                paddingSize={isMediumPadding ? "medium" : undefined}
-              >
-                <h1>{title}</h1>
-                {isEventsPage && (
-                  <NavButtons
-                    linkLeft="upcoming"
-                    linkRight="past"
-                    textLeft={t(`events.upcoming`)}
-                    textRight={t(`events.past`)}
-                  />
-                )}
-              </Container>
-            )}
-            {contentBlocks.length > 0 &&
-              [...contentBlocks].map((block) => {
-                if (!block.id || !block.typeHandle) return null;
-                return (
-                  <ContentBlockFactory
-                    key={block.id}
-                    type={block.typeHandle}
-                    data={block}
-                    pageId={id}
-                  />
-                );
-              })}
-            {pageType === "dynamic" && dynamicComponent && (
-              <DynamicComponentFactory
-                componentType={dynamicComponent}
-                pageId={id}
-              />
-            )}
-            {children}
-            {showSiblingNav && (
-              <SiblingNavigation
-                siblings={siblings}
-                parent={investigation ? investigation.landingPage?.[0] : parent}
-              />
-            )}
-          </NestedContext.Provider>
-        </PageContent>
+        <FilterParamsProvider {...{ serverParams }}>
+          {hasFilterbar && <FilterBar filterType={dynamicComponent} />}
+          <PageContent
+            heroImage={!showSiblingNav && hero}
+            overlapHero={showSiblingNav ? false : shouldOverlapHero}
+            {...{ focalPointX, focalPointY }}
+          >
+            <SubHero
+              type={typeHandle}
+              header={subHeroHeader}
+              text={subHeroText}
+              colorScheme={subHeroColorScheme}
+              nested={shouldOverlapHero}
+            />
+            <NestedContext.Provider value={shouldOverlapHero}>
+              {!hideTitle && (
+                <Container
+                  bgColor="white"
+                  className="c-page-header"
+                  width={isWideHeader ? "regular" : "narrow"}
+                  paddingSize={isMediumPadding ? "medium" : undefined}
+                >
+                  <h1>{title}</h1>
+                  {isEventsPage && (
+                    <NavButtons
+                      linkLeft="upcoming"
+                      linkRight="past"
+                      textLeft={t(`events.upcoming`)}
+                      textRight={t(`events.past`)}
+                    />
+                  )}
+                </Container>
+              )}
+              {contentBlocks.length > 0 &&
+                [...contentBlocks].map((block) => {
+                  if (!block.id || !block.typeHandle) return null;
+                  return (
+                    <ContentBlockFactory
+                      key={block.id}
+                      type={block.typeHandle}
+                      data={block}
+                      pageId={id}
+                    />
+                  );
+                })}
+              {pageType === "dynamic" && dynamicComponent && (
+                <DynamicComponentFactory
+                  componentType={dynamicComponent}
+                  pageId={id}
+                />
+              )}
+              {children}
+              {showSiblingNav && (
+                <SiblingNavigation
+                  siblings={siblings}
+                  parent={
+                    investigation ? investigation.landingPage?.[0] : parent
+                  }
+                />
+              )}
+            </NestedContext.Provider>
+          </PageContent>
+        </FilterParamsProvider>
       </AuthorizePage>
     </Body>
   );
