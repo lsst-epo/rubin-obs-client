@@ -24,7 +24,7 @@ import internalLinkShape, {
 import siteInfoShape from "@/shapes/siteInfo";
 import footerContentShape from "@/shapes/footerContent";
 import rootPagesShape from "@/shapes/rootPages";
-import { updateI18n } from "@/lib/i18n";
+import { updateI18n } from "@/lib/i18n/client";
 import { setEdcLog } from "@/lib/edc-log";
 import { purgeNextjsStaticFiles } from "@/lib/purgeStaticFiles";
 const glob = require("glob");
