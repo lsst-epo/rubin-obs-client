@@ -88,7 +88,7 @@ const FilterBar = ({ filterType, setLiveRegionMessage }) => {
               <div></div>
               <span>Filter</span>
             </ToggleButton>
-            <ToggleDropdown id="filter-dropdown" opened={filterOpen}>
+            <ToggleDropdown id="filter-dropdown" $opened={filterOpen}>
               <li>
                 <MixedLink url={asPath} params={{ filter: "" }}>
                   <T i18nKey={`filters.all`} />
@@ -121,7 +121,7 @@ const FilterBar = ({ filterType, setLiveRegionMessage }) => {
             <div id="sort"></div>
             <span>{t(`filters.sort`)}</span>
           </ToggleButton>
-          <ToggleDropdown id="sort-dropdown" opened={sortOpen}>
+          <ToggleDropdown id="sort-dropdown" $opened={sortOpen}>
             {sortItems.map((item, i) => {
               const active = query?.sort?.includes(item.slug);
 
@@ -251,12 +251,12 @@ const ToggleButton = styled.button`
 const ToggleDropdown = styled.ul`
   position: absolute;
   top: 40px;
-  opacity: ${(p) => (p.opened ? 1 : 0)};
-  visibility: ${(p) => (p.opened ? "visible" : "hidden")};
+  opacity: ${(p) => (p.$opened ? 1 : 0)};
+  visibility: ${(p) => (p.$opened ? "visible" : "hidden")};
   width: 300px;
   background-color: var(--neutral20);
   transition: opacity 0.2s;
-  z-index: ${(p) => (p.opened ? 1 : -1)};
+  z-index: ${(p) => (p.$opened ? 1 : -1)};
   ${respond(`width: auto;`, "640px")}
 
   li {
