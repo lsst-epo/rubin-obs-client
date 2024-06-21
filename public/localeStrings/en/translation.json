@@ -1,0 +1,441 @@
+{
+  "english-site-name": "English",
+  "espanol-site-name": "Spanish",
+  "language-select-label": "Language",
+  "breaking-news": "Breaking News",
+  "cell": "Cell",
+  "localize-content": "Localize site content",
+  "loading": "Loading…",
+  "media": "Media",
+  "read-more": "Read more",
+  "related-content": "Related content",
+  "related-content-loading": "Loading related content",
+  "error-title": "Error",
+  "error-text": "There has been an error.",
+  "page-not-found-title": "Page not found",
+  "page-not-found-text": "The page you're looking for was not found.",
+  "published": "Published",
+  "search-clear": "Clear all",
+  "search-no-results": "No results. Please try a different search.",
+  "search-placeholder": "Write your search and hit enter…",
+  "search-filter": "Search",
+  "search-filter-placeholder": "Search",
+  "search-site": "Search the website",
+  "skip-to-content": "Skip to main content",
+  "submit-search": "Submit search",
+  "tags": "Tags",
+  "toggle-nav": "Toggle navigation menu",
+  "toggle-search": "Toggle search",
+  "homepage": "Homepage",
+  "contact-form": {
+    "contact-us": "Contact us",
+    "success": "Thank you. We’ve received your message.",
+    "error": "We seem to have run into a problem."
+  },
+  "form": {
+    "email": "Email",
+    "email_required": "Email (required)",
+    "first_name": "First name",
+    "last_name": "Last name",
+    "topic": "Topic",
+    "inquiry": "Inquiry",
+    "password": "Password",
+    "password_required": "Password (required)",
+    "current_password": "Current password",
+    "new_password": "New password",
+    "confirm_password": "Confirm new password",
+    "show_password": "Show password",
+    "hide_password": "Hide password",
+    "create_password": "Create a password (required)",
+    "create_password_instructions": "Passwords should be at least 8 characters long and should contain a mixture of letters, numbers, and other characters.",
+    "school": "School",
+    "preferred_language": "Preferred language",
+    "email_subscription": "Email subscription",
+    "send": "Send",
+    "sending": "Sending…",
+    "submitting": "Submitting...",
+    "reset": "Reset form",
+    "cancel": "Cancel",
+    "error": "Error:",
+    "confirm": "Got it!"
+  },
+  "filters": {
+    "sort": "Sort by",
+    "ascending": "Ascending",
+    "descending": "Descending",
+    "all": "All",
+    "pages": "Pages",
+    "events": "Events",
+    "gallery-items": "Gallery Items",
+    "jobs": "Jobs",
+    "news": "News",
+    "staff-profiles": "Rubin Voices"
+  },
+  "alert": {
+    "solar-systems-found": "Solar systems found",
+    "broker-classifications": "Broker classifications",
+    "total-to-date": "Total to date"
+  },
+  "events": {
+    "event": "Event",
+    "open": "Registration Open",
+    "closed": "Registration Closed",
+    "related-events": "Other Events",
+    "go-to-events": "Go to events",
+    "upcoming": "Upcoming events",
+    "past": "Past events",
+    "loading": "Loading the Calendar..."
+  },
+  "gallery": {
+    "about-the-image": "About the Image",
+    "about-the-video": "About the Video",
+    "about-the-3d": "About the 3d Model",
+    "about-the-gallery": "About the Gallery",
+    "additional-information": "Additional information",
+    "available-sizes": "Available Sizes",
+    "curated-slideshows": "Curated Slideshows",
+    "loading-slideshows": "Loading the Slideshows...",
+    "download-image": "Download image",
+    "download-video": "Download video",
+    "download-3d": "Download 3d model",
+    "download-gallery": "Download",
+    "tags": "Tags",
+    "back-to-image": "Back to images",
+    "back-to-video": "Back to videos",
+    "back-to-3d": "Back to 3D models",
+    "back-to-gallery": "Back to galleries",
+    "back-to-slideshows": "Back to slideshows",
+    "image": "Image",
+    "video": "Video",
+    "3d": "3D",
+    "gallery": "Gallery",
+    "gallery-item": "Gallery Item",
+    "plural-image": "Images",
+    "plural-video": "Videos",
+    "plural-3d": "3D Files",
+    "plural-gallery": "Galleries",
+    "see-all": "See all",
+    "slideshow": "Slideshow",
+    "start-slideshow": "Start slideshow",
+    "original": "Original",
+    "extraLarge": "Extra Large",
+    "large": "Large",
+    "medium": "Medium",
+    "small": "Small",
+    "thumbnail": "Thumbnail",
+    "4k": "4k",
+    "1080p": "1080p",
+    "720p": "720p",
+    "480p": "480p",
+    "320p": "320p",
+    "loading": "Loading the Gallery..."
+  },
+  "jobs": {
+    "job": "Job",
+    "jobs": "Jobs",
+    "read-more": "Read more about this position.",
+    "open": "Open",
+    "closed": "Closed",
+    "loading": "Loading the Jobs..."
+  },
+  "news": {
+    "news": "News",
+    "related-posts": "Related News Posts",
+    "back-to-posts": "Go Back to News Posts",
+    "loading": "Loading the News...",
+    "more-info": "More Information",
+    "release-link": "Learn more about this release on NOIRLab.edu",
+    "links": "Links",
+    "contacts": "Contacts"
+  },
+  "pages": {
+    "page": "Page"
+  },
+  "pagination": {
+    "label": "Pagination",
+    "previous": "Previous",
+    "next": "Next",
+    "of": "of",
+    "current-slide": "Slide {{current}}",
+    "showing-current-slide": "Showing slide {{current}} of {{length}}",
+    "showing-range": "Showing {{from}} to {{to}} of {{length}}",
+    "previous_name": "Previous ({{name}})",
+    "next_name": "Next ({{name}})",
+    "back_to_name": "Back to {{name}}"
+  },
+  "social": {
+    "email-rubin": "Email the Rubin Observatory",
+    "visit-rubin": "Visit the Rubin Observatory on",
+    "connect": "Let's Connect"
+  },
+  "staff": {
+    "rubin-voices": "Rubin Voices",
+    "scientific-staff": "Scientific Staff Profile",
+    "non-scientific-staff": "Non-scientific Staff Profile",
+    "browse-more": "Browse More Profiles",
+    "back-to-profiles": "Go Back to Profiles",
+    "trading-card": "Trading card",
+    "loading": "Loading the Rubin Voices..."
+  },
+  "telescope": {
+    "state": "State",
+    "in-operations": "in operations",
+    "point": "Currently pointing at",
+    "temp": "Temperature at the summit",
+    "temp-data": "Humidity",
+    "image": "Current image of the sky",
+    "image-data": "completed",
+    "weather": "Weather",
+    "cloudy": "Cloudy",
+    "moon": "Moon phase",
+    "first-quarter": "First quarter"
+  },
+  "auth": {
+    "log_in": "Log in",
+    "log_out": "Log out",
+    "logged_in_as": "Logged in as {{name}}",
+    "logged_out": "Logged out",
+    "sign_up": "Sign up"
+  },
+  "sign_in": {
+    "header": "Welcome back!",
+    "sso_description": "To log in using Google or Facebook, please select whether you are a student or educator before continuing.",
+    "email_sign_in_description": "Or, log in using your email and password.",
+    "forgot_password_link": "Forgot Password?",
+    "create_account_link": "Create an account",
+    "continue_with_google": "Continue with Google",
+    "continue_with_facebook": "Continue with Facebook",
+    "submit": "Log in",
+    "submit_pending": "Signing in…",
+    "success": "Success!",
+    "success_message": "You are signed in as {{username}}.",
+    "redirecting_google": "Redirecting to Google…",
+    "redirecting_facebook": "Redirecting to Facebook…",
+    "loading_google": "Signing in with Google…",
+    "loading_facebook": "Signing in with Facebook…",
+    "error": "Error!",
+    "error_message": "There was an error signing you in.",
+    "error_message_google": "There was an error signing you in with Google.",
+    "error_message_facebook": "There was an error signing you in with Facebook."
+  },
+  "reset_password": {
+    "header": "Reset password",
+    "instructions": "Enter your email to reset your password",
+    "submit": "Reset password",
+    "success": "Success!",
+    "success_message": "We’ve sent you a link to <0>{{email}}</0> with instructions to reset your password.",
+    "error": "Error!",
+    "error_message": "There was an error resetting your password.",
+    "confirm_button": "Got it!"
+  },
+  "set_password": {
+    "header": "Create a new password",
+    "submit": "Submit",
+    "success": "Success!",
+    "success_message": "Your password has been updated.",
+    "error": "Error!",
+    "error_message": "There was an error updating your password.",
+    "confirm_button": "Got it!"
+  },
+  "activate": {
+    "success": "Success!",
+    "success_message": "Your account has been activated. Please log in to begin using the site as a registered user.",
+    "success_message_educator": "Your account has been activated, but it will need to be approved by an administrator before you can access educator content. You will receive an email when you have been approved.",
+    "error": "Error!",
+    "error_message": "There was an error activating your account.",
+    "loading": "Activating your account…",
+    "confirm_button": "Got it!"
+  },
+  "join": {
+    "as_students": "I’m a student",
+    "as_educators": "I’m an educator",
+    "header_students": "Learn real astronomy",
+    "header_educators": "Teach real astronomy",
+    "description_students": "Join to learn how astronomers learn and interact with real astronomy data. Free of charge forever.",
+    "description_educators": "Join to access real astronomy data and tools for your class. Free of charge forever.",
+    "sign_in_link": "Already have an account?",
+    "continue_with_google": "Continue with Google",
+    "continue_with_facebook": "Continue with Facebook",
+    "sign_up_with_email": "Sign up with email"
+  },
+  "register": {
+    "header": "Sign up",
+    "header_students": "Sign up as student",
+    "header_educators": "Sign up as an educator",
+    "instructions_students": "Please provide the following to create a student account",
+    "instructions_educators": "Please provide the following to create an educator account",
+    "submit_button": "Sign Up",
+    "success_students": "Activation pending",
+    "success_message_students": "Your account is now created, but activation is pending. You’ll receive an email with instructions to activate your account and enjoy access to real astronomy data and tools. <0>Free of charge forever.</0>",
+    "success_educators": "Activation pending",
+    "success_message_educators": "Your account is now created, but activation is pending. You’ll receive an email with instructions to activate your account and enjoy access to real astronomy data and tools. <0>Free of charge forever.</0>",
+    "confirm_button": "Got it!",
+    "loading": "Registering…",
+    "error": "Error!",
+    "error_message": "There was an error signing you in with {{service}}."
+  },
+  "sso": {
+    "success": "Success!",
+    "success_pending": "Activation pending",
+    "success_message": "You are signed in as {{username}}.",
+    "success_message_pending": "Your account is now created, but activation is pending. You’ll receive an email with instructions to activate your account and enjoy access to real astronomy data and tools. <0>Free of charge forever.</0>"
+  },
+  "account": {
+    "header": "Account",
+    "profile": "Profile",
+    "preferences": "Preferences",
+    "password": "Password",
+    "loading": "Loading…",
+    "edit": "Edit",
+    "submit_profile": "Update profile & preferences",
+    "submit_password": "Update password",
+    "submit_pending": "Submitting…",
+    "submit_success": "Updated!",
+    "error": "There was an error fetching your account information.",
+    "error_session_expired": "Your session has expired. Please log back in.",
+    "error_delete_failed": "There was a problem submitting your deletion request. Reload the page and try again.",
+    "delete": "Delete my account",
+    "delete_pending": "  Submitting…",
+    "delete_confirm_header": "Delete account?",
+    "delete_confirm_description": "We are sorry to see you go, but you are always welcome to come back. We’ll be here for you, with free of charge investigations for everybody. <0>Are you sure you want to delete your account?</0>",
+    "delete_success_header": "Your request to delete your account has been accepted",
+    "delete_success_description": "We have received your request. An administrator will delete your account promptly.",
+    "delete_confirm_label": "Yes, delete it!",
+    "delete_error_header": "Error!"
+  },
+  "glossary": {
+    "glossary-term": "Glossary Term",
+    "back_button": "Go back to Glossary",
+    "loading": "Loading the Glossary..."
+  },
+  "restricted": {
+    "header_approval_pending": "Content not yet available",
+    "message_approval_pending": "This content is not yet available for you since approval is pending. If you wish to speed up this process, please send us an email to <0>epo-feedback@lsst.org</0>.",
+    "header_restricted": "Content not available",
+    "message_restricted": "This content is not available to you. If you think this is in error, please send us an email to <0>epo-feedback@lsst.org</0>.",
+    "header_not_authorized": "Content not available",
+    "message_not_authorized": "You must log in to access this page.",
+    "header_deletion_pending": "Content not available",
+    "message_deletion_pending": "You have requested to delete your account. This process is pending. If you think you are seeing this message in error, please send us an email to <0>epo-feedback@lsst.org</0>.",
+    "button_confirm": "Got it!"
+  },
+  "investigation": {
+    "investigation": "Investigation",
+    "total_duration": "Investigation total duration",
+    "start": "Start Investigation",
+    "coming_soon": "(Coming Soon)",
+    "early_access": {
+      "full": "Early Access",
+      "line_1_text": "Early",
+      "line_2_text": "Access"
+    }
+  },
+  "share": {
+    "label_current": "Share current page",
+    "label_item": "Share {{title}}",
+    "copy_url": "Copy URL",
+    "email": "Email",
+    "email_subject": " Hey! Check out this info from Rubin Observatory's website: {{title}}",
+    "facebook_quote": "Hey! Check out this info from Rubin Observatory's website: {{title}}",
+    "twitter_title": "Hey! Check out this info from Rubin Observatory's website: {{title}}"
+  },
+  "summit_dashboard": {
+    "open_modal": "Expand content",
+    "unit_localization": {
+      "settings": "Settings",
+      "label_temp": "Temperature",
+      "label_windspeed": "Windspeed",
+      "label_humidity": "Humidity",
+      "label_precipitation": "Precipitation",
+      "fahrenheit": "Fahrenheit",
+      "celsius": "Celsius",
+      "NM": "kn",
+      "mi": "mph",
+      "m": "m/s",
+      "NM_full": "Knots",
+      "mi_full": "Miles per hour",
+      "m_full": "Meters per second",
+      "north_abbr": "N",
+      "south_abbr": "S",
+      "east_abbr": "E",
+      "west_abbr": "W",
+      "degrees_per_second": "Degrees per second",
+      "degrees_per_second_withUnit": "{{unit}} degrees per second",
+      "minutes_per_shot": "Minutes per shot",
+      "minutes_per_shot_withUnit": "{{unit}} minutes per shot"
+    },
+    "sections": {
+      "observations": {
+        "related": "Observations-related weather",
+        "instruments": "Where are the instruments pointing at?"
+      },
+      "weather": {
+        "preview": "Weather at the summit",
+        "current": "Weather at the summit now",
+        "hourly": "Hourly weather stats",
+        "daily": "Daily temperature variations - {{unit}} degrees (last week)"
+      },
+      "astro": {
+        "title": "Astroweather",
+        "daylight": {
+          "title": "Twilight, day, and night times",
+          "observing": "Dark enough to observe from {{from}} to {{to}}",
+          "twilight": "Twilight from {{from}} to {{to}}",
+          "daylight": "Daylight from {{from}} to {{to}}",
+          "current": "Current local time {{time}}. It is too light to observe right now.",
+          "current_observable": "Current local time {{time}}. It is dark enough to observe right now.",
+          "midnight": "Midnight"
+        },
+        "moonrise": {
+          "forecast": "Moonrise and moonset times forecast (next fourteen days)",
+          "time_moonrise": "Moonrise time",
+          "time_moonset": "Moonset time"
+        }
+      }
+    },
+    "weather": {
+      "temp_daily_max": "High",
+      "temp_daily_min": "Low",
+      "windspeed_direction": "Direction: {{direction}}",
+      "condition_now": "Now",
+      "no_data_yet": "No data yet"
+    },
+    "astro": {
+      "daylight": {
+        "night": "Night",
+        "twilight": "Twilight",
+        "day": "Day"
+      },
+      "moon": {
+        "new": "New Moon",
+        "full": "Full Moon",
+        "crescent_waxing": "Waxing Crescent",
+        "crescent_waning": "Waning Crescent",
+        "gibbous_waxing": "Waxing Gibbous",
+        "gibbous_waning": "Waning Gibbous",
+        "quarter_first": "First Quarter",
+        "quarter_last": "Last Quarter"
+      },
+      "moonlight": {
+        "moonrise": "Moonrise",
+        "moonset": "Moonset"
+      }
+    },
+    "widgets": {
+      "hourly": {
+        "windspeed": "Hourly wind speed report - {{unit}}",
+        "precipitation": "Hourly precipitation probability report - Probability percentage"
+      },
+      "current": {
+        "windspeed": "Average windspeed",
+        "moon": "Tonight we will have a",
+        "azimuth": "Azimuth",
+        "azimuth_angle": "Azimuth: {{angle}}",
+        "zenith": "Zenith",
+        "zenith_angle": "Zenith: {{angle}}",
+        "slew_speed": "Slew speed",
+        "shutter_speed": "Camera shutter speed"
+      }
+    }
+  }
+}
