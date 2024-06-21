@@ -78,7 +78,7 @@ const Tabs = ({ children, labels, defaultTab = 0 }) => {
           </Tab>
         ))}
       </TabList>
-      <TabPanel active={active}>{childrenWithPanelProps}</TabPanel>
+      <TabPanel $active={active}>{childrenWithPanelProps}</TabPanel>
     </TabContainer>
   );
 };
@@ -150,7 +150,7 @@ const TabPanel = styled.div`
   }
   ${(p) =>
     `>*:nth-child(${
-      p.active + 1
+      p.$active + 1
     }) {z-index: 1; opacity: 1; visibility: visible;}`}
 `;
 
