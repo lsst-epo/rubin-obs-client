@@ -11,7 +11,7 @@ import Breadcrumbs from "@/page/Breadcrumbs";
 import NewsHero from "./NewsHero";
 import NewsArticle from "./NewsArticle";
 import NewsList from "@/dynamic/NewsList";
-import NewsAside from "./NewsAside";
+import NewsAside from "@/layout/MediaAside";
 import * as Styled from "./styles";
 
 export default function NewsPage({ data }) {

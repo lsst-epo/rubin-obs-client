@@ -18,6 +18,7 @@ import SearchPageTemplate from "@/templates/SearchPage";
 import SlideshowPageTemplate from "@/templates/SlideshowPage";
 import StaffPageTemplate from "@/templates/StaffPage";
 import UserProfilePageTemplate from "@/templates/UserProfilePage";
+import DataProductPageTemplate from "@/components/templates/DataProductPage";
 import internalLinkShape, {
   internalLinkWithChildrenShape,
 } from "@/shapes/link";
@@ -64,6 +65,7 @@ export default function Page({ section, globalData, ...entryProps }) {
   globalData.localeInfo.locale === "es" ? updateI18n("es") : updateI18n("en");
 
   const sectionMap = {
+    dataProducts: DataProductPageTemplate,
     events: EventPageTemplate,
     galleryItems: GalleryPageTemplate,
     glossaryTerms: GlossaryPageTemplate,

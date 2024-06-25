@@ -9,7 +9,7 @@ import Tags from "./Tags";
 import MediaAssets from "./MediaAssets";
 import * as Styled from "./styles";
 
-export default function NewsAside({
+export default function MediaAside({
   manualAssets,
   contentBlockAssets,
   releaseImages,
@@ -90,7 +90,7 @@ export default function NewsAside({
   );
 }
 
-NewsAside.propTypes = {
+MediaAside.propTypes = {
   manualAssets: PropTypes.array,
   contentBlockAssets: PropTypes.array,
   releaseImages: PropTypes.array,
