@@ -10,7 +10,7 @@ import { useFilterParams } from "@/contexts/FilterParams";
 import * as Styled from "./styles";
 
 const FilterBar = ({ filterType, setLiveRegionMessage }) => {
-  const { params, hidden, setParams, resetParams } = useFilterParams();
+  const { params, hidden = [], setParams, resetParams } = useFilterParams();
   const { t } = useTranslation();
   const ref = useRef();
   const { asPath } = usePathData();
