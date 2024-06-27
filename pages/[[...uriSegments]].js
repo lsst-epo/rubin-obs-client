@@ -26,6 +26,7 @@ import footerContentShape from "@/shapes/footerContent";
 import rootPagesShape from "@/shapes/rootPages";
 import { updateI18n } from "@/lib/i18n";
 import { setEdcLog } from "@/lib/edc-log";
+import { purgeNextjsStaticFiles } from "@/lib/purgeStaticFiles";
 const glob = require("glob");
 const fs = require("fs");
 
@@ -152,6 +153,7 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
   // Handle 404 if there is no data
   if (!entrySectionType) {
     setEdcLog(runId, "404 encountered building for " + uri, "BUILD_ERROR_404");
+    await purgeNextjsStaticFiles(uriSegments);
     return {
       notFound: true,
     };
@@ -192,6 +194,7 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
   // Handle 404 if there is no data
   if (!currentId) {
     setEdcLog(runId, "404 encountered building for " + uri, "BUILD_ERROR_404");
+    await purgeNextjsStaticFiles(uriSegments);
     return {
       notFound: true,
     };
