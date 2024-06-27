@@ -1,8 +1,14 @@
 import styled from "styled-components";
 import { fluidScale, respond, containerRegular } from "@/styles/globalStyles";
+import AsideSection from "@/components/page/Aside/Section";
+import { token } from "@rubin-epo/epo-react-lib";
 
-const WIDE_BREAKPOINT = "1125px";
+const WIDE_BREAKPOINT = token("BREAK_DESKTOP_SMALL");
 const MOBILE_BREAKPOINT = "475px";
+
+export const TradingCardSection = styled(AsideSection)`
+  max-width: var(--size-width-aside);
+`;
 
 export const QuotePositioner = styled.div`
   position: absolute;
@@ -52,22 +58,8 @@ export const Bio = styled.div`
   margin-block-start: 0.5em;
 `;
 
-export const SectionHeading = styled.h2`
-  padding-block-end: 0.5em;
-  margin-block-end: 0.5em;
-  border-block-end: 10px solid var(--turquoise50);
-`;
-
 export const TradingCardLink = styled.a`
   display: block;
-  max-width: 270px;
-`;
-
-export const TagList = styled.ul``;
-
-export const Tag = styled.li`
-  display: inline-block;
-  margin-inline-end: 1.2em;
 `;
 
 export const Link = styled.a`

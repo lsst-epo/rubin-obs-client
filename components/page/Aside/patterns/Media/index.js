@@ -5,11 +5,11 @@ import {
   IconComposer,
   Figure,
 } from "@rubin-epo/epo-react-lib";
-import Tags from "./Tags";
-import MediaAssets from "./MediaAssets";
-import * as Styled from "./styles";
+import MediaAssets from "./MediaSection";
+import Aside from "../../index";
+import AsideSection from "../../Section";
 
-export default function NewsAside({
+export default function MediaAside({
   manualAssets,
   contentBlockAssets,
   releaseImages,
@@ -23,9 +23,9 @@ export default function NewsAside({
   );
 
   return (
-    <Styled.Aside>
+    <Aside {...{ tags, rootHomeLink }}>
       {manualAssets?.length > 0 && (
-        <Styled.AsidePrimary>
+        <AsideSection>
           {manualAssets.map((a, i) => {
             if (a.assetHeader) {
               return (
@@ -78,19 +78,18 @@ export default function NewsAside({
               }
             }
           })}
-        </Styled.AsidePrimary>
+        </AsideSection>
       )}
       <MediaAssets
         contentBlockAssets={contentBlockAssets}
         releaseImages={releaseImages}
         releaseVideos={releaseVideos}
       />
-      <Tags tags={tags} rootHomeLink={rootHomeLink} />
-    </Styled.Aside>
+    </Aside>
   );
 }
 
-NewsAside.propTypes = {
+MediaAside.propTypes = {
   manualAssets: PropTypes.array,
   contentBlockAssets: PropTypes.array,
   releaseImages: PropTypes.array,

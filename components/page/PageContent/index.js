@@ -22,9 +22,9 @@ function PageContent({
             {innerHero}
           </Styled.Hero>
         )}
-        <Styled.FullLayout $hasSidebar={hasSidebar}>
+        <Styled.FullLayout data-sidebar={hasSidebar}>
           <div>{children}</div>
-          {!!sidebar && <Styled.Aside>{sidebar}</Styled.Aside>}
+          {sidebar}
         </Styled.FullLayout>
         {footer}
       </>
@@ -38,9 +38,9 @@ function PageContent({
           {innerHero}
         </Styled.Hero>
       )}
-      <Styled.OverlapLayout $hasSidebar={hasSidebar}>
+      <Styled.OverlapLayout data-sidebar={hasSidebar}>
         <Styled.Main>{children}</Styled.Main>
-        {!!sidebar && <Styled.Aside>{sidebar}</Styled.Aside>}
+        {sidebar}
       </Styled.OverlapLayout>
       {footer}
     </>
