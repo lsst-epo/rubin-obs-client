@@ -5,10 +5,10 @@ import { ResponsiveImage, Figure } from "@rubin-epo/epo-react-lib";
 import ReleaseAssets from "./ReleaseAssets";
 import * as Styled from "./styles";
 
-export default function MediaAssets({
-  contentBlockAssets,
-  releaseImages,
-  releaseVideos,
+export default function MediaSection({
+  contentBlockAssets = [],
+  releaseImages = [],
+  releaseVideos = [],
 }) {
   const { t } = useTranslation();
 
@@ -22,8 +22,7 @@ export default function MediaAssets({
     return null;
 
   return (
-    <Styled.AsideSecondary>
-      <h3>{t(`media`)}</h3>
+    <Styled.MediaSection title={t(`media`)}>
       {contentBlockAssets.map((asset, i) => {
         if (asset.image?.[0].url) {
           return (
@@ -35,13 +34,12 @@ export default function MediaAssets({
           );
         }
       })}
-      <ReleaseAssets assets={releaseImages} />
-      <ReleaseAssets assets={releaseVideos} />
-    </Styled.AsideSecondary>
+      <ReleaseAssets assets={[...releaseImages, ...releaseVideos]} />
+    </Styled.MediaSection>
   );
 }
 
-MediaAssets.propTypes = {
+MediaSection.propTypes = {
   contentBlockAssets: PropTypes.array,
   releaseImages: PropTypes.array,
   releaseVideos: PropTypes.array,
