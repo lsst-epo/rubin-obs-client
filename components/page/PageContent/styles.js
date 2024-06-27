@@ -8,8 +8,9 @@ import {
   tokens,
   PADDING_LARGE,
 } from "@/styles/globalStyles";
+import { token } from "@rubin-epo/epo-react-lib";
 
-const WIDE_BREAKPOINT = "1125px";
+const WIDE_BREAKPOINT = token("BREAK_DESKTOP_SMALL");
 const NARROW_BREAKPOINT = "800px";
 const MOBILE_BREAKPOINT = "475px";
 const HERO_OVERLAP = "clamp(-150px, -10vw, -80px)";
@@ -28,31 +29,45 @@ export const Hero = styled(HeroComponent)`
 `;
 
 export const FullLayout = styled.article`
-  ${({ $hasSidebar }) =>
-    $hasSidebar
-      ? `
-      display: flex;
-      ${containerRegular()}`
-      : ``}
+  &[data-sidebar="false"] {
+    display: block;
+  }
 
-  ${respond(`display: block;`, WIDE_BREAKPOINT)}
+  &[data-sidebar="true"] {
+    display: flex;
+    flex-direction: column;
+    ${containerRegular()}
+  }
+
+  @media screen and (min-width: ${WIDE_BREAKPOINT}) {
+    &[data-sidebar="true"] {
+      flex-direction: row;
+    }
+  }
 `;
 
 export const OverlapLayout = styled.article`
   --hero-overlap: ${HERO_OVERLAP};
 
-  display: flex;
-  ${({ $hasSidebar }) =>
-    $hasSidebar
-      ? containerRegular()
-      : `
+  &[data-sidebar="false"] {
+    display: block;
     ${containerNarrow()}
     max-width: calc(var(--max-width) + 2 * ${MAIN_INLINE_PADDING});
-  `}
+  }
 
-  ${respond(`display: block;`, WIDE_BREAKPOINT)}
+  &[data-sidebar="true"] {
+    display: flex;
+    flex-direction: column;
+    ${containerRegular()}
+  }
 
   ${respond(`padding-inline: 0;`, NARROW_BREAKPOINT)}
+
+  @media screen and (min-width: ${WIDE_BREAKPOINT}) {
+    &[data-sidebar="true"] {
+      flex-direction: row;
+    }
+  }
 
   &:last-child {
     padding-block-end: ${PADDING_LARGE};

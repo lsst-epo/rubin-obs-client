@@ -1,34 +1,61 @@
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import { Container } from "@rubin-epo/epo-react-lib";
+import { useCustomBreadcrumbs } from "@/lib/utils";
 import Body from "@/global/Body";
 import PageContent from "@/page/PageContent";
 import MediaAside from "@/components/page/Aside/patterns/Media";
 import ContentBlockFactory from "@/factories/ContentBlockFactory";
+import DataProductsList from "@/components/dynamic/DataProductsList";
+import Breadcrumbs from "@/page/Breadcrumbs";
 
 const DataProductPage = ({
   data: {
     id,
+    uri,
     title,
     description,
-    typeHandle,
-    siteHandle,
     featuredImage = [],
     sidebarAssets = [],
     contentBlocks = [],
   },
 }) => {
+  const { t } = useTranslation();
+
   const bodyProps = {
     description,
     featuredImage,
     title,
   };
+  const pageLink = {
+    id,
+    uri,
+    title,
+  };
+  const breadcrumbs = useCustomBreadcrumbs("For Scientists");
+  const backPage = breadcrumbs[breadcrumbs.length - 1];
+
   return (
     <Body {...bodyProps}>
+      <Breadcrumbs breadcrumbs={[...breadcrumbs, pageLink]} />
       <PageContent
         sidebar={
           <MediaAside
             manualAssets={sidebarAssets}
             contentBlockAssets={contentBlocks}
+          />
+        }
+        footer={
+          <DataProductsList
+            excludeId={id}
+            header={t(`related-content`)}
+            limit={3}
+            button={{
+              text: t(`back`),
+              uri: backPage?.uri,
+            }}
+            isWide
+            isRelatedList
           />
         }
       >
