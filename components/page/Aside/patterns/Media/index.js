@@ -5,9 +5,9 @@ import {
   IconComposer,
   Figure,
 } from "@rubin-epo/epo-react-lib";
-import Tags from "./Tags";
-import MediaAssets from "./MediaAssets";
-import * as Styled from "./styles";
+import MediaAssets from "./MediaSection";
+import Aside from "../../index";
+import AsideSection from "../../Section";
 
 export default function MediaAside({
   manualAssets,
@@ -23,9 +23,9 @@ export default function MediaAside({
   );
 
   return (
-    <Styled.Aside>
+    <Aside {...{ tags, rootHomeLink }}>
       {manualAssets?.length > 0 && (
-        <Styled.AsidePrimary>
+        <AsideSection>
           {manualAssets.map((a, i) => {
             if (a.assetHeader) {
               return (
@@ -78,15 +78,14 @@ export default function MediaAside({
               }
             }
           })}
-        </Styled.AsidePrimary>
+        </AsideSection>
       )}
       <MediaAssets
         contentBlockAssets={contentBlockAssets}
         releaseImages={releaseImages}
         releaseVideos={releaseVideos}
       />
-      <Tags tags={tags} rootHomeLink={rootHomeLink} />
-    </Styled.Aside>
+    </Aside>
   );
 }
 
