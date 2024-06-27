@@ -14,7 +14,8 @@ export const HeroImage = styled(Image)`
     `${$focalPointX}% ${$focalPointY}%;`}
   width: 100%;
 
-  height: 100%;
+  /* stylelint-disable declaration-no-important */
+  height: 100% !important;
   object-fit: cover;
   object-position: var(--Hero-object-position, center);
 `;
