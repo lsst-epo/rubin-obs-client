@@ -12,10 +12,11 @@ export const Aside = styled.aside`
   flex-shrink: 0;
   flex-wrap: wrap;
   gap: var(--size-gap-aside);
-  margin-block-start: min(4.25vw, 64px);
+  padding: 0;
+  margin: 0;
 
   & a {
-    font-size: 65%;
+    font-size: 14px;
     color: var(--color-background-accent-aside);
     text-decoration: none;
 
@@ -39,6 +40,7 @@ export const Aside = styled.aside`
   @media screen and (min-width: ${token("BREAK_DESKTOP_SMALL")}) {
     flex-direction: column;
     gap: 0;
+    padding: var(--PADDING_LARGE) 0 var(--PADDING_LARGE) 10px;
 
     > * + * {
       margin-block-start: 1em;

@@ -1,8 +1,14 @@
 import styled from "styled-components";
 import { fluidScale, respond, containerRegular } from "@/styles/globalStyles";
+import AsideSection from "@/components/page/Aside/Section";
+import { token } from "@rubin-epo/epo-react-lib";
 
-const WIDE_BREAKPOINT = "1125px";
+const WIDE_BREAKPOINT = token("BREAK_DESKTOP_SMALL");
 const MOBILE_BREAKPOINT = "475px";
+
+export const TradingCardSection = styled(AsideSection)`
+  max-width: var(--size-width-aside);
+`;
 
 export const QuotePositioner = styled.div`
   position: absolute;
