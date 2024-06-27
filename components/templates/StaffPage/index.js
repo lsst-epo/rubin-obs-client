@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import { useGlobalData } from "@/lib/utils";
 import Body from "@/global/Body";
@@ -11,6 +10,8 @@ import { Image } from "@rubin-epo/epo-react-lib";
 import Breadcrumbs from "@/page/Breadcrumbs";
 import PageContent from "@/page/PageContent";
 import * as Styled from "./styles";
+import Aside from "@/components/page/Aside";
+import AsideSection from "@/components/page/Aside/Section";
 
 function getParentUri(uri) {
   const pathFragments = uri.split("/");
@@ -71,40 +72,18 @@ export default function StaffPage({
           )
         }
         sidebar={
-          <>
+          <Aside
+            rootHomeLink={{ uri: parentUri, ...parentEntry }}
+            {...{ tags }}
+          >
             {tradingCard?.[0] && (
-              <section>
-                <Styled.SectionHeading>
-                  {t("staff.trading-card")}
-                </Styled.SectionHeading>
+              <AsideSection title={t("staff.trading-card")}>
                 <Styled.TradingCardLink href={tradingCard[0].url3x} download>
                   <Image image={tradingCard[0]} />
                 </Styled.TradingCardLink>
-              </section>
+              </AsideSection>
             )}
-            {!!tags?.length && (
-              <section>
-                <Styled.SectionHeading>{t(`tags`)}</Styled.SectionHeading>
-                <Styled.TagList>
-                  {tags.map(({ id, slug, title }) => (
-                    <Styled.Tag key={id}>
-                      <Link
-                        prefetch={false}
-                        legacyBehavior
-                        href={{
-                          pathname: `/${parentEntry?.uri || parentUri}`,
-                          query: { search: slug },
-                        }}
-                        passHref
-                      >
-                        <Styled.Link>{title}</Styled.Link>
-                      </Link>
-                    </Styled.Tag>
-                  ))}
-                </Styled.TagList>
-              </section>
-            )}
-          </>
+          </Aside>
         }
         footer={
           <StaffList
