@@ -11,7 +11,6 @@ import Breadcrumbs from "@/page/Breadcrumbs";
 import PageContent from "@/page/PageContent";
 import * as Styled from "./styles";
 import Aside from "@/components/page/Aside";
-import AsideSection from "@/components/page/Aside/Section";
 
 function getParentUri(uri) {
   const pathFragments = uri.split("/");
@@ -77,11 +76,11 @@ export default function StaffPage({
             {...{ tags }}
           >
             {tradingCard?.[0] && (
-              <AsideSection title={t("staff.trading-card")}>
+              <Styled.TradingCardSection title={t("staff.trading-card")}>
                 <Styled.TradingCardLink href={tradingCard[0].url3x} download>
                   <Image image={tradingCard[0]} />
                 </Styled.TradingCardLink>
-              </AsideSection>
+              </Styled.TradingCardSection>
             )}
           </Aside>
         }

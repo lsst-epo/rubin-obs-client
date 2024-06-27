@@ -8,7 +8,7 @@ import {
   tokens,
 } from "@/styles/globalStyles";
 import { aHidden } from "@/styles/mixins/appearance";
-import { IconComposer, Image } from "@rubin-epo/epo-react-lib";
+import { IconComposer, Image, token } from "@rubin-epo/epo-react-lib";
 
 export const Hero = styled.div`
   ${containerFullBleed("CONTAINER_FULL")}
@@ -69,12 +69,9 @@ export const Article = styled.article`
 export const NewsDetail = styled.div`
   ${containerFullBleed("CONTAINER_REGULAR")}
   display: grid;
-  ${(props) =>
-    props.$showAside
-      ? "grid-template-columns: minmax(75%, 1fr) minmax(25%, 250px)"
-      : "grid-template-columns: 1fr"};
+  grid-template-columns: 1fr;
+
   ${respond(`${containerWide()}`, "1360px")}
-  ${respond(`grid-template-columns: 1fr;`)}
   ${(props) =>
     props.$showAside &&
     `${Article} > section > div {
@@ -96,6 +93,13 @@ export const NewsDetail = styled.div`
       }
     }
   `}
+
+  @media screen and (min-width: ${token("BREAK_DESKTOP_SMALL")}) {
+    ${(props) =>
+      props.$showAside
+        ? "grid-template-columns: minmax(75%, 1fr) minmax(25%, 250px)"
+        : "grid-template-columns: 1fr"};
+  }
 `;
 
 export const Pretitle = styled.div`
