@@ -24,7 +24,7 @@ function PageContent({
         )}
         <Styled.FullLayout $hasSidebar={hasSidebar}>
           <div>{children}</div>
-          {!!sidebar && <Styled.Aside>{sidebar}</Styled.Aside>}
+          {sidebar}
         </Styled.FullLayout>
         {footer}
       </>
@@ -40,7 +40,7 @@ function PageContent({
       )}
       <Styled.OverlapLayout $hasSidebar={hasSidebar}>
         <Styled.Main>{children}</Styled.Main>
-        {!!sidebar && <Styled.Aside>{sidebar}</Styled.Aside>}
+        {sidebar}
       </Styled.OverlapLayout>
       {footer}
     </>

@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { Container } from "@rubin-epo/epo-react-lib";
 import Body from "@/global/Body";
 import PageContent from "@/page/PageContent";
-import MediaAside from "@/components/layout/MediaAside";
+import MediaAside from "@/components/page/Aside/patterns/Media";
 import ContentBlockFactory from "@/factories/ContentBlockFactory";
 
 const DataProductPage = ({
