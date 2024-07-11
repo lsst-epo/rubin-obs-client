@@ -19,6 +19,7 @@ import GuideNavigation from "@/components/layout/GuideNavigation";
 import SiblingNavigation from "@/components/layout/SiblingNavigation";
 import NestedContext from "@/contexts/Nested";
 import PageContent from "@/page/PageContent";
+import MediaAside from "@/components/page/Aside/patterns/Media";
 import { FilterParamsProvider } from "@/contexts/FilterParams";
 
 export default function Page({
@@ -43,6 +44,8 @@ export default function Page({
     subHeroColorScheme,
     parent,
     showGuideNav,
+    showSidebar,
+    sidebarAssets = [],
     investigation,
     siblings,
     childNavigation,
@@ -143,6 +146,14 @@ export default function Page({
           <PageContent
             heroImage={!showSiblingNav && hero}
             overlapHero={showSiblingNav ? false : shouldOverlapHero}
+            sidebar={
+              showSidebar && (
+                <MediaAside
+                  manualAssets={sidebarAssets}
+                  contentBlockAssets={contentBlocks}
+                />
+              )
+            }
             {...{ focalPointX, focalPointY }}
           >
             <SubHero
