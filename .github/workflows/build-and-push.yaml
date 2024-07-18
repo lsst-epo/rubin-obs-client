@@ -9,15 +9,15 @@ on:
       - "master"
     tags:
       - "v*"
-  # pull_request:
-  #   types:
-  #     - 'opened'
-  #     - 'synchronize'
-  #     - 'reopened'
-  #     - 'closed'
-  #   branches:
-  #     - 'develop'
-  #     - 'master'
+  pull_request:
+    types:
+      - 'opened'
+      - 'synchronize'
+      - 'reopened'
+      - 'closed'
+    branches:
+      - 'develop'
+      - 'master'
 
 jobs:
   build:
@@ -72,7 +72,7 @@ jobs:
         id: deploy-tag
         run: |
           # Parse container image tag to deploy
-          full_tag=$(echo "$DOCKER_METADATA_OUTPUT_JSON" | jq -r '.tags[] | limit(1; select(. | test(":sha-|:v.")))')
+          full_tag=$(echo "$DOCKER_METADATA_OUTPUT_JSON" | jq -r '.tags[0]')
           echo "Will use tag \"$full_tag\" for deployment."
           echo image_tag=$(echo "$full_tag" | cut -f2 -d:) >> "$GITHUB_OUTPUT"
           echo image_name=$(echo "$full_tag" | cut -f1 -d:) >> "$GITHUB_OUTPUT"
@@ -101,6 +101,20 @@ jobs:
             type=gha
           build-args: |
             RUN_BUILD=false
+
+      -
+        uses: imjasonh/setup-crane@v0.1
+        if: ${{ github.event_name == 'pull_request' }}
+
+      -
+        name: Preview prep
+        if: ${{ github.event_name == 'pull_request' }}
+        run: |-
+          API_IMAGE=$(echo "${{ steps.deploy-tag.outputs.image_name }}" | sed -e 's/-client/-api/g')
+          if ! crane config ${API_IMAGE}:${{ steps.deploy-tag.outputs.image_tag }}; then
+            crane tag ${API_IMAGE}:latest ${{ steps.deploy-tag.outputs.image_tag }}
+          fi
+
       - name: Summary
         run: |
           cat <<-EOT >> "$GITHUB_STEP_SUMMARY"
@@ -114,6 +128,7 @@ jobs:
     name: Trigger deploy to ${{ needs.build.outputs.environment_name }}
     needs: build
     runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'pull_request' }}
     steps:
       - name: Generate Webhook Payload
         id: payload
