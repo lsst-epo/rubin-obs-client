@@ -1,19 +1,23 @@
 /* eslint-disable unused-imports/no-unused-imports */
 
 import PropTypes from "prop-types";
-import "@/lib/i18n";
+// import i18n from "@/lib/i18n/client";
 import "focus-visible";
 import Script from "next/script";
 import { AuthenticationContextProvider } from "@/contexts/Authentication";
 import useAuthentication from "@/hooks/useAuthentication";
 import GlobalStyles from "@/styles/globalStyles";
 import styles from "@/styles/styles.scss";
+import useClientTranslation from "@/lib/i18n/client";
+import { I18nextProvider } from "react-i18next";
 
 const PLAUSIBLE_DOMAIN = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
 const SURVEY_SPARROW = process.env.NEXT_PUBLIC_SURVEY_SPARROW;
 
 function Client({ Component, pageProps }) {
   const lang = pageProps?.data?.language || "en-US";
+  // console.log({ lang });
+  const { i18n } = useClientTranslation(lang);
 
   const authData = useAuthentication({
     typeHandle: pageProps?.data?.typeHandle || "",
@@ -22,22 +26,23 @@ function Client({ Component, pageProps }) {
   });
 
   return (
-    <AuthenticationContextProvider data={authData}>
-      {PLAUSIBLE_DOMAIN && (
-        <Script
-          id="plausible-script"
-          data-domain={PLAUSIBLE_DOMAIN}
-          src="https://plausible.io/js/plausible.js"
-          strategy="afterInteractive"
-        />
-      )}
-      {SURVEY_SPARROW && (
-        <>
-          <div id="ss_survey_widget"></div>
+    <I18nextProvider {...{ i18n }}>
+      <AuthenticationContextProvider data={authData}>
+        {PLAUSIBLE_DOMAIN && (
           <Script
-            id="SS_SCRIPT"
-            dangerouslySetInnerHTML={{
-              __html: `
+            id="plausible-script"
+            data-domain={PLAUSIBLE_DOMAIN}
+            src="https://plausible.io/js/plausible.js"
+            strategy="afterInteractive"
+          />
+        )}
+        {SURVEY_SPARROW && (
+          <>
+            <div id="ss_survey_widget"></div>
+            <Script
+              id="SS_SCRIPT"
+              dangerouslySetInnerHTML={{
+                __html: `
               function sparrowLaunch(opts) {
                 // eslint-disable-next-line no-var, one-var
                 var e = "ss-widget",
@@ -87,13 +92,14 @@ function Client({ Component, pageProps }) {
               }
               sparrowLaunch({sparrowLang: "${lang}"});
             `,
-            }}
-          />
-        </>
-      )}
-      <GlobalStyles />
-      <Component {...pageProps} />
-    </AuthenticationContextProvider>
+              }}
+            />
+          </>
+        )}
+        <GlobalStyles />
+        <Component {...pageProps} />
+      </AuthenticationContextProvider>
+    </I18nextProvider>
   );
 }
 
