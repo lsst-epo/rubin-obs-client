@@ -13,6 +13,7 @@ import { Grid } from "@rubin-epo/epo-react-lib";
 import DataList from "@/dynamic/DataList";
 import Tile from "@/atomic/Tile";
 import * as Styled from "./styles";
+import { fallbackLng } from "@/lib/i18n/settings";
 
 const SearchList = ({
   button,
@@ -24,7 +25,7 @@ const SearchList = ({
   const { t } = useTranslation();
   const localeInfo = useGlobalData("localeInfo");
   const rootPages = useGlobalData("rootPages");
-  const lang = localeInfo?.language || "en-US";
+  const lang = localeInfo?.language || fallbackLng;
 
   const makePretitle = (entry) => {
     if (entry.eventType) {

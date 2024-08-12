@@ -1,6 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import { ServerStyleSheet } from "styled-components";
-import { getSiteString } from "@/lib/utils";
 
 class CustomDocument extends Document {
   static async getInitialProps(ctx) {
@@ -16,12 +15,11 @@ class CustomDocument extends Document {
 
       const initialProps = await Document.getInitialProps(ctx);
       const {
-        query: { uriSegments },
+        query: { locale },
       } = ctx;
-      const lang = getSiteString(uriSegments, true);
       return {
         ...initialProps,
-        lang,
+        lang: locale,
         styles: (
           <>
             {initialProps.styles}
