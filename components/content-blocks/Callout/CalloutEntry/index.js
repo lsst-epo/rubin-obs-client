@@ -11,6 +11,7 @@ import {
 import * as Styled from "./styles";
 import { Image } from "@rubin-epo/epo-react-lib";
 import { useRelease } from "@/lib/api/noirlabReleases";
+import { fallbackLng } from "@/lib/i18n/settings";
 
 const getDateString = (newsDate, eventStart, eventEnd, lang) => {
   if (newsDate) {
@@ -32,7 +33,7 @@ const getDateString = (newsDate, eventStart, eventEnd, lang) => {
 export default function CalloutEntry({ callout }) {
   const { t } = useTranslation();
   const localeInfo = useGlobalData("localeInfo");
-  const lang = localeInfo?.language || "en-US";
+  const lang = localeInfo?.language || fallbackLng;
   const { id, entry, backgroundColor } = callout;
   // mix in the noirlabReleases from additional fetch to different endpoint
   const { data: entryWithRelease } = useRelease(getSiteString(lang), entry[0]);

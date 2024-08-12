@@ -11,11 +11,12 @@ import {
 import { Grid } from "@rubin-epo/epo-react-lib";
 import Tile from "@/atomic/Tile";
 import Loader from "@/atomic/Loader";
+import { fallbackLng } from "@/lib/i18n/settings";
 
 const NewsGrid = ({ items = [], limit, listTypeId, sectionHandle, pageId }) => {
   const { t } = useTranslation();
   const localeInfo = useGlobalData("localeInfo");
-  const lang = localeInfo?.language || "en-US";
+  const lang = localeInfo?.language || fallbackLng;
   // get manually-curated data first
   let allItems = normalizeItemData(items);
 

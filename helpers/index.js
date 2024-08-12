@@ -1,4 +1,6 @@
-export const capitalize = (string, locale = "en-US") => {
+import { fallbackLng } from "@/lib/i18n/settings";
+
+export const capitalize = (string, locale = fallbackLng) => {
   if (typeof string !== "string") return "";
   return string.charAt(0).toLocaleUpperCase(locale) + string.slice(1);
 };
