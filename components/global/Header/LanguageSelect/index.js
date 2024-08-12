@@ -1,74 +1,86 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 import { useGlobalData } from "@/lib/utils";
 import * as Styled from "./styles";
+import { fallbackLng } from "@/lib/i18n/settings";
 
 const CRAFT_HOMEPAGE_URI = "__home__";
 
 export default function LanguageSelect({ id }) {
   const router = useRouter();
-  const { t } = useTranslation();
   const {
-    localeInfo: { language: currentLanguage, localized },
+    t,
+    i18n: { language, changeLanguage },
+  } = useTranslation();
+  const {
+    localeInfo: { localized },
   } = useGlobalData();
-  const [toEs, setToEs] = useState(currentLanguage !== "en-US");
-  const [loading, setLoading] = useState(false);
-  const switchCount = useRef(0);
+  const [isPending, setPending] = useState(false);
+
+  const isDefaultLocale = fallbackLng.includes(language);
 
   useEffect(() => {
-    // don't run effect for change to `toEs` on mount
-    if (switchCount.current > 0) {
-      const newLang = toEs ? "es" : "en-US";
-      const newRoute = getNewRoute(newLang);
-      if (!newRoute) return;
-      router.push(newRoute);
-    }
+    // Used for page transition
+    const start = () => {
+      setPending(true);
+    };
+    const end = () => {
+      setPending(false);
+    };
+    router.events.on("routeChangeStart", start);
+    router.events.on("routeChangeComplete", end);
+    router.events.on("routeChangeError", end);
+    return () => {
+      router.events.off("routeChangeStart", start);
+      router.events.off("routeChangeComplete", end);
+      router.events.off("routeChangeError", end);
+    };
+  }, []);
 
-    switchCount.current++;
-  }, [toEs]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  useEffect(() => {
-    setLoading(false);
-  }, [currentLanguage]);
-
-  const getNewRoute = (newLanguage) => {
-    const newLocale = localized.find(
-      (locale) => locale.language === newLanguage
+  const getNewUriSegments = (newLanguage) => {
+    const newLocale = localized.find((locale) =>
+      locale.language.includes(newLanguage)
     );
-    const uri = newLocale?.uri;
+
+    const uri = isDefaultLocale
+      ? newLocale?.uri.replace("es/", "")
+      : newLocale?.uri;
+
     if (uri === CRAFT_HOMEPAGE_URI) return "/";
     return uri;
   };
 
   const handleClick = () => {
-    if (!loading) {
-      setToEs((prevValue) => !prevValue);
-    }
-    setLoading(true);
+    const newLocale = isDefaultLocale ? "es" : "en";
+    const route = getNewUriSegments(newLocale);
+
+    changeLanguage(newLocale);
+    router.push({
+      pathname: `/[locale]/${route}`,
+      query: { locale: newLocale },
+    });
   };
 
   return (
     <Styled.Fieldset>
       <legend className="a-hidden">{t("localize-content")}</legend>
-      <Styled.Label htmlFor={id} $disabled={loading}>
+      <Styled.Label htmlFor={id} $disabled={isPending}>
         <Styled.MobileLabelText role="presentation">
           {t("language-select-label")}
         </Styled.MobileLabelText>
         <span className="a-hidden">{t("espanol-site-name")}</span>
         <Styled.Switch
           id={id}
-          checked={toEs}
-          aria-disabled={loading}
+          checked={!isDefaultLocale}
+          aria-disabled={isPending}
           onClick={handleClick}
         />
       </Styled.Label>
     </Styled.Fieldset>
   );
 }
-
-LanguageSelect.displayName = "Global.LanguageSelect";
 
 LanguageSelect.propTypes = {
   id: PropTypes.string.isRequired,

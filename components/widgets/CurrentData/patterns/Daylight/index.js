@@ -8,11 +8,12 @@ import { timezoneOffset } from "@/helpers";
 import { timezone } from "@/lib/observatory";
 import { useTranslation } from "react-i18next";
 import ChartLegend from "@/components/charts/Legend";
+import { fallbackLng } from "@/lib/i18n/settings";
 
 const Daylight = ({ times = [], variant = "primary" }) => {
   const {
     t,
-    i18n: { language = "en-US" },
+    i18n: { language = fallbackLng },
   } = useTranslation();
 
   const offset = timezoneOffset(timezone);

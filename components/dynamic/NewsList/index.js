@@ -9,6 +9,7 @@ import {
   makeReleaseFeature,
   useGlobalData,
 } from "@/lib/utils";
+import { fallbackLng } from "@/lib/i18n/settings";
 
 const NewsList = ({
   button,
@@ -22,7 +23,7 @@ const NewsList = ({
 }) => {
   const { t } = useTranslation();
   const localeInfo = useGlobalData("localeInfo");
-  const lang = localeInfo?.language || "en-US";
+  const lang = localeInfo?.language || fallbackLng;
   const cols = initialLimit === 4 ? 4 : initialLimit === 3 ? 3 : 2;
   const canShowFeatured = initialLimit > 4;
 
