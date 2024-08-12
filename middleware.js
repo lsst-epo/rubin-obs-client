@@ -66,5 +66,5 @@ export function middleware(request) {
 
 // do not localize next.js paths
 export const config = {
-  matcher: ["/sso-redirect/", "/(en|es)/:path*"],
+  matcher: ["/sso-redirect/", "/((?!api|static|.*\\..*|_next).*)"],
 };

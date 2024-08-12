@@ -6,7 +6,7 @@ import { getEntryDataByUri, getEntrySectionTypeByUri } from "@/api/entry";
 import { getBreadcrumbs } from "@/api/pages";
 import { getGalleryItemDataByUri } from "@/lib/api/gallery-items";
 import { getSlideshowDataByUri } from "@/api/slideshows";
-import { getSiteString } from "@/lib/utils";
+import { getSiteFromLocale } from "@/lib/utils";
 import { GlobalDataProvider } from "@/contexts/GlobalData";
 import PageTemplate from "@/templates/Page";
 import EventPageTemplate from "@/templates/EventPage";
@@ -107,7 +107,10 @@ export async function getStaticPaths() {
   };
 }
 
-export async function getStaticProps({ params: { uriSegments }, previewData }) {
+export async function getStaticProps({
+  params: { uriSegments, locale },
+  previewData,
+}) {
   const PREVIEW_SLUG = process.env.NEXT_PREVIEW_SLUG;
 
   if (process.env.NEXT_DEBUG_LOGGING === "true") {
@@ -116,21 +119,23 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
 
   const runId = Date.now().toString();
   const isPreview = previewData && uriSegments[0] === PREVIEW_SLUG;
-  const site = getSiteString(isPreview ? previewData.uriSegments : uriSegments);
+  const isEspanol = locale === "es";
+  const site = getSiteFromLocale(locale);
   let uri = CRAFT_HOMEPAGE_URI;
   let previewToken;
-
   if (isPreview) {
     uri = previewData.uriSegments.join("/");
     previewToken = previewData?.previewToken;
   } else if (uriSegments && uriSegments.length) {
+    if (isEspanol) {
+      uriSegments.unshift("es");
+    }
+
     uri = uriSegments.join("/");
   }
 
   setEdcLog(runId, "Starting new client build for " + site, "BUILD_START");
   const data = await getGlobalData();
-  // add _es to property names if site is "es"
-  const isEspanol = site === "es";
 
   const globalKey = `globals${isEspanol ? "_es" : ""}`;
   let globals;
