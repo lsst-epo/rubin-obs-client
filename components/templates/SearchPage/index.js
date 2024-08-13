@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import { useTranslation } from "react-i18next";
 import Body from "@/global/Body";
 import Breadcrumbs from "@/components/page/Breadcrumbs";
 import { Container } from "@rubin-epo/epo-react-lib";
@@ -8,11 +7,11 @@ import DynamicComponentFactory from "@/components/factories/DynamicComponentFact
 import FilterBar from "@/components/page/FilterBar";
 import { usePathData } from "@/lib/utils";
 import { BREAK_PHABLET } from "@/styles/globalStyles";
+import { FilterParamsProvider } from "@/contexts/FilterParams";
 
 export default function SearchPage({
   data: { description, dynamicComponent, id, title, uri },
 }) {
-  const { t } = useTranslation();
   const bodyProps = {
     description,
     title,
@@ -30,17 +29,22 @@ export default function SearchPage({
   return (
     <Body {...bodyProps}>
       <Breadcrumbs breadcrumbs={[pageLink]} />
-      <FilterBar filterType={dynamicComponent} />
-      <Container bgColor="white" className="c-page-header">
-        <Title>
-          <h1>{title}</h1>
-          {keyphrase && <h1>&quot;{keyphrase}&quot;</h1>}
-        </Title>
-      </Container>
+      <FilterParamsProvider>
+        <FilterBar filterType={dynamicComponent} />
+        <Container bgColor="white" className="c-page-header">
+          <Title>
+            <h1>{title}</h1>
+            {keyphrase && <h1>&quot;{keyphrase}&quot;</h1>}
+          </Title>
+        </Container>
 
-      {dynamicComponent && (
-        <DynamicComponentFactory componentType={dynamicComponent} pageId={id} />
-      )}
+        {dynamicComponent && (
+          <DynamicComponentFactory
+            componentType={dynamicComponent}
+            pageId={id}
+          />
+        )}
+      </FilterParamsProvider>
     </Body>
   );
 }
