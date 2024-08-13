@@ -1,12 +1,9 @@
-import { useState, useEffect } from "react";
+import { useTransition } from "react";
 import PropTypes from "prop-types";
-import { useRouter } from "next/router";
+import { useRouter, usePathname } from "next/navigation";
 import { useTranslation } from "react-i18next";
-import { useGlobalData } from "@/lib/utils";
 import * as Styled from "./styles";
 import { fallbackLng } from "@/lib/i18n/settings";
-
-const CRAFT_HOMEPAGE_URI = "__home__";
 
 export default function LanguageSelect({ id }) {
   const router = useRouter();
@@ -14,52 +11,28 @@ export default function LanguageSelect({ id }) {
     t,
     i18n: { language, changeLanguage },
   } = useTranslation();
-  const {
-    localeInfo: { localized },
-  } = useGlobalData();
-  const [isPending, setPending] = useState(false);
+  const [isPending, startTransition] = useTransition();
 
   const isDefaultLocale = fallbackLng.includes(language);
+  const path = usePathname().split("/");
+  path.shift();
 
-  useEffect(() => {
-    // Used for page transition
-    const start = () => {
-      setPending(true);
-    };
-    const end = () => {
-      setPending(false);
-    };
-    router.events.on("routeChangeStart", start);
-    router.events.on("routeChangeComplete", end);
-    router.events.on("routeChangeError", end);
-    return () => {
-      router.events.off("routeChangeStart", start);
-      router.events.off("routeChangeComplete", end);
-      router.events.off("routeChangeError", end);
-    };
-  }, []);
+  if (!isDefaultLocale) {
+    path.shift();
+  }
 
-  const getNewUriSegments = (newLanguage) => {
-    const newLocale = localized.find((locale) =>
-      locale.language.includes(newLanguage)
-    );
-
-    const uri = isDefaultLocale
-      ? newLocale?.uri.replace("es/", "")
-      : newLocale?.uri;
-
-    if (uri === CRAFT_HOMEPAGE_URI) return "/";
-    return uri;
+  const newLocale = () => {
+    return isDefaultLocale ? "es" : "en";
   };
 
-  const handleClick = () => {
-    const newLocale = isDefaultLocale ? "es" : "en";
-    const route = getNewUriSegments(newLocale);
+  const newRoute = `/${newLocale()}/${path.join("/")}`;
 
-    changeLanguage(newLocale);
-    router.push({
-      pathname: `/[locale]/${route}`,
-      query: { locale: newLocale },
+  const handleClick = () => {
+    startTransition(() => {
+      changeLanguage(newLocale());
+      router.push(newRoute, {
+        scroll: false,
+      });
     });
   };
 
