@@ -146,7 +146,7 @@ const FilterBar = ({ filterType, setLiveRegionMessage }) => {
             />
           </Styled.FilterSearch>
         )}
-        <Styled.Clear onClick={handleReset}>
+        <Styled.Clear onClick={handleReset} data-cy="clear">
           <IconComposer icon="cancel" />
           {t(`search-clear`)}
         </Styled.Clear>

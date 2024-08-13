@@ -4,7 +4,7 @@ describe("Filtering dynamic data", () => {
     // so we must tell it to visit our website with the `cy.visit()` command.
     // Since we want to visit the same URL at the start of all our tests,
     // we include it in our beforeEach function so that it runs before each test
-    cy.visit("/calendar");
+    cy.visit("/news");
   });
 
   it("Should show all filtered items", () => {
@@ -21,7 +21,7 @@ describe("Filtering dynamic data", () => {
   });
   it("Should show selected filter", () => {
     const dropdownId = "filter-dropdown";
-    const filter = "Education Event";
+    const filter = "News Post";
 
     cy.get(`[aria-controls="${dropdownId}"]`).click();
     cy.get(`[id="${dropdownId}"]`).should("be.visible");
