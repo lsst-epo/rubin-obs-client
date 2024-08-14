@@ -156,6 +156,7 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
     await purgeNextjsStaticFiles(uriSegments);
     return {
       notFound: true,
+      revalidate: 10,
     };
   }
 
@@ -197,6 +198,7 @@ export async function getStaticProps({ params: { uriSegments }, previewData }) {
     await purgeNextjsStaticFiles(uriSegments);
     return {
       notFound: true,
+      revalidate: 10,
     };
   }
   setEdcLog(runId, "Done building for " + uri, "BUILD_COMPLETE");
