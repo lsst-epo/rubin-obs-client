@@ -1,35 +1,59 @@
 import { useTransition } from "react";
 import PropTypes from "prop-types";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import * as Styled from "./styles";
-import { fallbackLng } from "@/lib/i18n/settings";
+import { fallbackLng, languages } from "@/lib/i18n/settings";
+
+/** stand-in for useParams() in app router */
+const getParams = (pathname) => {
+  const uriSegments = pathname.split("/").filter((segment) => segment !== "");
+
+  if (uriSegments.length === 0) {
+    return { locale: fallbackLng, uriSegments: [] };
+  }
+
+  if (languages.includes(uriSegments[0])) {
+    const locale = uriSegments.shift();
+    return { locale, uriSegments };
+  } else {
+    return { locale: fallbackLng, uriSegments: [...uriSegments] };
+  }
+};
+
+const filterSearchParams = (searchParams) => {
+  const filteredParams = [];
+
+  searchParams.forEach((value, key) => {
+    if (key !== "locale" && key !== "uriSegments") {
+      filteredParams.push(`${key}=${value}`);
+    }
+  });
+
+  return `?${filteredParams.join("&")}`;
+};
 
 export default function LanguageSelect({ id }) {
   const router = useRouter();
-  const {
-    t,
-    i18n: { language, changeLanguage },
-  } = useTranslation();
+  const pathname = usePathname();
+  const { locale, uriSegments } = getParams(pathname);
+  const searchParams = useSearchParams();
+  const { t, i18n } = useTranslation();
   const [isPending, startTransition] = useTransition();
 
-  const isDefaultLocale = fallbackLng.includes(language);
-  const path = usePathname().split("/");
-  path.shift();
-
-  if (!isDefaultLocale) {
-    path.shift();
-  }
+  const isDefaultLocale = fallbackLng.includes(locale);
 
   const newLocale = () => {
     return isDefaultLocale ? "es" : "en";
   };
 
-  const newRoute = `/${newLocale()}/${path.join("/")}`;
+  const newRoute = `/${newLocale()}/${uriSegments.join(
+    "/"
+  )}${filterSearchParams(searchParams)}`;
 
   const handleClick = () => {
     startTransition(() => {
-      changeLanguage(newLocale());
+      i18n.changeLanguage(newLocale());
       router.push(newRoute, {
         scroll: false,
       });

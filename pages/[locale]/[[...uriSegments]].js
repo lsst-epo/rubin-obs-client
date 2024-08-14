@@ -127,10 +127,6 @@ export async function getStaticProps({
     uri = previewData.uriSegments.join("/");
     previewToken = previewData?.previewToken;
   } else if (uriSegments && uriSegments.length) {
-    if (isEspanol) {
-      uriSegments.unshift("es");
-    }
-
     uri = uriSegments.join("/");
   }
 
