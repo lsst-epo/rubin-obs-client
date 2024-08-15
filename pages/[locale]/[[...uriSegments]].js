@@ -24,7 +24,6 @@ import internalLinkShape, {
 import siteInfoShape from "@/shapes/siteInfo";
 import footerContentShape from "@/shapes/footerContent";
 import rootPagesShape from "@/shapes/rootPages";
-import { updateI18n } from "@/lib/i18n/client";
 import { setEdcLog } from "@/lib/edc-log";
 import { purgeNextjsStaticFiles } from "@/lib/purgeStaticFiles";
 const glob = require("glob");
@@ -61,8 +60,6 @@ function logNextDir() {
 
 const GOOGLE_APP_ID = process.env.NEXT_PUBLIC_GOOGLE_APP_ID;
 export default function Page({ section, globalData, ...entryProps }) {
-  globalData.localeInfo.locale === "es" ? updateI18n("es") : updateI18n("en");
-
   const sectionMap = {
     events: EventPageTemplate,
     galleryItems: GalleryPageTemplate,
