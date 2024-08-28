@@ -3,23 +3,7 @@ import PropTypes from "prop-types";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import * as Styled from "./styles";
-import { fallbackLng, languages } from "@/lib/i18n/settings";
-
-/** stand-in for useParams() in app router */
-const getParams = (pathname) => {
-  const uriSegments = pathname.split("/").filter((segment) => segment !== "");
-
-  if (uriSegments.length === 0) {
-    return { locale: fallbackLng, uriSegments: [] };
-  }
-
-  if (languages.includes(uriSegments[0])) {
-    const locale = uriSegments.shift();
-    return { locale, uriSegments };
-  } else {
-    return { locale: fallbackLng, uriSegments: [...uriSegments] };
-  }
-};
+import { fallbackLng } from "@/lib/i18n/settings";
 
 const filterSearchParams = (searchParams) => {
   const filteredParams = [];
@@ -36,27 +20,33 @@ const filterSearchParams = (searchParams) => {
 export default function LanguageSelect({ id }) {
   const router = useRouter();
   const pathname = usePathname();
-  const { locale, uriSegments } = getParams(pathname);
   const searchParams = useSearchParams();
-  const { t, i18n } = useTranslation();
+  const {
+    t,
+    i18n: { changeLanguage, resolvedLanguage: locale },
+  } = useTranslation();
   const [isPending, startTransition] = useTransition();
 
   const isDefaultLocale = fallbackLng.includes(locale);
 
-  const newLocale = () => {
-    return isDefaultLocale ? "es" : "en";
-  };
-
-  const newRoute = `/${newLocale()}/${uriSegments.join(
-    "/"
-  )}${filterSearchParams(searchParams)}`;
-
   const handleClick = () => {
     startTransition(() => {
-      i18n.changeLanguage(newLocale());
-      router.push(newRoute, {
-        scroll: false,
-      });
+      const newLocale = isDefaultLocale ? "es" : "en";
+
+      if (newLocale !== locale) {
+        const parts = pathname?.split("/") || [];
+        parts.shift();
+
+        if (locale !== fallbackLng) {
+          parts.shift();
+        }
+
+        const route = `/${newLocale}/${parts.join("/")}${filterSearchParams(
+          searchParams
+        )}`;
+        changeLanguage(newLocale);
+        router.replace(route, { scroll: false });
+      }
     });
   };
 
