@@ -1,5 +1,5 @@
-import { useTransition } from "react";
 import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import * as Styled from "./styles";
@@ -18,6 +18,7 @@ const filterSearchParams = (searchParams) => {
 };
 
 export default function LanguageSelect({ id }) {
+  const [isLoading, setLoading] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -25,35 +26,37 @@ export default function LanguageSelect({ id }) {
     t,
     i18n: { changeLanguage, resolvedLanguage: locale },
   } = useTranslation();
-  const [isPending, startTransition] = useTransition();
 
   const isDefaultLocale = fallbackLng.includes(locale);
 
+  useEffect(() => {
+    setLoading(false);
+  }, [pathname]);
+
   const handleClick = () => {
-    startTransition(() => {
-      const newLocale = isDefaultLocale ? "es" : "en";
+    const newLocale = isDefaultLocale ? "es" : "en";
 
-      if (newLocale !== locale) {
-        const parts = pathname?.split("/") || [];
+    if (newLocale !== locale) {
+      const parts = pathname?.split("/") || [];
+      parts.shift();
+
+      if (locale !== fallbackLng) {
         parts.shift();
-
-        if (locale !== fallbackLng) {
-          parts.shift();
-        }
-
-        const route = `/${newLocale}/${parts.join("/")}${filterSearchParams(
-          searchParams
-        )}`;
-        changeLanguage(newLocale);
-        router.replace(route, { scroll: false });
       }
-    });
+
+      const route = `/${newLocale}/${parts.join("/")}${filterSearchParams(
+        searchParams
+      )}`;
+      changeLanguage(newLocale);
+      setLoading(true);
+      router.replace(route, { scroll: false });
+    }
   };
 
   return (
     <Styled.Fieldset>
       <legend className="a-hidden">{t("localize-content")}</legend>
-      <Styled.Label htmlFor={id} $disabled={isPending}>
+      <Styled.Label htmlFor={id} $disabled={isLoading}>
         <Styled.MobileLabelText role="presentation">
           {t("language-select-label")}
         </Styled.MobileLabelText>
@@ -61,8 +64,8 @@ export default function LanguageSelect({ id }) {
         <Styled.Switch
           id={id}
           checked={!isDefaultLocale}
-          aria-disabled={isPending}
           onClick={handleClick}
+          aria-disabled={isLoading}
         />
       </Styled.Label>
     </Styled.Fieldset>
