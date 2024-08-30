@@ -27,7 +27,7 @@ export default function LanguageSelect({ id }) {
     t,
     i18n: { changeLanguage },
   } = useTranslation();
-  const locale = getCookie(cookieName);
+  const locale = getCookie(cookieName) || fallbackLng;
 
   const isDefaultLocale = fallbackLng.includes(locale);
 
