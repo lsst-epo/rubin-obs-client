@@ -2,8 +2,7 @@ import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { useTranslation } from "react-i18next";
-import { getCookie } from "cookies-next";
-import { cookieName, fallbackLng } from "@/lib/i18n/settings";
+import { fallbackLng } from "@/lib/i18n/settings";
 import * as Styled from "./styles";
 
 const filterSearchParams = (searchParams) => {
@@ -25,9 +24,8 @@ export default function LanguageSelect({ id }) {
   const searchParams = useSearchParams();
   const {
     t,
-    i18n: { changeLanguage },
+    i18n: { changeLanguage, resolvedLanguage: locale },
   } = useTranslation();
-  const locale = getCookie(cookieName) || fallbackLng;
 
   const isDefaultLocale = fallbackLng.includes(locale);
 
