@@ -53,7 +53,7 @@ const NewsList = ({
                     subtitle,
                     id,
                     hero,
-                    image: featureImage,
+                    image,
                     images: releaseImages,
                     newsAssets,
                     postType,
@@ -73,7 +73,7 @@ const NewsList = ({
                         : null
                     }
                     image={
-                      featureImage?.[0] ||
+                      image?.[0] ||
                       makeReleaseFeature(releaseImages)?.[0] ||
                       hero?.[0]
                     }

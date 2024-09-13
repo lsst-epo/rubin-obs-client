@@ -16,13 +16,13 @@ import { containerFull, respond } from "@/styles/globalStyles";
 
 export default function SlideshowPage({
   data: {
-    entry: { featuredImage, id, description, title, uri, items },
+    entry: { openGraphImage, id, description, title, uri, items },
   },
 }) {
   const { t } = useTranslation();
   const bodyProps = {
     description: striptags(description),
-    featuredImage,
+    openGraphImage,
     title,
   };
 
@@ -40,7 +40,7 @@ export default function SlideshowPage({
       id,
       title,
       description,
-      image: featuredImage,
+      image: openGraphImage,
     },
     ...items,
   ];

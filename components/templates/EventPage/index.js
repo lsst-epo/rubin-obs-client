@@ -28,7 +28,7 @@ export default function EventPage({
     endTime,
     description,
     eventType = [],
-    featuredImage = [],
+    openGraphImage = [],
     hero = [],
     focalPointX,
     focalPointY,
@@ -45,7 +45,7 @@ export default function EventPage({
   const rootHomeLink = customBreadcrumbs.slice(-1)[0];
   const bodyProps = {
     description,
-    featuredImage,
+    openGraphImage,
     title,
   };
   const pageLink = {

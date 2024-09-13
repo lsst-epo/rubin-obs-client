@@ -26,7 +26,7 @@ function getParentEntry(rootPages) {
 
 export default function StaffPage({
   data: {
-    featuredImage = [],
+    openGraphImage = [],
     id,
     uri,
     title,
@@ -43,7 +43,7 @@ export default function StaffPage({
   const parentUri = getParentUri(uri);
   const parentEntry = getParentEntry(rootPages);
   const bodyProps = {
-    featuredImage,
+    openGraphImage,
     title,
   };
   const pageLink = {

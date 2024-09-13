@@ -23,7 +23,6 @@ export default function NewsPage({ data }) {
     contentBlocksNews = [],
     description,
     headline,
-    featuredImage = [],
     hero = [],
     focalPointX,
     focalPointY,
@@ -33,13 +32,21 @@ export default function NewsPage({ data }) {
     postTags,
     title,
     uri,
+    openGraphImage,
     images: releaseImages,
     videos: releaseVideos,
   } = entryWithRelease || data;
+
+  const heroImage =
+    hero?.length > 0 ? hero : makeReleaseFeature(releaseImages, "banner1920");
+
   const { t } = useTranslation();
   const bodyProps = {
     description: description || headline,
-    featuredImage,
+    openGraphImage:
+      openGraphImage?.length > 0
+        ? openGraphImage
+        : makeReleaseFeature(releaseImages, "screen640"),
     title,
   };
   const customBreadcrumbs = useCustomBreadcrumbs("News");
@@ -92,11 +99,7 @@ export default function NewsPage({ data }) {
       <Breadcrumbs breadcrumbs={[...customBreadcrumbs, pageLink]} />
       <NewsHero
         caption={heroCaption}
-        data={
-          hero?.length > 0
-            ? hero
-            : makeReleaseFeature(releaseImages, "banner1920")
-        }
+        data={heroImage}
         narrowCaption={showAside}
         {...{ focalPointX, focalPointY }}
       />
