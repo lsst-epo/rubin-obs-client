@@ -28,7 +28,6 @@ export default function Page({
     description,
     dynamicComponent,
     eventFilter = [],
-    featuredImage,
     hero,
     focalPointX,
     focalPointY,
@@ -42,6 +41,7 @@ export default function Page({
     subHeroHeader,
     subHeroText,
     subHeroColorScheme,
+    openGraphImage,
     parent,
     showGuideNav,
     showSidebar,
@@ -58,7 +58,7 @@ export default function Page({
   const { t } = useTranslation();
   const bodyProps = {
     description,
-    featuredImage,
+    openGraphImage,
     title,
   };
   const pageLink = {
