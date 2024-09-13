@@ -7,11 +7,11 @@ import imageShape from "@/shapes/image";
 export default function HtmlHead({
   title,
   description,
-  featuredImage,
+  openGraphImage,
   siteInfo: { siteTitle, siteDescription, siteImage },
   children,
 }) {
-  const image = featuredImage?.[0] ? featuredImage[0] : siteImage?.[0];
+  const image = openGraphImage?.[0] ? openGraphImage[0] : siteImage?.[0];
   return (
     <Head>
       <title>{`${title} | ${siteTitle}`}</title>
@@ -104,6 +104,6 @@ HtmlHead.propTypes = {
   siteInfo: siteInfoShape,
   title: PropTypes.string,
   description: PropTypes.string,
-  featuredImage: PropTypes.arrayOf(imageShape),
+  openGraphImage: PropTypes.arrayOf(imageShape),
   children: PropTypes.node,
 };

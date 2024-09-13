@@ -50,7 +50,7 @@ export default function CalloutEntry({ callout }) {
     description,
     subtitle,
     hero,
-    image: featureImage,
+    image,
     images: releaseImages,
     entryType,
   } = entryWithRelease || entry[0];
@@ -63,8 +63,8 @@ export default function CalloutEntry({ callout }) {
     lang
   );
   const calloutImage =
-    featureImage?.[0] ||
-    makeReleaseFeature(releaseImages, "thumb700x")?.[0] ||
+    image?.[0] ||
+    makeReleaseFeature(releaseImages, "screen640")?.[0] ||
     hero?.[0];
 
   return (

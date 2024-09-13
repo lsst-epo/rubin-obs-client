@@ -37,7 +37,7 @@ const RelatedList = ({
                     id,
                     description,
                     hero,
-                    image: featureImage,
+                    image,
                     images: releaseImages,
                     title,
                     uri,
@@ -47,8 +47,8 @@ const RelatedList = ({
                   <Tile
                     key={id}
                     image={
-                      featureImage?.[0] ||
-                      makeReleaseFeature(releaseImages, "thumb700x")?.[0] ||
+                      image?.[0] ||
+                      makeReleaseFeature(releaseImages, "screen640")?.[0] ||
                       hero?.[0]
                     }
                     link={uri}

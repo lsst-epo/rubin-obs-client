@@ -6,7 +6,7 @@ import Header from "@/global/Header";
 import Footer from "@/global/Footer";
 import imageShape from "@/shapes/image";
 
-export default function Body({ children, description, featuredImage, title }) {
+export default function Body({ children, description, openGraphImage, title }) {
   return (
     <GlobalDataContext.Consumer>
       {({
@@ -29,12 +29,7 @@ export default function Body({ children, description, featuredImage, title }) {
 
         return (
           <>
-            <HtmlHead
-              title={title}
-              description={description}
-              featuredImage={featuredImage}
-              siteInfo={siteInfo}
-            />
+            <HtmlHead {...{ title, description, openGraphImage, siteInfo }} />
             <WideWidthContainer>
               <Header
                 navItems={headerNavItems}
@@ -65,6 +60,6 @@ Body.displayName = "Global.Body";
 Body.propTypes = {
   children: PropTypes.node,
   description: PropTypes.string,
-  featuredImage: PropTypes.arrayOf(imageShape),
+  openGraphImage: PropTypes.arrayOf(imageShape),
   title: PropTypes.string.isRequired,
 };

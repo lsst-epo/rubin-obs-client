@@ -26,7 +26,7 @@ export default function GalleryPage({
       assetVariants,
       credit,
       customDateCreated,
-      featuredImage,
+      openGraphImage,
       galleryItemCategory,
       galleryItemTags,
       id,
@@ -53,7 +53,7 @@ export default function GalleryPage({
   const { t } = useTranslation();
   const bodyProps = {
     description: striptags(richTextDescription),
-    featuredImage,
+    openGraphImage,
     title,
   };
 
@@ -84,7 +84,7 @@ export default function GalleryPage({
     title,
   };
 
-  const image = featuredImage[0];
+  const image = openGraphImage[0];
 
   // localized dates
   const localizedMetadataDate = useDateString(metadataDate);

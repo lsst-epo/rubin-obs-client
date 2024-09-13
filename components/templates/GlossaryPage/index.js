@@ -25,7 +25,7 @@ export default function GlossaryPage({ data }) {
 
   const bodyProps = {
     description,
-    featuredImage: image,
+    openGraphImage: image,
     title,
   };
 
