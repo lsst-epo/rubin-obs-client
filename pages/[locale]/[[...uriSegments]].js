@@ -107,23 +107,19 @@ export async function getStaticPaths() {
 export async function getStaticProps({
   params: { uriSegments, locale },
   previewData,
+  draftMode,
 }) {
-  const PREVIEW_SLUG = process.env.NEXT_PREVIEW_SLUG;
-
   if (process.env.NEXT_DEBUG_LOGGING === "true") {
     logNextDir();
   }
 
   const runId = Date.now().toString();
-  const isPreview = previewData && uriSegments[0] === PREVIEW_SLUG;
   const isEspanol = locale === "es";
   const site = getSiteFromLocale(locale);
   let uri = CRAFT_HOMEPAGE_URI;
-  let previewToken;
-  if (isPreview) {
-    uri = previewData.uriSegments.join("/");
-    previewToken = previewData?.previewToken;
-  } else if (uriSegments && uriSegments.length) {
+  const previewToken = draftMode ? previewData?.previewToken : undefined;
+
+  if (uriSegments && uriSegments.length) {
     uri = uriSegments.join("/");
   }
 
