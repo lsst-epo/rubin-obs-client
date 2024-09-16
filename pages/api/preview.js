@@ -1,49 +1,60 @@
-import { isCraftPreview } from "@/helpers";
-import { getEntryDataByUid } from "@/api/entry";
+import { gql } from "graphql-request";
+import { queryAPI } from "@/lib/fetch";
+import { getLocaleString, getSiteFromLocale } from "@/lib/utils";
 
-const preview = async (req, res) => {
-  const PREVIEW_SLUG = process.env.NEXT_PREVIEW_SLUG;
-  const { query } = req;
-  const isPreview = isCraftPreview(query);
-  // N.B. previewToken isn't consistently available
-  const previewToken = query.token || undefined;
-  if (!query.entryUid)
-    return res
-      .status(401)
-      .json({ message: "Not allowed to access this route" });
+const PREVIEW_SECRET_TOKEN = process.env.CRAFT_SECRET_TOKEN;
+const CRAFT_HOMEPAGE_URI = "__home__";
 
-  if (!isPreview)
-    return res.status(401).json({
-      message: `Preview Mode must be enabled to view entry "${query.entryUid}"`,
-    });
-
-  // Fetch the headless CMS to check if the provided entry exists
-  const site = query.site === "ES" ? "es" : "default";
-  const entry = await getEntryDataByUid(query.entryUid, site, previewToken);
-  if (!entry?.uri)
-    return res.status(401).json({
-      message: `URI of the entry "${query.entryUid}" could not be fetched`,
-    });
-
-  // const { pathname } = new URL(entry.url.replace("/es/es", "/es"));
-  const { uri } = entry;
-  // N.B. Because previewToken presence is unreliable, we're always redirecting to previewUri so real pages are never inadvertently updated.
-  // If a previewToken becomes reliable, inclusion of previewToken in the preview data should be enough (and could use real page uri as redirect)
-  const previewUri = `/${PREVIEW_SLUG}`;
-
-  // Enable Preview Mode by setting the cookies
-  res.setPreviewData(
-    {
-      previewToken,
-      uriSegments: uri.split("/"),
-    },
-    {
-      maxAge: 120,
-      path: previewUri,
+const Query = gql`
+  query PagePreviewQuery($site: [String], $uri: [String]) {
+    entry(site: $site, uri: $uri) {
+      uri
+      title
     }
+  }
+`;
+
+/**
+ * @function preview
+ * @param {import("next").NextApiRequest} request
+ * @param {import("next").NextApiResponse} response
+ */
+const preview = async (request, response) => {
+  const searchParams = new URLSearchParams(request.query);
+
+  const secret = searchParams.get("secret");
+  const previewToken = searchParams.get("token");
+  const site = getSiteFromLocale(
+    (searchParams.get("site") || "en").toLowerCase()
   );
-  // Redirect to the path from the fetched url
-  res.redirect(previewUri);
+  const locale = getLocaleString(site);
+  const uri = searchParams.get("uri");
+
+  // Check the secret and next parameters
+  // This secret should only be known to this route handler and the CMS
+  if (secret !== PREVIEW_SECRET_TOKEN) {
+    return response.status(401).send({ message: "Invalid token" });
+  }
+
+  if (!uri) {
+    return response.status(401).send({ message: "URI missing" });
+  }
+
+  const res = await queryAPI(Query, undefined, previewToken, { site, uri });
+
+  // If the uri doesn't exist prevent draft mode from being enabled
+  if (!res?.entry?.uri) {
+    return response.status(401).send({ message: "Invalid uri" });
+  }
+
+  const redirectUri = res.entry.uri === CRAFT_HOMEPAGE_URI ? "" : res.entry.uri;
+  const redirect = `/${locale}/${redirectUri}`;
+  const cookiePath = `${site === "default" ? "" : `/${locale}`}/${redirectUri}`;
+
+  // Enable Draft Mode by setting the cookie
+  response.setDraftMode({ enable: true });
+  response.setPreviewData({ previewToken }, { path: cookiePath, maxAge: 120 });
+  response.redirect(redirect);
 };
 
 export default preview;
