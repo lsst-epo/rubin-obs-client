@@ -27,6 +27,7 @@ const preview = async (request, response) => {
   const site = getSiteFromLocale(
     (searchParams.get("site") || "en").toLowerCase()
   );
+  const isDefaultSite = site === "default";
   const locale = getLocaleString(site);
   const uri = searchParams.get("uri");
 
@@ -47,14 +48,31 @@ const preview = async (request, response) => {
     return response.status(401).send({ message: "Invalid uri" });
   }
 
-  const redirectUri = res.entry.uri === CRAFT_HOMEPAGE_URI ? "" : res.entry.uri;
-  const redirect = `/${locale}/${redirectUri}`;
-  const cookiePath = `${site === "default" ? "" : `/${locale}`}/${redirectUri}`;
-
   // Enable Draft Mode by setting the cookie
   response.setDraftMode({ enable: true });
-  response.setPreviewData({ previewToken }, { path: cookiePath, maxAge: 120 });
-  response.redirect(redirect);
+
+  if (res.entry.uri === CRAFT_HOMEPAGE_URI) {
+    const redirect = `/${locale}`;
+    const cookiePath = isDefaultSite ? "/" : redirect;
+
+    response.redirect(redirect);
+    response.setPreviewData(
+      { previewToken },
+      { path: cookiePath, maxAge: 120 }
+    );
+  } else {
+    const redirectUri = `/${res.entry.uri}`;
+    const redirect = `/${locale}${redirectUri}`;
+    const cookiePath = `${
+      site === "default" ? "" : `/${locale}`
+    }${redirectUri}`;
+
+    response.setPreviewData(
+      { previewToken },
+      { path: cookiePath, maxAge: 120 }
+    );
+    response.redirect(redirect);
+  }
 };
 
 export default preview;
