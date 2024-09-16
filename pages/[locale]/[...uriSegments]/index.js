@@ -12,7 +12,6 @@ import PageTemplate from "@/templates/Page";
 import EventPageTemplate from "@/templates/EventPage";
 import GalleryPageTemplate from "@/templates/GalleryPage";
 import GlossaryPageTemplate from "@/templates/GlossaryPage";
-import HomePageTemplate from "@/templates/HomePage";
 import NewsPageTemplate from "@/templates/NewsPage";
 import SearchPageTemplate from "@/templates/SearchPage";
 import SlideshowPageTemplate from "@/templates/SlideshowPage";
@@ -28,8 +27,6 @@ import { setEdcLog } from "@/lib/edc-log";
 import { purgeNextjsStaticFiles } from "@/lib/purgeStaticFiles";
 const glob = require("glob");
 const fs = require("fs");
-
-const CRAFT_HOMEPAGE_URI = "__home__";
 
 function getDirectories(src, callback) {
   glob(src + "/**/*", { dot: true }, callback);
@@ -64,7 +61,6 @@ export default function Page({ section, globalData, ...entryProps }) {
     events: EventPageTemplate,
     galleryItems: GalleryPageTemplate,
     glossaryTerms: GlossaryPageTemplate,
-    homepage: HomePageTemplate,
     news: NewsPageTemplate,
     searchResults: SearchPageTemplate,
     slideshows: SlideshowPageTemplate,
@@ -104,6 +100,7 @@ export async function getStaticPaths() {
   };
 }
 
+/** @type {import("next").GetStaticProps } */
 export async function getStaticProps({
   params: { uriSegments, locale },
   previewData,
@@ -114,29 +111,23 @@ export async function getStaticProps({
   }
 
   const runId = Date.now().toString();
-  const isEspanol = locale === "es";
   const site = getSiteFromLocale(locale);
-  let uri = CRAFT_HOMEPAGE_URI;
+  const uri = uriSegments.join("/");
   const previewToken = draftMode ? previewData?.previewToken : undefined;
 
-  if (uriSegments && uriSegments.length) {
-    uri = uriSegments.join("/");
-  }
-
   setEdcLog(runId, "Starting new client build for " + site, "BUILD_START");
-  const data = await getGlobalData();
+  const data = await getGlobalData(site);
 
-  const globalKey = `globals${isEspanol ? "_es" : ""}`;
-  let globals;
-  if (data[globalKey] === undefined || data[globalKey] === null) {
-    globals = {};
-  } else {
-    globals = data[globalKey].reduce(
-      (obj, item) =>
-        Object.assign(obj, Object.keys(item).length && { [item.handle]: item }),
-      {}
-    );
-  }
+  const globals = data.globals
+    ? data.globals.reduce(
+        (obj, item) =>
+          Object.assign(
+            obj,
+            Object.keys(item).length && { [item.handle]: item }
+          ),
+        {}
+      )
+    : {};
 
   const entrySectionType = await getEntrySectionTypeByUri(
     uri,
@@ -161,10 +152,10 @@ export async function getStaticProps({
 
   const breadcrumbs = await getBreadcrumbs(currentId, site);
   const globalData = {
-    categories: data?.[`allCategories${isEspanol ? "_es" : ""}`] || [],
+    categories: data?.allCategories || [],
     footerContent: globals?.footer || {},
     contactForm: globals?.contactForm || {},
-    headerNavItems: data?.[`pageTree${isEspanol ? "_es" : ""}`] || [],
+    headerNavItems: data?.pageTree || [],
     rootPages: globals?.rootPageInformation?.customBreadcrumbs || [],
     siteInfo: globals?.siteInfo || {},
     localeInfo: {
@@ -172,7 +163,7 @@ export async function getStaticProps({
       language: entryData?.language || entryData?.entry?.language || "",
       localized: entryData?.localized || entryData?.entry?.localized || [],
     },
-    userProfilePage: data?.[`userProfilePage${isEspanol ? "_es" : ""}`] || {},
+    userProfilePage: data?.userProfilePage || {},
   };
 
   // Handle redirect if the entry has one
