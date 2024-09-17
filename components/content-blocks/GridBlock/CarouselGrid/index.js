@@ -5,20 +5,16 @@ import chunk from "lodash/chunk";
 import Tile from "@/atomic/Tile";
 import Loader from "@/atomic/Loader";
 import { Grid } from "@rubin-epo/epo-react-lib";
+import { useReleases } from "@/lib/api/noirlabReleases";
 import { normalizeItemData, makeReleaseFeature, useList } from "@/lib/utils";
 import * as Styled from "./styles";
 
-function CarouselGrid({
-  items = [],
-  limit,
-  listTypeId,
-  sectionHandle,
-  pageId,
-}) {
+function CarouselGrid({ items = [], limit, listTypeId, pageId }) {
   const section = "pages";
   const tileType = "pages";
   // get manually-curated data first
   const curatedItems = normalizeItemData(items);
+  const { entries } = useReleases("default", curatedItems);
 
   const { data, isLoading } = useList({
     limit,
@@ -28,12 +24,13 @@ function CarouselGrid({
   }) || {
     data: {},
   };
+
   const curatedIds = curatedItems.map((item) => item.id);
   // filter out curatedItems
   const filteredEntries = !data?.entries?.length
     ? []
     : data.entries.filter((item) => curatedIds.indexOf(item.id) < 0);
-  const allItems = [...curatedItems, ...filteredEntries];
+  const allItems = [...entries, ...filteredEntries];
   const chunkedItems = chunk(allItems, 3);
 
   function renderTiles(renderedItems) {
@@ -50,24 +47,26 @@ function CarouselGrid({
         externalUrl,
         uri,
         landingPage,
-      }) => (
-        <Tile
-          key={id}
-          image={
-            image?.[0] ||
-            makeReleaseFeature(releaseImages, "screen640")?.[0] ||
-            hero?.[0]
-          }
-          link={
-            mixedLink || {
-              url: externalUrl || uri || landingPage?.[0]?.uri,
+      }) => {
+        return (
+          <Tile
+            key={id}
+            image={
+              image?.[0] ||
+              makeReleaseFeature(releaseImages, "screen640")?.[0] ||
+              hero?.[0]
             }
-          }
-          text={plainText || striptags(description)}
-          title={title}
-          type={tileType}
-        />
-      )
+            link={
+              mixedLink || {
+                url: externalUrl || uri || landingPage?.[0]?.uri,
+              }
+            }
+            text={plainText || striptags(description)}
+            title={title}
+            type={tileType}
+          />
+        );
+      }
     );
   }
 
