@@ -1,10 +1,10 @@
 import { useCallback, useRef, useState } from "react";
-import { useRouter } from "next/router";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 import { useOnClickOutside, useKeyDownEvent } from "@/hooks/listeners";
 import { IconComposer } from "@rubin-epo/epo-react-lib";
-import { getSiteString } from "@/lib/utils";
+import useQueryParams from "@/lib/routing/useQueryParams";
+import { useRouter } from "next/navigation";
 
 const INPUT_ID = "headerSearchBar";
 
@@ -13,11 +13,10 @@ export default function SearchBar() {
   const inputRef = useRef();
   const [open, setOpen] = useState(false);
   const { t } = useTranslation();
-  const router = useRouter();
-  const { query } = router;
-  const site = getSiteString(query.uriSegments);
-  const searchPathname = site === "es" ? "/es/search" : "/search";
-  const [searchText, setSearchText] = useState(query.search || "");
+
+  const { push } = useRouter();
+  const { queryParams } = useQueryParams();
+  const [searchText, setSearchText] = useState(queryParams.get("search") || "");
 
   useKeyDownEvent(handleKeyDown);
   useOnClickOutside(ref, () => {
@@ -42,10 +41,9 @@ export default function SearchBar() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    router.push({
-      pathname: searchPathname,
-      query: { search: searchText },
-    });
+    const query = new URLSearchParams({ search: searchText });
+
+    push(`/search?${query.toString()}`);
   };
 
   const handleReset = () => {

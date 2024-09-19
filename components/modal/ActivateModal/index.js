@@ -1,17 +1,20 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useRouter } from "next/router";
 import { useAuthenticationContext } from "@/contexts/Authentication";
 import useAuthModal from "@/hooks/useAuthModal";
 import { Button } from "@rubin-epo/epo-react-lib";
 import AuthModal from "../AuthModal";
 import * as Styled from "./styles";
+import useQueryParams from "@/lib/routing/useQueryParams";
 
 export default function ActivateModal() {
   const { closeModal } = useAuthModal();
+  const { queryParams } = useQueryParams();
 
-  const { query } = useRouter();
-  const { activate, code, id, educator } = query;
+  const activate = queryParams.get("activate");
+  const code = queryParams.get("code");
+  const id = queryParams.get("id");
+  const educator = queryParams.get("educator");
 
   const { t } = useTranslation();
 

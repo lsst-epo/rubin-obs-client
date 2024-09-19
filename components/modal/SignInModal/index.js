@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useRouter } from "next/router";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import useQueryParams from "@/lib/routing/useQueryParams";
 import { useAuthenticationContext } from "@/contexts/Authentication";
 import useAuthModal from "@/hooks/useAuthModal";
 import { GoogleSSOButton } from "@/components/atomic";
@@ -18,7 +18,8 @@ import AuthModal from "../AuthModal";
 import * as Styled from "./styles";
 
 export default function SignInModal() {
-  const { query } = useRouter();
+  const { queryParams } = useQueryParams();
+  const isOpen = !!queryParams.get("signIn");
 
   const { t } = useTranslation();
 
@@ -78,11 +79,7 @@ export default function SignInModal() {
   };
 
   return (
-    <AuthModal
-      open={!!query.signIn}
-      onClose={onClose}
-      aria-label={t("sign_in.header")}
-    >
+    <AuthModal open={isOpen} onClose={onClose} aria-label={t("sign_in.header")}>
       {isAuthenticated && status === "active" ? ( // included only in case a user inadvertantly reopens the modal
         <>
           <AuthModal.Title>{t("sign_in.success")}</AuthModal.Title>

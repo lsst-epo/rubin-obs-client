@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useRouter } from "next/router";
+import { useRouter, usePathname } from "next/navigation";
 import jwtDecode from "jwt-decode";
 import {
   authenticate,
@@ -15,6 +15,7 @@ import {
   fetchUser,
   requestDeletion,
 } from "@/lib/api/auth";
+import useQueryParams from "@/lib/routing/useQueryParams";
 
 const SESSION_STORAGE_KEYS = [
   "jwt",
@@ -62,7 +63,9 @@ function normalizeLanguage(language) {
 
 // TODO: store refresh token in cookie so token can be refreshed after browser session ends
 export default function useAuthentication(data) {
-  const { query, push, asPath } = useRouter();
+  const { push } = useRouter();
+  const { queryParams } = useQueryParams();
+  const pathName = usePathname();
 
   const [token, setToken] = useState(getTokenFromStorage("jwt"));
   const [user, setUser] = useState(getUserFromJwt());
@@ -96,9 +99,10 @@ export default function useAuthentication(data) {
   }, [pendingGroup]);
 
   useEffect(() => {
-    if (!query.code || !query.facebook) return;
-    (async () => await authenticateWithFacebook({ code: query.code }))();
-  }, [query]); // eslint-disable-line react-hooks/exhaustive-deps
+    if (!queryParams.get("code") || !queryParams.get("facebook")) return;
+    (async () =>
+      await authenticateWithFacebook({ code: queryParams.get("code") }))();
+  }, [queryParams]); // eslint-disable-line react-hooks/exhaustive-deps
 
   function clearState() {
     setToken(null);
@@ -337,7 +341,7 @@ export default function useAuthentication(data) {
     const data = await getFacebookOauthUrl();
     if (data?.facebookOauthUrl) {
       const facebookOauthUrl = data.facebookOauthUrl;
-      const state = asPath.split("?")[0];
+      const state = pathName;
       const startSplitter = "&state=";
       const endSplitter = "&response_type";
       const startOfFacebookOauthUrl = facebookOauthUrl.split(startSplitter)[0];

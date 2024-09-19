@@ -4,16 +4,22 @@ import { useTranslation } from "react-i18next";
 import { MixedLink, IconComposer } from "@rubin-epo/epo-react-lib";
 import T from "@/page/Translate";
 import { useOnClickOutside } from "@/hooks/listeners";
-import { usePathData, getCategoryGroup, useGlobalData } from "@/lib/utils";
+import { getCategoryGroup, useGlobalData } from "@/lib/utils";
 import withLiveRegionChange from "@/hoc/withLiveRegionChange";
 import { useFilterParams } from "@/contexts/FilterParams";
 import * as Styled from "./styles";
+import { usePathname } from "next/navigation";
+import useQueryParams from "@/lib/routing/useQueryParams";
 
 const FilterBar = ({ filterType, setLiveRegionMessage }) => {
   const { params, hidden = [], setParams, resetParams } = useFilterParams();
   const { t } = useTranslation();
   const ref = useRef();
-  const { asPath } = usePathData();
+  const pathname = usePathname();
+  const { queryParams } = useQueryParams();
+  const paramsWithoutLocale = new URLSearchParams(queryParams);
+  paramsWithoutLocale.delete("locale");
+  const asPath = `${pathname}?${paramsWithoutLocale.toString()}`;
   const { categories } = useGlobalData();
   const filterMap = {
     events: "eventFilters",

@@ -1,15 +1,20 @@
 import React from "react";
+import { usePathname } from "next/navigation";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import { Container, MixedLink } from "@rubin-epo/epo-react-lib";
+import useQueryParams from "@/lib/routing/useQueryParams";
 import T from "@/page/Translate";
-import { usePathData } from "@/lib/utils";
 import { layoutGrid, respond } from "@/styles/globalStyles";
 
 const Pagination = ({ limit, offset, page, total }) => {
   const { t } = useTranslation();
-  const { asPath } = usePathData();
+  const pathname = usePathname();
+  const { queryParams } = useQueryParams();
+  const paramsWithoutLocale = new URLSearchParams(queryParams);
+  paramsWithoutLocale.delete("locale");
+  const asPath = `${pathname}?${paramsWithoutLocale.toString()}`;
   const currentPage = parseInt(page);
   const from = offset + 1;
   let to = offset + limit;
@@ -135,7 +140,7 @@ const NavDesktop = styled.nav`
 
 const NavMobile = styled.nav`
   display: none;
-  ${respond(`    
+  ${respond(`
     display: grid;
     width: 100%;
     grid-template-columns: 1fr 1fr;

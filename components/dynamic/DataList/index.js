@@ -1,16 +1,11 @@
-import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { Container, Buttonish } from "@rubin-epo/epo-react-lib";
 import Loader from "@/atomic/Loader";
 import Pagination from "@/page/Pagination";
-import {
-  usePathData,
-  normalizePathData,
-  useList,
-  useGlobalData,
-} from "@/lib/utils";
+import { useList, useGlobalData } from "@/lib/utils";
 import * as Styled from "./styles";
+import useQueryParams from "@/lib/routing/useQueryParams";
 
 const DataList = ({
   children,
@@ -27,12 +22,10 @@ const DataList = ({
   loaderDescription,
 }) => {
   const { t } = useTranslation();
-  const { asPath, query } = usePathData();
-  const { pathname, pathParams } = normalizePathData(asPath);
-  const router = useRouter();
+  const { queryParams, setQueryParams } = useQueryParams();
 
   // for the event list, we want to have past events show differently based on querystring type=past
-  if (section === "events" && query?.type === "past") {
+  if (section === "events" && queryParams.get("type") === "past") {
     section = "eventsPast";
   }
 
@@ -62,10 +55,7 @@ const DataList = ({
 
     // if our page is out of bounds, we must instead go to the last page with data
     if (offset > total) {
-      router.push({
-        pathname,
-        query: { ...pathParams, page: numberOfPages },
-      });
+      setQueryParams({ page: numberOfPages });
     }
 
     if (total === 0 && isRelatedList) return null;
