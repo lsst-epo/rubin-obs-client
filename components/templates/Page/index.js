@@ -9,7 +9,7 @@ import { Container } from "@rubin-epo/epo-react-lib";
 import Breadcrumbs from "@/page/Breadcrumbs";
 import FilterBar from "@/components/page/FilterBar";
 import SlideBlock from "@/components/content-blocks/SlideBlock";
-import { getCategoryObject, useGlobalData, usePathData } from "@/lib/utils";
+import { getCategoryObject, useGlobalData } from "@/lib/utils";
 import NavButtons from "@/components/layout/NavButtons";
 import SubHero from "@/components/page/SubHero";
 import AuthorizePage from "@/components/auth/AuthorizePage";
@@ -21,6 +21,7 @@ import NestedContext from "@/contexts/Nested";
 import PageContent from "@/page/PageContent";
 import MediaAside from "@/components/page/Aside/patterns/Media";
 import { FilterParamsProvider } from "@/contexts/FilterParams";
+import useQueryParams from "@/lib/routing/useQueryParams";
 
 export default function Page({
   data: {
@@ -93,8 +94,8 @@ export default function Page({
 
   // custom page name for gallery search
   const isGallerySearch = uri === "gallery/gallery-search";
-  const { query } = usePathData();
-  const categoryId = query.filter;
+  const { queryParams } = useQueryParams();
+  const categoryId = queryParams.get("filter");
   const categories = useGlobalData("categories");
   let categoryObj;
   if (isGallerySearch && categories && categoryId) {

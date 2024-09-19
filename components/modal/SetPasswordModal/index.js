@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
+import useQueryParams from "@/lib/routing/useQueryParams";
 import { useAuthenticationContext } from "@/contexts/Authentication";
 import useAuthModal from "@/hooks/useAuthModal";
 import { Button, Error } from "@rubin-epo/epo-react-lib";
@@ -11,9 +11,10 @@ import * as Styled from "./styles";
 
 export default function SetPasswordModal() {
   const { closeModal } = useAuthModal();
-
-  const { query } = useRouter();
-  const { set_password, code, id } = query; // eslint-disable-line camelcase
+  const { queryParams } = useQueryParams();
+  const isOpen = !!queryParams.get("set_password");
+  const code = queryParams.get("code");
+  const id = queryParams.get("id");
 
   const { t } = useTranslation();
 
@@ -64,7 +65,7 @@ export default function SetPasswordModal() {
 
   return (
     <AuthModal
-      open={!!set_password} // eslint-disable-line camelcase
+      open={isOpen} // eslint-disable-line camelcase
       onClose={onClose}
       aria-label={t("set_password.header")}
     >

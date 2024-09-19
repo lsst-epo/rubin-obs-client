@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useRouter } from "next/router";
+import { usePathname, useRouter } from "next/navigation";
 
 // const MODALS = ["signIn", "register", "forgotPassword"];
 
@@ -7,11 +7,10 @@ import { useRouter } from "next/router";
 
 export default function useAuthModal() {
   const router = useRouter();
+  const pathName = usePathname();
 
   const getModalUrlObj = useCallback(
     (nameParam, queryVars) => {
-      const path = router.asPath.split("?");
-
       const query = {
         ...(nameParam && {
           [nameParam]: true,
@@ -21,18 +20,16 @@ export default function useAuthModal() {
         }),
       };
 
-      return { pathname: path[0], query };
+      return { pathname: pathName, query };
     },
-    [router]
+    [pathName]
   );
 
   const doRouterPush = useCallback(
     (nameParam, queryVars) => {
       const url = getModalUrlObj(nameParam, queryVars);
 
-      router.push(url, undefined, {
-        shallow: true,
-      });
+      router.push(url);
     },
     [router, getModalUrlObj]
   );

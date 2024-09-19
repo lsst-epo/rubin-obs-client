@@ -1,13 +1,14 @@
-import { useRouter } from "next/router";
 import { useTranslation, Trans } from "react-i18next";
 import { useAuthenticationContext } from "@/contexts/Authentication";
 import useAuthModal from "@/hooks/useAuthModal";
+import useQueryParams from "@/lib/routing/useQueryParams";
 import { Button } from "@rubin-epo/epo-react-lib";
 import AuthModal from "../AuthModal";
 import * as Styled from "./styles";
 
 export default function SSOModal() {
-  const { query } = useRouter();
+  const { queryParams } = useQueryParams();
+  const isOpen = !!queryParams.get("sso");
 
   const { closeModal } = useAuthModal();
 
@@ -20,11 +21,11 @@ export default function SSOModal() {
     closeModal();
   };
 
-  const service = query.facebook ? "facebook" : "google";
+  const service = queryParams.get("facebook") ? "facebook" : "google";
 
   return (
     <AuthModal
-      open={!!query.sso}
+      open={isOpen}
       onClose={onClose}
       aria-label={t("sign_in.loading", {
         service,

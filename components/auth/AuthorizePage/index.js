@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import { Trans, useTranslation } from "react-i18next";
-import { useRouter } from "next/router";
 import { useAuthModal } from "@/hooks";
 import { useAuthenticationContext } from "@/contexts/Authentication";
 import { Button, Buttonish, Container } from "@rubin-epo/epo-react-lib";
@@ -33,7 +32,6 @@ export default function AuthorizePage({ typeHandle, children }) {
   const { isAuthenticated, user, status, pendingDeletion } =
     useAuthenticationContext();
   const { openModal } = useAuthModal();
-  const router = useRouter();
   const isAuthorizedType = AUTHORIZED_TYPES[typeHandle];
 
   if (!isAuthorizedType) return <>{children}</>;
