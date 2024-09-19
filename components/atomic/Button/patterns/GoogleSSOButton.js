@@ -1,22 +1,23 @@
 import PropTypes from "prop-types";
 import { useGoogleLogin } from "@react-oauth/google";
-import { useRouter } from "next/router";
+import { usePathname, useRouter } from "next/navigation";
 import { useAuthenticationContext } from "@/contexts/Authentication";
 import SSOButton from "./SSOButton";
+import useQueryParams from "@/lib/routing/useQueryParams";
 
 export default function GoogleSSOButton({ children, ...buttonProps }) {
   const { authenticateWithGoogle } = useAuthenticationContext();
-  const { query, push, asPath, pathname } = useRouter();
+  const { replace } = useRouter();
+  const { queryParams } = useQueryParams();
+  const pathName = usePathname();
+  const params = new URLSearchParams({ sso: true });
+
   const goToGoogleSignIn = useGoogleLogin({
-    state: asPath,
+    state: `${pathName}?${queryParams.toString()}`,
     onSuccess: (response) => {
-      push(
-        { pathname: asPath.split("?")[0], query: { sso: true } },
-        undefined,
-        {
-          shallow: true,
-        }
-      );
+      replace(`${pathName}?${params.toString()}`, {
+        scroll: true,
+      });
       fetch("/api/charming-overlords", {
         method: "POST",
         headers: { "Content-Type": "application/json" },

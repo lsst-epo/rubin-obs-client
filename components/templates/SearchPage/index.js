@@ -5,9 +5,9 @@ import Breadcrumbs from "@/components/page/Breadcrumbs";
 import { Container } from "@rubin-epo/epo-react-lib";
 import DynamicComponentFactory from "@/components/factories/DynamicComponentFactory";
 import FilterBar from "@/components/page/FilterBar";
-import { usePathData } from "@/lib/utils";
 import { BREAK_PHABLET } from "@/styles/globalStyles";
 import { FilterParamsProvider } from "@/contexts/FilterParams";
+import useQueryParams from "@/lib/routing/useQueryParams";
 
 export default function SearchPage({
   data: { description, dynamicComponent, id, title, uri },
@@ -21,10 +21,11 @@ export default function SearchPage({
     uri,
     title,
   };
-  const { query } = usePathData();
+  const { queryParams } = useQueryParams();
+  const search = queryParams.get("search");
   const keyphrase =
-    query.search &&
-    query.search.replace("+", " ").replace(/(^|\s)\S/g, (t) => t.toUpperCase());
+    search &&
+    search.replace("+", " ").replace(/(^|\s)\S/g, (t) => t.toUpperCase());
 
   return (
     <Body {...bodyProps}>

@@ -1,15 +1,17 @@
-import { useRouter } from "next/router";
 import { useTranslation, Trans } from "react-i18next";
 import { useAuthenticationContext } from "@/contexts/Authentication";
 import RegisterForm from "./RegisterForm";
 import useAuthModal from "@/hooks/useAuthModal";
+import useQueryParams from "@/lib/routing/useQueryParams";
 import { Button } from "@rubin-epo/epo-react-lib";
 import AuthModal from "../AuthModal";
 import JoinForm from "./JoinForm";
 import * as Styled from "./RegisterForm/styles";
 
 export default function RegisterModal() {
-  const { query } = useRouter();
+  const { queryParams } = useQueryParams();
+  const isOpen = !!queryParams.get("register");
+  const group = queryParams.get("group");
 
   const { openModal, closeModal } = useAuthModal();
 
@@ -32,7 +34,7 @@ export default function RegisterModal() {
 
   return (
     <AuthModal
-      open={!!query.register}
+      open={isOpen}
       onClose={onClose}
       aria-label={t("register.header")}
       image={isAuthenticated ? undefined : pendingGroup}
@@ -53,7 +55,7 @@ export default function RegisterModal() {
             <Button onClick={onClose}>{t("register.confirm_button")}</Button>
           </Styled.FormButtons>
         </>
-      ) : query.group === "educators" || query.group === "students" ? (
+      ) : group === "educators" || group === "students" ? (
         <RegisterForm onCancel={onCancel} />
       ) : (
         <JoinForm onEmailSignup={onEmailSignup} />

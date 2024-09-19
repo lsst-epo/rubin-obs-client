@@ -1,17 +1,18 @@
 import { useState } from "react";
 import { useTranslation, Trans } from "react-i18next";
-import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { useAuthenticationContext } from "@/contexts/Authentication";
 import useAuthModal from "@/hooks/useAuthModal";
 import { Button, FormField, Input } from "@rubin-epo/epo-react-lib";
 import AuthModal from "../AuthModal";
 import * as Styled from "./styles";
+import useQueryParams from "@/lib/routing/useQueryParams";
 
 export default function ForgotPasswordModal() {
   const { openModal, closeModal } = useAuthModal();
 
-  const { query } = useRouter();
+  const { queryParams } = useQueryParams();
+  const isOpen = !!queryParams.get("forgotPassword");
 
   const { t } = useTranslation();
 
@@ -61,7 +62,7 @@ export default function ForgotPasswordModal() {
 
   return (
     <AuthModal
-      open={!!query.forgotPassword}
+      open={isOpen}
       onClose={onClose}
       aria-label={t("reset_password.header")}
     >

@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import Link from "next/link";
 import { respond } from "@/styles/globalStyles";
-import { normalizePathData, usePathData } from "@/lib/utils";
+import useQueryParams from "@/lib/routing/useQueryParams";
+import { usePathname } from "next/navigation";
 
 const NavButtons = ({
   hasDefault = true,
@@ -12,13 +13,13 @@ const NavButtons = ({
   textLeft,
   textRight,
 }) => {
-  const { asPath, query } = usePathData();
-  const { pathname, pathParams } = normalizePathData(asPath);
+  const pathname = usePathname();
+  const { queryParams } = useQueryParams();
   const [activeType, setActiveType] = useState();
 
   useEffect(() => {
-    setActiveType(query.type);
-  }, [query]);
+    setActiveType(queryParams.get("type"));
+  }, [queryParams]);
 
   return (
     <Nav>
@@ -27,7 +28,7 @@ const NavButtons = ({
         prefetch={false}
         href={{
           pathname,
-          query: { ...pathParams, page: 1, type: linkLeft },
+          query: { ...queryParams, page: 1, type: linkLeft },
         }}
         passHref={true}
       >
@@ -45,7 +46,7 @@ const NavButtons = ({
         prefetch={false}
         href={{
           pathname,
-          query: { ...pathParams, page: 1, type: linkRight },
+          query: { ...queryParams, page: 1, type: linkRight },
         }}
         passHref={true}
       >

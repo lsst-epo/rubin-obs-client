@@ -1,7 +1,6 @@
-import { createContext, useCallback, useContext } from "react";
+import { createContext, useContext } from "react";
 import PropTypes from "prop-types";
-import { normalizePathData } from "@/lib/utils";
-import { useRouter } from "next/router";
+import useQueryParams from "@/lib/routing/useQueryParams";
 
 const isParamDefined = (filterValue) => {
   if (Array.isArray(filterValue)) {
@@ -23,24 +22,7 @@ const FilterParamsContext = createContext(null);
  * hide which filters are applied from the URL.
  */
 export const FilterParamsProvider = ({ children, serverParams = {} }) => {
-  const { asPath, query, push } = useRouter();
-  delete query.uriSegments;
-
-  const { pathname, pathParams } = normalizePathData(asPath);
-
-  const setParams = useCallback(
-    (params = {}) => {
-      push({
-        pathname,
-        query: { ...pathParams, ...params },
-      });
-    },
-    [pathname, pathParams, push]
-  );
-
-  const resetParams = useCallback(() => {
-    push(pathname);
-  }, [pathname, push]);
+  const { queryParams, setQueryParams, clearQueryParams } = useQueryParams();
 
   const activeServerParams = Object.keys(serverParams).reduce((prev, key) => {
     if (isParamDefined(serverParams[key])) {
@@ -53,12 +35,12 @@ export const FilterParamsProvider = ({ children, serverParams = {} }) => {
   return (
     <FilterParamsContext.Provider
       value={{
-        params: { ...pathParams, ...activeServerParams },
+        params: { ...Object.fromEntries(queryParams), ...activeServerParams },
         hidden: Object.keys(serverParams).filter(
           (key) => serverParams[key] && serverParams[key].length > 0
         ),
-        setParams,
-        resetParams,
+        setParams: (params) => setQueryParams(params, true),
+        resetParams: () => clearQueryParams(true),
       }}
     >
       {children}
@@ -79,10 +61,10 @@ FilterParamsProvider.propTypes = {
 
 export const useFilterParams = () => {
   const context = useContext(FilterParamsContext);
-  const { query } = useRouter();
+  const { queryParams } = useQueryParams();
 
   if (!context) {
-    return { params: query };
+    return { params: queryParams };
   }
 
   return context;
