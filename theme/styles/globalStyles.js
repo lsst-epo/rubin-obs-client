@@ -1,3 +1,4 @@
+"use client";
 /* eslint-disable */
 import { createGlobalStyle } from "styled-components";
 import { fluidScaleBase, stripUnit, respondBase } from "@castiron/style-mixins";

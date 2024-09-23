@@ -1,4 +1,5 @@
-import { useState } from "react";
+"use client";
+import { Suspense, useState } from "react";
 import PropTypes from "prop-types";
 import Link from "next/link";
 import useResizeObserver from "use-resize-observer";
@@ -6,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import Logo from "@/components/svg/unique/site/Logo";
 import LogoFullSize from "@/components/svg/unique/site/LogoFullSize";
 import internalLinkShape from "@/shapes/link";
-import { useGlobalData, useNavHider } from "@/lib/utils";
+import { useNavHider } from "@/lib/utils";
 import {
   SignInModal,
   RegisterModal,
@@ -23,15 +24,14 @@ import LanguageSelect from "./LanguageSelect";
 import UserNavigation from "./UserNav";
 import SRAuthStatus from "../../auth/SRAuthStatus";
 
-export default function Header({ navItems, userProfilePage }) {
+export default function Header({ navItems, userProfilePage, locale }) {
   const [mobileNavActive, setMobileNavActive] = useState(false);
   const [desktopNavActive, setDesktopNavActive] = useState(false);
   const [mobileLogoActive, setMobileLogoActive] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
   const { t } = useTranslation();
-  const { localeInfo } = useGlobalData();
-  const homeUrl = localeInfo.locale === "es" ? `/es` : `/`;
+  const homeUrl = locale === "es" ? `/es` : `/`;
 
   useNavHider(prevScrollPos, setPrevScrollPos, visible, setVisible);
 
@@ -110,12 +110,14 @@ export default function Header({ navItems, userProfilePage }) {
         mobileActive={mobileNavActive}
         mobileSetter={setMobileNavActive}
       />
-      <SignInModal />
-      <RegisterModal />
-      <SSOModal />
-      <ForgotPasswordModal />
-      <SetPasswordModal />
-      <ActivateModal />
+      <Suspense>
+        <SignInModal />
+        <RegisterModal />
+        <SSOModal />
+        <ForgotPasswordModal />
+        <SetPasswordModal />
+        <ActivateModal />
+      </Suspense>
     </header>
   );
 }
@@ -123,6 +125,7 @@ export default function Header({ navItems, userProfilePage }) {
 Header.displayName = "Global.Header";
 
 Header.propTypes = {
+  locale: PropTypes.string,
   navItems: PropTypes.arrayOf(internalLinkShape),
   userProfilePage: PropTypes.object,
 };

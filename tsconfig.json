@@ -1,18 +1,14 @@
 {
   "compilerOptions": {
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
     "noEmit": true,
     "incremental": true,
-    "module": "esnext",
+    "module": "NodeNext",
     "esModuleInterop": true,
-    "moduleResolution": "node",
+    "moduleResolution": "nodenext",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
@@ -24,78 +20,39 @@
     "baseUrl": ".",
     "strictNullChecks": true,
     "paths": {
-      "@/lib/*": [
-        "lib/*"
-      ],
-      "@/api/*": [
-        "lib/api/*"
-      ],
-      "@/charts/*": [
-        "charts/*"
-      ],
-      "@/components/*": [
-        "components/*"
-      ],
-      "@/content-blocks": [
-        "components/content-blocks"
-      ],
-      "@/dynamic/*": [
-        "components/dynamic/*"
-      ],
-      "@/factories/*": [
-        "components/factories/*"
-      ],
-      "@/atomic/*": [
-        "components/atomic/*"
-      ],
-      "@/layout/*": [
-        "components/layout/*"
-      ],
-      "@/templates/*": [
-        "components/templates/*"
-      ],
-      "@/global/*": [
-        "components/global/*"
-      ],
-      "@/page/*": [
-        "components/page/*"
-      ],
-      "@/shapes/*": [
-        "components/shapes/*"
-      ],
-      "@/hooks/*": [
-        "hooks/*"
-      ],
-      "@/hooks": [
-        "hooks"
-      ],
-      "@/contexts/*": [
-        "contexts/*"
-      ],
-      "@/styles/*": [
-        "theme/styles/*"
-      ],
-      "@/svg/*": [
-        "components/svg/*"
-      ],
-      "@/helpers": [
-        "helpers"
-      ],
-      "@/helpers/*": [
-        "helpers/*"
-      ],
-      "@/hoc/*": [
-        "components/hoc/*"
-      ]
+      "@/lib/*": ["lib/*"],
+      "@/api/*": ["lib/api/*"],
+      "@/charts/*": ["charts/*"],
+      "@/components/*": ["components/*"],
+      "@/content-blocks": ["components/content-blocks"],
+      "@/dynamic/*": ["components/dynamic/*"],
+      "@/factories/*": ["components/factories/*"],
+      "@/atomic/*": ["components/atomic/*"],
+      "@/layout/*": ["components/layout/*"],
+      "@/templates/*": ["components/templates/*"],
+      "@/global/*": ["components/global/*"],
+      "@/page/*": ["components/page/*"],
+      "@/shapes/*": ["components/shapes/*"],
+      "@/hooks/*": ["hooks/*"],
+      "@/hooks": ["hooks"],
+      "@/contexts/*": ["contexts/*"],
+      "@/styles/*": ["theme/styles/*"],
+      "@/svg/*": ["components/svg/*"],
+      "@/helpers": ["helpers"],
+      "@/helpers/*": ["helpers/*"],
+      "@/hoc/*": ["components/hoc/*"]
     }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"],
+  // Old "moduleResolution": "Node" option required for Cypress
+  // https://github.com/cypress-io/cypress/issues/26308#issuecomment-1663592648
+  //
+  // TODO: Remove when issue is resolved https://github.com/cypress-io/cypress/issues/27448
+  "ts-node": {
+    "compilerOptions": {
+      "module": "ESNext",
+      "moduleResolution": "Node"
+    }
+  }
 }
