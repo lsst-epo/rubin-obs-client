@@ -21,7 +21,7 @@ export function getStaticPaths() {
     paths: languages.map((language) => {
       return { params: { locale: language } };
     }),
-    fallback: "blocking",
+    fallback: false,
   };
 }
 
