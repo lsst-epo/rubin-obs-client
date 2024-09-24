@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import { usePathname } from "next/navigation";
+
 import Link from "next/link";
 import { respond } from "@/styles/globalStyles";
 import useQueryParams from "@/lib/routing/useQueryParams";
-import { usePathname } from "next/navigation";
-
 const NavButtons = ({
   hasDefault = true,
   linkLeft,
@@ -15,11 +15,7 @@ const NavButtons = ({
 }) => {
   const pathname = usePathname();
   const { queryParams } = useQueryParams();
-  const [activeType, setActiveType] = useState();
-
-  useEffect(() => {
-    setActiveType(queryParams.get("type"));
-  }, [queryParams]);
+  const activeType = queryParams.get("type");
 
   return (
     <Nav>
@@ -36,7 +32,6 @@ const NavButtons = ({
           $active={
             hasDefault ? activeType !== linkRight : activeType === linkLeft
           }
-          onClick={() => setActiveType(linkLeft)}
         >
           {textLeft}
         </NavButton>
@@ -50,12 +45,7 @@ const NavButtons = ({
         }}
         passHref={true}
       >
-        <NavButton
-          active={activeType === linkRight}
-          onClick={() => setActiveType(linkRight)}
-        >
-          {textRight}
-        </NavButton>
+        <NavButton $active={activeType === linkRight}>{textRight}</NavButton>
       </Link>
     </Nav>
   );
