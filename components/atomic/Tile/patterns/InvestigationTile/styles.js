@@ -9,7 +9,7 @@ import {
   BREAK_PHABLET,
   fluidScale,
 } from "@/styles/globalStyles";
-import { EarlyAccess } from "@/components/atomic";
+import EarlyAccess from "@/components/atomic/Flag/patterns/EarlyAccess";
 import { FlagBody, OffsetWrapper } from "@/atomic/Flag/styles";
 
 export const MixedLink = styled(BaseMixedLink)`
