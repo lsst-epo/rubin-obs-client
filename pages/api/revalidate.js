@@ -4,6 +4,9 @@ import { isCraftPreview } from "@/helpers";
 const REVALIDATE_SECRET_TOKEN = process.env.CRAFT_REVALIDATE_SECRET_TOKEN;
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
+console.info("test test");
+
+
 /**
  * @function preview
  * @param {import("next").NextApiRequest} req
