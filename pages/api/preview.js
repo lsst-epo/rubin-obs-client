@@ -55,11 +55,11 @@ const preview = async (request, response) => {
     const redirect = `/${locale}`;
     const cookiePath = isDefaultSite ? "/" : redirect;
 
-    response.redirect(redirect);
     response.setPreviewData(
       { previewToken },
       { path: cookiePath, maxAge: 120 }
     );
+    response.redirect(redirect);
   } else {
     const redirectUri = `/${res.entry.uri}`;
     const redirect = `/${locale}${redirectUri}`;
