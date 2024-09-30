@@ -1,7 +1,7 @@
+"use client";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useGlobalData } from "@/lib/utils";
-import Body from "@/global/Body";
 import { Share } from "@/content-blocks";
 import StaffList from "@/dynamic/StaffList";
 import ContentBlockFactory from "@/factories/ContentBlockFactory";
@@ -26,7 +26,6 @@ function getParentEntry(rootPages) {
 
 export default function StaffPage({
   data: {
-    openGraphImage = [],
     id,
     uri,
     title,
@@ -42,10 +41,7 @@ export default function StaffPage({
   const rootPages = useGlobalData("rootPages");
   const parentUri = getParentUri(uri);
   const parentEntry = getParentEntry(rootPages);
-  const bodyProps = {
-    openGraphImage,
-    title,
-  };
+
   const pageLink = {
     id,
     uri,
@@ -54,7 +50,7 @@ export default function StaffPage({
   const breadcrumbs = [parentEntry, pageLink].filter(Boolean);
 
   return (
-    <Body {...bodyProps}>
+    <>
       <Breadcrumbs breadcrumbs={breadcrumbs} />
       <PageContent
         overlapHero={!!heroImage?.length}
@@ -119,7 +115,7 @@ export default function StaffPage({
             })}
         </NestedContext.Provider>
       </PageContent>
-    </Body>
+    </>
   );
 }
 

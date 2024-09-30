@@ -1,8 +1,8 @@
+"use client";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import internalLinkShape from "@/shapes/link";
 import pageShape from "@/shapes/page";
-import Body from "@/global/Body";
 import ContentBlockFactory from "@/factories/ContentBlockFactory";
 import DynamicComponentFactory from "@/factories/DynamicComponentFactory";
 import { Container } from "@rubin-epo/epo-react-lib";
@@ -26,7 +26,6 @@ import useQueryParams from "@/lib/routing/useQueryParams";
 export default function Page({
   data: {
     contentBlocks = [],
-    description,
     dynamicComponent,
     eventFilter = [],
     hero,
@@ -42,7 +41,6 @@ export default function Page({
     subHeroHeader,
     subHeroText,
     subHeroColorScheme,
-    openGraphImage,
     parent,
     showGuideNav,
     showSidebar,
@@ -57,11 +55,7 @@ export default function Page({
   children,
 }) {
   const { t } = useTranslation();
-  const bodyProps = {
-    description,
-    openGraphImage,
-    title,
-  };
+
   const pageLink = {
     id,
     uri,
@@ -113,108 +107,102 @@ export default function Page({
   };
 
   return (
-    <Body {...bodyProps}>
-      <AuthorizePage typeHandle={typeHandle}>
-        {breadcrumbs && (
-          <Breadcrumbs breadcrumbs={[...breadcrumbs, pageLink]} />
-        )}
-        {investigation && <InvestigationHero investigation={investigation} />}
-        {showSiblingNav && (
-          <GuideNavigation
-            title={parent.title}
-            pages={parent.children}
-            currentUri={uri}
-          />
-        )}
-        <ChildNavigation
-          title={childNavigationTitle}
-          description={childNavigationDescription}
-          pages={childNavigation}
+    <AuthorizePage typeHandle={typeHandle}>
+      {breadcrumbs && <Breadcrumbs breadcrumbs={[...breadcrumbs, pageLink]} />}
+      {investigation && <InvestigationHero investigation={investigation} />}
+      {showSiblingNav && (
+        <GuideNavigation
+          title={parent.title}
+          pages={parent.children}
+          currentUri={uri}
         />
-        {isGalleryHome && (
-          <SlideBlock
-            section="slideshows"
-            header={t(`gallery.curated-slideshows`)}
-            mixedLink={{
-              url: "/gallery/slideshows",
-              text: t(`gallery.see-all`),
-            }}
-            truncate={50}
+      )}
+      <ChildNavigation
+        title={childNavigationTitle}
+        description={childNavigationDescription}
+        pages={childNavigation}
+      />
+      {isGalleryHome && (
+        <SlideBlock
+          section="slideshows"
+          header={t(`gallery.curated-slideshows`)}
+          mixedLink={{
+            url: "/gallery/slideshows",
+            text: t(`gallery.see-all`),
+          }}
+          truncate={50}
+        />
+      )}
+      <FilterParamsProvider {...{ serverParams }}>
+        {hasFilterbar && <FilterBar filterType={dynamicComponent} />}
+        <PageContent
+          heroImage={!showSiblingNav && hero}
+          overlapHero={showSiblingNav ? false : shouldOverlapHero}
+          sidebar={
+            showSidebar && (
+              <MediaAside
+                manualAssets={sidebarAssets}
+                contentBlockAssets={contentBlocks}
+              />
+            )
+          }
+          {...{ focalPointX, focalPointY }}
+        >
+          <SubHero
+            type={typeHandle}
+            header={subHeroHeader}
+            text={subHeroText}
+            colorScheme={subHeroColorScheme}
+            nested={shouldOverlapHero}
           />
-        )}
-        <FilterParamsProvider {...{ serverParams }}>
-          {hasFilterbar && <FilterBar filterType={dynamicComponent} />}
-          <PageContent
-            heroImage={!showSiblingNav && hero}
-            overlapHero={showSiblingNav ? false : shouldOverlapHero}
-            sidebar={
-              showSidebar && (
-                <MediaAside
-                  manualAssets={sidebarAssets}
-                  contentBlockAssets={contentBlocks}
-                />
-              )
-            }
-            {...{ focalPointX, focalPointY }}
-          >
-            <SubHero
-              type={typeHandle}
-              header={subHeroHeader}
-              text={subHeroText}
-              colorScheme={subHeroColorScheme}
-              nested={shouldOverlapHero}
-            />
-            <NestedContext.Provider value={shouldOverlapHero}>
-              {!hideTitle && (
-                <Container
-                  bgColor="white"
-                  className="c-page-header"
-                  width={isWideHeader ? "regular" : "narrow"}
-                  paddingSize={isMediumPadding ? "medium" : undefined}
-                >
-                  <h1>{title}</h1>
-                  {isEventsPage && (
-                    <NavButtons
-                      linkLeft="upcoming"
-                      linkRight="past"
-                      textLeft={t(`events.upcoming`)}
-                      textRight={t(`events.past`)}
-                    />
-                  )}
-                </Container>
-              )}
-              {contentBlocks.length > 0 &&
-                [...contentBlocks].map((block) => {
-                  if (!block.id || !block.typeHandle) return null;
-                  return (
-                    <ContentBlockFactory
-                      key={block.id}
-                      type={block.typeHandle}
-                      data={block}
-                      pageId={id}
-                    />
-                  );
-                })}
-              {pageType === "dynamic" && dynamicComponent && (
-                <DynamicComponentFactory
-                  componentType={dynamicComponent}
-                  pageId={id}
-                />
-              )}
-              {children}
-              {showSiblingNav && (
-                <SiblingNavigation
-                  siblings={siblings}
-                  parent={
-                    investigation ? investigation.landingPage?.[0] : parent
-                  }
-                />
-              )}
-            </NestedContext.Provider>
-          </PageContent>
-        </FilterParamsProvider>
-      </AuthorizePage>
-    </Body>
+          <NestedContext.Provider value={shouldOverlapHero}>
+            {!hideTitle && (
+              <Container
+                bgColor="white"
+                className="c-page-header"
+                width={isWideHeader ? "regular" : "narrow"}
+                paddingSize={isMediumPadding ? "medium" : undefined}
+              >
+                <h1>{title}</h1>
+                {isEventsPage && (
+                  <NavButtons
+                    linkLeft="upcoming"
+                    linkRight="past"
+                    textLeft={t(`events.upcoming`)}
+                    textRight={t(`events.past`)}
+                  />
+                )}
+              </Container>
+            )}
+            {contentBlocks.length > 0 &&
+              [...contentBlocks].map((block) => {
+                if (!block.id || !block.typeHandle) return null;
+                return (
+                  <ContentBlockFactory
+                    key={block.id}
+                    type={block.typeHandle}
+                    data={block}
+                    pageId={id}
+                  />
+                );
+              })}
+            {pageType === "dynamic" && dynamicComponent && (
+              <DynamicComponentFactory
+                componentType={dynamicComponent}
+                pageId={id}
+              />
+            )}
+            {children}
+            {showSiblingNav && (
+              <SiblingNavigation
+                siblings={siblings}
+                parent={investigation ? investigation.landingPage?.[0] : parent}
+              />
+            )}
+          </NestedContext.Provider>
+        </PageContent>
+      </FilterParamsProvider>
+    </AuthorizePage>
   );
 }
 

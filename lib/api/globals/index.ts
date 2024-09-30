@@ -11,6 +11,7 @@ import {
 import { categoriesFragment } from "@/lib/api/fragments/categories";
 import { userProfileFragment } from "@/lib/api/fragments/page";
 import { getSiteFromLocale } from "@/lib/helpers/site";
+import tags from "../client/tags";
 
 export async function getGlobalData(locale = fallbackLng) {
   const site = getSiteFromLocale(locale);
@@ -57,7 +58,11 @@ export async function getGlobalData(locale = fallbackLng) {
       }
     }
   `;
-  const { data } = await queryAPI({ query, variables: { site } });
+  const { data } = await queryAPI({
+    query,
+    variables: { site },
+    fetchOptions: { next: { tags: [tags.globals] } },
+  });
 
   const globals = data.globals
     ? data.globals.reduce(

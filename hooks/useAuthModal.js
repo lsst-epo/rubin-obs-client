@@ -1,10 +1,6 @@
 import { useCallback } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
-// const MODALS = ["signIn", "register", "forgotPassword"];
-
-// const VARS = ["role"];
-
 export default function useAuthModal() {
   const router = useRouter();
   const pathName = usePathname();
@@ -20,7 +16,7 @@ export default function useAuthModal() {
         }),
       };
 
-      return { pathname: pathName, query };
+      return `${pathName}?${new URLSearchParams(query).toString()}`;
     },
     [pathName]
   );

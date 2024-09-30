@@ -49,8 +49,6 @@ export const generateStaticParams = () => {
   });
 };
 
-export const dynamicParams = false;
-
 const LocaleLayout: FunctionComponent<PropsWithChildren<LocaleProps>> = async ({
   params: { locale },
   children,
