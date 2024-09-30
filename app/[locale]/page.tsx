@@ -1,10 +1,9 @@
 import { FunctionComponent } from "react";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { draftMode } from "next/headers";
-import { purgeNextjsStaticFiles } from "@/lib/purgeStaticFiles";
-import HomePageTemplate from "@/templates/HomePage";
-import { Metadata } from "next";
 import { getHomepage, getHomepageMetadata } from "@/lib/api/homepage";
+import HomePageTemplate from "@/templates/HomePage";
 
 export async function generateMetadata({
   params: { locale },
@@ -41,7 +40,6 @@ const RootPage: FunctionComponent<LocaleProps> = async ({
 
   // Handle 404 if there is no data
   if (!data?.id) {
-    await purgeNextjsStaticFiles(locale);
     notFound();
   }
 

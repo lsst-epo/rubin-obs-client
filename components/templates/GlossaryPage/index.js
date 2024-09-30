@@ -1,5 +1,5 @@
+"use client";
 import PropTypes from "prop-types";
-import Body from "@/global/Body";
 import Breadcrumbs from "@/page/Breadcrumbs";
 import { useCustomBreadcrumbs, imageShaper } from "@/lib/utils";
 import {
@@ -13,7 +13,7 @@ import { useTranslation } from "react-i18next";
 export default function GlossaryPage({ data }) {
   const { t } = useTranslation();
 
-  const { id, title, description, uri, text, cantoAssetSingle, caption } = data;
+  const { id, title, uri, text, cantoAssetSingle } = data;
 
   const customBreadcrumbs = useCustomBreadcrumbs("Glossary");
 
@@ -23,12 +23,6 @@ export default function GlossaryPage({ data }) {
 
   const image = imageShaper("EN", cantoAssetSingle[0]);
 
-  const bodyProps = {
-    description,
-    openGraphImage: image,
-    title,
-  };
-
   const pageLink = {
     id,
     uri,
@@ -36,7 +30,7 @@ export default function GlossaryPage({ data }) {
   };
 
   return (
-    <Body {...bodyProps}>
+    <>
       <Breadcrumbs breadcrumbs={[...customBreadcrumbs, pageLink]} />
       <Container width="narrow">
         <h1>{title}</h1>
@@ -56,7 +50,7 @@ export default function GlossaryPage({ data }) {
           />
         )}
       </Container>
-    </Body>
+    </>
   );
 }
 

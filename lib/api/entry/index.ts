@@ -1,6 +1,5 @@
-import { gql } from "graphql-request";
-import { queryAPI } from "@/lib/fetch";
-// import { getRelease } from "@/lib/api/noirlabReleases";
+import { gql } from "@urql/core";
+import queryAPI from "@/lib/api/client/query";
 import { fullBaseFieldsFragment } from "@/lib/api/fragments/shared";
 import { linkFragment } from "@/lib/api/fragments/link";
 import {
@@ -16,14 +15,15 @@ import {
   redirectFragment,
 } from "@/lib/api/fragments/page";
 import { staffProfileFragmentFull } from "@/lib/api/fragments/staff-profile";
-import { glossaryTermFragmentFull } from "./fragments/glossary-term";
-import { studentPageFragmentFull } from "./fragments/student-page";
-import { educatorPageFragmentFull } from "./fragments/educator-page";
-import { investigationLandingPageFragmentFull } from "./fragments/investigation-landing-page";
-import { addRelatedInvestigation } from "./investigation";
-import { addSiblings } from "./sibling-nav";
+import { glossaryTermFragmentFull } from "@/lib/api/fragments/glossary-term";
+import { studentPageFragmentFull } from "@/lib/api//fragments/student-page";
+import { educatorPageFragmentFull } from "@/lib/api//fragments/educator-page";
+import { investigationLandingPageFragmentFull } from "@/lib/api//fragments/investigation-landing-page";
+import { addRelatedInvestigation } from "@/lib/api//investigation";
+import { addSiblings } from "@/lib/api//sibling-nav";
+import { getSiteFromLocale } from "../../helpers/site";
 
-function entryQueryify(fragment) {
+function entryQueryify(fragment: string) {
   return gql`
     ${fullBaseFieldsFragment}
     query getEntry(
@@ -39,50 +39,43 @@ function entryQueryify(fragment) {
   }`;
 }
 
-function getPageQueryFragmentsByType(uri, section, type, site) {
-  let query = null;
-
+function getPageQueryFragmentsByType(type: string) {
   switch (type) {
     case "pages":
-      query = gql`
+      return gql`
         ${linkFragment}
         ${allPageBlocksFragment}
         ${pageFragmentFull}
         ${entryQueryify(`...pageFragmentFull`)}
       `;
-      break;
     case "educatorPages":
-      query = gql`
+      return gql`
         ${linkFragment}
         ${allPageBlocksFragment}
         ${educatorPageFragmentFull}
         ${entryQueryify(`...educatorPageFragmentFull`)}
       `;
-      break;
     case "studentPages":
-      query = gql`
+      return gql`
         ${linkFragment}
         ${allPageBlocksFragment}
         ${studentPageFragmentFull}
         ${entryQueryify(`...studentPageFragmentFull`)}
       `;
-      break;
     case "investigationLandingPage":
-      query = gql`
+      return gql`
         ${linkFragment}
         ${allPageBlocksFragment}
         ${investigationLandingPageFragmentFull}
         ${entryQueryify(`...investigationLandingPageFragmentFull`)}
       `;
-      break;
     case "redirectPage":
-      query = gql`
+      return gql`
         ${redirectFragment}
         ${entryQueryify(`...redirectFragment`)}
       `;
-      break;
     default:
-      query = gql`
+      return gql`
         ${linkFragment}
         ${allPageBlocksFragment}
         ${pageFragmentFull}
@@ -98,61 +91,54 @@ function getPageQueryFragmentsByType(uri, section, type, site) {
           ...redirectFragment
         `)}
       `;
-      break;
   }
-
-  return query;
 }
 
-function getQueryFragments(uri, section, type, site) {
-  let query = null;
-
+function getQueryFragments(
+  uri: string,
+  section: string,
+  type: string,
+  site: string
+) {
   switch (section) {
     case "pages":
-      query = getPageQueryFragmentsByType(uri, section, type, site);
-      break;
+      return getPageQueryFragmentsByType(type);
     case "news":
-      query = gql`
+      return gql`
         ${allNewsBlocksFragment}
         ${newsPostFragmentFull}
         ${entryQueryify(`...newsPostFragmentFull`)}
       `;
-      break;
     case "events":
-      query = gql`
+      return gql`
         ${linkFragment}
         ${allPageBlocksFragment}
         ${eventFragmentFull}
         ${entryQueryify(`...eventFragmentFull`)}
       `;
-      break;
     case "staffProfiles":
-      query = gql`
+      return gql`
         ${allNewsBlocksFragment}
         ${staffProfileFragmentFull}
         ${entryQueryify(`...staffProfileFragmentFull`)}
       `;
-      break;
     case "glossaryTerms":
-      query = gql`
+      return gql`
         ${glossaryTermFragmentFull}
         ${entryQueryify(`...glossaryTermFragmentFull`)}
       `;
-      break;
     case "userProfilePage":
-      query = gql`
+      return gql`
         ${userProfileFragmentFull}
         ${entryQueryify(`...userProfileFragmentFull`)}
       `;
-      break;
     case "searchResults":
-      query = gql`
+      return gql`
         ${searchFragmentFull}
         ${entryQueryify(`...searchFragmentFull`)}
       `;
-      break;
     default:
-      query = gql`
+      return gql`
         ${linkFragment}
         ${allPageBlocksFragment}
         ${allNewsBlocksFragment}
@@ -181,10 +167,7 @@ function getQueryFragments(uri, section, type, site) {
           ...redirectFragment
         `)}
       `;
-      break;
   }
-
-  return query;
 }
 
 async function includeRelatedEntries(entry, site) {
@@ -199,73 +182,28 @@ async function includeRelatedEntries(entry, site) {
   return withRelatedEntries;
 }
 
-export async function getEntrySectionTypeByUri(
-  uri = "__home__",
-  site = "default",
-  previewToken
-) {
-  const query = gql`
-    {
-      entry (uri: "${uri}", site: "${site}") {
-        sectionHandle
-        typeHandle
-      }
-    }
-  `;
-  const data = await queryAPI(query, null, previewToken);
-  return data.entry;
-}
-
 export async function getEntryDataByUri(
-  uri,
-  section,
-  type,
-  site = "default",
-  previewToken
+  uri: string,
+  section: string,
+  type: string,
+  locale: string,
+  previewToken?: string
 ) {
+  const site = getSiteFromLocale(locale);
   const query = getQueryFragments(uri, section, type, site);
 
-  const data = await queryAPI(query, null, previewToken, {
-    section,
-    type,
-    site,
-    uri,
+  const { data } = await queryAPI({
+    query,
+    variables: {
+      section,
+      type,
+      site,
+      uri: decodeURI(uri),
+    },
+    previewToken,
   });
-
-  // if (section === "news" && data) {
-  //   if (data.entry.pressReleaseId) {
-  //     await getRelease(site, data.entry.pressReleaseId).then((releaseData) => {
-  //       const { description, title } = data.entry;
-  //       const {
-  //         description: releaseDescription,
-  //         title: releaseTitle,
-  //         url,
-  //       } = releaseData;
-  //       data.entry = {
-  //         ...releaseData,
-  //         ...data.entry,
-  //         releaseDescription,
-  //         title: releaseTitle || title,
-  //         releaseUrl: url,
-  //       };
-  //     });
-  //   }
-  // }
 
   // Get the related investigation
   const entryWithRelatedData = await includeRelatedEntries(data.entry, site);
   return entryWithRelatedData;
-}
-
-export async function getEntryDataByUid(uid, site, previewToken) {
-  const query = gql`
-    {
-      entry (uid: "${uid}" site: "${site}") {
-        url
-        uri
-      }
-    }
-  `;
-  const data = await queryAPI(query, null, previewToken);
-  return data.entry;
 }

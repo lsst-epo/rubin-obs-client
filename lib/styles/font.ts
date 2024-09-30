@@ -6,6 +6,7 @@ const SourceSansPro = Source_Sans_3({
   style: ["normal", "italic"],
   subsets: ["latin"],
   display: "swap",
+  fallback: ["system-ui"],
   variable: "--FONT_STACK_BASE",
 });
 
