@@ -51,8 +51,14 @@ const preview = async (request, response) => {
   // Enable Draft Mode by setting the cookie
   response.setDraftMode({ enable: true });
 
+  const params = new URLSearchParams({});
+
+  if (previewToken) {
+    params.set("preview", previewToken);
+  }
+
   if (res.entry.uri === CRAFT_HOMEPAGE_URI) {
-    const redirect = `/${locale}?preview=${previewToken}`;
+    const redirect = `/${locale}?${params.toString()}`;
     const cookiePath = isDefaultSite ? "/" : redirect;
 
     response.setPreviewData(
@@ -62,7 +68,7 @@ const preview = async (request, response) => {
     response.redirect(redirect);
   } else {
     const redirectUri = `/${res.entry.uri}`;
-    const redirect = `/${locale}${redirectUri}?preview=${previewToken}`;
+    const redirect = `/${locale}${redirectUri}?${params.toString()}`;
     const cookiePath = `${
       site === "default" ? "" : `/${locale}`
     }${redirectUri}`;

@@ -1,3 +1,4 @@
+"use client";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import {
@@ -5,7 +6,6 @@ import {
   createLocationString,
   useCustomBreadcrumbs,
 } from "@/lib/utils";
-import Body from "@/global/Body";
 import Hero from "@/page/Hero";
 import ContentBlockFactory from "@/factories/ContentBlockFactory";
 import { Share } from "@/content-blocks";
@@ -28,7 +28,6 @@ export default function EventPage({
     endTime,
     description,
     eventType = [],
-    openGraphImage = [],
     hero = [],
     focalPointX,
     focalPointY,
@@ -43,11 +42,7 @@ export default function EventPage({
   const { t } = useTranslation();
   const customBreadcrumbs = useCustomBreadcrumbs("Events");
   const rootHomeLink = customBreadcrumbs.slice(-1)[0];
-  const bodyProps = {
-    description,
-    openGraphImage,
-    title,
-  };
+
   const pageLink = {
     id,
     uri,
@@ -69,7 +64,7 @@ export default function EventPage({
     : "closed";
 
   return (
-    <Body {...bodyProps}>
+    <>
       <Breadcrumbs breadcrumbs={[...customBreadcrumbs, pageLink]} />
       <Hero data={hero} {...{ focalPointX, focalPointY }} />
       <Container paddingSize="medium">
@@ -129,7 +124,7 @@ export default function EventPage({
         isWide
         isRelatedList
       />
-    </Body>
+    </>
   );
 }
 
