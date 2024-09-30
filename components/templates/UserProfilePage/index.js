@@ -1,7 +1,7 @@
+"use client";
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useTranslation, Trans } from "react-i18next";
-import Body from "@/global/Body";
 import { useIsMounted } from "@/hooks";
 import AuthorizePage from "@/components/auth/AuthorizePage";
 import { useAuthenticationContext } from "@/contexts/Authentication";
@@ -62,7 +62,7 @@ function UserProfilePageTemplate({
   }
 
   return (
-    <Body title={title}>
+    <>
       <AuthorizePage typeHandle={typeHandle}>
         <Container>
           <Styled.Header>
@@ -144,7 +144,7 @@ function UserProfilePageTemplate({
           onClose={() => setShowModal(null)}
         />
       )}
-    </Body>
+    </>
   );
 }
 

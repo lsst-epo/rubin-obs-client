@@ -1,6 +1,8 @@
-import { cacheExchange, createClient, fetchExchange } from "@urql/core";
+import { RequestInit } from "next/dist/server/web/spec-extension/request";
+import { createClient, fetchExchange } from "@urql/core";
 import { registerUrql } from "@urql/next/rsc";
 import type { AnyVariables, DocumentInput, OperationResult } from "@urql/core";
+import merge from "lodash/merge";
 
 let API_URL = process.env.NEXT_PUBLIC_API_URL as string;
 
@@ -18,12 +20,21 @@ if (
 const queryAPI = async <Query, Variables extends AnyVariables = AnyVariables>({
   query,
   variables,
+  fetchOptions: inputFetchOptions,
   previewToken,
 }: {
   query: DocumentInput<Query, Variables>;
   variables: Variables;
+  fetchOptions?: RequestInit;
   previewToken?: string;
 }): Promise<OperationResult<Query, Variables>> => {
+  const defaultFetchOptions = {
+    cache: "force-cache",
+    next: {
+      revalidate: previewToken ? 0 : undefined,
+    },
+  };
+  const fetchOptions = merge({}, defaultFetchOptions, inputFetchOptions);
   const params = new URLSearchParams({});
 
   if (previewToken) {
@@ -34,15 +45,8 @@ const queryAPI = async <Query, Variables extends AnyVariables = AnyVariables>({
     return createClient({
       suspense: true,
       url: `${API_URL}?${params.toString()}`,
-      exchanges: [cacheExchange, fetchExchange],
-      fetchOptions: () => {
-        return {
-          cache: "force-cache",
-          next: {
-            revalidate: previewToken ? 0 : undefined,
-          },
-        };
-      },
+      exchanges: [fetchExchange],
+      fetchOptions,
     });
   };
 

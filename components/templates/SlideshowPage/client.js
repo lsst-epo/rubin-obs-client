@@ -1,10 +1,9 @@
+"use client";
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import striptags from "striptags";
 import { useTranslation } from "react-i18next";
 import { useCustomBreadcrumbs } from "@/lib/utils";
-import Body from "@/global/Body";
 import Breadcrumbs from "@/page/Breadcrumbs";
 import {
   CarouselLayout as Carousel,
@@ -20,11 +19,6 @@ export default function SlideshowPage({
   },
 }) {
   const { t } = useTranslation();
-  const bodyProps = {
-    description: striptags(description),
-    openGraphImage,
-    title,
-  };
 
   const customBreadcrumbs = useCustomBreadcrumbs("Slideshows");
   const rootHomeLink = customBreadcrumbs.slice(-1)[0];
@@ -46,7 +40,7 @@ export default function SlideshowPage({
   ];
 
   return (
-    <Body {...bodyProps}>
+    <>
       <Breadcrumbs breadcrumbs={[...customBreadcrumbs, pageLink]} />
       <h1 className="a-hidden">{title}</h1>
       <Modalish>
@@ -82,7 +76,7 @@ export default function SlideshowPage({
           isBlock={true}
         />
       </Container>
-    </Body>
+    </>
   );
 }
 

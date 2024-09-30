@@ -3,14 +3,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import Link from "next/link";
-import striptags from "striptags";
 import { useTranslation } from "react-i18next";
 import {
   createLocationString,
   useCustomBreadcrumbs,
   useDateString,
 } from "@/lib/utils";
-import Body from "@/global/Body";
 import Breadcrumbs from "@/page/Breadcrumbs";
 import {
   Container,
@@ -51,11 +49,6 @@ export default function GalleryPage({
   },
 }) {
   const { t } = useTranslation();
-  const bodyProps = {
-    description: striptags(richTextDescription),
-    openGraphImage,
-    title,
-  };
 
   const customBreadcrumbs = useCustomBreadcrumbs("Gallery");
 
@@ -148,7 +141,7 @@ export default function GalleryPage({
   );
 
   return (
-    <Body {...bodyProps}>
+    <>
       <Breadcrumbs breadcrumbs={[...customBreadcrumbs, pageLink]} />
       <Container width="regular">
         <h1>{title}</h1>
@@ -254,7 +247,7 @@ export default function GalleryPage({
           isBlock={true}
         />
       </Container>
-    </Body>
+    </>
   );
 }
 

@@ -1,7 +1,10 @@
-import { revalidatePath } from "next/cache";
+import tags from "@/lib/api/client/tags";
+import { fallbackLng, languages } from "@/lib/i18n/settings";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 
 const REVALIDATE_SECRET_TOKEN = process.env.CRAFT_REVALIDATE_SECRET_TOKEN;
+const CRAFT_HOMEPAGE_URI = "__home__";
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
   const uri = request.nextUrl.searchParams.get("uri");
@@ -24,7 +27,16 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
   }
 
   if (uri) {
-    revalidatePath(`/[locale]/${uri}`, "page");
+    languages.forEach((locale) => {
+      const parts: Array<string> = uri === CRAFT_HOMEPAGE_URI ? [] : [uri];
+      if (locale !== fallbackLng) {
+        parts.unshift(locale);
+      }
+
+      revalidatePath(`/${parts.join("/")}`);
+    });
+
+    revalidateTag(tags.globals);
 
     return NextResponse.json({ revalidated: true, now: Date.now() });
   }

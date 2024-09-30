@@ -1,3 +1,4 @@
+"use client";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import {
@@ -6,7 +7,6 @@ import {
   makeReleaseFeature,
 } from "@/lib/utils";
 import { useRelease } from "@/lib/api/noirlabReleases";
-import Body from "@/global/Body";
 import Breadcrumbs from "@/page/Breadcrumbs";
 import NewsHero from "./NewsHero";
 import NewsArticle from "./NewsArticle";
@@ -21,8 +21,6 @@ export default function NewsPage({ data }) {
   );
   const {
     contentBlocksNews = [],
-    description,
-    headline,
     hero = [],
     focalPointX,
     focalPointY,
@@ -32,7 +30,6 @@ export default function NewsPage({ data }) {
     postTags,
     title,
     uri,
-    openGraphImage,
     images: releaseImages,
     videos: releaseVideos,
   } = entryWithRelease || data;
@@ -41,14 +38,7 @@ export default function NewsPage({ data }) {
     hero?.length > 0 ? hero : makeReleaseFeature(releaseImages, "banner1920");
 
   const { t } = useTranslation();
-  const bodyProps = {
-    description: description || headline,
-    openGraphImage:
-      openGraphImage?.length > 0
-        ? openGraphImage
-        : makeReleaseFeature(releaseImages, "screen640"),
-    title,
-  };
+
   const customBreadcrumbs = useCustomBreadcrumbs("News");
   const rootHomeLink = customBreadcrumbs.slice(-1)[0];
   const pageLink = {
@@ -95,7 +85,7 @@ export default function NewsPage({ data }) {
     postTags?.length > 0;
 
   return (
-    <Body {...bodyProps}>
+    <>
       <Breadcrumbs breadcrumbs={[...customBreadcrumbs, pageLink]} />
       <NewsHero
         caption={heroCaption}
@@ -130,7 +120,7 @@ export default function NewsPage({ data }) {
         gridType="pages"
         isRelatedList
       />
-    </Body>
+    </>
   );
 }
 

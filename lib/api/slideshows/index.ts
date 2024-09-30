@@ -1,17 +1,19 @@
-import { gql } from "graphql-request";
-import { queryAPI } from "@/lib/fetch";
+import { gql } from "@urql/core";
+import queryAPI from "@/lib/api/client/query";
 import { slideshowFragment } from "@/lib/api/fragments/slideshow";
 import { getImageFields } from "@/lib/api/fragments/image";
+import { getSiteFromLocale } from "@/lib/helpers/site";
 
 export async function getSlideshowDataByUri(
-  uri,
-  site = "default",
-  previewToken
+  uri: string,
+  locale: string,
+  previewToken?: string
 ) {
+  const site = getSiteFromLocale(locale);
   const query = gql`
     ${slideshowFragment}
-    {
-      entry (section: "slideshows", site: "${site}", uri: "${uri}") {
+    query getSlideshow($site: [String], $uri: [String]) {
+      entry (section: "slideshows", site: $site, uri: $uri) {
         ...slideshowFragment
 
         ...on slideshows_slideshow_Entry {
@@ -36,6 +38,12 @@ export async function getSlideshowDataByUri(
       }
     }
   `;
-  const data = await queryAPI(query, null, previewToken);
-  return { entry: data.entry };
+
+  const { data } = await queryAPI({
+    query,
+    variables: { uri, site },
+    previewToken,
+  });
+
+  return data;
 }

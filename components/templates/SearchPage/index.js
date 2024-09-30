@@ -1,6 +1,6 @@
+"use client";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import Body from "@/global/Body";
 import Breadcrumbs from "@/components/page/Breadcrumbs";
 import { Container } from "@rubin-epo/epo-react-lib";
 import DynamicComponentFactory from "@/components/factories/DynamicComponentFactory";
@@ -12,10 +12,6 @@ import useQueryParams from "@/lib/routing/useQueryParams";
 export default function SearchPage({
   data: { description, dynamicComponent, id, title, uri },
 }) {
-  const bodyProps = {
-    description,
-    title,
-  };
   const pageLink = {
     id,
     uri,
@@ -28,7 +24,7 @@ export default function SearchPage({
     search.replace("+", " ").replace(/(^|\s)\S/g, (t) => t.toUpperCase());
 
   return (
-    <Body {...bodyProps}>
+    <>
       <Breadcrumbs breadcrumbs={[pageLink]} />
       <FilterParamsProvider>
         <FilterBar filterType={dynamicComponent} />
@@ -46,7 +42,7 @@ export default function SearchPage({
           />
         )}
       </FilterParamsProvider>
-    </Body>
+    </>
   );
 }
 
