@@ -15,6 +15,7 @@ export default function Body({ children, description, openGraphImage, title }) {
         userProfilePage,
         footerContent,
         contactForm,
+        localeInfo: { locale },
       }) => {
         const {
           siteTitle,
@@ -34,6 +35,7 @@ export default function Body({ children, description, openGraphImage, title }) {
               <Header
                 navItems={headerNavItems}
                 userProfilePage={userProfilePage}
+                locale={locale}
               />
               <main id="page-content">{children}</main>
               <Footer
