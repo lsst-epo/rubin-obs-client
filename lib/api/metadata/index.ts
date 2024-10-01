@@ -1,7 +1,7 @@
-import { queryAPI } from "@/lib/fetch";
+import { gql } from "@urql/core";
+import queryAPI from "@/lib/api/client/query";
 import { getSiteFromLocale } from "@/lib/helpers/site";
 import { fallbackLng } from "@/lib/i18n/settings";
-import { gql } from "graphql-request";
 
 export async function getEntryMetadataByUri(
   uri: string,
@@ -41,5 +41,11 @@ export async function getEntryMetadataByUri(
     }
   `;
 
-  return queryAPI(query, undefined, previewToken, { site, uri });
+  const { data } = await queryAPI({
+    query,
+    variables: { site, uri },
+    previewToken,
+  });
+
+  return data;
 }
