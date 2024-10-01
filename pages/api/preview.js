@@ -1,6 +1,6 @@
 import { gql } from "graphql-request";
 import { queryAPI } from "@/lib/fetch";
-import { getLocaleString, getSiteFromLocale } from "@/lib/utils";
+import { getSiteFromLocale, getLocaleString } from "@/lib/helpers/site";
 
 const PREVIEW_SECRET_TOKEN = process.env.CRAFT_SECRET_TOKEN;
 const CRAFT_HOMEPAGE_URI = "__home__";
@@ -52,7 +52,7 @@ const preview = async (request, response) => {
   response.setDraftMode({ enable: true });
 
   if (res.entry.uri === CRAFT_HOMEPAGE_URI) {
-    const redirect = `/${locale}`;
+    const redirect = `/${locale}?preview=${previewToken}`;
     const cookiePath = isDefaultSite ? "/" : redirect;
 
     response.setPreviewData(
@@ -62,7 +62,7 @@ const preview = async (request, response) => {
     response.redirect(redirect);
   } else {
     const redirectUri = `/${res.entry.uri}`;
-    const redirect = `/${locale}${redirectUri}`;
+    const redirect = `/${locale}${redirectUri}?preview=${previewToken}`;
     const cookiePath = `${
       site === "default" ? "" : `/${locale}`
     }${redirectUri}`;
