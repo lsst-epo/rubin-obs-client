@@ -1,6 +1,6 @@
-import { gql } from "graphql-request";
+import { gql } from "@urql/core";
 import { fallbackLng } from "@/lib/i18n/settings";
-import { queryAPI } from "@/lib/fetch";
+import queryAPI from "@/lib/api/client/query";
 import { linkFragment } from "@/lib/api/fragments/link";
 import {
   siteInfoFragment,
@@ -57,7 +57,7 @@ export async function getGlobalData(locale = fallbackLng) {
       }
     }
   `;
-  const data = await queryAPI(query, undefined, undefined, { site });
+  const { data } = await queryAPI({ query, variables: { site } });
 
   const globals = data.globals
     ? data.globals.reduce(
