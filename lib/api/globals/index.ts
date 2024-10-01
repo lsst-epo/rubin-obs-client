@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { gql } from "graphql-request";
 import { fallbackLng } from "@/lib/i18n/settings";
 import { queryAPI } from "@/lib/fetch";
@@ -12,7 +13,7 @@ import { categoriesFragment } from "@/lib/api/fragments/categories";
 import { userProfileFragment } from "@/lib/api/fragments/page";
 import { getSiteFromLocale } from "@/lib/helpers/site";
 
-export async function getGlobalData(locale = fallbackLng) {
+export const getGlobalData = cache(async (locale = fallbackLng) => {
   const site = getSiteFromLocale(locale);
   const query = gql`
     ${linkFragment}
@@ -82,4 +83,4 @@ export async function getGlobalData(locale = fallbackLng) {
       locale,
     },
   };
-}
+});
