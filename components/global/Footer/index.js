@@ -1,4 +1,3 @@
-"use client";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import Social from "./Social";

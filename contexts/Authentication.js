@@ -1,14 +1,11 @@
-"use client";
 import { createContext, useContext } from "react";
-import useAuthentication from "@/hooks/useAuthentication";
 
 const AuthenticationContext = createContext(null);
 
 // eslint-disable-next-line react/prop-types
-export function AuthenticationContextProvider({ children }) {
-  const authData = useAuthentication();
+export function AuthenticationContextProvider({ data, children }) {
   return (
-    <AuthenticationContext.Provider value={authData}>
+    <AuthenticationContext.Provider value={data}>
       {children}
     </AuthenticationContext.Provider>
   );

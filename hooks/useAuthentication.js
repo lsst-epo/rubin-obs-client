@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import jwtDecode from "jwt-decode";
 import {
   authenticate,
@@ -55,8 +55,15 @@ function hasPendingDeletion(userData) {
   return userData?.requestDeletion?.[0] === "requested";
 }
 
+function normalizeLanguage(language) {
+  if (language !== "en" && language !== "es") return null;
+  if (language === "en") return "en-US";
+  return language;
+}
+
 // TODO: store refresh token in cookie so token can be refreshed after browser session ends
-export default function useAuthentication() {
+export default function useAuthentication(data) {
+  const { push } = useRouter();
   const { queryParams } = useQueryParams();
   const pathName = usePathname();
 
@@ -153,6 +160,20 @@ export default function useAuthentication() {
     return data;
   }
 
+  function maybeRedirectToPreferredLanguage(preferredLanguage) {
+    const newlanguage = normalizeLanguage(preferredLanguage);
+
+    if (!newlanguage || data?.language === newlanguage) return;
+
+    const localized = data?.localized ?? [];
+    const newLocale = localized.find(
+      (locale) => locale.language === newlanguage
+    );
+    const uri = newLocale?.uri;
+
+    push(uri === CRAFT_HOMEPAGE_URI ? "/" : uri);
+  }
+
   function getUserFromJwt(jwt = getTokenFromStorage("jwt")) {
     if (!jwt) return;
 
@@ -213,6 +234,10 @@ export default function useAuthentication() {
     const data = await authenticate({ email, password, token });
 
     if (!data?.authenticate) return handleError(data);
+
+    maybeRedirectToPreferredLanguage(
+      data.authenticate?.user?.preferredLanguage
+    );
 
     return handleSuccess(data.authenticate);
   }
@@ -297,6 +322,7 @@ export default function useAuthentication() {
 
     if (!data?.[returnRole]) return handleError(data);
 
+    maybeRedirectToPreferredLanguage(data[returnRole]?.user?.preferredLanguage);
     return handleSuccess(data[returnRole]);
   }
 
@@ -346,6 +372,7 @@ export default function useAuthentication() {
 
     if (!data?.[returnRole]) return handleError(data);
 
+    maybeRedirectToPreferredLanguage(data[returnRole]?.user?.preferredLanguage);
     return handleSuccess(data[returnRole]);
   }
 

@@ -1,4 +1,3 @@
-"use client";
 import { createContext } from "react";
 import PropTypes from "prop-types";
 import { internalLinkWithChildrenShape } from "@/shapes/link";
