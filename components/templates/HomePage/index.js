@@ -1,6 +1,6 @@
+"use client";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import Body from "@/global/Body";
 import ContentBlockFactory from "@/factories/ContentBlockFactory";
 import Hero from "@/page/Hero";
 import { Buttonish, MixedLink } from "@rubin-epo/epo-react-lib";
@@ -24,10 +24,6 @@ export default function HomePage({
   },
 }) {
   const { t } = useTranslation();
-  const bodyProps = {
-    description,
-    title,
-  };
 
   // HERO AREA
   // If there is a newsEntry or customHero, display alternate hero area
@@ -84,7 +80,7 @@ export default function HomePage({
   }
 
   return (
-    <Body {...bodyProps}>
+    <>
       {isAlternate ? (
         <Styled.HeroWrapper>
           {altFlag && <Styled.Flag>{altFlag}</Styled.Flag>}
@@ -138,7 +134,7 @@ export default function HomePage({
           />
         );
       })}
-    </Body>
+    </>
   );
 }
 
