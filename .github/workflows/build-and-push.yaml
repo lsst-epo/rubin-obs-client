@@ -9,15 +9,15 @@ on:
       - "master"
     tags:
       - "v*"
-  # pull_request:
-  #   types:
-  #     - 'opened'
-  #     - 'synchronize'
-  #     - 'reopened'
-  #     - 'closed'
-  #   branches:
-  #     - 'develop'
-  #     - 'master'
+  pull_request:
+    types:
+      - 'opened'
+      - 'synchronize'
+      - 'reopened'
+      # - 'closed'
+    branches:
+      - 'develop'
+      - 'master'
 
 jobs:
   build:
@@ -114,6 +114,7 @@ jobs:
     name: Trigger deploy to ${{ needs.build.outputs.environment_name }}
     needs: build
     runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'push' }}
     steps:
       - name: Generate Webhook Payload
         id: payload
