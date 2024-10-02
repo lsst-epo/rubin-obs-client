@@ -6,7 +6,7 @@ import { getEntryDataByUri, getEntrySectionTypeByUri } from "@/api/entry";
 import { getBreadcrumbs } from "@/api/pages";
 import { getGalleryItemDataByUri } from "@/lib/api/gallery-items";
 import { getSlideshowDataByUri } from "@/api/slideshows";
-import { getSiteFromLocale } from "@/lib/helpers/site";
+import { getSiteFromLocale } from "@/lib/utils";
 import { GlobalDataProvider } from "@/contexts/GlobalData";
 import PageTemplate from "@/templates/Page";
 import EventPageTemplate from "@/templates/EventPage";
