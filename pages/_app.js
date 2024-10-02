@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import "focus-visible";
 import Script from "next/script";
 import { AuthenticationContextProvider } from "@/contexts/Authentication";
-import useAuthentication from "@/hooks/useAuthentication";
 import GlobalStyles from "@/styles/globalStyles";
 import "@/styles/styles.scss";
 import useClientTranslation from "@/lib/i18n/client";
@@ -18,15 +17,9 @@ function Client({ Component, pageProps, ...props }) {
   const lang = pageProps?.data?.language || fallbackLng;
   const { i18n } = useClientTranslation(lang);
 
-  const authData = useAuthentication({
-    typeHandle: pageProps?.data?.typeHandle || "",
-    language: lang,
-    localized: pageProps?.data?.localized || [],
-  });
-
   return (
     <I18nextProvider {...{ i18n }}>
-      <AuthenticationContextProvider data={authData}>
+      <AuthenticationContextProvider>
         {PLAUSIBLE_DOMAIN && (
           <Script
             id="plausible-script"
