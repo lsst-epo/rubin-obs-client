@@ -15,6 +15,15 @@ if (
   API_URL = `http://${process.env.DOCKER_GATEWAY_IP}:${process.env.DOCKER_GATEWAY_PORT}/api`;
 }
 
+const makeClient = () => {
+  return createClient({
+    url: API_URL,
+    exchanges: [cacheExchange, fetchExchange],
+  });
+};
+
+const { getClient } = registerUrql(makeClient);
+
 const queryAPI = async <Query, Variables extends AnyVariables = AnyVariables>({
   query,
   variables,
@@ -30,24 +39,6 @@ const queryAPI = async <Query, Variables extends AnyVariables = AnyVariables>({
     params.append("token", previewToken);
   }
 
-  const makeClient = () => {
-    return createClient({
-      url: `${API_URL}?${params.toString()}`,
-      exchanges: [cacheExchange, fetchExchange],
-      fetchOptions: () => {
-        return {
-          next: {
-            revalidate: previewToken ? 0 : undefined,
-          },
-        };
-      },
-    });
-  };
-
-  const { getClient } = registerUrql(makeClient);
-
-  console.info("urql query");
-
   return await getClient()
     .query(query, variables)
     .toPromise()
@@ -58,7 +49,11 @@ const queryAPI = async <Query, Variables extends AnyVariables = AnyVariables>({
 
         // TODO: refresh token & rerun request if expired token error
         if (result.error.networkError) {
-          process.exitCode = 1;
+          process.exitCode = -99; // so we can confirm that the exit code as seen in ArgoCD is coming from this line
+          console.info(result.error);
+        } else if (result.error) {
+          console.info("Some other error occurred!");
+          console.info(result.error);
         }
       }
 
