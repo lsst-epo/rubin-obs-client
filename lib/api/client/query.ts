@@ -15,15 +15,6 @@ if (
   API_URL = `http://${process.env.DOCKER_GATEWAY_IP}:${process.env.DOCKER_GATEWAY_PORT}/api`;
 }
 
-const makeClient = () => {
-  return createClient({
-    url: API_URL,
-    exchanges: [cacheExchange, fetchExchange],
-  });
-};
-
-const { getClient } = registerUrql(makeClient);
-
 const queryAPI = async <Query, Variables extends AnyVariables = AnyVariables>({
   query,
   variables,
@@ -38,6 +29,24 @@ const queryAPI = async <Query, Variables extends AnyVariables = AnyVariables>({
   if (previewToken) {
     params.append("token", previewToken);
   }
+
+  const makeClient = () => {
+    return createClient({
+      suspense: true,
+      url: `${API_URL}?${params.toString()}`,
+      exchanges: [cacheExchange, fetchExchange],
+      fetchOptions: () => {
+        return {
+          cache: "force-cache",
+          next: {
+            revalidate: previewToken ? 0 : undefined,
+          },
+        };
+      },
+    });
+  };
+
+  const { getClient } = registerUrql(makeClient);
 
   return await getClient()
     .query(query, variables)
