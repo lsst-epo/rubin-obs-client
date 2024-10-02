@@ -104,12 +104,4 @@ module.exports = {
     "plugin:storybook/recommended",
     "plugin:cypress/recommended",
   ],
-  overrides: [
-    {
-      files: ["*.ts", "*.tsx"],
-      rules: {
-        "no-undef": "off",
-      },
-    },
-  ],
 };

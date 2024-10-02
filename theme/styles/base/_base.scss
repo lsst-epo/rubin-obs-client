@@ -3,6 +3,16 @@
 @use "abstracts/mixins/base";
 @use "abstracts/mixins/layout";
 
+// Base
+// --------------------------------------------------------
+
+// Applies a natural box layout model to all the things
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
 // Global
 // --------------------------
 html {
@@ -16,7 +26,7 @@ html {
 
 body {
   color: functions.sass-palette(neutral80);
-  background-color: var(--neutral08);
+  background-color: functions.palette(white);
 }
 
 // next.js nests a `div#__next` inside `body`
@@ -38,6 +48,15 @@ img {
   display: block;
   width: 100%;
   height: auto;
+
+  &[loading] {
+    opacity: 0;
+    transition: opacity 0.4s 0.1s;
+
+    &.is-loaded {
+      opacity: 1;
+    }
+  }
 }
 
 a {

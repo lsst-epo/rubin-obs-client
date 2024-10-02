@@ -4,9 +4,6 @@ import { isCraftPreview } from "@/helpers";
 const REVALIDATE_SECRET_TOKEN = process.env.CRAFT_REVALIDATE_SECRET_TOKEN;
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
-const CRAFT_HOMEPAGE_URI = "__home__";
-const APP_ROUTER_REVALIDATE = [CRAFT_HOMEPAGE_URI];
-
 /**
  * @function preview
  * @param {import("next").NextApiRequest} req
@@ -34,14 +31,11 @@ async function handler(req, res) {
   }
 
   try {
-    if (APP_ROUTER_REVALIDATE.includes(query.uri)) {
-      const searchParams = new URLSearchParams(query);
-      await fetch(`${BASE_URL}/api/app-revalidate?${searchParams.toString()}`);
-      return res.status(200).json({ revalidated: true });
-    } else {
-      await res.revalidate(`/${query.uri}`);
-      return res.status(200).json({ revalidated: true });
-    }
+    const searchParams = new URLSearchParams(query);
+
+    await fetch(`${BASE_URL}/api/app-revalidate?${searchParams.toString()}`);
+    await res.revalidate(`/${query.uri}`);
+    return res.status(200).json({ revalidated: true });
   } catch (error) {
     console.error(error);
     // If there was an error, Next.js will continue
