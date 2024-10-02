@@ -19,6 +19,7 @@ export const getHomepage = async (locale: string, previewToken?: string) => {
     query Homepage($site: [String], $uri: [String]) {
       entry(site: $site, uri: $uri) {
         ...on homepage_homepage_Entry {
+          title
           id
           description
           pageType
