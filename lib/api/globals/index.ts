@@ -79,6 +79,7 @@ export async function getGlobalData(locale = fallbackLng) {
     siteInfo: globals?.siteInfo || {},
     userProfilePage: data?.userProfilePage || {},
     localeInfo: {
+      language: locale,
       locale,
     },
   };
