@@ -2,12 +2,7 @@
 
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import {
-  makeDateString,
-  useGlobalData,
-  getSiteString,
-  makeReleaseFeature,
-} from "@/lib/utils";
+import { makeDateString, getSiteString, makeReleaseFeature } from "@/lib/utils";
 import * as Styled from "./styles";
 import { Image } from "@rubin-epo/epo-react-lib";
 import { useRelease } from "@/lib/api/noirlabReleases";
@@ -31,12 +26,16 @@ const getDateString = (newsDate, eventStart, eventEnd, lang) => {
 };
 
 export default function CalloutEntry({ callout }) {
-  const { t } = useTranslation();
-  const localeInfo = useGlobalData("localeInfo");
-  const lang = localeInfo?.language || fallbackLng;
+  const {
+    t,
+    i18n: { language = fallbackLng },
+  } = useTranslation();
   const { id, entry, backgroundColor } = callout;
   // mix in the noirlabReleases from additional fetch to different endpoint
-  const { data: entryWithRelease } = useRelease(getSiteString(lang), entry[0]);
+  const { data: entryWithRelease } = useRelease(
+    getSiteString(language),
+    entry[0]
+  );
 
   if (!entry[0] && !entryWithRelease) return null;
 
@@ -60,7 +59,7 @@ export default function CalloutEntry({ callout }) {
     date || releaseDate,
     startDate,
     endDate,
-    lang
+    language
   );
   const calloutImage =
     image?.[0] ||
