@@ -44,6 +44,12 @@ const documents = {
     types.GetNavigationItemsDocument,
   "\n    query SearchResultsPage($site: [String]) {\n      searchResultsEntries(site: $site) {\n        ... on searchResults_searchResults_Entry {\n          title\n          id\n          dynamicComponent\n        }\n      }\n    }\n  ":
     types.SearchResultsPageDocument,
+  "\n    query NewsSitemapData($site: [String]) {\n      newsEntries(site: $site) {\n        ... on news_post_Entry {\n          title\n          uri\n          date\n          dateUpdated\n        }\n      }\n      globalSets(site: $site) {\n        ... on siteInfo_GlobalSet {\n          siteTitle\n        }\n      }\n    }\n  ":
+    types.NewsSitemapDataDocument,
+  '\n    query ImageSitemapData($site: [String]) {\n        galleries: galleriesEntries(site: $site) {\n        ... on galleries_gallery_Entry {\n          uri\n          dateUpdated\n          assetAlbum(whereIn: {key: "scheme", values: ["image", "video", "document"]}) {\n            id\n            scheme\n            url {\n              directUrlOriginal\n            }\n          }\n        }\n      }\n    }\n  ':
+    types.ImageSitemapDataDocument,
+  '\n    query SitemapData($site: [String]) {\n      pages: entries(\n        site: $site\n        section: ["pages"]\n        type: ["not", "redirectPage"]\n      ) {\n        uri\n        dateUpdated\n      }\n      homepage: homepageEntries(site: $site) {\n        ... on homepage_homepage_Entry {\n          uri\n          dateUpdated\n        }\n      }\n      staff: staffProfilesEntries(site: $site) {\n        ... on staffProfiles_staffProfiles_Entry {\n          dateUpdated\n          uri\n        }\n      }\n      slideshows: slideshowsEntries(site: $site) {\n        ... on slideshows_slideshow_Entry {\n          dateUpdated\n          uri\n        }\n      }\n      glossary: glossaryTermsEntries(site: $site) {\n        ... on glossaryTerms_glossaryTerm_Entry {\n          dateUpdated\n          uri\n        }\n      }\n    }\n  ':
+    types.SitemapDataDocument,
   "\n  fragment firstLookWidgetsBlock on contentBlocks_firstLookWidgets_BlockType {\n    id\n    typeHandle\n    backgroundColor\n    filmReel {\n      ... on filmReel_item_BlockType {\n        text\n        share\n      }\n    }\n    firstLookWidget\n  }\n":
     types.FirstLookWidgetsBlockFragmentDoc,
   '\n  fragment imageBlock on contentBlocks_image_BlockType {\n    id\n    typeHandle\n    caption\n    image: contentImage {\n      ... on contentImages_Asset {\n        altText\n        width\n        height\n        url @transform(mode: "fit", width: 900)\n      }\n    }\n    cantoImage: cantoAssetSingle {\n      ...CantoAssetDetailed\n    }\n    floatDirection\n    backgroundColor\n  }\n':
@@ -184,6 +190,24 @@ export function graphql(
 export function graphql(
   source: "\n    query SearchResultsPage($site: [String]) {\n      searchResultsEntries(site: $site) {\n        ... on searchResults_searchResults_Entry {\n          title\n          id\n          dynamicComponent\n        }\n      }\n    }\n  "
 ): (typeof documents)["\n    query SearchResultsPage($site: [String]) {\n      searchResultsEntries(site: $site) {\n        ... on searchResults_searchResults_Entry {\n          title\n          id\n          dynamicComponent\n        }\n      }\n    }\n  "];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: "\n    query NewsSitemapData($site: [String]) {\n      newsEntries(site: $site) {\n        ... on news_post_Entry {\n          title\n          uri\n          date\n          dateUpdated\n        }\n      }\n      globalSets(site: $site) {\n        ... on siteInfo_GlobalSet {\n          siteTitle\n        }\n      }\n    }\n  "
+): (typeof documents)["\n    query NewsSitemapData($site: [String]) {\n      newsEntries(site: $site) {\n        ... on news_post_Entry {\n          title\n          uri\n          date\n          dateUpdated\n        }\n      }\n      globalSets(site: $site) {\n        ... on siteInfo_GlobalSet {\n          siteTitle\n        }\n      }\n    }\n  "];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: '\n    query ImageSitemapData($site: [String]) {\n        galleries: galleriesEntries(site: $site) {\n        ... on galleries_gallery_Entry {\n          uri\n          dateUpdated\n          assetAlbum(whereIn: {key: "scheme", values: ["image", "video", "document"]}) {\n            id\n            scheme\n            url {\n              directUrlOriginal\n            }\n          }\n        }\n      }\n    }\n  '
+): (typeof documents)['\n    query ImageSitemapData($site: [String]) {\n        galleries: galleriesEntries(site: $site) {\n        ... on galleries_gallery_Entry {\n          uri\n          dateUpdated\n          assetAlbum(whereIn: {key: "scheme", values: ["image", "video", "document"]}) {\n            id\n            scheme\n            url {\n              directUrlOriginal\n            }\n          }\n        }\n      }\n    }\n  '];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: '\n    query SitemapData($site: [String]) {\n      pages: entries(\n        site: $site\n        section: ["pages"]\n        type: ["not", "redirectPage"]\n      ) {\n        uri\n        dateUpdated\n      }\n      homepage: homepageEntries(site: $site) {\n        ... on homepage_homepage_Entry {\n          uri\n          dateUpdated\n        }\n      }\n      staff: staffProfilesEntries(site: $site) {\n        ... on staffProfiles_staffProfiles_Entry {\n          dateUpdated\n          uri\n        }\n      }\n      slideshows: slideshowsEntries(site: $site) {\n        ... on slideshows_slideshow_Entry {\n          dateUpdated\n          uri\n        }\n      }\n      glossary: glossaryTermsEntries(site: $site) {\n        ... on glossaryTerms_glossaryTerm_Entry {\n          dateUpdated\n          uri\n        }\n      }\n    }\n  '
+): (typeof documents)['\n    query SitemapData($site: [String]) {\n      pages: entries(\n        site: $site\n        section: ["pages"]\n        type: ["not", "redirectPage"]\n      ) {\n        uri\n        dateUpdated\n      }\n      homepage: homepageEntries(site: $site) {\n        ... on homepage_homepage_Entry {\n          uri\n          dateUpdated\n        }\n      }\n      staff: staffProfilesEntries(site: $site) {\n        ... on staffProfiles_staffProfiles_Entry {\n          dateUpdated\n          uri\n        }\n      }\n      slideshows: slideshowsEntries(site: $site) {\n        ... on slideshows_slideshow_Entry {\n          dateUpdated\n          uri\n        }\n      }\n      glossary: glossaryTermsEntries(site: $site) {\n        ... on glossaryTerms_glossaryTerm_Entry {\n          dateUpdated\n          uri\n        }\n      }\n    }\n  '];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

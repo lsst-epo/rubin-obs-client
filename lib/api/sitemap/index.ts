@@ -81,24 +81,23 @@ export const getSitemapNewsData = async (locale: string) => {
 export const getSitemapGalleryData = async (locale: string) => {
   const site = getSiteFromLocale(locale);
 
-  const query = gql`
+  const query = gql(`
     query ImageSitemapData($site: [String]) {
-      galleries: galleriesEntries(site: $site) {
+        galleries: galleriesEntries(site: $site) {
         ... on galleries_gallery_Entry {
           uri
-          assetAlbum {
+          dateUpdated
+          assetAlbum(whereIn: {key: "scheme", values: ["image", "video", "document"]}) {
+            id
+            scheme
             url {
               directUrlOriginal
-            }
-            id
-            metadata {
-              FileType
             }
           }
         }
       }
     }
-  `;
+  `);
 
   const { data } = await queryAPI({
     query,

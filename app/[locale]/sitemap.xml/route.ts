@@ -50,20 +50,30 @@ export async function GET(
 
   const { galleries } = await getSitemapGalleryData(locale);
   const imageData: any[] = [];
-  galleries.forEach((gallery) => {
-    const { uri, assetAlbum } = gallery;
+  const galleryData = galleries.map(({ uri, dateUpdated, assetAlbum }) => {
+    const entry = {
+      loc: generateSitemapUrl(uri, locale),
+      lastmod: dateUpdated,
+      "xhtml:link": generateAlternateLanguages(uri, locale),
+    };
 
     assetAlbum.forEach((asset) => {
-      const fileType = asset?.metadata?.FileType;
-      if (asset.metadata && fileType === "image") {
+      const {
+        id,
+        scheme,
+        url: { directUrlOriginal },
+      } = asset;
+      if (scheme === "image") {
         imageData.push({
-          loc: generateSitemapUrl(uri.concat("/").concat(asset.id), locale),
+          loc: generateSitemapUrl(uri.concat("/").concat(id), locale),
           "image:image": {
-            "image:loc": asset.url.directUrlOriginal,
+            "image:loc": directUrlOriginal,
           },
         });
       }
     });
+
+    return entry;
   });
 
   const data = {
@@ -76,7 +86,7 @@ export async function GET(
       "$xmlns:xhtml": "http://www.w3.org/1999/xhtml",
       "$xmlns:news": "http://www.google.com/schemas/sitemap-news/0.9",
       "$xmlns:image": "http://www.google.com/schemas/sitemap-image/1.1",
-      url: pageData.concat(newsData, imageData),
+      url: pageData.concat(newsData, galleryData, imageData),
     },
   };
   const builder = new XMLBuilder({
