@@ -10,12 +10,17 @@ import I18NextClientProvider from "@/contexts/i18next";
 import { AuthenticationContextProvider } from "@/contexts/Authentication";
 import PageWrapper from "@/components/organisms/PageWrapper";
 import RootScripts from "./scripts";
+import { notFound } from "next/navigation";
 
 const GOOGLE_APP_ID = process.env.NEXT_PUBLIC_GOOGLE_APP_ID || "";
 
 export async function generateMetadata({
   params: { locale },
 }: LocaleProps): Promise<Metadata> {
+  if (!languages.includes(locale)) {
+    notFound();
+  }
+
   const { siteInfo: metadata } = await getGlobalData(locale);
   const { siteTitle, siteDescription, siteImage, language } = metadata;
   const { url, width, height, altText: alt } = siteImage[0];
@@ -53,6 +58,10 @@ const LocaleLayout: FunctionComponent<PropsWithChildren<LocaleProps>> = async ({
   params: { locale },
   children,
 }) => {
+  if (!languages.includes(locale)) {
+    notFound();
+  }
+
   return (
     <html lang={locale}>
       <head></head>
