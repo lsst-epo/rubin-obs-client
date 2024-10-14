@@ -1,24 +1,16 @@
 "use client";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import {
-  getSiteString,
-  useCustomBreadcrumbs,
-  makeReleaseFeature,
-} from "@/lib/utils";
-import { useRelease } from "@/lib/api/noirlabReleases";
+import { useCustomBreadcrumbs } from "@/lib/utils";
 import Breadcrumbs from "@/page/Breadcrumbs";
 import NewsHero from "./NewsHero";
 import NewsArticle from "./NewsArticle";
 import NewsList from "@/dynamic/NewsList";
 import NewsAside from "@/components/page/Aside/patterns/Media";
 import * as Styled from "./styles";
+import { getReleaseHero } from "@/lib/api/noirlab";
 
 export default function NewsPage({ data }) {
-  const { data: entryWithRelease } = useRelease(
-    getSiteString(data?.siteHandle || "default"),
-    data
-  );
   const {
     contentBlocksNews = [],
     hero = [],
@@ -32,10 +24,11 @@ export default function NewsPage({ data }) {
     uri,
     images: releaseImages,
     videos: releaseVideos,
-  } = entryWithRelease || data;
+  } = data;
 
-  const heroImage =
-    hero?.length > 0 ? hero : makeReleaseFeature(releaseImages, "banner1920");
+  if (hero.length === 0 && releaseImages) {
+    hero.push(getReleaseHero(releaseImages));
+  }
 
   const { t } = useTranslation();
 
@@ -74,7 +67,7 @@ export default function NewsPage({ data }) {
     }
   });
   // If there is a hero then combine it with the content block media assets
-  if (heroBlock) mediaContentBlocks.unshift(heroBlock);
+  if (heroBlock && !releaseImages) mediaContentBlocks.unshift(heroBlock);
 
   // Only show the aside if there are news assets
   const showAside =
@@ -89,14 +82,12 @@ export default function NewsPage({ data }) {
       <Breadcrumbs breadcrumbs={[...customBreadcrumbs, pageLink]} />
       <NewsHero
         caption={heroCaption}
-        data={heroImage}
+        data={hero}
         narrowCaption={showAside}
         {...{ focalPointX, focalPointY }}
       />
       <Styled.NewsDetail $showAside={showAside}>
-        {(entryWithRelease || data) && (
-          <NewsArticle data={entryWithRelease || data} />
-        )}
+        {data && <NewsArticle data={data} />}
         {showAside && (
           <NewsAside
             manualAssets={manualAssets}

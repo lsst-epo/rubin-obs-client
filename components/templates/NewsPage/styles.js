@@ -102,7 +102,7 @@ export const NewsDetail = styled.div`
   }
 `;
 
-export const Pretitle = styled.div`
+export const Pretitle = styled.time`
   padding-bottom: 10px;
 `;
 
@@ -122,18 +122,18 @@ export const ArticleHeading = styled.h3`
 export const ContactList = styled.ul`
   display: block;
 
-  + ul {
-    margin-top: 25px;
+  & > * + * {
+    margin-block-start: 25px;
   }
 `;
 
-export const ContactListItem = styled.li`
+export const Contact = styled.address`
+  font-style: normal;
+`;
+
+export const ContactRow = styled.div`
   display: flex;
   align-items: center;
-
-  + & {
-    margin-top: 10px;
-  }
 `;
 
 export const IconWrapper = styled.div`
