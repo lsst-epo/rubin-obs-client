@@ -7,8 +7,7 @@ import {
 } from "@/lib/api/fragments/content-blocks";
 import { getLinkFields, linkFragment } from "@/lib/api/fragments/link";
 import queryAPI from "@/lib/api/client/query";
-
-const CRAFT_HOMEPAGE_URI = "__home__";
+import { CRAFT_HOMEPAGE_URI } from "@/lib/constants";
 
 export const getHomepage = async (locale: string, previewToken?: string) => {
   const site = getSiteFromLocale(locale);
