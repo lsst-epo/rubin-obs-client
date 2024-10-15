@@ -1,7 +1,7 @@
-import tags from "@/lib/api/client/tags";
-import { fallbackLng, languages } from "@/lib/i18n/settings";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
+import tags from "@/lib/api/client/tags";
+import { fallbackLng, languages } from "@/lib/i18n/settings";
 
 const REVALIDATE_SECRET_TOKEN = process.env.CRAFT_REVALIDATE_SECRET_TOKEN;
 const CRAFT_HOMEPAGE_URI = "__home__";

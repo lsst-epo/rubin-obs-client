@@ -1,4 +1,7 @@
+import { loadEnvConfig } from "@next/env";
+
 const { defineConfig } = require("cypress");
+const projectDir = process.cwd();
 
 module.exports = defineConfig({
   experimentalModifyObstructiveThirdPartyCode: true,
@@ -13,4 +16,5 @@ module.exports = defineConfig({
       bundler: "webpack",
     },
   },
+  env: loadEnvConfig(projectDir).combinedEnv,
 });
