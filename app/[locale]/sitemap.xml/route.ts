@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { XMLBuilder } from "fast-xml-parser";
 import {
+  generateAlternateLanguages,
   generateSitemapUrl,
   getSitemapData,
   getSiteMapNewsData,
@@ -15,6 +16,7 @@ export async function GET(
     return {
       loc: generateSitemapUrl(uri, locale),
       lastmod: dateUpdated,
+      "xhtml:link": generateAlternateLanguages(uri, locale),
     };
   });
   const { siteTitle, news } = await getSiteMapNewsData(locale);
@@ -28,6 +30,7 @@ export async function GET(
     const entry = {
       loc: generateSitemapUrl(uri, locale),
       lastmod: dateUpdated,
+      "xhtml:link": generateAlternateLanguages(uri, locale),
     };
 
     if (new Date(date) > recentNewsThreshold) {
@@ -51,6 +54,7 @@ export async function GET(
     },
     urlset: {
       $xmlns: "http://www.sitemaps.org/schemas/sitemap/0.9",
+      "$xmlns:xhtml": "http://www.w3.org/1999/xhtml",
       "$xmlns:news": "http://www.google.com/schemas/sitemap-news/0.9",
       url: pageData.concat(newsData),
     },
