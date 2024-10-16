@@ -16,7 +16,8 @@ export const generateSitemapUrl = (
   locale: string,
   preserveLocale = false
 ) => {
-  const segments = uri === CRAFT_HOMEPAGE_URI ? [] : [encodeURIComponent(uri)];
+  const segments =
+    uri === CRAFT_HOMEPAGE_URI ? [] : uri.split("/").map(encodeURIComponent);
 
   if (preserveLocale || locale !== fallbackLng) {
     segments.unshift(locale);
