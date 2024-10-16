@@ -3,7 +3,7 @@ import { getSiteFromLocale } from "@/lib/helpers/site";
 import queryAPI from "@/lib/api/client/query";
 import tags from "@/lib/api/client/tags";
 import { CRAFT_HOMEPAGE_URI } from "@/lib/constants";
-import { fallbackLng } from "@/lib/i18n/settings";
+import { fallbackLng, languages } from "@/lib/i18n/settings";
 
 interface PageMetadata {
   uri: string;
@@ -16,7 +16,7 @@ export const generateSitemapUrl = (
   locale: string,
   preserveLocale = false
 ) => {
-  const segments = uri === CRAFT_HOMEPAGE_URI ? [] : [uri];
+  const segments = uri === CRAFT_HOMEPAGE_URI ? [] : [encodeURIComponent(uri)];
 
   if (preserveLocale || locale !== fallbackLng) {
     segments.unshift(locale);
@@ -25,6 +25,18 @@ export const generateSitemapUrl = (
   segments.unshift(baseUrl);
 
   return segments.join("/");
+};
+
+export const generateAlternateLanguages = (uri: string, locale: string) => {
+  return languages
+    .filter((language) => language !== locale)
+    .map((language) => {
+      return {
+        $rel: "alternate",
+        $hreflang: language,
+        $href: generateSitemapUrl(uri, language),
+      };
+    }, {});
 };
 
 export const getSiteMapNewsData = async (locale: string) => {
