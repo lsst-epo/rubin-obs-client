@@ -6,7 +6,7 @@ import {
   createLocationString,
   useCustomBreadcrumbs,
 } from "@/lib/utils";
-import Hero from "@/page/Hero";
+import Hero from "@/components/molecules/Hero";
 import ContentBlockFactory from "@/factories/ContentBlockFactory";
 import { Share } from "@/content-blocks";
 import Breadcrumbs from "@/page/Breadcrumbs";
