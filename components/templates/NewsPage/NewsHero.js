@@ -17,9 +17,9 @@ export default function NewsHero({
   if (caption)
     return (
       <Styled.HeroFigure className={className}>
-        <Styled.HeroImageContainer>
+        <Styled.HeroImageContainer data-cy="hero">
           <Styled.HeroImage
-            image={imageData}
+            image={{ ...imageData, priority: true }}
             $focalPointX={focalPointX || 50}
             $focalPointY={focalPointY || 50}
           />
@@ -29,10 +29,10 @@ export default function NewsHero({
     );
 
   return (
-    <Styled.Hero className={className}>
+    <Styled.Hero className={className} data-cy="hero">
       <Styled.HeroImage
         role="presentation"
-        image={imageData}
+        image={{ ...imageData, priority: true }}
         $focalPointX={focalPointX || 50}
         $focalPointY={focalPointY || 50}
       />

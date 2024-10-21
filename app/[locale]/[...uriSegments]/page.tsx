@@ -10,7 +10,7 @@ import {
   getEntrySectionByUri,
 } from "@/lib/api/entries/index";
 import { getEntryDataByUri } from "@/lib/api/entry";
-import { getReleaseOpenGraph } from "@/lib/api/noirlab";
+import { generateReleaseMetadata } from "@/lib/api/noirlab";
 import { resizeCantoImage } from "@/lib/api/canto/resize";
 import PageTemplate from "@/components/templates/Page";
 import NewsPageTemplate from "@/components/templates/NewsPage";
@@ -21,20 +21,9 @@ import StaffPageTemplate from "@/components/templates/StaffPage";
 import EventPageTemplate from "@/components/templates/EventPage";
 
 const pickFeaturedImage = async (
-  locale: string,
   image?: any,
-  cantoAsset?: any,
-  pressReleaseId?: string
+  cantoAsset?: any
 ): Promise<OpenGraph["images"] | undefined> => {
-  if (pressReleaseId) {
-    const releaseOpenGraphImage = await getReleaseOpenGraph(
-      locale,
-      pressReleaseId
-    );
-
-    return releaseOpenGraphImage;
-  }
-
   if (cantoAsset) {
     const {
       width,
@@ -80,13 +69,13 @@ export async function generateMetadata(
     pressReleaseId,
   } = entry;
 
-  const featuredImage = await pickFeaturedImage(
-    locale,
-    image[0],
-    cantoAssetSingle[0],
-    pressReleaseId
-  );
   const previousImages = (await parent).openGraph?.images || [];
+
+  if (pressReleaseId) {
+    return generateReleaseMetadata(pressReleaseId, locale);
+  }
+
+  const featuredImage = await pickFeaturedImage(image[0], cantoAssetSingle[0]);
 
   return {
     title,
