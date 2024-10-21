@@ -22,16 +22,13 @@ export default function NewsArticle({ data }) {
     subtitle,
     contacts,
     links,
-    /* eslint-disable camelcase */
-    more_information: moreInformation,
-    release_date: releaseDate,
-    /* eslint-enable camelcase */
+    moreInformation,
     headline,
     releaseUrl,
   } = data;
 
   const { t } = useTranslation();
-  const localizedDate = useDateString(date || releaseDate);
+  const localizedDate = useDateString(date);
   const { ref } = useResizeObserver({
     box: "border-box",
     onResize: ({ height }) => {
@@ -58,7 +55,7 @@ export default function NewsArticle({ data }) {
           {subtitle && (
             <Styled.SubtitleSecondary>{subtitle}</Styled.SubtitleSecondary>
           )}
-          <Styled.Pretitle className="t-heading-quaternary">
+          <Styled.Pretitle dateTime={date} className="t-heading-quaternary">
             {localizedDate}
           </Styled.Pretitle>
           <Styled.Subtitle>{description || headline}</Styled.Subtitle>
@@ -69,6 +66,7 @@ export default function NewsArticle({ data }) {
       {releaseDescription && (
         <Container paddingSize="medium">
           <div
+            data-cy="press-release-text"
             dangerouslySetInnerHTML={{ __html: releaseDescription }}
             className="c-content-rte"
           />
