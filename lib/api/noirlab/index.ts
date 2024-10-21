@@ -1,15 +1,33 @@
-export async function getRelease(locale: string, id: string) {
-  const releaseUrl = `https://noirlab.edu/public/api/v2/releases/${id}/?lang=${locale}&translation_mode=fallback`;
-  const response = await fetch(releaseUrl, {
-    next: { tags: ["pressRelease"] },
-  });
-  const release = await response.json();
-  return release;
+import { OpenGraph } from "next/dist/lib/metadata/types/opengraph-types";
+import { client, ImageMini, ReleasesService } from "./codegen";
+import { Locale } from "@/lib/i18n/settings";
+
+client.setConfig({
+  baseUrl: "https://noirlab.edu",
+});
+
+export function getReleaseOpenGraph(
+  images: Array<ImageMini> = []
+): OpenGraph["images"] | undefined {
+  const format = "screen640";
+
+  const feature = images[0];
+
+  if (!feature) return;
+
+  const { title, height, width, formats } = feature;
+
+  if (formats[format]) {
+    return {
+      alt: title,
+      url: formats[format],
+      height: height || undefined,
+      width: width || undefined,
+    };
+  }
 }
 
-export async function getReleaseOpenGraph(locale: string, id: string) {
-  const format = "screen640";
-  const { images } = await getRelease(locale, id);
+export function getReleaseHero(images: Array<ImageMini>) {
   if (!images) return;
   const feature = images[0];
   if (!feature) return;
@@ -17,9 +35,29 @@ export async function getReleaseOpenGraph(locale: string, id: string) {
   const { title, height, width, formats } = feature;
 
   return {
-    alt: title,
-    url: formats[format],
+    altText: title,
+    url: formats.banner1920,
     height,
     width,
   };
 }
+
+export const generateReleaseMetadata = async (id: string, locale: string) => {
+  const { data } = await ReleasesService.releasesRetrieve({
+    path: {
+      id,
+    },
+    query: {
+      lang: locale as Locale,
+      translation_mode: "fallback",
+    },
+  });
+
+  return {
+    title: data?.title,
+    description: data?.headline,
+    openGraph: {
+      images: getReleaseOpenGraph(data?.images),
+    },
+  };
+};
