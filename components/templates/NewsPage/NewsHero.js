@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import imageShape from "@/shapes/image";
 import * as Styled from "./styles";
+import Hero from "@/components/molecules/Hero";
 
 export default function NewsHero({
   data,
@@ -17,27 +18,13 @@ export default function NewsHero({
   if (caption)
     return (
       <Styled.HeroFigure className={className}>
-        <Styled.HeroImageContainer data-cy="hero">
-          <Styled.HeroImage
-            image={{ ...imageData, priority: true }}
-            $focalPointX={focalPointX || 50}
-            $focalPointY={focalPointY || 50}
-          />
-        </Styled.HeroImageContainer>
+        <Hero {...{ className, data, focalPointX, focalPointY }} />
         <Styled.HeroFigCaption dangerouslySetInnerHTML={{ __html: caption }} />
       </Styled.HeroFigure>
     );
 
   return (
-    <Styled.Hero className={className} data-cy="hero">
-      <Styled.HeroImage
-        role="presentation"
-        image={{ ...imageData, priority: true }}
-        $focalPointX={focalPointX || 50}
-        $focalPointY={focalPointY || 50}
-      />
-      {children}
-    </Styled.Hero>
+    <Hero {...{ className, data, focalPointX, focalPointY }}>{children}</Hero>
   );
 }
 
