@@ -1,6 +1,7 @@
+"use client";
 import styled from "styled-components";
 import { fluidScale, containerFullBleed } from "@/styles/globalStyles";
-import { Image } from "@rubin-epo/epo-react-lib";
+import Image from "@rubin-epo/epo-react-lib/Image";
 
 export const HeroContainer = styled.div`
   ${containerFullBleed("CONTAINER_FULL")}
@@ -10,10 +11,6 @@ export const HeroContainer = styled.div`
 `;
 
 export const HeroImage = styled(Image)`
-  --Hero-object-position: ${({ $focalPointX, $focalPointY }) =>
-    `${$focalPointX}% ${$focalPointY}%;`}
-  width: 100%;
-
   /* stylelint-disable declaration-no-important */
   height: 100% !important;
   object-fit: cover;
