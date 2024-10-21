@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import HeroComponent from "@/page/Hero";
+import HeroComponent from "@/components/molecules/Hero";
 import {
   fluidScale,
   respond,
@@ -23,8 +23,6 @@ export const Hero = styled(HeroComponent)`
     WIDE_BREAKPOINT,
     MOBILE_BREAKPOINT
   )};
-  --Hero-object-position: ${({ $focalPointX, $focalPointY }) =>
-    `${$focalPointX}% ${$focalPointY}%;`}
   --hero-overlap: ${HERO_OVERLAP};
 `;
 

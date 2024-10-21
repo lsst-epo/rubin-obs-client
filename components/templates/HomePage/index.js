@@ -2,7 +2,7 @@
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import ContentBlockFactory from "@/factories/ContentBlockFactory";
-import Hero from "@/page/Hero";
+import Hero from "@/components/molecules/Hero";
 import { Buttonish, MixedLink } from "@rubin-epo/epo-react-lib";
 import { makeDateString, makeTruncatedString } from "@/lib/utils";
 import { SlideBlock } from "@/components/content-blocks";
