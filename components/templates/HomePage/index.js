@@ -1,29 +1,33 @@
-"use client";
 import PropTypes from "prop-types";
-import { useTranslation } from "react-i18next";
+import truncate from "lodash/truncate";
+import { damAssetToImage } from "@/lib/canto";
+import { useTranslation } from "@/lib/i18n";
 import ContentBlockFactory from "@/factories/ContentBlockFactory";
 import Hero from "@/components/molecules/Hero";
-import { Buttonish, MixedLink } from "@rubin-epo/epo-react-lib";
-import { makeDateString, makeTruncatedString } from "@/lib/utils";
+import Buttonish from "@rubin-epo/epo-react-lib/Buttonish";
+import MixedLink from "@rubin-epo/epo-react-lib/MixedLink";
+import { makeDateString } from "@/lib/utils/dates";
 import { SlideBlock } from "@/components/content-blocks";
 import Tabs from "@/components/layout/Tabs";
 import TempList from "@/components/dynamic/TempList";
 import * as Styled from "./styles";
 
-export default function HomePage({
+export default async function HomePage({
   data: {
     contentBlocks,
     customHero,
     description,
     hero,
+    cantoHero,
     focalPointX,
     focalPointY,
     id,
     newsEntry,
     title,
   },
+  locale,
 }) {
-  const { t } = useTranslation();
+  const { t } = await useTranslation(locale);
 
   // HERO AREA
   // If there is a newsEntry or customHero, display alternate hero area
@@ -95,7 +99,7 @@ export default function HomePage({
             <Styled.Details>
               <span>
                 {!custom && news?.date && <h4>{makeDateString(news.date)}</h4>}
-                <div>{makeTruncatedString(altTeaser, 30)}</div>
+                <div>{truncate(altTeaser, 30)}</div>
               </span>
               {custom?.mixedLink?.element || custom?.mixedLink?.url ? (
                 <MixedLink {...custom.mixedLink} className="c-buttonish" />
@@ -111,7 +115,14 @@ export default function HomePage({
       ) : (
         <Styled.HeroWrapper>
           <Styled.HeroContainer>
-            <Hero data={hero} {...{ focalPointX, focalPointY }} />
+            <Hero
+              data={
+                cantoHero?.length > 0
+                  ? [damAssetToImage(locale, cantoHero[0])]
+                  : hero
+              }
+              {...{ focalPointX, focalPointY }}
+            />
           </Styled.HeroContainer>
           <Styled.HeroContent>
             <h1>{title}</h1>
@@ -142,4 +153,5 @@ HomePage.displayName = "Template.HomePage";
 
 HomePage.propTypes = {
   data: PropTypes.object,
+  locale: PropTypes.string.isRequired,
 };

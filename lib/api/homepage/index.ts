@@ -27,6 +27,20 @@ export const getHomepage = async (locale: string, previewToken?: string) => {
               ${getImageFields("crop", 1920, 1067)}
             }
           }
+          cantoHero {
+            url {
+              directUrlPreview
+              directUrlOriginal
+            }
+            width
+            height
+            metadata: additional {
+              AltTextEN
+              AltTextES
+              CaptionEN
+              CaptionES
+            }
+          }
           focalPointX
           focalPointY
           newsEntry {
@@ -94,6 +108,25 @@ export const getHomepageMetadata = async (
         ... on homepage_homepage_Entry {
           title
           description
+          hero {
+            ...on heroes_Asset {
+              ${getImageFields("crop", 900, 550)}
+            }
+          }
+          cantoHero {
+            url {
+              directUrlPreview
+              directUrlOriginal
+            }
+            width
+            height
+            metadata: additional {
+              AltTextEN
+              AltTextES
+              CaptionEN
+              CaptionES
+            }
+          }
         }
       }
     }

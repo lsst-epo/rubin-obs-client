@@ -1,3 +1,4 @@
+"use client";
 import PropTypes from "prop-types";
 import { fileSize } from "@/helpers";
 import * as Styled from "./styles";

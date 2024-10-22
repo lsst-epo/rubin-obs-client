@@ -1,18 +1,29 @@
 "use client";
 import styled from "styled-components";
-import { fluidScale, containerFullBleed } from "@/styles/globalStyles";
+import { fluidScale } from "@/styles/globalStyles";
 import Image from "@rubin-epo/epo-react-lib/Image";
 
 export const HeroContainer = styled.div`
-  ${containerFullBleed("CONTAINER_FULL")}
-  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   height: var(--Hero-height, ${fluidScale("540px", "400px")});
-  overflow: auto;
+  overflow: hidden;
+  position: relative;
 `;
 
 export const HeroImage = styled(Image)`
-  /* stylelint-disable declaration-no-important */
-  height: 100% !important;
+  color: transparent;
+  background-image: var(--image-background-hero, none);
+  background-size: cover;
+  background-position: var(--Hero-object-position, center);
+  background-repeat: no-repeat;
+
+  width: unset;
+  height: unset;
+  inline-size: 100%;
+  block-size: 100%;
   object-fit: cover;
   object-position: var(--Hero-object-position, center);
 `;

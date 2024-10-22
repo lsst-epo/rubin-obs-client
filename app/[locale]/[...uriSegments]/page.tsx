@@ -2,7 +2,6 @@ import { FunctionComponent } from "react";
 import { Metadata, ResolvingMetadata } from "next";
 import { draftMode } from "next/headers";
 import { notFound, redirect } from "next/navigation";
-import { OpenGraph } from "next/dist/lib/metadata/types/opengraph-types";
 import striptags from "striptags";
 import { getBreadcrumbsById, getEntryMetadataByUri } from "@/lib/api/metadata";
 import {
@@ -11,7 +10,7 @@ import {
 } from "@/lib/api/entries/index";
 import { getEntryDataByUri } from "@/lib/api/entry";
 import { generateReleaseMetadata } from "@/lib/api/noirlab";
-import { resizeCantoImage } from "@/lib/api/canto/resize";
+import { pickFeaturedImage } from "@/lib/helpers/metadata";
 import PageTemplate from "@/components/templates/Page";
 import NewsPageTemplate from "@/components/templates/NewsPage";
 import GlossaryPageTemplate from "@/components/templates/GlossaryPage";
@@ -19,28 +18,6 @@ import SearchPageTemplate from "@/components/templates/SearchPage";
 import SlideshowPageTemplate from "@/components/templates/SlideshowPage";
 import StaffPageTemplate from "@/components/templates/StaffPage";
 import EventPageTemplate from "@/components/templates/EventPage";
-
-const pickFeaturedImage = async (
-  image?: any,
-  cantoAsset?: any
-): Promise<OpenGraph["images"] | undefined> => {
-  if (cantoAsset) {
-    const {
-      width,
-      height,
-      url: { directUrlPreview },
-    } = cantoAsset;
-    const url = resizeCantoImage(directUrlPreview, 800);
-
-    return { url, width, height };
-  }
-
-  if (image) {
-    const { url, width, height, altText: alt } = image;
-
-    return { url, width, height, alt };
-  }
-};
 
 export async function generateMetadata(
   { params: { locale, uriSegments }, searchParams = {} }: UriSegmentProps,

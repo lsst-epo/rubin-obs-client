@@ -1,3 +1,4 @@
+"use client";
 import { Share } from "@/components/atomic";
 import { Container } from "@rubin-epo/epo-react-lib";
 
