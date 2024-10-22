@@ -2,20 +2,12 @@ import styled from "styled-components";
 import {
   containerWide,
   containerFullBleed,
-  fluidScale,
   ptToEm,
   respond,
   tokens,
 } from "@/styles/globalStyles";
 import { aHidden } from "@/styles/mixins/appearance";
-import { IconComposer, Image, token } from "@rubin-epo/epo-react-lib";
-
-export const Hero = styled.div`
-  ${containerFullBleed("CONTAINER_FULL")}
-  position: relative;
-  height: var(--Hero-height, ${fluidScale("540px", "400px")});
-  overflow: auto;
-`;
+import { IconComposer, token } from "@rubin-epo/epo-react-lib";
 
 export const HeroFigure = styled.figure`
   ${containerFullBleed("CONTAINER_FULL")}
@@ -27,13 +19,6 @@ export const HeroFigure = styled.figure`
   }
 `;
 
-export const HeroImageContainer = styled.div`
-  ${containerFullBleed("CONTAINER_FULL")}
-  position: relative;
-  height: var(--Hero-height, ${fluidScale("540px", "400px")});
-  overflow: auto;
-`;
-
 export const HeroFigCaption = styled.figcaption`
   ${aHidden}
 `;
@@ -43,17 +28,6 @@ export const HeroCaption = styled.div`
   padding-bottom: 40px;
   font-size: ${ptToEm("12pt")};
   line-height: 1.428;
-`;
-
-export const HeroImage = styled(Image)`
-  --Hero-object-position: ${({ $focalPointX, $focalPointY }) =>
-    `${$focalPointX}% ${$focalPointY}%;`}
-
-  width: 100%;
-  /* stylelint-disable declaration-no-important */
-  height: 100% !important;
-  object-fit: cover;
-  object-position: var(--Hero-object-position, center);
 `;
 
 export const Article = styled.article`
