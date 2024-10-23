@@ -1,3 +1,4 @@
+"use client";
 import styled from "styled-components";
 import { respond } from "@/styles/globalStyles";
 

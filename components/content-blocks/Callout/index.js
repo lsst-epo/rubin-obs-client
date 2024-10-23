@@ -1,3 +1,4 @@
+"use client";
 import PropTypes from "prop-types";
 import CalloutTwoTone from "./CalloutTwoTone";
 import CalloutMain from "./CalloutMain";

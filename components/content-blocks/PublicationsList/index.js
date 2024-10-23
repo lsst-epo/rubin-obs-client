@@ -1,3 +1,4 @@
+"use client";
 import PropTypes from "prop-types";
 import { Container } from "@rubin-epo/epo-react-lib";
 import { mixedLinkShape } from "@/shapes/link";

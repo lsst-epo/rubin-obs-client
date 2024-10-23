@@ -1,32 +1,31 @@
 import { fallbackLng } from "@/lib/i18n/settings";
 import { resizeCantoImage, ValidCantoSizes } from "./resize";
 
-const responsiveCantoSrc = (
-  previewUrl: string,
-  originalUrl: string,
-  width: number
-) => {
-  const eligibleSizes = ValidCantoSizes.filter((size) => size < width);
-  const srcset = eligibleSizes.map(
-    (size) => `${resizeCantoImage(previewUrl, size)} ${size}w`
+const responsiveCanto = (previewUrl: string, width: number) => {
+  const eligibleSizes: Array<ValidCantoSize | number> = ValidCantoSizes.filter(
+    (size) => size < width
   );
+  const srcSet = eligibleSizes.map((size) => {
+    return {
+      size,
+      src: resizeCantoImage(previewUrl, size),
+    };
+  });
 
-  srcset.push(`${originalUrl} ${width}w`);
+  const srcSize = eligibleSizes.map((size) => {
+    return { size };
+  });
 
-  const sizes = eligibleSizes.map((size) => {
-    return `(max-width: ${size}px): ${size}px`;
-  }, "");
-
-  sizes.push(`${width}px`);
+  srcSize.push({ size: width });
 
   return {
-    srcSet: srcset.join(", "),
-    sizes: sizes.join(", "),
+    srcSet,
+    srcSize,
   };
 };
 
 const getAssetMetadata = (
-  metadata: Record<string, string>,
+  metadata: CantoAdditional,
   locale = fallbackLng
 ): { altText?: string; caption?: string; credit?: string } | undefined => {
   if (!metadata) return undefined;
@@ -44,24 +43,26 @@ const getAssetMetadata = (
   };
 };
 
-export const damAssetToImage = (locale: string, data: CantoImage) => {
+export const damAssetToImage = (locale: string, data: CantoAsset) => {
   if (!data) return undefined;
 
   const { metadata, url, width, height } = data;
   const { directUrlPreview, directUrlOriginal } = url;
-  const { altText: alt, ...assetMetadata } =
+  const { altText, ...assetMetadata } =
     getAssetMetadata(metadata, locale) || {};
 
+  const { srcSet, srcSize } = responsiveCanto(
+    directUrlPreview,
+    parseFloat(width)
+  );
+
   return {
-    src: directUrlPreview,
-    ...responsiveCantoSrc(
-      directUrlPreview,
-      directUrlOriginal,
-      parseFloat(width)
-    ),
+    url: directUrlOriginal,
+    srcSet,
+    srcSize,
     width: parseFloat(width),
     height: parseFloat(height),
-    alt,
+    altText,
     ...assetMetadata,
   };
 };

@@ -18,10 +18,15 @@ const Hero: FunctionComponent<PropsWithChildren<HeroProps>> = ({
 
   if (!imageData?.url) return null;
 
+  const { srcSet = [] } = imageData;
+
+  const blurImage = srcSet[0]?.src ? `url('${srcSet[0]?.src}')` : undefined;
+
   return (
     <Styled.HeroContainer
       data-cy="hero"
       style={{
+        "--image-background-hero": blurImage,
         "--Hero-object-position": `${focalPointX || 50}% ${focalPointY || 50}%`,
       }}
       className={className}

@@ -1,14 +1,15 @@
 import { FunctionComponent } from "react";
-import { Metadata } from "next";
+import { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import { draftMode } from "next/headers";
+import { pickFeaturedImage } from "@/lib/helpers/metadata";
 import { getHomepage, getHomepageMetadata } from "@/lib/api/homepage";
 import HomePageTemplate from "@/templates/HomePage";
 
-export async function generateMetadata({
-  params: { locale },
-  searchParams = {},
-}: LocaleProps): Promise<Metadata> {
+export async function generateMetadata(
+  { params: { locale }, searchParams = {} }: LocaleProps,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
   let previewToken: string | undefined;
 
   if (draftMode().isEnabled) {
@@ -17,11 +18,22 @@ export async function generateMetadata({
       : searchParams?.preview;
   }
 
+  const { openGraph } = await parent;
+
   const {
-    entry: { title, description },
+    entry: { title, description, hero, cantoHero },
   } = await getHomepageMetadata(locale, previewToken);
 
-  return { title, description };
+  const images =
+    (await pickFeaturedImage(hero[0], cantoHero[0])) || openGraph?.images;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      images,
+    },
+  };
 }
 
 const RootPage: FunctionComponent<LocaleProps> = async ({
@@ -43,7 +55,7 @@ const RootPage: FunctionComponent<LocaleProps> = async ({
     notFound();
   }
 
-  return <HomePageTemplate data={data} />;
+  return <HomePageTemplate {...{ locale, data }} />;
 };
 
 export default RootPage;

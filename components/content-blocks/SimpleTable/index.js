@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import PropTypes from "prop-types";
 import * as EPOLib from "@rubin-epo/epo-react-lib";
