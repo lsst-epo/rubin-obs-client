@@ -21,7 +21,7 @@ export async function generateMetadata({
     entry: { title, description },
   } = await getHomepageMetadata(locale, previewToken);
 
-  return { title, description };
+  return { title, description, alternates: { canonical: "./" } };
 }
 
 const RootPage: FunctionComponent<LocaleProps> = async ({
