@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import createIntlMiddleware from "next-intl/middleware";
-import { fallbackLng, languages } from "./lib/i18n/settings";
+import { i18nRouter } from "next-i18n-router";
+import { cookieName, fallbackLng, languages } from "./lib/i18n/settings";
 
 const ignorableFileExtensions = ["woff", "ico", "png", "jpeg", "jpg"];
 
@@ -37,15 +37,12 @@ export function middleware(request) {
       return NextResponse.redirect(redirectUrl);
     }
   } else {
-    const handleI18nRouting = createIntlMiddleware({
-      // A list of all locales that are supported
+    const res = i18nRouter(request, {
       locales: languages,
-      localePrefix: "as-needed",
-
-      // If this locale is matched, pathnames work without a prefix (e.g. `/about`)
       defaultLocale: fallbackLng,
+      localeCookie: cookieName,
+      routingStrategy: "dynamicSegment",
     });
-    const res = handleI18nRouting(request);
 
     logEntry.httpRequest.status = res.status;
     logEntry.httpRequest.redirected = res.redirected;
