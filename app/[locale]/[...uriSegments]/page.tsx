@@ -83,6 +83,7 @@ export async function generateMetadata(
     openGraph: {
       images: featuredImage || previousImages,
     },
+    alternates: { canonical: "./" },
   };
 }
 
