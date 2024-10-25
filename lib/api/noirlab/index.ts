@@ -55,7 +55,10 @@ export const generateReleaseMetadata = async (id: string, locale: string) => {
 
   return {
     title: data?.title,
-    description: data?.headline,
+    description: data?.subtitle,
+    twitter: {
+      title: data?.title,
+    },
     openGraph: {
       images: getReleaseOpenGraph(data?.images),
     },

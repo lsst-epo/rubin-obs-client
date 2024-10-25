@@ -22,7 +22,7 @@ export async function generateMetadata({
   }
 
   const { siteInfo: metadata } = await getGlobalData(locale);
-  const { siteTitle, siteDescription, siteImage, language } = metadata;
+  const { siteTitle, siteDescription, siteImage, language, twitter } = metadata;
   const { url, width, height, altText: alt } = siteImage[0];
 
   return {
@@ -32,9 +32,14 @@ export async function generateMetadata({
     },
     description: siteDescription,
     manifest: "/site.webmanifest",
+    alternates: { canonical: "./" },
     openGraph: {
       locale: language,
       images: [{ url, width, height, alt }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      site: `@${twitter.substring(twitter.lastIndexOf("/") + 1)}`,
     },
     icons: {
       icon: [
@@ -44,6 +49,11 @@ export async function generateMetadata({
       apple: [
         { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
       ],
+    },
+    robots: {
+      googleBot: {
+        "max-image-preview": "large",
+      },
     },
   };
 }
