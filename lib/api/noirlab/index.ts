@@ -1,10 +1,21 @@
+import { Metadata } from "next";
 import { OpenGraph } from "next/dist/lib/metadata/types/opengraph-types";
-import { client, ImageMini, ReleasesService } from "./codegen";
+import {
+  AnnouncementsService,
+  client,
+  ImageMini,
+  ReleasesService,
+} from "./codegen";
 import { Locale } from "@/lib/i18n/settings";
 
 client.setConfig({
   baseUrl: "https://noirlab.edu",
 });
+
+export const NOIRLabServices = {
+  "news-post": AnnouncementsService.announcementsRetrieve,
+  "press-release": ReleasesService.releasesRetrieve,
+};
 
 export function getReleaseOpenGraph(
   images: Array<ImageMini> = []
@@ -42,25 +53,58 @@ export function getReleaseHero(images: Array<ImageMini>) {
   };
 }
 
-export const generateReleaseMetadata = async (id: string, locale: string) => {
-  const { data } = await ReleasesService.releasesRetrieve({
-    path: {
-      id,
-    },
-    query: {
-      lang: locale as Locale,
-      translation_mode: "fallback",
-    },
-  });
+export const generateNOIRLabMetadata = async (
+  id: string,
+  postType: Array<{ slug: string }>,
+  locale: string
+): Promise<Metadata> => {
+  const { slug } = postType[0];
 
-  return {
-    title: data?.title,
-    description: data?.subtitle,
-    twitter: {
+  if (slug === "news-post") {
+    const { data } = await AnnouncementsService.announcementsRetrieve({
+      path: {
+        id,
+      },
+      query: {
+        lang: locale as Locale,
+        translation_mode: "fallback",
+      },
+    });
+
+    return {
       title: data?.title,
-    },
-    openGraph: {
-      images: getReleaseOpenGraph(data?.images),
-    },
-  };
+      description: data?.subtitle,
+      twitter: {
+        title: data?.title,
+      },
+      openGraph: {
+        images: getReleaseOpenGraph(data?.images),
+      },
+    };
+  }
+
+  if (slug === "press-release") {
+    const { data } = await ReleasesService.releasesRetrieve({
+      path: {
+        id,
+      },
+      query: {
+        lang: locale as Locale,
+        translation_mode: "fallback",
+      },
+    });
+
+    return {
+      title: data?.title,
+      description: data?.headline,
+      twitter: {
+        title: data?.title,
+      },
+      openGraph: {
+        images: getReleaseOpenGraph(data?.images),
+      },
+    };
+  }
+
+  return {};
 };
