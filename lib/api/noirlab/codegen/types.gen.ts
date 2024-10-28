@@ -768,6 +768,159 @@ export type VideoMini = {
   };
 };
 
+export type AnnouncementsListData = {
+  query?: {
+    /**
+     * The language to use, used along with "translation_mode", default: user "preferred_language" cookie
+     */
+    lang?: "en" | "es";
+    /**
+     * A page number within the paginated result set.
+     */
+    page?: number;
+    /**
+     * Number of results to return per page. Max: 50, Default: 10
+     */
+    page_size?: number;
+    /**
+     * The program identifier, e.g: kpno, rubin, gemini, ctio, csdc, noao, useltp, noirlab
+     */
+    program?: string;
+    /**
+     * Defines if the original version of an object is returned in case the translation is not found, use "fallback" to retrieve the original content if no translation exist, or "language" to return translated content only. Default: "language"
+     */
+    translation_mode?: "fallback" | "language";
+  };
+};
+
+export type AnnouncementsListResponse = PaginatedAnnouncementMiniList;
+
+export type AnnouncementsListError = unknown;
+
+export type AnnouncementsRetrieveData = {
+  path: {
+    id: string;
+  };
+  query?: {
+    /**
+     * The language to use, used along with "translation_mode", default: user "preferred_language" cookie
+     */
+    lang?: "en" | "es";
+    /**
+     * Defines if the original version of an object is returned in case the translation is not found, use "fallback" to retrieve the original content if no translation exist, or "language" to return translated content only. Default: "language"
+     */
+    translation_mode?: "fallback" | "language";
+  };
+};
+
+export type AnnouncementsRetrieveResponse = Announcement;
+
+export type AnnouncementsRetrieveError = unknown;
+
+export type MediaImagesListData = {
+  query?: {
+    /**
+     * The web category identifier, e.g: kpno, rubin, gemini, ctio, csdc, noao, useltp, galaxies, illustrations
+     */
+    category?: string;
+    facility?: Array<number>;
+    /**
+     * The language to use, used along with "translation_mode", default: user "preferred_language" cookie
+     */
+    lang?: "en" | "es";
+    /**
+     * A page number within the paginated result set.
+     */
+    page?: number;
+    /**
+     * Number of results to return per page. Max: 50, Default: 10
+     */
+    page_size?: number;
+    search?: string;
+    /**
+     * If true the response will be a simplified version of the image with only the minimal required fields. Default: false
+     */
+    tiny?: boolean;
+    /**
+     * Defines if the original version of an object is returned in case the translation is not found, use "fallback" to retrieve the original content if no translation exist, or "language" to return translated content only. Default: "language"
+     */
+    translation_mode?: "fallback" | "language";
+  };
+};
+
+export type MediaImagesListResponse = PaginatedImageItemList;
+
+export type MediaImagesListError = unknown;
+
+export type MediaImagesRetrieveData = {
+  path: {
+    id: string;
+  };
+  query?: {
+    /**
+     * The language to use, used along with "translation_mode", default: user "preferred_language" cookie
+     */
+    lang?: "en" | "es";
+    /**
+     * Defines if the original version of an object is returned in case the translation is not found, use "fallback" to retrieve the original content if no translation exist, or "language" to return translated content only. Default: "language"
+     */
+    translation_mode?: "fallback" | "language";
+  };
+};
+
+export type MediaImagesRetrieveResponse = Image;
+
+export type MediaImagesRetrieveError = unknown;
+
+export type MediaVideosListData = {
+  query?: {
+    /**
+     * The web category identifier, e.g: kpno, rubin, gemini, ctio, csdc, noao, useltp, galaxies, illustrations
+     */
+    category?: string;
+    /**
+     * The language to use, used along with "translation_mode", default: user "preferred_language" cookie
+     */
+    lang?: "en" | "es";
+    /**
+     * A page number within the paginated result set.
+     */
+    page?: number;
+    /**
+     * Number of results to return per page. Max: 50, Default: 10
+     */
+    page_size?: number;
+    /**
+     * Defines if the original version of an object is returned in case the translation is not found, use "fallback" to retrieve the original content if no translation exist, or "language" to return translated content only. Default: "language"
+     */
+    translation_mode?: "fallback" | "language";
+  };
+};
+
+export type MediaVideosListResponse = PaginatedVideoMiniList;
+
+export type MediaVideosListError = unknown;
+
+export type MediaVideosRetrieveData = {
+  path: {
+    id: string;
+  };
+  query?: {
+    /**
+     * The language to use, used along with "translation_mode", default: user "preferred_language" cookie
+     */
+    lang?: "en" | "es";
+    /**
+     * Defines if the original version of an object is returned in case the translation is not found, use "fallback" to retrieve the original content if no translation exist, or "language" to return translated content only. Default: "language"
+     */
+    translation_mode?: "fallback" | "language";
+  };
+};
+
+export type MediaVideosRetrieveResponse = Video;
+
+export type MediaVideosRetrieveError = unknown;
+
 export type ReleasesListData = {
   query?: {
     /**
@@ -816,3 +969,30 @@ export type ReleasesRetrieveData = {
 export type ReleasesRetrieveResponse = Release;
 
 export type ReleasesRetrieveError = unknown;
+
+export type VisitsActivitiesRetrieveData = {
+  path: {
+    id: string;
+  };
+};
+
+export type VisitsActivitiesRetrieveResponse = Activity;
+
+export type VisitsActivitiesRetrieveError = unknown;
+
+export type VisitsShowingsListData = {
+  query?: {
+    /**
+     * The ID of the activity to filter showings.
+     */
+    activity?: string;
+    /**
+     * The start date to filter showings from.
+     */
+    start_date?: Date;
+  };
+};
+
+export type VisitsShowingsListResponse = Array<Showing>;
+
+export type VisitsShowingsListError = unknown;

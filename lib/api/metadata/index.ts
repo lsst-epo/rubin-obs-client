@@ -49,6 +49,9 @@ export async function getEntryMetadataByUri(
           title
         }
         ... on news_post_Entry {
+          postType {
+            slug
+          }
           pressReleaseId
           description: teaser
           title

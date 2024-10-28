@@ -15,6 +15,6 @@ export default defineConfig({
   },
   services: {
     asClass: true,
-    filter: "^\\w+ /public/api/v2/releases",
+    filter: "^\\w+ /public/api/v2",
   },
 });

@@ -1,6 +1,9 @@
 import { FunctionComponent } from "react";
 import sanitizeHtml from "sanitize-html";
-import { ReleasesService } from "@/lib/api/noirlab/codegen";
+import {
+  AnnouncementsService,
+  ReleasesService,
+} from "@/lib/api/noirlab/codegen";
 import { Locale } from "@/lib/i18n/settings";
 import NewsPageClient from "./client";
 
@@ -9,9 +12,52 @@ const NewsPage: FunctionComponent<{
   data: PageEntry;
   locale: string;
 }> = async ({ data, section, locale }) => {
-  const { pressReleaseId } = data;
+  const { postType, pressReleaseId } = data;
+  const { slug } = postType[0];
 
-  if (pressReleaseId) {
+  // Announcements
+  if (slug !== "feature" && pressReleaseId) {
+    const { data: release, error } =
+      await AnnouncementsService.announcementsRetrieve({
+        path: { id: pressReleaseId },
+        query: {
+          lang: locale as Locale,
+          translation_mode: "fallback",
+        },
+      });
+
+    if (!error && release) {
+      const {
+        title,
+        url: releaseUrl,
+        description,
+        subtitle,
+        images,
+        videos,
+        release_date: date,
+        links,
+        contacts,
+      } = release;
+
+      const combinedData = {
+        ...data,
+        title,
+        releaseUrl,
+        subtitle,
+        releaseDescription: description ? sanitizeHtml(description) : undefined,
+        links: links ? sanitizeHtml(links) : links,
+        contacts,
+        date,
+        images,
+        videos,
+      };
+
+      return <NewsPageClient data={combinedData} {...{ section, locale }} />;
+    }
+  }
+
+  // Press Releases
+  if (slug === "press-release" && pressReleaseId) {
     const { data: release, error } = await ReleasesService.releasesRetrieve({
       path: { id: pressReleaseId },
       query: {
@@ -56,6 +102,7 @@ const NewsPage: FunctionComponent<{
     }
   }
 
+  // Craft news entries
   return <NewsPageClient {...{ data, section, locale }} />;
 };
 

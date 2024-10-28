@@ -10,7 +10,7 @@ import {
   getEntrySectionByUri,
 } from "@/lib/api/entries/index";
 import { getEntryDataByUri } from "@/lib/api/entry";
-import { generateReleaseMetadata } from "@/lib/api/noirlab";
+import { generateNOIRLabMetadata } from "@/lib/api/noirlab";
 import { resizeCantoImage } from "@/lib/api/canto/resize";
 import PageTemplate from "@/components/templates/Page";
 import NewsPageTemplate from "@/components/templates/NewsPage";
@@ -67,12 +67,13 @@ export async function generateMetadata(
     image = [],
     cantoAssetSingle = [],
     pressReleaseId,
+    postType,
   } = entry;
 
   const previousImages = (await parent).openGraph?.images || [];
 
   if (pressReleaseId) {
-    return generateReleaseMetadata(pressReleaseId, locale);
+    return generateNOIRLabMetadata(pressReleaseId, postType, locale);
   }
 
   const featuredImage = await pickFeaturedImage(image[0], cantoAssetSingle[0]);
