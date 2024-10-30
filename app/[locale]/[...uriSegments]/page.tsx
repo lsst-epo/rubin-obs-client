@@ -43,7 +43,10 @@ const pickFeaturedImage = async (
 };
 
 export async function generateMetadata(
-  { params: { locale, uriSegments }, searchParams = {} }: UriSegmentProps,
+  {
+    params: { locale, uriSegments },
+    searchParams = {},
+  }: WithSearchParams<UriSegmentProps>,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const uri = uriSegments.join("/");
@@ -110,10 +113,9 @@ const sectionMap = {
   // userProfilePage: UserProfilePageTemplate,
 };
 
-const UriSegmentsPage: FunctionComponent<UriSegmentProps> = async ({
-  params: { locale, uriSegments },
-  searchParams,
-}) => {
+const UriSegmentsPage: FunctionComponent<
+  WithSearchParams<UriSegmentProps>
+> = async ({ params: { locale, uriSegments }, searchParams }) => {
   const uri = uriSegments.join("/");
   let previewToken: string | undefined;
 
