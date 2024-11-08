@@ -1,7 +1,8 @@
 "use client";
 import styled from "styled-components";
 import { fluidScale, containerFullBleed } from "@/styles/globalStyles";
-import Image from "@rubin-epo/epo-react-lib/Image";
+// import Image from "@rubin-epo/epo-react-lib/Image";
+import Image from "next/image";
 
 export const HeroContainer = styled.div`
   ${containerFullBleed("CONTAINER_FULL")}
