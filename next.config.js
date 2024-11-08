@@ -28,6 +28,22 @@ module.exports = {
       },
     ];
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "storage.googleapis.com",
+      },
+      {
+        protocol: "https",
+        hostname: "rubin.canto.com",
+      },
+      {
+        protocol: "https",
+        hostname: "noirlab.edu",
+      },
+    ],
+  },
   experimental: {
     forceSwcTransforms: true,
   },

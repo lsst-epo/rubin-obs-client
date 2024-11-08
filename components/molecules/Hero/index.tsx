@@ -18,15 +18,21 @@ const Hero: FunctionComponent<PropsWithChildren<HeroProps>> = ({
 
   if (!imageData?.url) return null;
 
+  const { width, height, url: src, altText: alt = "" } = imageData;
+
   return (
-    <Styled.HeroContainer
-      data-cy="hero"
-      style={{
-        "--Hero-object-position": `${focalPointX || 50}% ${focalPointY || 50}%`,
-      }}
-      className={className}
-    >
-      <Styled.HeroImage image={{ ...imageData, priority: true }} />
+    <Styled.HeroContainer data-cy="hero" className={className}>
+      <Styled.HeroImage
+        {...{ width, height, src, alt }}
+        style={{
+          "--Hero-object-position": `${focalPointX || 50}% ${
+            focalPointY || 50
+          }%`,
+        }}
+        priority
+        fetchPriority="high"
+        quality={90}
+      />
       {children}
     </Styled.HeroContainer>
   );
