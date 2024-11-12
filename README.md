@@ -56,3 +56,11 @@ node getApiGatewayURL
 
 This IP will change between bringing up and down the container, so keep in mind that you'll need to do this step everytime you bring the Craft CMS containers down and back up.
 
+### Summit Log
+
+If you visit the Rubin Observatory summit site and would like to commemorate your visit with a commit, enter it here:
+
+|Date|Visitor|Comments|
+|----|-------|--------|
+|2024, November 15|[@alexgoff](https://github.com/alexgoff)|Primera commit|
+
