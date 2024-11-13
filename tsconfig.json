@@ -41,7 +41,8 @@
       "@/helpers": ["helpers"],
       "@/helpers/*": ["helpers/*"],
       "@/hoc/*": ["components/hoc/*"]
-    }
+    },
+    "types": ["cypress", "node"]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"],
