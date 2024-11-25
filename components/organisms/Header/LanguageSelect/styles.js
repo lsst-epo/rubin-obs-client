@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { Switch as FormSwitch } from "@rubin-epo/epo-react-lib";
-import { respond, BREAK_HEADER_LAYOUT } from "@/styles/globalStyles";
 
 export const Fieldset = styled.fieldset`
   display: flex;
@@ -17,13 +16,6 @@ export const Label = styled.label`
   font-weight: 700;
 
   ${({ $disabled }) => $disabled && `pointer-events: none;`}
-`;
-
-export const MobileLabelText = styled.span`
-  display: none;
-  padding-inline-end: min(5vw, 1.75em);
-
-  ${respond(`display: block;`, BREAK_HEADER_LAYOUT)}
 `;
 
 export const Switch = styled(FormSwitch)`

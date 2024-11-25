@@ -1,3 +1,4 @@
+"use client";
 import PropTypes from "prop-types";
 import { useGoogleLogin } from "@react-oauth/google";
 import { usePathname, useRouter } from "next/navigation";
