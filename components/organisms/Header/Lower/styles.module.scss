@@ -1,0 +1,31 @@
+@use "abstracts/functions";
+@use "abstracts/mixins/base";
+
+.lower {
+  background-color: var(--color-rubin-teal-400, #058b8c);
+}
+
+.desktopNavigation {
+  @include base.respond(functions.header(layout-breakpoint)) {
+    display: none;
+  }
+}
+
+.mobileLanguageToggle {
+  display: none;
+  padding-left: 1rem;
+  flex-shrink: 0;
+
+  @include base.respond(functions.header(layout-breakpoint)) {
+    display: inline-block;
+  }
+}
+
+.lowerControls {
+  display: none;
+  height: 100%;
+
+  @include base.respond(functions.header(layout-breakpoint)) {
+    display: flex;
+  }
+}

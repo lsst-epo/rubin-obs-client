@@ -1,8 +1,9 @@
+"use client";
 import { useRef } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import Subnavigation from "./Subnavigation";
-import { IconComposer } from "@rubin-epo/epo-react-lib";
+import IconComposer from "@rubin-epo/epo-react-lib/IconComposer";
 import { useKeyDownEvent, useFocusTrap } from "@/hooks";
 import internalLinkShape, { internalLinkInternalShape } from "@/shapes/link";
 
