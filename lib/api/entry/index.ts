@@ -11,7 +11,6 @@ import { newsPostFragmentFull } from "@/lib/api/fragments/news-post";
 import {
   pageFragmentFull,
   searchFragmentFull,
-  userProfileFragmentFull,
   redirectFragment,
 } from "@/lib/api/fragments/page";
 import { staffProfileFragmentFull } from "@/lib/api/fragments/staff-profile";
@@ -127,11 +126,6 @@ function getQueryFragments(
         ${glossaryTermFragmentFull}
         ${entryQueryify(`...glossaryTermFragmentFull`)}
       `;
-    case "userProfilePage":
-      return gql`
-        ${userProfileFragmentFull}
-        ${entryQueryify(`...userProfileFragmentFull`)}
-      `;
     case "searchResults":
       return gql`
         ${searchFragmentFull}
@@ -150,7 +144,6 @@ function getQueryFragments(
         ${staffProfileFragmentFull}
         ${glossaryTermFragmentFull}
         ${educatorPageFragmentFull}
-        ${userProfileFragmentFull}
         ${investigationLandingPageFragmentFull}
         ${redirectFragment}
         ${entryQueryify(`
@@ -162,7 +155,6 @@ function getQueryFragments(
           ...searchFragmentFull
           ...staffProfileFragmentFull
           ...glossaryTermFragmentFull
-          ...userProfileFragmentFull
           ...investigationLandingPageFragmentFull
           ...redirectFragment
         `)}

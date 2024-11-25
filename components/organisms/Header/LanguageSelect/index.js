@@ -1,5 +1,6 @@
+"use client";
 import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { fallbackLng } from "@/lib/i18n/settings";
@@ -17,7 +18,8 @@ const filterSearchParams = (searchParams) => {
   return `?${filteredParams.join("&")}`;
 };
 
-export default function LanguageSelect({ id }) {
+export default function LanguageSelect({ className }) {
+  const id = useId();
   const [isLoading, setLoading] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
@@ -54,12 +56,9 @@ export default function LanguageSelect({ id }) {
   };
 
   return (
-    <Styled.Fieldset>
+    <Styled.Fieldset className={className}>
       <legend className="a-hidden">{t("localize-content")}</legend>
       <Styled.Label htmlFor={id} $disabled={isLoading}>
-        <Styled.MobileLabelText role="presentation">
-          {t("language-select-label")}
-        </Styled.MobileLabelText>
         <span className="a-hidden">{t("espanol-site-name")}</span>
         <Styled.Switch
           id={id}
@@ -73,5 +72,5 @@ export default function LanguageSelect({ id }) {
 }
 
 LanguageSelect.propTypes = {
-  id: PropTypes.string.isRequired,
+  className: PropTypes.string,
 };

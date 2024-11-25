@@ -1,0 +1,99 @@
+@use "abstracts/mixins/appearance";
+@use "abstracts/mixins/base";
+@use "abstracts/functions";
+
+.searchBar {
+  @include base.fluid-scale(
+    toggle-width,
+    75px,
+    60px,
+    functions.break(tablet),
+    functions.break(mobile)
+  );
+
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  font-size: 0.818em;
+  font-weight: functions.font-weight(bold);
+  color: functions.palette(white);
+
+  &__input {
+    @include appearance.input-unstyled;
+    @include base.fluid-scale(
+      width,
+      functions.header(button-width-tablet),
+      functions.header(button-width-mobile),
+      functions.break(tablet),
+      functions.break(mobile)
+    );
+
+    width: calc(100% - var(--width));
+    margin-left: var(--width);
+
+    &.focus-visible {
+      outline-width: 0;
+    }
+  }
+}
+
+.toggle {
+  position: absolute;
+  width: var(--toggle-width);
+  top: 0;
+  left: 0;
+  height: 100%;
+}
+
+.toggleIcon {
+  transform: translateY(12%);
+
+  @include base.fluid-scale(
+    width height,
+    41.85px,
+    26px,
+    functions.break(tablet),
+    functions.break(mobile)
+  );
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  width: var(--toggle-width);
+  height: 100%;
+  transition: width 0.35s ease-in-out, background-color 0.35s ease-in-out,
+    visibility 0s 0.35s;
+  visibility: hidden;
+
+  &[data-expanded="true"] {
+    width: 468px;
+    background-color: functions.palette(black);
+    visibility: visible;
+    transition: width 0.35s ease-in-out, background-color 0.35s ease-in-out;
+
+    @include base.respond(functions.header(breakpoint-for-search-bar)) {
+      // overlap logo
+      width: calc(var(--header-width, 100vw) - var(--width));
+      min-width: 55vw;
+    }
+  }
+}
+
+.input {
+  @include appearance.input-unstyled;
+  @include base.fluid-scale(
+    width,
+    functions.header(button-width-tablet),
+    functions.header(button-width-mobile),
+    functions.break(tablet),
+    functions.break(mobile)
+  );
+
+  width: calc(100% - var(--width));
+  margin-left: var(--width);
+
+  &:focus-visible {
+    outline-width: 0;
+  }
+}

@@ -61,12 +61,12 @@ $font-weights: (
 // Cross-component variables
 // --------------------------------------------------------
 $header: (
-  height-tablet: 110px,
+  height-tablet: 95px,
   height-mobile: 60px,
   gap: 0,
-  layout-breakpoint: 1625px,
+  layout-breakpoint: 1500px,
   breakpoint-for-search-bar: 850px,
-  nav-link-padding-lateral: 1em,
+  nav-link-padding-lateral: 0.75em,
   nav-width-desktop: 450px,
   nav-width-mobile: 300px,
   button-width-tablet: 114px,

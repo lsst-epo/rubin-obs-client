@@ -1,3 +1,4 @@
+"use client";
 import { useTranslation, Trans } from "react-i18next";
 import { useAuthenticationContext } from "@/contexts/Authentication";
 import RegisterForm from "./RegisterForm";

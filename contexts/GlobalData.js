@@ -28,7 +28,6 @@ GlobalDataProvider.propTypes = {
     metadata: PropTypes.arrayOf(PropTypes.object),
     rootPages: rootPagesShape,
     siteInfo: siteInfoShape,
-    userProfilePage: PropTypes.object,
     investigation: PropTypes.object,
     contactForm: PropTypes.object,
   }),
