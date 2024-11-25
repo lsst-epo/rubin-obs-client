@@ -1,7 +1,7 @@
 import { FunctionComponent, PropsWithChildren, Suspense } from "react";
 import { Metadata } from "next";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import GlobalStyles from "@/styles/globalStyles";
+import { GlobalStyles } from "@rubin-epo/epo-react-lib/styles";
 import { getGlobalData } from "@/lib/api/globals";
 import { languages } from "@/lib/i18n/settings";
 import SourceSansPro from "@/lib/styles/font";

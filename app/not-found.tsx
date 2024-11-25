@@ -1,7 +1,7 @@
 import { FunctionComponent, Suspense } from "react";
 import SourceSansPro from "@/lib/styles/font";
 import StyledComponentsRegistry from "@/lib/styles/registry";
-import GlobalStyles from "@/styles/globalStyles";
+import { GlobalStyles } from "@rubin-epo/epo-react-lib/styles";
 import I18NextClientProvider from "@/contexts/i18next";
 import { AuthenticationContextProvider } from "@/contexts/Authentication";
 import { GoogleOAuthProvider } from "@react-oauth/google";
