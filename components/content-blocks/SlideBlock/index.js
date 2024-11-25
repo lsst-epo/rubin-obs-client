@@ -32,9 +32,7 @@ const SlideBlock = ({
 
   // get manually-curated data first. This has some filtering for missing entries (deleted in craft)
   let allItems = [];
-  if (dynamicComponent === "galleryItems") {
-    allItems = normalizeItemData(items, "galleryEntry");
-  } else if (dynamicComponent === "staffProfiles") {
+  if (dynamicComponent === "staffProfiles") {
     allItems = normalizeItemData(items, "staffEntry");
     truncate = 50;
   }
@@ -74,10 +72,6 @@ const SlideBlock = ({
   const makePretitle = (cat, type) => {
     if (type === "slideshow") {
       return t(`gallery.slideshow`);
-    } else if (type === "galleryItem") {
-      return cat?.[0]?.slug
-        ? t(`gallery.${cat[0].slug}`)
-        : t(`gallery.gallery`);
     }
     return null;
   };
