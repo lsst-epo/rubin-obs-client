@@ -34,7 +34,6 @@ const DataList = ({
   const listTypeMap = {
     newsPosts: "news-post",
     pressReleases: "press-release",
-    imageGalleryItems: "image",
     videoGalleryItems: "video",
   };
   const listType = categories.find((c) => c.slug === listTypeMap[component]);

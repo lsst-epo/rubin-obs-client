@@ -62,20 +62,6 @@ export default function MediaAside({
                   </Figure>
                 </Link>
               );
-            } else if (a.galleryItem?.length > 0) {
-              if (a.galleryItem[0].uri) {
-                return (
-                  <Link
-                    prefetch={false}
-                    href={`/${a.galleryItem[0].uri}`}
-                    key={i}
-                  >
-                    <ResponsiveImage
-                      image={a.galleryItem[0].representativeAssetVariant[0]}
-                    />
-                  </Link>
-                );
-              }
             }
           })}
         </AsideSection>
