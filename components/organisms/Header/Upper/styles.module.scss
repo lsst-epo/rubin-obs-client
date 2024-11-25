@@ -1,0 +1,17 @@
+@use "abstracts/functions";
+@use "abstracts/mixins/base";
+
+.upper {
+  background-color: var(--color-rubin-teal-600, #0c4a47);
+}
+
+.upperControls {
+  display: flex;
+  gap: 0.5rem;
+  height: 100%;
+  padding-right: 1rem;
+
+  @include base.respond(functions.header(layout-breakpoint)) {
+    display: none;
+  }
+}

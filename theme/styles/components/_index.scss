@@ -2,11 +2,9 @@
 @forward "page-header";
 
 // Globals
-@forward "components/global/Header/header";
-@forward "components/global/Header/navigation.scss";
-@forward "components/global/Header/subnavigation.scss";
-@forward "components/global/Header/subsubnavigation.scss";
-@forward "components/global/Header/search-bar.scss";
+@forward "components/organisms/Header/navigation.scss";
+@forward "components/organisms/Header/subnavigation.scss";
+@forward "components/organisms/Header/subsubnavigation.scss";
 @forward "components/global/Footer/footer";
 @forward "components/global/Footer/social.scss";
 @forward "components/global/Footer/nav.scss";

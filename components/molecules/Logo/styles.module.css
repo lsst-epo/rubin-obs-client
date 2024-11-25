@@ -1,0 +1,13 @@
+.logoWrapper {
+  display: inline-block;
+  height: 100%;
+}
+
+.logo {
+  height: 100%;
+  width: auto;
+
+  & > img {
+    max-height: 100%;
+  }
+}
