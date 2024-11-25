@@ -9,14 +9,12 @@ const AUTHORIZED_TYPES = {
   pages: false,
   educatorPages: true,
   studentPages: false,
-  userProfilePage: true,
   investigationLandingPage: false,
 };
 
 function isAuthorized(typeHandle, user, status) {
   if (typeHandle === "educatorPages")
     return user?.group === "educators" && status === "active";
-  if (typeHandle === "userProfilePage") return !!user && status === "active";
   return false;
 }
 
@@ -95,7 +93,6 @@ AuthorizePage.propTypes = {
     "pages",
     "educatorPages",
     "studentPages",
-    "userProfilePage",
     "investigationLandingPage",
   ]),
   children: PropTypes.node,

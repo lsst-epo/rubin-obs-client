@@ -1,0 +1,22 @@
+@use "abstracts/functions";
+@use "abstracts/mixins/base";
+
+.horizontalNavigation {
+  @include base.fluid-scale(
+    font-size,
+    20px,
+    14px,
+    functions.header(layout-breakpoint),
+    functions.break(mobile)
+  );
+
+  font-weight: functions.font-weight(bold);
+}
+
+.navigationList {
+  display: flex;
+}
+
+.navigationItem {
+  position: relative;
+}

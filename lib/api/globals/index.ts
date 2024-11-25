@@ -9,22 +9,86 @@ import {
   contactFormFragment,
 } from "@/lib/api/fragments/global";
 import { categoriesFragment } from "@/lib/api/fragments/categories";
-import { userProfileFragment } from "@/lib/api/fragments/page";
 import { getSiteFromLocale } from "@/lib/helpers/site";
 import tags from "../client/tags";
+import { getImageProps } from "next/image";
+import { cantoToImageProps } from "../canto";
 
-export async function getGlobalData(locale = fallbackLng) {
-  const site = getSiteFromLocale(locale);
+export async function getLogos() {
   const query = gql`
-    ${linkFragment}
-    ${siteInfoFragment}
-    ${footerFragment}
-    ${rootPageInfoFragment}
-    ${contactFormFragment}
-    ${categoriesFragment}
-    ${userProfileFragment}
-    query getGlobalData($site: [String]) {
-      pageTree: entries(
+    query getLogos($set: [String]) {
+      siteInfo: globalSet(handle: $set) {
+        ... on siteInfo_GlobalSet {
+          logoLarge {
+            url {
+              directUrlOriginal
+            }
+            width
+            height
+          }
+          logoSmall {
+            url {
+              directUrlOriginal
+            }
+            width
+            height
+          }
+        }
+      }
+    }
+  `;
+
+  const { data } = await queryAPI({
+    query,
+    variables: { set: "siteInfo" },
+    fetchOptions: { next: { tags: [tags.globals] } },
+  });
+
+  if (!data || !data.siteInfo) {
+    return undefined;
+  }
+
+  const {
+    siteInfo: { logoLarge, logoSmall },
+  } = data;
+
+  const largeProps = cantoToImageProps(logoLarge[0]);
+
+  const { props: large } = getImageProps({
+    ...largeProps,
+    priority: true,
+    quality: 90,
+  });
+
+  if (logoSmall[0]) {
+    const { props: small } = getImageProps({
+      ...cantoToImageProps(logoSmall[0]),
+      priority: true,
+      quality: 90,
+    });
+
+    return {
+      large,
+      small,
+    };
+  }
+
+  return {
+    large: {
+      ...large,
+      width: large.width,
+    },
+  };
+}
+
+export async function getNavigationItems(
+  locale = fallbackLng
+): Promise<Array<InternalLinkWithChildren>> {
+  const site = getSiteFromLocale(locale);
+
+  const query = gql`
+    query getNavigationItems($site: [String]) {
+      navigationItems: entries(
         section: "pages"
         site: $site
         level: 1
@@ -44,6 +108,28 @@ export async function getGlobalData(locale = fallbackLng) {
           }
         }
       }
+    }
+  `;
+
+  const { data } = await queryAPI({
+    query,
+    variables: { site },
+    fetchOptions: { next: { tags: [tags.globals] } },
+  });
+
+  return data?.navigationItems || [];
+}
+
+export async function getGlobalData(locale = fallbackLng) {
+  const site = getSiteFromLocale(locale);
+  const query = gql`
+    ${linkFragment}
+    ${siteInfoFragment}
+    ${footerFragment}
+    ${rootPageInfoFragment}
+    ${contactFormFragment}
+    ${categoriesFragment}
+    query getGlobalData($site: [String]) {
       globals: globalSets(site: $site) {
         ...rootPageInfoFragment
         ...siteInfoFragment
@@ -52,9 +138,6 @@ export async function getGlobalData(locale = fallbackLng) {
       }
       allCategories: categories(site: $site) {
         ...categoriesFragment
-      }
-      userProfilePage: entry(site: $site, type: "userProfilePage") {
-        ...userProfileFragment
       }
     }
   `;
@@ -79,10 +162,8 @@ export async function getGlobalData(locale = fallbackLng) {
     categories: data?.allCategories || [],
     footerContent: globals?.footer || {},
     contactForm: globals?.contactForm || {},
-    headerNavItems: data?.pageTree || [],
     rootPages: globals?.rootPageInformation?.customBreadcrumbs || [],
     siteInfo: globals?.siteInfo || {},
-    userProfilePage: data?.userProfilePage || {},
     localeInfo: {
       language: locale,
       locale,

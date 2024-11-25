@@ -1,0 +1,43 @@
+/* stylelint-disable declaration-no-important */
+@use "abstracts/functions";
+@use "abstracts/mixins/base";
+
+.verticalNavigation {
+  @include base.fluid-scale(
+    font-size,
+    20px,
+    14px,
+    functions.header(layout-breakpoint),
+    functions.break(mobile)
+  );
+
+  background-color: var(--color-rubin-teal-400, #058b8c);
+  font-weight: functions.font-weight(bold);
+  height: 100%;
+}
+
+.navigationList {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.slideOut {
+  --offset-slideout: calc(var(--header-height) * 2);
+
+  height: calc(100vh - var(--offset-slideout)) !important;
+  top: var(--offset-slideout) !important;
+  right: 0;
+}
+
+.icon {
+  svg {
+    @include base.fluid-scale(
+      width height,
+      41.85px,
+      26px,
+      functions.break(tablet),
+      functions.break(mobile)
+    );
+  }
+}
