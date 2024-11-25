@@ -1,0 +1,18 @@
+@use "abstracts/functions";
+@use "abstracts/mixins/base";
+@use "abstracts/mixins/layout";
+
+.header {
+  @include base.fluid-scale(
+    header-height,
+    functions.header(height-tablet),
+    functions.header(height-mobile),
+    functions.break(tablet),
+    functions.break(mobile)
+  );
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+  z-index: var(--elevation-element-header, 25);
+}

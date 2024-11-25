@@ -107,7 +107,6 @@ const sectionMap = {
   searchResults: SearchPageTemplate,
   slideshows: SlideshowPageTemplate,
   staffProfiles: StaffPageTemplate,
-  // userProfilePage: UserProfilePageTemplate,
 };
 
 const UriSegmentsPage: FunctionComponent<UriSegmentProps> = async ({

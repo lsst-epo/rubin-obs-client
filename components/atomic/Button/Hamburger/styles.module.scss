@@ -1,0 +1,22 @@
+@use "abstracts/mixins/base";
+@use "abstracts/functions";
+
+.hamburger {
+  @include base.fluid-scale(
+    width,
+    functions.header(button-width-tablet),
+    functions.header(button-width-mobile),
+    functions.break(tablet),
+    functions.break(mobile)
+  );
+
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+
+  &[aria-expanded="true"] {
+    background-color: var(--color-rubin-teal-600, #0c4a47);
+  }
+}
