@@ -39,8 +39,8 @@ export const aButtonTheme = (style) => {
   switch (style) {
     case "secondary":
       return css`
-        --button-background-color: var(--purple);
-        --button-border-color: var(--purple);
+        --button-background-color: var(--color-rubin-purple-300, #583671);
+        --button-border-color: var(--color-rubin-purple-300, #583671);
         --button-color: var(--white);
       `;
 
