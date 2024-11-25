@@ -1,7 +1,15 @@
-import { FunctionComponent, PropsWithChildren } from "react";
+import { FunctionComponent, PropsWithChildren, Suspense } from "react";
+import {
+  SignInModal,
+  RegisterModal,
+  SSOModal,
+  ForgotPasswordModal,
+  SetPasswordModal,
+  ActivateModal,
+} from "@/components/modal";
 import { getGlobalData } from "@/lib/api/globals";
 import { GlobalDataProvider } from "@/contexts/GlobalData";
-import Header from "@/components/global/Header";
+import Header from "@/components/organisms/Header";
 import Footer from "@/components/global/Footer";
 import Center from "@rubin-epo/epo-react-lib/Center";
 
@@ -10,8 +18,6 @@ const PageWrapper: FunctionComponent<
 > = async ({ locale, children }) => {
   const globalData = await getGlobalData(locale);
   const {
-    headerNavItems,
-    userProfilePage,
     footerContent,
     contactForm,
     siteInfo: { email, facebook, instagram, linkedIn, twitter, youTube },
@@ -20,11 +26,7 @@ const PageWrapper: FunctionComponent<
   return (
     <GlobalDataProvider data={globalData}>
       <Center maxWidth="2000px">
-        <Header
-          navItems={headerNavItems}
-          userProfilePage={userProfilePage}
-          locale={locale}
-        />
+        <Header locale={locale} />
         <main id="page-content">{children}</main>
         <Footer
           socialInfo={{
@@ -38,6 +40,14 @@ const PageWrapper: FunctionComponent<
           content={footerContent}
           contactForm={contactForm}
         />
+        <Suspense>
+          <SignInModal />
+          <RegisterModal />
+          <SSOModal />
+          <ForgotPasswordModal />
+          <SetPasswordModal />
+          <ActivateModal />
+        </Suspense>
       </Center>
     </GlobalDataProvider>
   );
