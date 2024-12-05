@@ -8,8 +8,6 @@ import DynamicComponentFactory from "@/factories/DynamicComponentFactory";
 import { Container } from "@rubin-epo/epo-react-lib";
 import Breadcrumbs from "@/page/Breadcrumbs";
 import FilterBar from "@/components/page/FilterBar";
-import SlideBlock from "@/components/content-blocks/SlideBlock";
-import { getCategoryObject, useGlobalData } from "@/lib/utils";
 import NavButtons from "@/components/layout/NavButtons";
 import SubHero from "@/components/page/SubHero";
 import AuthorizePage from "@/components/auth/AuthorizePage";
@@ -21,7 +19,6 @@ import NestedContext from "@/contexts/Nested";
 import PageContent from "@/page/PageContent";
 import MediaAside from "@/components/page/Aside/patterns/Media";
 import { FilterParamsProvider } from "@/contexts/FilterParams";
-import useQueryParams from "@/lib/routing/useQueryParams";
 
 export default function Page({
   data: {
@@ -66,8 +63,6 @@ export default function Page({
   const hasFilterbar =
     pageType === "dynamic" &&
     (dynamicComponent === "events" ||
-      dynamicComponent === "galleryItems" ||
-      dynamicComponent === "imageGalleryItems" ||
       dynamicComponent === "videoGalleryItems" ||
       dynamicComponent === "jobs" ||
       dynamicComponent === "news" ||
@@ -77,27 +72,11 @@ export default function Page({
       dynamicComponent === "nonScientificStaff");
 
   const isWideHeader =
-    dynamicComponent === "galleryItems" ||
-    dynamicComponent === "slideshows" ||
-    dynamicComponent === "glossaryTerms";
+    dynamicComponent === "slideshows" || dynamicComponent === "glossaryTerms";
 
   const isMediumPadding = dynamicComponent === "none";
 
-  const isGalleryHome = uri === "gallery";
   const isEventsPage = uri?.split("/").includes("calendar");
-
-  // custom page name for gallery search
-  const isGallerySearch = uri === "gallery/gallery-search";
-  const { queryParams } = useQueryParams();
-  const categoryId = queryParams.get("filter");
-  const categories = useGlobalData("categories");
-  let categoryObj;
-  if (isGallerySearch && categories && categoryId) {
-    categoryObj = getCategoryObject(categories, categoryId);
-
-    pageLink.title = t(`gallery.plural-${categoryObj.slug}`);
-    title = t(`gallery.plural-${categoryObj.slug}`);
-  }
 
   const showSiblingNav = parent?.children && showGuideNav;
   const shouldOverlapHero = !!hero?.length && overlapHero;
@@ -122,17 +101,7 @@ export default function Page({
         description={childNavigationDescription}
         pages={childNavigation}
       />
-      {isGalleryHome && (
-        <SlideBlock
-          section="slideshows"
-          header={t(`gallery.curated-slideshows`)}
-          mixedLink={{
-            url: "/gallery/slideshows",
-            text: t(`gallery.see-all`),
-          }}
-          truncate={50}
-        />
-      )}
+
       <FilterParamsProvider {...{ serverParams }}>
         {hasFilterbar && <FilterBar filterType={dynamicComponent} />}
         <PageContent

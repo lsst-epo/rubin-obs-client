@@ -45,33 +45,6 @@ const SearchList = ({
     };
     let customBreadcrumbs;
 
-    if (entry.typeHandle === "galleryItem") {
-      customBreadcrumbs = makeCustomBreadcrumbs(rootPages, "Gallery");
-      // add category strings and pre-filtered crumb: id, title, uri
-      let typeId = "";
-      let typeTitlePlural = "";
-      let typeSlug = "gallery";
-
-      if (entry.galleryItemCategory.length > 0) {
-        typeId = entry.galleryItemCategory[0].id;
-        typeTitlePlural = t(
-          `gallery.plural-${entry.galleryItemCategory[0].slug}`
-        );
-        typeSlug = entry.galleryItemCategory[0].slug;
-
-        customBreadcrumbs.push({
-          id: typeId,
-          title: typeTitlePlural,
-          uri: `gallery/gallery-search?filter=${typeId}`,
-        });
-      }
-      return (
-        <Breadcrumbs
-          breadcrumbs={[...customBreadcrumbs, pageLink]}
-          type="search"
-        />
-      );
-    }
     if (entry.typeHandle === "slideshow") {
       customBreadcrumbs = makeCustomBreadcrumbs(rootPages, "Slideshows");
       return (
@@ -89,7 +62,6 @@ const SearchList = ({
 
   const makeSubtitle = (entry) => {
     const type = {
-      galleryItem: t("gallery.gallery-item"),
       slideshow: t("gallery.slideshow"),
       events: t("events.event"),
       job: t("jobs.job"),

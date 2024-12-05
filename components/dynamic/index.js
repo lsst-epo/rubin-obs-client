@@ -1,5 +1,4 @@
 import EventList from "./EventList";
-import GalleryList from "./GalleryList";
 import JobList from "./JobList";
 import NewsList from "./NewsList";
 import RelatedList from "./RelatedList";
@@ -12,7 +11,6 @@ export default {
   EventList,
   JobList,
   NewsList,
-  GalleryList,
   RelatedList,
   SearchList,
   SlideshowList,
