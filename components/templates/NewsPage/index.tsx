@@ -34,7 +34,6 @@ const NewsPage: FunctionComponent<{
         subtitle,
         images,
         videos,
-        release_date: date,
         links,
         contacts,
       } = release;
@@ -47,7 +46,6 @@ const NewsPage: FunctionComponent<{
         releaseDescription: description ? sanitizeHtml(description) : undefined,
         links: links ? sanitizeHtml(links) : links,
         contacts,
-        date,
         images,
         videos,
       };
@@ -75,7 +73,6 @@ const NewsPage: FunctionComponent<{
         subtitle,
         images,
         videos,
-        release_date: date,
         more_information: moreInformation,
         links,
         contacts,
@@ -93,7 +90,6 @@ const NewsPage: FunctionComponent<{
           : undefined,
         links: links ? sanitizeHtml(links) : links,
         contacts,
-        date,
         images,
         videos,
       };
