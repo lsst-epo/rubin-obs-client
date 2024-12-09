@@ -1,12 +1,7 @@
 import PropTypes from "prop-types";
 import { useId } from "react";
 import classNames from "classnames";
-import {
-  ResponsiveImage,
-  Image,
-  MixedLink,
-  IconComposer,
-} from "@rubin-epo/epo-react-lib";
+import { Image, MixedLink, IconComposer } from "@rubin-epo/epo-react-lib";
 import { mixedLinkShape } from "@/shapes/link";
 import { useGlobalData } from "@/lib/utils";
 import * as Styled from "./styles";
@@ -57,13 +52,9 @@ const Tile = ({
         {finalImage && (
           <div className="image">
             {ratio ? (
-              <ResponsiveImage
-                role="presentation"
-                ratio={ratio}
-                image={finalImage}
-              />
+              <Styled.ResponsiveImage aspectRatio={ratio} image={finalImage} />
             ) : (
-              <Image role="presentation" image={finalImage} />
+              <Image image={finalImage} />
             )}
             {isVideo && (
               <Styled.PlayButton>
