@@ -2393,10 +2393,10 @@
   resolved "https://registry.yarnpkg.com/@rtsao/scc/-/scc-1.1.0.tgz#927dd2fae9bc3361403ac2c7a00c32ddce9ad7e8"
   integrity sha512-zt6OdqaDoOnJ1ZYsCYGt9YmWzDXl4vQdKTyJev62gFhRGKdx7mcT54V9KIjg+d2wi9EXsPvAPKe7i7WjfVWB8g==
 
-"@rubin-epo/epo-react-lib@^2.3.0":
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/@rubin-epo/epo-react-lib/-/epo-react-lib-2.3.0.tgz#6559cbb8dc0fb1c3bf2bc570ef5d5c539ce43bb2"
-  integrity sha512-RV+ZH2hJ0LkFhX6g9GjiwudxEK3l7qAf7hBXeNnpx+7GbCAlDwgqKx80TiL9pLULEeyLzlww3/+twOA9ht14IQ==
+"@rubin-epo/epo-react-lib@^2.5.1":
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/@rubin-epo/epo-react-lib/-/epo-react-lib-2.5.1.tgz#86acf0aa748a7b89e5698a412d690f318bd621f2"
+  integrity sha512-vXuQ5P9Dwz0pdLQOFEiQx5GruzkHohYBy/D/3oEBzVF7BA1K68P0Zr2CSkhfvaOdORFwmyLVnOR2RvPxqzhDyQ==
   dependencies:
     "@castiron/style-mixins" "^1.0.6"
     "@headlessui/react" "2.0.4"
