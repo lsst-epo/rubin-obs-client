@@ -63,7 +63,7 @@
     "@influxdata/influxdb-client": "^1.33.2",
     "@popperjs/core": "^2.11.5",
     "@react-oauth/google": "^0.12.1",
-    "@rubin-epo/epo-react-lib": "^2.3.0",
+    "@rubin-epo/epo-react-lib": "^2.5.1",
     "@urql/core": "^5.0.6",
     "@urql/next": "^1.1.2",
     "add": "^2.0.6",
