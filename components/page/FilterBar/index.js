@@ -23,7 +23,6 @@ const FilterBar = ({ filterType, setLiveRegionMessage }) => {
   const { categories } = useGlobalData();
   const filterMap = {
     events: "eventFilters",
-    galleryItems: "galleryTypes",
     jobs: "jobTypes",
     news: "newsFilters",
     staffProfiles: "staffFilters",
