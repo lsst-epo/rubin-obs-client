@@ -1,6 +1,7 @@
 /* eslint-disable */
 import styled from "styled-components";
-import { MixedLink as BaseMixedLink } from "@rubin-epo/epo-react-lib";
+import BaseMixedLink from "@rubin-epo/epo-react-lib/MixedLink";
+import BaseResponsiveImage from "@rubin-epo/epo-react-lib/ResponsiveImage";
 import SharePopupComponent from "@/layout/SharePopup";
 import {
   BREAK_PHABLET,
@@ -15,6 +16,10 @@ Media queries are done this way for special treatment at tablet level vs phone l
 @media (max-width: ${BREAK_PHABLET}) {}
 @media (min-width: ${BREAK_PHABLET_MIN}) and (max-width: ${BREAK_TABLET}) {}
 */
+
+export const ResponsiveImage = styled(BaseResponsiveImage)`
+  height: 100%;
+`;
 
 export const ListItem = styled.li`
   position: relative;
@@ -36,6 +41,7 @@ export const MixedLink = styled(BaseMixedLink)`
   /* set the grid areas for various bits */
   .image {
     grid-area: image;
+    overflow: hidden;
   }
 
   .pretitle {
@@ -210,10 +216,6 @@ export const MixedLink = styled(BaseMixedLink)`
       grid-row-gap: 0px;
       padding: 0px;
 
-      && .image > div {
-        padding-top: 50%;
-      }
-
       .pretitle {
         padding: 0.5rem 0;
         font-weight: normal;
@@ -296,10 +298,6 @@ export const MixedLink = styled(BaseMixedLink)`
       grid-gap: 0;
       padding: 0px;
 
-      && .image > div {
-        padding-top: 50%;
-      }
-
       .pretitle {
         padding: 0.5rem 20px;
         font-weight: normal;
@@ -330,13 +328,7 @@ export const MixedLink = styled(BaseMixedLink)`
         "image title"
         "image subtitle"
         "image text"
-        "footer text";
-
-      .image {
-        > div {
-          padding-top: 100%;
-        }
-      }
+        "image text";
 
       && .footer {
         display: none;
@@ -655,12 +647,6 @@ export const MixedLink = styled(BaseMixedLink)`
         "image title"
         "image text"
         "image text";
-
-      .image {
-        > div {
-          padding-top: 100%;
-        }
-      }
     }
   }
 
