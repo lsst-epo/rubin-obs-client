@@ -4,10 +4,11 @@ import { useTranslation } from "react-i18next";
 import {
   makeBreadcrumbs,
   makeCustomBreadcrumbs,
-  makeDateString,
   makeTruncatedString,
   useGlobalData,
 } from "@/lib/utils";
+
+import { makeDateString } from "@/helpers/dates";
 import Breadcrumbs from "@/components/page/Breadcrumbs";
 import { Grid } from "@rubin-epo/epo-react-lib";
 import DataList from "@/dynamic/DataList";
@@ -25,7 +26,7 @@ const SearchList = ({
   const { t } = useTranslation();
   const localeInfo = useGlobalData("localeInfo");
   const rootPages = useGlobalData("rootPages");
-  const lang = localeInfo?.language || fallbackLng;
+  const locale = localeInfo?.language || fallbackLng;
 
   const makePretitle = (entry) => {
     if (entry.eventType) {
@@ -79,7 +80,7 @@ const SearchList = ({
         <div>{type ? `${type} ` : ``}</div>
         <div>
           {entry.date
-            ? `${t("published")} ${makeDateString(entry.date, lang)}`
+            ? `${t("published")} ${makeDateString(entry.date, { locale })}`
             : ``}
         </div>
       </Styled.PretitleContainer>

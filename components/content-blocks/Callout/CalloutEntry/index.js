@@ -2,26 +2,27 @@
 
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { makeDateString, getSiteString, makeReleaseFeature } from "@/lib/utils";
+import { getSiteString, makeReleaseFeature } from "@/lib/utils";
+import { makeDateString } from "@/helpers/dates";
 import * as Styled from "./styles";
 import { Image } from "@rubin-epo/epo-react-lib";
 import { useRelease } from "@/lib/api/noirlabReleases";
 import { fallbackLng } from "@/lib/i18n/settings";
 
-const getDateString = (newsDate, eventStart, eventEnd, lang) => {
+const getDateString = (newsDate, eventStart, eventEnd, locale) => {
   if (newsDate) {
-    return makeDateString(newsDate, lang);
+    return makeDateString(newsDate, { locale });
   }
 
   if (eventStart && eventEnd) {
-    return `${makeDateString(eventStart, lang)} - ${makeDateString(
+    return `${makeDateString(eventStart, { locale })} - ${makeDateString(
       eventEnd,
-      lang
+      { locale }
     )}`;
   }
 
   if (eventEnd) {
-    return makeDateString(eventEnd, lang);
+    return makeDateString(eventEnd, { locale });
   }
 };
 

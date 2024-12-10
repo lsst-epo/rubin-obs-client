@@ -1,13 +1,14 @@
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import {
-  makeDateString,
   makeTruncatedString,
   makeReleaseFeature,
   normalizeItemData,
   useGlobalData,
   useList,
 } from "@/lib/utils";
+
+import { makeDateString } from "@/helpers/dates";
 import { Grid } from "@rubin-epo/epo-react-lib";
 import Tile from "@/atomic/Tile";
 import Loader from "@/atomic/Loader";
@@ -16,7 +17,7 @@ import { fallbackLng } from "@/lib/i18n/settings";
 const NewsGrid = ({ items = [], limit, listTypeId, sectionHandle, pageId }) => {
   const { t } = useTranslation();
   const localeInfo = useGlobalData("localeInfo");
-  const lang = localeInfo?.language || fallbackLng;
+  const locale = localeInfo?.language || fallbackLng;
   // get manually-curated data first
   let allItems = normalizeItemData(items);
 
@@ -70,7 +71,7 @@ const NewsGrid = ({ items = [], limit, listTypeId, sectionHandle, pageId }) => {
                 isFeature={i === 0}
                 link={uri}
                 pretitle={postType?.[0]?.title ? postType[0].title : " "}
-                subtitle={makeDateString(date || releaseDate, lang)}
+                subtitle={makeDateString(date || releaseDate, { locale })}
                 text={makeTruncatedString(subtitle || description, 30)}
                 title={title}
                 type="news"
