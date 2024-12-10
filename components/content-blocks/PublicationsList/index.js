@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { Container } from "@rubin-epo/epo-react-lib";
 import { mixedLinkShape } from "@/shapes/link";
-import { makeDateString } from "@/lib/utils";
+import { makeDateString } from "@/helpers/dates";
 import * as Styled from "./styles";
 
 export default function PublicationsListBlock({

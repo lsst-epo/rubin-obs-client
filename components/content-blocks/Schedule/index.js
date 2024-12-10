@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { Container } from "@rubin-epo/epo-react-lib";
-import { useDateString } from "@/lib/utils";
+import { makeDateString } from "@/helpers/dates";
 
 export default function ScheduleBlock({ date, description, scheduleRows }) {
-  const localizedDate = useDateString(date);
+  const localizedDate = makeDateString(date);
   return (
     <Container>
       <Date>{localizedDate}</Date>

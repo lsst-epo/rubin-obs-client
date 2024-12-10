@@ -4,11 +4,11 @@ import { Grid } from "@rubin-epo/epo-react-lib";
 import DataList from "@/dynamic/DataList";
 import Tile from "@/atomic/Tile";
 import {
-  makeDateString,
   makeTruncatedString,
   makeReleaseFeature,
   useGlobalData,
 } from "@/lib/utils";
+import { makeDateString } from "@/helpers/dates";
 import { fallbackLng } from "@/lib/i18n/settings";
 
 const NewsList = ({
@@ -23,7 +23,7 @@ const NewsList = ({
 }) => {
   const { t } = useTranslation();
   const localeInfo = useGlobalData("localeInfo");
-  const lang = localeInfo?.language || fallbackLng;
+  const locale = localeInfo?.language || fallbackLng;
   const cols = initialLimit === 4 ? 4 : initialLimit === 3 ? 3 : 2;
   const canShowFeatured = initialLimit > 4;
 
@@ -84,7 +84,7 @@ const NewsList = ({
                         ? postType[0].title
                         : null
                     }
-                    subtitle={makeDateString(date || releaseDate, lang)}
+                    subtitle={makeDateString(date || releaseDate, { locale })}
                     text={makeTruncatedString(description || subtitle, 30)}
                     title={title}
                     titleTag={"h2"}
