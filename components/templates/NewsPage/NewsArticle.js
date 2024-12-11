@@ -1,8 +1,9 @@
+"use client";
 import PropTypes from "prop-types";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import useResizeObserver from "use-resize-observer";
-import { useDateString } from "@/lib/utils";
+import { makeDateString } from "@/helpers/dates";
 import ContentBlockFactory from "@/factories/ContentBlockFactory";
 import { Container } from "@rubin-epo/epo-react-lib";
 import { Share } from "@/content-blocks";
@@ -27,8 +28,11 @@ export default function NewsArticle({ data }) {
     releaseUrl,
   } = data;
 
-  const { t } = useTranslation();
-  const localizedDate = useDateString(date);
+  const {
+    t,
+    i18n: { resolvedLanguage },
+  } = useTranslation();
+  const localizedDate = makeDateString(date, { locale: resolvedLanguage });
   const { ref } = useResizeObserver({
     box: "border-box",
     onResize: ({ height }) => {

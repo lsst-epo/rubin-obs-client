@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
-import { makeDateObject, useGlobalData } from "@/lib/utils";
+import { useGlobalData } from "@/lib/utils";
+import { makeDateObject } from "@/helpers/dates";
 import * as Styled from "./styles";
 import { fallbackLng } from "@/lib/i18n/settings";
 
@@ -15,10 +16,10 @@ function renderShortDate({ month, day, year }) {
 
 export default function EventTimeShort({ startDate, endDate, isSameDay }) {
   const localeInfo = useGlobalData("localeInfo");
-  const lang = localeInfo?.language || fallbackLng;
-  const endDateObject = makeDateObject(endDate, lang, true);
+  const locale = localeInfo?.language || fallbackLng;
+  const endDateObject = makeDateObject(endDate, { locale, isShort: true });
   const startDateObject = !isSameDay
-    ? makeDateObject(startDate, lang, true)
+    ? makeDateObject(startDate, { locale, isShort: true })
     : null;
 
   return (

@@ -102,7 +102,6 @@ export async function generateStaticParams({
 
 const sectionMap = {
   events: EventPageTemplate,
-  // galleryItems: GalleryPageTemplate,
   glossaryTerms: GlossaryPageTemplate,
   news: NewsPageTemplate,
   searchResults: SearchPageTemplate,

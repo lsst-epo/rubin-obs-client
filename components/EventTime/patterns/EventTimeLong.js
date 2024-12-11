@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
-import { useDateString, useTimeString, useTimeZone } from "@/lib/utils";
+import { useTimeString, useTimeZone } from "@/lib/utils";
+import { makeDateString } from "@/helpers/dates";
 
 export default function EventTimeLong({
   startDate,
@@ -9,9 +10,9 @@ export default function EventTimeLong({
   timezone,
   isSameDay,
 }) {
-  const localizedStartDate = useDateString(startDate);
+  const localizedStartDate = makeDateString(startDate);
   const localizedStartTime = useTimeString(startTime);
-  const localizedEndDate = useDateString(endDate);
+  const localizedEndDate = makeDateString(endDate);
   const localizedEndTime = useTimeString(endTime);
   const localizedTimezone = useTimeZone(timezone);
 

@@ -4,10 +4,11 @@ import { useTranslation } from "react-i18next";
 import {
   makeBreadcrumbs,
   makeCustomBreadcrumbs,
-  makeDateString,
   makeTruncatedString,
   useGlobalData,
 } from "@/lib/utils";
+
+import { makeDateString } from "@/helpers/dates";
 import Breadcrumbs from "@/components/page/Breadcrumbs";
 import { Grid } from "@rubin-epo/epo-react-lib";
 import DataList from "@/dynamic/DataList";
@@ -25,7 +26,7 @@ const SearchList = ({
   const { t } = useTranslation();
   const localeInfo = useGlobalData("localeInfo");
   const rootPages = useGlobalData("rootPages");
-  const lang = localeInfo?.language || fallbackLng;
+  const locale = localeInfo?.language || fallbackLng;
 
   const makePretitle = (entry) => {
     if (entry.eventType) {
@@ -45,33 +46,6 @@ const SearchList = ({
     };
     let customBreadcrumbs;
 
-    if (entry.typeHandle === "galleryItem") {
-      customBreadcrumbs = makeCustomBreadcrumbs(rootPages, "Gallery");
-      // add category strings and pre-filtered crumb: id, title, uri
-      let typeId = "";
-      let typeTitlePlural = "";
-      let typeSlug = "gallery";
-
-      if (entry.galleryItemCategory.length > 0) {
-        typeId = entry.galleryItemCategory[0].id;
-        typeTitlePlural = t(
-          `gallery.plural-${entry.galleryItemCategory[0].slug}`
-        );
-        typeSlug = entry.galleryItemCategory[0].slug;
-
-        customBreadcrumbs.push({
-          id: typeId,
-          title: typeTitlePlural,
-          uri: `gallery/gallery-search?filter=${typeId}`,
-        });
-      }
-      return (
-        <Breadcrumbs
-          breadcrumbs={[...customBreadcrumbs, pageLink]}
-          type="search"
-        />
-      );
-    }
     if (entry.typeHandle === "slideshow") {
       customBreadcrumbs = makeCustomBreadcrumbs(rootPages, "Slideshows");
       return (
@@ -89,7 +63,6 @@ const SearchList = ({
 
   const makeSubtitle = (entry) => {
     const type = {
-      galleryItem: t("gallery.gallery-item"),
       slideshow: t("gallery.slideshow"),
       events: t("events.event"),
       job: t("jobs.job"),
@@ -107,7 +80,7 @@ const SearchList = ({
         <div>{type ? `${type} ` : ``}</div>
         <div>
           {entry.date
-            ? `${t("published")} ${makeDateString(entry.date, lang)}`
+            ? `${t("published")} ${makeDateString(entry.date, { locale })}`
             : ``}
         </div>
       </Styled.PretitleContainer>
