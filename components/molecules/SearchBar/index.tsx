@@ -1,14 +1,15 @@
-import { useCallback, useRef, useState } from "react";
+"use client";
+import { useCallback, useRef, useState, useId } from "react";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 import { useOnClickOutside, useKeyDownEvent } from "@/hooks/listeners";
 import { IconComposer } from "@rubin-epo/epo-react-lib";
 import useQueryParams from "@/lib/routing/useQueryParams";
 import { useRouter } from "next/navigation";
+import styles from "./styles.module.scss";
 
-const INPUT_ID = "headerSearchBar";
-
-export default function SearchBar() {
+const SearchBar: FunctionComponent = () => {
+  const id = useId();
   const ref = useRef();
   const inputRef = useRef();
   const [open, setOpen] = useState(false);
@@ -18,24 +19,34 @@ export default function SearchBar() {
   const { queryParams } = useQueryParams();
   const [searchText, setSearchText] = useState(queryParams.get("search") || "");
 
-  useKeyDownEvent(handleKeyDown);
-  useOnClickOutside(ref, () => {
+  const handleOpen = () => {
+    inputRef.current.focus();
+    setOpen(true);
+  };
+
+  const handleClose = () => {
     setOpen(false);
-    handleReset();
-  });
+    setSearchText("");
+  };
 
   function handleKeyDown({ key }) {
     if (key !== "Escape") return;
-    setOpen(false);
+    handleClose();
   }
+
+  useKeyDownEvent(handleKeyDown);
+  useOnClickOutside(ref, handleClose);
 
   const handleChange = useCallback((val) => {
     setSearchText(val);
   }, []);
 
-  const handleOpen = () => {
-    setOpen(!open);
-    inputRef.current.focus();
+  const toggleOpen = () => {
+    if (open) {
+      handleClose();
+    } else {
+      handleOpen();
+    }
   };
 
   const handleSubmit = (event) => {
@@ -46,37 +57,35 @@ export default function SearchBar() {
     push(`/search?${query.toString()}`);
   };
 
-  const handleReset = () => {
-    setSearchText("");
-  };
+  if (open) {
+    inputRef.current.focus();
+  }
 
   return (
-    <div ref={ref} className="c-search-bar">
+    <div ref={ref} className={styles.searchBar}>
       <button
         aria-expanded={open}
         aria-haspopup="dialog"
         onClick={handleOpen}
-        className="c-search-bar__toggle"
+        className={styles.toggle}
       >
         <span className="a-hidden">{t("toggle-search")}</span>
-        <IconComposer icon="Search" className="c-global-header__icon" />
+        <IconComposer icon="Search" className={styles.toggleIcon} />
       </button>
       <form
         role="search"
         action=""
         onSubmit={handleSubmit}
-        className={classNames({
-          "c-search-bar__form": true,
-          "c-search-bar__form--is-open": open,
-        })}
+        className={classNames(styles.form)}
+        data-expanded={open}
       >
-        <label htmlFor={INPUT_ID} className="a-hidden">
+        <label htmlFor={id} className="a-hidden">
           {t("search-site")}
         </label>
         <input
           autoComplete="off"
-          className="c-search-bar__input"
-          id={INPUT_ID}
+          className={styles.input}
+          id={id}
           placeholder={t("search-placeholder")}
           onChange={(e) => handleChange(e.target.value)}
           ref={inputRef}
@@ -91,6 +100,8 @@ export default function SearchBar() {
       </form>
     </div>
   );
-}
+};
 
-SearchBar.displayName = "Global.Header.SearchBar";
+SearchBar.displayName = "Molecule.SearchBar";
+
+export default SearchBar;

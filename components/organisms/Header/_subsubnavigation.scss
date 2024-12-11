@@ -1,20 +1,17 @@
 @use "abstracts/functions";
 
-$_color: functions.sass-palette(neutral80);
-$_bg-color: #E8E8E8;
-$_button-bg-color: functions.sass-palette(neutral02);
-
 .c-sub-subnav-list {
   height: 100%;
   max-height: 0;
   margin-left: functions.header(nav-link-padding-lateral) / 2;
   overflow: hidden;
-  color: $_color;
+  color: var(--color-font-primary);
   visibility: hidden;
   transition: max-height 0.25s ease-out, visibility 0s 0.25s;
 
   @keyframes hide-scroll {
-    from, to {
+    from,
+    to {
       overflow: hidden;
     }
   }
@@ -42,7 +39,9 @@ $_button-bg-color: functions.sass-palette(neutral02);
 
       .c-nav-list--mobile & {
         left: functions.header(nav-link-padding-lateral) / 2;
-        width: calc(100% - #{2 * functions.header(nav-link-padding-lateral) / 2});
+        width: calc(
+          100% - #{2 * functions.header(nav-link-padding-lateral) / 2}
+        );
       }
     }
   }
@@ -52,13 +51,13 @@ $_button-bg-color: functions.sass-palette(neutral02);
     align-items: center;
     width: 100%;
     text-decoration: none;
-    background-color: $_bg-color;
+    background-color: var(--color-rubin-gray-100);
     transition: color 0.2s, background-color 0.2s;
 
     &:hover,
     &:focus-visible,
     &--is-active {
-      color: functions.palette(white);
+      color: var(--color-font-invert);
       background-color: functions.palette(turquoise50);
     }
 
@@ -74,7 +73,8 @@ $_button-bg-color: functions.sass-palette(neutral02);
 
     .c-nav-list--mobile & {
       height: functions.header(height);
-      padding: functions.header(nav-link-padding-lateral) / 3 functions.header(nav-link-padding-lateral) / 2;
+      padding: functions.header(nav-link-padding-lateral) / 3
+        functions.header(nav-link-padding-lateral) / 2;
     }
 
     .c-nav-list--desktop & {
@@ -84,17 +84,18 @@ $_button-bg-color: functions.sass-palette(neutral02);
 
     .c-sub-subnav-list__item-inner > & {
       color: #333;
-      background-color: $_button-bg-color;
+      background-color: var(--color-background-tile-light);
 
       &:hover,
       &:focus-visible,
       &--is-active {
-        color: functions.palette(white);
+        color: var(--color-font-invert);
         background-color: functions.palette(turquoise50);
       }
 
       .c-nav-list--mobile & {
-        padding: functions.header(nav-link-padding-lateral) / 2 functions.header(nav-link-padding-lateral);
+        padding: functions.header(nav-link-padding-lateral) / 2
+          functions.header(nav-link-padding-lateral);
       }
     }
 
