@@ -41,7 +41,8 @@
       "@/svg/*": ["components/svg/*"],
       "@/helpers": ["helpers"],
       "@/helpers/*": ["helpers/*"],
-      "@/hoc/*": ["components/hoc/*"]
+      "@/hoc/*": ["components/hoc/*"],
+      "@/gql/*": ["gql/*"]
     },
     "types": ["cypress", "node"]
   },
