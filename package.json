@@ -28,7 +28,8 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "proxy": "env-cmd -x lcp --proxyUrl \\$EFD_URL_PROXY",
-    "openapi": "openapi-ts"
+    "codegen:noirlab": "openapi-ts",
+    "codegen:gql": "graphql-codegen --config codegen.ts"
   },
   "babel": {
     "presets": [
@@ -61,7 +62,7 @@
     "@influxdata/influxdb-client": "^1.33.2",
     "@popperjs/core": "^2.11.5",
     "@react-oauth/google": "^0.12.1",
-    "@rubin-epo/epo-react-lib": "^2.5.3",
+    "@rubin-epo/epo-react-lib": "^2.6.4",
     "@urql/core": "^5.0.6",
     "@urql/next": "^1.1.2",
     "add": "^2.0.6",
@@ -103,6 +104,8 @@
     "use-resize-observer": "^9.0.2"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.3",
+    "@graphql-codegen/client-preset": "^4.5.1",
     "@hey-api/openapi-ts": "^0.53.11",
     "@next/env": "^15.1.3",
     "@rushstack/eslint-patch": "^1.1.4",

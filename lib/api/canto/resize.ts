@@ -17,3 +17,23 @@ export const resizeCantoImage = (previewUrl: string, size: number) => {
 
   return previewUrl;
 };
+
+export const generateAllPreviewSizes = (
+  directPreviewUrl: string,
+  width: string,
+  height: string
+) => {
+  const aspectRatio = parseInt(width) / parseInt(height);
+  const { origin, pathname } = new URL(directPreviewUrl);
+  const [, , scheme, id, hash] = pathname.split("/");
+
+  return ValidCantoSizes.map((size) => {
+    const url = `${origin}/direct/${scheme}/${id}/${hash}/m800/${size}`;
+
+    if (aspectRatio < 1) {
+      return { url, width: Math.round(size * aspectRatio), height: size };
+    } else {
+      return { url, width: size, height: Math.round(size * aspectRatio) };
+    }
+  });
+};
