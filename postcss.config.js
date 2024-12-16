@@ -13,7 +13,7 @@ module.exports = {
     [
       "postcss-normalize",
       {
-        forceImport: true,
+        allowDuplicates: false,
       },
     ],
   ],
