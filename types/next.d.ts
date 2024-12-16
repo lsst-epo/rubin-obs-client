@@ -22,8 +22,8 @@ type GalleryParams = {
   gallery: string;
 };
 
-type GalleryImageParams = {
-  image: string;
+type GalleryAssetParams = {
+  asset: string;
 };
 
 interface LocaleProps {
@@ -38,8 +38,8 @@ interface GalleryProps {
   params: LocaleParams & GalleryParams;
 }
 
-interface GalleryImageProps {
-  params: LocaleParams & GalleryParams & GalleryImageParams;
+interface GalleryAssetProps {
+  params: LocaleParams & GalleryParams & GalleryAssetParams;
 }
 
 interface ErrorProps {
