@@ -1,56 +1,52 @@
 import { gql } from "@urql/core";
 import queryAPI from "@/lib/api/client/query";
+import { getSiteFromLocale } from "@/lib/helpers/site";
 
 export async function getGalleryData(
-    uri: string,
-    searchParams: any
-    // section: string,
-    // type: string,
-    // locale: string,
-    // previewToken?: string
-  ) {
-    // const site = getSiteFromLocale(locale);
-    // const query = getQueryFragments(uri, section, type, site);
-    const query = getQuery(searchParams?.sort);
-    console.info(query);
+  uri: string,
+  locale: string,
+  searchParams: any
+  // section: string,
+  // type: string,
+  // locale: string,
+  // previewToken?: string
+) {
+  const site = getSiteFromLocale(locale);
+  // const site = getSiteFromLocale(locale);
+  // const query = getQueryFragments(uri, section, type, site);
+  const query = getQuery(searchParams?.sort);
+  console.info(query);
 
-    const { data } = await queryAPI({
-      query,
-      variables : {},
-    //   variables: {
-    //     section,
-    //     type,
-    //     site,
-    //     uri: decodeURI(uri),
-    //   },
-    //   previewToken,
-    });
+  const { data } = await queryAPI({
+    query,
+    variables: {},
+  });
 
-    // Get the related investigation
-    // const entryWithRelatedData = await includeRelatedEntries(data.entry, site);
-    return cleanUpQueryResponse(data);
-  }
+  // Get the related investigation
+  // const entryWithRelatedData = await includeRelatedEntries(data.entry, site);
+  return cleanUpQueryResponse(data);
+}
 
-  function cleanUpQueryResponse(response) {
-    return response?.entries.filter( e => Object.keys(e).length !== 0);
-  }
+function cleanUpQueryResponse(response) {
+  return response?.entries.filter((e) => Object.keys(e).length !== 0);
+}
 
-  function getQuery(sort) {
-    let sortArg = "";
-    if (sort != undefined && sort != null) {
-        if (sort == "asc") {
-            sortArg = "(sortBy: \"default.DateCreated\")";
-        } else {
-            sortArg = "(sortByDesc: \"default.DateCreated\")";
-        }
+function getQuery(sort) {
+  let sortArg = "";
+  if (sort != undefined && sort != null) {
+    if (sort == "asc") {
+      sortArg = '(sortBy: "default.DateCreated")';
+    } else {
+      sortArg = '(sortByDesc: "default.DateCreated")';
     }
-    return gql`
+  }
+  return gql`
     query MyQuery {
         entries {
-            ... on galleryItems_galleryItem_Entry {
+            ... on galleries_gallery_Entry {
             id
             title
-            albumAsGallery${sortArg} {
+            assetAlbum${sortArg} {
                 id
                 approvalStatus
                 owner
@@ -76,4 +72,4 @@ export async function getGalleryData(
             }
         }
     }`;
-  }
+}

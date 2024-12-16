@@ -1,6 +1,7 @@
 import { fallbackLng } from "@/lib/i18n/settings";
 import { resizeCantoImage, ValidCantoSizes } from "./resize";
 import { ImageProps } from "next/image";
+import { CantoImage } from "types/canto";
 
 const responsiveCantoSrc = (
   previewUrl: string,

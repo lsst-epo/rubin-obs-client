@@ -1,0 +1,10 @@
+.metadataList {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.metadataSet {
+  display: flex;
+  gap: 1ex;
+}
