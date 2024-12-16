@@ -1,0 +1,9 @@
+.section {
+  & > * + * {
+    margin-block-start: var(--size-spacing-xs);
+  }
+}
+
+.sectionTitle {
+  margin: 0;
+}
