@@ -4,10 +4,7 @@ import {
   CantoDefaultType,
   CantoUrlType,
 } from "@/gql/graphql";
-import {
-  CantoAssetAdditional,
-  CantoAssetScheme,
-} from "@/lib/api/galleries/schema";
+import { CantoAssetAdditional } from "@/lib/api/galleries/schema";
 
 export interface CantoImage {
   url: {

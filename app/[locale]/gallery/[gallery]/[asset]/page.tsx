@@ -18,7 +18,7 @@ export async function generateMetadata({
 }: GalleryAssetProps): Promise<Metadata> {
   const asset = await getAssetFromGallery(gallery, id, locale);
 
-  if (!asset) {
+  if (!asset || !parentGalleryTitle) {
     notFound();
   }
 
