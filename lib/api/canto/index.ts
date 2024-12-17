@@ -2,6 +2,7 @@ import { fallbackLng } from "@/lib/i18n/settings";
 import { resizeCantoImage, ValidCantoSizes } from "./resize";
 import { ImageProps } from "next/image";
 import { CantoImage } from "types/canto";
+import { CantoAssetAdditional } from "../galleries/schema";
 
 const responsiveCantoSrc = (
   previewUrl: string,
@@ -28,7 +29,7 @@ const responsiveCantoSrc = (
 };
 
 const getAssetMetadata = (
-  metadata: Record<string, string>,
+  metadata: CantoAssetAdditional,
   locale = fallbackLng
 ): { altText?: string; caption?: string; credit?: string } | undefined => {
   if (!metadata) return undefined;

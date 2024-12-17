@@ -43,7 +43,9 @@ const ImageSizes: FunctionComponent<ImageSizesProps> = ({
           {sizes.map(({ url, width, height }) => {
             return (
               <li className={styles.sizeItem} key={url}>
-                <Link href={url}>{labelFromSize(width, height)}</Link>
+                <Link href={url} rel="alternate" target="_blank">
+                  {labelFromSize(width, height)}
+                </Link>
                 <span>
                   ({width} × {height})
                 </span>

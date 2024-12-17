@@ -1,21 +1,22 @@
 import {
   CantoAdditionalType,
   CantoDamAssetInterface,
+  CantoDefaultType,
   CantoUrlType,
 } from "@/gql/graphql";
+import { CantoAssetAdditional } from "@/lib/api/galleries/schema";
 
-interface CantoImage {
+export interface CantoImage {
   url: {
     directUrlPreview: string;
     directUrlOriginal: string;
-    preview: string;
   };
   width: string;
   height: string;
-  metadata: Record<string, string>;
+  metadata: CantoAssetAdditional;
 }
 
-interface CantoDetailedAsset {
+export interface CantoDetailedAsset {
   additional: Pick<
     CantoAdditionalType,
     | "AltTextEN"
@@ -27,6 +28,7 @@ interface CantoDetailedAsset {
     | "TitleES"
   >;
   approvalStatus: CantoDamAssetInterface["approvalStatus"];
+  default: CantoDefaultType;
   height: CantoDamAssetInterface["height"];
   id: CantoDamAssetInterface["id"];
   name: CantoDamAssetInterface["name"];
