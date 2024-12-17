@@ -1,8 +1,7 @@
 import PropTypes from "prop-types";
-import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import AsideSection from "../Section";
-import * as Styled from "./styles";
+import TagList from "@/components/molecules/TagList";
 
 export default function Tags({ tags, rootHomeLink }) {
   const { t } = useTranslation();
@@ -10,24 +9,16 @@ export default function Tags({ tags, rootHomeLink }) {
   if (!tags) return null;
   if (tags.length <= 0) return null;
 
+  const tagsWithLinks = tags.map(({ slug, title }) => {
+    return {
+      name: title,
+      destination: `/${rootHomeLink?.uri}?search=${slug}`,
+    };
+  });
+
   return (
     <AsideSection title={t(`tags`)}>
-      <Styled.TagList>
-        {tags.map((tag, i) => {
-          if (rootHomeLink?.uri && tag.slug) {
-            return (
-              <Styled.Tag key={i}>
-                <Link
-                  prefetch={false}
-                  href={`/${rootHomeLink?.uri}?search=${tag.slug}`}
-                >
-                  {`#${tag.title}`}
-                </Link>
-              </Styled.Tag>
-            );
-          }
-        })}
-      </Styled.TagList>
+      <TagList tags={tagsWithLinks} />
     </AsideSection>
   );
 }
