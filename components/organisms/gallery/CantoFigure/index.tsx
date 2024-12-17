@@ -1,52 +1,61 @@
-import { FunctionComponent } from "react";
-import { damAssetToImage } from "@/lib/api/canto";
-import { assetCaption } from "@/lib/api/canto/metadata";
-import Image from "@rubin-epo/epo-react-lib/Image";
-import Buttonish from "@rubin-epo/epo-react-lib/Buttonish";
+import { FunctionComponent, ReactNode } from "react";
 import Figure from "@rubin-epo/epo-react-lib/Figure";
-import Stack from "@rubin-epo/epo-react-lib/Stack";
+import { damAssetToImage } from "@/lib/api/canto";
+import { CantoAssetAdditional } from "@/lib/api/galleries/schema";
+import { assetCaption } from "@/lib/api/canto/metadata";
 import SharePopup from "@/components/layout/SharePopup";
-import { CantoDetailedAsset } from "types/canto";
-import styles from "./styles.module.css";
 import CantoDownload from "../CantoDownload";
+import styles from "./styles.module.css";
 
 interface CantoFigureProps {
   locale: string;
-  asset: CantoDetailedAsset;
+  name: string;
+  additional: CantoAssetAdditional;
+  downloadUrl: string;
+  asset: ReactNode;
+  location: string;
+  width: string;
+  height: string;
 }
 
 const CantoFigure: FunctionComponent<CantoFigureProps> = ({
   asset,
+  additional,
+  downloadUrl,
+  name,
   locale,
+  location,
+  width,
+  height,
 }) => {
-  const image = damAssetToImage(locale, asset);
-
-  if (!image) return null;
-
-  const { width, height, src, srcSet, alt } = image;
-
+  const aspectRatio = parseInt(width) / parseInt(height);
   return (
     <Figure
       caption={
-        <Stack>
-          <div>{assetCaption(asset, locale)}</div>
+        <>
+          {assetCaption(additional, locale)}
           <div className={styles.actionsRow}>
-            <CantoDownload
-              id={asset.id}
-              fileName={asset.name}
-              directUrlOriginal={asset.url.directUrlOriginal}
-            />
-            <SharePopup title={asset.name} url="sdfsdfsdfs" />
+            <CantoDownload directUrlOriginal={downloadUrl} />
+            <SharePopup title={name} url={location} />
           </div>
-        </Stack>
+        </>
       }
+      layout={aspectRatio < 1 ? "horizontal" : "vertical"}
       withBackground
     >
-      <Image image={{ width, height, srcSet, altText: alt, url: src }} />
+      <div
+        className={styles.imageWrapper}
+        style={{
+          "--w": `${width}px`,
+          "--h": `${height}px`,
+        }}
+      >
+        {asset}
+      </div>
     </Figure>
   );
 };
 
-CantoFigure.displayName = "Organism.Gallery.CantoFigure";
+CantoFigure.displayName = "Organism.Gallery.CantoFigureProps";
 
 export default CantoFigure;

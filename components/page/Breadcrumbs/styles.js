@@ -1,3 +1,4 @@
+"use client";
 import styled from "styled-components";
 import BaseLink from "next/link";
 import CommonJsBreadcrumbs from "@castiron/components-breadcrumbs";
