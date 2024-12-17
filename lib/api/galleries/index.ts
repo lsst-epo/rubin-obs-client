@@ -1,6 +1,32 @@
 import { gql } from "@urql/core";
+import { graphql } from "@/gql/gql";
 import queryAPI from "@/lib/api/client/query";
 import { getSiteFromLocale } from "@/lib/helpers/site";
+
+export async function getAllGalleries(locale: string) {
+  const site = getSiteFromLocale(locale);
+
+  const query = graphql(`
+    query AllGalleriesQuery($site: [String]) {
+      galleriesEntries(site: $site) {
+        ... on galleries_gallery_Entry {
+          slug
+        }
+      }
+    }
+  `);
+
+  const { data } = await queryAPI({ query, variables: { site } });
+  const galleries: Array<{ gallery: string }> = [];
+
+  data?.galleriesEntries?.forEach((gallery) => {
+    if (gallery && gallery.slug) {
+      galleries.push({ gallery: gallery.slug });
+    }
+  });
+
+  return galleries;
+}
 
 export async function getGalleryData(
   uri: string,
@@ -33,8 +59,8 @@ function cleanUpQueryResponse(response) {
 
 function getQuery(sort) {
   let sortArg = "";
-  if (sort != undefined && sort != null) {
-    if (sort == "asc") {
+  if (sort !== undefined && sort != null) {
+    if (sort === "asc") {
       sortArg = '(sortBy: "default.DateCreated")';
     } else {
       sortArg = '(sortByDesc: "default.DateCreated")';

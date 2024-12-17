@@ -121,8 +121,7 @@ export const Title = styled.div`
   transition: backgroud-color 0.2s;
 
   @media (max-width: ${BREAK_PHABLET}) {
-    align-self: center;
-    justify-self: left;
+    place-self: center left;
     text-align: left;
   }
 `;
