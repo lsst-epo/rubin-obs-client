@@ -4,6 +4,10 @@ export const ValidCantoSizes: Array<ValidCantoSize> = [
   100, 240, 320, 500, 640, 800, 2050,
 ];
 
+export const getPreviewSize = (previewUrl: string) => {
+  return parseInt(previewUrl.slice(-3));
+};
+
 export const isValidCantoSize = (size: any): size is ValidCantoSize => {
   return ValidCantoSizes.includes(size);
 };

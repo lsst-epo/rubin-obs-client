@@ -1,5 +1,12 @@
 .actionsRow {
   display: flex;
-  align-items: flex-end;
   justify-content: space-between;
+  align-items: flex-end;
+  margin-block-start: var(--figure-padding);
+}
+
+.imageWrapper {
+  aspect-ratio: var(--w) / var(--h);
+  width: var(--w);
+  max-width: 100%;
 }
