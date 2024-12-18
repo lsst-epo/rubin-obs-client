@@ -1,7 +1,8 @@
-import * as Styled from "./styles";
+import CircularLoader from "@rubin-epo/epo-react-lib/CircularLoader";
+import styles from "./styles.module.css";
 
 function Loader(props) {
-  return <Styled.Loader {...props} />;
+  return <CircularLoader className={styles.loader} {...props} />;
 }
 
 Loader.displayName = "Atomic.Loader";
