@@ -1,15 +1,12 @@
 @use "abstracts/functions";
 
-$_color: functions.sass-palette(neutral80);
-$_bg-color: functions.sass-palette(neutral02);
-
 .c-subnav-list {
   position: absolute;
   z-index: -5;
   max-width: 47vw;
-  max-height: calc(100vh - var(--header-height));
+  max-height: calc(100vh - calc(var(--header-height) * 2));
   overflow: auto;
-  color: $_color;
+  color: var(--color-font-primary);
   visibility: hidden;
   transition: transform 0.25s ease-in-out, visibility 0s 0.25s;
 
@@ -54,10 +51,11 @@ $_bg-color: functions.sass-palette(neutral02);
 
       .c-nav-list--mobile & {
         left: functions.header(nav-link-padding-lateral) / 2;
-        width: calc(100% - #{2 * functions.header(nav-link-padding-lateral) / 2});
+        width: calc(
+          100% - #{2 * functions.header(nav-link-padding-lateral) / 2}
+        );
       }
     }
-
   }
 
   &__link {
@@ -65,7 +63,7 @@ $_bg-color: functions.sass-palette(neutral02);
     align-items: center;
     padding: functions.header(nav-link-padding-lateral);
     text-decoration: none;
-    background-color: $_bg-color;
+    background-color: var(--color-background-tile-light);
     transition: color 0.2s, background-color 0.2s;
 
     &:hover,
