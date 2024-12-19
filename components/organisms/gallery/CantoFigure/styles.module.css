@@ -1,3 +1,7 @@
+.credit {
+  margin-block-start: var(--figure-padding);
+}
+
 .actionsRow {
   display: flex;
   justify-content: space-between;
@@ -9,4 +13,16 @@
   aspect-ratio: var(--w) / var(--h);
   width: var(--w);
   max-width: 100%;
+  position: relative;
+}
+
+.closeLink {
+  aspect-ratio: 1;
+  background-color: var(--color-border-button-tertiary);
+  color: var(--color-font-invert);
+  padding: var(--size-spacing-3xs);
+  position: absolute;
+  line-height: 0;
+  top: 0;
+  right: 0;
 }
