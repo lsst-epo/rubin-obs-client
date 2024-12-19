@@ -4,7 +4,10 @@ import {
   CantoDefaultType,
   CantoUrlType,
 } from "@/gql/graphql";
-import { CantoAssetAdditional } from "@/lib/api/galleries/schema";
+import {
+  CantoAssetAdditional,
+  CantoAssetScheme,
+} from "@/lib/api/galleries/schema";
 
 export interface CantoImage {
   url: {
@@ -52,3 +55,8 @@ export interface CantoDetailedAsset {
   >;
   width: CantoDamAssetInterface["width"];
 }
+
+export type SupportedCantoAssetScheme = Extract<
+  CantoAssetScheme,
+  "image" | "video"
+>;
