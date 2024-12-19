@@ -1,5 +1,6 @@
 import { fallbackLng } from "@/lib/i18n/settings";
 import { resizeCantoImage, ValidCantoSizes } from "./resize";
+import { ImageProps } from "next/image";
 
 const responsiveCantoSrc = (
   previewUrl: string,
@@ -63,5 +64,23 @@ export const damAssetToImage = (locale: string, data: CantoImage) => {
     height: parseFloat(height),
     alt,
     ...assetMetadata,
+  };
+};
+
+export const cantoToImageProps = (
+  data: CantoImage,
+  options: { locale?: string; usePreviewUrl?: boolean } = {}
+): ImageProps => {
+  const { locale = fallbackLng, usePreviewUrl = false } = options;
+  const { metadata, url, width, height } = data;
+  const { directUrlOriginal, directUrlPreview } = url;
+
+  const { altText: alt = "" } = getAssetMetadata(metadata, locale) || {};
+
+  return {
+    src: usePreviewUrl ? directUrlPreview : directUrlOriginal,
+    alt,
+    width: parseFloat(width),
+    height: parseFloat(height),
   };
 };
