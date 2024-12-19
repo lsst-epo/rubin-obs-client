@@ -32,6 +32,7 @@ const CantoVideo: FunctionComponent<CantoVideoProps> = ({ locale, asset }) => {
     <>
       <StructuredData jsonLd={structuredData} />
       <Video
+        data-cy="canto-video"
         url={directUrlPreviewPlay || directUrlOriginal}
         thumbnail={directUrlPreview}
         {...{ width, height }}

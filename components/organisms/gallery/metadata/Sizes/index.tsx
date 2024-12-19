@@ -3,41 +3,47 @@ import Link from "next/link";
 import { generateAllPreviewSizes } from "@/lib/api/canto/resize";
 import MetadataSection from "../Section";
 import styles from "./styles.module.css";
+import { getLocale } from "@/lib/i18n/server";
+import { useTranslation } from "@/lib/i18n";
 
 interface ImageSizesProps {
+  directUrlOriginal: string;
   directUrlPreview: string;
-  width: string;
-  height: string;
+  width: number;
+  height: number;
 }
 
-const ImageSizes: FunctionComponent<ImageSizesProps> = ({
+const ImageSizes: FunctionComponent<ImageSizesProps> = async ({
+  directUrlOriginal,
   directUrlPreview,
   width,
   height,
 }) => {
+  const locale = getLocale();
+  const { t } = await useTranslation(locale);
   const sizes = generateAllPreviewSizes(directUrlPreview, width, height);
 
   const labelFromSize = (width: number, height: number) => {
     const longest = Math.max(width, height);
 
     if (longest <= 100) {
-      return "Thumbnail";
+      return t("gallery.thumbnail");
     }
 
     if (longest < 500) {
-      return "Small";
+      return t("gallery.small");
     }
 
     if (longest < 1024) {
-      return "Medium";
+      return t("gallery.medium");
     }
 
-    return "Large";
+    return t("gallery.large");
   };
 
   return (
     <MetadataSection
-      title="Sizes"
+      title={t("gallery.available-sizes")}
       metadata={
         <ul>
           {sizes.map(({ url, width, height }) => {
@@ -52,6 +58,14 @@ const ImageSizes: FunctionComponent<ImageSizesProps> = ({
               </li>
             );
           })}
+          <li className={styles.sizeItem}>
+            <Link href={directUrlOriginal} rel="alternate" target="_blank">
+              {t("gallery.original")}
+            </Link>
+            <span>
+              ({width} × {height})
+            </span>
+          </li>
         </ul>
       }
     />
