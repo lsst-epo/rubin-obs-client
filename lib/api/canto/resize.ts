@@ -24,20 +24,21 @@ export const resizeCantoImage = (previewUrl: string, size: number) => {
 
 export const generateAllPreviewSizes = (
   directPreviewUrl: string,
-  width: string,
-  height: string
+  width: number,
+  height: number
 ) => {
-  const aspectRatio = parseInt(width) / parseInt(height);
+  const aspectRatio = width / height;
+  const longestSide = aspectRatio < 1 ? height : width;
   const { origin, pathname } = new URL(directPreviewUrl);
   const [, , scheme, id, hash] = pathname.split("/");
 
-  return ValidCantoSizes.map((size) => {
+  return ValidCantoSizes.filter((size) => size < longestSide).map((size) => {
     const url = `${origin}/direct/${scheme}/${id}/${hash}/m800/${size}`;
 
     if (aspectRatio < 1) {
       return { url, width: Math.round(size * aspectRatio), height: size };
     } else {
-      return { url, width: size, height: Math.round(size * aspectRatio) };
+      return { url, width: size, height: Math.round(size / aspectRatio) };
     }
   });
 };
