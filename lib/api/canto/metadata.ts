@@ -1,8 +1,26 @@
 import { Metadata } from "next";
 import { OpenGraph } from "next/dist/lib/metadata/types/opengraph-types";
+import { Twitter } from "next/dist/lib/metadata/types/twitter-types";
 import { fallbackLng } from "@/lib/i18n/settings";
 import { getPreviewSize } from "./resize";
 import { CantoAssetAdditional, CantoAssetDetailed } from "../galleries/schema";
+
+export const assetTitle = (
+  additional: {
+    TitleEN: string | null;
+    TitleES: string | null;
+  },
+  locale = fallbackLng
+): string => {
+  const localeKey = locale.toUpperCase();
+  const defaultLocaleKey = fallbackLng.toUpperCase();
+
+  return (
+    additional[`Title${localeKey}`] ||
+    additional[`Title${defaultLocaleKey}`] ||
+    ""
+  );
+};
 
 export const assetCaption = (
   additional: CantoAssetAdditional,
@@ -18,25 +36,49 @@ export const assetCaption = (
   );
 };
 
+export const assetAlt = (
+  additional: CantoAssetAdditional,
+  locale = fallbackLng
+): string => {
+  const localeKey = locale.toUpperCase();
+  const defaultLocaleKey = fallbackLng.toUpperCase();
+
+  return (
+    additional[`AltText${localeKey}`] ||
+    additional[`AltText${defaultLocaleKey}`] ||
+    ""
+  );
+};
+
 export const assetToPageMetadata = (
   asset: CantoAssetDetailed,
   locale: string
 ): Metadata => {
-  const { name: title, additional } = asset;
-  const localeKey = locale.toUpperCase();
-  const defaultLocaleKey = fallbackLng.toUpperCase();
+  const {
+    name,
+    additional,
+    scheme,
+    width,
+    url: { directUrlOriginal, directUrlPreviewPlay },
+  } = asset;
 
-  const description =
-    additional[`Title${localeKey}`] ||
-    additional[`Title${defaultLocaleKey}`] ||
-    undefined;
+  const twitterVideo: Twitter = {
+    card: "player",
+    players: {
+      playerUrl: directUrlPreviewPlay || directUrlOriginal,
+      streamUrl: directUrlPreviewPlay || directUrlOriginal,
+      width: parseInt(width),
+      height: parseInt(width),
+    },
+  };
 
   return {
-    title,
-    description,
+    title: assetTitle(additional, locale) || name,
+    description: assetCaption(additional, locale),
     openGraph: {
       images: assetToOpenGraphImage(asset, locale),
     },
+    twitter: scheme === "video" ? twitterVideo : undefined,
   };
 };
 

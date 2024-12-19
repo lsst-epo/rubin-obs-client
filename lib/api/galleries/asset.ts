@@ -1,7 +1,13 @@
 import { graphql } from "@/gql/gql";
 import queryAPI from "@/lib/api/client/query";
 import { getSiteFromLocale } from "@/lib/helpers/site";
-import { DetailedAssetSchema, CantoAssetDetailed } from "./schema";
+import {
+  DetailedAssetSchema,
+  CantoAssetDetailed,
+  BreadcrumbAssetSchema,
+} from "./schema";
+import { addLocaleUriSegment } from "@/lib/i18n";
+import { assetTitle } from "../canto/metadata";
 
 export async function getRecentAssets(locale: string, gallery: string) {
   const site = getSiteFromLocale(locale);
@@ -36,14 +42,27 @@ export async function getRecentAssets(locale: string, gallery: string) {
   return assets;
 }
 
-export async function getAssetGalleryTitle(gallery: string, locale: string) {
+export async function getAssetBreadcrumb({
+  locale,
+  gallery,
+  asset,
+}: GalleryAssetProps["params"]) {
   const site = getSiteFromLocale(locale);
 
   const query = graphql(`
-    query GalleryTitleQuery($site: [String], $uri: [String]) {
+    query GalleryTitleQuery($site: [String], $uri: [String], $id: String) {
       galleriesEntries(uri: $uri, site: $site) {
         ... on galleries_gallery_Entry {
+          id
           title
+          assetAlbum(where: { key: "id", value: $id }) {
+            additional {
+              TitleEN
+              TitleES
+            }
+            id
+            name
+          }
         }
       }
     }
@@ -51,14 +70,39 @@ export async function getAssetGalleryTitle(gallery: string, locale: string) {
 
   const { data } = await queryAPI({
     query,
-    variables: { site, uri: `gallery/${gallery}` },
+    variables: { site, uri: `gallery/${gallery}`, id: asset },
   });
 
   if (!data || !data.galleriesEntries || !data.galleriesEntries[0]) {
-    return undefined;
+    return [];
   }
 
-  return data.galleriesEntries[0].title || undefined;
+  const { title, id, assetAlbum } = data.galleriesEntries[0];
+
+  const basePath = `${addLocaleUriSegment(locale, {
+    includeLeadingSlash: false,
+    includeTrailingSlash: true,
+  })}gallery/${gallery}`;
+
+  if (title && id && assetAlbum) {
+    const breadcrumbs = [{ title, uri: basePath, id }];
+
+    const { data: parsedAsset } = BreadcrumbAssetSchema.safeParse(
+      assetAlbum[0]
+    );
+
+    if (parsedAsset) {
+      breadcrumbs.push({
+        title: assetTitle(parsedAsset.additional) || parsedAsset.name,
+        uri: `${basePath}/${asset}`,
+        id: parsedAsset.id,
+      });
+    }
+
+    return breadcrumbs;
+  }
+
+  return [];
 }
 
 export async function getAssetFromGallery(
