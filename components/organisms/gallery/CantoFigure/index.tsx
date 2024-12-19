@@ -1,8 +1,9 @@
 import { FunctionComponent, ReactNode } from "react";
 import Figure from "@rubin-epo/epo-react-lib/Figure";
-import { damAssetToImage } from "@/lib/api/canto";
+import IconComposer from "@rubin-epo/epo-react-lib/IconComposer";
 import { CantoAssetAdditional } from "@/lib/api/galleries/schema";
 import { assetCaption } from "@/lib/api/canto/metadata";
+import { useTranslation } from "@/lib/i18n";
 import SharePopup from "@/components/layout/SharePopup";
 import CantoDownload from "../CantoDownload";
 import styles from "./styles.module.css";
@@ -18,7 +19,7 @@ interface CantoFigureProps {
   height: string;
 }
 
-const CantoFigure: FunctionComponent<CantoFigureProps> = ({
+const CantoFigure: FunctionComponent<CantoFigureProps> = async ({
   asset,
   additional,
   downloadUrl,
@@ -28,12 +29,26 @@ const CantoFigure: FunctionComponent<CantoFigureProps> = ({
   width,
   height,
 }) => {
+  const { t } = await useTranslation(locale);
   const aspectRatio = parseInt(width) / parseInt(height);
+  const { origin, pathname } = new URL(location);
+  const parentLocation = `${origin}${pathname
+    .split("/")
+    .slice(0, -1)
+    .join("/")}`;
+
   return (
     <Figure
       caption={
         <>
           {assetCaption(additional, locale)}
+          {additional?.Credit && (
+            <div className={styles.credit}>
+              {t("gallery.credit", {
+                credit: additional.Credit,
+              })}
+            </div>
+          )}
           <div className={styles.actionsRow}>
             <CantoDownload directUrlOriginal={downloadUrl} />
             <SharePopup title={name} url={location} />
@@ -51,6 +66,14 @@ const CantoFigure: FunctionComponent<CantoFigureProps> = ({
         }}
       >
         {asset}
+        <a
+          className={styles.closeLink}
+          href={parentLocation}
+          title={t("gallery.back-to-gallery")}
+        >
+          <IconComposer icon="close" />
+          <span className="a-hidden">{t("gallery.back-to-gallery")}</span>
+        </a>
       </div>
     </Figure>
   );

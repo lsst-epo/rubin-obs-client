@@ -30,6 +30,15 @@ const AssetUrlSchema = z.object({
   directUrlPreviewPlay: z.string().url().nullable(),
 });
 
+export const BreadcrumbAssetSchema = z.object({
+  additional: z.object({
+    TitleEN: z.string().nullable(),
+    TitleES: z.string().nullable(),
+  }),
+  id: z.string(),
+  name: z.string(),
+});
+
 export const DetailedAssetSchema = z
   .object({
     additional: AdditionalSchema,
