@@ -1,10 +1,11 @@
 import { FunctionComponent } from "react";
 import { ImageObject } from "schema-dts";
-import Image from "@rubin-epo/epo-react-lib/Image";
+import Image from "next/image";
 import StructuredData from "@/components/atomic/StructuredData";
 import { CantoAssetDetailed } from "@/lib/api/galleries/schema";
-import { damAssetToImage } from "@/lib/api/canto";
-import { assetCaption } from "@/lib/api/canto/metadata";
+import { assetAlt, assetCaption } from "@/lib/api/canto/metadata";
+import { tokens } from "@rubin-epo/epo-react-lib/styles";
+import { resizeCantoImage } from "@/lib/api/canto/resize";
 
 interface CantoImageProps {
   locale: string;
@@ -12,35 +13,42 @@ interface CantoImageProps {
 }
 
 const CantoImage: FunctionComponent<CantoImageProps> = ({ locale, asset }) => {
-  const { additional: metadata, url } = asset;
-  const image = damAssetToImage(locale, {
-    width: asset.width,
-    height: asset.height,
-    metadata,
-    url,
-  });
+  const { additional, url } = asset;
 
-  if (!image) {
-    return null;
-  }
-
-  const { alt: altText, src, width, height, srcSet } = image;
+  const width = parseInt(asset.width);
+  const height = parseInt(asset.height);
+  const aspectRatio = width / height;
+  const landscapeSizes = `(max-width: ${tokens.BREAK_TABLET}) 100vw, 900px`;
+  const portraitSizes = `(max-width: ${tokens.BREAK_TABLET}) 100vw, 450px`;
 
   const structuredData: ImageObject = {
     "@type": "ImageObject",
-    caption: assetCaption(metadata, locale),
+    caption: assetCaption(additional, locale),
     contentSize: asset.size,
-    contentUrl: asset.url.directUrlOriginal,
+    contentUrl: url.directUrlOriginal,
     creditText: asset.additional.Credit || undefined,
     encodingFormat: asset.default.ContentType,
-    height: asset.height,
-    width: asset.width,
+    height: asset.width,
+    width: asset.height,
+    thumbnail: {
+      "@type": "ImageObject",
+      contentUrl: resizeCantoImage(url.directUrlPreview, 100),
+    },
   };
 
   return (
     <>
       <StructuredData jsonLd={structuredData} />
-      <Image image={{ altText, url: src, width, height, srcSet }} />
+      <Image
+        {...{ width, height }}
+        data-cy="canto-image"
+        alt={assetAlt(additional, locale)}
+        src={url.directUrlOriginal}
+        sizes={aspectRatio < 1 ? portraitSizes : landscapeSizes}
+        quality={85}
+        priority
+        title={asset.name}
+      />
     </>
   );
 };
