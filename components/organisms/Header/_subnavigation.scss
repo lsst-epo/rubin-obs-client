@@ -14,7 +14,6 @@
     top: 0;
     left: 0;
     width: functions.header(nav-width-mobile);
-    height: 100%;
 
     &--is-active {
       transform: translateX(-100%);

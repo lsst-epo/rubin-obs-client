@@ -41,7 +41,7 @@ export async function getLogos() {
   const { data } = await queryAPI({
     query,
     variables: { set: "siteInfo" },
-    fetchOptions: { next: { tags: [tags.globals] } },
+    fetchOptions: { next: { tags: [tags.globals], revalidate: 60 * 60 } },
   });
 
   if (!data || !data.siteInfo) {

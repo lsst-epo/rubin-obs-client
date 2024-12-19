@@ -2,8 +2,6 @@ import Arrow from "./Arrow";
 import Cloudy from "./weather/Cloudy";
 import CloudyPartial from "./weather/CloudyPartial";
 import Gear from "./Gear";
-import Logo from "./site/Logo";
-import LogoFullSize from "./site/LogoFullSize";
 import Rain from "./weather/Rain";
 import RainHeavy from "./weather/RainHeavy";
 import RainLight from "./weather/RainLight";
@@ -17,8 +15,6 @@ export default {
   Cloudy,
   CloudyPartial,
   Gear,
-  Logo,
-  LogoFullSize,
   Rain,
   RainHeavy,
   RainLight,
