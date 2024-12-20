@@ -23,7 +23,7 @@ const NavigationVertical: FunctionComponent<NavigationProps> = ({
 }) => {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState<string | null>(null);
-  const { setPinned } = useHeadroom();
+  const { pinned, setPinned } = useHeadroom();
 
   const handleOpenToggle = () => {
     if (open) {
@@ -36,7 +36,12 @@ const NavigationVertical: FunctionComponent<NavigationProps> = ({
   };
 
   function handleToggleClick(id: string) {
-    setActive((prevActive) => (prevActive === id ? null : id));
+    if (active === id) {
+      setActive(null);
+    } else {
+      setPinned(true);
+      setActive(id);
+    }
   }
 
   return (
