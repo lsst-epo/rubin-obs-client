@@ -28,13 +28,18 @@ const queryAPI = async <Query, Variables extends AnyVariables = AnyVariables>({
   fetchOptions?: RequestInit;
   previewToken?: string;
 }): Promise<OperationResult<Query, Variables>> => {
-  const defaultFetchOptions = {
+  const defaultFetchOptions: RequestInit = {
     cache: "force-cache",
     next: {
       revalidate: previewToken ? 0 : undefined,
     },
   };
   const fetchOptions = merge({}, defaultFetchOptions, inputFetchOptions);
+
+  if (inputFetchOptions?.next?.revalidate) {
+    delete fetchOptions.cache;
+  }
+
   const params = new URLSearchParams({});
 
   if (previewToken) {

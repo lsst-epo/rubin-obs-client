@@ -21,14 +21,14 @@ export async function getLogos() {
         ... on siteInfo_GlobalSet {
           logoLarge {
             url {
-              directUrlPreview
+              directUrlOriginal
             }
             width
             height
           }
           logoSmall {
             url {
-              directUrlPreview
+              directUrlOriginal
             }
             width
             height
@@ -41,7 +41,9 @@ export async function getLogos() {
   const { data } = await queryAPI({
     query,
     variables: { set: "siteInfo" },
-    fetchOptions: { next: { tags: [tags.globals], revalidate: 60 * 60 } },
+    fetchOptions: {
+      next: { tags: [tags.globals], revalidate: 60 * 60 },
+    },
   });
 
   if (!data || !data.siteInfo) {
@@ -53,15 +55,17 @@ export async function getLogos() {
   } = data;
 
   const { props: large } = getImageProps({
-    ...cantoToImageProps(logoLarge[0], { usePreviewUrl: true }),
+    ...cantoToImageProps(logoLarge[0]),
     priority: true,
+    sizes: "33vw",
     quality: 90,
   });
 
   if (logoSmall[0]) {
     const { props: small } = getImageProps({
-      ...cantoToImageProps(logoSmall[0], { usePreviewUrl: true }),
+      ...cantoToImageProps(logoSmall[0]),
       priority: true,
+      sizes: "100vw",
       quality: 90,
     });
 
