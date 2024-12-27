@@ -1,16 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import pick from "lodash/pick";
-
-type CantoScheme =
-  | "image"
-  | "video"
-  | "audio"
-  | "document"
-  | "presentation"
-  | "other";
+import {
+  SupportedCantoAssetScheme,
+  SupportedCantoScheme,
+} from "@/lib/api/galleries/schema";
 
 type CantoAssetParams = {
-  scheme: CantoScheme;
+  scheme: SupportedCantoAssetScheme;
   directUrlOriginalHash: string;
   id: string;
 };
@@ -19,20 +15,13 @@ interface CantoDownloadProps {
   params: CantoAssetParams;
 }
 
-const ValidCantoSchemes: Array<CantoScheme> = [
-  "image",
-  "video",
-  "audio",
-  "document",
-  "presentation",
-  "other",
-];
-
 export async function GET(
   request: NextRequest,
   { params: { scheme, id, directUrlOriginalHash } }: CantoDownloadProps
 ) {
-  if (!ValidCantoSchemes.includes(scheme)) {
+  const { error } = SupportedCantoScheme.safeParse(scheme);
+
+  if (error) {
     return new NextResponse("Invalid scheme", { status: 400 });
   }
 
@@ -48,6 +37,8 @@ export async function GET(
     return new NextResponse("Invalid content type", { status: 400 });
   }
 
+  const proxySearchParams = new URLSearchParams({ fileName, contentType });
+
   const {
     body,
     ok,
@@ -55,7 +46,9 @@ export async function GET(
     statusText,
     headers: cantoHeaders,
   } = await fetch(
-    `${process.env.CANTO_BASE_URL}/direct/${scheme}/${id}/${directUrlOriginalHash}/original?content-type=${contentType}&name=${fileName}`
+    `${
+      process.env.CANTO_BASE_URL
+    }/direct/${scheme}/${id}/${directUrlOriginalHash}/original?${proxySearchParams.toString()}`
   );
 
   if (ok) {

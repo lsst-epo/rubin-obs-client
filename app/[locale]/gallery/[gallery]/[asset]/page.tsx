@@ -1,14 +1,14 @@
 import { ComponentType, FunctionComponent } from "react";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { SupportedCantoAssetScheme } from "types/canto";
 import { getAssetFromGallery } from "@/lib/api/galleries/asset";
 import { assetTitle, assetToPageMetadata } from "@/lib/api/canto/metadata";
+import { SupportedCantoAssetScheme } from "@/lib/api/galleries/schema";
+import { addLocaleUriSegment } from "@/lib/i18n";
 import CantoFigure from "@/components/organisms/gallery/CantoFigure";
 import SingleMediaAsset from "@/components/templates/SingleMediaAsset";
 import ImageSizes from "@/components/organisms/gallery/metadata/Sizes";
 import AssetTags from "@/components/organisms/gallery/metadata/Tags";
-import { addLocaleUriSegment } from "@/lib/i18n";
 import CantoImage from "@/components/organisms/gallery/CantoImage";
 import CantoVideo from "@/components/organisms/gallery/CantoVideo";
 import AssetMetadata from "@/components/organisms/gallery/metadata/Asset";
