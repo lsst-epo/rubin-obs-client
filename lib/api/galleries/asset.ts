@@ -5,6 +5,7 @@ import {
   DetailedAssetSchema,
   CantoAssetDetailed,
   BreadcrumbAssetSchema,
+  SupportedCantoScheme,
 } from "./schema";
 import { addLocaleUriSegment } from "@/lib/i18n";
 import { assetTitle } from "../canto/metadata";
@@ -13,10 +14,14 @@ export async function getRecentAssets(locale: string, gallery: string) {
   const site = getSiteFromLocale(locale);
 
   const query = graphql(`
-    query RecentAssetsQuery($site: [String], $uri: [String]) {
+    query RecentAssetsQuery(
+      $site: [String]
+      $uri: [String]
+      $scheme: [String]
+    ) {
       galleriesEntries(uri: $uri, site: $site) {
         ... on galleries_gallery_Entry {
-          assetAlbum {
+          assetAlbum(whereIn: { key: "scheme", values: $scheme }) {
             id
           }
         }
@@ -26,7 +31,11 @@ export async function getRecentAssets(locale: string, gallery: string) {
 
   const { data } = await queryAPI({
     query,
-    variables: { site, uri: `gallery/${gallery}` },
+    variables: {
+      site,
+      uri: `gallery/${gallery}`,
+      scheme: SupportedCantoScheme.options,
+    },
   });
 
   const assets: Array<{ asset: string }> = [];
@@ -50,12 +59,20 @@ export async function getAssetBreadcrumb({
   const site = getSiteFromLocale(locale);
 
   const query = graphql(`
-    query GalleryTitleQuery($site: [String], $uri: [String], $id: String) {
+    query GalleryTitleQuery(
+      $site: [String]
+      $uri: [String]
+      $id: String
+      $scheme: [String]
+    ) {
       galleriesEntries(uri: $uri, site: $site) {
         ... on galleries_gallery_Entry {
           id
           title
-          assetAlbum(where: { key: "id", value: $id }) {
+          assetAlbum(
+            whereIn: { key: "scheme", values: $scheme }
+            where: { key: "id", value: $id }
+          ) {
             additional {
               TitleEN
               TitleES
@@ -70,7 +87,12 @@ export async function getAssetBreadcrumb({
 
   const { data } = await queryAPI({
     query,
-    variables: { site, uri: `gallery/${gallery}`, id: asset },
+    variables: {
+      site,
+      uri: `gallery/${gallery}`,
+      id: asset,
+      scheme: SupportedCantoScheme.options,
+    },
   });
 
   if (!data || !data.galleriesEntries || !data.galleriesEntries[0]) {
