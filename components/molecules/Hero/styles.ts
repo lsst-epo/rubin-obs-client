@@ -1,11 +1,12 @@
 "use client";
 import styled from "styled-components";
-import { fluidScale, containerFullBleed } from "@/styles/globalStyles";
-// import Image from "@rubin-epo/epo-react-lib/Image";
+import { fluidScale } from "@/styles/globalStyles";
 import Image from "next/image";
 
 export const HeroContainer = styled.div`
-  ${containerFullBleed("CONTAINER_FULL")}
+  width: 100%;
+  max-width: var(--size-width-center, 2000px);
+  margin: 0 auto;
   position: relative;
   height: var(--Hero-height, ${fluidScale("540px", "400px")});
   overflow: auto;
