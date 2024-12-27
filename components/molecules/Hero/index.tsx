@@ -29,6 +29,7 @@ const Hero: FunctionComponent<PropsWithChildren<HeroProps>> = ({
             focalPointY || 50
           }%`,
         }}
+        sizes={`(max-width: 2000px) 100vw, 2000px`}
         priority
         fetchPriority="high"
         quality={90}
