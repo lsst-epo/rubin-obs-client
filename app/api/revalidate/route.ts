@@ -2,6 +2,7 @@ import { revalidatePath, revalidateTag } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 import tags from "@/lib/api/client/tags";
 import { fallbackLng, languages } from "@/lib/i18n/settings";
+import { addLocaleUriSegment } from "@/lib/i18n";
 
 const HOST = process.env.NEXT_PUBLIC_BASE_URL;
 const REVALIDATE_SECRET_TOKEN = process.env.CRAFT_REVALIDATE_SECRET_TOKEN;
@@ -49,6 +50,15 @@ const indexNow = async (uri: string) => {
   console.info(`${status}: ${indexNowStatusText[status]}`);
 };
 
+const revalidateChildren = (parts: Array<string>): "layout" | "page" => {
+  // revalidate gallery children if the URI is a gallery, but not the root gallery
+  if (parts.indexOf("gallery") === 0 && parts.length > 1) {
+    return "layout";
+  }
+
+  return "page";
+};
+
 export async function GET(request: NextRequest): Promise<NextResponse> {
   const uri = request.nextUrl.searchParams.get("uri");
   const secret = request.nextUrl.searchParams.get("secret");
@@ -71,14 +81,12 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 
   if (uri) {
     languages.forEach((locale) => {
-      const parts: Array<string> = uri === CRAFT_HOMEPAGE_URI ? [] : [uri];
-      if (locale !== fallbackLng) {
-        parts.unshift(locale);
-      }
+      const parts: Array<string> =
+        uri === CRAFT_HOMEPAGE_URI ? [] : uri.split("/");
 
-      const path = `/${parts.join("/")}`;
+      const path = `${addLocaleUriSegment(locale)}/${parts.join("/")}`;
 
-      revalidatePath(path);
+      revalidatePath(path, revalidateChildren(parts));
     });
 
     revalidateTag(tags.globals);

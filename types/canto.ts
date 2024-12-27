@@ -55,8 +55,3 @@ export interface CantoDetailedAsset {
   >;
   width: CantoDamAssetInterface["width"];
 }
-
-export type SupportedCantoAssetScheme = Extract<
-  CantoAssetScheme,
-  "image" | "video"
->;
