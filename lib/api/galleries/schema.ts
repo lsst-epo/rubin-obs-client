@@ -1,8 +1,8 @@
 import z from "zod";
 
+export const SupportedCantoScheme = z.enum(["image", "video"]);
 const CantoScheme = z.enum([
-  "image",
-  "video",
+  ...SupportedCantoScheme.options,
   "audio",
   "document",
   "presentation",
@@ -66,6 +66,7 @@ export const DetailedAssetSchema = z
     }
   });
 
+export type SupportedCantoAssetScheme = z.infer<typeof SupportedCantoScheme>;
 export type CantoAssetScheme = z.infer<typeof CantoScheme>;
 export type CantoAssetAdditional = z.infer<typeof AdditionalSchema>;
 export type CantoAssetDetailed = z.infer<typeof DetailedAssetSchema>;
