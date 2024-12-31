@@ -1,11 +1,33 @@
 import { FunctionComponent } from "react";
-import sanitizeHtml from "sanitize-html";
+import sanitizeHtml, { defaults, IOptions } from "sanitize-html";
 import {
   AnnouncementsService,
   ReleasesService,
 } from "@/lib/api/noirlab/codegen";
 import { Locale } from "@/lib/i18n/settings";
 import NewsPageClient from "./client";
+
+const sanitize = (dirty: string | undefined) => {
+  if (typeof dirty === "undefined") return;
+
+  try {
+    const { hostname: noirLabHostname } = new URL(
+      `${process.env.NOIRLAB_BASE_URL}`
+    );
+    const sanitizeOptions: IOptions = {
+      allowedTags: [...defaults.allowedTags, "iframe"],
+      allowedAttributes: {
+        ...defaults.allowedAttributes,
+        iframe: ["src", "style", "width", "height", "allowfullscreen"],
+      },
+      allowedIframeHostnames: [noirLabHostname],
+    };
+
+    return sanitizeHtml(dirty, sanitizeOptions);
+  } catch {
+    return;
+  }
+};
 
 const NewsPage: FunctionComponent<{
   section: string;
@@ -43,8 +65,8 @@ const NewsPage: FunctionComponent<{
         title,
         releaseUrl,
         subtitle,
-        releaseDescription: description ? sanitizeHtml(description) : undefined,
-        links: links ? sanitizeHtml(links) : links,
+        releaseDescription: sanitize(description),
+        links: sanitize(links),
         contacts,
         images,
         videos,
@@ -84,11 +106,9 @@ const NewsPage: FunctionComponent<{
         releaseUrl,
         headline,
         subtitle,
-        releaseDescription: description ? sanitizeHtml(description) : undefined,
-        moreInformation: moreInformation
-          ? sanitizeHtml(moreInformation)
-          : undefined,
-        links: links ? sanitizeHtml(links) : links,
+        releaseDescription: sanitize(description),
+        moreInformation: sanitize(moreInformation),
+        links: sanitize(links),
         contacts,
         images,
         videos,
