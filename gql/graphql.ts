@@ -19792,6 +19792,7 @@ export type Galleries_Gallery_Entry = ElementInterface & EntryInterface & {
   dateUpdated: Maybe<Scalars['DateTime']['output']>;
   /** The entry’s descendants, if the section is a structure. Accepts the same arguments as the `entries` query. */
   descendants: Array<EntryInterface>;
+  description: Maybe<Scalars['String']['output']>;
   /** The draft ID (from the `drafts` table). */
   draftId: Maybe<Scalars['Int']['output']>;
   /** The name of the draft. */
@@ -19834,7 +19835,6 @@ export type Galleries_Gallery_Entry = ElementInterface & EntryInterface & {
   revisionNotes: Maybe<Scalars['String']['output']>;
   /** The element’s right position within its structure. */
   rgt: Maybe<Scalars['Int']['output']>;
-  richTextDescription: Maybe<Scalars['String']['output']>;
   /** The element’s structure’s root ID */
   root: Maybe<Scalars['Int']['output']>;
   /** The element’s search score, if the `search` parameter was used when querying for the element. */
