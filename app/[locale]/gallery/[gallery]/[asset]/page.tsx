@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import { getAssetFromGallery } from "@/lib/api/galleries/asset";
 import { assetTitle, assetToPageMetadata } from "@/lib/api/canto/metadata";
 import { SupportedCantoAssetScheme } from "@/lib/api/galleries/schema";
-import { addLocaleUriSegment } from "@/lib/i18n";
 import CantoFigure from "@/components/organisms/gallery/CantoFigure";
 import SingleMediaAsset from "@/components/templates/SingleMediaAsset";
 import ImageSizes from "@/components/organisms/gallery/metadata/Sizes";
@@ -18,7 +17,7 @@ export async function generateMetadata({
 }: GalleryAssetProps): Promise<Metadata> {
   const asset = await getAssetFromGallery(gallery, id, locale);
 
-  if (!asset || !parentGalleryTitle) {
+  if (!asset) {
     notFound();
   }
 
@@ -65,10 +64,6 @@ const GalleryAsset: FunctionComponent<GalleryAssetProps> = async ({
     video: <AssetTags tags={validTagsOnly} parentUri={`/gallery/${gallery}`} />,
   };
 
-  const location = `${process.env.NEXT_PUBLIC_BASE_URL}${addLocaleUriSegment(
-    locale
-  )}/gallery/${gallery}/${id}`;
-
   const Asset = assetComponent[scheme];
 
   return (
@@ -78,7 +73,7 @@ const GalleryAsset: FunctionComponent<GalleryAssetProps> = async ({
         <CantoFigure
           downloadUrl={directUrlOriginal}
           asset={<Asset {...{ asset, locale }} />}
-          {...{ locale, additional, width, height, location, name }}
+          {...{ locale, additional, width, height, gallery, id, name }}
         />
       }
       metadataBlocks={

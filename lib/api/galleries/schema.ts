@@ -1,12 +1,15 @@
 import z from "zod";
 
-export const SupportedCantoScheme = z.enum(["image", "video"]);
-const CantoScheme = z.enum([
-  ...SupportedCantoScheme.options,
+export const UnsupportedCantoScheme = z.enum([
   "audio",
   "document",
   "presentation",
   "other",
+]);
+export const SupportedCantoScheme = z.enum(["image", "video"]);
+const CantoScheme = z.enum([
+  ...SupportedCantoScheme.options,
+  ...UnsupportedCantoScheme.options,
 ]);
 const AdditionalSchema = z.object({
   AltTextEN: z.string().nullable(),
@@ -39,6 +42,21 @@ export const BreadcrumbAssetSchema = z.object({
   name: z.string(),
 });
 
+export const MetadataAssetSchema = z.object({
+  additional: z.object({
+    AltTextEN: z.string().nullable(),
+    AltTextES: z.string().nullable(),
+    TitleEN: z.string().nullable(),
+    TitleES: z.string().nullable(),
+  }),
+  height: z.string(),
+  id: z.string(),
+  name: z.string(),
+  scheme: CantoScheme,
+  url: AssetUrlSchema,
+  width: z.string(),
+});
+
 export const DetailedAssetSchema = z
   .object({
     additional: AdditionalSchema,
@@ -66,8 +84,31 @@ export const DetailedAssetSchema = z
     }
   });
 
+const limit = 30;
+
+export const GalleryFilterSchema = z
+  .object({
+    sort: z.enum(["asc", "desc"]).catch("asc").default("asc"),
+    page: z.coerce.number().min(1).catch(1).default(1),
+    limit: z.coerce.number().min(limit).max(limit).catch(limit).default(limit),
+    tag: z
+      .array(z.string())
+      .optional()
+      .catch(({ input }) => {
+        if (typeof input === "string") {
+          return [input];
+        }
+
+        return [];
+      })
+      .default([]),
+  })
+  .default({});
+
 export type SupportedCantoAssetScheme = z.infer<typeof SupportedCantoScheme>;
 export type CantoAssetScheme = z.infer<typeof CantoScheme>;
 export type CantoAssetAdditional = z.infer<typeof AdditionalSchema>;
 export type CantoAssetDetailed = z.infer<typeof DetailedAssetSchema>;
 export type CantoAssetUrl = z.infer<typeof AssetUrlSchema>;
+export type CantoAssetMetadata = z.infer<typeof MetadataAssetSchema>;
+export type GalleryDataFilters = z.infer<typeof GalleryFilterSchema>;

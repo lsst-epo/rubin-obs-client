@@ -59,19 +59,38 @@ async function useTranslation(
 
 export const isDefaultLocale = (locale: string) => locale === fallbackLng;
 
+const shiftToSegments = (segments: Array<string>) => {
+  if (segments[0] === "") {
+    segments.shift();
+    shiftToSegments(segments);
+  }
+};
+
 export const addLocaleUriSegment = (
   locale: string,
+  uri: string,
   options: {
     includeLeadingSlash?: boolean;
-    includeTrailingSlash?: boolean;
-  } = { includeLeadingSlash: true, includeTrailingSlash: false }
+  } = { includeLeadingSlash: true }
 ) => {
-  const { includeLeadingSlash = true, includeTrailingSlash = false } = options;
-  return isDefaultLocale(locale)
-    ? ""
-    : `${includeLeadingSlash ? "/" : ""}${locale}${
-        includeTrailingSlash ? "/" : ""
-      }`;
+  const segments = uri.split("/");
+
+  shiftToSegments(segments);
+
+  if (segments[0] === locale) {
+    return segments.join("/");
+  } else {
+    if (!isDefaultLocale(locale)) {
+      segments.unshift(locale);
+    }
+
+    const { includeLeadingSlash = true } = options;
+    if (includeLeadingSlash) {
+      segments.unshift("");
+    }
+
+    return segments.join("/");
+  }
 };
 
 export { useTranslation, useTranslation as serverTranslation };
