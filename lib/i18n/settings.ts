@@ -1,4 +1,4 @@
-import { InitOptions } from "i18next";
+import { type InitOptions } from "i18next";
 
 export const fallbackLng = "en";
 export const languages = [fallbackLng, "es"] as const;
