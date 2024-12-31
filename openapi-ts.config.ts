@@ -1,8 +1,12 @@
 import { defineConfig } from "@hey-api/openapi-ts";
+import { loadEnvConfig } from "@next/env";
+
+const projectDir = process.cwd();
+loadEnvConfig(projectDir);
 
 export default defineConfig({
   client: "@hey-api/client-fetch",
-  input: "https://noirlab.edu/public/documentation/schema/",
+  input: `${process.env.NOIRLAB_BASE_URL}/public/documentation/schema/`,
   output: {
     format: "prettier",
     lint: "eslint",
