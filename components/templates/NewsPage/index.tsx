@@ -25,7 +25,7 @@ const sanitize = (dirty: string | undefined) => {
 
     return sanitizeHtml(dirty, sanitizeOptions);
   } catch {
-    return;
+    return undefined;
   }
 };
 
