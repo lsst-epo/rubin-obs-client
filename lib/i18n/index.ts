@@ -59,4 +59,19 @@ async function useTranslation(
 
 export const isDefaultLocale = (locale: string) => locale === fallbackLng;
 
+export const addLocaleUriSegment = (
+  locale: string,
+  options: {
+    includeLeadingSlash?: boolean;
+    includeTrailingSlash?: boolean;
+  } = { includeLeadingSlash: true, includeTrailingSlash: false }
+) => {
+  const { includeLeadingSlash = true, includeTrailingSlash = false } = options;
+  return isDefaultLocale(locale)
+    ? ""
+    : `${includeLeadingSlash ? "/" : ""}${locale}${
+        includeTrailingSlash ? "/" : ""
+      }`;
+};
+
 export { useTranslation, useTranslation as serverTranslation };
