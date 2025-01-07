@@ -1,3 +1,4 @@
+/* stylelint-disable scss/operator-no-newline-after */
 @use "sass:map";
 @use "sass:math";
 @use "sass:meta";
@@ -31,7 +32,7 @@
 
 // encode colors
 @function encode-color($string) {
-  @if type-of($string) == "color" {
+  @if meta.type-of($string) == "color" {
     $hex: string.slice(color.ie-hex-str($string), 4);
     $string: string.unquote("#{$hex}");
   }
@@ -54,7 +55,8 @@
   $min-vw: break(60)
 ) {
   @return calc(
-    #{$min-value} + #{strip-unit($max-value - $min-value)} * (100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}
+    #{$min-value} + #{strip-unit($max-value - $min-value)} *
+      (100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}
   );
 }
 

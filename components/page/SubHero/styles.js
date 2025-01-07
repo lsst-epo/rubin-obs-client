@@ -12,8 +12,7 @@ export const Wrapper = styled.div`
   ${protoContainer(tokens.CONTAINER_NARROW)}
   --max-width: ${CONTAINER_REGULAR};
 
-  padding-block-start: ${fluidScale("50px", "30px")};
-  padding-block-end: ${fluidScale("50px", "40px")};
+  padding-block: ${fluidScale("50px", "30px")} ${fluidScale("50px", "40px")};
   margin-block-end: 60px;
   background-color: ${(p) => tokens[p.$bgColor]};
 

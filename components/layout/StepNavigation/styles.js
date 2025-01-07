@@ -94,8 +94,8 @@ export const NavItem = styled.li`
   font-size: ${fluidScale("20px", "16px")};
   font-weight: bold;
   counter-increment: guide-nav-counter;
-  break-inside: avoid;
   border: 1px solid transparent;
+  break-inside: avoid;
 
   & + & {
     margin-block-start: ${pxToEm(24)};

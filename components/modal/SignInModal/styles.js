@@ -27,8 +27,7 @@ export const AccountLinks = styled.div`
   flex-wrap: wrap;
   gap: 1rem;
   justify-content: space-between;
-  margin-block-start: 10px;
-  margin-block-end: 30px;
+  margin-block: 10px 30px;
 `;
 
 export const FormButtons = styled(BaseFormButtons)`

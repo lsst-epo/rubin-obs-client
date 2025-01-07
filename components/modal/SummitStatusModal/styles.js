@@ -37,10 +37,9 @@ export const ScrollableContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: var(--PADDING_SMALL, 20px);
-  overflow-x: hidden;
-  overflow-y: auto;
-  scrollbar-width: thin;
+  overflow: hidden auto;
   scrollbar-color: var(--white, #fff) rgba(255, 255, 255, 20%);
+  scrollbar-width: thin;
 
   &::-webkit-scrollbar {
     width: 8px;

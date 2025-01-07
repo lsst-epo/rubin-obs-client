@@ -4,11 +4,11 @@ import { fluidScale } from "@/styles/globalStyles";
 import Image from "next/image";
 
 export const HeroContainer = styled.div`
+  position: relative;
   width: 100%;
   max-width: var(--size-width-center, 2000px);
-  margin: 0 auto;
-  position: relative;
   height: var(--Hero-height, ${fluidScale("540px", "400px")});
+  margin: 0 auto;
   overflow: auto;
 `;
 

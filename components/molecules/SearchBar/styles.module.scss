@@ -39,9 +39,9 @@
 
 .toggle {
   position: absolute;
-  width: var(--toggle-width);
   top: 0;
   left: 0;
+  width: var(--toggle-width);
   height: 100%;
 }
 
@@ -62,14 +62,14 @@
   align-items: center;
   width: var(--toggle-width);
   height: 100%;
+  visibility: hidden;
   transition: width 0.35s ease-in-out, background-color 0.35s ease-in-out,
     visibility 0s 0.35s;
-  visibility: hidden;
 
   &[data-expanded="true"] {
     width: 468px;
-    background-color: functions.palette(black);
     visibility: visible;
+    background-color: functions.palette(black);
     transition: width 0.35s ease-in-out, background-color 0.35s ease-in-out;
 
     @include base.respond(functions.header(breakpoint-for-search-bar)) {

@@ -13,8 +13,8 @@
 
 .mobileLanguageToggle {
   display: none;
-  padding-left: 1rem;
   flex-shrink: 0;
+  padding-left: 1rem;
 
   @include base.respond(functions.header(layout-breakpoint)) {
     display: inline-block;

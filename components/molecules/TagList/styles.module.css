@@ -7,7 +7,7 @@
 }
 
 .tag {
-  & a {
+  a {
     color: var(--color-font-accent);
   }
 
