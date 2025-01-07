@@ -5,7 +5,7 @@ export const HeroWrapper = styled.div`
   display: grid;
   grid-template-rows: 50px 1fr;
   grid-template-columns: 40% 60%;
-  gap: 0px 0px;
+  gap: 0px;
   align-items: center;
   background-color: var(--black);
   ${respond(`grid-template-columns: 10% 90%;`)}

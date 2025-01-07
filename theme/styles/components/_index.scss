@@ -2,11 +2,11 @@
 @forward "page-header";
 
 // Globals
-@forward "components/organisms/Header/navigation.scss";
-@forward "components/organisms/Header/subnavigation.scss";
-@forward "components/organisms/Header/subsubnavigation.scss";
+@forward "components/organisms/Header/navigation";
+@forward "components/organisms/Header/subnavigation";
+@forward "components/organisms/Header/subsubnavigation";
 @forward "components/global/Footer/footer";
-@forward "components/global/Footer/social.scss";
-@forward "components/global/Footer/nav.scss";
-@forward "components/global/Footer/contact-form.scss";
+@forward "components/global/Footer/social";
+@forward "components/global/Footer/nav";
+@forward "components/global/Footer/contact-form";
 @forward "components/global/ContactInfo/styles";

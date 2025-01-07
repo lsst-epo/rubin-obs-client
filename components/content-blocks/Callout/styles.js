@@ -103,8 +103,7 @@ export const StyledMixedLink = styled(MixedLink)`
 
 export const StyledImage = styled(Image)`
   grid-area: image;
-  align-self: center;
-  justify-self: center;
+  place-self: center center;
   width: 100%;
 
   ${respond(
@@ -117,8 +116,7 @@ export const StyledImage = styled(Image)`
 `;
 export const StyledBackgroundImage = styled(Image)`
   grid-area: image;
-  align-self: end;
-  justify-self: center;
+  place-self: end center;
   width: 100%;
 
   ${respond(
@@ -129,16 +127,15 @@ export const StyledBackgroundImage = styled(Image)`
 `;
 export const StyledTwoToneImage = styled.div`
   grid-area: image;
-  align-self: start;
-  justify-self: end;
+  place-self: start end;
   width: ${fluidScale("180px", "130px")};
   min-height: 220px;
   margin-right: ${fluidScale("20px", "0px")};
 
   img {
     padding: 4px;
-    border-radius: 100%;
     object-fit: cover;
+    border-radius: 100%;
   }
 
   ${respond(

@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import Image from "next/legacy/image";
 import { IconComposer } from "@rubin-epo/epo-react-lib";
+import { Dialog } from "@headlessui/react";
 import * as Styled from "./styles";
 
 export default function AuthModal({
@@ -43,7 +44,7 @@ export default function AuthModal({
   );
 }
 
-AuthModal.Title = Styled.Title;
+AuthModal.Title = Dialog.Title;
 
 AuthModal.Description = Styled.Description;
 

@@ -8,8 +8,7 @@ export const Content = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow: auto hidden;
   scrollbar-color: var(--white, #fff) rgba(255, 255, 255, 20%);
   scrollbar-width: thin;
 

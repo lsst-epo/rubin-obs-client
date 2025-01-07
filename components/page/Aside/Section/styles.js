@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-export const Section = styled.section``;
-
 export const Title = styled.h3`
   position: relative;
   padding-right: 1em;

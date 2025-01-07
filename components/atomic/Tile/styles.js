@@ -157,8 +157,7 @@ export const MixedLink = styled(BaseMixedLink)`
       }
 
       .title {
-        align-self: center;
-        justify-self: left;
+        place-self: center left;
         text-align: left;
       }
     }
@@ -769,8 +768,7 @@ export const MixedLink = styled(BaseMixedLink)`
       "image"
       "text"
       "title";
-    align-items: start;
-    justify-items: center;
+    place-items: start center;
     padding: 24px;
     background-color: var(--neutral10);
 
@@ -813,8 +811,7 @@ export const MixedLink = styled(BaseMixedLink)`
       }
 
       .text {
-        align-self: end;
-        justify-self: left;
+        place-self: end left;
         font-size: 16px;
       }
     }

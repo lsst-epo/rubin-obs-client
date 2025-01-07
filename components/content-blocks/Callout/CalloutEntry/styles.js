@@ -202,8 +202,8 @@ export const FooterButton = styled(MixedLink)`
 
 export const SharePopup = styled(SharePopupComponent)`
   position: absolute;
-  inset-inline-end: 30px;
   inset-block-end: 30px;
+  inset-inline-end: 30px;
   color: var(--neutral40);
 
   @media (max-width: ${tokens.BREAK_TABLET}) {
