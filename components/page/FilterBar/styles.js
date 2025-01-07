@@ -27,7 +27,7 @@ export const FilterGrid = styled.div`
     flex: 0 1 180px;
   }
 
-  @media (max-width: 720px) {
+  @media (width <= 720px) {
     flex-wrap: wrap;
 
     > * {
@@ -152,7 +152,7 @@ export const FilterSearch = styled.form`
     border-radius: 0 25px 25px 0;
   }
 
-  @media screen and (max-width: 720px) {
+  @media screen and (width <= 720px) {
     flex-basis: 100%;
     order: -1;
     text-align: start;

@@ -62,13 +62,13 @@
     }
 
     .c-subnav-list__item & {
-      justify-content: space-between;
       flex-direction: row-reverse;
+      justify-content: space-between;
     }
 
     .c-sub-subnav-list__item & {
-      justify-content: space-between;
       flex-direction: row;
+      justify-content: space-between;
     }
 
     .c-nav-list--mobile & {

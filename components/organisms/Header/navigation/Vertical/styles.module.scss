@@ -11,9 +11,9 @@
     functions.break(mobile)
   );
 
-  background-color: var(--color-rubin-teal-400, #058b8c);
-  font-weight: functions.font-weight(bold);
   height: 100%;
+  font-weight: functions.font-weight(bold);
+  background-color: var(--color-rubin-teal-400, #058b8c);
 }
 
 .navigationList {
@@ -25,9 +25,9 @@
 .slideOut {
   --offset-slideout: calc(var(--header-height) * 2);
 
-  height: calc(100vh - var(--offset-slideout)) !important;
   top: var(--offset-slideout) !important;
   right: 0;
+  height: calc(100vh - var(--offset-slideout)) !important;
 }
 
 .icon {

@@ -12,7 +12,7 @@ const ChartLegend = ({ legends = [] }) => {
       {legends.map(({ title, type, id, color }) => (
         <Styled.Legend key={id}>
           <Styled.LegendColor color={color || colors[type]} />
-          <Styled.LegendTitle id={id}>{title}</Styled.LegendTitle>
+          <span id={id}>{title}</span>
         </Styled.Legend>
       ))}
     </Styled.Legends>

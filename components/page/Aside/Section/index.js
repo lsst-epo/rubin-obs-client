@@ -3,10 +3,10 @@ import * as Styled from "./styles";
 
 const AsideSection = ({ title, children, className }) => {
   return (
-    <Styled.Section {...{ className }}>
+    <section {...{ className }}>
       {title && <Styled.Title>{title}</Styled.Title>}
       {children}
-    </Styled.Section>
+    </section>
   );
 };
 

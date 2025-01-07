@@ -7,8 +7,7 @@ export const JoinAsButtons = styled(BaseFormButtons)`
 `;
 
 export const SSOButtons = styled.div`
-  margin-block-start: ${fluidScale("30px", "36px")};
-  margin-block-end: ${fluidScale("40px", "15px")};
+  margin-block: ${fluidScale("30px", "36px")} ${fluidScale("40px", "15px")};
 
   > * + * {
     margin-block-start: 10px;

@@ -14,8 +14,6 @@ export const Legend = styled.div`
   align-items: center;
 `;
 
-export const LegendTitle = styled.span``;
-
 export const LegendColor = styled(ColorSwatch)`
   > span {
     border-color: var(--white, #fff);

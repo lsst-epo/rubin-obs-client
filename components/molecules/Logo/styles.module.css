@@ -7,7 +7,7 @@
   height: 100%;
   width: auto;
 
-  & > img {
+  > img {
     height: 100%;
     max-height: 100%;
     max-width: 100%;

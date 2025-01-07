@@ -16,9 +16,9 @@
     width: functions.header(nav-width-mobile);
 
     &--is-active {
-      transform: translateX(-100%);
       visibility: visible;
       transition: transform 0.25s ease-in-out;
+      transform: translateX(-100%);
     }
   }
 
@@ -29,9 +29,9 @@
     transform: translateY(-100%);
 
     &--is-active {
-      transform: translateY(0);
       visibility: visible;
       transition: transform 0.25s ease-in-out;
+      transform: translateY(0);
     }
   }
 

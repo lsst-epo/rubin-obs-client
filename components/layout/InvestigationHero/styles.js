@@ -21,8 +21,7 @@ const BUTTON_WRAPPER_PADDING = fluidScale(
 const DURATION_WIDTH = "197px";
 
 export const Wrapper = styled.div`
-  padding-inline-start: ${WRAPPER_PADDING};
-  padding-inline-end: ${WRAPPER_PADDING};
+  padding-inline: ${WRAPPER_PADDING} ${WRAPPER_PADDING};
   background-color: ${tokens.orange05};
 `;
 
@@ -141,8 +140,7 @@ export const Duration = styled.div`
   align-items: center;
   justify-content: center;
   min-height: 265px;
-  padding-inline-start: 5px;
-  padding-inline-end: 5px;
+  padding-inline: 5px;
   text-align: center;
   background-color: #ffe7cc;
 

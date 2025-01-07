@@ -5,7 +5,6 @@ export const Table = styled.table`
   font-size: 0.75rem;
   border-collapse: collapse;
 `;
-export const Header = styled.thead``;
 export const HeaderCell = styled.th`
   height: 40px;
   padding: 0;
