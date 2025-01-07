@@ -16,10 +16,10 @@
     "prepare": "husky install",
     "precommit": "lint-staged",
     "lint": "npm-run-all lint:*",
-    "lint:js": "prettier --check \"**/*.{js,jsx}\" & eslint -c .eslintrc.js \"**/*.{js,jsx}\"",
+    "lint:js": "prettier --check \"**/*.{js,jsx,ts,tsx}\" & eslint -c .eslintrc.js \"**/*.{js,jsx}\"",
     "lint:styles": "stylelint --config scss.stylelintrc.js \"**/*.{css,scss}\" \"**/styles.{js,ts}\"",
     "fix": "npm-run-all fix:*",
-    "fix:js": "prettier --write \"**/*.{js,jsx}\" && eslint -c .eslintrc.js \"**/*.{js,jsx}\" --fix",
+    "fix:js": "prettier --write \"**/*.{js,jsx,ts,tsx}\" && eslint -c .eslintrc.js \"**/*.{js,jsx}\" --fix",
     "fix:styles": "stylelint --config scss.stylelintrc.js \"**/*.{css,scss}\" \"**/styles.{js,ts}\" --fix",
     "test": "npm-run-all test:*",
     "test:unit": "cypress run --component --headless",
@@ -49,9 +49,9 @@
     "not IE 11"
   ],
   "lint-staged": {
-    "*.{js,jsx}": "yarn fix:js",
-    "*.scss": "yarn fix:scss",
-    "**/styles.js": "yarn fix:styled"
+    "*.{js,jsx,ts,tsx}": "yarn fix:js",
+    "*.{css,scss}": "yarn fix:styles",
+    "**/styles.{js,ts}": "yarn fix:styles"
   },
   "dependencies": {
     "@castiron/components-breadcrumbs": "2.0.2",
