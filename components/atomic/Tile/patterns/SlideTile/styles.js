@@ -150,8 +150,7 @@ export const MixedLink = styled(BaseMixedLink)`
       }
 
       .title {
-        align-self: center;
-        justify-self: left;
+        place-self: center left;
         text-align: left;
       }
     }
@@ -765,8 +764,7 @@ export const MixedLink = styled(BaseMixedLink)`
       "image"
       "text"
       "title";
-    align-items: start;
-    justify-items: center;
+    place-items: start center;
     padding: 24px;
     background-color: var(--neutral10);
 
@@ -809,8 +807,7 @@ export const MixedLink = styled(BaseMixedLink)`
       }
 
       .text {
-        align-self: end;
-        justify-self: left;
+        place-self: end left;
         font-size: 16px;
       }
     }
@@ -903,8 +900,8 @@ export const PlayButton = styled.span`
 
 export const SharePopup = styled(SharePopupComponent)`
   position: absolute;
-  inset-inline-end: 30px;
   inset-block-end: 30px;
+  inset-inline-end: 30px;
   color: var(--neutral40);
 
   @media (max-width: ${BREAK_TABLET}) {

@@ -2,8 +2,7 @@ import styled from "styled-components";
 import { MixedLink } from "@rubin-epo/epo-react-lib";
 
 export const Header = styled.h2`
-  margin-block-start: 3.166em;
-  margin-block-end: 3.166em;
+  margin-block: 3.166em;
   font-size: 1.363rem;
   line-height: 1.5;
 `;

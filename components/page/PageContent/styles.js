@@ -91,8 +91,8 @@ export const Main = styled.div`
 export const Aside = styled.aside`
   --PageContent-Aside-padding-inline: ${MAIN_INLINE_PADDING};
 
-  flex-basis: 270px;
   flex-shrink: 0;
+  flex-basis: 270px;
   margin-block-start: min(4.25vw, 64px);
 
   ${respond(

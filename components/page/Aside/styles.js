@@ -8,8 +8,8 @@ export const Aside = styled.aside`
   --color-background-accent-aside: var(--turquoise55, #009fa1);
 
   display: flex;
-  flex-basis: 270px;
   flex-shrink: 0;
+  flex-basis: 270px;
   flex-wrap: wrap;
   gap: var(--size-gap-aside);
   padding: 0;

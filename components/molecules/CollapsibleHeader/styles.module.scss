@@ -11,8 +11,8 @@
     functions.break(mobile)
   );
 
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr;
   z-index: var(--elevation-element-header, 25);
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr;
 }

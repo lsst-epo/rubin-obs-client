@@ -41,9 +41,9 @@ $_input-bg: functions.sass-palette(neutral08);
     position: absolute;
     top: 50%;
     right: 0.5em;
-    transform: translateY(-50%) rotate(-90deg);
-    pointer-events: none;
     color: $_input-color;
+    pointer-events: none;
+    transform: translateY(-50%) rotate(-90deg);
   }
 
   &__submit {

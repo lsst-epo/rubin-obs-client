@@ -57,6 +57,5 @@ export const DateYear = styled.span`
 export const DateEmDash = styled.span`
   display: inline-flex;
   align-items: center;
-  padding-inline-start: 0.33em;
-  padding-inline-end: 0.25em;
+  padding-inline: 0.33em 0.25em;
 `;

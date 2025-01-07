@@ -46,7 +46,7 @@ export default function GlossaryList({ excludeId = null, limit = null }) {
             <nav>
               <Styled.AlphaList>
                 {alphabet.map((char) => (
-                  <Styled.AlphaItem key={char}>
+                  <li key={char}>
                     <Styled.AlphaButton
                       disabled={!charKeys.includes(char)}
                       aria-pressed={
@@ -65,7 +65,7 @@ export default function GlossaryList({ excludeId = null, limit = null }) {
                     >
                       {char}
                     </Styled.AlphaButton>
-                  </Styled.AlphaItem>
+                  </li>
                 ))}
               </Styled.AlphaList>
             </nav>

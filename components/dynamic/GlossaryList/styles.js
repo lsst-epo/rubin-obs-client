@@ -7,8 +7,6 @@ export const AlphaList = styled.ul`
   margin-block-end: 60px;
 `;
 
-export const AlphaItem = styled.li``;
-
 export const AlphaButton = styled.button`
   display: flex;
   align-items: center;
@@ -32,8 +30,8 @@ export const AlphaButton = styled.button`
 `;
 
 export const TermGroup = styled.div`
-  break-inside: avoid;
   margin-block-end: 100px;
+  break-inside: avoid;
 `;
 
 export const TermGroupHeader = styled.h2`

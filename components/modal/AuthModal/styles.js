@@ -27,8 +27,6 @@ export const Dialog = styled(BaseDialog)`
   overflow: auto;
 `;
 
-export const Title = styled(BaseDialog.Title)``;
-
 export const Description = styled(BaseDialog.Description)`
   font-size: 0.909em;
   line-height: 1.5;
@@ -84,14 +82,12 @@ export const ImageWrapper = styled.div`
       ? css`
           justify-content: center;
           padding-block-start: 134px;
-          padding-inline-start: 20px;
-          padding-inline-end: 20px;
+          padding-inline: 20px;
           background: var(--orange20);
         `
       : css`
           padding-block-start: 90px;
-          padding-inline-start: 6px;
-          padding-inline-end: 20px;
+          padding-inline: 6px 20px;
           background: var(--turquoise10);
         `};
 
