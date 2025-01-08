@@ -1,10 +1,10 @@
 import { FunctionComponent, PropsWithChildren } from "react";
 import { getAssetBreadcrumb, getRecentAssets } from "@/lib/api/galleries/asset";
-import { addLocaleUriSegment, useTranslation } from "@/lib/i18n";
 import Container from "@rubin-epo/epo-react-lib/Container";
 import Stack from "@rubin-epo/epo-react-lib/Stack";
-import Buttonish from "@rubin-epo/epo-react-lib/Buttonish";
 import Breadcrumbs from "@/components/page/Breadcrumbs";
+import BackButton from "@/components/molecules/BackButton";
+import { addLocaleUriSegment, useTranslation } from "@/lib/i18n";
 
 export async function generateStaticParams({
   params: { locale, gallery },
@@ -18,17 +18,21 @@ const AssetLayout: FunctionComponent<
   const { t } = await useTranslation(locale);
   const breadcrumbs = await getAssetBreadcrumb({ locale, gallery, asset });
 
+  const parentPath = addLocaleUriSegment(locale, `/gallery/${gallery}`);
+
   return (
     <>
       <Breadcrumbs breadcrumbs={breadcrumbs} />
-      <Container>
+      <Container width="wide">
         <Stack>
           {children}
-          <Buttonish
+          <BackButton
+            fallback={parentPath}
+            matches={parentPath}
             data-cy="back-to-gallery"
-            url={`${addLocaleUriSegment(locale)}/gallery/${gallery}`}
-            text={t("gallery.back-to-gallery")}
-          />
+          >
+            {t("gallery.back-to-gallery")}
+          </BackButton>
         </Stack>
       </Container>
     </>
