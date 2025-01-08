@@ -1,5 +1,5 @@
 import { FunctionComponent, ReactNode } from "react";
-import styles from "./styles.module.css";
+import styles from "./styles.module.scss";
 
 interface SingleMediaAssetProps {
   title: string;

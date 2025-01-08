@@ -3335,10 +3335,10 @@
   resolved "https://registry.yarnpkg.com/@rtsao/scc/-/scc-1.1.0.tgz#927dd2fae9bc3361403ac2c7a00c32ddce9ad7e8"
   integrity sha512-zt6OdqaDoOnJ1ZYsCYGt9YmWzDXl4vQdKTyJev62gFhRGKdx7mcT54V9KIjg+d2wi9EXsPvAPKe7i7WjfVWB8g==
 
-"@rubin-epo/epo-react-lib@^2.6.4":
-  version "2.6.4"
-  resolved "https://registry.yarnpkg.com/@rubin-epo/epo-react-lib/-/epo-react-lib-2.6.4.tgz#dead4d3d882e8ed6bb612a318f8aa85eec565355"
-  integrity sha512-8tTr0c+Q8mDUaXY1uI91xgv9sl7jA0kMsaQd2L1dxjTfyn+T/IL7WPjV/Pli3ANI/r3hU308NbuJGHMy47r8Ww==
+"@rubin-epo/epo-react-lib@^2.6.5":
+  version "2.6.5"
+  resolved "https://registry.yarnpkg.com/@rubin-epo/epo-react-lib/-/epo-react-lib-2.6.5.tgz#be424df5c747f1b02d252365c9b0ea1f4b8de397"
+  integrity sha512-pLRD3nURn6K0617Qou3K+PoNYLr5OzgEpCogG/ehlRfSTT4c00BcVbtM21TwVhJsSl8VZFn989dCGyZW/HCw3w==
   dependencies:
     "@castiron/style-mixins" "^1.0.6"
     "@headlessui/react" "2.0.4"
@@ -4661,6 +4661,11 @@
   resolved "https://registry.yarnpkg.com/@types/range-parser/-/range-parser-1.2.4.tgz#cd667bcfdd025213aafb7ca5915a932590acdcdc"
   integrity sha512-EEhsLsD6UsDM1yFhAvy0Cjr6VwmpMWqFBCb9w07wVugF7w9nfajxLuVmngTIpgS6svCnm6Vaw+MZhoDCKnOfsw==
 
+"@types/react-dom@^18":
+  version "18.3.5"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-18.3.5.tgz#45f9f87398c5dcea085b715c58ddcf1faf65f716"
+  integrity sha512-P4t6saawp+b/dFrUr2cvkVsfvPguwsxtH6dNIYRllMsefqFzkZk5UIjzyDOv5g1dXIPdG4Sp1yCR4Z6RCUsG/Q==
+
 "@types/react-headroom@^3.2.3":
   version "3.2.3"
   resolved "https://registry.yarnpkg.com/@types/react-headroom/-/react-headroom-3.2.3.tgz#5756fe089146d52e45bbb527cbe9443352107535"
@@ -5477,6 +5482,11 @@ arraybuffer.prototype.slice@^1.0.3:
     get-intrinsic "^1.2.3"
     is-array-buffer "^3.0.4"
     is-shared-array-buffer "^1.0.2"
+
+asap@~2.0.3:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/asap/-/asap-2.0.6.tgz#e50347611d7e690943208bbdafebcbc2fb866d46"
+  integrity sha512-BSHWgDSAiKs50o2Re8ppvp3seVHXSRM44cdSsT9FfNEUUZLOGWVCsiWaRPWM1Znn+mqZ1OfVZ3z3DWEzSp7hRA==
 
 asap@~2.0.3:
   version "2.0.6"
@@ -11159,6 +11169,13 @@ normalize-package-data@^2.3.2, normalize-package-data@^2.5.0:
     resolve "^1.10.0"
     semver "2 || 3 || 4 || 5"
     validate-npm-package-license "^3.0.1"
+
+normalize-path@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/normalize-path/-/normalize-path-2.1.1.tgz#1ab28b556e198363a8c1a6f7e6fa20137fe6aed9"
+  integrity sha512-3pKJwH184Xo/lnH6oyP1q2pMd7HcypqqmRs91/6/i2CGtWwIKGCkOOMTm/zXbgTEWHw1uNpNi/igc3ePOYHb6w==
+  dependencies:
+    remove-trailing-separator "^1.0.1"
 
 normalize-path@^2.1.1:
   version "2.1.1"
