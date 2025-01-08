@@ -3,7 +3,11 @@ import { OpenGraph } from "next/dist/lib/metadata/types/opengraph-types";
 import { Twitter } from "next/dist/lib/metadata/types/twitter-types";
 import { fallbackLng } from "@/lib/i18n/settings";
 import { getPreviewSize } from "./resize";
-import { CantoAssetAdditional, CantoAssetDetailed } from "../galleries/schema";
+import {
+  CantoAssetAdditional,
+  CantoAssetDetailed,
+  CantoAssetMetadata,
+} from "../galleries/schema";
 
 export const assetTitle = (
   additional: {
@@ -37,7 +41,7 @@ export const assetCaption = (
 };
 
 export const assetAlt = (
-  additional: CantoAssetAdditional,
+  additional: Pick<CantoAssetAdditional, "AltTextEN" | "AltTextES">,
   locale = fallbackLng
 ): string => {
   const localeKey = locale.toUpperCase();
@@ -83,7 +87,7 @@ export const assetToPageMetadata = (
 };
 
 export const assetToOpenGraphImage = (
-  asset: CantoAssetDetailed,
+  asset: CantoAssetMetadata,
   locale = fallbackLng
 ): OpenGraph["images"] | undefined => {
   const {

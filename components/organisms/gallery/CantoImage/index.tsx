@@ -18,8 +18,8 @@ const CantoImage: FunctionComponent<CantoImageProps> = ({ locale, asset }) => {
   const width = parseInt(asset.width);
   const height = parseInt(asset.height);
   const aspectRatio = width / height;
-  const landscapeSizes = `(max-width: ${tokens.BREAK_TABLET}) 100vw, 900px`;
-  const portraitSizes = `(max-width: ${tokens.BREAK_TABLET}) 100vw, 450px`;
+  const landscapeSizes = `(max-width: ${tokens.BREAK_TABLET}) 100vw, 1435px`;
+  const portraitSizes = `(max-width: ${tokens.BREAK_TABLET}) 100vw, 700px`;
 
   const structuredData: ImageObject = {
     "@type": "ImageObject",
