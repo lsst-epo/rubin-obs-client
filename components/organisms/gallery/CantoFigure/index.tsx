@@ -1,11 +1,11 @@
 import { FunctionComponent, ReactNode } from "react";
 import Figure from "@rubin-epo/epo-react-lib/Figure";
-import IconComposer from "@rubin-epo/epo-react-lib/IconComposer";
 import { CantoAssetAdditional } from "@/lib/api/galleries/schema";
 import { assetCaption } from "@/lib/api/canto/metadata";
-import { useTranslation } from "@/lib/i18n";
+import { addLocaleUriSegment, useTranslation } from "@/lib/i18n";
 import SharePopup from "@/components/layout/SharePopup";
 import CantoDownload from "../CantoDownload";
+import { CloseButton } from "./CantoFigure.client";
 import styles from "./styles.module.css";
 
 interface CantoFigureProps {
@@ -14,9 +14,10 @@ interface CantoFigureProps {
   additional: CantoAssetAdditional;
   downloadUrl: string;
   asset: ReactNode;
-  location: string;
   width: string;
   height: string;
+  id: string;
+  gallery: string;
 }
 
 const CantoFigure: FunctionComponent<CantoFigureProps> = async ({
@@ -25,17 +26,14 @@ const CantoFigure: FunctionComponent<CantoFigureProps> = async ({
   downloadUrl,
   name,
   locale,
-  location,
   width,
   height,
+  id,
+  gallery,
 }) => {
   const { t } = await useTranslation(locale);
   const aspectRatio = parseInt(width) / parseInt(height);
-  const { origin, pathname } = new URL(location);
-  const parentLocation = `${origin}${pathname
-    .split("/")
-    .slice(0, -1)
-    .join("/")}`;
+  const parentPath = addLocaleUriSegment(locale, `/gallery/${gallery}`);
 
   return (
     <Figure
@@ -51,7 +49,7 @@ const CantoFigure: FunctionComponent<CantoFigureProps> = async ({
           )}
           <div className={styles.actionsRow}>
             <CantoDownload directUrlOriginal={downloadUrl} />
-            <SharePopup title={name} url={location} />
+            <SharePopup title={name} url={`/gallery/${gallery}/${id}`} />
           </div>
         </>
       }
@@ -66,14 +64,7 @@ const CantoFigure: FunctionComponent<CantoFigureProps> = async ({
         }}
       >
         {asset}
-        <a
-          className={styles.closeLink}
-          href={parentLocation}
-          title={t("gallery.back-to-gallery")}
-        >
-          <IconComposer icon="close" />
-          <span className="a-hidden">{t("gallery.back-to-gallery")}</span>
-        </a>
+        <CloseButton fallback={parentPath} />
       </div>
     </Figure>
   );
