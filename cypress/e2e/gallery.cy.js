@@ -23,7 +23,7 @@ describe("Gallery", () => {
             cy.get(`h1 ~ ul > li > a > img`)
               .first()
               .then(($nextImg) => {
-                expect($nextImg.attr("id")).to.not.be($img.attr("id"));
+                expect($nextImg.attr("id")).not.to.be($img.attr("id"));
               });
           });
         });

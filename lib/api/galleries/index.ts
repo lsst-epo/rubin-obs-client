@@ -5,13 +5,18 @@ import {
   CantoAssetMetadata,
   GalleryDataFilters,
   MetadataAssetSchema,
+  SupportedCantoScheme,
   UnsupportedCantoScheme,
 } from "./schema";
 import z from "zod";
-import { ForPageInput, WhereInFiltersInput } from "@/gql/graphql";
+import {
+  ForPageInput,
+  WhereContainsInFilterInput,
+  WhereInFiltersInput,
+  WhereNotInFiltersInput,
+} from "@/gql/graphql";
 
-const whereIn = (filters: GalleryDataFilters): WhereInFiltersInput => {
-  const { tag } = filters;
+const whereIn = ({ tag = [] }: GalleryDataFilters): WhereInFiltersInput => {
   if (tag.length > 0) {
     return { key: "tag", values: tag };
   }
@@ -21,6 +26,31 @@ const whereIn = (filters: GalleryDataFilters): WhereInFiltersInput => {
 
 const forPage = ({ limit, page }: GalleryDataFilters): ForPageInput => {
   return { items: limit, page };
+};
+
+const whereContainsIn = ({
+  search,
+}: GalleryDataFilters): WhereContainsInFilterInput => {
+  if (search) {
+    return { keys: ["name", "tag"], value: search };
+  }
+
+  return { keys: [""], value: "" };
+};
+
+const whereNotIn = ({
+  type = [],
+}: GalleryDataFilters): WhereNotInFiltersInput => {
+  if (type.length > 0) {
+    return {
+      key: "scheme",
+      values: SupportedCantoScheme.options.filter(
+        (option) => !type.includes(option)
+      ),
+    };
+  }
+
+  return { key: "scheme", values: UnsupportedCantoScheme.options };
 };
 
 export async function getAllGalleries(locale: string) {
@@ -160,8 +190,9 @@ export async function getGalleryData(
     query GalleryQuery(
       $site: [String]
       $uri: [String]
-      $scheme: [String]
       $whereIn: WhereInFiltersInput
+      $whereNotIn: WhereNotInFiltersInput
+      $whereContainsIn: WhereContainsInFilterInput
       $forPage: ForPageInput
     ) {
       galleriesEntries(site: $site, uri: $uri) {
@@ -170,9 +201,10 @@ export async function getGalleryData(
           title
           description
           assetAlbum(
-            whereNotIn: { key: "scheme", values: $scheme }
+            whereNotIn: $whereNotIn
             forPage: $forPage
             whereIn: $whereIn
+            whereContainsIn: $whereContainsIn
           ) {
             additional {
               AltTextEN
@@ -196,8 +228,9 @@ export async function getGalleryData(
       metaGalleries: galleriesEntries(site: $site, uri: $uri) {
         ... on galleries_gallery_Entry {
           assetAlbum(
-            whereNotIn: { key: "scheme", values: $scheme }
+            whereNotIn: $whereNotIn
             whereIn: $whereIn
+            whereContainsIn: $whereContainsIn
           ) {
             id
           }
@@ -211,9 +244,10 @@ export async function getGalleryData(
     variables: {
       site,
       uri: `gallery/${gallery}`,
-      scheme: UnsupportedCantoScheme.options,
+      whereNotIn: whereNotIn(filters),
       whereIn: whereIn(filters),
       forPage: forPage(filters),
+      whereContainsIn: whereContainsIn(filters),
     },
   });
 
