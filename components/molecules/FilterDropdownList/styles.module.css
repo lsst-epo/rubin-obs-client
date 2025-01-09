@@ -1,0 +1,84 @@
+.toggleWrapper {
+  position: relative;
+  height: var(--height-filter-controls, 50px);
+  font-weight: 600;
+}
+
+.toggleButton {
+  --radius-border-button: calc(var(--height-filter-controls) / 2);
+
+  display: flex;
+  align-items: center;
+  border: 2px solid transparent;
+  border-radius: var(--radius-border-button);
+  gap: var(--size-filter-spacing, var(--size-spacing-2xs));
+  padding-inline: var(--size-spacing-xs);
+  height: var(--height-filter-controls, 50px);
+  white-space: nowrap;
+
+  &:not(:disabled):hover,
+  &:not(:disabled):focus,
+  &:not(:disabled)[data-headlessui-state="open"] {
+    border-color: currentcolor;
+  }
+
+  &:not(:disabled)[data-headlessui-state="open"] {
+    background-color: var(--color-background-page-primary);
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.toggleIcon {
+  width: 1.5em;
+  height: 1.5em;
+  position: relative;
+
+  & > svg {
+    width: 1.5em;
+    height: 1.5em;
+  }
+}
+
+.filterList {
+  background-color: var(--color-rubin-gray-100);
+  position: absolute;
+  top: calc(100% + var(--size-filter-spacing, var(--size-spacing-2xs)));
+  width: 300px;
+  z-index: 1;
+  transition: opacity 0.2s;
+
+  &:focus-within {
+    outline: none;
+  }
+}
+
+.filterListClose {
+  opacity: 0;
+}
+
+.filterListOpen {
+  opacity: 1;
+}
+
+.filterLink {
+  display: grid;
+  align-items: center;
+  justify-content: flex-start;
+  grid-auto-flow: column;
+  grid-template-columns: 1em 1fr;
+  gap: var(--size-filter-spacing);
+  padding: var(--size-spacing-3xs) var(--size-spacing-2xs);
+  text-decoration: none;
+  white-space: nowrap;
+
+  &:hover,
+  &:focus,
+  &[data-headlessui-state="active"] {
+    font-weight: 600;
+    color: var(--color-background-page-primary);
+    background-color: var(--turquoise50);
+  }
+}

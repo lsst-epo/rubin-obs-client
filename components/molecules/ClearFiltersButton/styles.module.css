@@ -1,0 +1,30 @@
+.clearFilters {
+  --height-button: var(--height-filter-controls, 50px);
+  --radius-border-button: calc(var(--height-button) / 2);
+
+  border: 2px solid transparent;
+  display: flex;
+  gap: var(--size-spacing-3xs);
+  align-items: center;
+  font-weight: 600;
+  height: var(--height-button);
+  padding: var(--size-spacing-2xs) var(--size-spacing-m);
+  white-space: nowrap;
+  background-color: var(--neutral30);
+  border-radius: var(--height-button);
+
+  &:not(:disabled):hover,
+  &:not(:disabled):focus {
+    background-color: var(--red20);
+    border-color: currentcolor;
+    outline: none;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+
+    & > svg {
+      filter: grayscale();
+    }
+  }
+}

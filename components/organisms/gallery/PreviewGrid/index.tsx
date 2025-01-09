@@ -3,13 +3,14 @@ import Image from "next/image";
 import MasonryGrid from "@rubin-epo/epo-react-lib/MasonryGrid";
 import MasonryImage from "@rubin-epo/epo-react-lib/MasonryImage";
 import Buttonish from "@rubin-epo/epo-react-lib/Buttonish";
-import Stack from "@rubin-epo/epo-react-lib/Stack";
+import { type IconKey } from "@rubin-epo/epo-react-lib/IconComposer";
 import { getGalleryData } from "@/lib/api/galleries";
 import { GalleryDataFilters } from "@/lib/api/galleries/schema";
 import { assetAlt, assetTitle } from "@/lib/api/canto/metadata";
 import { useTranslation } from "@/lib/i18n";
 import { getOffset } from "@/lib/utils/pagination";
 import Pagination from "@/components/molecules/Pagination";
+import FilteredResults from "../FilteredResults";
 import styles from "./styles.module.css";
 interface PreviewGridProps {
   gallery: string;
@@ -26,20 +27,29 @@ const PreviewGridContent: FunctionComponent<PreviewGridProps> = async ({
   const data = await getGalleryData(gallery, locale, filters);
 
   if (!data) {
-    return null;
+    return (
+      <>
+        <FilteredResults total={0} {...{ filters }} />
+        <Buttonish text={t("gallery.back-to-gallery")} url={gallery} />
+      </>
+    );
   }
 
-  const { assetAlbum, total } = data;
+  const { assetAlbum, total = 0 } = data;
   const { page, limit } = filters;
 
   if (assetAlbum.length === 0 || total === 0) {
     return (
-      <Stack>
-        <p>{t("search-no-results")}</p>
+      <>
+        <FilteredResults {...{ filters, total }} />
         <Buttonish text={t("gallery.back-to-gallery")} url={gallery} />
-      </Stack>
+      </>
     );
   }
+
+  const icons: Record<string, IconKey> = {
+    video: "Play",
+  };
 
   const items = assetAlbum.map(
     (
@@ -61,7 +71,8 @@ const PreviewGridContent: FunctionComponent<PreviewGridProps> = async ({
             linkProps={{
               href: `${gallery}/${id}`,
             }}
-            isVideo={scheme === "video"}
+            icon={icons[scheme]}
+            className={styles.tile}
           >
             <Image
               id={id}
@@ -70,10 +81,12 @@ const PreviewGridContent: FunctionComponent<PreviewGridProps> = async ({
               src={directUrlPreview}
               sizes={`(max-width: 600px) 100vw`}
               alt={assetAlt(additional, locale)}
-              title={assetTitle(additional, locale) || name}
               priority={i < 10}
               quality={80}
             />
+            <div className={styles.titleCard}>
+              {assetTitle(additional, locale) || name}
+            </div>
           </MasonryImage>
         ),
       };
@@ -82,6 +95,7 @@ const PreviewGridContent: FunctionComponent<PreviewGridProps> = async ({
 
   return (
     <>
+      <FilteredResults {...{ total, filters }} />
       <MasonryGrid items={items} />
       <Pagination
         limit={limit}
@@ -108,6 +122,7 @@ const PreviewGrid: FunctionComponent<PreviewGridProps> = ({
     <Suspense
       fallback={
         <>
+          <FilteredResults {...{ filters }} />
           <MasonryGrid items={fallbackTiles} />
           <Pagination
             limit={limit}

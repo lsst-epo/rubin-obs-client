@@ -53678,30 +53678,6 @@ export type GalleryMetadataQueryQuery = {
   } | null> | null;
 };
 
-export type AssetCountQueryQueryVariables = Exact<{
-  site: InputMaybe<
-    | Array<InputMaybe<Scalars["String"]["input"]>>
-    | InputMaybe<Scalars["String"]["input"]>
-  >;
-  uri: InputMaybe<
-    | Array<InputMaybe<Scalars["String"]["input"]>>
-    | InputMaybe<Scalars["String"]["input"]>
-  >;
-  scheme: InputMaybe<
-    | Array<InputMaybe<Scalars["String"]["input"]>>
-    | InputMaybe<Scalars["String"]["input"]>
-  >;
-  whereIn: InputMaybe<WhereInFiltersInput>;
-}>;
-
-export type AssetCountQueryQuery = {
-  __typename?: "Query";
-  galleriesEntries: Array<{
-    __typename?: "galleries_gallery_Entry";
-    assetAlbum: Array<never | null> | null;
-  } | null> | null;
-};
-
 export type GalleryQueryQueryVariables = Exact<{
   site: InputMaybe<
     | Array<InputMaybe<Scalars["String"]["input"]>>
@@ -53711,11 +53687,9 @@ export type GalleryQueryQueryVariables = Exact<{
     | Array<InputMaybe<Scalars["String"]["input"]>>
     | InputMaybe<Scalars["String"]["input"]>
   >;
-  scheme: InputMaybe<
-    | Array<InputMaybe<Scalars["String"]["input"]>>
-    | InputMaybe<Scalars["String"]["input"]>
-  >;
   whereIn: InputMaybe<WhereInFiltersInput>;
+  whereNotIn: InputMaybe<WhereNotInFiltersInput>;
+  whereContainsIn: InputMaybe<WhereContainsInFilterInput>;
   forPage: InputMaybe<ForPageInput>;
 }>;
 
@@ -54980,161 +54954,6 @@ export const GalleryMetadataQueryDocument = {
   GalleryMetadataQueryQuery,
   GalleryMetadataQueryQueryVariables
 >;
-export const AssetCountQueryDocument = {
-  kind: "Document",
-  definitions: [
-    {
-      kind: "OperationDefinition",
-      operation: "query",
-      name: { kind: "Name", value: "AssetCountQuery" },
-      variableDefinitions: [
-        {
-          kind: "VariableDefinition",
-          variable: { kind: "Variable", name: { kind: "Name", value: "site" } },
-          type: {
-            kind: "ListType",
-            type: {
-              kind: "NamedType",
-              name: { kind: "Name", value: "String" },
-            },
-          },
-        },
-        {
-          kind: "VariableDefinition",
-          variable: { kind: "Variable", name: { kind: "Name", value: "uri" } },
-          type: {
-            kind: "ListType",
-            type: {
-              kind: "NamedType",
-              name: { kind: "Name", value: "String" },
-            },
-          },
-        },
-        {
-          kind: "VariableDefinition",
-          variable: {
-            kind: "Variable",
-            name: { kind: "Name", value: "scheme" },
-          },
-          type: {
-            kind: "ListType",
-            type: {
-              kind: "NamedType",
-              name: { kind: "Name", value: "String" },
-            },
-          },
-        },
-        {
-          kind: "VariableDefinition",
-          variable: {
-            kind: "Variable",
-            name: { kind: "Name", value: "whereIn" },
-          },
-          type: {
-            kind: "NamedType",
-            name: { kind: "Name", value: "WhereInFiltersInput" },
-          },
-        },
-      ],
-      selectionSet: {
-        kind: "SelectionSet",
-        selections: [
-          {
-            kind: "Field",
-            name: { kind: "Name", value: "galleriesEntries" },
-            arguments: [
-              {
-                kind: "Argument",
-                name: { kind: "Name", value: "site" },
-                value: {
-                  kind: "Variable",
-                  name: { kind: "Name", value: "site" },
-                },
-              },
-              {
-                kind: "Argument",
-                name: { kind: "Name", value: "uri" },
-                value: {
-                  kind: "Variable",
-                  name: { kind: "Name", value: "uri" },
-                },
-              },
-            ],
-            selectionSet: {
-              kind: "SelectionSet",
-              selections: [
-                {
-                  kind: "InlineFragment",
-                  typeCondition: {
-                    kind: "NamedType",
-                    name: { kind: "Name", value: "galleries_gallery_Entry" },
-                  },
-                  selectionSet: {
-                    kind: "SelectionSet",
-                    selections: [
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "assetAlbum" },
-                        arguments: [
-                          {
-                            kind: "Argument",
-                            name: { kind: "Name", value: "whereNotIn" },
-                            value: {
-                              kind: "ObjectValue",
-                              fields: [
-                                {
-                                  kind: "ObjectField",
-                                  name: { kind: "Name", value: "key" },
-                                  value: {
-                                    kind: "StringValue",
-                                    value: "scheme",
-                                    block: false,
-                                  },
-                                },
-                                {
-                                  kind: "ObjectField",
-                                  name: { kind: "Name", value: "values" },
-                                  value: {
-                                    kind: "Variable",
-                                    name: { kind: "Name", value: "scheme" },
-                                  },
-                                },
-                              ],
-                            },
-                          },
-                          {
-                            kind: "Argument",
-                            name: { kind: "Name", value: "whereIn" },
-                            value: {
-                              kind: "Variable",
-                              name: { kind: "Name", value: "whereIn" },
-                            },
-                          },
-                        ],
-                        selectionSet: {
-                          kind: "SelectionSet",
-                          selections: [
-                            {
-                              kind: "Field",
-                              name: { kind: "Name", value: "id" },
-                            },
-                          ],
-                        },
-                      },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<
-  AssetCountQueryQuery,
-  AssetCountQueryQueryVariables
->;
 export const GalleryQueryDocument = {
   kind: "Document",
   definitions: [
@@ -55169,25 +54988,33 @@ export const GalleryQueryDocument = {
           kind: "VariableDefinition",
           variable: {
             kind: "Variable",
-            name: { kind: "Name", value: "scheme" },
+            name: { kind: "Name", value: "whereIn" },
           },
           type: {
-            kind: "ListType",
-            type: {
-              kind: "NamedType",
-              name: { kind: "Name", value: "String" },
-            },
+            kind: "NamedType",
+            name: { kind: "Name", value: "WhereInFiltersInput" },
           },
         },
         {
           kind: "VariableDefinition",
           variable: {
             kind: "Variable",
-            name: { kind: "Name", value: "whereIn" },
+            name: { kind: "Name", value: "whereNotIn" },
           },
           type: {
             kind: "NamedType",
-            name: { kind: "Name", value: "WhereInFiltersInput" },
+            name: { kind: "Name", value: "WhereNotInFiltersInput" },
+          },
+        },
+        {
+          kind: "VariableDefinition",
+          variable: {
+            kind: "Variable",
+            name: { kind: "Name", value: "whereContainsIn" },
+          },
+          type: {
+            kind: "NamedType",
+            name: { kind: "Name", value: "WhereContainsInFilterInput" },
           },
         },
         {
@@ -55252,26 +55079,8 @@ export const GalleryQueryDocument = {
                             kind: "Argument",
                             name: { kind: "Name", value: "whereNotIn" },
                             value: {
-                              kind: "ObjectValue",
-                              fields: [
-                                {
-                                  kind: "ObjectField",
-                                  name: { kind: "Name", value: "key" },
-                                  value: {
-                                    kind: "StringValue",
-                                    value: "scheme",
-                                    block: false,
-                                  },
-                                },
-                                {
-                                  kind: "ObjectField",
-                                  name: { kind: "Name", value: "values" },
-                                  value: {
-                                    kind: "Variable",
-                                    name: { kind: "Name", value: "scheme" },
-                                  },
-                                },
-                              ],
+                              kind: "Variable",
+                              name: { kind: "Name", value: "whereNotIn" },
                             },
                           },
                           {
@@ -55288,6 +55097,14 @@ export const GalleryQueryDocument = {
                             value: {
                               kind: "Variable",
                               name: { kind: "Name", value: "whereIn" },
+                            },
+                          },
+                          {
+                            kind: "Argument",
+                            name: { kind: "Name", value: "whereContainsIn" },
+                            value: {
+                              kind: "Variable",
+                              name: { kind: "Name", value: "whereContainsIn" },
                             },
                           },
                         ],
@@ -55420,26 +55237,8 @@ export const GalleryQueryDocument = {
                             kind: "Argument",
                             name: { kind: "Name", value: "whereNotIn" },
                             value: {
-                              kind: "ObjectValue",
-                              fields: [
-                                {
-                                  kind: "ObjectField",
-                                  name: { kind: "Name", value: "key" },
-                                  value: {
-                                    kind: "StringValue",
-                                    value: "scheme",
-                                    block: false,
-                                  },
-                                },
-                                {
-                                  kind: "ObjectField",
-                                  name: { kind: "Name", value: "values" },
-                                  value: {
-                                    kind: "Variable",
-                                    name: { kind: "Name", value: "scheme" },
-                                  },
-                                },
-                              ],
+                              kind: "Variable",
+                              name: { kind: "Name", value: "whereNotIn" },
                             },
                           },
                           {
@@ -55448,6 +55247,14 @@ export const GalleryQueryDocument = {
                             value: {
                               kind: "Variable",
                               name: { kind: "Name", value: "whereIn" },
+                            },
+                          },
+                          {
+                            kind: "Argument",
+                            name: { kind: "Name", value: "whereContainsIn" },
+                            value: {
+                              kind: "Variable",
+                              name: { kind: "Name", value: "whereContainsIn" },
                             },
                           },
                         ],
