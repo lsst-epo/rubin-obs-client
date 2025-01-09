@@ -3,3 +3,35 @@
   height: 100%;
   background-color: var(--color-background-tile-light);
 }
+
+.tile {
+  &:hover,
+  &:focus-visible {
+    --translate-card: translateY(0);
+  }
+
+  &:focus {
+    outline: 3px solid var(--color-font-accent);
+    outline-offset: 1px;
+  }
+}
+
+.titleCard {
+  position: absolute;
+  bottom: 0;
+  backdrop-filter: blur(2px);
+  background-color: rgb(
+    from var(--color-background-page-invert) r g b /
+      var(--opacity-background-title, 1)
+  );
+  font-size: 0.75rem;
+  color: var(--color-font-invert);
+  padding: var(--size-spacing-xs);
+  transition: var(--time-transition-base) transform;
+  transform: var(--translate-card, translateY(100%));
+  width: 100%;
+
+  @media (prefers-reduced-transparency: no-preference) {
+    --opacity-background-title: 0.8;
+  }
+}
