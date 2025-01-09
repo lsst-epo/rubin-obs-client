@@ -6,7 +6,7 @@ loadEnvConfig(projectDir);
 
 export default defineConfig({
   client: "@hey-api/client-fetch",
-  input: `${process.env.NOIRLAB_BASE_URL}/public/documentation/schema/`,
+  input: `${process.env.NEXT_PUBLIC_NOIRLAB_BASE_URL}/public/documentation/schema/`,
   output: {
     format: "prettier",
     lint: "eslint",

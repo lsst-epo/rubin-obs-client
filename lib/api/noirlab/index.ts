@@ -9,7 +9,7 @@ import {
 import { Locale } from "@/lib/i18n/settings";
 
 client.setConfig({
-  baseUrl: process.env.NOIRLAB_BASE_URL,
+  baseUrl: process.env.NEXT_PUBLIC_NOIRLAB_BASE_URL,
 });
 
 export const NOIRLabServices = {

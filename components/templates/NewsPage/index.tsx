@@ -12,7 +12,7 @@ const sanitize = (dirty: string | undefined) => {
 
   try {
     const { hostname: noirLabHostname } = new URL(
-      `${process.env.NOIRLAB_BASE_URL}`
+      `${process.env.NEXT_PUBLIC_NOIRLAB_BASE_URL}`
     );
     const sanitizeOptions: IOptions = {
       allowedTags: [...defaults.allowedTags, "iframe"],
