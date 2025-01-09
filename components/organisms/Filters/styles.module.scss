@@ -1,0 +1,44 @@
+@use "abstracts/mixins/base";
+@use "abstracts/functions";
+
+.filters {
+  --height-filter-controls: 50px;
+  --size-filter-spacing: var(--size-spacing-2xs);
+
+  position: relative;
+  padding: var(--size-filter-spacing) 0;
+  font-size: 16px;
+  background-color: var(--color-rubin-gray-100);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-rows: 1fr;
+  gap: var(--size-filter-spacing);
+
+  @include base.respond(functions.break(tablet), min) {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.left {
+  display: flex;
+  gap: var(--size-spacing-3xs);
+}
+
+.right {
+  display: flex;
+  gap: var(--size-spacing-3xs);
+
+  @include base.respond(functions.break(tablet)) {
+    order: -1;
+  }
+}
+
+.search {
+  @include base.respond(functions.break(tablet)) {
+    flex-grow: 1;
+  }
+}
