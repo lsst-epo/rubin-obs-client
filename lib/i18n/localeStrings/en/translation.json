@@ -113,8 +113,15 @@
     "3d": "3D",
     "gallery": "Gallery",
     "gallery-item": "Gallery Item",
-    "plural-image": "Images",
-    "plural-video": "Videos",
+    "filters": {
+      "results_zero": "No results for",
+      "results_one": "{{total}} result for",
+      "results_other": "{{total}} results for",
+      "search": "“{{value}}”",
+      "type": "Type: {{type}}",
+      "image": "Images",
+      "video": "Videos"
+    },
     "plural-3d": "3D Files",
     "plural-gallery": "Galleries",
     "see-all": "See all",

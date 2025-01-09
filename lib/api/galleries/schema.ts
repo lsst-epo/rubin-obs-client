@@ -95,13 +95,37 @@ export const GalleryFilterSchema = z
       .array(z.string())
       .optional()
       .catch(({ input }) => {
-        if (typeof input === "string") {
+        if (typeof input === "string" && input !== "") {
           return [input];
         }
 
         return [];
       })
-      .default([]),
+      .transform((items) => {
+        const set = new Set(items);
+
+        return Array.from(set);
+      }),
+    search: z.string().optional(),
+    type: z
+      .array(SupportedCantoScheme)
+      .optional()
+      .catch(({ input }) => {
+        if (typeof input === "string" && input !== "") {
+          const { data, error } = SupportedCantoScheme.safeParse(input);
+
+          if (data && !error) {
+            return [input];
+          }
+        }
+
+        return [];
+      })
+      .transform((items) => {
+        const set = new Set(items);
+
+        return Array.from(set);
+      }),
   })
   .default({});
 
