@@ -134,7 +134,8 @@
     "loading": "Loading the Gallery...",
     "size": "Size",
     "file-size": "File size",
-    "credit": "Credit: {{credit}}"
+    "credit": "Credit: {{credit}}",
+    "date-created": "Date created"
   },
   "jobs": {
     "job": "Job",
