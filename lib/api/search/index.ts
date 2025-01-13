@@ -2,11 +2,11 @@ import { graphql } from "@/gql/gql";
 import queryAPI from "@/lib/api/client/query";
 import { getSiteFromLocale } from "@/lib/helpers/site";
 
-export async function getSearchEntry(locale: string, previewToken?: string) {
+export async function getSearchPage(locale: string, previewToken?: string) {
   const site = getSiteFromLocale(locale);
   const query = graphql(`
     query SearchResultsPage($site: [String]) {
-      searchResultsEntries {
+      searchResultsEntries(site: $site) {
         ... on searchResults_searchResults_Entry {
           title
           id

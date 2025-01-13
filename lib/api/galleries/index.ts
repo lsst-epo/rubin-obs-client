@@ -15,6 +15,7 @@ import {
   WhereInFiltersInput,
   WhereNotInFiltersInput,
 } from "@/gql/graphql";
+import { fullBaseFields } from "../fragments/shared";
 
 const whereIn = ({ tag = [] }: GalleryDataFilters): WhereInFiltersInput => {
   if (tag.length > 0) {
@@ -52,6 +53,27 @@ const whereNotIn = ({
 
   return { key: "scheme", values: UnsupportedCantoScheme.options };
 };
+
+export const galleryFragment = `
+  fragment galleryFragment on galleries_gallery_Entry {
+    ${fullBaseFields}
+    description
+    cantoAssetSingle {
+      metadata: additional {
+        AltTextEN
+        AltTextES
+        TitleEN
+        TitleES
+      }
+      height
+      url {
+        directUrlOriginal
+        directUrlPreview
+      }
+      width
+    }
+  }
+`;
 
 export async function getAllGalleries(locale: string) {
   const site = getSiteFromLocale(locale);
