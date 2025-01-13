@@ -28,6 +28,8 @@ const documents = {
     types.GalleryMetadataQueryDocument,
   "\n    query GalleryQuery(\n      $site: [String]\n      $uri: [String]\n      $whereIn: WhereInFiltersInput\n      $whereNotIn: WhereNotInFiltersInput\n      $whereContainsIn: WhereContainsInFilterInput\n      $forPage: ForPageInput\n    ) {\n      galleriesEntries(site: $site, uri: $uri) {\n        ... on galleries_gallery_Entry {\n          id\n          title\n          description\n          assetAlbum(\n            whereNotIn: $whereNotIn\n            forPage: $forPage\n            whereIn: $whereIn\n            whereContainsIn: $whereContainsIn\n          ) {\n            additional {\n              AltTextEN\n              AltTextES\n              TitleEN\n              TitleES\n            }\n            height\n            id\n            name\n            scheme\n            url {\n              directUrlOriginal\n              directUrlPreview\n              directUrlPreviewPlay\n            }\n            width\n          }\n        }\n      }\n      metaGalleries: galleriesEntries(site: $site, uri: $uri) {\n        ... on galleries_gallery_Entry {\n          assetAlbum(\n            whereNotIn: $whereNotIn\n            whereIn: $whereIn\n            whereContainsIn: $whereContainsIn\n          ) {\n            id\n          }\n        }\n      }\n    }\n  ":
     types.GalleryQueryDocument,
+  "\n    query SearchResultsPage($site: [String]) {\n      searchResultsEntries {\n        ... on searchResults_searchResults_Entry {\n          title\n          id\n          dynamicComponent\n        }\n      }\n    }\n  ":
+    types.SearchResultsPageDocument,
 };
 
 /**
