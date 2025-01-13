@@ -1,3 +1,4 @@
+"use client";
 import PropTypes from "prop-types";
 import EventList from "@/components/dynamic/EventList";
 import JobList from "@/dynamic/JobList";

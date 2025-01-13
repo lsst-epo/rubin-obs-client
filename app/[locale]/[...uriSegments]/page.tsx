@@ -15,7 +15,6 @@ import { resizeCantoImage } from "@/lib/api/canto/resize";
 import PageTemplate from "@/components/templates/Page";
 import NewsPageTemplate from "@/components/templates/NewsPage";
 import GlossaryPageTemplate from "@/components/templates/GlossaryPage";
-import SearchPageTemplate from "@/components/templates/SearchPage";
 import SlideshowPageTemplate from "@/components/templates/SlideshowPage";
 import StaffPageTemplate from "@/components/templates/StaffPage";
 import EventPageTemplate from "@/components/templates/EventPage";
@@ -107,7 +106,6 @@ const sectionMap = {
   events: EventPageTemplate,
   glossaryTerms: GlossaryPageTemplate,
   news: NewsPageTemplate,
-  searchResults: SearchPageTemplate,
   slideshows: SlideshowPageTemplate,
   staffProfiles: StaffPageTemplate,
 };

@@ -8,7 +8,9 @@ const config: CodegenConfig = {
     "./gql/": {
       documents: [
         "app/[locale]/gallery/**/*.{ts,tsx}",
+        "app/[locale]/search/**/*.{ts,tsx}",
         "lib/api/galleries/*.ts",
+        "lib/api/search/*.ts",
       ],
       preset: "client",
     },
