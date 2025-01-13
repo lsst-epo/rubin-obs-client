@@ -1,8 +1,9 @@
 import { fallbackLng } from "@/lib/i18n/settings";
-import { resizeCantoImage, ValidCantoSizes } from "./resize";
+import { resizeCantoImage, ValidCantoSize, ValidCantoSizes } from "./resize";
 import { ImageProps } from "next/image";
 import { CantoImage } from "types/canto";
-import { CantoAssetAdditional, CantoAssetMetadata } from "../galleries/schema";
+import { CantoAssetAdditional } from "../galleries/schema";
+import { type ImageShape } from "@rubin-epo/epo-react-lib/Image";
 import { assetAlt } from "./metadata";
 
 const responsiveCantoSrc = (
@@ -57,59 +58,39 @@ const getAssetMetadata = (
   };
 };
 
-export const damAssetToImage = (locale: string, data: CantoImage) => {
+export const cantoToImageShape = (
+  data: CantoImage,
+  size?: ValidCantoSize,
+  locale?: string
+): ImageShape | undefined => {
   if (!data) return undefined;
 
-  const { metadata, url, width, height } = data;
+  const { metadata, url } = data;
   const { directUrlPreview, directUrlOriginal } = url;
-  const { altText: alt, ...assetMetadata } =
-    getAssetMetadata(metadata, locale) || {};
 
-  return {
-    src: directUrlPreview,
-    ...responsiveCantoSrc(
-      directUrlPreview,
-      directUrlOriginal,
-      parseInt(width),
-      parseInt(height)
-    ),
-    width: parseInt(width),
-    height: parseInt(height),
-    alt,
-    ...assetMetadata,
-  };
-};
+  const width = parseInt(data.width);
+  const height = parseInt(data.height);
 
-export const damAssetToGalleryTile = (
-  data: CantoAssetMetadata,
-  locale: string
-) => {
-  const {
-    additional,
-    url: { directUrlPreview },
-  } = data;
+  if (size) {
+    const scale = size / Math.max(width, height);
+    const src = resizeCantoImage(directUrlPreview, size);
 
-  const aspectRatio = parseInt(data.width) / parseInt(data.height);
-  const isPortrait = aspectRatio < 1;
-  const size = 640;
-  const width = isPortrait ? Math.floor(size / aspectRatio) : size;
-  const height = isPortrait ? size : Math.floor(size / aspectRatio);
-
-  const { srcSet } = responsiveCantoSrc(
-    directUrlPreview,
-    directUrlPreview,
-    width,
-    height
-  );
-
-  return {
-    width: isPortrait ? size : Math.floor(size * aspectRatio),
-    height: isPortrait ? Math.floor(size * aspectRatio) : size,
-    alt: assetAlt(additional),
-    url: directUrlPreview,
-    src: directUrlPreview,
-    srcSet,
-  };
+    return {
+      src,
+      url: src,
+      width: Math.round(width * scale),
+      height: Math.round(height * scale),
+      altText: assetAlt(metadata, locale),
+    };
+  } else {
+    return {
+      src: directUrlOriginal,
+      url: directUrlOriginal,
+      width,
+      height,
+      altText: assetAlt(metadata, locale),
+    };
+  }
 };
 
 export const cantoToImageProps = (

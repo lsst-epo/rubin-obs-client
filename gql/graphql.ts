@@ -55322,6 +55322,16 @@ export const SearchResultsPageDocument = {
           {
             kind: "Field",
             name: { kind: "Name", value: "searchResultsEntries" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "site" },
+                value: {
+                  kind: "Variable",
+                  name: { kind: "Name", value: "site" },
+                },
+              },
+            ],
             selectionSet: {
               kind: "SelectionSet",
               selections: [

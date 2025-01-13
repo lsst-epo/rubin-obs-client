@@ -6,45 +6,24 @@ export async function getEntriesByLocale(locale: string) {
   const site = getSiteFromLocale(locale);
   const ENV = process.env.CLOUD_ENV;
 
-  if (ENV === "DEV") {
-    const query = gql`
-      query getEntriesBySite($site: [String]) {
-        entries(
-          site: $site
-          section: ["pages", "searchResults"]
-          type: ["not", "redirectPage"]
-          level: 1
-        ) {
-          uri
-        }
-        search: entries(
-          site: $site
-          section: ["searchResults"]
-          type: ["not", "redirectPage"]
-        ) {
-          uri
-        }
+  const query = gql`
+    query getEntriesBySite($site: [String], $level: Int) {
+      entries(
+        site: $site
+        section: ["pages"]
+        type: ["not", "redirectPage"]
+        level: $level
+      ) {
+        uri
       }
-    `;
-    const { data } = await queryAPI({ query, variables: { site } });
+    }
+  `;
+  const { data } = await queryAPI({
+    query,
+    variables: { site, level: ENV === "DEV" ? 1 : 0 },
+  });
 
-    return { entries: [...data.entries, ...data.search] };
-  } else {
-    const query = gql`
-      query getEntriesBySite($site: [String]) {
-        entries(
-          site: $site
-          section: ["pages", "searchResults"]
-          type: ["not", "redirectPage"]
-        ) {
-          uri
-        }
-      }
-    `;
-
-    const { data } = await queryAPI({ query, variables: { site } });
-    return data;
-  }
+  return data;
 }
 
 export async function getEntrySectionByUri(
