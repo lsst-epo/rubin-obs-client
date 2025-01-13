@@ -30,6 +30,7 @@ const CantoImage: FunctionComponent<CantoImageProps> = ({ locale, asset }) => {
     encodingFormat: asset.default.ContentType,
     height: asset.width,
     width: asset.height,
+    dateCreated: asset.default.DateCreated,
     thumbnail: {
       "@type": "ImageObject",
       contentUrl: resizeCantoImage(url.directUrlPreview, 100),

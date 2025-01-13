@@ -12,6 +12,7 @@ interface AssetMetadataProps {
   scheme: CantoAssetScheme;
   width: string | number;
   height: string | number;
+  dateCreated: Date;
   size: number;
 }
 
@@ -20,12 +21,23 @@ const AssetMetadata: FunctionComponent<AssetMetadataProps> = async ({
   height,
   size,
   scheme,
+  dateCreated,
 }) => {
   const locale = getLocale();
   const { t } = await useTranslation(locale);
   const { quantity, unit } = convert(size, "bytes").to("best");
 
   const items: Array<MetadataItem> = [
+    {
+      key: t("gallery.date-created"),
+      value: (
+        <time dateTime={dateCreated.toISOString()}>
+          {new Intl.DateTimeFormat(locale, { dateStyle: "long" }).format(
+            dateCreated
+          )}
+        </time>
+      ),
+    },
     { key: t("gallery.size"), value: `${width} × ${height} px` },
     {
       key: t("gallery.file-size"),
