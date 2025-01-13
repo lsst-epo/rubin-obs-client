@@ -8,11 +8,7 @@ import {
 } from "@/api/fragments/content-blocks";
 import { eventFragmentFull } from "@/lib/api/fragments/event";
 import { newsPostFragmentFull } from "@/lib/api/fragments/news-post";
-import {
-  pageFragmentFull,
-  searchFragmentFull,
-  redirectFragment,
-} from "@/lib/api/fragments/page";
+import { pageFragmentFull, redirectFragment } from "@/lib/api/fragments/page";
 import { staffProfileFragmentFull } from "@/lib/api/fragments/staff-profile";
 import { glossaryTermFragmentFull } from "@/lib/api/fragments/glossary-term";
 import { studentPageFragmentFull } from "@/lib/api//fragments/student-page";
@@ -126,11 +122,6 @@ function getQueryFragments(
         ${glossaryTermFragmentFull}
         ${entryQueryify(`...glossaryTermFragmentFull`)}
       `;
-    case "searchResults":
-      return gql`
-        ${searchFragmentFull}
-        ${entryQueryify(`...searchFragmentFull`)}
-      `;
     default:
       return gql`
         ${linkFragment}
@@ -140,7 +131,6 @@ function getQueryFragments(
         ${newsPostFragmentFull}
         ${pageFragmentFull}
         ${studentPageFragmentFull}
-        ${searchFragmentFull}
         ${staffProfileFragmentFull}
         ${glossaryTermFragmentFull}
         ${educatorPageFragmentFull}
@@ -152,7 +142,6 @@ function getQueryFragments(
           ...pageFragmentFull
           ...studentPageFragmentFull
           ...educatorPageFragmentFull
-          ...searchFragmentFull
           ...staffProfileFragmentFull
           ...glossaryTermFragmentFull
           ...investigationLandingPageFragmentFull
