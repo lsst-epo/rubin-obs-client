@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import { getAllGalleries, getGalleryMetadata } from "@/lib/api/galleries";
 import { assetToOpenGraphImage } from "@/lib/api/canto/metadata";
 
+export const dynamicParams = false;
+
 export async function generateStaticParams({
   params: { locale },
 }: LocaleProps) {
