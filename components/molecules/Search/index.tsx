@@ -1,5 +1,5 @@
 "use client";
-import { FC, FormEventHandler, useId } from "react";
+import { FC, FormEventHandler, useEffect, useId, useRef } from "react";
 import classNames from "classnames";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
@@ -16,8 +16,15 @@ const Search: FC<SearchProps> = ({ className }) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { t } = useTranslation();
+  const formRef = useRef<HTMLFormElement>(null);
 
   const searchText = searchParams?.get("search") || "";
+
+  useEffect(() => {
+    if (searchText === "") {
+      formRef?.current?.reset();
+    }
+  }, [searchText]);
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
@@ -56,6 +63,7 @@ const Search: FC<SearchProps> = ({ className }) => {
 
   return (
     <form
+      ref={formRef}
       onSubmit={handleSubmit}
       className={classNames(styles.searchFieldset, className)}
     >
