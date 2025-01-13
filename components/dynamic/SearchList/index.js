@@ -7,14 +7,13 @@ import {
   makeTruncatedString,
   useGlobalData,
 } from "@/lib/utils";
-
+import { cantoToImageShape } from "@/lib/api/canto";
 import { makeDateString } from "@/helpers/dates";
 import Breadcrumbs from "@/components/page/Breadcrumbs";
 import { Grid } from "@rubin-epo/epo-react-lib";
 import DataList from "@/dynamic/DataList";
 import Tile from "@/atomic/Tile";
 import * as Styled from "./styles";
-import { fallbackLng } from "@/lib/i18n/settings";
 
 const SearchList = ({
   button,
@@ -23,10 +22,11 @@ const SearchList = ({
   limit = 10,
   isWide = true,
 }) => {
-  const { t } = useTranslation();
-  const localeInfo = useGlobalData("localeInfo");
+  const {
+    t,
+    i18n: { language: locale },
+  } = useTranslation();
   const rootPages = useGlobalData("rootPages");
-  const locale = localeInfo?.language || fallbackLng;
 
   const makePretitle = (entry) => {
     if (entry.eventType) {
@@ -63,6 +63,7 @@ const SearchList = ({
 
   const makeSubtitle = (entry) => {
     const type = {
+      gallery: t("gallery.gallery"),
       slideshow: t("gallery.slideshow"),
       events: t("events.event"),
       job: t("jobs.job"),
@@ -101,10 +102,16 @@ const SearchList = ({
           {entries?.length > 0 && (
             <Grid columns={1}>
               {entries.map((entry) => {
+                const { cantoAssetSingle } = entry;
+
                 return entry.id ? (
                   <Tile
                     key={entry.id}
-                    image={entry.image?.[0]}
+                    image={
+                      cantoAssetSingle?.length > 0
+                        ? cantoToImageShape(cantoAssetSingle[0], 240, locale)
+                        : entry.image?.[0]
+                    }
                     link={entry.uri}
                     pretitle={makePretitle(entry)}
                     subtitle={makeSubtitle(entry)}
