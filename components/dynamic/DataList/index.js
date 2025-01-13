@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { Container, Buttonish } from "@rubin-epo/epo-react-lib";
 import Loader from "@/atomic/Loader";
-import Pagination from "@/page/Pagination";
+import Pagination from "@/components/molecules/Pagination";
 import { useList, useGlobalData } from "@/lib/utils";
 import * as Styled from "./styles";
 import useQueryParams from "@/lib/routing/useQueryParams";
@@ -95,7 +95,9 @@ const DataList = ({
           </Styled.Footer>
         )}
       </Container>
-      {!isLoading && data && renderPagination()}
+      <Container width={width}>
+        {!isLoading && data && renderPagination()}
+      </Container>
     </>
   );
 };
