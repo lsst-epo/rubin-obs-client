@@ -24,6 +24,7 @@ const CantoVideo: FunctionComponent<CantoVideoProps> = ({ locale, asset }) => {
     contentUrl: asset.url.directUrlOriginal,
     creditText: asset.additional.Credit || undefined,
     encodingFormat: asset.default.ContentType,
+    dateCreated: asset.default.DateCreated,
     height: asset.height,
     width: asset.width,
   };
