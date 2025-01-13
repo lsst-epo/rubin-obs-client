@@ -38,7 +38,17 @@ const GalleryAsset: FunctionComponent<GalleryAssetProps> = async ({
     notFound();
   }
 
-  const { name, width, height, url, scheme, tag, additional, size } = asset;
+  const {
+    name,
+    width,
+    height,
+    url,
+    scheme,
+    tag,
+    additional,
+    size,
+    default: { DateCreated },
+  } = asset;
 
   const { directUrlPreview, directUrlOriginal } = url;
 
@@ -77,7 +87,11 @@ const GalleryAsset: FunctionComponent<GalleryAssetProps> = async ({
         />
       }
       metadataBlocks={
-        <AssetMetadata size={parseInt(size)} {...{ scheme, width, height }} />
+        <AssetMetadata
+          size={parseInt(size)}
+          dateCreated={new Date(DateCreated)}
+          {...{ scheme, width, height }}
+        />
       }
       metadataLinks={links[scheme]}
     />
