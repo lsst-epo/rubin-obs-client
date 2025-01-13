@@ -53708,6 +53708,23 @@ export type GalleryQueryQuery = {
   } | null> | null;
 };
 
+export type SearchResultsPageQueryVariables = Exact<{
+  site: InputMaybe<
+    | Array<InputMaybe<Scalars["String"]["input"]>>
+    | InputMaybe<Scalars["String"]["input"]>
+  >;
+}>;
+
+export type SearchResultsPageQuery = {
+  __typename?: "Query";
+  searchResultsEntries: Array<{
+    __typename?: "searchResults_searchResults_Entry";
+    title: string | null;
+    id: string | null;
+    dynamicComponent: string | null;
+  } | null> | null;
+};
+
 export const RecentAssetsQueryDocument = {
   kind: "Document",
   definitions: [
@@ -55279,3 +55296,64 @@ export const GalleryQueryDocument = {
     },
   ],
 } as unknown as DocumentNode<GalleryQueryQuery, GalleryQueryQueryVariables>;
+export const SearchResultsPageDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "SearchResultsPage" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "site" } },
+          type: {
+            kind: "ListType",
+            type: {
+              kind: "NamedType",
+              name: { kind: "Name", value: "String" },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "searchResultsEntries" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "InlineFragment",
+                  typeCondition: {
+                    kind: "NamedType",
+                    name: {
+                      kind: "Name",
+                      value: "searchResults_searchResults_Entry",
+                    },
+                  },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "title" } },
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "dynamicComponent" },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  SearchResultsPageQuery,
+  SearchResultsPageQueryVariables
+>;
