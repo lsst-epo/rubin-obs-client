@@ -1,3 +1,4 @@
+"use client";
 import { createContext, useContext } from "react";
 import PropTypes from "prop-types";
 import useQueryParams from "@/lib/routing/useQueryParams";
