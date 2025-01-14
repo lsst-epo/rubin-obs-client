@@ -5,9 +5,16 @@
 
 // Typography
 // --------------------------------------------------------
+html {
+  @include typography.type-scale(
+    variables.$font-size-base-desktop,
+    variables.$font-size-base-mobile
+  );
+}
 
 body {
   font-family: variables.$font-stack-base;
+  font-size: 1em;
   line-height: variables.$line-height-base;
 }
 

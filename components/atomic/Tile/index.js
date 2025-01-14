@@ -1,10 +1,7 @@
-"use client";
 import PropTypes from "prop-types";
 import { useId } from "react";
 import classNames from "classnames";
-import IconComposer from "@rubin-epo/epo-react-lib/IconComposer";
-import Image from "@rubin-epo/epo-react-lib/Image";
-import MixedLink from "@rubin-epo/epo-react-lib/MixedLink";
+import { Image, MixedLink, IconComposer } from "@rubin-epo/epo-react-lib";
 import { mixedLinkShape } from "@/shapes/link";
 import { useGlobalData } from "@/lib/utils";
 import * as Styled from "./styles";

@@ -8,7 +8,7 @@ import HomePageTemplate from "@/templates/HomePage";
 export async function generateMetadata({
   params: { locale },
   searchParams = {},
-}: WithSearchParams<LocaleProps>): Promise<Metadata> {
+}: LocaleProps): Promise<Metadata> {
   let previewToken: string | undefined;
 
   if (draftMode().isEnabled) {
@@ -24,7 +24,7 @@ export async function generateMetadata({
   return { title, description };
 }
 
-const RootPage: FunctionComponent<WithSearchParams<LocaleProps>> = async ({
+const RootPage: FunctionComponent<LocaleProps> = async ({
   params: { locale },
   searchParams = {},
 }) => {

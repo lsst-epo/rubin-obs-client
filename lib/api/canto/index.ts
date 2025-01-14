@@ -1,33 +1,21 @@
 import { fallbackLng } from "@/lib/i18n/settings";
 import { resizeCantoImage, ValidCantoSizes } from "./resize";
 import { ImageProps } from "next/image";
-import { CantoImage } from "types/canto";
-import { CantoAssetAdditional, CantoAssetMetadata } from "../galleries/schema";
-import { assetAlt } from "./metadata";
 
 const responsiveCantoSrc = (
   previewUrl: string,
   originalUrl: string,
-  width: number,
-  height: number
+  width: number
 ) => {
-  const aspectRatio = width / height;
-  const isPortrait = aspectRatio < 1;
-  const longestEdge = Math.max(width, height);
-  const eligibleSizes = ValidCantoSizes.filter((size) => size < longestEdge);
+  const eligibleSizes = ValidCantoSizes.filter((size) => size < width);
   const srcset = eligibleSizes.map(
-    (size) =>
-      `${resizeCantoImage(previewUrl, size)} ${
-        isPortrait ? Math.floor(size / aspectRatio) : size
-      }w`
+    (size) => `${resizeCantoImage(previewUrl, size)} ${size}w`
   );
 
   srcset.push(`${originalUrl} ${width}w`);
 
   const sizes = eligibleSizes.map((size) => {
-    return `(max-width: ${
-      isPortrait ? Math.floor(size / aspectRatio) : size
-    }px): ${isPortrait ? Math.floor(size / aspectRatio) : size}px`;
+    return `(max-width: ${size}px): ${size}px`;
   }, "");
 
   sizes.push(`${width}px`);
@@ -39,7 +27,7 @@ const responsiveCantoSrc = (
 };
 
 const getAssetMetadata = (
-  metadata: CantoAssetAdditional,
+  metadata: Record<string, string>,
   locale = fallbackLng
 ): { altText?: string; caption?: string; credit?: string } | undefined => {
   if (!metadata) return undefined;
@@ -70,45 +58,12 @@ export const damAssetToImage = (locale: string, data: CantoImage) => {
     ...responsiveCantoSrc(
       directUrlPreview,
       directUrlOriginal,
-      parseInt(width),
-      parseInt(height)
+      parseFloat(width)
     ),
-    width: parseInt(width),
-    height: parseInt(height),
+    width: parseFloat(width),
+    height: parseFloat(height),
     alt,
     ...assetMetadata,
-  };
-};
-
-export const damAssetToGalleryTile = (
-  data: CantoAssetMetadata,
-  locale: string
-) => {
-  const {
-    additional,
-    url: { directUrlPreview },
-  } = data;
-
-  const aspectRatio = parseInt(data.width) / parseInt(data.height);
-  const isPortrait = aspectRatio < 1;
-  const size = 640;
-  const width = isPortrait ? Math.floor(size / aspectRatio) : size;
-  const height = isPortrait ? size : Math.floor(size / aspectRatio);
-
-  const { srcSet } = responsiveCantoSrc(
-    directUrlPreview,
-    directUrlPreview,
-    width,
-    height
-  );
-
-  return {
-    width: isPortrait ? size : Math.floor(size * aspectRatio),
-    height: isPortrait ? Math.floor(size * aspectRatio) : size,
-    alt: assetAlt(additional),
-    url: directUrlPreview,
-    src: directUrlPreview,
-    srcSet,
   };
 };
 

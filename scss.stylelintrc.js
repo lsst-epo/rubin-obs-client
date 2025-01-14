@@ -78,10 +78,6 @@ module.exports = {
         "stylelint-config-recess-order",
       ],
       rules: {
-        "media-feature-name-no-unknown": [
-          true,
-          { ignoreMediaFeatureNames: ["functions"] },
-        ],
         // SCSS rules
         "scss/at-else-closing-brace-newline-after": "always-last-in-chain",
         "scss/at-function-pattern": "([a-z]+[0-9]*)([a-z0-9-]+)?",
@@ -94,6 +90,7 @@ module.exports = {
         "scss/percent-placeholder-pattern": "[a-z][a-z0-9-]*",
         // Arbitrary media values can be used, but explicitly
         "scss/media-feature-value-dollar-variable": "always",
+        "scss/selector-no-redundant-nesting-selector": true,
       },
     },
   ],

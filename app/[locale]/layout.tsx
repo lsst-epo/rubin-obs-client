@@ -1,6 +1,5 @@
 import { FunctionComponent, PropsWithChildren, Suspense } from "react";
 import { Metadata } from "next";
-import { notFound } from "next/navigation";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GlobalStyles } from "@rubin-epo/epo-react-lib/styles";
 import { getGlobalData } from "@/lib/api/globals";
@@ -11,7 +10,7 @@ import I18NextClientProvider from "@/contexts/i18next";
 import { AuthenticationContextProvider } from "@/contexts/Authentication";
 import PageWrapper from "@/components/organisms/PageWrapper";
 import RootScripts from "./scripts";
-import { HistoryProvider } from "@/contexts/History";
+import { notFound } from "next/navigation";
 
 const GOOGLE_APP_ID = process.env.NEXT_PUBLIC_GOOGLE_APP_ID || "";
 
@@ -81,16 +80,14 @@ const LocaleLayout: FunctionComponent<PropsWithChildren<LocaleProps>> = async ({
       <body className={SourceSansPro.variable}>
         <I18NextClientProvider {...{ locale }}>
           <Suspense>
-            <HistoryProvider>
-              <AuthenticationContextProvider>
-                <StyledComponentsRegistry>
-                  <GoogleOAuthProvider clientId={GOOGLE_APP_ID}>
-                    <GlobalStyles />
-                    <PageWrapper {...{ locale }}>{children}</PageWrapper>
-                  </GoogleOAuthProvider>
-                </StyledComponentsRegistry>
-              </AuthenticationContextProvider>
-            </HistoryProvider>
+            <AuthenticationContextProvider>
+              <StyledComponentsRegistry>
+                <GoogleOAuthProvider clientId={GOOGLE_APP_ID}>
+                  <GlobalStyles />
+                  <PageWrapper {...{ locale }}>{children}</PageWrapper>
+                </GoogleOAuthProvider>
+              </StyledComponentsRegistry>
+            </AuthenticationContextProvider>
           </Suspense>
         </I18NextClientProvider>
         <RootScripts {...{ locale }} />

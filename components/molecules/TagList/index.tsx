@@ -31,7 +31,7 @@ const TagList: FunctionComponent<TagListProps> = ({
         return (
           <li className={styles.tag} data-no-break={!withLinebreaks} key={name}>
             {destination ? (
-              <Link href={destination} prefetch={false}>
+              <Link href={destination} rel="tag">
                 {tagName}
               </Link>
             ) : (

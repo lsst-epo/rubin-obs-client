@@ -1,8 +1,0 @@
-.sizeItem {
-  display: flex;
-  gap: 1ex;
-
-  & a {
-    color: var(--color-font-accent);
-  }
-}

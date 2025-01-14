@@ -8,7 +8,9 @@ describe("Filtering dynamic data", () => {
   });
 
   it("Should show all filtered items", () => {
-    cy.get("button").contains("Filter").click();
+    const dropdownId = "filter-dropdown";
+    cy.get(`[aria-controls="${dropdownId}"]`).click();
+    cy.get(`[id="${dropdownId}"]`).should("be.visible");
     cy.get("a").contains("a", "All").click();
 
     cy.on("url:changed", (newUrl) => {
@@ -18,25 +20,28 @@ describe("Filtering dynamic data", () => {
     });
   });
   it("Should show selected filter", () => {
-    const filter = "Press Release";
+    const dropdownId = "filter-dropdown";
+    const filter = "News Post";
 
-    cy.get("button").contains("Filter").click();
-    cy.get("a").contains(filter).click();
+    cy.get(`[aria-controls="${dropdownId}"]`).click();
+    cy.get(`[id="${dropdownId}"]`).should("be.visible");
+    cy.get("a").contains("a", filter).click();
 
     cy.on("url:changed", (newUrl) => {
       const url = new URL(newUrl);
       const params = new URLSearchParams(url.search);
 
       cy.get(".pretitle").should("have.text", filter);
-      expect(params.get("filter")).to.contain("85");
+      expect(params.get("filter")).to.contain("60613");
     });
   });
   it("Should change sort order", () => {
     const dropdownId = "sort-dropdown";
     const sort = "Ascending";
 
-    cy.get("button").contains("Sort").click();
-    cy.get("a").contains(sort).click();
+    cy.get(`[aria-controls="${dropdownId}"]`).click();
+    cy.get(`[id="${dropdownId}"]`).should("be.visible");
+    cy.get("a").contains("a", sort).click();
 
     cy.on("url:changed", (newUrl) => {
       const url = new URL(newUrl);
