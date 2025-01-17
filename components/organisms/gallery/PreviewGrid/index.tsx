@@ -69,7 +69,7 @@ const PreviewGridContent: FunctionComponent<PreviewGridProps> = async ({
         element: (
           <MasonryImage
             linkProps={{
-              href: `${gallery}/${id}`,
+              href: `../gallery/${gallery}/${id}`,
             }}
             icon={icons[scheme]}
             className={styles.tile}
