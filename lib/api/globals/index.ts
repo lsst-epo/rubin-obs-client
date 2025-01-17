@@ -88,7 +88,7 @@ export async function getNavigationItems(
   const query = gql`
     query getNavigationItems($site: [String]) {
       navigationItems: entries(
-        section: "pages"
+        section: ["pages", "galleries"]
         site: $site
         level: 1
         isVisible: true

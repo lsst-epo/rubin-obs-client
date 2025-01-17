@@ -18,6 +18,7 @@ const config: CodegenConfig = {
   config: {
     useTypeImports: true,
     avoidOptionals: true,
+    nonOptionalTypename: true,
   },
   schema: process.env.NEXT_PUBLIC_API_URL,
 

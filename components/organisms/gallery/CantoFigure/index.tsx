@@ -2,7 +2,7 @@ import { FunctionComponent, ReactNode } from "react";
 import Figure from "@rubin-epo/epo-react-lib/Figure";
 import { CantoAssetAdditional } from "@/lib/api/galleries/schema";
 import { assetCaption } from "@/lib/api/canto/metadata";
-import { addLocaleUriSegment, useTranslation } from "@/lib/i18n";
+import { useTranslation } from "@/lib/i18n";
 import SharePopup from "@/components/layout/SharePopup";
 import CantoDownload from "../CantoDownload";
 import { CloseButton } from "./CantoFigure.client";
@@ -17,6 +17,7 @@ interface CantoFigureProps {
   width: string;
   height: string;
   id: string;
+  parentUri: string;
   gallery: string;
 }
 
@@ -29,11 +30,11 @@ const CantoFigure: FunctionComponent<CantoFigureProps> = async ({
   width,
   height,
   id,
+  parentUri,
   gallery,
 }) => {
   const { t } = await useTranslation(locale);
   const aspectRatio = parseInt(width) / parseInt(height);
-  const parentPath = addLocaleUriSegment(locale, `/gallery/${gallery}`);
 
   return (
     <Figure
@@ -49,7 +50,7 @@ const CantoFigure: FunctionComponent<CantoFigureProps> = async ({
           )}
           <div className={styles.actionsRow}>
             <CantoDownload directUrlOriginal={downloadUrl} />
-            <SharePopup title={name} url={`/gallery/${gallery}/${id}`} />
+            <SharePopup title={name} url={`gallery/${gallery}/${id}`} />
           </div>
         </>
       }
@@ -64,7 +65,7 @@ const CantoFigure: FunctionComponent<CantoFigureProps> = async ({
         }}
       >
         {asset}
-        <CloseButton fallback={parentPath} />
+        <CloseButton fallback={parentUri} />
       </div>
     </Figure>
   );
