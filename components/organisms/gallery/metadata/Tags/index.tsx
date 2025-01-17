@@ -21,7 +21,7 @@ const AssetTags: FunctionComponent<AssetTagsProps> = async ({
     const searchParams = new URLSearchParams({ tag });
     return {
       name: tag,
-      destination: `${parentUri}?${searchParams.toString()}`,
+      destination: `/${parentUri}?${searchParams.toString()}`,
     };
   });
 

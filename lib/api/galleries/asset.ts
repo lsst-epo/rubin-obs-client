@@ -117,6 +117,10 @@ export async function getAssetBreadcrumb({
     ? basePath
     : basePath.split("/").slice(0, -2).join("/");
 
+  const parentPath = hasParentSlug
+    ? basePath
+    : basePath.split("/").slice(0, -1).join("/");
+
   if (title && id && assetAlbum) {
     const breadcrumbs = [{ title, uri: parentPath, id }];
 
