@@ -1,4 +1,5 @@
 import { FunctionComponent } from "react";
+import { redirect } from "next/navigation";
 import Container from "@rubin-epo/epo-react-lib/Container";
 import Stack from "@rubin-epo/epo-react-lib/Stack";
 import { useTranslation } from "@/lib/i18n";
@@ -18,6 +19,14 @@ const Gallery: FunctionComponent<WithSearchParams<GalleryProps>> = async ({
 }) => {
   const metadata = await getGalleryMetadata(gallery, locale);
   const { t } = await useTranslation(locale);
+
+  // while the main gallery is at a different route, it is still rendered through
+  // this page. To avoid confusion and duplication, it's "true" path is redirected back to the main
+  // gallery page. So that it doesn't get stuck in a loop, the main gallery page injects
+  // a hidden query param that skips the redirect.
+  if (metadata?.isMainGallery && searchParams?.renderedFrom !== "mainGallery") {
+    redirect("/gallery");
+  }
 
   const filters = GalleryFilterSchema.parse(searchParams);
 
