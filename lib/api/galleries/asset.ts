@@ -58,7 +58,8 @@ export async function getAssetBreadcrumb({
   locale,
   gallery,
   asset,
-}: GalleryAssetProps["params"]) {
+  hasParentSlug,
+}: GalleryAssetProps["params"] & { hasParentSlug: boolean }) {
   const site = getSiteFromLocale(locale);
 
   const query = graphql(`
@@ -108,8 +109,12 @@ export async function getAssetBreadcrumb({
     includeLeadingSlash: false,
   });
 
+  const parentPath = hasParentSlug
+    ? basePath
+    : basePath.split("/").slice(0, -1).join("/");
+
   if (title && id && assetAlbum) {
-    const breadcrumbs = [{ title, uri: basePath, id }];
+    const breadcrumbs = [{ title, uri: parentPath, id }];
 
     const { data: parsedAsset } = BreadcrumbAssetSchema.safeParse(
       assetAlbum[0]

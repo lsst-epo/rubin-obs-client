@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import { getAssetFromGallery } from "@/lib/api/galleries/asset";
 import { assetTitle, assetToPageMetadata } from "@/lib/api/canto/metadata";
 import { SupportedCantoAssetScheme } from "@/lib/api/galleries/schema";
+import { isMainGallery } from "@/lib/api/galleries";
+import { addLocaleUriSegment } from "@/lib/i18n";
 import CantoFigure from "@/components/organisms/gallery/CantoFigure";
 import SingleMediaAsset from "@/components/templates/SingleMediaAsset";
 import ImageSizes from "@/components/organisms/gallery/metadata/Sizes";
@@ -37,6 +39,15 @@ const GalleryAsset: FunctionComponent<GalleryAssetProps> = async ({
   if (!asset) {
     notFound();
   }
+  const hasParentSlug = !(await isMainGallery(gallery, locale));
+
+  const slugs = ["gallery"];
+
+  if (hasParentSlug) {
+    slugs.push(gallery);
+  }
+
+  const parentUri = addLocaleUriSegment(locale, slugs.join("/"));
 
   const {
     name,
@@ -68,10 +79,10 @@ const GalleryAsset: FunctionComponent<GalleryAssetProps> = async ({
           height={parseInt(height)}
           {...{ directUrlPreview, directUrlOriginal }}
         />
-        <AssetTags tags={validTagsOnly} parentUri={`/gallery/${gallery}`} />
+        <AssetTags tags={validTagsOnly} parentUri={parentUri} />
       </>
     ),
-    video: <AssetTags tags={validTagsOnly} parentUri={`/gallery/${gallery}`} />,
+    video: <AssetTags tags={validTagsOnly} parentUri={parentUri} />,
   };
 
   const Asset = assetComponent[scheme];
@@ -83,7 +94,16 @@ const GalleryAsset: FunctionComponent<GalleryAssetProps> = async ({
         <CantoFigure
           downloadUrl={directUrlOriginal}
           asset={<Asset {...{ asset, locale }} />}
-          {...{ locale, additional, width, height, gallery, id, name }}
+          {...{
+            locale,
+            additional,
+            width,
+            height,
+            gallery,
+            parentUri,
+            id,
+            name,
+          }}
         />
       }
       metadataBlocks={

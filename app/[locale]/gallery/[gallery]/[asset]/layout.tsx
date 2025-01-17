@@ -1,10 +1,11 @@
 import { FunctionComponent, PropsWithChildren } from "react";
-import { getAssetBreadcrumb, getRecentAssets } from "@/lib/api/galleries/asset";
 import Container from "@rubin-epo/epo-react-lib/Container";
 import Stack from "@rubin-epo/epo-react-lib/Stack";
 import Breadcrumbs from "@/components/page/Breadcrumbs";
 import BackButton from "@/components/molecules/BackButton";
+import { getAssetBreadcrumb, getRecentAssets } from "@/lib/api/galleries/asset";
 import { addLocaleUriSegment, useTranslation } from "@/lib/i18n";
+import { isMainGallery } from "@/lib/api/galleries";
 
 export async function generateStaticParams({
   params: { locale, gallery },
@@ -16,9 +17,21 @@ const AssetLayout: FunctionComponent<
   PropsWithChildren<GalleryAssetProps>
 > = async ({ children, params: { locale, gallery, asset } }) => {
   const { t } = await useTranslation(locale);
-  const breadcrumbs = await getAssetBreadcrumb({ locale, gallery, asset });
+  const hasParentSlug = !(await isMainGallery(gallery, locale));
+  const breadcrumbs = await getAssetBreadcrumb({
+    locale,
+    gallery,
+    asset,
+    hasParentSlug,
+  });
 
-  const parentPath = addLocaleUriSegment(locale, `/gallery/${gallery}`);
+  const slugs = ["gallery"];
+
+  if (hasParentSlug) {
+    slugs.push(gallery);
+  }
+
+  const parentPath = addLocaleUriSegment(locale, slugs.join("/"));
 
   return (
     <>
