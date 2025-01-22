@@ -39,13 +39,6 @@ const GalleryAsset: FunctionComponent<GalleryAssetProps> = async ({
   if (!asset) {
     notFound();
   }
-  const hasParentSlug = !(await isMainGallery(gallery, locale));
-
-  const slugs = ["gallery"];
-
-  if (hasParentSlug) {
-    slugs.push(gallery);
-  }
 
   const parentUri = buildParentPath({
     locale,
