@@ -172,7 +172,7 @@ export async function getGalleryMetadata(
   locale: string
 ): Promise<GalleryMetadata | undefined> {
   const site = getSiteFromLocale(locale);
-  const uri = `gallery/${gallery}`;
+  const uri = `gallery/collections/${gallery}`;
 
   const query = graphql(`
     query GalleryMetadataQuery(
@@ -343,7 +343,7 @@ export async function getGalleryData(
     query,
     variables: {
       site,
-      uri: `gallery/${gallery}`,
+      uri: `gallery/collections/${gallery}`,
       whereNotIn: whereNotIn(filters),
       whereIn: whereIn(filters),
       forPage: forPage(filters),
