@@ -1,6 +1,6 @@
 import { FC } from "react";
-import Gallery from "./[gallery]/page";
-import { generateMetadata as baseGeneradataMetadata } from "./[gallery]/layout";
+import Gallery from "./collections/[gallery]/page";
+import { generateMetadata as baseGeneradataMetadata } from "./collections/[gallery]/layout";
 import { getMainGallery } from "@/lib/api/galleries";
 import { notFound } from "next/navigation";
 

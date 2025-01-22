@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import { getNavigationItems } from "@/lib/api/globals";
+import { getNavigationItems } from "@/lib/api/globals/navigation";
 import NavigationHorizontal from "../navigation/Horizontal";
 import HeaderLevel from "@/components/molecules/HeaderLevel";
 import SearchBar from "@/components/molecules/SearchBar";
