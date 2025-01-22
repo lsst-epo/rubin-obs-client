@@ -80,45 +80,6 @@ export async function getLogos() {
   };
 }
 
-export async function getNavigationItems(
-  locale = fallbackLng
-): Promise<Array<InternalLinkWithChildren>> {
-  const site = getSiteFromLocale(locale);
-
-  const query = gql`
-    query getNavigationItems($site: [String]) {
-      navigationItems: entries(
-        section: ["pages", "galleries"]
-        site: $site
-        level: 1
-        isVisible: true
-      ) {
-        id
-        title
-        uri
-        children(isVisible: true) {
-          id
-          title
-          uri
-          children(isVisible: true) {
-            id
-            title
-            uri
-          }
-        }
-      }
-    }
-  `;
-
-  const { data } = await queryAPI({
-    query,
-    variables: { site },
-    fetchOptions: { next: { tags: [tags.globals] } },
-  });
-
-  return data?.navigationItems || [];
-}
-
 export async function getGlobalData(locale = fallbackLng) {
   const site = getSiteFromLocale(locale);
   const query = gql`

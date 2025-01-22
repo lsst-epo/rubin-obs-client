@@ -11,6 +11,7 @@ const config: CodegenConfig = {
         "app/[locale]/search/**/*.{ts,tsx}",
         "lib/api/galleries/*.ts",
         "lib/api/search/*.ts",
+        "lib/api/globals/navigation.ts",
       ],
       preset: "client",
     },

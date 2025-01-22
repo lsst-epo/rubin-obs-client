@@ -5,7 +5,7 @@ const gallerySlug = "camera-construction";
 describe("Gallery", () => {
   context("Gallery feed", () => {
     beforeEach(() => {
-      cy.visit(`/gallery/${gallerySlug}`);
+      cy.visit(`/gallery`);
     });
     it("has a gallery title", () => {
       cy.get("h1").should("exist");
@@ -36,16 +36,14 @@ describe("Gallery", () => {
           cy.visit(`/gallery/${$img.parent().attr("href")}`);
 
           cy.on("url:changed", (newUrl) => {
-            expect(newUrl).to.contain(
-              `/gallery/${gallerySlug}/${$img.attr("id")}`
-            );
+            expect(newUrl).to.contain($img.attr("id"));
           });
         });
     });
   });
   context("Single image", () => {
     beforeEach(() => {
-      cy.visit(`/gallery/${gallerySlug}/${imageId}`);
+      cy.visit(`/gallery/collections/${gallerySlug}/${imageId}`);
     });
     it("has a breadcrumb", () => {
       cy.get("[data-cy=breadcrumb]").should("exist");
@@ -53,12 +51,12 @@ describe("Gallery", () => {
       cy.get("[data-cy=breadcrumb] > ol > li > a")
         .eq(0)
         .should("have.attr", "href")
-        .and("contain", `/gallery/${gallerySlug}`)
+        .and("contain", `/gallery/collections/${gallerySlug}`)
         .and("not.contain", imageId);
       cy.get("[data-cy=breadcrumb] > ol > li > a")
         .eq(1)
         .should("have.attr", "href")
-        .and("contain", `/gallery/${gallerySlug}/${imageId}`);
+        .and("contain", `/gallery/collections/${gallerySlug}/${imageId}`);
     });
     it("has a page title", () => {
       cy.get("h1").should("not.to.match", ":empty");

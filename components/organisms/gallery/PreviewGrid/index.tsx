@@ -7,7 +7,7 @@ import { type IconKey } from "@rubin-epo/epo-react-lib/IconComposer";
 import { getGalleryData } from "@/lib/api/galleries";
 import { GalleryDataFilters } from "@/lib/api/galleries/schema";
 import { assetAlt, assetTitle } from "@/lib/api/canto/metadata";
-import { useTranslation } from "@/lib/i18n";
+import { addLocaleUriSegment, useTranslation } from "@/lib/i18n";
 import { getOffset } from "@/lib/utils/pagination";
 import Pagination from "@/components/molecules/Pagination";
 import FilteredResults from "../FilteredResults";
@@ -69,7 +69,10 @@ const PreviewGridContent: FunctionComponent<PreviewGridProps> = async ({
         element: (
           <MasonryImage
             linkProps={{
-              href: `../gallery/${gallery}/${id}`,
+              href: addLocaleUriSegment(
+                locale,
+                `/gallery/collections/${gallery}/${id}`
+              ),
             }}
             icon={icons[scheme]}
             className={styles.tile}
