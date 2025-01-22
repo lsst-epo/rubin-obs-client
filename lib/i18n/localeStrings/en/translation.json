@@ -142,7 +142,8 @@
     "size": "Size",
     "file-size": "File size",
     "credit": "Credit: {{credit}}",
-    "date-created": "Date created"
+    "date-created": "Date created",
+    "collections": "Collections"
   },
   "jobs": {
     "job": "Job",
