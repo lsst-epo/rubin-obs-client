@@ -32,6 +32,8 @@ const documents = {
     types.GalleryQueryDocument,
   "\n    query SearchResultsPage($site: [String]) {\n      searchResultsEntries(site: $site) {\n        ... on searchResults_searchResults_Entry {\n          title\n          id\n          dynamicComponent\n        }\n      }\n    }\n  ":
     types.SearchResultsPageDocument,
+  '\n    query getNavigationItems($site: [String]) {\n      navigationItems: entries(\n        section: ["pages", "galleries"]\n        site: $site\n        level: 1\n        isVisible: true\n      ) {\n        id\n        title\n        uri\n        children(isVisible: true) {\n          id\n          title\n          uri\n          children(isVisible: true) {\n            id\n            title\n            uri\n          }\n        }\n      }\n      galleriesEntries(isVisible: true) {\n        ... on galleries_gallery_Entry {\n          id\n          title\n          uri\n        }\n      }\n    }\n  ':
+    types.GetNavigationItemsDocument,
 };
 
 /**
@@ -100,8 +102,8 @@ export function graphql(
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: "\n    query SearchResultsPage($site: [String]) {\n      searchResultsEntries(site: $site) {\n        ... on searchResults_searchResults_Entry {\n          title\n          id\n          dynamicComponent\n        }\n      }\n    }\n  "
-): (typeof documents)["\n    query SearchResultsPage($site: [String]) {\n      searchResultsEntries(site: $site) {\n        ... on searchResults_searchResults_Entry {\n          title\n          id\n          dynamicComponent\n        }\n      }\n    }\n  "];
+  source: '\n    query getNavigationItems($site: [String]) {\n      navigationItems: entries(\n        section: ["pages", "galleries"]\n        site: $site\n        level: 1\n        isVisible: true\n      ) {\n        id\n        title\n        uri\n        children(isVisible: true) {\n          id\n          title\n          uri\n          children(isVisible: true) {\n            id\n            title\n            uri\n          }\n        }\n      }\n      galleriesEntries(isVisible: true) {\n        ... on galleries_gallery_Entry {\n          id\n          title\n          uri\n        }\n      }\n    }\n  '
+): (typeof documents)['\n    query getNavigationItems($site: [String]) {\n      navigationItems: entries(\n        section: ["pages", "galleries"]\n        site: $site\n        level: 1\n        isVisible: true\n      ) {\n        id\n        title\n        uri\n        children(isVisible: true) {\n          id\n          title\n          uri\n          children(isVisible: true) {\n            id\n            title\n            uri\n          }\n        }\n      }\n      galleriesEntries(isVisible: true) {\n        ... on galleries_gallery_Entry {\n          id\n          title\n          uri\n        }\n      }\n    }\n  '];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

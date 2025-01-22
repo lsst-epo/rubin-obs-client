@@ -36,7 +36,7 @@ export async function getRecentAssets(locale: string, gallery: string) {
     query,
     variables: {
       site,
-      uri: `gallery/${gallery}`,
+      uri: `gallery/collections/${gallery}`,
       scheme: SupportedCantoScheme.options,
     },
   });
@@ -93,7 +93,7 @@ export async function getAssetBreadcrumb({
     query,
     variables: {
       site,
-      uri: `gallery/${gallery}`,
+      uri: `gallery/collections/${gallery}`,
       id: asset,
       scheme: SupportedCantoScheme.options,
     },
@@ -105,13 +105,17 @@ export async function getAssetBreadcrumb({
 
   const { title, id, assetAlbum } = data.galleriesEntries[0];
 
-  const basePath = addLocaleUriSegment(locale, `/gallery/${gallery}`, {
-    includeLeadingSlash: false,
-  });
+  const basePath = addLocaleUriSegment(
+    locale,
+    `/gallery/collections/${gallery}`,
+    {
+      includeLeadingSlash: false,
+    }
+  );
 
   const parentPath = hasParentSlug
     ? basePath
-    : basePath.split("/").slice(0, -1).join("/");
+    : basePath.split("/").slice(0, -2).join("/");
 
   if (title && id && assetAlbum) {
     const breadcrumbs = [{ title, uri: parentPath, id }];
@@ -192,7 +196,7 @@ export async function getAssetFromGallery(
 
   const { data } = await queryAPI({
     query,
-    variables: { site, uri: `gallery/${gallery}`, id },
+    variables: { site, uri: `gallery/collections/${gallery}`, id },
   });
 
   if (!data || !data.galleriesEntries || !data.galleriesEntries[0]) {

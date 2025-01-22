@@ -39,9 +39,11 @@ export default function Subnavigation({
         const hasChildren = children && children.length > 0;
         const isActiveSub = id === activeSub;
 
+        if (!uri && !hasChildren) return null;
+
         return (
           <li key={id} className={`${baseClassName}__item`}>
-            {hasChildren && (
+            {hasChildren ? (
               <NavItemWithChildren
                 id={id}
                 active={active && isActiveSub}
@@ -55,8 +57,7 @@ export default function Subnavigation({
                 level={3}
                 parentActive={active}
               />
-            )}
-            {!hasChildren && (
+            ) : (
               <Link
                 prefetch={false}
                 href={`/${uri}`}
