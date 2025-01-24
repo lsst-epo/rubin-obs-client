@@ -48,21 +48,21 @@ export async function GET(
   } = await fetch(
     `${
       process.env.CANTO_BASE_URL
-    }/direct/${scheme}/${id}/${directUrlOriginalHash}/original?${proxySearchParams.toString()}`
+    }/direct/${scheme}/${id}/${directUrlOriginalHash}/original?${proxySearchParams.toString()}`,
+    { cache: "no-store" }
   );
 
   if (ok) {
-    const headers = new Headers(
-      pick(Object.fromEntries(cantoHeaders.entries()), [
+    const headers = new Headers({
+      ...pick(Object.fromEntries(cantoHeaders.entries()), [
         "content-length",
         "content-type",
         "date",
         "etag",
         "last-modified",
-      ])
-    );
-
-    headers.set("content-disposition", `attachment; filename="${fileName}"`);
+      ]),
+      "content-disposition": `attachment; filename="${fileName}"`,
+    });
 
     return new NextResponse(body, {
       status: 200,
