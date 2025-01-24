@@ -1,5 +1,6 @@
 import { FunctionComponent, Suspense } from "react";
 import Image from "next/image";
+import Stack from "@rubin-epo/epo-react-lib/Stack";
 import MasonryGrid from "@rubin-epo/epo-react-lib/MasonryGrid";
 import MasonryImage from "@rubin-epo/epo-react-lib/MasonryImage";
 import Buttonish from "@rubin-epo/epo-react-lib/Buttonish";
@@ -122,22 +123,24 @@ const PreviewGrid: FunctionComponent<PreviewGridProps> = ({
     });
 
   return (
-    <Suspense
-      fallback={
-        <>
-          <FilteredResults {...{ filters }} />
-          <MasonryGrid items={fallbackTiles} />
-          <Pagination
-            limit={limit}
-            page={page}
-            total={0}
-            offset={getOffset(limit, page)}
-          />
-        </>
-      }
-    >
-      <PreviewGridContent {...{ filters, ...props }} />
-    </Suspense>
+    <Stack space="var(--size-spacing-s)">
+      <Suspense
+        fallback={
+          <>
+            <FilteredResults {...{ filters }} />
+            <MasonryGrid items={fallbackTiles} />
+            <Pagination
+              limit={limit}
+              page={page}
+              total={0}
+              offset={getOffset(limit, page)}
+            />
+          </>
+        }
+      >
+        <PreviewGridContent {...{ filters, ...props }} />
+      </Suspense>
+    </Stack>
   );
 };
 
