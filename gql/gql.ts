@@ -24,8 +24,10 @@ const documents = {
     types.RandomAssetQueryDocument,
   '\n    query MainGalleryQuery($site: [String]) {\n      pagesEntries(site: $site, uri: "gallery") {\n        ... on pages_galleryLandingPage_Entry {\n          __typename\n          isVisible\n          galleryEntry {\n            ... on galleries_gallery_Entry {\n              __typename\n              slug\n            }\n          }\n          slideshowEntry {\n            ... on slideshows_slideshow_Entry {\n              id\n              uri\n              title\n              richTextDescription\n            }\n          }\n        }\n      }\n    }\n  ':
     types.MainGalleryQueryDocument,
-  "\n    query AllGalleriesQuery($site: [String]) {\n      galleriesEntries(site: $site) {\n        ... on galleries_gallery_Entry {\n          slug\n        }\n      }\n    }\n  ":
-    types.AllGalleriesQueryDocument,
+  "\n    query AllGalleries($site: [String]) {\n      galleriesEntries(site: $site) {\n        ... on galleries_gallery_Entry {\n          title\n          id\n          uri\n          slug\n        }\n      }\n    }\n  ":
+    types.AllGalleriesDocument,
+  "\n    query AllGallerySlugs($site: [String]) {\n      galleriesEntries(site: $site) {\n        ... on galleries_gallery_Entry {\n          slug\n        }\n      }\n    }\n  ":
+    types.AllGallerySlugsDocument,
   '\n    query GalleryMetadataQuery(\n      $site: [String]\n      $slug: [String]\n      $uri: [String]\n    ) {\n      pagesEntries(site: $site, uri: "gallery") {\n        ... on pages_galleryLandingPage_Entry {\n          __typename\n          galleryEntry(slug: $slug) {\n            ... on galleries_gallery_Entry {\n              id\n            }\n          }\n        }\n      }\n      galleriesEntries(site: $site, uri: $uri) {\n        ... on galleries_gallery_Entry {\n          slug\n          title\n          description\n          cantoAssetSingle {\n            additional {\n              AltTextEN\n              AltTextES\n              TitleEN\n              TitleES\n            }\n            height\n            id\n            name\n            scheme\n            url {\n              directUrlOriginal\n              directUrlPreview\n              directUrlPreviewPlay\n            }\n            width\n          }\n          assetAlbum(first: true) {\n            additional {\n              AltTextEN\n              AltTextES\n              TitleEN\n              TitleES\n            }\n            height\n            id\n            name\n            scheme\n            url {\n              directUrlOriginal\n              directUrlPreview\n              directUrlPreviewPlay\n            }\n            width\n          }\n        }\n      }\n    }\n  ':
     types.GalleryMetadataQueryDocument,
   "\n    query GalleryQuery(\n      $site: [String]\n      $uri: [String]\n      $whereIn: WhereInFiltersInput\n      $whereNotIn: WhereNotInFiltersInput\n      $whereContainsIn: WhereContainsInFilterInput\n      $forPage: ForPageInput\n    ) {\n      galleriesEntries(site: $site, uri: $uri) {\n        ... on galleries_gallery_Entry {\n          id\n          title\n          description\n          assetAlbum(\n            whereNotIn: $whereNotIn\n            forPage: $forPage\n            whereIn: $whereIn\n            whereContainsIn: $whereContainsIn\n          ) {\n            additional {\n              AltTextEN\n              AltTextES\n              TitleEN\n              TitleES\n            }\n            height\n            id\n            name\n            scheme\n            url {\n              directUrlOriginal\n              directUrlPreview\n              directUrlPreviewPlay\n            }\n            width\n          }\n        }\n      }\n      metaGalleries: galleriesEntries(site: $site, uri: $uri) {\n        ... on galleries_gallery_Entry {\n          assetAlbum(\n            whereNotIn: $whereNotIn\n            whereIn: $whereIn\n            whereContainsIn: $whereContainsIn\n          ) {\n            id\n          }\n        }\n      }\n    }\n  ":
@@ -84,8 +86,14 @@ export function graphql(
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: "\n    query AllGalleriesQuery($site: [String]) {\n      galleriesEntries(site: $site) {\n        ... on galleries_gallery_Entry {\n          slug\n        }\n      }\n    }\n  "
-): (typeof documents)["\n    query AllGalleriesQuery($site: [String]) {\n      galleriesEntries(site: $site) {\n        ... on galleries_gallery_Entry {\n          slug\n        }\n      }\n    }\n  "];
+  source: "\n    query AllGalleries($site: [String]) {\n      galleriesEntries(site: $site) {\n        ... on galleries_gallery_Entry {\n          title\n          id\n          uri\n          slug\n        }\n      }\n    }\n  "
+): (typeof documents)["\n    query AllGalleries($site: [String]) {\n      galleriesEntries(site: $site) {\n        ... on galleries_gallery_Entry {\n          title\n          id\n          uri\n          slug\n        }\n      }\n    }\n  "];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: "\n    query AllGallerySlugs($site: [String]) {\n      galleriesEntries(site: $site) {\n        ... on galleries_gallery_Entry {\n          slug\n        }\n      }\n    }\n  "
+): (typeof documents)["\n    query AllGallerySlugs($site: [String]) {\n      galleriesEntries(site: $site) {\n        ... on galleries_gallery_Entry {\n          slug\n        }\n      }\n    }\n  "];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

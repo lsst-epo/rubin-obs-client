@@ -136,7 +136,32 @@ export async function getAllGalleries(locale: string) {
   const site = getSiteFromLocale(locale);
 
   const query = graphql(`
-    query AllGalleriesQuery($site: [String]) {
+    query AllGalleries($site: [String]) {
+      galleriesEntries(site: $site) {
+        ... on galleries_gallery_Entry {
+          title
+          id
+          uri
+          slug
+        }
+      }
+    }
+  `);
+
+  const { data } = await queryAPI({ query, variables: { site } });
+
+  if (!data || !data.galleriesEntries) return [];
+
+  const { galleriesEntries } = data;
+
+  return galleriesEntries.filter((entry) => !!entry);
+}
+
+export async function getAllGallerySlugs(locale: string) {
+  const site = getSiteFromLocale(locale);
+
+  const query = graphql(`
+    query AllGallerySlugs($site: [String]) {
       galleriesEntries(site: $site) {
         ... on galleries_gallery_Entry {
           slug
