@@ -6,7 +6,7 @@ on:
   push:
     branches:
       - "develop"
-      - "master"
+      - "main"
     tags:
       - "v*"
   pull_request:
@@ -17,7 +17,7 @@ on:
       - 'reopened'
     branches:
       - 'develop'
-      - 'master'
+      - 'main'
 
 jobs:
   build:
@@ -38,7 +38,7 @@ jobs:
           if ${{ github.ref_type == 'tag'}}; then
             environment_name="prod"
             credentials_json='${{ secrets.PIPELINE_EPO_PROD_PROJECT }}'
-          elif ${{ contains(github.ref, 'master') || contains(github.base_ref, 'master') }}; then
+          elif ${{ contains(github.ref, 'main') || contains(github.base_ref, 'main') }}; then
             environment_name="int"
             credentials_json='${{ secrets.SKYVIEWER_INT_SERVICE_ACCOUNT }}'
           else
