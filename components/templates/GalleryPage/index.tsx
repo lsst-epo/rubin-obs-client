@@ -1,6 +1,5 @@
 import { FC } from "react";
 import Container from "@rubin-epo/epo-react-lib/Container";
-import Stack from "@rubin-epo/epo-react-lib/Stack";
 import { useTranslation } from "@/lib/i18n";
 import { getGalleryMetadata } from "@/lib/api/galleries";
 import FilterDropdownList from "@/components/molecules/FilterDropdownList";
@@ -11,6 +10,9 @@ import {
   GalleryFilterSchema,
   SupportedCantoScheme,
 } from "@/lib/api/galleries/schema";
+import GalleryList from "@/components/organisms/gallery/GalleryList";
+import styles from "./styles.module.css";
+import classNames from "classnames";
 
 interface GalleryPageProps {
   gallery: string;
@@ -41,11 +43,12 @@ const GalleryPage: FC<WithSearchParams<GalleryPageProps>> = async ({
           icon={<UniqueIconComposer icon="Filter" />}
         />
       </Filters>
+      <GalleryList currentGallery={gallery} />
       <Container width="wide">
-        <Stack space="var(--size-spacing-s)">
-          <h1>{metadata?.title}</h1>
-          <PreviewGrid {...{ locale, gallery, filters }} />
-        </Stack>
+        <h1 className={classNames("t-heading-secondary", styles.galleryTitle)}>
+          {metadata?.title}
+        </h1>
+        <PreviewGrid {...{ locale, gallery, filters }} />
       </Container>
     </>
   );
