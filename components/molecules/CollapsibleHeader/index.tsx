@@ -1,15 +1,19 @@
 "use client";
 
-import { FunctionComponent, PropsWithChildren, useState } from "react";
+import { FunctionComponent, PropsWithChildren, useRef } from "react";
 import Headroom from "react-headroom";
 import styles from "./styles.module.scss";
-import { HeadroomProvider } from "@/contexts/Headroom";
+import useNavigationMenu from "@/contexts/NavigationMenu";
 import Center from "@rubin-epo/epo-react-lib/Center";
+import { useOnClickOutside } from "@/hooks/listeners";
 
 const CollapsibleHeader: FunctionComponent<PropsWithChildren> = ({
   children,
 }) => {
-  const [pinned, setPinned] = useState(false);
+  const { pinned, close } = useNavigationMenu();
+  const ref = useRef(null);
+
+  useOnClickOutside(ref, close);
 
   return (
     <Headroom
@@ -17,11 +21,11 @@ const CollapsibleHeader: FunctionComponent<PropsWithChildren> = ({
       pin={pinned}
       style={{ zIndex: "var(--elevation-element-header, 25)" }}
     >
-      <HeadroomProvider {...{ pinned, setPinned }}>
-        <Center maxWidth="inherit">
-          <header className={styles.header}>{children}</header>
-        </Center>
-      </HeadroomProvider>
+      <Center maxWidth="inherit">
+        <header ref={ref} className={styles.header}>
+          {children}
+        </header>
+      </Center>
     </Headroom>
   );
 };
