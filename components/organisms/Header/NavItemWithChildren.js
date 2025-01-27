@@ -6,29 +6,38 @@ import Subnavigation from "./Subnavigation";
 import IconComposer from "@rubin-epo/epo-react-lib/IconComposer";
 import { useKeyDownEvent, useFocusTrap } from "@/hooks";
 import internalLinkShape, { internalLinkInternalShape } from "@/shapes/link";
+import useNavigationMenu from "@/contexts/NavigationMenu";
 
 export default function NavItemWithChildren({
   id,
-  active,
   parentActive,
   title,
   uri,
   childItems,
-  onToggleClick,
-  onEsc,
   theme,
   baseClassName = "c-nav-list",
   level = 2,
 }) {
+  const { activeSubmenu, closeMenu, openMenu, close } = useNavigationMenu();
+  const isActive =
+    activeSubmenu.has(id) || childItems.find(({ id }) => activeSubmenu.has(id));
   const ref = useRef(null);
 
-  useFocusTrap(ref, active);
+  useFocusTrap(ref, isActive);
   useKeyDownEvent(handleKeyDown);
 
   function handleKeyDown({ key }) {
-    if (!active || key !== "Escape") return;
-    onEsc();
+    if (!isActive || key !== "Escape") return;
+    close();
   }
+
+  const handleToggle = () => {
+    if (isActive) {
+      closeMenu(id);
+    } else {
+      openMenu(id, true);
+    }
+  };
 
   const parent = { id, title, uri };
   const childrenWithParent = [parent].concat(childItems);
@@ -36,12 +45,12 @@ export default function NavItemWithChildren({
   return (
     <div ref={ref} className={`${baseClassName}__item-inner`}>
       <button
-        onClick={() => onToggleClick(id)}
-        aria-expanded={active}
+        onClick={handleToggle}
+        aria-expanded={isActive}
         aria-haspopup
         className={classNames({
           [`${baseClassName}__link`]: true,
-          [`${baseClassName}__link--is-active`]: active,
+          [`${baseClassName}__link--is-active`]: isActive,
           [`${baseClassName}__link--${theme}`]: !!theme,
         })}
       >
@@ -53,8 +62,8 @@ export default function NavItemWithChildren({
       </button>
       <Subnavigation
         items={childrenWithParent}
-        active={level === 3 ? parentActive && active : active}
-        onClick={onEsc}
+        active={level === 3 ? parentActive && isActive : isActive}
+        onClick={close}
         theme={theme}
         level={3}
         baseClassName={level === 3 ? baseClassName : "c-subnav-list"}
@@ -68,11 +77,9 @@ NavItemWithChildren.displayName =
 
 NavItemWithChildren.propTypes = {
   ...internalLinkInternalShape,
-  active: PropTypes.bool,
   parentActive: PropTypes.bool,
   childItems: PropTypes.arrayOf(internalLinkShape),
-  onToggleClick: PropTypes.func.isRequired,
-  onEsc: PropTypes.func.isRequired,
+  close: PropTypes.func.isRequired,
   theme: PropTypes.oneOf(["desktop", "mobile"]),
   baseClassName: PropTypes.string,
   level: PropTypes.number,
