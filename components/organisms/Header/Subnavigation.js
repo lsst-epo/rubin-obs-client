@@ -3,30 +3,20 @@
  * Ignore false positives (key event exists on Navigation component; role attribute not needed
  * since Link component validly handles href and window history, click just closes subnav)
  */
-import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Link from "next/link";
 import classNames from "classnames";
 import internalLinkShape from "@/shapes/link";
 import NavItemWithChildren from "./NavItemWithChildren";
+import useNavigationMenu from "@/contexts/NavigationMenu";
 
 export default function Subnavigation({
   items,
   active,
-  onClick,
   theme,
   baseClassName = "c-subnav-list",
-  level = 2,
 }) {
-  const [activeSub, setActiveSub] = useState(null);
-
-  useEffect(() => {
-    if (!active) setActiveSub(null);
-  }, [active]);
-
-  function handleToggleClick(id) {
-    setActiveSub((prevActive) => (prevActive === id ? null : id));
-  }
+  const { activeSubmenu, closeMenu, close } = useNavigationMenu();
 
   return (
     <ul
@@ -37,7 +27,7 @@ export default function Subnavigation({
     >
       {items.map(({ id, title, uri, children }) => {
         const hasChildren = children && children.length > 0;
-        const isActiveSub = id === activeSub;
+        const isActiveSub = activeSubmenu.has(id);
 
         if (!uri && !hasChildren) return null;
 
@@ -50,8 +40,7 @@ export default function Subnavigation({
                 title={title}
                 uri={uri}
                 childItems={children}
-                onToggleClick={handleToggleClick}
-                onEsc={() => setActiveSub(null)}
+                onEsc={() => closeMenu(id)}
                 theme={theme}
                 baseClassName="c-sub-subnav-list"
                 level={3}
@@ -63,7 +52,7 @@ export default function Subnavigation({
                 href={`/${uri}`}
                 className={`${baseClassName}__link`}
                 tabIndex={active ? 0 : -1}
-                onClick={onClick}
+                onClick={close}
               >
                 {title}
               </Link>
@@ -80,7 +69,6 @@ Subnavigation.displayName = "Header.Navigation.Subnavigation";
 Subnavigation.propTypes = {
   items: PropTypes.arrayOf(internalLinkShape),
   active: PropTypes.bool,
-  onClick: PropTypes.func,
   theme: PropTypes.oneOf(["desktop", "mobile"]),
   baseClassName: PropTypes.string,
   level: PropTypes.number,
