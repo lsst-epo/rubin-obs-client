@@ -87,6 +87,7 @@ const PreviewGridContent: FunctionComponent<PreviewGridProps> = async ({
               alt={assetAlt(additional, locale)}
               priority={i < 10}
               quality={80}
+              className={styles.image}
             />
             <div className={styles.titleCard}>
               {assetTitle(additional, locale) || name}
