@@ -16,6 +16,10 @@
   }
 }
 
+.image {
+  content-visibility: auto;
+}
+
 .titleCard {
   position: absolute;
   bottom: 0;
@@ -30,6 +34,7 @@
   transition: var(--time-transition-base) transform;
   transform: var(--translate-card, translateY(100%));
   width: 100%;
+  word-break: break-word;
 
   @media (prefers-reduced-transparency: no-preference) {
     --opacity-background-title: 0.8;
