@@ -30,7 +30,7 @@ const GalleryPage: FC<WithSearchParams<GalleryPageProps>> = async ({
 
   const filterOptions = [
     ...SupportedCantoScheme.options.map((value) => {
-      return { name: t(`gallery.filters.${value}`), query: "type", value };
+      return { name: t(`gallery.${value}_other`, {}), query: "type", value };
     }),
   ];
 

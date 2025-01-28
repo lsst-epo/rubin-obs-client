@@ -25,8 +25,8 @@ const CantoVideo: FunctionComponent<CantoVideoProps> = ({ locale, asset }) => {
     creditText: asset.additional.Credit || undefined,
     encodingFormat: asset.default.ContentType,
     dateCreated: asset.default.DateCreated,
-    height: asset.height,
-    width: asset.width,
+    height: `${width}px`,
+    width: `${height}px`,
   };
 
   return (

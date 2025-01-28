@@ -5,8 +5,8 @@ import {
   CantoAssetMetadata,
   GalleryDataFilters,
   MetadataAssetSchema,
-  SupportedCantoScheme,
   UnsupportedCantoScheme,
+  SupportedCantoScheme,
 } from "./schema";
 import z from "zod";
 import {
@@ -42,16 +42,21 @@ const whereContainsIn = ({
 const whereNotIn = ({
   type = [],
 }: GalleryDataFilters): WhereNotInFiltersInput => {
+  const { options: unsupported } = UnsupportedCantoScheme;
+
   if (type.length > 0) {
+    const { options: supported } = SupportedCantoScheme;
+
     return {
       key: "scheme",
-      values: SupportedCantoScheme.options.filter(
-        (option) => !type.includes(option)
-      ),
+      values: [
+        ...unsupported,
+        ...supported.filter((scheme) => !type.includes(scheme)),
+      ],
     };
   }
 
-  return { key: "scheme", values: UnsupportedCantoScheme.options };
+  return { key: "scheme", values: unsupported };
 };
 
 export const galleryFragment = `

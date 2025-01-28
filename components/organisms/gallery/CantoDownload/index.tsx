@@ -19,7 +19,7 @@ const CantoDownload: FunctionComponent<CantoDownloadProps> = async ({
     <Buttonish
       data-cy="canto-download"
       url={`/api/canto/${scheme}/${contentId}/${directUrlOriginalHash}${search}`}
-      text={t("gallery.download-original")}
+      text={t(`gallery.download-${scheme}`)}
       download={searchParams.get("name")}
       rel="alternate"
     />

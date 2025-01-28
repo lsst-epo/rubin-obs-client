@@ -79,9 +79,8 @@ const PreviewGridContent: FunctionComponent<PreviewGridProps> = async ({
             className={styles.tile}
           >
             <Image
+              {...{ width, height }}
               id={id}
-              width={parseInt(width)}
-              height={parseInt(height)}
               src={directUrlPreview}
               sizes={`(max-width: 600px) 100vw`}
               alt={assetAlt(additional, locale)}

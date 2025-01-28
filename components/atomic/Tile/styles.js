@@ -2,7 +2,7 @@
 import styled from "styled-components";
 import BaseMixedLink from "@rubin-epo/epo-react-lib/MixedLink";
 import BaseResponsiveImage from "@rubin-epo/epo-react-lib/ResponsiveImage";
-import SharePopupComponent from "@/layout/SharePopup";
+import SharePopupComponent from "@/components/molecules/SharePopup";
 import {
   BREAK_PHABLET,
   BREAK_PHABLET_MIN,
@@ -818,7 +818,7 @@ export const MixedLink = styled(BaseMixedLink)`
   }
 
   &.padded-bottom {
-    padding-bottom: 49px;
+    padding-bottom: calc(15px + var(--size-spacing-m));
 
     @media (max-width: ${BREAK_TABLET}) {
       padding-bottom: 0;
@@ -909,9 +909,8 @@ export const PlayButton = styled.span`
 
 export const SharePopup = styled(SharePopupComponent)`
   position: absolute;
-  right: 12px;
-  bottom: 0;
-  color: var(--neutral40);
+  inset-block-end: 15px;
+  inset-inline-end: 15px;
 
   @media (max-width: ${BREAK_TABLET}) {
     display: none;

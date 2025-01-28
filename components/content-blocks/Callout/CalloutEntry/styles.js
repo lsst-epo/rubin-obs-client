@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { MixedLink } from "@rubin-epo/epo-react-lib";
-import SharePopupComponent from "@/layout/SharePopup";
+import SharePopupComponent from "@/components/molecules/SharePopup";
 import {
   fluidScale,
   containerRegular,
@@ -201,10 +201,12 @@ export const FooterButton = styled(MixedLink)`
 `;
 
 export const SharePopup = styled(SharePopupComponent)`
+  --color-background-button: transparent;
+  --color-font-button: var(--neutral40);
+
   position: absolute;
   inset-block-end: 30px;
   inset-inline-end: 30px;
-  color: var(--neutral40);
 
   @media (max-width: ${tokens.BREAK_TABLET}) {
     display: none;

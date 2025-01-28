@@ -1,7 +1,7 @@
 /* eslint-disable */
 import styled from "styled-components";
 import { MixedLink as BaseMixedLink } from "@rubin-epo/epo-react-lib";
-import SharePopupComponent from "@/layout/SharePopup";
+import SharePopupComponent from "@/components/molecules/SharePopup";
 import {
   BREAK_PHABLET,
   BREAK_PHABLET_MIN,
@@ -899,10 +899,12 @@ export const PlayButton = styled.span`
 `;
 
 export const SharePopup = styled(SharePopupComponent)`
+  --color-background-button: transparent;
+  --color-font-button: var(--neutral40);
+
   position: absolute;
   inset-block-end: 30px;
   inset-inline-end: 30px;
-  color: var(--neutral40);
 
   @media (max-width: ${BREAK_TABLET}) {
     display: none;
