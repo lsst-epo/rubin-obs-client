@@ -90,6 +90,7 @@
   "gallery": {
     "about-the-image": "About the image",
     "about-the-video": "About the video",
+    "about-the-document": "About the document",
     "about-the-3d": "About the 3d Model",
     "about-the-gallery": "About the Gallery",
     "additional-information": "Additional information",
@@ -99,6 +100,7 @@
     "download-original": "Download original",
     "download-image": "Download image",
     "download-video": "Download video",
+    "download-document": "Download document",
     "download-3d": "Download 3d model",
     "download-gallery": "Download",
     "tags": "Tags",
@@ -109,8 +111,13 @@
     "back-to-galleries": "Back to galleries",
     "back-to-slideshows": "Back to slideshows",
     "image": "Image",
+    "image_other": "Images",
     "video": "Video",
+    "video_other": "Videos",
     "3d": "3D",
+    "3d_other": "3D Files",
+    "document": "Document",
+    "document_other": "Documents",
     "gallery": "Gallery",
     "gallery-item": "Gallery Item",
     "filters": {
@@ -118,11 +125,8 @@
       "results_one": "{{total}} result for",
       "results_other": "{{total}} results for",
       "search": "“{{value}}”",
-      "type": "Type: {{type}}",
-      "image": "Images",
-      "video": "Videos"
+      "type": "Type: {{type}}"
     },
-    "plural-3d": "3D Files",
     "plural-gallery": "Galleries",
     "see-all": "See all",
     "slideshow": "Slideshow",
@@ -143,6 +147,7 @@
     "file-size": "File size",
     "credit": "Credit: {{credit}}",
     "date-created": "Date created",
+    "date-published": "Publication date",
     "collections": "Collections"
   },
   "jobs": {

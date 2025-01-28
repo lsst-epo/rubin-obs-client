@@ -63,6 +63,7 @@ export const assetToPageMetadata = (
     additional,
     scheme,
     width,
+    height,
     url: { directUrlOriginal, directUrlPreviewPlay },
   } = asset;
 
@@ -71,8 +72,8 @@ export const assetToPageMetadata = (
     players: {
       playerUrl: directUrlPreviewPlay || directUrlOriginal,
       streamUrl: directUrlPreviewPlay || directUrlOriginal,
-      width: parseInt(width),
-      height: parseInt(width),
+      width,
+      height,
     },
   };
 
@@ -108,7 +109,7 @@ export const assetToOpenGraphImage = (
     const baseAttributes = { url: directUrlPreview, alt, type: "image/jpeg" };
 
     if (width && height) {
-      const aspectRatio = parseInt(width) / parseInt(height);
+      const aspectRatio = width / height;
       const previewSize = getPreviewSize(directUrlPreview);
 
       if (aspectRatio < 1) {

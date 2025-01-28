@@ -27,3 +27,12 @@
   top: 0;
   right: 0;
 }
+
+.scheme {
+  font-weight: bold;
+}
+
+.dateCreated {
+  display: block;
+  font-weight: bold;
+}
