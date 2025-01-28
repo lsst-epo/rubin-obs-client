@@ -3,6 +3,7 @@ import { generateMetadata as baseGeneradataMetadata } from "../../../app/[locale
 import { getMainGallery } from "@/lib/api/galleries";
 import { notFound } from "next/navigation";
 import GalleryPage from "../GalleryPage";
+import SlideshowCarousel from "@/components/organisms/SlideshowCarousel";
 
 export const generateMetadata = async ({ params: { locale } }: LocaleProps) => {
   const data = await getMainGallery(locale);
@@ -29,9 +30,16 @@ const GalleryLandingPage: FC<
     notFound();
   }
 
-  const { gallery } = data;
+  const { gallery, slideshows, slideshowsUri } = data;
 
-  return <GalleryPage {...{ locale, gallery, searchParams }} />;
+  return (
+    <>
+      {slideshows.length > 0 && (
+        <SlideshowCarousel {...{ slideshows, slideshowsUri }} />
+      )}
+      <GalleryPage {...{ locale, gallery, searchParams }} />
+    </>
+  );
 };
 
 GalleryLandingPage.displayName = "Template.GalleryLandingPage";

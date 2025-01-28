@@ -35,8 +35,15 @@ module.exports = {
       },
     ],
     "selector-attribute-quotes": "always",
+    "selector-pseudo-class-no-unknown": [
+      true,
+      {
+        ignorePseudoClasses: ["global"],
+      },
+    ],
     "selector-pseudo-element-colon-notation": "double",
     "selector-type-case": "lower",
+
     "rule-empty-line-before": [
       "always",
       {
