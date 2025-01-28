@@ -1,12 +1,16 @@
 import { FunctionComponent, ReactNode } from "react";
 import Figure from "@rubin-epo/epo-react-lib/Figure";
-import { CantoAssetAdditional } from "@/lib/api/galleries/schema";
-import { assetCaption } from "@/lib/api/canto/metadata";
+import {
+  CantoAssetAdditional,
+  CantoAssetScheme,
+} from "@/lib/api/galleries/schema";
+import { assetCaption, assetTitle } from "@/lib/api/canto/metadata";
 import { useTranslation } from "@/lib/i18n";
-import SharePopup from "@/components/layout/SharePopup";
+import SharePopup from "@/components/molecules/SharePopup";
 import CantoDownload from "../CantoDownload";
 import { CloseButton } from "./CantoFigure.client";
 import styles from "./styles.module.css";
+import Stack from "@rubin-epo/epo-react-lib/Stack";
 
 interface CantoFigureProps {
   locale: string;
@@ -14,11 +18,13 @@ interface CantoFigureProps {
   additional: CantoAssetAdditional;
   downloadUrl: string;
   asset: ReactNode;
-  width: string;
-  height: string;
+  width: number;
+  height: number;
   id: string;
   parentUri: string;
   gallery: string;
+  scheme: CantoAssetScheme;
+  dateCreated: Date;
 }
 
 const CantoFigure: FunctionComponent<CantoFigureProps> = async ({
@@ -32,15 +38,34 @@ const CantoFigure: FunctionComponent<CantoFigureProps> = async ({
   id,
   parentUri,
   gallery,
+  scheme,
+  dateCreated,
 }) => {
   const { t } = await useTranslation(locale);
-  const aspectRatio = parseInt(width) / parseInt(height);
+  const aspectRatio = width / height;
+  const shortestSide = Math.min(width, height);
+  const useHorizontalLayout = aspectRatio < 1 || shortestSide < 720;
+
+  const additionalInfo = (
+    <>
+      <div className={styles.scheme}>{t(`gallery.${scheme}`)}</div>
+      <div className="t-heading-tertiary">{assetTitle(additional, locale)}</div>
+      <time className={styles.dateCreated} dateTime={dateCreated.toISOString()}>
+        {new Intl.DateTimeFormat(locale, { dateStyle: "long" }).format(
+          dateCreated
+        )}
+      </time>
+    </>
+  );
+
+  const hasAdditionalInfo = scheme === "document";
 
   return (
     <Figure
       caption={
-        <>
-          {assetCaption(additional, locale)}
+        <Stack space="var(--size-spacing-xs)">
+          {hasAdditionalInfo && additionalInfo}
+          <div>{assetCaption(additional, locale)}</div>
           {additional?.Credit && (
             <div className={styles.credit}>
               {t("gallery.credit", {
@@ -52,9 +77,9 @@ const CantoFigure: FunctionComponent<CantoFigureProps> = async ({
             <CantoDownload directUrlOriginal={downloadUrl} />
             <SharePopup title={name} url={`gallery/${gallery}/${id}`} />
           </div>
-        </>
+        </Stack>
       }
-      layout={aspectRatio < 1 ? "horizontal" : "vertical"}
+      layout={useHorizontalLayout ? "horizontal" : "vertical"}
       withBackground
     >
       <div

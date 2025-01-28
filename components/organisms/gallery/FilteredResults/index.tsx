@@ -56,7 +56,7 @@ const FilteredResults: FC<FilteredResultsProps> = ({ total, filters }) => {
         break;
       case "type":
         displayValue = t("gallery.filters.type", {
-          type: t(`gallery.filters.${value}`).toLocaleLowerCase(language),
+          type: t(`gallery.${value}_other`).toLocaleLowerCase(language),
         });
         break;
     }

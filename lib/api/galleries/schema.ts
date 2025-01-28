@@ -2,12 +2,11 @@ import z from "zod";
 
 export const UnsupportedCantoScheme = z.enum([
   "audio",
-  "document",
   "presentation",
   "other",
 ]);
-export const SupportedCantoScheme = z.enum(["image", "video"]);
-const CantoScheme = z.enum([
+export const SupportedCantoScheme = z.enum(["image", "video", "document"]);
+export const CantoScheme = z.enum([
   ...SupportedCantoScheme.options,
   ...UnsupportedCantoScheme.options,
 ]);
@@ -49,12 +48,12 @@ export const MetadataAssetSchema = z.object({
     TitleEN: z.string().nullable(),
     TitleES: z.string().nullable(),
   }),
-  height: z.string(),
+  height: z.coerce.number(),
   id: z.string(),
   name: z.string(),
   scheme: CantoScheme,
   url: AssetUrlSchema,
-  width: z.string(),
+  width: z.coerce.number(),
 });
 
 export const DetailedAssetSchema = z
@@ -62,7 +61,7 @@ export const DetailedAssetSchema = z
     additional: AdditionalSchema,
     approvalStatus: z.string(),
     default: AssetDefaultSchema,
-    height: z.string(),
+    height: z.coerce.number(),
     id: z.string(),
     name: z.string(),
     owner: z.string().nullable(),
@@ -73,7 +72,7 @@ export const DetailedAssetSchema = z
     tag: z.array(z.string()),
     time: z.string(),
     url: AssetUrlSchema,
-    width: z.string(),
+    width: z.coerce.number(),
   })
   .superRefine((val, ctx) => {
     if (val.scheme === "video" && !val.url.directUrlPreviewPlay) {

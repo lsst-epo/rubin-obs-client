@@ -12,6 +12,7 @@ import ImageSizes from "@/components/organisms/gallery/metadata/Sizes";
 import AssetTags from "@/components/organisms/gallery/metadata/Tags";
 import CantoImage from "@/components/organisms/gallery/CantoImage";
 import CantoVideo from "@/components/organisms/gallery/CantoVideo";
+import CantoDocument from "@/components/organisms/gallery/CantoDocument";
 import AssetMetadata from "@/components/organisms/gallery/metadata/Asset";
 
 export async function generateMetadata({
@@ -29,6 +30,7 @@ export async function generateMetadata({
 const assetComponent: Record<SupportedCantoAssetScheme, ComponentType> = {
   image: CantoImage,
   video: CantoVideo,
+  document: CantoDocument,
 };
 
 const GalleryAsset: FunctionComponent<GalleryAssetProps> = async ({
@@ -72,17 +74,21 @@ const GalleryAsset: FunctionComponent<GalleryAssetProps> = async ({
     image: (
       <>
         <ImageSizes
-          width={parseInt(width)}
-          height={parseInt(height)}
-          {...{ directUrlPreview, directUrlOriginal }}
+          {...{ width, height, directUrlPreview, directUrlOriginal }}
         />
         <AssetTags tags={validTagsOnly} parentUri={parentUri} />
       </>
     ),
     video: <AssetTags tags={validTagsOnly} parentUri={parentUri} />,
+    document: (
+      <>
+        <AssetTags tags={validTagsOnly} parentUri={parentUri} />
+      </>
+    ),
   };
 
   const Asset = assetComponent[scheme];
+  const dateCreated = new Date(DateCreated);
 
   return (
     <SingleMediaAsset
@@ -100,14 +106,15 @@ const GalleryAsset: FunctionComponent<GalleryAssetProps> = async ({
             parentUri,
             id,
             name,
+            scheme,
+            dateCreated,
           }}
         />
       }
       metadataBlocks={
         <AssetMetadata
           size={parseInt(size)}
-          dateCreated={new Date(DateCreated)}
-          {...{ scheme, width, height }}
+          {...{ scheme, width, height, dateCreated }}
         />
       }
       metadataLinks={links[scheme]}

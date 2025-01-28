@@ -1,0 +1,33 @@
+.button {
+  aspect-ratio: 1;
+  background-color: var(
+    --color-background-button,
+    var(--color-background-tile-light)
+  );
+  border-radius: calc(var(--size-spacing-m) / 2);
+  border: 1px solid transparent;
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 16%);
+  color: var(--color-font-button, #313333);
+  font-size: var(--size-spacing-m);
+  width: var(--size-spacing-m);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:not(:disabled):hover,
+  &[data-headlessui-state="open"] {
+    border-color: var(--color-border-button-hover, #707070);
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+.panel {
+  padding: var(--size-spacing-2xs);
+  background-color: var(--white);
+  border-radius: 5px;
+  box-shadow: 5px 15px 35px 8px rgba(0, 0, 0, 13%);
+}
