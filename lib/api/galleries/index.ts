@@ -74,6 +74,14 @@ export const galleryFragment = `
     }
   }
 `;
+
+const imageAsset = z.object({
+  altText: z.string().nullable(),
+  url: z.string(),
+  width: z.number(),
+  height: z.number(),
+});
+
 export async function getMainGallery(locale: string) {
   const site = getSiteFromLocale(locale);
 
@@ -91,12 +99,28 @@ export async function getMainGallery(locale: string) {
           }
           slideshowEntry {
             ... on slideshows_slideshow_Entry {
+              __typename
               id
               uri
               title
               richTextDescription
+              images: representativeAssetVariant {
+                ... on assetVariants_Asset {
+                  __typename
+                  altText
+                  width
+                  height
+                  url
+                }
+              }
             }
           }
+        }
+      }
+      slideshowsMain: pagesEntries(site: $site, slug: "slideshows") {
+        ... on pages_pages_Entry {
+          __typename
+          uri
         }
       }
     }
@@ -106,7 +130,7 @@ export async function getMainGallery(locale: string) {
 
   if (!data) return;
 
-  const { pagesEntries } = data;
+  const { pagesEntries, slideshowsMain } = data;
 
   if (
     !pagesEntries ||
@@ -125,10 +149,31 @@ export async function getMainGallery(locale: string) {
     return;
   }
 
+  const slideshows = slideshowEntry
+    .filter(
+      (slideshow) =>
+        slideshow !== null &&
+        slideshow.__typename === "slideshows_slideshow_Entry"
+    )
+    .map(({ images, ...slideshow }) => {
+      const { data: image } = imageAsset.safeParse(images[0]);
+
+      return {
+        ...slideshow,
+        image,
+      };
+    });
+
+  const slideshowsUri =
+    slideshowsMain && slideshowsMain[0]?.__typename === "pages_pages_Entry"
+      ? slideshowsMain[0]?.uri
+      : undefined;
+
   return {
     isVisible: !!isVisible,
     gallery: galleryEntry[0].slug,
-    slideshows: slideshowEntry,
+    slideshows,
+    slideshowsUri: slideshowsUri || undefined,
   };
 }
 
