@@ -2,7 +2,9 @@ import { FC } from "react";
 import Container from "@rubin-epo/epo-react-lib/Container";
 import { useTranslation } from "@/lib/i18n";
 import { getGalleryMetadata } from "@/lib/api/galleries";
-import FilterDropdownList from "@/components/molecules/FilterDropdownList";
+import FilterDropdownList, {
+  Filter,
+} from "@/components/molecules/FilterDropdownList";
 import PreviewGrid from "@/components/organisms/gallery/PreviewGrid";
 import Filters from "@/components/organisms/Filters";
 import UniqueIconComposer from "@/components/svg/UniqueIconComposer";
@@ -28,10 +30,25 @@ const GalleryPage: FC<WithSearchParams<GalleryPageProps>> = async ({
   const { t } = await useTranslation(locale);
   const filters = GalleryFilterSchema.parse(searchParams);
 
-  const filterOptions = [
+  const filterOptions: Array<Filter> = [
     ...SupportedCantoScheme.options.map((value) => {
       return { name: t(`gallery.${value}_other`, {}), query: "type", value };
     }),
+  ];
+
+  const sortOptions: Array<Filter> = [
+    {
+      name: t("filters.age", { context: "desc" }),
+      query: "sort",
+      value: "desc",
+      active: filters.sort === "desc",
+    },
+    {
+      name: t("filters.age", { context: "asc" }),
+      query: "sort",
+      value: "asc",
+      active: filters.sort === "asc",
+    },
   ];
 
   return (
@@ -41,6 +58,12 @@ const GalleryPage: FC<WithSearchParams<GalleryPageProps>> = async ({
           name="Filter"
           filters={filterOptions}
           icon={<UniqueIconComposer icon="Filter" />}
+        />
+        <FilterDropdownList
+          name="Sort by"
+          filters={sortOptions}
+          icon={<UniqueIconComposer icon="Sort" />}
+          includeReset={false}
         />
       </Filters>
       <GalleryList currentGallery={gallery} />
