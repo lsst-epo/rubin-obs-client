@@ -70,7 +70,9 @@
     "gallery-items": "Gallery Items",
     "jobs": "Jobs",
     "news": "News",
-    "staff-profiles": "Rubin Voices"
+    "staff-profiles": "Rubin Voices",
+    "age_asc": "Oldest first",
+    "age_desc": "Newest first"
   },
   "alert": {
     "solar-systems-found": "Solar systems found",

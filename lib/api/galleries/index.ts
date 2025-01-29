@@ -11,18 +11,41 @@ import {
 import z from "zod";
 import {
   ForPageInput,
+  InputMaybe,
+  SortByDescInput,
+  SortByInput,
   WhereContainsInFilterInput,
   WhereInFiltersInput,
   WhereNotInFiltersInput,
 } from "@/gql/graphql";
 import { fullBaseFields } from "../fragments/shared";
 
-const whereIn = ({ tag = [] }: GalleryDataFilters): WhereInFiltersInput => {
-  if (tag.length > 0) {
-    return { key: "tag", values: tag };
+const sortBy = ({ sort }: GalleryDataFilters): InputMaybe<SortByInput> => {
+  if (sort === "asc") {
+    return { field: "default.DateCreated", flags: null };
   }
 
-  return { key: "", values: [""] };
+  return null;
+};
+const sortByDesc = ({
+  sort,
+}: GalleryDataFilters): InputMaybe<SortByDescInput> => {
+  if (sort === "desc") {
+    return { field: "default.DateCreated", flags: null };
+  }
+
+  return null;
+};
+
+const whereIn = ({
+  tag = [],
+}: GalleryDataFilters): Array<WhereInFiltersInput> => {
+  const whereIn: Array<WhereInFiltersInput> = [];
+  if (tag.length > 0) {
+    whereIn.push({ key: "tag", values: tag });
+  }
+
+  return whereIn;
 };
 
 const forPage = ({ limit, page }: GalleryDataFilters): ForPageInput => {
@@ -31,32 +54,36 @@ const forPage = ({ limit, page }: GalleryDataFilters): ForPageInput => {
 
 const whereContainsIn = ({
   search,
-}: GalleryDataFilters): WhereContainsInFilterInput => {
+}: GalleryDataFilters): Array<WhereContainsInFilterInput> => {
+  const whereContainsIn: Array<WhereContainsInFilterInput> = [];
   if (search) {
-    return { keys: ["name", "tag"], value: search };
+    whereContainsIn.push({ keys: ["name", "tag"], value: search });
   }
 
-  return { keys: [""], value: "" };
+  return whereContainsIn;
 };
 
 const whereNotIn = ({
   type = [],
-}: GalleryDataFilters): WhereNotInFiltersInput => {
+}: GalleryDataFilters): Array<WhereNotInFiltersInput> => {
+  const whereNotIn: Array<WhereNotInFiltersInput> = [];
   const { options: unsupported } = UnsupportedCantoScheme;
 
   if (type.length > 0) {
     const { options: supported } = SupportedCantoScheme;
 
-    return {
+    whereNotIn.push({
       key: "scheme",
       values: [
         ...unsupported,
         ...supported.filter((scheme) => !type.includes(scheme)),
       ],
-    };
+    });
+  } else {
+    whereNotIn.push({ key: "scheme", values: unsupported });
   }
 
-  return { key: "scheme", values: unsupported };
+  return whereNotIn;
 };
 
 export const galleryFragment = `
@@ -355,20 +382,26 @@ export async function getGalleryMetadata(
   return sharedProps;
 }
 
-export async function getGalleryData(
-  gallery: string,
-  locale: string,
-  filters: GalleryDataFilters
-) {
+export async function getGalleryData({
+  gallery,
+  filters,
+  locale,
+}: {
+  gallery: string;
+  filters: GalleryDataFilters;
+  locale: string;
+}) {
   const site = getSiteFromLocale(locale);
   const query = graphql(`
     query GalleryQuery(
       $site: [String]
       $uri: [String]
-      $whereIn: WhereInFiltersInput
-      $whereNotIn: WhereNotInFiltersInput
-      $whereContainsIn: WhereContainsInFilterInput
+      $whereIn: [WhereInFiltersInput]
+      $whereNotIn: [WhereNotInFiltersInput]
+      $whereContainsIn: [WhereContainsInFilterInput]
       $forPage: ForPageInput
+      $sortBy: SortByInput
+      $sortByDesc: SortByDescInput
     ) {
       galleriesEntries(site: $site, uri: $uri) {
         ... on galleries_gallery_Entry {
@@ -380,6 +413,8 @@ export async function getGalleryData(
             forPage: $forPage
             whereIn: $whereIn
             whereContainsIn: $whereContainsIn
+            sortBy: $sortBy
+            sortByDesc: $sortByDesc
           ) {
             additional {
               AltTextEN
@@ -423,6 +458,8 @@ export async function getGalleryData(
       whereIn: whereIn(filters),
       forPage: forPage(filters),
       whereContainsIn: whereContainsIn(filters),
+      sortBy: sortBy(filters),
+      sortByDesc: sortByDesc(filters),
     },
   });
 
