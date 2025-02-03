@@ -10,9 +10,10 @@ import { resizeCantoImage } from "@/lib/api/canto/resize";
 interface CantoDocumentProps {
   locale: string;
   asset: CantoAssetDetailed;
+  license?: string;
 }
 
-const CantoDocument: FC<CantoDocumentProps> = ({ locale, asset }) => {
+const CantoDocument: FC<CantoDocumentProps> = ({ locale, asset, license }) => {
   const { additional, url, width, height } = asset;
 
   const aspectRatio = width / height;
@@ -27,6 +28,7 @@ const CantoDocument: FC<CantoDocumentProps> = ({ locale, asset }) => {
     encodingFormat: asset.default.ContentType,
     dateCreated: asset.default.DateCreated,
     thumbnailUrl: resizeCantoImage(url.directUrlPreview, 100),
+    license,
   };
 
   return (

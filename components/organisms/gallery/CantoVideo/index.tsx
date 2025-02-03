@@ -8,9 +8,14 @@ import { assetCaption } from "@/lib/api/canto/metadata";
 interface CantoVideoProps {
   locale: string;
   asset: CantoAssetDetailed;
+  license?: string;
 }
 
-const CantoVideo: FunctionComponent<CantoVideoProps> = ({ locale, asset }) => {
+const CantoVideo: FunctionComponent<CantoVideoProps> = ({
+  locale,
+  asset,
+  license,
+}) => {
   const {
     width,
     height,
@@ -27,6 +32,7 @@ const CantoVideo: FunctionComponent<CantoVideoProps> = ({ locale, asset }) => {
     dateCreated: asset.default.DateCreated,
     height: `${width}px`,
     width: `${height}px`,
+    license,
   };
 
   return (
