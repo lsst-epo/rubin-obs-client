@@ -148,7 +148,8 @@
     "credit": "Credit: {{credit}}",
     "date-created": "Date created",
     "date-published": "Publication date",
-    "collections": "Collections"
+    "collections": "Collections",
+    "media-policy": "Information about <1>Usage of Rubin Observatory images, videos, web texts, and music</1>"
   },
   "jobs": {
     "job": "Job",

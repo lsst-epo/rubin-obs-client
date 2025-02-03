@@ -10,9 +10,14 @@ import { resizeCantoImage } from "@/lib/api/canto/resize";
 interface CantoImageProps {
   locale: string;
   asset: CantoAssetDetailed;
+  license?: string;
 }
 
-const CantoImage: FunctionComponent<CantoImageProps> = ({ locale, asset }) => {
+const CantoImage: FunctionComponent<CantoImageProps> = ({
+  locale,
+  asset,
+  license,
+}) => {
   const { additional, url, width, height } = asset;
 
   const aspectRatio = width / height;
@@ -33,6 +38,7 @@ const CantoImage: FunctionComponent<CantoImageProps> = ({ locale, asset }) => {
       "@type": "ImageObject",
       contentUrl: resizeCantoImage(url.directUrlPreview, 100),
     },
+    license,
   };
 
   return (
