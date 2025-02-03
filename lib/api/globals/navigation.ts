@@ -33,7 +33,7 @@ export async function getNavigationItems(
   const query = graphql(`
     query getNavigationItems($site: [String]) {
       navigationItems: entries(
-        section: ["pages", "galleries"]
+        section: ["pages"]
         site: $site
         level: 1
         isVisible: true
@@ -52,7 +52,7 @@ export async function getNavigationItems(
           }
         }
       }
-      galleriesEntries(isVisible: true) {
+      galleriesEntries(site: $site, isVisible: true) {
         ... on galleries_gallery_Entry {
           id
           title
