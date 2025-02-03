@@ -5,6 +5,7 @@ import { getAssetFromGallery } from "@/lib/api/galleries/asset";
 import { assetTitle, assetToPageMetadata } from "@/lib/api/canto/metadata";
 import { SupportedCantoAssetScheme } from "@/lib/api/galleries/schema";
 import { isMainGallery } from "@/lib/api/galleries";
+import { getMediaPolicyPage } from "@/lib/api/galleries/media-policy";
 import { buildParentPath } from "@/lib/helpers/gallery";
 import CantoFigure from "@/components/organisms/gallery/CantoFigure";
 import SingleMediaAsset from "@/components/templates/SingleMediaAsset";
@@ -14,6 +15,7 @@ import CantoImage from "@/components/organisms/gallery/CantoImage";
 import CantoVideo from "@/components/organisms/gallery/CantoVideo";
 import CantoDocument from "@/components/organisms/gallery/CantoDocument";
 import AssetMetadata from "@/components/organisms/gallery/metadata/Asset";
+import { addLocaleUriSegment } from "@/lib/i18n";
 
 export async function generateMetadata({
   params: { locale, gallery, asset: id },
@@ -89,6 +91,13 @@ const GalleryAsset: FunctionComponent<GalleryAssetProps> = async ({
 
   const Asset = assetComponent[scheme];
   const dateCreated = new Date(DateCreated);
+  const mediaPolicyPage = await getMediaPolicyPage(locale);
+  const license = mediaPolicyPage
+    ? `${process.env.NEXT_PUBLIC_BASE_URL}${addLocaleUriSegment(
+        locale,
+        mediaPolicyPage.uri
+      )}`
+    : undefined;
 
   return (
     <SingleMediaAsset
@@ -96,7 +105,7 @@ const GalleryAsset: FunctionComponent<GalleryAssetProps> = async ({
       asset={
         <CantoFigure
           downloadUrl={directUrlOriginal}
-          asset={<Asset {...{ asset, locale }} />}
+          asset={<Asset {...{ asset, locale, license }} />}
           {...{
             locale,
             additional,
