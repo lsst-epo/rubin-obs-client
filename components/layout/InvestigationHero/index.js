@@ -1,3 +1,4 @@
+"use client";
 import PropTypes from "prop-types";
 import * as Styled from "./styles";
 import { Button, Image, IconComposer } from "@rubin-epo/epo-react-lib";

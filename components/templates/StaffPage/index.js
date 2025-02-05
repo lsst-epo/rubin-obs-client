@@ -2,15 +2,18 @@
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useGlobalData } from "@/lib/utils";
+import { addLocaleUriSegment } from "@/lib/i18n";
 import { Share } from "@/content-blocks";
 import StaffList from "@/dynamic/StaffList";
 import ContentBlockFactory from "@/factories/ContentBlockFactory";
-import NestedContext from "@/contexts/Nested";
-import { Image } from "@rubin-epo/epo-react-lib";
+import { NestedProvider } from "@/contexts/Nested";
+import Image from "@rubin-epo/epo-react-lib/Image";
 import Breadcrumbs from "@/page/Breadcrumbs";
 import PageContent from "@/page/PageContent";
+import Aside from "@/components/molecules/Aside";
+import AsideSection from "@/components/molecules/Aside/Section";
+import TagList from "@/components/molecules/TagList";
 import * as Styled from "./styles";
-import Aside from "@/components/page/Aside";
 
 function getParentUri(uri) {
   const pathFragments = uri.split("/");
@@ -37,7 +40,10 @@ export default function StaffPage({
     contentBlocks,
   },
 }) {
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = useTranslation();
   const rootPages = useGlobalData("rootPages");
   const parentUri = getParentUri(uri);
   const parentEntry = getParentEntry(rootPages);
@@ -48,6 +54,15 @@ export default function StaffPage({
     title,
   };
   const breadcrumbs = [parentEntry, pageLink].filter(Boolean);
+  const tagsWithLinks = tags.map(({ slug, title }) => {
+    return {
+      name: title,
+      destination: addLocaleUriSegment(
+        language,
+        `/${parentEntry?.uri}?search=${slug}`
+      ),
+    };
+  });
 
   return (
     <>
@@ -67,10 +82,7 @@ export default function StaffPage({
           )
         }
         sidebar={
-          <Aside
-            rootHomeLink={{ uri: parentUri, ...parentEntry }}
-            {...{ tags }}
-          >
+          <Aside>
             {tradingCard?.[0] && (
               <Styled.TradingCardSection title={t("staff.trading-card")}>
                 <Styled.TradingCardLink href={tradingCard[0].url3x} download>
@@ -78,6 +90,9 @@ export default function StaffPage({
                 </Styled.TradingCardLink>
               </Styled.TradingCardSection>
             )}
+            <AsideSection title={t("tags")}>
+              <TagList tags={tagsWithLinks} />
+            </AsideSection>
           </Aside>
         }
         footer={
@@ -94,7 +109,7 @@ export default function StaffPage({
           />
         }
       >
-        <NestedContext.Provider value={!!heroImage?.length}>
+        <NestedProvider value={!!heroImage?.length}>
           <h1>{title}</h1>{" "}
           <Styled.Bio
             className="c-content-rte"
@@ -113,7 +128,7 @@ export default function StaffPage({
                 />
               );
             })}
-        </NestedContext.Provider>
+        </NestedProvider>
       </PageContent>
     </>
   );

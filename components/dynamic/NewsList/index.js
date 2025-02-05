@@ -1,6 +1,7 @@
+"use client";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { Grid } from "@rubin-epo/epo-react-lib";
+import Grid from "@rubin-epo/epo-react-lib/Grid";
 import DataList from "@/dynamic/DataList";
 import Tile from "@/atomic/Tile";
 import {
