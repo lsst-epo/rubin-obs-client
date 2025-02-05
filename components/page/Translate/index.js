@@ -1,3 +1,4 @@
+"use client";
 // react-i18next extends i18next's functionality
 // params in this context are values passed into the translation key
 // For docs on pluralization, see: https://www.i18next.com/translation-function/plurals
