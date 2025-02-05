@@ -1,3 +1,4 @@
+"use client";
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { ExpandToggle, Container } from "@rubin-epo/epo-react-lib";

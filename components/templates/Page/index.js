@@ -1,11 +1,12 @@
-"use client";
 import PropTypes from "prop-types";
-import { useTranslation } from "react-i18next";
+import Container from "@rubin-epo/epo-react-lib/Container";
+import { getLocale } from "@/lib/i18n/server";
+import { useTranslation } from "@/lib/i18n";
 import internalLinkShape from "@/shapes/link";
 import pageShape from "@/shapes/page";
+import { NestedProvider } from "@/contexts/Nested";
 import ContentBlockFactory from "@/factories/ContentBlockFactory";
 import DynamicComponentFactory from "@/factories/DynamicComponentFactory";
-import { Container } from "@rubin-epo/epo-react-lib";
 import Breadcrumbs from "@/page/Breadcrumbs";
 import FilterBar from "@/components/page/FilterBar";
 import NavButtons from "@/components/layout/NavButtons";
@@ -15,12 +16,11 @@ import InvestigationHero from "@/components/layout/InvestigationHero";
 import ChildNavigation from "@/components/layout/ChildNavigation";
 import GuideNavigation from "@/components/layout/GuideNavigation";
 import SiblingNavigation from "@/components/layout/SiblingNavigation";
-import NestedContext from "@/contexts/Nested";
+import MediaAside from "@/components/organisms/MediaAside";
 import PageContent from "@/page/PageContent";
-import MediaAside from "@/components/page/Aside/patterns/Media";
 import { FilterParamsProvider } from "@/contexts/FilterParams";
 
-export default function Page({
+export default async function Page({
   data: {
     contentBlocks = [],
     dynamicComponent,
@@ -51,7 +51,8 @@ export default function Page({
   breadcrumbs,
   children,
 }) {
-  const { t } = useTranslation();
+  const locale = getLocale();
+  const { t } = await useTranslation(locale);
 
   const pageLink = {
     id,
@@ -124,7 +125,7 @@ export default function Page({
             colorScheme={subHeroColorScheme}
             nested={shouldOverlapHero}
           />
-          <NestedContext.Provider value={shouldOverlapHero}>
+          <NestedProvider value={shouldOverlapHero}>
             {!hideTitle && (
               <Container
                 bgColor="white"
@@ -168,7 +169,7 @@ export default function Page({
                 parent={investigation ? investigation.landingPage?.[0] : parent}
               />
             )}
-          </NestedContext.Provider>
+          </NestedProvider>
         </PageContent>
       </FilterParamsProvider>
     </AuthorizePage>
