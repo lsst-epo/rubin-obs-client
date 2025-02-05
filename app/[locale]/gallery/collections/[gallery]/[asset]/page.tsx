@@ -7,6 +7,7 @@ import { SupportedCantoAssetScheme } from "@/lib/api/galleries/schema";
 import { isMainGallery } from "@/lib/api/galleries";
 import { getMediaPolicyPage } from "@/lib/api/galleries/media-policy";
 import { buildParentPath } from "@/lib/helpers/gallery";
+import { addLocaleUriSegment } from "@/lib/i18n";
 import CantoFigure from "@/components/organisms/gallery/CantoFigure";
 import SingleMediaAsset from "@/components/templates/SingleMediaAsset";
 import ImageSizes from "@/components/organisms/gallery/metadata/Sizes";
@@ -15,7 +16,7 @@ import CantoImage from "@/components/organisms/gallery/CantoImage";
 import CantoVideo from "@/components/organisms/gallery/CantoVideo";
 import CantoDocument from "@/components/organisms/gallery/CantoDocument";
 import AssetMetadata from "@/components/organisms/gallery/metadata/Asset";
-import { addLocaleUriSegment } from "@/lib/i18n";
+import LinkedPosts from "@/components/organisms/gallery/metadata/LinkedPosts";
 
 export async function generateMetadata({
   params: { locale, gallery, asset: id },
@@ -121,10 +122,13 @@ const GalleryAsset: FunctionComponent<GalleryAssetProps> = async ({
         />
       }
       metadataBlocks={
-        <AssetMetadata
-          size={parseInt(size)}
-          {...{ scheme, width, height, dateCreated }}
-        />
+        <>
+          <AssetMetadata
+            size={parseInt(size)}
+            {...{ scheme, width, height, dateCreated }}
+          />
+          <LinkedPosts {...{ id, scheme }} />
+        </>
       }
       metadataLinks={links[scheme]}
     />

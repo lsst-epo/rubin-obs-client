@@ -12,6 +12,8 @@ import {
 import { addLocaleUriSegment } from "@/lib/i18n";
 import { assetTitle } from "../canto/metadata";
 import { getLocale } from "@/lib/i18n/server";
+import z from "zod";
+import { getMainGallery } from ".";
 
 export async function getRecentAssets(locale: string, gallery: string) {
   const site = getSiteFromLocale(locale);
@@ -303,4 +305,107 @@ export const getRandomAsset = async () => {
   );
 
   return { title, slug, asset };
+};
+
+const linkedPostSchema = z.array(
+  z.object({ title: z.string(), uri: z.string(), id: z.string() })
+);
+
+export const getLinkedPosts = async (id: string) => {
+  const site = getSiteFromLocale(getLocale());
+
+  const query = graphql(`
+    query LinkedPosts($site: [String], $id: String) {
+      newsEntries(site: $site) {
+        ... on news_post_Entry {
+          id
+          uri
+          title
+          sidebarAssets(type: "associatedAsset") {
+            ... on sidebarAssets_associatedAsset_BlockType {
+              __typename
+              asset(where: { key: "id", value: $id }) {
+                id
+              }
+            }
+          }
+        }
+      }
+    }
+  `);
+
+  const { data } = await queryAPI({
+    query,
+    variables: { site, id },
+  });
+
+  if (!data || !data.newsEntries) return [];
+
+  const linkedPosts = data.newsEntries.filter((entry) => {
+    return (
+      entry &&
+      entry.sidebarAssets.some((sidebarAsset) => {
+        return (
+          sidebarAsset &&
+          sidebarAsset.__typename ===
+            "sidebarAssets_associatedAsset_BlockType" &&
+          sidebarAsset.asset &&
+          sidebarAsset.asset.length > 0
+        );
+      })
+    );
+  });
+
+  const { data: parsedLinkedPosts = [] } =
+    linkedPostSchema.safeParse(linkedPosts);
+
+  return parsedLinkedPosts;
+};
+
+export const getGalleryForAsset = async (id: string) => {
+  const locale = getLocale();
+  const site = getSiteFromLocale(locale);
+
+  const query = graphql(`
+    query GalleryForAsset($site: [String], $id: String) {
+      galleriesEntries(site: $site) {
+        ... on galleries_gallery_Entry {
+          uri
+          slug
+          assetAlbum(where: { key: "id", value: $id }) {
+            id
+          }
+        }
+      }
+    }
+  `);
+
+  const { data } = await queryAPI({
+    query,
+    variables: { site, id },
+  });
+
+  if (!data || !data.galleriesEntries) return;
+
+  const { galleriesEntries } = data;
+
+  const mainGallery = await getMainGallery(locale);
+
+  const galleriesWithAsset = galleriesEntries.filter(
+    (entry) => entry && entry.assetAlbum && entry.assetAlbum.length > 0
+  );
+
+  if (mainGallery) {
+    const mainGalleryWithAsset = galleriesWithAsset.find(
+      (entry) => entry?.slug === mainGallery.gallery
+    );
+
+    if (mainGalleryWithAsset) {
+      return mainGalleryWithAsset.uri || undefined;
+    }
+  }
+
+  const [firstGallery] = galleriesWithAsset;
+
+  return firstGallery?.uri || undefined;
 };

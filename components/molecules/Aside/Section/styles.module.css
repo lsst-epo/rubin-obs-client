@@ -1,0 +1,28 @@
+.section {
+  flex: 1 0 270px;
+
+  & > * + * {
+    margin-block-start: var(--size-spacing-2xs);
+  }
+}
+
+.title {
+  position: relative;
+  padding-right: var(--size-spacing-s);
+  padding-bottom: var(--size-spacing-2xs);
+  border-bottom: 8px solid var(--color-background-accent-aside);
+
+  & svg {
+    position: absolute;
+    top: 4px;
+    right: 0;
+    display: block;
+    width: 32px;
+    height: 32px;
+    padding: 8px;
+    overflow: visible;
+    background-color: var(--turquoise60);
+    border-radius: 50%;
+    fill: var(--white);
+  }
+}

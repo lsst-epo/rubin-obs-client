@@ -1,16 +1,16 @@
-"use client";
 import PropTypes from "prop-types";
-import { useTranslation } from "react-i18next";
-import { useCustomBreadcrumbs } from "@/lib/utils";
 import Breadcrumbs from "@/page/Breadcrumbs";
 import NewsHero from "./NewsHero";
 import NewsArticle from "./NewsArticle";
 import NewsList from "@/dynamic/NewsList";
-import NewsAside from "@/components/page/Aside/patterns/Media";
+import MediaAside from "@/components/organisms/MediaAside";
 import * as Styled from "./styles";
 import { getReleaseHero } from "@/lib/api/noirlab";
+import { getLocale } from "@/lib/i18n/server";
+import { useTranslation } from "@/lib/i18n";
+import { getGlobalData } from "@/lib/api/globals";
 
-export default function NewsPage({ data }) {
+export default async function NewsPage({ data }) {
   const {
     contentBlocksNews = [],
     hero = [],
@@ -25,14 +25,19 @@ export default function NewsPage({ data }) {
     images: releaseImages,
     videos: releaseVideos,
   } = data;
+  const locale = getLocale();
+  const { t } = await useTranslation(locale);
 
   if (hero.length === 0 && releaseImages) {
     hero.push(getReleaseHero(releaseImages));
   }
 
-  const { t } = useTranslation();
+  const { rootPages } = await getGlobalData(locale);
+  const customBreadcrumbs = rootPages
+    .filter((p) => p.header?.includes("News"))
+    .map((p) => p.pageEntry)
+    .flat(1);
 
-  const customBreadcrumbs = useCustomBreadcrumbs("News");
   const rootHomeLink = customBreadcrumbs.slice(-1)[0];
   const pageLink = {
     id,
@@ -66,6 +71,7 @@ export default function NewsPage({ data }) {
       manualAssets.push(a);
     }
   });
+
   // If there is a hero then combine it with the content block media assets
   if (heroBlock && !releaseImages) mediaContentBlocks.unshift(heroBlock);
 
@@ -89,7 +95,7 @@ export default function NewsPage({ data }) {
       <Styled.NewsDetail $showAside={showAside}>
         {data && <NewsArticle data={data} />}
         {showAside && (
-          <NewsAside
+          <MediaAside
             manualAssets={manualAssets}
             contentBlockAssets={mediaContentBlocks}
             releaseImages={releaseImages}

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { fluidScale, respond, containerRegular } from "@/styles/globalStyles";
-import AsideSection from "@/components/page/Aside/Section";
+import AsideSection from "@/components/molecules/Aside/Section";
 import { token } from "@rubin-epo/epo-react-lib";
 
 const WIDE_BREAKPOINT = token("BREAK_DESKTOP_SMALL");
