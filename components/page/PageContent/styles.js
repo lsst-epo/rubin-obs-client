@@ -1,3 +1,4 @@
+"use client";
 import styled from "styled-components";
 import HeroComponent from "@/components/molecules/Hero";
 import {
@@ -85,22 +86,5 @@ export const Main = styled.div`
 
   > * + * {
     margin-block-start: ${MAIN_INLINE_PADDING};
-  }
-`;
-
-export const Aside = styled.aside`
-  --PageContent-Aside-padding-inline: ${MAIN_INLINE_PADDING};
-
-  flex-shrink: 0;
-  flex-basis: 270px;
-  margin-block-start: min(4.25vw, 64px);
-
-  ${respond(
-    `padding: 0 var(--PageContent-Aside-padding-inline);`,
-    WIDE_BREAKPOINT
-  )}
-
-  > * + * {
-    margin-block-start: min(4.25vw, 64px);
   }
 `;
