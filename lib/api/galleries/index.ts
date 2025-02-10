@@ -15,7 +15,6 @@ import {
   WhereInFiltersInput,
   WhereNotInFiltersInput,
 } from "@/gql/graphql";
-import { fullBaseFields } from "../fragments/shared";
 
 const whereIn = ({ tag = [] }: GalleryDataFilters): WhereInFiltersInput => {
   if (tag.length > 0) {
@@ -58,27 +57,6 @@ const whereNotIn = ({
 
   return { key: "scheme", values: unsupported };
 };
-
-export const galleryFragment = `
-  fragment galleryFragment on galleries_gallery_Entry {
-    ${fullBaseFields}
-    description
-    cantoAssetSingle {
-      metadata: additional {
-        AltTextEN
-        AltTextES
-        TitleEN
-        TitleES
-      }
-      height
-      url {
-        directUrlOriginal
-        directUrlPreview
-      }
-      width
-    }
-  }
-`;
 
 const imageAsset = z.object({
   altText: z.string().nullable(),

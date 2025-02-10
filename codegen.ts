@@ -7,6 +7,7 @@ const config: CodegenConfig = {
   generates: {
     "./gql/": {
       documents: [
+        "app/api/**/*.ts",
         "app/[locale]/gallery/**/*.{ts,tsx}",
         "app/[locale]/search/**/*.{ts,tsx}",
         "lib/api/galleries/*.ts",

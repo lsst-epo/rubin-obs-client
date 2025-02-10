@@ -2,7 +2,7 @@ import { graphql } from "@/gql/gql";
 import queryAPI from "@/lib/api/client/query";
 import { getSiteFromLocale } from "@/lib/helpers/site";
 
-export async function getSearchPage(locale: string, previewToken?: string) {
+export async function getSearchPage(locale: string) {
   const site = getSiteFromLocale(locale);
   const query = graphql(`
     query SearchResultsPage($site: [String]) {
@@ -16,7 +16,7 @@ export async function getSearchPage(locale: string, previewToken?: string) {
     }
   `);
 
-  const { data } = await queryAPI({ query, variables: { site }, previewToken });
+  const { data } = await queryAPI({ query, variables: { site } });
 
   if (!data) return;
 

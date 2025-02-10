@@ -167,8 +167,7 @@ export async function getEntryDataByUri(
   uri: string,
   section: string,
   type: string,
-  locale: string,
-  previewToken?: string
+  locale: string
 ) {
   const site = getSiteFromLocale(locale);
   const query = getQueryFragments(uri, section, type, site);
@@ -181,7 +180,6 @@ export async function getEntryDataByUri(
       site,
       uri: decodeURI(uri),
     },
-    previewToken,
   });
 
   // Get the related investigation

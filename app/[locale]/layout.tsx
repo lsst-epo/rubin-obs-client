@@ -12,6 +12,7 @@ import { AuthenticationContextProvider } from "@/contexts/Authentication";
 import PageWrapper from "@/components/organisms/PageWrapper";
 import RootScripts from "./scripts";
 import { HistoryProvider } from "@/contexts/History";
+import PreviewMode from "@/components/organisms/PreviewMode";
 
 const GOOGLE_APP_ID = process.env.NEXT_PUBLIC_GOOGLE_APP_ID || "";
 
@@ -86,7 +87,9 @@ const LocaleLayout: FunctionComponent<PropsWithChildren<LocaleProps>> = async ({
                 <StyledComponentsRegistry>
                   <GoogleOAuthProvider clientId={GOOGLE_APP_ID}>
                     <GlobalStyles />
-                    <PageWrapper {...{ locale }}>{children}</PageWrapper>
+                    <PreviewMode>
+                      <PageWrapper {...{ locale }}>{children}</PageWrapper>
+                    </PreviewMode>
                   </GoogleOAuthProvider>
                 </StyledComponentsRegistry>
               </AuthenticationContextProvider>

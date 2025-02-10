@@ -1,6 +1,5 @@
 import { FC, PropsWithChildren } from "react";
 import { Metadata, ResolvingMetadata } from "next";
-import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
 import { OpenGraph } from "next/dist/lib/metadata/types/opengraph-types";
 import striptags from "striptags";
@@ -53,19 +52,8 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const uri = uriSegments.join("/");
-  let previewToken: string | undefined;
 
-  if (draftMode().isEnabled) {
-    previewToken = Array.isArray(searchParams.preview)
-      ? searchParams.preview[0]
-      : searchParams?.preview;
-  }
-
-  const entrySectionType = await getEntrySectionByUri(
-    uri,
-    locale,
-    previewToken
-  );
+  const entrySectionType = await getEntrySectionByUri(uri, locale);
 
   // Handle 404 if there is no data
   if (!entrySectionType) {
@@ -81,7 +69,7 @@ export async function generateMetadata(
     );
   }
 
-  const { entry } = await getEntryMetadataByUri(uri, locale, previewToken);
+  const { entry } = await getEntryMetadataByUri(uri, locale);
 
   if (!entry) {
     notFound();

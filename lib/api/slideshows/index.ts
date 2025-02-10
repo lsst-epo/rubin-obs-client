@@ -4,11 +4,7 @@ import { slideshowFragment } from "@/lib/api/fragments/slideshow";
 import { getImageFields } from "@/lib/api/fragments/image";
 import { getSiteFromLocale } from "@/lib/helpers/site";
 
-export async function getSlideshowDataByUri(
-  uri: string,
-  locale: string,
-  previewToken?: string
-) {
+export async function getSlideshowDataByUri(uri: string, locale: string) {
   const site = getSiteFromLocale(locale);
   const query = gql`
     ${slideshowFragment}
@@ -42,7 +38,6 @@ export async function getSlideshowDataByUri(
   const { data } = await queryAPI({
     query,
     variables: { uri, site },
-    previewToken,
   });
 
   return data;

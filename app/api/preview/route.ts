@@ -1,15 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
-import { draftMode } from "next/headers";
-import { redirect } from "next/navigation";
-import { gql } from "@urql/core";
+import { redirect, RedirectType } from "next/navigation";
+import { graphql } from "@/gql/gql";
 import { fallbackLng } from "@/lib/i18n/settings";
 import queryAPI from "@/lib/api/client/query";
 import { getLocaleString, getSiteFromLocale } from "@/lib/helpers/site";
+import previewSession from "@/services/sessions/preview";
+import { addLocaleUriSegment } from "@/lib/i18n";
 
 const PREVIEW_SECRET_TOKEN = process.env.CRAFT_SECRET_TOKEN;
 const CRAFT_HOMEPAGE_URI = "__home__";
 
-const Query = gql(`
+const Query = graphql(`
   query PagePreviewQuery($site: [String], $uri: [String]) {
     entry(site: $site, uri: $uri) {
       __typename
@@ -65,16 +66,15 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     return new NextResponse("Invalid uri", { status: 422 });
   }
 
-  // Enable Draft Mode by setting the cookie
-  draftMode().enable();
+  previewSession().start({ previewToken });
 
-  const segments = [locale];
+  const segments: Array<String> = [];
 
   if (data.entry.uri !== CRAFT_HOMEPAGE_URI) {
     segments.push(data.entry.uri);
   }
 
-  const params = new URLSearchParams({});
+  const params = new URLSearchParams();
 
   if (previewToken) {
     params.set("preview", previewToken);
@@ -82,7 +82,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 
   // Redirect to the path from the fetched entry
   // We don't redirect to searchParams.uri as that might lead to open redirect vulnerabilities
-  const redirectPath = `/${segments.join("/")}?${params.toString()}`;
+  const redirectPath = addLocaleUriSegment(locale, segments.join("/"));
 
-  redirect(redirectPath, "replace");
+  redirect(redirectPath, RedirectType.replace);
 }

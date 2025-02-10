@@ -458,5 +458,9 @@
         "shutter_speed": "Camera shutter speed"
       }
     }
+  },
+  "preview_mode": {
+    "is_enabled": "Preview mode is enabled",
+    "disable": "Disable"
   }
 }

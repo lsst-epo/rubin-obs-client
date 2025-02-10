@@ -1,8 +1,10 @@
+"server-only";
 import { RequestInit } from "next/dist/server/web/spec-extension/request";
 import { createClient, fetchExchange } from "@urql/core";
 import { registerUrql } from "@urql/next/rsc";
 import type { AnyVariables, DocumentInput, OperationResult } from "@urql/core";
 import merge from "lodash/merge";
+import previewSession from "@/services/sessions/preview";
 
 let API_URL = process.env.NEXT_PUBLIC_API_URL as string;
 
@@ -28,10 +30,11 @@ const queryAPI = async <Query, Variables extends AnyVariables = AnyVariables>({
   fetchOptions?: RequestInit;
   previewToken?: string;
 }): Promise<OperationResult<Query, Variables>> => {
+  const token = previewToken || previewSession().token();
   const defaultFetchOptions: RequestInit = {
     cache: "force-cache",
     next: {
-      revalidate: previewToken ? 0 : undefined,
+      revalidate: token ? 0 : undefined,
     },
   };
   const fetchOptions = merge({}, defaultFetchOptions, inputFetchOptions);
@@ -42,8 +45,8 @@ const queryAPI = async <Query, Variables extends AnyVariables = AnyVariables>({
 
   const params = new URLSearchParams({});
 
-  if (previewToken) {
-    params.append("token", previewToken);
+  if (token) {
+    params.append("token", token);
   }
 
   const makeClient = () => {
