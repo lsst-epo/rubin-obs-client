@@ -9,7 +9,7 @@ import { getLinkFields, linkFragment } from "@/lib/api/fragments/link";
 import queryAPI from "@/lib/api/client/query";
 import { CRAFT_HOMEPAGE_URI } from "@/lib/constants";
 
-export const getHomepage = async (locale: string, previewToken?: string) => {
+export const getHomepage = async (locale: string) => {
   const site = getSiteFromLocale(locale);
 
   const query = gql`
@@ -76,16 +76,12 @@ export const getHomepage = async (locale: string, previewToken?: string) => {
   const { data } = await queryAPI({
     query,
     variables: { site, uri: CRAFT_HOMEPAGE_URI },
-    previewToken,
   });
 
   return data?.entry;
 };
 
-export const getHomepageMetadata = async (
-  locale: string,
-  previewToken?: string
-) => {
+export const getHomepageMetadata = async (locale: string) => {
   const site = getSiteFromLocale(locale);
 
   const query = gql`
@@ -102,7 +98,6 @@ export const getHomepageMetadata = async (
   const { data } = await queryAPI({
     query,
     variables: { site, uri: CRAFT_HOMEPAGE_URI },
-    previewToken,
   });
 
   return data;

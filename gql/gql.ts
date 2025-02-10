@@ -14,6 +14,8 @@ import type { TypedDocumentNode as DocumentNode } from "@graphql-typed-document-
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 const documents = {
+  "\n  query PagePreviewQuery($site: [String], $uri: [String]) {\n    entry(site: $site, uri: $uri) {\n      __typename\n      uri\n      title\n    }\n  }\n":
+    types.PagePreviewQueryDocument,
   '\n    query RecentAssetsQuery(\n      $site: [String]\n      $uri: [String]\n      $scheme: [String]\n    ) {\n      galleriesEntries(uri: $uri, site: $site) {\n        ... on galleries_gallery_Entry {\n          assetAlbum(whereIn: { key: "scheme", values: $scheme }) {\n            id\n          }\n        }\n      }\n    }\n  ':
     types.RecentAssetsQueryDocument,
   '\n    query GalleryTitleQuery(\n      $site: [String]\n      $uri: [String]\n      $id: String\n      $scheme: [String]\n    ) {\n      galleriesEntries(uri: $uri, site: $site) {\n        ... on galleries_gallery_Entry {\n          id\n          title\n          assetAlbum(\n            whereIn: { key: "scheme", values: $scheme }\n            where: { key: "id", value: $id }\n          ) {\n            additional {\n              TitleEN\n              TitleES\n            }\n            id\n            name\n          }\n        }\n      }\n    }\n  ':
@@ -54,6 +56,12 @@ const documents = {
  */
 export function graphql(source: string): unknown;
 
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: "\n  query PagePreviewQuery($site: [String], $uri: [String]) {\n    entry(site: $site, uri: $uri) {\n      __typename\n      uri\n      title\n    }\n  }\n"
+): (typeof documents)["\n  query PagePreviewQuery($site: [String], $uri: [String]) {\n    entry(site: $site, uri: $uri) {\n      __typename\n      uri\n      title\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

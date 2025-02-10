@@ -42,7 +42,8 @@
       "@/helpers": ["helpers"],
       "@/helpers/*": ["helpers/*"],
       "@/hoc/*": ["components/hoc/*"],
-      "@/gql/*": ["gql/*"]
+      "@/gql/*": ["gql/*"],
+      "@/services/*": ["services/*"]
     },
     "types": ["cypress", "node"]
   },
