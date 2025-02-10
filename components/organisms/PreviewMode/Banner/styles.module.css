@@ -1,0 +1,28 @@
+.previewModeBanner {
+  background-color: var(--color-rubin-orange-200);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--size-spacing-m);
+  width: 100%;
+  font-size: 0.85rem;
+  padding: 0 var(--size-spacing-2xs);
+  bottom: 0;
+  position: fixed;
+  z-index: 999;
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  gap: 1ex;
+}
+
+.disableButton {
+  display: flex;
+  align-items: center;
+  padding: var(--size-spacing-3xs) var(--size-spacing-2xs);
+  border: 2px solid currentcolor;
+  border-radius: var(--size-spacing-2xs);
+  height: var(--size-spacing-s);
+}

@@ -1,6 +1,5 @@
 import { FunctionComponent } from "react";
-import { draftMode } from "next/headers";
-import { notFound, redirect } from "next/navigation";
+import { notFound, redirect, RedirectType } from "next/navigation";
 import { getBreadcrumbsById } from "@/lib/api/metadata";
 import { getEntrySectionByUri } from "@/lib/api/entries/index";
 import { getEntryDataByUri } from "@/lib/api/entry";
@@ -28,19 +27,8 @@ const UriSegmentsPage: FunctionComponent<
   WithSearchParams<UriSegmentProps>
 > = async ({ params: { locale, uriSegments }, searchParams = {} }) => {
   const uri = uriSegments.join("/");
-  let previewToken: string | undefined;
 
-  if (draftMode().isEnabled) {
-    previewToken = Array.isArray(searchParams.preview)
-      ? searchParams.preview[0]
-      : searchParams?.preview;
-  }
-
-  const entrySectionType = await getEntrySectionByUri(
-    uri,
-    locale,
-    previewToken
-  );
+  const entrySectionType = await getEntrySectionByUri(uri, locale);
 
   // Handle 404 if there is no data
   if (!entrySectionType) {
@@ -48,17 +36,11 @@ const UriSegmentsPage: FunctionComponent<
   }
 
   const { sectionHandle: section, typeHandle: type } = entrySectionType;
-  const data = await getEntryDataByUri(
-    uri,
-    section,
-    type,
-    locale,
-    previewToken
-  );
+  const data = await getEntryDataByUri(uri, section, type, locale);
 
   // Handle redirect if the entry has one
   if (data?.typeHandle === "redirectPage" && data?.linkTo?.url) {
-    redirect(data.linkTo.url, "replace");
+    redirect(data.linkTo.url, RedirectType.replace);
   }
 
   const currentId = data?.id || data?.entry?.id;
@@ -72,11 +54,7 @@ const UriSegmentsPage: FunctionComponent<
 
   const Template = sectionMap[section] || pageMap[type] || PageTemplate;
 
-  return (
-    <Template
-      {...{ section, breadcrumbs, data, previewToken, locale, searchParams }}
-    />
-  );
+  return <Template {...{ section, breadcrumbs, data, locale, searchParams }} />;
 };
 
 export default UriSegmentsPage;

@@ -26,11 +26,7 @@ export async function getEntriesByLocale(locale: string) {
   return data;
 }
 
-export async function getEntrySectionByUri(
-  uri = "__home__",
-  locale: string,
-  previewToken?: string
-) {
+export async function getEntrySectionByUri(uri = "__home__", locale: string) {
   const site = getSiteFromLocale(locale);
   const query = gql`
     query getEntrySectionByUri($site: [String], $uri: [String]) {
@@ -43,7 +39,6 @@ export async function getEntrySectionByUri(
   const { data } = await queryAPI({
     query,
     variables: { uri: decodeURI(uri), site },
-    previewToken,
   });
   return data.entry;
 }

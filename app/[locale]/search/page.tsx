@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
 import Container from "@rubin-epo/epo-react-lib/Container";
 import { getSearchPage } from "@/lib/api/search";
@@ -24,15 +23,8 @@ const SearchPage: FC<WithSearchParams<LocaleProps>> = async ({
   searchParams = {},
 }) => {
   const { search } = searchParams;
-  let previewToken: string | undefined;
 
-  if (draftMode().isEnabled) {
-    previewToken = Array.isArray(searchParams.preview)
-      ? searchParams.preview[0]
-      : searchParams?.preview;
-  }
-
-  const data = await getSearchPage(locale, previewToken);
+  const data = await getSearchPage(locale);
 
   if (!data || !data.id) {
     notFound();

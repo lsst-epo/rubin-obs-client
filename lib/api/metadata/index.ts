@@ -4,11 +4,7 @@ import { getSiteFromLocale } from "@/lib/helpers/site";
 import { fallbackLng } from "@/lib/i18n/settings";
 import { cantoSingleAsset, getImageFields } from "../fragments/image";
 
-export async function getEntryMetadataByUri(
-  uri: string,
-  locale = fallbackLng,
-  previewToken?: string
-) {
+export async function getEntryMetadataByUri(uri: string, locale = fallbackLng) {
   const site = getSiteFromLocale(locale);
 
   const query = gql`
@@ -93,17 +89,12 @@ export async function getEntryMetadataByUri(
   const { data } = await queryAPI({
     query,
     variables: { site, uri: decodeURI(uri) },
-    previewToken,
   });
 
   return data;
 }
 
-export async function getBreadcrumbsById(
-  id: number,
-  locale: string,
-  previewToken?: string
-) {
+export async function getBreadcrumbsById(id: number, locale: string) {
   if (!id) return null;
   const site = getSiteFromLocale(locale);
 
@@ -119,7 +110,6 @@ export async function getBreadcrumbsById(
   const { data } = await queryAPI({
     query,
     variables: { site, id },
-    previewToken,
   });
   return data.entries;
 }

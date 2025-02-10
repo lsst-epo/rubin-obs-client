@@ -6,9 +6,8 @@ const SlideshowPage: FunctionComponent<{
   section: string;
   data: PageEntry;
   locale: string;
-  previewToken?: string;
-}> = async ({ data: { uri }, section, locale, previewToken }) => {
-  const data = await getSlideshowDataByUri(uri, locale, previewToken);
+}> = async ({ data: { uri }, section, locale }) => {
+  const data = await getSlideshowDataByUri(uri, locale);
 
   return <SlideshowPageClient {...{ data, section }} />;
 };
