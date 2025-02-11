@@ -4,6 +4,7 @@ import {
   SupportedCantoAssetScheme,
   SupportedCantoScheme,
 } from "@/lib/api/galleries/schema";
+import { headers } from "next/headers";
 
 type CantoAssetParams = {
   scheme: SupportedCantoAssetScheme;
@@ -19,6 +20,19 @@ export async function GET(
   request: NextRequest,
   { params: { scheme, id, directUrlOriginalHash } }: CantoDownloadProps
 ) {
+  const headersList = headers();
+  const referer = headersList.get("referer");
+
+  if (!referer) {
+    return new NextResponse("Invalid client", { status: 403 });
+  }
+
+  const { origin } = new URL(referer);
+
+  if (process.env.NEXT_PUBLIC_BASE_URL !== origin) {
+    return new NextResponse("Invalid client", { status: 403 });
+  }
+
   const { error } = SupportedCantoScheme.safeParse(scheme);
 
   if (error) {
@@ -62,6 +76,7 @@ export async function GET(
         "last-modified",
       ]),
       "content-disposition": `attachment; filename="${fileName}"`,
+      "X-Robots-Tag": "noindex",
     });
 
     return new NextResponse(body, {
