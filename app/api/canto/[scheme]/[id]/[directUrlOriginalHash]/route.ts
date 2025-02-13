@@ -24,7 +24,7 @@ export async function GET(
   const referer = headersList.get("referer");
 
   if (!referer) {
-    return new NextResponse("Invalid client", { status: 403 });
+    return new NextResponse("Invalid request", { status: 400 });
   }
 
   const { origin } = new URL(referer);
