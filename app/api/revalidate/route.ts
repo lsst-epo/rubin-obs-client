@@ -50,13 +50,15 @@ const indexNow = async (uri: string) => {
   console.info(`${status}: ${indexNowStatusText[status]}`);
 };
 
-const revalidateChildren = (parts: Array<string>): "layout" | "page" => {
+const revalidateChildren = (
+  parts: Array<string>
+): "layout" | "page" | undefined => {
   // revalidate gallery children if the URI is a gallery, but not the root gallery
   if (parts.indexOf("gallery") === 0 && parts.length > 1) {
     return "layout";
   }
 
-  return "page";
+  return undefined;
 };
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
@@ -78,6 +80,8 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       message: "Invalid token",
     });
   }
+
+  console.info({ uri });
 
   if (uri) {
     languages.forEach((locale) => {
