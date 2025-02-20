@@ -81,8 +81,6 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     });
   }
 
-  console.info({ uri });
-
   if (uri) {
     languages.forEach((locale) => {
       const parts: Array<string> =
