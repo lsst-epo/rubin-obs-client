@@ -8,6 +8,9 @@ module.exports = {
           grid: false,
         },
         stage: 2,
+        features: {
+          "logical-properties-and-values": false,
+        },
       },
     ],
     [
@@ -16,5 +19,10 @@ module.exports = {
         allowDuplicates: false,
       },
     ],
+    [
+      "@csstools/postcss-global-data",
+      { files: ["./theme/styles/abstracts/media.css"] },
+    ],
+    "postcss-custom-media",
   ],
 };
