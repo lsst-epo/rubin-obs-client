@@ -2,20 +2,20 @@
   --height-button: var(--height-filter-controls, 50px);
   --radius-border-button: calc(var(--height-button) / 2);
 
+  align-self: center;
+  background: none;
   border: 2px solid transparent;
   display: flex;
   gap: var(--size-spacing-3xs);
   align-items: center;
   font-weight: 600;
-  height: var(--height-button);
-  padding: var(--size-spacing-2xs) var(--size-spacing-m);
+  height: auto;
+  padding: var(--size-spacing-3xs);
   white-space: nowrap;
-  background-color: var(--neutral30);
   border-radius: var(--height-button);
 
   &:not(:disabled):hover,
   &:not(:disabled):focus {
-    background-color: var(--red20);
     border-color: currentcolor;
     outline: none;
   }
@@ -26,5 +26,35 @@
     & > svg {
       filter: grayscale();
     }
+  }
+
+  @media (--phablet-max) {
+    justify-content: center;
+    aspect-ratio: 1;
+  }
+
+  @media (--phablet) {
+    background-color: var(--neutral30);
+    height: var(--height-button);
+    padding: var(--size-spacing-2xs) var(--size-spacing-m);
+
+    &:not(:disabled):hover,
+    &:not(:disabled):focus {
+      background-color: var(--red20);
+    }
+  }
+}
+
+.text {
+  @media (--phablet-max) {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 0;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
   }
 }

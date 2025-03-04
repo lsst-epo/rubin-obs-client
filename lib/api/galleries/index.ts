@@ -1,3 +1,4 @@
+"server-only";
 import { graphql } from "@/gql/gql";
 import queryAPI from "@/lib/api/client/query";
 import { getSiteFromLocale } from "@/lib/helpers/site";
@@ -18,6 +19,7 @@ import {
   WhereInFiltersInput,
   WhereNotInFiltersInput,
 } from "@/gql/graphql";
+import { getLocale } from "@/lib/i18n/server";
 
 const sortBy = ({ sort }: GalleryDataFilters): InputMaybe<SortByInput> => {
   if (sort === "asc") {
@@ -55,8 +57,18 @@ const whereContainsIn = ({
   search,
 }: GalleryDataFilters): Array<WhereContainsInFilterInput> => {
   const whereContainsIn: Array<WhereContainsInFilterInput> = [];
+  const locale = getLocale().toUpperCase();
+
   if (search) {
-    whereContainsIn.push({ keys: ["name", "tag"], value: search });
+    whereContainsIn.push({
+      keys: [
+        "name",
+        "tag",
+        `additional.Caption${locale}`,
+        `additional.Title${locale}`,
+      ],
+      value: search,
+    });
   }
 
   return whereContainsIn;
