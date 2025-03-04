@@ -25,7 +25,7 @@ const PreviewGridContent: FunctionComponent<PreviewGridProps> = async ({
   filters,
 }) => {
   const { t } = await useTranslation(locale);
-  const data = await getGalleryData(gallery, locale, filters);
+  const data = await getGalleryData({ gallery, filters, locale });
 
   if (!data) {
     return (

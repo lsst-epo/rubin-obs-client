@@ -41,7 +41,7 @@ const ClearFiltersButton: FC<ClearFiltersButtonProps> = ({
       disabled={!hasParamsToReset}
     >
       <IconComposer icon="cancel" />
-      {t(`search-clear`)}
+      <span className={styles.text}>{t(`search-clear`)}</span>
     </button>
   );
 };

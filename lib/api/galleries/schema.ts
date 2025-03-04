@@ -87,7 +87,7 @@ const limit = 30;
 
 export const GalleryFilterSchema = z
   .object({
-    sort: z.enum(["asc", "desc"]).catch("asc").default("asc"),
+    sort: z.enum(["asc", "desc"]).catch("desc").default("desc"),
     page: z.coerce.number().min(1).catch(1).default(1),
     limit: z.coerce.number().min(limit).max(limit).catch(limit).default(limit),
     tag: z

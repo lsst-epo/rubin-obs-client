@@ -171,6 +171,7 @@ export async function getAssetFromGallery(
             approvalStatus
             height
             id
+            keyword
             name
             owner
             ownerName

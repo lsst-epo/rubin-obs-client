@@ -8,10 +8,11 @@ import { useTranslation } from "react-i18next";
 import IconComposer from "@rubin-epo/epo-react-lib/IconComposer";
 import styles from "./styles.module.css";
 
-interface Filter {
+export interface Filter {
   name: string;
   query: string;
   value: string;
+  active?: boolean;
 }
 
 interface FilterDropdownListProps {
@@ -32,12 +33,18 @@ const FilterDropdownList: FC<FilterDropdownListProps> = ({
   const { t } = useTranslation();
   const searchParams = useSearchParams();
   const paramsWithoutPage = new URLSearchParams(searchParams || {});
+  const dropdownParams = [...new Set(filters.map(({ query }) => query))];
 
   paramsWithoutPage.delete("page");
 
   const params = Object.fromEntries(paramsWithoutPage);
 
   const resetParams = new URLSearchParams(paramsWithoutPage);
+  const resetActive = !dropdownParams.some((param) => {
+    const value = paramsWithoutPage.get(param);
+
+    return value && value.length > 0;
+  });
 
   filters.forEach(({ query }) => {
     if (resetParams.has(query)) {
@@ -59,13 +66,17 @@ const FilterDropdownList: FC<FilterDropdownListProps> = ({
               href={{ query: resetParams.toString() }}
               prefetch={false}
             >
-              <span />
+              {resetActive ? (
+                <IconComposer size="1em" icon="checkmark" />
+              ) : (
+                <span />
+              )}
               {t("filters.all")}
             </Link>
           </Menu.Item>
         )}
-        {filters.map(({ name, query, value }) => {
-          const isActive = paramsWithoutPage.has(query, value);
+        {filters.map(({ name, query, value, active }) => {
+          const isActive = active || paramsWithoutPage.has(query, value);
           return (
             <Menu.Item key={name}>
               <Link
