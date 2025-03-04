@@ -5,7 +5,7 @@ import Container, {
 } from "@rubin-epo/epo-react-lib/Container";
 import Search from "@/components/molecules/Search";
 import ClearFiltersButton from "@/components/molecules/ClearFiltersButton";
-import styles from "./styles.module.scss";
+import styles from "./styles.module.css";
 
 interface FiltersProps {
   className?: string;
