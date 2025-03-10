@@ -84,7 +84,6 @@ export const ActivitySchema = {
   required: [
     "conduct_tech_doc",
     "conduct_tech_doc_es",
-    "duration",
     "group_liability_tech_doc",
     "group_liability_tech_doc_es",
     "group_safety_tech_doc",

@@ -1,9 +1,6 @@
 import { FunctionComponent } from "react";
 import sanitizeHtml, { defaults, IOptions } from "sanitize-html";
-import {
-  AnnouncementsService,
-  ReleasesService,
-} from "@/lib/api/noirlab/codegen";
+import { AnnouncementsService, ReleasesService } from "@/services/noirlab";
 import { Locale } from "@/lib/i18n/settings";
 import NewsPageClient from "./client";
 

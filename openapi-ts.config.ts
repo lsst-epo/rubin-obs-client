@@ -1,24 +1,31 @@
-import { defineConfig } from "@hey-api/openapi-ts";
+import { defineConfig, defaultPlugins } from "@hey-api/openapi-ts";
 import { loadEnvConfig } from "@next/env";
 
 const projectDir = process.cwd();
 loadEnvConfig(projectDir);
 
 export default defineConfig({
-  client: "@hey-api/client-fetch",
+  experimentalParser: true,
   input: `${process.env.NEXT_PUBLIC_NOIRLAB_BASE_URL}/public/documentation/schema/`,
   output: {
     format: "prettier",
     lint: "eslint",
-    path: "./lib/api/noirlab/codegen",
+    path: "./services/noirlab",
   },
-  types: {
-    dates: "types+transform",
-    enums: "javascript",
-    name: "PascalCase",
-  },
-  services: {
-    asClass: true,
-    filter: "^\\w+ /public/api/v2",
-  },
+  plugins: [
+    ...defaultPlugins,
+    "@hey-api/schemas",
+    "@hey-api/client-next",
+    "zod",
+    { name: "@hey-api/typescript", style: "PascalCase", enums: "javascript" },
+    {
+      dates: true,
+      name: "@hey-api/transformers",
+    },
+    {
+      asClass: true,
+      name: "@hey-api/sdk",
+      transformer: true,
+    },
+  ],
 });
