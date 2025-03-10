@@ -2,15 +2,10 @@ import { Metadata } from "next";
 import { OpenGraph } from "next/dist/lib/metadata/types/opengraph-types";
 import {
   AnnouncementsService,
-  client,
   ImageMini,
   ReleasesService,
-} from "./codegen";
+} from "@/services/noirlab";
 import { Locale } from "@/lib/i18n/settings";
-
-client.setConfig({
-  baseUrl: process.env.NEXT_PUBLIC_NOIRLAB_BASE_URL,
-});
 
 export const NOIRLabServices = {
   "news-post": AnnouncementsService.announcementsRetrieve,
