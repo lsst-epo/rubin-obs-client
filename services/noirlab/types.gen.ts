@@ -17,7 +17,7 @@ export type Activity = {
   /**
    * Format: HH:MM
    */
-  duration: string;
+  duration?: string;
   readonly safety_tech_doc: string;
   readonly conduct_tech_doc: string;
   readonly liability_tech_doc: string;
@@ -78,7 +78,7 @@ export type AnnouncementMini = {
   subtitle?: string;
   readonly release_date: string;
   programs: Array<Program>;
-  readonly main_image: ImageMini;
+  main_image: ImageMini;
 };
 
 export type AuthorDescription = {
@@ -97,7 +97,7 @@ export type AuthorDescription = {
 export type BlankEnum = "";
 
 export const BlankEnum = {
-  EMPTY_STRING: "",
+  "": "",
 } as const;
 
 export type Category = {
@@ -144,7 +144,7 @@ export type Image = {
    * * `Collage` - Collage
    * * `Chart` - Chart
    */
-  type?: (TypeEnum | BlankEnum | NullEnum) | null;
+  type?: TypeEnum | BlankEnum | NullEnum | null;
   /**
    * The minimum information that the Publisher would like to see mentioned when the resource is used.
    */
@@ -322,6 +322,8 @@ export type Model3D = {
 
 export type NullEnum = unknown;
 
+export const NullEnum = {} as const;
+
 export type Page = {
   /**
    * Title is shown in browser window. Use a good informative title, since search engines normally display the title on their result pages.
@@ -459,7 +461,7 @@ export type Post = {
   subtitle?: string;
   readonly banner: string;
   authors: Array<AuthorDescription>;
-  readonly category: Category;
+  category: Category;
   lede: string;
   release_date?: Date | null;
 };
@@ -546,7 +548,7 @@ export type ReleaseMini = {
   headline?: string;
   readonly release_date: string;
   programs: Array<Program>;
-  readonly main_image: ImageMini;
+  main_image: ImageMini;
 };
 
 export type Showing = {
@@ -628,7 +630,7 @@ export type Video = {
    * * `Collage` - Collage
    * * `Chart` - Chart
    */
-  type?: (TypeEnum | BlankEnum | NullEnum) | null;
+  type?: TypeEnum | BlankEnum | NullEnum | null;
   /**
    * The minimum information that the Publisher would like to see mentioned when the resource is used.
    */
@@ -769,6 +771,8 @@ export type VideoMini = {
 };
 
 export type AnnouncementsListData = {
+  body?: never;
+  path?: never;
   query?: {
     /**
      * The language to use, used along with "translation_mode", default: user "preferred_language" cookie
@@ -787,18 +791,30 @@ export type AnnouncementsListData = {
      */
     program?: string;
     /**
+     * Search by title, subtitle, or description
+     */
+    search?: string;
+    /**
      * Defines if the original version of an object is returned in case the translation is not found, use "fallback" to retrieve the original content if no translation exist, or "language" to return translated content only. Default: "language"
      */
     translation_mode?: "fallback" | "language";
   };
+  url: "/public/api/v2/announcements/";
 };
 
-export type AnnouncementsListResponse = PaginatedAnnouncementMiniList;
+export type AnnouncementsListResponses = {
+  200: PaginatedAnnouncementMiniList;
+};
 
-export type AnnouncementsListError = unknown;
+export type AnnouncementsListResponse =
+  AnnouncementsListResponses[keyof AnnouncementsListResponses];
 
 export type AnnouncementsRetrieveData = {
+  body?: never;
   path: {
+    /**
+     * Ids are only allowed to contain letters, numbers, underscores or hyphens. They are used in URLs for the archive item.
+     */
     id: string;
   };
   query?: {
@@ -811,13 +827,19 @@ export type AnnouncementsRetrieveData = {
      */
     translation_mode?: "fallback" | "language";
   };
+  url: "/public/api/v2/announcements/{id}/";
 };
 
-export type AnnouncementsRetrieveResponse = Announcement;
+export type AnnouncementsRetrieveResponses = {
+  200: Announcement;
+};
 
-export type AnnouncementsRetrieveError = unknown;
+export type AnnouncementsRetrieveResponse =
+  AnnouncementsRetrieveResponses[keyof AnnouncementsRetrieveResponses];
 
 export type MediaImagesListData = {
+  body?: never;
+  path?: never;
   query?: {
     /**
      * The web category identifier, e.g: kpno, rubin, gemini, ctio, csdc, noao, useltp, galaxies, illustrations
@@ -846,14 +868,22 @@ export type MediaImagesListData = {
      */
     translation_mode?: "fallback" | "language";
   };
+  url: "/public/api/v2/media/images/";
 };
 
-export type MediaImagesListResponse = PaginatedImageItemList;
+export type MediaImagesListResponses = {
+  200: PaginatedImageItemList;
+};
 
-export type MediaImagesListError = unknown;
+export type MediaImagesListResponse =
+  MediaImagesListResponses[keyof MediaImagesListResponses];
 
 export type MediaImagesRetrieveData = {
+  body?: never;
   path: {
+    /**
+     * Id of image - used in the URL for the image as well as the filename for the different formats.
+     */
     id: string;
   };
   query?: {
@@ -866,13 +896,19 @@ export type MediaImagesRetrieveData = {
      */
     translation_mode?: "fallback" | "language";
   };
+  url: "/public/api/v2/media/images/{id}/";
 };
 
-export type MediaImagesRetrieveResponse = Image;
+export type MediaImagesRetrieveResponses = {
+  200: Image;
+};
 
-export type MediaImagesRetrieveError = unknown;
+export type MediaImagesRetrieveResponse =
+  MediaImagesRetrieveResponses[keyof MediaImagesRetrieveResponses];
 
 export type MediaVideosListData = {
+  body?: never;
+  path?: never;
   query?: {
     /**
      * The web category identifier, e.g: kpno, rubin, gemini, ctio, csdc, noao, useltp, galaxies, illustrations
@@ -895,14 +931,22 @@ export type MediaVideosListData = {
      */
     translation_mode?: "fallback" | "language";
   };
+  url: "/public/api/v2/media/videos/";
 };
 
-export type MediaVideosListResponse = PaginatedVideoMiniList;
+export type MediaVideosListResponses = {
+  200: PaginatedVideoMiniList;
+};
 
-export type MediaVideosListError = unknown;
+export type MediaVideosListResponse =
+  MediaVideosListResponses[keyof MediaVideosListResponses];
 
 export type MediaVideosRetrieveData = {
+  body?: never;
   path: {
+    /**
+     * Id of video - used in the URL for the image as well as the filename for the different formats.
+     */
     id: string;
   };
   query?: {
@@ -915,13 +959,19 @@ export type MediaVideosRetrieveData = {
      */
     translation_mode?: "fallback" | "language";
   };
+  url: "/public/api/v2/media/videos/{id}/";
 };
 
-export type MediaVideosRetrieveResponse = Video;
+export type MediaVideosRetrieveResponses = {
+  200: Video;
+};
 
-export type MediaVideosRetrieveError = unknown;
+export type MediaVideosRetrieveResponse =
+  MediaVideosRetrieveResponses[keyof MediaVideosRetrieveResponses];
 
 export type ReleasesListData = {
+  body?: never;
+  path?: never;
   query?: {
     /**
      * The language to use, used along with "translation_mode", default: user "preferred_language" cookie
@@ -940,18 +990,30 @@ export type ReleasesListData = {
      */
     program?: string;
     /**
+     * Search by title, subtitle, headline or description
+     */
+    search?: string;
+    /**
      * Defines if the original version of an object is returned in case the translation is not found, use "fallback" to retrieve the original content if no translation exist, or "language" to return translated content only. Default: "language"
      */
     translation_mode?: "fallback" | "language";
   };
+  url: "/public/api/v2/releases/";
 };
 
-export type ReleasesListResponse = PaginatedReleaseMiniList;
+export type ReleasesListResponses = {
+  200: PaginatedReleaseMiniList;
+};
 
-export type ReleasesListError = unknown;
+export type ReleasesListResponse =
+  ReleasesListResponses[keyof ReleasesListResponses];
 
 export type ReleasesRetrieveData = {
+  body?: never;
   path: {
+    /**
+     * Id of release - e.g. heic0801. The id must be unique.
+     */
     id: string;
   };
   query?: {
@@ -964,23 +1026,38 @@ export type ReleasesRetrieveData = {
      */
     translation_mode?: "fallback" | "language";
   };
+  url: "/public/api/v2/releases/{id}/";
 };
 
-export type ReleasesRetrieveResponse = Release;
+export type ReleasesRetrieveResponses = {
+  200: Release;
+};
 
-export type ReleasesRetrieveError = unknown;
+export type ReleasesRetrieveResponse =
+  ReleasesRetrieveResponses[keyof ReleasesRetrieveResponses];
 
 export type VisitsActivitiesRetrieveData = {
+  body?: never;
   path: {
+    /**
+     * ID of the activity, also used in URLs
+     */
     id: string;
   };
+  query?: never;
+  url: "/public/api/v2/visits/activities/{id}/";
 };
 
-export type VisitsActivitiesRetrieveResponse = Activity;
+export type VisitsActivitiesRetrieveResponses = {
+  200: Activity;
+};
 
-export type VisitsActivitiesRetrieveError = unknown;
+export type VisitsActivitiesRetrieveResponse =
+  VisitsActivitiesRetrieveResponses[keyof VisitsActivitiesRetrieveResponses];
 
 export type VisitsShowingsListData = {
+  body?: never;
+  path?: never;
   query?: {
     /**
      * The ID of the activity to filter showings.
@@ -991,8 +1068,369 @@ export type VisitsShowingsListData = {
      */
     start_date?: Date;
   };
+  url: "/public/api/v2/visits/showings/";
 };
 
-export type VisitsShowingsListResponse = Array<Showing>;
+export type VisitsShowingsListResponses = {
+  200: Array<Showing>;
+};
 
-export type VisitsShowingsListError = unknown;
+export type VisitsShowingsListResponse =
+  VisitsShowingsListResponses[keyof VisitsShowingsListResponses];
+
+export type BlogApiPostsListData = {
+  body?: never;
+  path?: never;
+  query?: never;
+  url: "/public/blog/api/posts/";
+};
+
+export type BlogApiPostsListResponses = {
+  200: Array<Post>;
+};
+
+export type BlogApiPostsListResponse =
+  BlogApiPostsListResponses[keyof BlogApiPostsListResponses];
+
+export type CommunicationPagesApiCommitteeListData = {
+  body?: never;
+  path?: never;
+  query?: never;
+  url: "/public/communication/pages/api/committee/";
+};
+
+export type CommunicationPagesApiCommitteeListResponses = {
+  200: Array<Page>;
+};
+
+export type CommunicationPagesApiCommitteeListResponse =
+  CommunicationPagesApiCommitteeListResponses[keyof CommunicationPagesApiCommitteeListResponses];
+
+export type CommunicationPagesApiCommitteeCreateData = {
+  body: PageRequest;
+  path?: never;
+  query?: never;
+  url: "/public/communication/pages/api/committee/";
+};
+
+export type CommunicationPagesApiCommitteeCreateResponses = {
+  201: Page;
+};
+
+export type CommunicationPagesApiCommitteeCreateResponse =
+  CommunicationPagesApiCommitteeCreateResponses[keyof CommunicationPagesApiCommitteeCreateResponses];
+
+export type CommunicationPagesApiCommitteeDestroyData = {
+  body?: never;
+  path: {
+    /**
+     * ID of page
+     */
+    id: string;
+  };
+  query?: never;
+  url: "/public/communication/pages/api/committee/{id}/";
+};
+
+export type CommunicationPagesApiCommitteeDestroyResponses = {
+  /**
+   * No response body
+   */
+  204: void;
+};
+
+export type CommunicationPagesApiCommitteeDestroyResponse =
+  CommunicationPagesApiCommitteeDestroyResponses[keyof CommunicationPagesApiCommitteeDestroyResponses];
+
+export type CommunicationPagesApiCommitteeRetrieveData = {
+  body?: never;
+  path: {
+    /**
+     * ID of page
+     */
+    id: string;
+  };
+  query?: never;
+  url: "/public/communication/pages/api/committee/{id}/";
+};
+
+export type CommunicationPagesApiCommitteeRetrieveResponses = {
+  200: Page;
+};
+
+export type CommunicationPagesApiCommitteeRetrieveResponse =
+  CommunicationPagesApiCommitteeRetrieveResponses[keyof CommunicationPagesApiCommitteeRetrieveResponses];
+
+export type CommunicationPagesApiCommitteePartialUpdateData = {
+  body?: PatchedPageRequest;
+  path: {
+    /**
+     * ID of page
+     */
+    id: string;
+  };
+  query?: never;
+  url: "/public/communication/pages/api/committee/{id}/";
+};
+
+export type CommunicationPagesApiCommitteePartialUpdateResponses = {
+  200: Page;
+};
+
+export type CommunicationPagesApiCommitteePartialUpdateResponse =
+  CommunicationPagesApiCommitteePartialUpdateResponses[keyof CommunicationPagesApiCommitteePartialUpdateResponses];
+
+export type CommunicationPagesApiCommitteeUpdateData = {
+  body: PageRequest;
+  path: {
+    /**
+     * ID of page
+     */
+    id: string;
+  };
+  query?: never;
+  url: "/public/communication/pages/api/committee/{id}/";
+};
+
+export type CommunicationPagesApiCommitteeUpdateResponses = {
+  200: Page;
+};
+
+export type CommunicationPagesApiCommitteeUpdateResponse =
+  CommunicationPagesApiCommitteeUpdateResponses[keyof CommunicationPagesApiCommitteeUpdateResponses];
+
+export type ContactsApiImportsRetrieveData = {
+  body?: never;
+  path: {
+    id: string;
+  };
+  query?: never;
+  url: "/public/contacts/api/imports/{id}/";
+};
+
+export type ContactsApiImportsRetrieveResponses = {
+  /**
+   * No response body
+   */
+  200: unknown;
+};
+
+export type DjangoplicityAdminPagesApiPagesListData = {
+  body?: never;
+  path?: never;
+  query?: never;
+  url: "/public/djangoplicity/admin/pages/api/pages/";
+};
+
+export type DjangoplicityAdminPagesApiPagesListResponses = {
+  200: Array<Page>;
+};
+
+export type DjangoplicityAdminPagesApiPagesListResponse =
+  DjangoplicityAdminPagesApiPagesListResponses[keyof DjangoplicityAdminPagesApiPagesListResponses];
+
+export type DjangoplicityAdminPagesApiPagesCreateData = {
+  body: PageRequest;
+  path?: never;
+  query?: never;
+  url: "/public/djangoplicity/admin/pages/api/pages/";
+};
+
+export type DjangoplicityAdminPagesApiPagesCreateResponses = {
+  201: Page;
+};
+
+export type DjangoplicityAdminPagesApiPagesCreateResponse =
+  DjangoplicityAdminPagesApiPagesCreateResponses[keyof DjangoplicityAdminPagesApiPagesCreateResponses];
+
+export type DjangoplicityAdminPagesApiPagesDestroyData = {
+  body?: never;
+  path: {
+    /**
+     * ID of page
+     */
+    id: string;
+  };
+  query?: never;
+  url: "/public/djangoplicity/admin/pages/api/pages/{id}/";
+};
+
+export type DjangoplicityAdminPagesApiPagesDestroyResponses = {
+  /**
+   * No response body
+   */
+  204: void;
+};
+
+export type DjangoplicityAdminPagesApiPagesDestroyResponse =
+  DjangoplicityAdminPagesApiPagesDestroyResponses[keyof DjangoplicityAdminPagesApiPagesDestroyResponses];
+
+export type DjangoplicityAdminPagesApiPagesRetrieveData = {
+  body?: never;
+  path: {
+    /**
+     * ID of page
+     */
+    id: string;
+  };
+  query?: never;
+  url: "/public/djangoplicity/admin/pages/api/pages/{id}/";
+};
+
+export type DjangoplicityAdminPagesApiPagesRetrieveResponses = {
+  200: Page;
+};
+
+export type DjangoplicityAdminPagesApiPagesRetrieveResponse =
+  DjangoplicityAdminPagesApiPagesRetrieveResponses[keyof DjangoplicityAdminPagesApiPagesRetrieveResponses];
+
+export type DjangoplicityAdminPagesApiPagesPartialUpdateData = {
+  body?: PatchedPageRequest;
+  path: {
+    /**
+     * ID of page
+     */
+    id: string;
+  };
+  query?: never;
+  url: "/public/djangoplicity/admin/pages/api/pages/{id}/";
+};
+
+export type DjangoplicityAdminPagesApiPagesPartialUpdateResponses = {
+  200: Page;
+};
+
+export type DjangoplicityAdminPagesApiPagesPartialUpdateResponse =
+  DjangoplicityAdminPagesApiPagesPartialUpdateResponses[keyof DjangoplicityAdminPagesApiPagesPartialUpdateResponses];
+
+export type DjangoplicityAdminPagesApiPagesUpdateData = {
+  body: PageRequest;
+  path: {
+    /**
+     * ID of page
+     */
+    id: string;
+  };
+  query?: never;
+  url: "/public/djangoplicity/admin/pages/api/pages/{id}/";
+};
+
+export type DjangoplicityAdminPagesApiPagesUpdateResponses = {
+  200: Page;
+};
+
+export type DjangoplicityAdminPagesApiPagesUpdateResponse =
+  DjangoplicityAdminPagesApiPagesUpdateResponses[keyof DjangoplicityAdminPagesApiPagesUpdateResponses];
+
+export type DocumentationSchemaRetrieveData = {
+  body?: never;
+  path?: never;
+  query?: {
+    format?: "json" | "yaml";
+    lang?: "en" | "es";
+  };
+  url: "/public/documentation/schema/";
+};
+
+export type DocumentationSchemaRetrieveResponses = {
+  200: {};
+};
+
+export type DocumentationSchemaRetrieveResponse =
+  DocumentationSchemaRetrieveResponses[keyof DocumentationSchemaRetrieveResponses];
+
+export type ImagesD2dListData = {
+  body?: never;
+  path?: never;
+  query?: {
+    /**
+     * Number of results to return per page.
+     */
+    count?: number;
+    /**
+     * A page number within the paginated result set.
+     */
+    page?: number;
+  };
+  url: "/public/images/d2d/";
+};
+
+export type ImagesD2dListResponses = {
+  200: PaginatedImageList;
+};
+
+export type ImagesD2dListResponse =
+  ImagesD2dListResponses[keyof ImagesD2dListResponses];
+
+export type ProductsModels3dD2dListData = {
+  body?: never;
+  path?: never;
+  query?: {
+    /**
+     * Number of results to return per page.
+     */
+    count?: number;
+    /**
+     * A page number within the paginated result set.
+     */
+    page?: number;
+  };
+  url: "/public/products/models3d/d2d/";
+};
+
+export type ProductsModels3dD2dListResponses = {
+  200: PaginatedModel3dList;
+};
+
+export type ProductsModels3dD2dListResponse =
+  ProductsModels3dD2dListResponses[keyof ProductsModels3dD2dListResponses];
+
+export type ProductsPodcastD2dListData = {
+  body?: never;
+  path?: never;
+  query?: {
+    /**
+     * Number of results to return per page.
+     */
+    count?: number;
+    /**
+     * A page number within the paginated result set.
+     */
+    page?: number;
+  };
+  url: "/public/products/podcast/d2d/";
+};
+
+export type ProductsPodcastD2dListResponses = {
+  200: PaginatedPodcastList;
+};
+
+export type ProductsPodcastD2dListResponse =
+  ProductsPodcastD2dListResponses[keyof ProductsPodcastD2dListResponses];
+
+export type VideosD2dListData = {
+  body?: never;
+  path?: never;
+  query?: {
+    /**
+     * Number of results to return per page.
+     */
+    count?: number;
+    /**
+     * A page number within the paginated result set.
+     */
+    page?: number;
+  };
+  url: "/public/videos/d2d/";
+};
+
+export type VideosD2dListResponses = {
+  200: PaginatedVideoList;
+};
+
+export type VideosD2dListResponse =
+  VideosD2dListResponses[keyof VideosD2dListResponses];
+
+export type ClientOptions = {
+  baseUrl: "https://noirlab.edu" | (string & {});
+};
