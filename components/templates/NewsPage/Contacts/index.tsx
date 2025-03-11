@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import { ReleaseContact } from "@/lib/api/noirlab/codegen";
+import { ReleaseContact } from "@/services/noirlab";
 import Stack from "@rubin-epo/epo-react-lib/Stack";
 import * as Styled from "../styles";
 
