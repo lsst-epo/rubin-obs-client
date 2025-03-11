@@ -19,8 +19,7 @@ export default function NavItemWithChildren({
   level = 2,
 }) {
   const { activeSubmenu, closeMenu, openMenu, close } = useNavigationMenu();
-  const isActive =
-    activeSubmenu.has(id) || childItems.find(({ id }) => activeSubmenu.has(id));
+  const isActive = activeSubmenu.has(id);
   const ref = useRef(null);
 
   useFocusTrap(ref, isActive);
@@ -33,9 +32,9 @@ export default function NavItemWithChildren({
 
   const handleToggle = () => {
     if (isActive) {
-      closeMenu(id);
+      closeMenu(level < 3 ? undefined : id);
     } else {
-      openMenu(id, true);
+      openMenu(id, level < 3);
     }
   };
 
@@ -65,7 +64,7 @@ export default function NavItemWithChildren({
         active={level === 3 ? parentActive && isActive : isActive}
         onClick={close}
         theme={theme}
-        level={3}
+        level={level + 1}
         baseClassName={level === 3 ? baseClassName : "c-subnav-list"}
       />
     </div>

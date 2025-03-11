@@ -21,12 +21,14 @@ const NavigationVertical: FunctionComponent<NavigationProps> = ({
   locale = fallbackLng,
   className,
 }) => {
-  const { pinned, setPinned, open, setOpen, close } = useNavigationMenu();
+  const { pinned, setPinned, open, setOpen, close, closeMenu } =
+    useNavigationMenu();
 
   const handleOpenToggle = useCallback(() => {
     if (open) {
       setOpen(false);
       setPinned(false);
+      closeMenu();
     } else {
       setOpen(true);
       setPinned(true);
@@ -59,7 +61,7 @@ const NavigationVertical: FunctionComponent<NavigationProps> = ({
                       title={title}
                       uri={uri}
                       childItems={children}
-                      // onEsc={close}
+                      close={closeMenu}
                       theme="mobile"
                     />
                   ) : (
