@@ -4933,7 +4933,7 @@
     "@typescript-eslint/types" "8.7.0"
     eslint-visitor-keys "^3.4.3"
 
-"@urql/core@^5.0.0", "@urql/core@^5.0.6":
+"@urql/core@^5.0.0":
   version "5.0.6"
   resolved "https://registry.yarnpkg.com/@urql/core/-/core-5.0.6.tgz#0d6624e30084f9137f78dc6c5bb8a599cba7f9dc"
   integrity sha512-38rgSDqVNihFDauw1Pm9V7XLWIKuK8V9CKgrUF7/xEKinze8ENKP1ZeBhkG+dxWzJan7CHK+SLl46kAdvZwIlA==
@@ -4941,10 +4941,18 @@
     "@0no-co/graphql.web" "^1.0.5"
     wonka "^6.3.2"
 
-"@urql/next@^1.1.2":
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/@urql/next/-/next-1.1.2.tgz#7c96e4e3af77f2790ffa235f5787057037e805ee"
-  integrity sha512-Rn7Bx4ciU41pir3SBdjWo/eDb9763RRFz8kXBGBAYunp1FNeqnQPOzvsF/wV8XKlc6oeLa5JWmsDE+JnNwE+Xw==
+"@urql/core@^5.1.1":
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/@urql/core/-/core-5.1.1.tgz#d83c405451806a5936dabbd3f10a22967199e2f5"
+  integrity sha512-aGh024z5v2oINGD/In6rAtVKTm4VmQ2TxKQBAtk2ZSME5dunZFcjltw4p5ENQg+5CBhZ3FHMzl0Oa+rwqiWqlg==
+  dependencies:
+    "@0no-co/graphql.web" "^1.0.5"
+    wonka "^6.3.2"
+
+"@urql/next@^1.1.5":
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/@urql/next/-/next-1.1.5.tgz#b63ed693153595767bfa4b3f7f37aa6326604946"
+  integrity sha512-xCNzgf6IarQ99FN4IPvj5nwkeX1z/mpO9+R54StZOK445lXlYbQnI8s4b9tNqTHbB09gt/vKE3ByRh2NLFMyfw==
 
 "@webassemblyjs/ast@1.11.5", "@webassemblyjs/ast@^1.11.5":
   version "1.11.5"

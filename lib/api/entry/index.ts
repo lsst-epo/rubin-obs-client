@@ -11,11 +11,11 @@ import { newsPostFragmentFull } from "@/lib/api/fragments/news-post";
 import { pageFragmentFull, redirectFragment } from "@/lib/api/fragments/page";
 import { staffProfileFragmentFull } from "@/lib/api/fragments/staff-profile";
 import { glossaryTermFragmentFull } from "@/lib/api/fragments/glossary-term";
-import { studentPageFragmentFull } from "@/lib/api//fragments/student-page";
-import { educatorPageFragmentFull } from "@/lib/api//fragments/educator-page";
-import { investigationLandingPageFragmentFull } from "@/lib/api//fragments/investigation-landing-page";
-import { addRelatedInvestigation } from "@/lib/api//investigation";
-import { addSiblings } from "@/lib/api//sibling-nav";
+import { studentPageFragmentFull } from "@/lib/api/fragments/student-page";
+import { educatorPageFragmentFull } from "@/lib/api/fragments/educator-page";
+import { investigationLandingPageFragmentFull } from "@/lib/api/fragments/investigation-landing-page";
+import { addRelatedInvestigation } from "@/services/craft/investigations";
+import { addSiblings } from "@/services/craft/siblings";
 import { getSiteFromLocale } from "../../helpers/site";
 
 function entryQueryify(fragment: string) {
@@ -151,16 +151,15 @@ function getQueryFragments(
   }
 }
 
-async function includeRelatedEntries(entry, site) {
-  const entryData = Object.assign({}, entry);
-  const withRelatedEntries = await Promise.all([
-    await addRelatedInvestigation(entryData, site),
-    await addSiblings(entryData, site),
-  ]).then(() => {
-    return entryData;
+async function includeRelatedEntries(entry) {
+  return await Promise.all([
+    await addRelatedInvestigation(entry),
+    await addSiblings(entry),
+  ]).then((result) => {
+    return result.reduce((prev, curr) => {
+      return { ...prev, ...curr };
+    }, {});
   });
-
-  return withRelatedEntries;
 }
 
 export async function getEntryDataByUri(
@@ -183,6 +182,5 @@ export async function getEntryDataByUri(
   });
 
   // Get the related investigation
-  const entryWithRelatedData = await includeRelatedEntries(data.entry, site);
-  return entryWithRelatedData;
+  return { ...data.entry, ...(await includeRelatedEntries(data.entry)) };
 }
