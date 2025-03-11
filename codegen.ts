@@ -13,6 +13,7 @@ const config: CodegenConfig = {
         "lib/api/galleries/*.ts",
         "lib/api/search/*.ts",
         "lib/api/globals/navigation.ts",
+        "services/craft/**/*.ts",
       ],
       preset: "client",
     },
