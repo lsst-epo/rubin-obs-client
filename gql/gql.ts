@@ -44,6 +44,8 @@ const documents = {
     types.GetNavigationItemsDocument,
   "\n    query SearchResultsPage($site: [String]) {\n      searchResultsEntries(site: $site) {\n        ... on searchResults_searchResults_Entry {\n          title\n          id\n          dynamicComponent\n        }\n      }\n    }\n  ":
     types.SearchResultsPageDocument,
+  '\n    query GetSiblings(\n      $uri: [String]\n      $site: [String]\n      $parentId: Int\n      $level: Int\n    ) {\n      siblings: entry(uri: $uri, site: $site) {\n        prev(\n          descendantOf: $parentId\n          section: "pages"\n          site: $site\n          level: $level\n        ) {\n          uri\n          title\n        }\n        next(\n          descendantOf: $parentId\n          section: "pages"\n          site: $site\n          level: $level\n        ) {\n          uri\n          title\n        }\n      }\n    }\n  ':
+    types.GetSiblingsDocument,
 };
 
 /**
@@ -150,6 +152,12 @@ export function graphql(
 export function graphql(
   source: "\n    query SearchResultsPage($site: [String]) {\n      searchResultsEntries(site: $site) {\n        ... on searchResults_searchResults_Entry {\n          title\n          id\n          dynamicComponent\n        }\n      }\n    }\n  "
 ): (typeof documents)["\n    query SearchResultsPage($site: [String]) {\n      searchResultsEntries(site: $site) {\n        ... on searchResults_searchResults_Entry {\n          title\n          id\n          dynamicComponent\n        }\n      }\n    }\n  "];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: '\n    query GetSiblings(\n      $uri: [String]\n      $site: [String]\n      $parentId: Int\n      $level: Int\n    ) {\n      siblings: entry(uri: $uri, site: $site) {\n        prev(\n          descendantOf: $parentId\n          section: "pages"\n          site: $site\n          level: $level\n        ) {\n          uri\n          title\n        }\n        next(\n          descendantOf: $parentId\n          section: "pages"\n          site: $site\n          level: $level\n        ) {\n          uri\n          title\n        }\n      }\n    }\n  '
+): (typeof documents)['\n    query GetSiblings(\n      $uri: [String]\n      $site: [String]\n      $parentId: Int\n      $level: Int\n    ) {\n      siblings: entry(uri: $uri, site: $site) {\n        prev(\n          descendantOf: $parentId\n          section: "pages"\n          site: $site\n          level: $level\n        ) {\n          uri\n          title\n        }\n        next(\n          descendantOf: $parentId\n          section: "pages"\n          site: $site\n          level: $level\n        ) {\n          uri\n          title\n        }\n      }\n    }\n  '];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
