@@ -15,6 +15,7 @@ export default function Subnavigation({
   active,
   theme,
   baseClassName = "c-subnav-list",
+  level = 3,
 }) {
   const { activeSubmenu, closeMenu, close } = useNavigationMenu();
 
@@ -43,7 +44,7 @@ export default function Subnavigation({
                 onEsc={() => closeMenu(id)}
                 theme={theme}
                 baseClassName="c-sub-subnav-list"
-                level={3}
+                level={level}
                 parentActive={active}
               />
             ) : (
