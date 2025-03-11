@@ -15,7 +15,6 @@ import { studentPageFragmentFull } from "@/lib/api/fragments/student-page";
 import { educatorPageFragmentFull } from "@/lib/api/fragments/educator-page";
 import { investigationLandingPageFragmentFull } from "@/lib/api/fragments/investigation-landing-page";
 import { addRelatedInvestigation } from "@/services/craft/investigations";
-import { addSiblings } from "@/services/craft/siblings";
 import { getSiteFromLocale } from "../../helpers/site";
 
 function entryQueryify(fragment: string) {
@@ -151,17 +150,6 @@ function getQueryFragments(
   }
 }
 
-async function includeRelatedEntries(entry) {
-  return await Promise.all([
-    await addRelatedInvestigation(entry),
-    await addSiblings(entry),
-  ]).then((result) => {
-    return result.reduce((prev, curr) => {
-      return { ...prev, ...curr };
-    }, {});
-  });
-}
-
 export async function getEntryDataByUri(
   uri: string,
   section: string,
@@ -182,5 +170,5 @@ export async function getEntryDataByUri(
   });
 
   // Get the related investigation
-  return { ...data.entry, ...(await includeRelatedEntries(data.entry)) };
+  return { ...data.entry, ...(await addRelatedInvestigation(data.entry)) };
 }

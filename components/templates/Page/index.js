@@ -15,7 +15,7 @@ import AuthorizePage from "@/components/auth/AuthorizePage";
 import InvestigationHero from "@/components/layout/InvestigationHero";
 import ChildNavigation from "@/components/layout/ChildNavigation";
 import GuideNavigation from "@/components/layout/GuideNavigation";
-import SiblingNavigation from "@/components/layout/SiblingNavigation";
+import SiblingNavigation from "@/components/molecules/SiblingNavigation";
 import MediaAside from "@/components/organisms/MediaAside";
 import PageContent from "@/page/PageContent";
 import { FilterParamsProvider } from "@/contexts/FilterParams";
@@ -43,10 +43,10 @@ export default async function Page({
     showSidebar,
     sidebarAssets = [],
     investigation,
-    siblings,
     childNavigation,
     childNavigationTitle,
     childNavigationDescription,
+    level,
   },
   breadcrumbs,
   children,
@@ -165,8 +165,11 @@ export default async function Page({
             {children}
             {showSiblingNav && (
               <SiblingNavigation
-                siblings={siblings}
-                parent={investigation ? investigation.landingPage?.[0] : parent}
+                {...{ uri, level }}
+                parentId={parent.id}
+                returnTo={
+                  investigation ? investigation.landingPage?.[0] : parent
+                }
               />
             )}
           </NestedProvider>

@@ -9,7 +9,7 @@ import { getLocale } from "@/lib/i18n/server";
 export async function addRelatedInvestigation(entryData) {
   if (!entryData || !entryData.id) return null;
 
-  return { investigation: await getRelatedInvestigation(entryData) };
+  return getRelatedInvestigation(entryData);
 }
 
 export async function getRelatedInvestigation(entryData) {
@@ -36,6 +36,7 @@ export async function getRelatedInvestigation(entryData) {
           status: investigationStatus
           landingPage {
             ... on pages_investigationLandingPage_Entry {
+              id
               uri
               title
             }
@@ -48,5 +49,5 @@ export async function getRelatedInvestigation(entryData) {
 
   const { data } = await queryAPI({ query, variables: { ids, site } });
 
-  return data.investigation;
+  return data;
 }
