@@ -1,11 +1,10 @@
 "use client";
 import PropTypes from "prop-types";
-import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import useResizeObserver from "use-resize-observer";
 import { makeDateString } from "@/helpers/dates";
 import ContentBlockFactory from "@/factories/ContentBlockFactory";
-import { Container } from "@rubin-epo/epo-react-lib";
+import Container from "@rubin-epo/epo-react-lib/Container";
 import { Share } from "@/content-blocks";
 import Contacts from "./Contacts";
 import * as Styled from "./styles";
@@ -101,9 +100,9 @@ export default function NewsArticle({ data }) {
             />
           )}
           <div className="c-content-rte">
-            <Link prefetch={false} href={releaseUrl}>
+            <a href={releaseUrl} target="_blank" rel="noopener noreferrer">
               {t(`news.release-link`)}
-            </Link>
+            </a>
           </div>
         </Container>
       )}

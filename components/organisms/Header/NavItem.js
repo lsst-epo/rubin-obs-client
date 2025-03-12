@@ -7,7 +7,7 @@ function NavItem({ href, onClick, title, theme, className, icon }) {
   // eslint-disable-next-line react/prop-types
   const WrapperTag = ({ href, children }) =>
     href ? (
-      <Link legacyBehavior prefetch={false} href={href} passHref>
+      <Link legacyBehavior href={href} passHref>
         {children}
       </Link>
     ) : (
