@@ -4949,6 +4949,14 @@
     "@0no-co/graphql.web" "^1.0.5"
     wonka "^6.3.2"
 
+"@urql/exchange-retry@^1.3.1":
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/@urql/exchange-retry/-/exchange-retry-1.3.1.tgz#b2538afd5f568081f6260fada3cb1a50a7af009f"
+  integrity sha512-EEmtFu8JTuwsInqMakhLq+U3qN8ZMd5V3pX44q0EqD2imqTDsa8ikZqJ1schVrN8HljOdN+C08cwZ1/r5uIgLw==
+  dependencies:
+    "@urql/core" "^5.1.1"
+    wonka "^6.3.2"
+
 "@urql/next@^1.1.5":
   version "1.1.5"
   resolved "https://registry.yarnpkg.com/@urql/next/-/next-1.1.5.tgz#b63ed693153595767bfa4b3f7f37aa6326604946"
