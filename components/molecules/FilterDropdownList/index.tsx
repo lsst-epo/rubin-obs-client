@@ -64,7 +64,6 @@ const FilterDropdownList: FC<FilterDropdownListProps> = ({
             <Link
               className={styles.filterLink}
               href={{ query: resetParams.toString() }}
-              prefetch={false}
             >
               {resetActive ? (
                 <IconComposer size="1em" icon="checkmark" />
@@ -83,7 +82,6 @@ const FilterDropdownList: FC<FilterDropdownListProps> = ({
                 className={styles.filterLink}
                 aria-current={isActive ? "page" : undefined}
                 href={{ query: { ...params, [query]: value } }}
-                prefetch={false}
               >
                 {isActive ? (
                   <IconComposer size="1em" icon="checkmark" />
