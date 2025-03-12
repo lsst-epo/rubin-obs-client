@@ -1,10 +1,16 @@
 "server-only";
 import { RequestInit } from "next/dist/server/web/spec-extension/request";
-import { createClient, fetchExchange } from "@urql/core";
+import { createClient, fetchExchange, cacheExchange } from "@urql/core";
 import { registerUrql } from "@urql/next/rsc";
+import { retryExchange, type RetryExchangeOptions } from "@urql/exchange-retry";
 import type { AnyVariables, DocumentInput, OperationResult } from "@urql/core";
 import merge from "lodash/merge";
 import previewSession from "@/services/sessions/preview";
+
+// None of these options have to be added, these are the default values.
+const options: RetryExchangeOptions = {
+  maxNumberAttempts: 3,
+};
 
 let API_URL = process.env.NEXT_PUBLIC_API_URL as string;
 
@@ -53,7 +59,7 @@ const queryAPI = async <Query, Variables extends AnyVariables = AnyVariables>({
     return createClient({
       suspense: true,
       url: `${API_URL}?${params.toString()}`,
-      exchanges: [fetchExchange],
+      exchanges: [cacheExchange, fetchExchange, retryExchange(options)],
       fetchOptions,
     });
   };
