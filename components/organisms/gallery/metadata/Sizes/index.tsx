@@ -49,7 +49,11 @@ const ImageSizes: FunctionComponent<ImageSizesProps> = async ({
           {sizes.map(({ url, width, height }) => {
             return (
               <li className={styles.sizeItem} key={url}>
-                <Link href={url} rel="alternate" target="_blank">
+                <Link
+                  href={url}
+                  rel="alternate noopener noreferrer"
+                  target="_blank"
+                >
                   {labelFromSize(width, height)}
                 </Link>
                 <span>
@@ -59,7 +63,11 @@ const ImageSizes: FunctionComponent<ImageSizesProps> = async ({
             );
           })}
           <li className={styles.sizeItem}>
-            <Link href={directUrlOriginal} rel="alternate" target="_blank">
+            <Link
+              href={directUrlOriginal}
+              rel="alternate noopener noreferrer"
+              target="_blank"
+            >
               {t("gallery.original")}
             </Link>
             <span>

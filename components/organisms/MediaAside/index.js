@@ -96,7 +96,7 @@ export default async function MediaAside({
                   href={a.externalLink}
                   key={i}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                 >
                   {a.text}
                 </a>

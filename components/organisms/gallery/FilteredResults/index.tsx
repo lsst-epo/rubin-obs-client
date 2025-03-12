@@ -85,7 +85,7 @@ const FilteredResults: FC<FilteredResultsProps> = ({ total, filters }) => {
         {applied.map(({ key, value, query }, i) => {
           return (
             <li key={`${key}-${i}`}>
-              <Link className={styles.badge} href={{ query }} prefetch={false}>
+              <Link className={styles.badge} href={{ query }}>
                 {value}
                 <IconComposer size="0.75em" icon="cancel" />
               </Link>

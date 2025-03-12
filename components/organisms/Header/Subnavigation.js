@@ -49,7 +49,6 @@ export default function Subnavigation({
               />
             ) : (
               <Link
-                prefetch={false}
                 href={`/${uri}`}
                 className={`${baseClassName}__link`}
                 tabIndex={active ? 0 : -1}

@@ -14,7 +14,7 @@ export default function Breadcrumbs({ breadcrumbs, type }) {
     >
       {({ id, uri, title, ...restProps }) => {
         return (
-          <Styled.Link prefetch={false} href={`/${uri}`} {...restProps}>
+          <Styled.Link href={`/${uri}`} {...restProps}>
             {title}
           </Styled.Link>
         );
