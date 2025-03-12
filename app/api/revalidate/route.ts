@@ -86,9 +86,11 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       const parts: Array<string> =
         uri === CRAFT_HOMEPAGE_URI ? [] : uri.split("/");
 
-      const path = addLocaleUriSegment(locale, parts.join("/"));
+      const path = addLocaleUriSegment(locale, parts.join("/"), {
+        includeLeadingSlash: false,
+      });
 
-      revalidatePath(path, revalidateChildren(parts));
+      revalidatePath(`/${path}`, revalidateChildren(parts));
     });
 
     revalidateTag(tags.globals);
