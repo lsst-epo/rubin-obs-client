@@ -28,6 +28,9 @@ export async function generateMetadata({
   const { url, width, height, altText: alt } = siteImage[0];
 
   return {
+    metadataBase: process.env.NEXT_PUBLIC_BASE_URL
+      ? new URL(process.env.NEXT_PUBLIC_BASE_URL)
+      : undefined,
     title: {
       default: siteTitle,
       template: `%s | ${siteTitle}`,
