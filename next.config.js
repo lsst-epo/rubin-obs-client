@@ -1,5 +1,8 @@
-const path = require("path");
-const nextBuildId = require("next-build-id");
+import { join, dirname } from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 let API_URL;
 
@@ -14,7 +17,8 @@ if (
   API_URL = `http://${process.env.DOCKER_GATEWAY_IP}:${process.env.DOCKER_GATEWAY_PORT}`;
 }
 
-module.exports = {
+/** @type {import('next').NextConfig} */
+export default {
   async generateBuildId() {
     return "rubin-obs-client-next-build-id";
   },
@@ -28,6 +32,7 @@ module.exports = {
       },
     ];
   },
+
   images: {
     remotePatterns: [
       {
@@ -61,8 +66,8 @@ module.exports = {
   },
   sassOptions: {
     includePaths: [
-      path.join(__dirname, "theme/styles"),
-      path.join(__dirname, "components"),
+      join(__dirname, "theme/styles"),
+      join(__dirname, "components"),
     ],
   },
   webpack: (config) => {
