@@ -1,9 +1,10 @@
-import { loadEnvConfig } from "@next/env";
+import nextEnv from "@next/env";
+import { defineConfig } from "cypress";
 
-const { defineConfig } = require("cypress");
+const { loadEnvConfig } = nextEnv;
 const projectDir = process.cwd();
 
-module.exports = defineConfig({
+export default defineConfig({
   experimentalModifyObstructiveThirdPartyCode: true,
   chromeWebSecurity: false,
   video: false,
