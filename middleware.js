@@ -3,6 +3,7 @@ import { i18nRouter } from "next-i18n-router";
 import { cookieName, fallbackLng, languages } from "./lib/i18n/settings";
 
 const ignorableFileExtensions = ["woff", "ico", "png", "jpeg", "jpg"];
+const deployedEnvironments = ["DEV", "INT", "PROD"];
 
 // This function can be marked `async` if using `await` inside
 export function middleware(request) {
@@ -52,7 +53,7 @@ export function middleware(request) {
       !ignorableFileExtensions.some((e) =>
         request.nextUrl.pathname.includes(e)
       ) &&
-      !request.nextUrl.href.includes("localhost")
+      deployedEnvironments.includes(process.env.CLOUD_ENV?.toUpperCase())
     ) {
       console.info(JSON.stringify(logEntry));
     }
