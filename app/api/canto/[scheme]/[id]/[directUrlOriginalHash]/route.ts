@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import pick from "lodash/pick";
+import { headers } from "next/headers";
 import {
   SupportedCantoAssetScheme,
   SupportedCantoScheme,
 } from "@/lib/api/galleries/schema";
-import { headers } from "next/headers";
+import { env } from "@/env";
 
 type CantoAssetParams = {
   scheme: SupportedCantoAssetScheme;
@@ -29,7 +30,7 @@ export async function GET(
 
   const { origin } = new URL(referer);
 
-  if (process.env.NEXT_PUBLIC_BASE_URL !== origin) {
+  if (env.NEXT_PUBLIC_BASE_URL !== origin) {
     return new NextResponse("Invalid client", { status: 403 });
   }
 
@@ -61,7 +62,7 @@ export async function GET(
     headers: cantoHeaders,
   } = await fetch(
     `${
-      process.env.CANTO_BASE_URL
+      env.CANTO_BASE_URL
     }/direct/${scheme}/${id}/${directUrlOriginalHash}/original?${proxySearchParams.toString()}`,
     { cache: "no-store" }
   );

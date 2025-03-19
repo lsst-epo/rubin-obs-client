@@ -1,8 +1,9 @@
 import { FunctionComponent } from "react";
 import Script from "next/script";
+import { env } from "@/env";
 
-const PLAUSIBLE_DOMAIN = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
-const SURVEY_SPARROW = process.env.NEXT_PUBLIC_SURVEY_SPARROW;
+const PLAUSIBLE_DOMAIN = env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
+const SURVEY_SPARROW = env.NEXT_PUBLIC_SURVEY_SPARROW;
 
 const RootScripts: FunctionComponent<{ locale: string }> = ({ locale }) => {
   return (

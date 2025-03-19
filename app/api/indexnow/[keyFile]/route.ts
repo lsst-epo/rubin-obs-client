@@ -1,3 +1,4 @@
+import { env } from "@/env";
 import { NextRequest } from "next/server";
 
 type IndexNowParams = {
@@ -8,7 +9,7 @@ interface IndexNowProps {
   params: IndexNowParams;
 }
 
-const BING_INDEXNOW_KEY = process.env.BING_INDEXNOW_KEY;
+const BING_INDEXNOW_KEY = env.BING_INDEXNOW_KEY;
 
 export async function GET(
   request: NextRequest,

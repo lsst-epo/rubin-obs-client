@@ -1,10 +1,9 @@
 import nextEnv from "@next/env";
 import { defineConfig } from "cypress";
-
 const { loadEnvConfig } = nextEnv;
 const projectDir = process.cwd();
 
-export default defineConfig({
+const config = defineConfig({
   experimentalModifyObstructiveThirdPartyCode: true,
   chromeWebSecurity: false,
   video: false,
@@ -17,5 +16,7 @@ export default defineConfig({
       bundler: "webpack",
     },
   },
-  env: loadEnvConfig(projectDir).combinedEnv,
+  env: loadEnvConfig(projectDir).parsedEnv,
 });
+
+export default config;

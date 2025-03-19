@@ -1,14 +1,15 @@
 import { revalidatePath, revalidateTag } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
+import { env } from "@/env";
 import tags from "@/lib/api/client/tags";
 import { fallbackLng, languages } from "@/lib/i18n/settings";
 import { addLocaleUriSegment } from "@/lib/i18n";
 
-const HOST = process.env.NEXT_PUBLIC_BASE_URL;
-const REVALIDATE_SECRET_TOKEN = process.env.CRAFT_REVALIDATE_SECRET_TOKEN;
+const HOST = env.NEXT_PUBLIC_BASE_URL;
+const REVALIDATE_SECRET_TOKEN = env.CRAFT_REVALIDATE_SECRET_TOKEN;
 const CRAFT_HOMEPAGE_URI = "__home__";
-const BING_INDEXNOW_KEY = process.env.BING_INDEXNOW_KEY;
-const ENV = process.env.CLOUD_ENV;
+const BING_INDEXNOW_KEY = env.BING_INDEXNOW_KEY;
+const ENV = env.CLOUD_ENV;
 
 /**
  * Derived from https://www.indexnow.org/documentation#response

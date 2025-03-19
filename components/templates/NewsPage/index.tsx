@@ -1,5 +1,6 @@
 import { FunctionComponent } from "react";
 import sanitizeHtml, { defaults, IOptions } from "sanitize-html";
+import { env } from "@/env";
 import { AnnouncementsService, ReleasesService } from "@/services/noirlab";
 import { Locale } from "@/lib/i18n/settings";
 import NewsPageClient from "./client";
@@ -9,7 +10,7 @@ const sanitize = (dirty: string | undefined) => {
 
   try {
     const { hostname: noirLabHostname } = new URL(
-      `${process.env.NEXT_PUBLIC_NOIRLAB_BASE_URL}`
+      `${env.NEXT_PUBLIC_NOIRLAB_BASE_URL}`
     );
     const sanitizeOptions: IOptions = {
       allowedTags: [...defaults.allowedTags, "iframe"],

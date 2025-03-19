@@ -4,11 +4,12 @@ import { Popover } from "@headlessui/react";
 import { usePopper } from "react-popper";
 import { useTranslation } from "react-i18next";
 import IconComposer from "@rubin-epo/epo-react-lib/IconComposer";
+import { env } from "@/env";
 import { isAbsoluteUrl } from "@/helpers";
 import ShareButtons from "@/atomic/Share";
 import styles from "./styles.module.css";
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const BASE_URL = env.NEXT_PUBLIC_BASE_URL;
 
 function createFinalUrl(url: string) {
   if (isAbsoluteUrl(url)) return url;

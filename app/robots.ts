@@ -1,6 +1,7 @@
+import { env } from "@/env";
 import { MetadataRoute } from "next";
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "";
+const baseUrl = env.NEXT_PUBLIC_BASE_URL;
 
 export default function robots(): MetadataRoute.Robots {
   return {

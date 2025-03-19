@@ -1,16 +1,17 @@
 "use client";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import { env } from "@/env";
 import { useGlobalData } from "@/lib/utils";
 import {
   CopyUrlButton,
   FacebookButton,
   TwitterButton,
   EmailButton,
-} from "@rubin-epo/epo-react-lib";
+} from "@rubin-epo/epo-react-lib/Share";
 import * as Styled from "./styles";
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const BASE_URL = env.NEXT_PUBLIC_BASE_URL;
 
 function getShareUrl(url) {
   if (url) return url;
