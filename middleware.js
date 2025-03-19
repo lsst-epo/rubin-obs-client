@@ -6,6 +6,7 @@ const ignorableFileExtensions = ["woff", "ico", "png", "jpeg", "jpg"];
 
 // This function can be marked `async` if using `await` inside
 export function middleware(request) {
+  console.info("Got to the middleware!");
   // Insight into API server:
   const logEntry = {
     httpRequest: {
@@ -18,9 +19,11 @@ export function middleware(request) {
       xForwardedFor: request?.headers?.["x-forwarded-for"],
     },
   };
+  console.info("Logging object:", logEntry);
 
   // For SSO redirects:
   if (request.nextUrl.pathname.includes("sso-redirect")) {
+    console.info("Got into sso-redirect block");
     const {
       nextUrl: { search },
     } = request;
@@ -37,6 +40,7 @@ export function middleware(request) {
       return NextResponse.redirect(redirectUrl);
     }
   } else {
+    console.info("Got into else block");
     const res = i18nRouter(request, {
       locales: languages,
       defaultLocale: fallbackLng,
@@ -47,6 +51,7 @@ export function middleware(request) {
     logEntry.httpRequest.status = res.status;
     logEntry.httpRequest.redirected = res.redirected;
 
+    console.info(`request.nextUrl.href: ${request.nextUrl.href}`);
     // Filter out file extensions we don't care about
     if (
       !ignorableFileExtensions.some((e) =>
@@ -55,6 +60,8 @@ export function middleware(request) {
       !request.nextUrl.href.includes("localhost")
     ) {
       console.info(JSON.stringify(logEntry));
+    } else {
+      console.info("Got into log else!");
     }
 
     return res;
