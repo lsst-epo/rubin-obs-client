@@ -9,8 +9,9 @@ import PageWrapper from "@/components/organisms/PageWrapper";
 import { useTranslation } from "@/lib/i18n";
 import { getLocale } from "@/lib/i18n/server";
 import Error from "@/components/organisms/Error";
+import { env } from "@/env";
 
-const GOOGLE_APP_ID = process.env.NEXT_PUBLIC_GOOGLE_APP_ID || "";
+const GOOGLE_APP_ID = env.NEXT_PUBLIC_GOOGLE_APP_ID;
 
 const NotFound: FunctionComponent = async () => {
   const locale = getLocale();

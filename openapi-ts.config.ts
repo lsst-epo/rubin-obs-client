@@ -1,12 +1,9 @@
 import { defineConfig, defaultPlugins } from "@hey-api/openapi-ts";
-import { loadEnvConfig } from "@next/env";
-
-const projectDir = process.cwd();
-loadEnvConfig(projectDir);
+import { env } from "@/env";
 
 export default defineConfig({
   experimentalParser: true,
-  input: `${process.env.NEXT_PUBLIC_NOIRLAB_BASE_URL}/public/documentation/schema/`,
+  input: `${env.NEXT_PUBLIC_NOIRLAB_BASE_URL}/public/documentation/schema/`,
   output: {
     format: "prettier",
     lint: "eslint",

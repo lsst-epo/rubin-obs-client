@@ -2,12 +2,13 @@ import { useState, useRef } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
-import { IconComposer } from "@rubin-epo/epo-react-lib";
+import IconComposer from "@rubin-epo/epo-react-lib/IconComposer";
+import { env } from "@/env";
 
 const EMAIL_ID = "footerContactEmail";
 const TOPIC_ID = "footerContactTopic";
 const MESSAGE_ID = "footerContactMessage";
-const POST_URL = process.env.NEXT_PUBLIC_CONTACT_FORM_POST_URL;
+const POST_URL = env.NEXT_PUBLIC_CONTACT_FORM_POST_URL;
 
 async function postFormData(data) {
   const url = POST_URL;

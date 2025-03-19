@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { redirect, RedirectType } from "next/navigation";
+import { env } from "@/env";
 import { graphql } from "@/gql/gql";
 import { fallbackLng } from "@/lib/i18n/settings";
 import queryAPI from "@/lib/api/client/query";
@@ -7,7 +8,7 @@ import { getLocaleString, getSiteFromLocale } from "@/lib/helpers/site";
 import previewSession from "@/services/sessions/preview";
 import { addLocaleUriSegment } from "@/lib/i18n";
 
-const PREVIEW_SECRET_TOKEN = process.env.CRAFT_SECRET_TOKEN;
+const PREVIEW_SECRET_TOKEN = env.CRAFT_SECRET_TOKEN;
 const CRAFT_HOMEPAGE_URI = "__home__";
 
 const Query = graphql(`

@@ -1,6 +1,7 @@
 import { ComponentType, FunctionComponent } from "react";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { env } from "@/env";
 import { getAssetFromGallery } from "@/lib/api/galleries/asset";
 import { assetTitle, assetToPageMetadata } from "@/lib/api/canto/metadata";
 import { SupportedCantoAssetScheme } from "@/lib/api/galleries/schema";
@@ -94,7 +95,7 @@ const GalleryAsset: FunctionComponent<GalleryAssetProps> = async ({
   const dateCreated = new Date(DateCreated);
   const mediaPolicyPage = await getMediaPolicyPage(locale);
   const license = mediaPolicyPage
-    ? `${process.env.NEXT_PUBLIC_BASE_URL}${addLocaleUriSegment(
+    ? `${env.NEXT_PUBLIC_BASE_URL}${addLocaleUriSegment(
         locale,
         mediaPolicyPage.uri
       )}`
