@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GlobalStyles } from "@rubin-epo/epo-react-lib/styles";
+import { env } from "@/env";
 import { getGlobalData } from "@/lib/api/globals";
 import { languages } from "@/lib/i18n/settings";
 import SourceSansPro from "@/lib/styles/font";
@@ -14,7 +15,7 @@ import RootScripts from "./scripts";
 import { HistoryProvider } from "@/contexts/History";
 import PreviewMode from "@/components/organisms/PreviewMode";
 
-const GOOGLE_APP_ID = process.env.NEXT_PUBLIC_GOOGLE_APP_ID || "";
+const GOOGLE_APP_ID = env.NEXT_PUBLIC_GOOGLE_APP_ID;
 
 export async function generateMetadata({
   params: { locale },
@@ -28,9 +29,7 @@ export async function generateMetadata({
   const { url, width, height, altText: alt } = siteImage[0];
 
   return {
-    metadataBase: process.env.NEXT_PUBLIC_BASE_URL
-      ? new URL(process.env.NEXT_PUBLIC_BASE_URL)
-      : undefined,
+    metadataBase: new URL(env.NEXT_PUBLIC_BASE_URL),
     title: {
       default: siteTitle,
       template: `%s | ${siteTitle}`,

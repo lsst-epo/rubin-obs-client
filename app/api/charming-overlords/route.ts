@@ -1,8 +1,9 @@
 import { OAuth2Client } from "google-auth-library";
 import { NextRequest, NextResponse } from "next/server";
+import { env } from "@/env";
 
-const GOOGLE_APP_ID = process.env.NEXT_PUBLIC_GOOGLE_APP_ID;
-const GOOGLE_APP_SECRET = process.env.GOOGLE_APP_SECRET;
+const GOOGLE_APP_ID = env.NEXT_PUBLIC_GOOGLE_APP_ID;
+const GOOGLE_APP_SECRET = env.GOOGLE_APP_SECRET;
 
 const oAuth2Client = new OAuth2Client(
   GOOGLE_APP_ID,
