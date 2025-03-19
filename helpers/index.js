@@ -1,3 +1,4 @@
+import { env } from "@/env";
 import { fallbackLng } from "@/lib/i18n/settings";
 
 export const capitalize = (string, locale = fallbackLng) => {
@@ -12,7 +13,7 @@ export function isAbsoluteUrl(url) {
   return /^https?:\/\//i.test(url);
 }
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const BASE_URL = env.NEXT_PUBLIC_BASE_URL;
 
 export function isInternalUrl(url) {
   if (!isAbsoluteUrl(url)) return true;

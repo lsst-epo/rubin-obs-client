@@ -1,4 +1,5 @@
 import { gql } from "@urql/core";
+import { env } from "@/env";
 import { getSiteFromLocale } from "@/lib/helpers/site";
 import queryAPI from "@/lib/api/client/query";
 import tags from "@/lib/api/client/tags";
@@ -9,7 +10,7 @@ interface PageMetadata {
   uri: string;
   dateUpdated: string;
 }
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "";
+const baseUrl = env.NEXT_PUBLIC_BASE_URL;
 
 export const generateSitemapUrl = (
   uri: string,

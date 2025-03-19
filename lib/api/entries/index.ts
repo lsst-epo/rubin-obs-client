@@ -1,10 +1,11 @@
 import { gql } from "@urql/core";
+import { env } from "@/env";
 import queryAPI from "@/lib/api/client/query";
 import { getSiteFromLocale } from "@/lib/helpers/site";
 
 export async function getEntriesByLocale(locale: string) {
   const site = getSiteFromLocale(locale);
-  const ENV = process.env.CLOUD_ENV;
+  const ENV = env.CLOUD_ENV;
 
   const query = gql`
     query getEntriesBySite($site: [String], $level: Int) {
