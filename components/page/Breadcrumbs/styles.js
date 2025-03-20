@@ -1,7 +1,7 @@
 "use client";
 import styled from "styled-components";
 import BaseLink from "next/link";
-import CommonJsBreadcrumbs from "@castiron/components-breadcrumbs";
+import BaseBreadcrumbs from "@castiron/components-breadcrumbs";
 import { containerRegular, respond, tokens } from "@/styles/globalStyles";
 
 // eslint-disable-next-line react/prop-types
@@ -12,7 +12,7 @@ const BreadcrumbsWrapper = ({ className, ...restProps }) => {
   };
 
   return (
-    <CommonJsBreadcrumbs
+    <BaseBreadcrumbs.default
       className={className}
       classes={classes}
       {...restProps}
