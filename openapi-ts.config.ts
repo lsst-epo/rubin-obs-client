@@ -1,4 +1,4 @@
-import "./env.config";
+import "./env.config.js";
 import { defineConfig, defaultPlugins } from "@hey-api/openapi-ts";
 import { env } from "./env";
 

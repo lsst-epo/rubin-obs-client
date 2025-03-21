@@ -1,4 +1,4 @@
-import "./env.config";
+import "./env.config.js";
 import type { CodegenConfig } from "@graphql-codegen/cli";
 import { env } from "./env";
 
