@@ -1,5 +1,6 @@
+"use client";
 import PropTypes from "prop-types";
-import * as EPOLib from "@rubin-epo/epo-react-lib";
+import BaseComplexTable from "@rubin-epo/epo-react-lib/ComplexTable";
 import { useGlobalData } from "@/lib/utils";
 
 export default function ComplexTable({ sites = [], ...props }) {
@@ -10,7 +11,7 @@ export default function ComplexTable({ sites = [], ...props }) {
   } = useGlobalData();
   const showTable = sites.includes(language);
 
-  return showTable ? <EPOLib.ComplexTable {...props} /> : null;
+  return showTable ? <BaseComplexTable {...props} /> : null;
 }
 
 ComplexTable.propTypes = {

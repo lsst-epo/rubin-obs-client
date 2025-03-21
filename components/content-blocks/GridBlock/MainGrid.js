@@ -1,3 +1,4 @@
+"use client";
 import PropTypes from "prop-types";
 import striptags from "striptags";
 import { normalizeItemData, useList } from "@/lib/utils";
