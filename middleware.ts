@@ -1,22 +1,27 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import { i18nRouter } from "next-i18n-router";
 import { cookieName, fallbackLng, languages } from "./lib/i18n/settings";
+import { env } from "@/env";
 
 const ignorableFileExtensions = ["woff", "ico", "png", "jpeg", "jpg"];
-const deployedEnvironments = ["DEV", "INT", "PROD"];
+const deployedEnvironments: Array<typeof env.CLOUD_ENV> = [
+  "DEV",
+  "INT",
+  "PROD",
+];
 
 // This function can be marked `async` if using `await` inside
-export function middleware(request) {
+export function middleware(request: NextRequest) {
   // Insight into API server:
-  const logEntry = {
+  const logEntry: Record<string, any> = {
     httpRequest: {
       name: "NEXTJS_API_SERVER_LOG",
       hostname: process.env.HOSTNAME,
       href: request.nextUrl.href,
       method: request.method,
       client_ip: request.ip,
-      userAgent: request?.headers?.["user-agent"],
-      xForwardedFor: request?.headers?.["x-forwarded-for"],
+      userAgent: request.headers.get("user-agent"),
+      xForwardedFor: request.headers.get("x-forwarded-for"),
     },
   };
 
@@ -42,7 +47,6 @@ export function middleware(request) {
       locales: languages,
       defaultLocale: fallbackLng,
       localeCookie: cookieName,
-      routingStrategy: "dynamicSegment",
     });
 
     logEntry.httpRequest.status = res.status;
@@ -53,7 +57,7 @@ export function middleware(request) {
       !ignorableFileExtensions.some((e) =>
         request.nextUrl.pathname.includes(e)
       ) &&
-      deployedEnvironments.includes(process.env.CLOUD_ENV?.toUpperCase())
+      deployedEnvironments.includes(env.CLOUD_ENV)
     ) {
       console.info(JSON.stringify(logEntry));
     }
@@ -62,7 +66,6 @@ export function middleware(request) {
   }
 }
 
-// do not localize next.js paths
 export const config = {
   matcher: ["/sso-redirect/", "/((?!api|static|.*\\..*|_next).*)"],
 };
