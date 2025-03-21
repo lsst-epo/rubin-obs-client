@@ -1,4 +1,4 @@
-import "./env.config";
+import "./env.config.js";
 import { env } from "./env";
 import { defineConfig } from "cypress";
 
