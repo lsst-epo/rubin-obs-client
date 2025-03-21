@@ -1,5 +1,6 @@
+import "./env.config";
 import type { CodegenConfig } from "@graphql-codegen/cli";
-import { env } from "@/env";
+import { env } from "./env";
 
 const config: CodegenConfig = {
   generates: {
