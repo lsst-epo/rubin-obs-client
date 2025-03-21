@@ -1,3 +1,4 @@
+"use client";
 import PropTypes from "prop-types";
 import { Trans } from "react-i18next";
 import WidgetBackground from "@/components/atomic/WidgetBackground";

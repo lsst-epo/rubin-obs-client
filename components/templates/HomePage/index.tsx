@@ -1,17 +1,22 @@
-"use client";
-import PropTypes from "prop-types";
-import { useTranslation } from "react-i18next";
+import { FC } from "react";
+import { useTranslation } from "@/lib/i18n";
 import ContentBlockFactory from "@/factories/ContentBlockFactory";
 import Hero from "@/components/molecules/Hero";
-import { Buttonish, MixedLink } from "@rubin-epo/epo-react-lib";
-import { makeTruncatedString } from "@/lib/utils";
+import Buttonish from "@rubin-epo/epo-react-lib/Buttonish";
+import MixedLink from "@rubin-epo/epo-react-lib/MixedLink";
+import { makeTruncatedString } from "@/lib/utils/strings";
 import { makeDateString } from "@/helpers/dates";
 import { SlideBlock } from "@/components/content-blocks";
 import Tabs from "@/components/layout/Tabs";
 import TempList from "@/components/dynamic/TempList";
-import * as Styled from "./styles";
+import styles from "./styles.module.css";
 
-export default function HomePage({
+interface HomePageProps {
+  data: any;
+  locale: string;
+}
+
+const HomePage: FC<HomePageProps> = async ({
   data: {
     contentBlocks,
     customHero,
@@ -23,8 +28,9 @@ export default function HomePage({
     newsEntry,
     title,
   },
-}) {
-  const { t } = useTranslation();
+  locale,
+}) => {
+  const { t } = await useTranslation(locale);
 
   // HERO AREA
   // If there is a newsEntry or customHero, display alternate hero area
@@ -47,7 +53,7 @@ export default function HomePage({
   );
 
   // if the first three blocks are sliders...
-  let sliderArray = [];
+  let sliderArray: Array<any> = [];
   let Sliders;
   let sliderLabels;
   const icons = ["video", "info", "team"];
@@ -75,25 +81,23 @@ export default function HomePage({
       )
     );
     sliderLabels = sliderArray.map((slider) => slider.header);
-    labelMap = Object.assign(
-      ...sliderLabels.map((k, i) => ({ [icons[i]]: k }))
-    );
+    labelMap = { ...sliderLabels.map((k, i) => ({ [icons[i]]: k })) };
   }
 
   return (
     <>
       {isAlternate ? (
-        <Styled.HeroWrapper>
-          {altFlag && <Styled.Flag>{altFlag}</Styled.Flag>}
-          <Styled.NewsHero>
+        <div className={styles.heroWrapper}>
+          {altFlag && <h4 className={styles.flag}>{altFlag}</h4>}
+          <div className={styles.newsHero}>
             <Hero data={altHero} {...{ focalPointX, focalPointY }} />
-          </Styled.NewsHero>
-          <Styled.HeroContent>
+          </div>
+          <div className={styles.heroContent}>
             {!custom && news?.postType?.[0]?.title && (
               <h4>{news.postType[0].title}</h4>
             )}
             <h1>{altHeader}</h1>
-            <Styled.Details>
+            <div className={styles.details}>
               <span>
                 {!custom && news?.date && <h4>{makeDateString(news.date)}</h4>}
                 <div>{makeTruncatedString(altTeaser, 30)}</div>
@@ -101,29 +105,26 @@ export default function HomePage({
               {custom?.mixedLink?.element || custom?.mixedLink?.url ? (
                 <MixedLink {...custom.mixedLink} className="c-buttonish" />
               ) : news?.uri ? (
-                <Buttonish
-                  text={t(`read-more`)}
-                  url={`/${news.uri}`}
-                ></Buttonish>
+                <Buttonish url={`/${news.uri}`}>{t(`read-more`)}</Buttonish>
               ) : null}
-            </Styled.Details>
-          </Styled.HeroContent>
-        </Styled.HeroWrapper>
+            </div>
+          </div>
+        </div>
       ) : (
-        <Styled.HeroWrapper>
-          <Styled.HeroContainer>
+        <div className={styles.heroWrapper}>
+          <div className={styles.heroContainer}>
             <Hero data={hero} {...{ focalPointX, focalPointY }} />
-          </Styled.HeroContainer>
-          <Styled.HeroContent>
+          </div>
+          <div className={styles.heroContent}>
             <h1>{title}</h1>
-            <Styled.Details>{description}</Styled.Details>
-          </Styled.HeroContent>
-        </Styled.HeroWrapper>
+            <div className={styles.details}>{description}</div>
+          </div>
+        </div>
       )}
       {sliderArray.length > 0 && (
-        <Styled.TabsContainer>
+        <div className={styles.tabsContainer}>
           <Tabs labels={labelMap}>{Sliders}</Tabs>
-        </Styled.TabsContainer>
+        </div>
       )}
       {[...finalContentBlocks].map((block) => {
         return (
@@ -137,10 +138,8 @@ export default function HomePage({
       })}
     </>
   );
-}
+};
 
 HomePage.displayName = "Template.HomePage";
 
-HomePage.propTypes = {
-  data: PropTypes.object,
-};
+export default HomePage;

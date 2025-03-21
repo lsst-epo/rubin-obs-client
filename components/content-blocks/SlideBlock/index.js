@@ -1,3 +1,4 @@
+"use client";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import striptags from "striptags";
@@ -8,11 +9,9 @@ import {
   MixedLink,
 } from "@rubin-epo/epo-react-lib";
 import { SlideTile } from "@/components/atomic";
-import {
-  makeTruncatedString,
-  normalizeItemData,
-  useListForBlock,
-} from "@/lib/utils";
+import { normalizeItemData, useListForBlock } from "@/lib/utils";
+
+import { makeTruncatedString } from "@/lib/utils/strings";
 import { mixedLinkShape } from "@/components/shapes/link";
 
 const SlideBlock = ({
