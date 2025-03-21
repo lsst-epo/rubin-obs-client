@@ -1,5 +1,6 @@
+import "./env.config";
 import { defineConfig, defaultPlugins } from "@hey-api/openapi-ts";
-import { env } from "@/env";
+import { env } from "./env";
 
 export default defineConfig({
   experimentalParser: true,
