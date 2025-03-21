@@ -4,9 +4,9 @@ import { useTranslation } from "react-i18next";
 import {
   makeBreadcrumbs,
   makeCustomBreadcrumbs,
-  makeTruncatedString,
   useGlobalData,
 } from "@/lib/utils";
+import { makeTruncatedString } from "@/lib/utils/strings";
 import { cantoToImageShape } from "@/lib/api/canto";
 import { makeDateString } from "@/helpers/dates";
 import Breadcrumbs from "@/components/page/Breadcrumbs";
