@@ -1,3 +1,4 @@
+"use client";
 import { useId } from "react";
 import PropTypes from "prop-types";
 import { Image } from "@rubin-epo/epo-react-lib";

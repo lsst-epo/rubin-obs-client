@@ -1,3 +1,4 @@
+"use client";
 import styled from "styled-components";
 import { fluidScale, tokens } from "@/styles/globalStyles";
 import Flag from "@/atomic/Flag";

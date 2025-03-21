@@ -4,11 +4,8 @@ import { useTranslation } from "react-i18next";
 import Grid from "@rubin-epo/epo-react-lib/Grid";
 import DataList from "@/dynamic/DataList";
 import Tile from "@/atomic/Tile";
-import {
-  makeTruncatedString,
-  makeReleaseFeature,
-  useGlobalData,
-} from "@/lib/utils";
+import { makeReleaseFeature, useGlobalData } from "@/lib/utils";
+import { makeTruncatedString } from "@/lib/utils/strings";
 import { makeDateString } from "@/helpers/dates";
 import { fallbackLng } from "@/lib/i18n/settings";
 

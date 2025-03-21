@@ -1,3 +1,4 @@
+"use client";
 import styled from "styled-components";
 import { fluidScale } from "@/styles/globalStyles";
 import { MixedLink } from "@rubin-epo/epo-react-lib";

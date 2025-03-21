@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-
+"use client";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { getSiteString, makeReleaseFeature } from "@/lib/utils";

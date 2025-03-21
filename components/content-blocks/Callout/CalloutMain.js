@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-
+"use client";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { linksShape } from "@/shapes/link";

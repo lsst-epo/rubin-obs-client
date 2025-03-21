@@ -1,12 +1,14 @@
+"use client";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import {
-  makeTruncatedString,
   makeReleaseFeature,
   normalizeItemData,
   useGlobalData,
   useList,
 } from "@/lib/utils";
+
+import { makeTruncatedString } from "@/lib/utils/strings";
 
 import { makeDateString } from "@/helpers/dates";
 import { Grid } from "@rubin-epo/epo-react-lib";

@@ -81,26 +81,4 @@ export const getHomepage = async (locale: string) => {
   return data?.entry;
 };
 
-export const getHomepageMetadata = async (locale: string) => {
-  const site = getSiteFromLocale(locale);
-
-  const query = gql`
-    query HomepageMetadata($site: [String], $uri: [String]) {
-      entry(site: $site, uri: $uri) {
-        ... on homepage_homepage_Entry {
-          title
-          description
-        }
-      }
-    }
-  `;
-
-  const { data } = await queryAPI({
-    query,
-    variables: { site, uri: CRAFT_HOMEPAGE_URI },
-  });
-
-  return data;
-};
-
 export default getHomepage;

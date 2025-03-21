@@ -1,3 +1,4 @@
+"use client";
 import PropTypes from "prop-types";
 import { Container, Video, Figure } from "@rubin-epo/epo-react-lib";
 import { useIsMounted } from "@/hooks";

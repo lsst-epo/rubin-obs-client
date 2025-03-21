@@ -1,6 +1,7 @@
+"use client";
 import React from "react";
 import PropTypes from "prop-types";
-import * as EPOLib from "@rubin-epo/epo-react-lib";
+import BaseSimpleTable from "@rubin-epo/epo-react-lib/SimpleTable";
 import { useGlobalData } from "@/lib/utils";
 
 const SimpleTable = ({ simpleTable, sites = [] }) => {
@@ -11,7 +12,7 @@ const SimpleTable = ({ simpleTable, sites = [] }) => {
   } = useGlobalData();
   const showTable = sites.includes(language);
 
-  return showTable ? <EPOLib.SimpleTable {...{ simpleTable }} /> : null;
+  return showTable ? <BaseSimpleTable {...{ simpleTable }} /> : null;
 };
 
 SimpleTable.propTypes = {
