@@ -22,7 +22,7 @@ const CollapsibleHeader: FunctionComponent<PropsWithChildren> = ({
       style={{ zIndex: "var(--elevation-element-header, 25)" }}
     >
       <Center maxWidth="inherit">
-        <header ref={ref} className={styles.header}>
+        <header ref={ref} data-cy="header" className={styles.header}>
           {children}
         </header>
       </Center>
