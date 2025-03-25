@@ -47,6 +47,7 @@ const Logo: FunctionComponent<LogoProps> = async ({
       prefetch={false}
       href={homeUrl}
       className={classNames(styles.logoWrapper, className)}
+      data-cy="logo"
     >
       <Picture
         className={styles.logo}

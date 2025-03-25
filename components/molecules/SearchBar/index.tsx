@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useRef, useState, useId } from "react";
+import { useCallback, useRef, useState, useId, FC } from "react";
 import classNames from "classnames";
 import { useTranslation } from "react-i18next";
 import { useOnClickOutside, useKeyDownEvent } from "@/hooks/listeners";
@@ -8,19 +8,21 @@ import useQueryParams from "@/lib/routing/useQueryParams";
 import { useRouter } from "next/navigation";
 import styles from "./styles.module.scss";
 
-const SearchBar: FunctionComponent = () => {
+const SearchBar: FC = () => {
   const id = useId();
-  const ref = useRef();
-  const inputRef = useRef();
+  const ref = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const [open, setOpen] = useState(false);
   const { t } = useTranslation();
 
   const { push } = useRouter();
   const { queryParams } = useQueryParams();
-  const [searchText, setSearchText] = useState(queryParams.get("search") || "");
+  const [searchText, setSearchText] = useState(
+    queryParams?.get("search") || ""
+  );
 
   const handleOpen = () => {
-    inputRef.current.focus();
+    inputRef.current?.focus();
     setOpen(true);
   };
 
@@ -41,14 +43,6 @@ const SearchBar: FunctionComponent = () => {
     setSearchText(val);
   }, []);
 
-  const toggleOpen = () => {
-    if (open) {
-      handleClose();
-    } else {
-      handleOpen();
-    }
-  };
-
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -58,11 +52,11 @@ const SearchBar: FunctionComponent = () => {
   };
 
   if (open) {
-    inputRef.current.focus();
+    inputRef.current?.focus();
   }
 
   return (
-    <div ref={ref} className={styles.searchBar}>
+    <div ref={ref} data-cy="searchBar" className={styles.searchBar}>
       <button
         aria-expanded={open}
         aria-haspopup="dialog"

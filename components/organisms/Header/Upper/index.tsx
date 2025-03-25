@@ -4,7 +4,7 @@ import Logo from "@/components/molecules/Logo";
 import LanguageSelect from "../LanguageSelect";
 import SearchBar from "../../../molecules/SearchBar";
 import styles from "./styles.module.scss";
-import { getLogos } from "@/lib/api/globals";
+import { getLogos } from "@/services/craft/globals/logos";
 
 interface UpperHeaderProps {
   locale: string;

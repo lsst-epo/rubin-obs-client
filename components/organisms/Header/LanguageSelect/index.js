@@ -56,7 +56,7 @@ export default function LanguageSelect({ className }) {
   };
 
   return (
-    <Styled.Fieldset className={className}>
+    <Styled.Fieldset data-cy="localeToggle" className={className}>
       <legend className="a-hidden">{t("localize-content")}</legend>
       <Styled.Label htmlFor={id} $disabled={isLoading}>
         <span className="a-hidden">{t("espanol-site-name")}</span>
