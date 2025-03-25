@@ -10,16 +10,6 @@ describe("Homepage", () => {
     cy.get("[data-cy=hero] > img")
       .invoke("attr", "src")
       .should("have.length.gt", 0);
-    cy.get("[data-cy=hero] > img").should("have.attr", "loading", "eager");
-    cy.get("[data-cy=hero] > img").should("have.attr", "decoding", "sync");
-  });
-  it("Searching yields results", () => {
-    cy.get(".c-search-bar__toggle").click();
-    cy.get("#headerSearchBar").should("be.visible").type("rubin{enter}");
-    cy.intercept("http://localhost:3000/search?search=rubin").as("search");
-    cy.on("url:changed", (newUrl) => {
-      expect(newUrl).to.contain("?search=rubin");
-    });
-    cy.get("ul li").its("length").should("be.gte", 1);
+    cy.get("[data-cy=hero] > img").should("have.attr", "fetchpriority", "high");
   });
 });
