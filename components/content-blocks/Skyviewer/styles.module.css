@@ -1,0 +1,24 @@
+.container {
+  padding: var(--size-spacing-xs);
+}
+
+.iframe {
+  aspect-ratio: var(--ratio-iframe-size, 1880 / 1027);
+  border: none;
+  display: block;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+
+  @media (--portrait) {
+    --ratio-iframe-size: 290 / 366;
+  }
+
+  &[data-embed="true"] {
+    --ratio-iframe-size: 750 / 580;
+
+    @media (--portrait) {
+      --ratio-iframe-size: 260 / 366;
+    }
+  }
+}

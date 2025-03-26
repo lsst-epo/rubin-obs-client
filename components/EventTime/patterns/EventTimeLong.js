@@ -1,3 +1,4 @@
+"use client";
 import PropTypes from "prop-types";
 import { useTimeString, useTimeZone } from "@/lib/utils";
 import { makeDateString } from "@/helpers/dates";

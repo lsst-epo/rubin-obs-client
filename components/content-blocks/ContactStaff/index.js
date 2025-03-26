@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import Container from "@rubin-epo/epo-react-lib/Container";
 import { useTranslation } from "react-i18next";
-import { createLocationString } from "@/lib/utils";
+import { createLocationString } from "@/lib/helpers/location";
 
 export default function ContactStaff({ header, staffEntry }) {
   const { t } = useTranslation();
