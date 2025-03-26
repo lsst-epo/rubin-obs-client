@@ -12,3 +12,5 @@
 @custom-media --phablet-max (width < 600px);
 @custom-media --mobile-max (width < 446px);
 @custom-media --mobile-small-max (width < 280px);
+@custom-media --portrait (orientation: portrait);
+@custom-media --landscape (orientation: landscape);

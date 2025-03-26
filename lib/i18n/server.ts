@@ -1,3 +1,4 @@
+"server-only";
 import { cache } from "react";
 import { cookies, headers } from "next/headers";
 import { cookieName, fallbackLng } from "./settings";
