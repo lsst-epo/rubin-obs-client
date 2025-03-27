@@ -1,11 +1,12 @@
 import { gql } from "@urql/core";
+import { print } from "graphql";
+import { RootPageInfoFragmentFragmentDoc } from "@/gql/graphql";
 import { fallbackLng } from "@/lib/i18n/settings";
 import queryAPI from "@/lib/api/client/query";
 import { linkFragment } from "@/lib/api/fragments/link";
 import {
   siteInfoFragment,
   footerFragment,
-  rootPageInfoFragment,
   contactFormFragment,
 } from "@/lib/api/fragments/global";
 import { categoriesFragment } from "@/lib/api/fragments/categories";
@@ -18,7 +19,7 @@ export async function getGlobalData(locale = fallbackLng) {
     ${linkFragment}
     ${siteInfoFragment}
     ${footerFragment}
-    ${rootPageInfoFragment}
+    ${print(RootPageInfoFragmentFragmentDoc)}
     ${contactFormFragment}
     ${categoriesFragment}
     query getGlobalData($site: [String]) {
