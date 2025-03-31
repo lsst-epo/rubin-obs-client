@@ -12,7 +12,7 @@ export const isValidCantoSize = (size: any): size is ValidCantoSize => {
   return ValidCantoSizes.includes(size);
 };
 
-export const resizeCantoImage = (previewUrl: string, size: number) => {
+export const resizeCantoImage = (previewUrl: string, size: ValidCantoSize) => {
   if (isValidCantoSize(size)) {
     const urlWithoutConstraint = previewUrl.slice(0, -3);
 
