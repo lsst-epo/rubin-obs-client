@@ -1,0 +1,9 @@
+.sizeItem {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1ex;
+
+  & a {
+    color: var(--color-font-accent);
+  }
+}

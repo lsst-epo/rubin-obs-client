@@ -3,14 +3,18 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { env } from "@/env";
 import { getAssetFromGallery } from "@/lib/api/galleries/asset";
-import { assetTitle, assetToPageMetadata } from "@/lib/api/canto/metadata";
+import {
+  assetCaption,
+  assetTitle,
+  assetToPageMetadata,
+} from "@/lib/api/canto/metadata";
 import { SupportedCantoAssetScheme } from "@/lib/api/galleries/schema";
 import { isMainGallery } from "@/lib/api/galleries";
 import { getMediaPolicyPage } from "@/lib/api/galleries/media-policy";
 import { buildParentPath } from "@/lib/helpers/gallery";
-import { addLocaleUriSegment } from "@/lib/i18n";
-import CantoFigure from "@/components/organisms/gallery/CantoFigure";
+import { addLocaleUriSegment, useTranslation } from "@/lib/i18n";
 import SingleMediaAsset from "@/components/templates/SingleMediaAsset";
+import SharePopup from "@/components/molecules/SharePopup";
 import ImageSizes from "@/components/organisms/gallery/metadata/Sizes";
 import AssetTags from "@/components/organisms/gallery/metadata/Tags";
 import CantoImage from "@/components/organisms/gallery/CantoImage";
@@ -18,6 +22,9 @@ import CantoVideo from "@/components/organisms/gallery/CantoVideo";
 import CantoDocument from "@/components/organisms/gallery/CantoDocument";
 import AssetMetadata from "@/components/organisms/gallery/metadata/Asset";
 import LinkedPosts from "@/components/organisms/gallery/metadata/LinkedPosts";
+import CantoDownload from "@/components/organisms/gallery/CantoDownload";
+import BackToGallery from "@/components/organisms/gallery/BackToGallery";
+import DocumentInfo from "@/components/molecules/DocumentInfo";
 
 export async function generateMetadata({
   params: { locale, gallery, asset: id },
@@ -31,7 +38,7 @@ export async function generateMetadata({
   return assetToPageMetadata(asset, locale);
 }
 
-const assetComponent: Record<SupportedCantoAssetScheme, ComponentType> = {
+const assetComponent: Record<SupportedCantoAssetScheme, ComponentType<any>> = {
   image: CantoImage,
   video: CantoVideo,
   document: CantoDocument,
@@ -40,6 +47,7 @@ const assetComponent: Record<SupportedCantoAssetScheme, ComponentType> = {
 const GalleryAsset: FunctionComponent<GalleryAssetProps> = async ({
   params: { locale, gallery, asset: id },
 }) => {
+  const { t } = await useTranslation(locale);
   const asset = await getAssetFromGallery(gallery, id, locale);
 
   if (!asset) {
@@ -92,6 +100,7 @@ const GalleryAsset: FunctionComponent<GalleryAssetProps> = async ({
   };
 
   const Asset = assetComponent[scheme];
+  const title = assetTitle(additional, locale) || name;
   const dateCreated = new Date(DateCreated);
   const mediaPolicyPage = await getMediaPolicyPage(locale);
   const license = mediaPolicyPage
@@ -103,24 +112,37 @@ const GalleryAsset: FunctionComponent<GalleryAssetProps> = async ({
 
   return (
     <SingleMediaAsset
-      title={assetTitle(additional, locale) || name}
+      {...{
+        width,
+        height,
+        title,
+      }}
+      caption={
+        <>
+          {scheme === "document" && (
+            <DocumentInfo {...{ locale, title, scheme, dateCreated }} />
+          )}
+          <div>{assetCaption(additional, locale)}</div>
+        </>
+      }
+      credit={
+        additional?.Credit
+          ? t("gallery.credit", {
+              credit: additional.Credit,
+            })
+          : undefined
+      }
       asset={
-        <CantoFigure
-          downloadUrl={directUrlOriginal}
-          asset={<Asset {...{ asset, locale, license }} />}
-          {...{
-            locale,
-            additional,
-            width,
-            height,
-            gallery,
-            parentUri,
-            id,
-            name,
-            scheme,
-            dateCreated,
-          }}
-        />
+        <>
+          <Asset {...{ asset, locale, license }} />
+          <BackToGallery fallback={parentUri} />
+        </>
+      }
+      actions={
+        <>
+          <CantoDownload directUrlOriginal={directUrlOriginal} />
+          <SharePopup title={name} url={`gallery/${gallery}/${id}`} />
+        </>
       }
       metadataBlocks={
         <>

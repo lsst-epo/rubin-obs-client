@@ -6,5 +6,6 @@
 
 .metadataSet {
   display: flex;
-  gap: 1ex;
+  flex-wrap: wrap;
+  column-gap: 1ex;
 }

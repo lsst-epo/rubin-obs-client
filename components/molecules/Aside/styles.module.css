@@ -1,8 +1,4 @@
-"use client";
-import { token } from "@rubin-epo/epo-react-lib";
-import styled from "styled-components";
-
-export const Aside = styled.aside`
+.aside {
   --size-width-aside: 270px;
   --size-gap-aside: var(--size-spacing-xs);
   --color-font-link-aside: var(--turquoise60);
@@ -14,6 +10,7 @@ export const Aside = styled.aside`
   padding: 0;
   margin: 0;
   font-size: 0.875rem;
+  align-content: flex-start;
 
   & a {
     & img {
@@ -33,13 +30,13 @@ export const Aside = styled.aside`
     }
   }
 
-  @media screen and (min-width: ${token("BREAK_DESKTOP_SMALL")}) {
+  @media (--desktop-small) {
     gap: 0;
     padding: var(--size-spacing-l) 0 var(--size-spacing-l)
       var(--size-spacing-xs);
 
-    > * + * {
+    & > * + * {
       margin-block-start: var(--size-spacing-2xs);
     }
   }
-`;
+}

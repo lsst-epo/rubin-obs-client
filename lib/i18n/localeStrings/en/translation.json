@@ -154,7 +154,9 @@
     "media-policy": "Information about <1>Usage of Rubin Observatory images, videos, web texts, and music</1>",
     "image-linked-to": "This image appears on",
     "video-linked-to": "This video appears on",
-    "document-linked-to": "This document appears on"
+    "document-linked-to": "This document appears on",
+    "zoomable": "Zoomable",
+    "wallpapers": "Wallpapers"
   },
   "jobs": {
     "job": "Job",

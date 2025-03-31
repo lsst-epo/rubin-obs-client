@@ -1,0 +1,18 @@
+.actionsRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-block-start: var(--figure-padding);
+}
+
+.imageWrapper {
+  aspect-ratio: var(--w) / var(--h);
+  width: var(--w);
+  max-width: 100%;
+  position: relative;
+  margin: 0 auto;
+}
+
+.credit {
+  margin-block-start: var(--figure-padding);
+}
