@@ -74,6 +74,7 @@ const PreviewGridContent: FunctionComponent<PreviewGridProps> = async ({
                 locale,
                 `/gallery/collections/${gallery}/${id}`
               ),
+              prefetch: null,
             }}
             icon={icons[scheme]}
             className={styles.tile}
