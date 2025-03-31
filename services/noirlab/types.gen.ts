@@ -997,6 +997,10 @@ export type ReleasesListData = {
      * Defines if the original version of an object is returned in case the translation is not found, use "fallback" to retrieve the original content if no translation exist, or "language" to return translated content only. Default: "language"
      */
     translation_mode?: "fallback" | "language";
+    /**
+     * Default: PUBLIC
+     */
+    type?: "EMBARGO" | "PUBLIC" | "STAGING";
   };
   url: "/public/api/v2/releases/";
 };
@@ -1025,6 +1029,10 @@ export type ReleasesRetrieveData = {
      * Defines if the original version of an object is returned in case the translation is not found, use "fallback" to retrieve the original content if no translation exist, or "language" to return translated content only. Default: "language"
      */
     translation_mode?: "fallback" | "language";
+    /**
+     * Default: PUBLIC
+     */
+    type?: "EMBARGO" | "PUBLIC" | "STAGING";
   };
   url: "/public/api/v2/releases/{id}/";
 };

@@ -25,6 +25,7 @@ export default async function NewsPage({ data }) {
     images: releaseImages,
     videos: releaseVideos,
   } = data;
+
   const locale = getLocale();
   const { t } = await useTranslation(locale);
 

@@ -1,8 +1,6 @@
 import { FunctionComponent, Suspense } from "react";
-import Image from "next/image";
 import Stack from "@rubin-epo/epo-react-lib/Stack";
 import MasonryGrid from "@rubin-epo/epo-react-lib/MasonryGrid";
-import MasonryImage from "@rubin-epo/epo-react-lib/MasonryImage";
 import Buttonish from "@rubin-epo/epo-react-lib/Buttonish";
 import { type IconKey } from "@rubin-epo/epo-react-lib/IconComposer";
 import { getGalleryData } from "@/lib/api/galleries";
@@ -11,6 +9,7 @@ import { assetAlt, assetTitle } from "@/lib/api/canto/metadata";
 import { addLocaleUriSegment, useTranslation } from "@/lib/i18n";
 import { getOffset } from "@/lib/utils/pagination";
 import Pagination from "@/components/molecules/Pagination";
+import LinkedImage from "@/components/molecules/LinkedImage";
 import FilteredResults from "../FilteredResults";
 import styles from "./styles.module.css";
 interface PreviewGridProps {
@@ -68,31 +67,27 @@ const PreviewGridContent: FunctionComponent<PreviewGridProps> = async ({
       return {
         id,
         element: (
-          <MasonryImage
-            linkProps={{
+          <LinkedImage
+            icon={icons[scheme]}
+            link={{
               href: addLocaleUriSegment(
                 locale,
                 `/gallery/collections/${gallery}/${id}`
               ),
               prefetch: null,
             }}
-            icon={icons[scheme]}
-            className={styles.tile}
-          >
-            <Image
-              {...{ width, height }}
-              id={id}
-              src={directUrlPreview}
-              sizes={`(max-width: 600px) 100vw`}
-              alt={assetAlt(additional, locale)}
-              priority={i < 10}
-              quality={80}
-              className={styles.image}
-            />
-            <div className={styles.titleCard}>
-              {assetTitle(additional, locale) || name}
-            </div>
-          </MasonryImage>
+            image={{
+              width,
+              height,
+              id,
+              src: directUrlPreview,
+              sizes: `(max-width: 600px) 100vw`,
+              alt: assetAlt(additional, locale),
+              priority: i < 10,
+              quality: 80,
+            }}
+            title={assetTitle(additional, locale) || name}
+          />
         ),
       };
     }

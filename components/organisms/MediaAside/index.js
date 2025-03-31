@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import Link from "next/link";
 import IconComposer from "@rubin-epo/epo-react-lib/IconComposer";
+import { imagesToAsides, videosToAsides } from "@/helpers/noirlab";
 import { addLocaleUriSegment, useTranslation } from "@/lib/i18n";
 import { getLocale } from "@/lib/i18n/server";
 import Aside from "@/components/molecules/Aside/index";
@@ -34,39 +35,19 @@ export default async function MediaAside({
     };
   });
 
-  const mapReleaseAsset = ({
-    title,
-    url,
-    height,
-    width,
-    formats: { newsfeature },
-  }) => {
-    return {
-      caption: title,
-      image: {
-        altText: title,
-        url: newsfeature,
-        url2x: newsfeature,
-        url3x: newsfeature,
-        width,
-        height,
-      },
-      link: { href: url },
-    };
-  };
-
   const mediaAssets = [
     ...contentBlockAssets
       .filter(({ image }) => image && image.length > 0 && image[0].url)
       .map(({ caption, image }) => {
+        const [{ altText, url, width, height }] = image;
         return {
-          caption,
-          image: image?.[0],
-          link: { href: image?.[0]?.url },
+          title: caption,
+          image: { src: url, width, height, alt: altText || caption },
+          link: { href: url },
         };
       }),
-    ...releaseImages.map(mapReleaseAsset),
-    ...releaseVideos.map(mapReleaseAsset),
+    ...imagesToAsides(releaseImages),
+    ...videosToAsides(releaseVideos),
   ];
 
   return (

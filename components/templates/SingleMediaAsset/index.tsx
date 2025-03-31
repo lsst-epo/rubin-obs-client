@@ -1,11 +1,16 @@
 import { FunctionComponent, ReactNode } from "react";
-import styles from "./styles.module.scss";
+import styles from "./styles.module.css";
+import GalleryFigure, {
+  GalleryFigureProps,
+} from "@/components/molecules/GalleryFigure";
 
-interface SingleMediaAssetProps {
+interface SingleMediaAssetProps extends GalleryFigureProps {
   title: string;
   asset: ReactNode;
-  metadataBlocks: ReactNode;
-  metadataLinks: ReactNode;
+  caption: ReactNode;
+
+  metadataBlocks?: ReactNode;
+  metadataLinks?: ReactNode;
 }
 
 const SingleMediaAsset: FunctionComponent<SingleMediaAssetProps> = ({
@@ -13,14 +18,19 @@ const SingleMediaAsset: FunctionComponent<SingleMediaAssetProps> = ({
   asset,
   metadataBlocks,
   metadataLinks,
+  ...galleryFigureProps
 }) => {
   return (
     <>
       <h1>{title}</h1>
-      {asset}
+      <GalleryFigure {...galleryFigureProps}>{asset}</GalleryFigure>
       <div className={styles.metadataGrid}>
-        <div className={styles.metadataBlocks}>{metadataBlocks}</div>
-        <div className={styles.metadataLinks}>{metadataLinks}</div>
+        {metadataBlocks && (
+          <div className={styles.metadataBlocks}>{metadataBlocks}</div>
+        )}
+        {metadataLinks && (
+          <div className={styles.metadataLinks}>{metadataLinks}</div>
+        )}
       </div>
     </>
   );
