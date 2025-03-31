@@ -48,10 +48,11 @@ const CantoImage: FunctionComponent<CantoImageProps> = ({
         {...{ width, height }}
         data-cy="canto-image"
         alt={assetAlt(additional, locale)}
-        src={url.directUrlOriginal}
+        src={resizeCantoImage(url.directUrlPreview, 2050)}
         sizes={aspectRatio < 1 ? portraitSizes : landscapeSizes}
         quality={85}
         priority
+        fetchPriority="high"
         title={asset.name}
       />
     </>
