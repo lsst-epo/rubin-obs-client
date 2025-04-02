@@ -1,0 +1,19 @@
+.closeLink {
+  aspect-ratio: 1;
+  background-color: var(--color-border-button-tertiary);
+  color: var(--color-font-invert);
+  padding: var(--size-spacing-3xs);
+  position: absolute;
+  line-height: 0;
+  top: 0;
+  right: 0;
+}
+
+.scheme {
+  font-weight: bold;
+}
+
+.dateCreated {
+  display: block;
+  font-weight: bold;
+}

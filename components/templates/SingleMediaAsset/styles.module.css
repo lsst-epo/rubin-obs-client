@@ -1,14 +1,10 @@
-@use "abstracts/mixins/base";
-@use "abstracts/functions";
-
 .metadataGrid {
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: 1fr 1fr;
   gap: var(--size-spacing-s);
 
-  @media screen and (width >=
- functions.break(mobile)) {
+  @media (--mobile) {
     grid-template-columns: 2fr 1fr;
   }
 }

@@ -10,8 +10,8 @@ type WithSearchParams<T = unknown> = T & {
   searchParams?: SearchParams;
 };
 
-type LocaleParams = {
-  locale: string;
+type LocaleParams<T extends string = string> = {
+  locale: T;
 };
 
 type UriSegmentParams = {
@@ -30,16 +30,20 @@ interface LocaleProps {
   params: LocaleParams;
 }
 
-interface UriSegmentProps {
-  params: LocaleParams & UriSegmentParams;
+interface UriSegmentProps<T = string> {
+  params: LocaleParams<T> & UriSegmentParams;
 }
 
-interface GalleryProps {
-  params: LocaleParams & GalleryParams;
+interface GalleryProps<T = string> {
+  params: LocaleParams<T> & GalleryParams;
 }
 
-interface GalleryAssetProps {
-  params: LocaleParams & GalleryParams & GalleryAssetParams;
+interface GalleryAssetProps<T = string> {
+  params: LocaleParams<T> & GalleryParams & GalleryAssetParams;
+}
+
+interface NOIRLabAssetProps<T = string> {
+  params: LocaleParams<T> & GalleryAssetParams;
 }
 
 interface ErrorProps {
