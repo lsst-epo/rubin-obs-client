@@ -93,12 +93,6 @@ export class AnnouncementsService {
       unknown,
       ThrowOnError
     >({
-      security: [
-        {
-          scheme: "basic",
-          type: "http",
-        },
-      ],
       url: "/public/api/v2/announcements/",
       ...options,
     });
@@ -112,12 +106,6 @@ export class AnnouncementsService {
       unknown,
       ThrowOnError
     >({
-      security: [
-        {
-          scheme: "basic",
-          type: "http",
-        },
-      ],
       url: "/public/api/v2/announcements/{id}/",
       ...options,
     });
@@ -133,12 +121,6 @@ export class MediaService {
       unknown,
       ThrowOnError
     >({
-      security: [
-        {
-          scheme: "basic",
-          type: "http",
-        },
-      ],
       url: "/public/api/v2/media/images/",
       ...options,
     });
@@ -152,12 +134,6 @@ export class MediaService {
       unknown,
       ThrowOnError
     >({
-      security: [
-        {
-          scheme: "basic",
-          type: "http",
-        },
-      ],
       url: "/public/api/v2/media/images/{id}/",
       ...options,
     });
@@ -171,12 +147,6 @@ export class MediaService {
       unknown,
       ThrowOnError
     >({
-      security: [
-        {
-          scheme: "basic",
-          type: "http",
-        },
-      ],
       url: "/public/api/v2/media/videos/",
       ...options,
     });
@@ -190,12 +160,6 @@ export class MediaService {
       unknown,
       ThrowOnError
     >({
-      security: [
-        {
-          scheme: "basic",
-          type: "http",
-        },
-      ],
       url: "/public/api/v2/media/videos/{id}/",
       ...options,
     });
@@ -211,12 +175,6 @@ export class ReleasesService {
       unknown,
       ThrowOnError
     >({
-      security: [
-        {
-          scheme: "basic",
-          type: "http",
-        },
-      ],
       url: "/public/api/v2/releases/",
       ...options,
     });
@@ -230,12 +188,6 @@ export class ReleasesService {
       unknown,
       ThrowOnError
     >({
-      security: [
-        {
-          scheme: "basic",
-          type: "http",
-        },
-      ],
       url: "/public/api/v2/releases/{id}/",
       ...options,
     });
@@ -251,12 +203,6 @@ export class VisitsService {
       unknown,
       ThrowOnError
     >({
-      security: [
-        {
-          scheme: "basic",
-          type: "http",
-        },
-      ],
       url: "/public/api/v2/visits/activities/{id}/",
       ...options,
     });
@@ -270,12 +216,6 @@ export class VisitsService {
       unknown,
       ThrowOnError
     >({
-      security: [
-        {
-          scheme: "basic",
-          type: "http",
-        },
-      ],
       url: "/public/api/v2/visits/showings/",
       ...options,
     });
@@ -291,12 +231,6 @@ export class BlogService {
       unknown,
       ThrowOnError
     >({
-      security: [
-        {
-          scheme: "basic",
-          type: "http",
-        },
-      ],
       responseTransformer: blogApiPostsListResponseTransformer,
       url: "/public/blog/api/posts/",
       ...options,
@@ -313,12 +247,6 @@ export class CommunicationService {
       unknown,
       ThrowOnError
     >({
-      security: [
-        {
-          scheme: "basic",
-          type: "http",
-        },
-      ],
       url: "/public/communication/pages/api/committee/",
       ...options,
     });
@@ -332,12 +260,6 @@ export class CommunicationService {
       unknown,
       ThrowOnError
     >({
-      security: [
-        {
-          scheme: "basic",
-          type: "http",
-        },
-      ],
       url: "/public/communication/pages/api/committee/",
       ...options,
       headers: {
@@ -355,12 +277,6 @@ export class CommunicationService {
       unknown,
       ThrowOnError
     >({
-      security: [
-        {
-          scheme: "basic",
-          type: "http",
-        },
-      ],
       url: "/public/communication/pages/api/committee/{id}/",
       ...options,
     });
@@ -376,12 +292,6 @@ export class CommunicationService {
       unknown,
       ThrowOnError
     >({
-      security: [
-        {
-          scheme: "basic",
-          type: "http",
-        },
-      ],
       url: "/public/communication/pages/api/committee/{id}/",
       ...options,
     });
@@ -404,12 +314,6 @@ export class CommunicationService {
       unknown,
       ThrowOnError
     >({
-      security: [
-        {
-          scheme: "basic",
-          type: "http",
-        },
-      ],
       url: "/public/communication/pages/api/committee/{id}/",
       ...options,
       headers: {
@@ -427,12 +331,6 @@ export class CommunicationService {
       unknown,
       ThrowOnError
     >({
-      security: [
-        {
-          scheme: "basic",
-          type: "http",
-        },
-      ],
       url: "/public/communication/pages/api/committee/{id}/",
       ...options,
       headers: {
@@ -452,12 +350,6 @@ export class ContactsService {
       unknown,
       ThrowOnError
     >({
-      security: [
-        {
-          scheme: "basic",
-          type: "http",
-        },
-      ],
       url: "/public/contacts/api/imports/{id}/",
       ...options,
     });
@@ -473,12 +365,6 @@ export class DjangoplicityService {
       unknown,
       ThrowOnError
     >({
-      security: [
-        {
-          scheme: "basic",
-          type: "http",
-        },
-      ],
       url: "/public/djangoplicity/admin/pages/api/pages/",
       ...options,
     });
@@ -492,12 +378,6 @@ export class DjangoplicityService {
       unknown,
       ThrowOnError
     >({
-      security: [
-        {
-          scheme: "basic",
-          type: "http",
-        },
-      ],
       url: "/public/djangoplicity/admin/pages/api/pages/",
       ...options,
       headers: {
@@ -517,12 +397,6 @@ export class DjangoplicityService {
       unknown,
       ThrowOnError
     >({
-      security: [
-        {
-          scheme: "basic",
-          type: "http",
-        },
-      ],
       url: "/public/djangoplicity/admin/pages/api/pages/{id}/",
       ...options,
     });
@@ -538,12 +412,6 @@ export class DjangoplicityService {
       unknown,
       ThrowOnError
     >({
-      security: [
-        {
-          scheme: "basic",
-          type: "http",
-        },
-      ],
       url: "/public/djangoplicity/admin/pages/api/pages/{id}/",
       ...options,
     });
@@ -566,12 +434,6 @@ export class DjangoplicityService {
       unknown,
       ThrowOnError
     >({
-      security: [
-        {
-          scheme: "basic",
-          type: "http",
-        },
-      ],
       url: "/public/djangoplicity/admin/pages/api/pages/{id}/",
       ...options,
       headers: {
@@ -589,12 +451,6 @@ export class DjangoplicityService {
       unknown,
       ThrowOnError
     >({
-      security: [
-        {
-          scheme: "basic",
-          type: "http",
-        },
-      ],
       url: "/public/djangoplicity/admin/pages/api/pages/{id}/",
       ...options,
       headers: {
@@ -620,12 +476,6 @@ export class DocumentationService {
       unknown,
       ThrowOnError
     >({
-      security: [
-        {
-          scheme: "basic",
-          type: "http",
-        },
-      ],
       url: "/public/documentation/schema/",
       ...options,
     });
@@ -641,12 +491,6 @@ export class ImagesService {
       unknown,
       ThrowOnError
     >({
-      security: [
-        {
-          scheme: "basic",
-          type: "http",
-        },
-      ],
       url: "/public/images/d2d/",
       ...options,
     });
@@ -662,12 +506,6 @@ export class ProductsService {
       unknown,
       ThrowOnError
     >({
-      security: [
-        {
-          scheme: "basic",
-          type: "http",
-        },
-      ],
       url: "/public/products/models3d/d2d/",
       ...options,
     });
@@ -681,12 +519,6 @@ export class ProductsService {
       unknown,
       ThrowOnError
     >({
-      security: [
-        {
-          scheme: "basic",
-          type: "http",
-        },
-      ],
       url: "/public/products/podcast/d2d/",
       ...options,
     });
@@ -702,12 +534,6 @@ export class VideosService {
       unknown,
       ThrowOnError
     >({
-      security: [
-        {
-          scheme: "basic",
-          type: "http",
-        },
-      ],
       url: "/public/videos/d2d/",
       ...options,
     });

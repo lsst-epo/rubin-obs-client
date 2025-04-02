@@ -1,11 +1,9 @@
 import { FunctionComponent } from "react";
 import { ImageObject } from "schema-dts";
-import Image from "next/image";
-import StructuredData from "@/components/atomic/StructuredData";
 import { CantoAssetDetailed } from "@/lib/api/galleries/schema";
 import { assetAlt, assetCaption } from "@/lib/api/canto/metadata";
-import { tokens } from "@rubin-epo/epo-react-lib/styles";
 import { resizeCantoImage } from "@/lib/api/canto/resize";
+import GalleryImage from "@/components/molecules/GalleryImage";
 
 interface CantoImageProps {
   locale: string;
@@ -19,10 +17,6 @@ const CantoImage: FunctionComponent<CantoImageProps> = ({
   license,
 }) => {
   const { additional, url, width, height } = asset;
-
-  const aspectRatio = width / height;
-  const landscapeSizes = `(max-width: ${tokens.BREAK_TABLET}) 100vw, 1435px`;
-  const portraitSizes = `(max-width: ${tokens.BREAK_TABLET}) 100vw, 700px`;
 
   const structuredData: ImageObject = {
     "@type": "ImageObject",
@@ -42,20 +36,13 @@ const CantoImage: FunctionComponent<CantoImageProps> = ({
   };
 
   return (
-    <>
-      <StructuredData jsonLd={structuredData} />
-      <Image
-        {...{ width, height }}
-        data-cy="canto-image"
-        alt={assetAlt(additional, locale)}
-        src={resizeCantoImage(url.directUrlPreview, 2050)}
-        sizes={aspectRatio < 1 ? portraitSizes : landscapeSizes}
-        quality={85}
-        priority
-        fetchPriority="high"
-        title={asset.name}
-      />
-    </>
+    <GalleryImage
+      {...{ width, height }}
+      metadata={structuredData}
+      alt={assetAlt(additional, locale)}
+      src={resizeCantoImage(url.directUrlPreview, 2050)}
+      title={asset.name}
+    />
   );
 };
 

@@ -1,9 +1,8 @@
 import { FunctionComponent } from "react";
 import { VideoObject } from "schema-dts";
-import { GenericPlayer as Video } from "@rubin-epo/epo-react-lib/Video";
-import StructuredData from "@/components/atomic/StructuredData";
 import { CantoAssetDetailed } from "@/lib/api/galleries/schema";
-import { assetCaption } from "@/lib/api/canto/metadata";
+import { assetCaption, assetTitle } from "@/lib/api/canto/metadata";
+import GalleryVideo from "@/components/molecules/GalleryVideo";
 
 interface CantoVideoProps {
   locale: string;
@@ -24,27 +23,27 @@ const CantoVideo: FunctionComponent<CantoVideoProps> = ({
 
   const structuredData: VideoObject = {
     "@type": "VideoObject",
+    name: assetTitle(asset.additional, locale),
     caption: assetCaption(asset.additional, locale),
     contentSize: asset.size,
     contentUrl: asset.url.directUrlOriginal,
     creditText: asset.additional.Credit || undefined,
     encodingFormat: asset.default.ContentType,
     dateCreated: asset.default.DateCreated,
+    uploadDate: asset.default.DateUploaded,
+    thumbnailUrl: directUrlPreviewPlay || undefined,
     height: `${width}px`,
     width: `${height}px`,
     license,
   };
 
   return (
-    <>
-      <StructuredData jsonLd={structuredData} />
-      <Video
-        data-cy="canto-video"
-        url={directUrlPreviewPlay || directUrlOriginal}
-        thumbnail={directUrlPreview}
-        {...{ width, height }}
-      />
-    </>
+    <GalleryVideo
+      metadata={structuredData}
+      url={directUrlPreviewPlay || directUrlOriginal}
+      thumbnail={directUrlPreview}
+      {...{ width, height }}
+    />
   );
 };
 

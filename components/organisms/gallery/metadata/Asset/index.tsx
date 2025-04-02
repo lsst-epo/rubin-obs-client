@@ -2,81 +2,82 @@ import { FunctionComponent } from "react";
 import convert from "convert";
 import { getLocale } from "@/lib/i18n/server";
 import { useTranslation } from "@/lib/i18n";
-import {
-  CantoAssetScheme,
-  SupportedCantoAssetScheme,
-} from "@/lib/api/galleries/schema";
 import MetadataList, {
   MetadataItem,
 } from "@/components/molecules/MetadataList";
 import MetadataSection from "../Section";
+import formatDuration from "@/lib/utils/duration";
 
-interface AssetMetadataProps {
-  scheme: CantoAssetScheme;
-  width: string | number;
-  height: string | number;
+interface DocumentMetadataProps {
+  scheme: "document";
   dateCreated: Date;
-  size: number;
 }
 
-const metadataMap: Record<SupportedCantoAssetScheme, Array<string>> = {
-  image: ["dateCreated", "size", "fileSize"],
-  video: ["dateCreated", "size", "fileSize"],
-  document: ["datePublished"],
-};
+interface ImageMetadataProps {
+  scheme: "image";
+  dateCreated: Date;
+  width: string | number;
+  height: string | number;
+  size?: number;
+}
 
-const AssetMetadata: FunctionComponent<AssetMetadataProps> = async ({
-  width,
-  height,
-  size,
-  scheme,
-  dateCreated,
-}) => {
+interface VideoMetadataProps {
+  scheme: "video";
+  dateCreated: Date;
+  width: string | number;
+  height: string | number;
+  size?: number;
+  duration?: number;
+}
+
+const AssetMetadata: FunctionComponent<
+  DocumentMetadataProps | ImageMetadataProps | VideoMetadataProps
+> = async (props) => {
   const locale = getLocale();
   const { t } = await useTranslation(locale);
-  const { quantity, unit } = convert(size, "bytes").to("best");
-
-  const metadata: Record<string, MetadataItem> = {
-    dateCreated: {
-      key: t("gallery.date-created"),
-      value: (
-        <time dateTime={dateCreated.toISOString()}>
-          {new Intl.DateTimeFormat(locale, { dateStyle: "long" }).format(
-            dateCreated
-          )}
-        </time>
-      ),
-    },
-    datePublished: {
-      key: t("gallery.date-published"),
-      value: (
-        <time dateTime={dateCreated.toISOString()}>
-          {new Intl.DateTimeFormat(locale, { dateStyle: "long" }).format(
-            dateCreated
-          )}
-        </time>
-      ),
-    },
-    size: { key: t("gallery.size"), value: `${width} × ${height} px` },
-    fileSize: {
-      key: t("gallery.file-size"),
-      value: `${new Intl.NumberFormat(locale, {
-        maximumFractionDigits: 2,
-      }).format(quantity)}${unit}`,
-    },
-  };
 
   const items: Array<MetadataItem> = [];
 
-  Object.entries(metadata).forEach(([key, value]) => {
-    if (metadataMap[scheme].includes(key)) {
-      items.push(value);
-    }
+  items.push({
+    key:
+      props.scheme === "document"
+        ? t("gallery.date-published")
+        : t("gallery.date-created"),
+    value: (
+      <time dateTime={props.dateCreated.toISOString()}>
+        {new Intl.DateTimeFormat(locale, { dateStyle: "long" }).format(
+          props.dateCreated
+        )}
+      </time>
+    ),
   });
+
+  if (props.scheme === "video" || props.scheme === "image") {
+    items.push({
+      key: t("gallery.size"),
+      value: `${props.width} × ${props.height} px`,
+    });
+
+    if (props.size) {
+      const { quantity, unit } = convert(props.size, "bytes").to("best");
+      items.push({
+        key: t("gallery.file-size"),
+        value: `${new Intl.NumberFormat(locale, {
+          maximumFractionDigits: 2,
+        }).format(quantity)}${unit}`,
+      });
+    }
+  }
+
+  if (props.scheme === "video") {
+    if (props.duration) {
+      items.push({ key: "Duration", value: formatDuration(props.duration) });
+    }
+  }
 
   return (
     <MetadataSection
-      title={t(`gallery.about-the-${scheme}`)}
+      title={t(`gallery.about-the-${props.scheme}`)}
       metadata={<MetadataList items={items} />}
     />
   );

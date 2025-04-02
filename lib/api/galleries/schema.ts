@@ -66,7 +66,7 @@ export const DetailedAssetSchema = z
     name: z.string(),
     owner: z.string().nullable(),
     ownerName: z.string().nullable(),
-    scheme: CantoScheme,
+    scheme: SupportedCantoScheme,
     size: z.string(),
     smartTags: z.array(z.string()),
     tag: z.array(z.string()),

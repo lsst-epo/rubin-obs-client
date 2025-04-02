@@ -1,15 +1,15 @@
 "use client";
 import { FC } from "react";
-import styles from "./styles.module.css";
 import IconComposer from "@rubin-epo/epo-react-lib/IconComposer";
 import { useTranslation } from "react-i18next";
 import { useSafeBackNavigation } from "@/contexts/History";
+import styles from "./styles.module.css";
 
-interface CloseButtonProps {
+interface BackToGalleryProps {
   fallback: string;
 }
 
-export const CloseButton: FC<CloseButtonProps> = ({ fallback }) => {
+export const BackToGallery: FC<BackToGalleryProps> = ({ fallback }) => {
   const { safeBackNavigation } = useSafeBackNavigation({
     fallback,
     matches: fallback,
@@ -27,3 +27,7 @@ export const CloseButton: FC<CloseButtonProps> = ({ fallback }) => {
     </button>
   );
 };
+
+BackToGallery.displayName = "Organism.Gallery.Back";
+
+export default BackToGallery;
