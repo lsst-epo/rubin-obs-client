@@ -1,7 +1,8 @@
 import PropTypes from "prop-types";
 import { fileSize } from "@/helpers";
-import * as Styled from "./styles";
-import { Buttonish, Container } from "@rubin-epo/epo-react-lib";
+import Buttonish from "@rubin-epo/epo-react-lib/Buttonish";
+import Container from "@rubin-epo/epo-react-lib/Container";
+import styles from "./styles.module.css";
 
 export default function DownloadList({ assetsList, ...props }) {
   function getIcon(kind) {
@@ -24,8 +25,8 @@ export default function DownloadList({ assetsList, ...props }) {
   return assetsList.length > 0 ? (
     <Container>
       {assetsList.map((asset) => (
-        <Styled.DownloadButton
-          as={Buttonish}
+        <Buttonish
+          className={styles.downloadButton}
           key={asset.id}
           url={asset.assetSingle[0].url}
           download={asset.assetSingle[0].filename}

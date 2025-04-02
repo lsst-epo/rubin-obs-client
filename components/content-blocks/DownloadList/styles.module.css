@@ -1,9 +1,6 @@
-"use client";
-import styled from "styled-components";
-
-export const DownloadButton = styled.a`
+.downloadButton {
   & + & {
     /* stylelint-disable-next-line declaration-no-important */
     margin-block-start: 31px !important;
   }
-`;
+}
