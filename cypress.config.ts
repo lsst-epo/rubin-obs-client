@@ -7,7 +7,7 @@ const config = defineConfig({
   chromeWebSecurity: false,
   video: false,
   e2e: {
-    baseUrl: "http://localhost:3000",
+    baseUrl: env.NEXT_PUBLIC_BASE_URL,
   },
   component: {
     devServer: {

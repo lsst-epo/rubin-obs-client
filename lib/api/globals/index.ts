@@ -33,7 +33,7 @@ export async function getGlobalData(locale = fallbackLng) {
       }
     }
   `;
-  const { data } = await queryAPI({
+  const { data, error } = await queryAPI({
     query,
     variables: { site },
     fetchOptions: { next: { tags: [tags.globals] } },
