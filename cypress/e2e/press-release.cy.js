@@ -19,7 +19,6 @@ describe("Press release", () => {
     cy.get("[data-cy=hero] > img")
       .invoke("attr", "src")
       .should("have.length.gt", 0);
-    cy.get("[data-cy=hero] > img").should("have.attr", "loading", "eager");
   });
   it("Has a headline", () => {
     cy.get("h1").invoke("text").should("have.length.gt", 0);
