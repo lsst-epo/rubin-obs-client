@@ -44,8 +44,16 @@ const documents = {
     types.GetNavigationItemsDocument,
   "\n    query SearchResultsPage($site: [String]) {\n      searchResultsEntries(site: $site) {\n        ... on searchResults_searchResults_Entry {\n          title\n          id\n          dynamicComponent\n        }\n      }\n    }\n  ":
     types.SearchResultsPageDocument,
+  "\n  fragment skyviewerBlock on contentBlocks_skyviewer_BlockType {\n    id\n    embedTitle\n    typeHandle\n    captionRichText\n    dec\n    fov\n    ra\n    fullWidth\n    backgroundColor\n  }\n":
+    types.SkyviewerBlockFragmentDoc,
+  "\n  fragment skyviewerNewsBlock on contentBlocksNews_skyviewer_BlockType {\n    id\n    embedTitle\n    typeHandle\n    captionRichText\n    dec\n    fov\n    ra\n    fullWidth\n    backgroundColor\n  }\n":
+    types.SkyviewerNewsBlockFragmentDoc,
   "\n    query getLogos($set: [String], $site: [String]) {\n      siteInfo: globalSet(handle: $set, site: $site) {\n        ... on siteInfo_GlobalSet {\n          __typename\n          logoLarge {\n            url {\n              directUrlOriginal\n            }\n            width\n            height\n          }\n          logoSmall {\n            url {\n              directUrlOriginal\n            }\n            width\n            height\n          }\n        }\n      }\n    }\n  ":
     types.GetLogosDocument,
+  "\n  fragment rootPageInfoFragment on rootPageInformation_GlobalSet {\n    name\n    handle\n    customBreadcrumbs {\n      ... on customBreadcrumbs_ancestorsAndRoot_BlockType {\n        header\n        pageEntry {\n          id\n          title\n          uri\n        }\n      }\n    }\n  }\n":
+    types.RootPageInfoFragmentFragmentDoc,
+  "\n    query getRootPages($site: [String], $set: [String]) {\n      rootPages: globalSet(handle: $set, site: $site) {\n        ...rootPageInfoFragment\n      }\n    }\n  ":
+    types.GetRootPagesDocument,
   '\n    query RelatedInvestigation($site: [String], $ids: [QueryArgument]) {\n      investigation: entry(type: "investigation", landingPage: $ids, site: $site) {\n        sectionHandle\n        ... on investigations_investigation_Entry {\n          uri\n          title\n          duration: plainText\n          typeHandle\n          externalUrl: externalUrlTranslatable\n          status: investigationStatus\n          landingPage {\n            ... on pages_investigationLandingPage_Entry {\n              id\n              uri\n              title\n            }\n          }\n          \n        }\n      }\n    }\n  ':
     types.RelatedInvestigationDocument,
   '\n    query GetSiblings(\n      $uri: [String]\n      $site: [String]\n      $parentId: Int\n      $level: Int\n    ) {\n      siblings: entry(uri: $uri, site: $site) {\n        prev(\n          descendantOf: $parentId\n          section: "pages"\n          site: $site\n          level: $level\n        ) {\n          uri\n          title\n        }\n        next(\n          descendantOf: $parentId\n          section: "pages"\n          site: $site\n          level: $level\n        ) {\n          uri\n          title\n        }\n      }\n    }\n  ':
@@ -160,8 +168,32 @@ export function graphql(
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
+  source: "\n  fragment skyviewerBlock on contentBlocks_skyviewer_BlockType {\n    id\n    embedTitle\n    typeHandle\n    captionRichText\n    dec\n    fov\n    ra\n    fullWidth\n    backgroundColor\n  }\n"
+): (typeof documents)["\n  fragment skyviewerBlock on contentBlocks_skyviewer_BlockType {\n    id\n    embedTitle\n    typeHandle\n    captionRichText\n    dec\n    fov\n    ra\n    fullWidth\n    backgroundColor\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: "\n  fragment skyviewerNewsBlock on contentBlocksNews_skyviewer_BlockType {\n    id\n    embedTitle\n    typeHandle\n    captionRichText\n    dec\n    fov\n    ra\n    fullWidth\n    backgroundColor\n  }\n"
+): (typeof documents)["\n  fragment skyviewerNewsBlock on contentBlocksNews_skyviewer_BlockType {\n    id\n    embedTitle\n    typeHandle\n    captionRichText\n    dec\n    fov\n    ra\n    fullWidth\n    backgroundColor\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
   source: "\n    query getLogos($set: [String], $site: [String]) {\n      siteInfo: globalSet(handle: $set, site: $site) {\n        ... on siteInfo_GlobalSet {\n          __typename\n          logoLarge {\n            url {\n              directUrlOriginal\n            }\n            width\n            height\n          }\n          logoSmall {\n            url {\n              directUrlOriginal\n            }\n            width\n            height\n          }\n        }\n      }\n    }\n  "
 ): (typeof documents)["\n    query getLogos($set: [String], $site: [String]) {\n      siteInfo: globalSet(handle: $set, site: $site) {\n        ... on siteInfo_GlobalSet {\n          __typename\n          logoLarge {\n            url {\n              directUrlOriginal\n            }\n            width\n            height\n          }\n          logoSmall {\n            url {\n              directUrlOriginal\n            }\n            width\n            height\n          }\n        }\n      }\n    }\n  "];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: "\n  fragment rootPageInfoFragment on rootPageInformation_GlobalSet {\n    name\n    handle\n    customBreadcrumbs {\n      ... on customBreadcrumbs_ancestorsAndRoot_BlockType {\n        header\n        pageEntry {\n          id\n          title\n          uri\n        }\n      }\n    }\n  }\n"
+): (typeof documents)["\n  fragment rootPageInfoFragment on rootPageInformation_GlobalSet {\n    name\n    handle\n    customBreadcrumbs {\n      ... on customBreadcrumbs_ancestorsAndRoot_BlockType {\n        header\n        pageEntry {\n          id\n          title\n          uri\n        }\n      }\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: "\n    query getRootPages($site: [String], $set: [String]) {\n      rootPages: globalSet(handle: $set, site: $site) {\n        ...rootPageInfoFragment\n      }\n    }\n  "
+): (typeof documents)["\n    query getRootPages($site: [String], $set: [String]) {\n      rootPages: globalSet(handle: $set, site: $site) {\n        ...rootPageInfoFragment\n      }\n    }\n  "];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

@@ -33,11 +33,11 @@ export const HeroCaption = styled.div`
 
 export const Article = styled.article`
   z-index: 1;
-  margin-top: var(--Hero-caption-offset);
+  margin-block-start: calc(var(--size-spacing-l) * -1);
   background-color: white;
 
   @media (max-width: ${tokens.BREAK_TABLET}) {
-    margin-top: auto;
+    margin-block-start: auto;
   }
 `;
 

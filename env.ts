@@ -13,6 +13,7 @@ export const env = createEnv({
     CRAFT_REVALIDATE_SECRET_TOKEN: z.string().min(1),
     CRAFT_SECRET_TOKEN: z.string().min(1),
     GOOGLE_APP_SECRET: z.string().min(1),
+    SKYVIEWER_BASE_URL: z.string().url(),
   },
   client: {
     NEXT_PUBLIC_API_URL: z.string().url(),

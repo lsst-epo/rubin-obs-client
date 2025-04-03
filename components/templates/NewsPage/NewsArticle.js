@@ -1,15 +1,14 @@
-"use client";
 import PropTypes from "prop-types";
-import { useTranslation } from "react-i18next";
-import useResizeObserver from "use-resize-observer";
+import { useTranslation } from "@/lib/i18n";
 import { makeDateString } from "@/helpers/dates";
 import ContentBlockFactory from "@/factories/ContentBlockFactory";
 import Container from "@rubin-epo/epo-react-lib/Container";
 import { Share } from "@/content-blocks";
 import Contacts from "./Contacts";
 import * as Styled from "./styles";
+import { getLocale } from "@/lib/i18n/server";
 
-export default function NewsArticle({ data }) {
+export default async function NewsArticle({ data }) {
   const {
     contentBlocksNews = [],
     date,
@@ -30,17 +29,8 @@ export default function NewsArticle({ data }) {
   const {
     t,
     i18n: { resolvedLanguage },
-  } = useTranslation();
+  } = await useTranslation(getLocale());
   const localizedDate = makeDateString(date, { locale: resolvedLanguage });
-  const { ref } = useResizeObserver({
-    box: "border-box",
-    onResize: ({ height }) => {
-      document.documentElement.style.setProperty(
-        "--Hero-caption-offset",
-        `-${height}px`
-      );
-    },
-  });
 
   return (
     <Styled.Article>
@@ -48,7 +38,6 @@ export default function NewsArticle({ data }) {
         <div>
           {heroCaption && (
             <Styled.HeroCaption
-              ref={ref}
               dangerouslySetInnerHTML={{ __html: heroCaption }}
               aria-hidden
             />
