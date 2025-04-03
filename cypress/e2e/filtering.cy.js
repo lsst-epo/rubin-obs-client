@@ -9,7 +9,10 @@ describe("Filtering dynamic data", () => {
 
   it("Should show all filtered items", () => {
     cy.get("button").contains("Filter").click();
-    cy.get("a").contains("a", "All").click();
+    cy.get("a[role='menuitem']")
+      .contains("a", "All")
+      .filter(":visible")
+      .click();
 
     cy.on("url:changed", (newUrl) => {
       const url = new URL(newUrl);
