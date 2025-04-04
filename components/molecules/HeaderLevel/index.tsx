@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import { FunctionComponent, PropsWithChildren } from "react";
 import styles from "./styles.module.css";
 import Center from "@rubin-epo/epo-react-lib/Center";
@@ -12,7 +12,7 @@ const HeaderLevel: FunctionComponent<PropsWithChildren<HeaderLevelProps>> = ({
   className,
 }) => {
   return (
-    <div className={classNames(className)}>
+    <div className={clsx(className)}>
       <Center className={styles.headerLevel} maxWidth="2000px">
         {children}
       </Center>

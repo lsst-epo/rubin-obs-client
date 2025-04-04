@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
+import clsx from "clsx";
 import { useTranslation } from "react-i18next";
 import IconComposer from "@rubin-epo/epo-react-lib/IconComposer";
 import { env } from "@/env";
@@ -69,7 +69,7 @@ function ContactForm({ topics = [], className }) {
       method="post"
       action=""
       onSubmit={handleSubmit}
-      className={classNames({
+      className={clsx({
         "c-contact-form": true,
         [`${className}`]: !!className,
       })}

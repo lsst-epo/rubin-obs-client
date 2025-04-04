@@ -3,7 +3,7 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import IconComposer from "@rubin-epo/epo-react-lib/IconComposer";
 import styles from "./styles.module.css";
-import classNames from "classnames";
+import clsx from "clsx";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 interface ClearFiltersButtonProps {
@@ -36,7 +36,7 @@ const ClearFiltersButton: FC<ClearFiltersButtonProps> = ({
   return (
     <button
       onClick={clearFilters}
-      className={classNames(styles.clearFilters, className)}
+      className={clsx(styles.clearFilters, className)}
       data-cy="clear"
       disabled={!hasParamsToReset}
     >

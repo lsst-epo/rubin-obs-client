@@ -1,7 +1,7 @@
 "use client";
 import PropTypes from "prop-types";
 import { useId } from "react";
-import classNames from "classnames";
+import clsx from "clsx";
 import IconComposer from "@rubin-epo/epo-react-lib/IconComposer";
 import Image from "@rubin-epo/epo-react-lib/Image";
 import MixedLink from "@rubin-epo/epo-react-lib/MixedLink";
@@ -47,7 +47,7 @@ const Tile = ({
         as={link?.url && type !== "search" ? MixedLink : "div"}
         {...link}
         aria-labelledby={link?.url ? uid : null}
-        className={classNames(className, type, {
+        className={clsx(className, type, {
           featured: isFeature,
           "padded-bottom": showSharePopup,
         })}

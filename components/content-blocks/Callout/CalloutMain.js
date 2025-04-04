@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 "use client";
 import PropTypes from "prop-types";
-import classNames from "classnames";
+import clsx from "clsx";
 import { linksShape } from "@/shapes/link";
 import Wrapper from "./Wrapper";
 import { Header, Text, StyledMixedLink, StyledImage } from "./styles";
@@ -39,7 +39,7 @@ export default function CalloutMain({ callout }) {
           <StyledMixedLink
             {...link.mixedLink}
             key={index}
-            className={classNames({
+            className={clsx({
               "c-buttonish": true,
               "c-buttonish--educator":
                 wrapperProps.backgroundColor === "orange20",

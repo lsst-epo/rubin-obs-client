@@ -1,5 +1,5 @@
 import { FC } from "react";
-import classNames from "classnames";
+import clsx from "clsx";
 import Image, { ImageProps } from "next/image";
 import { LinkProps } from "next/link";
 import { type IconKey } from "@rubin-epo/epo-react-lib/IconComposer";
@@ -25,9 +25,9 @@ const LinkedImage: FC<LinkedImageProps> = ({
     <MasonryImage
       icon={icon}
       linkProps={link}
-      className={classNames(styles.tile, className)}
+      className={clsx(styles.tile, className)}
     >
-      <Image {...image} className={classNames(styles.image, imageClassName)} />
+      <Image {...image} className={clsx(styles.image, imageClassName)} />
       {title && <div className={styles.titleCard}>{title}</div>}
     </MasonryImage>
   );

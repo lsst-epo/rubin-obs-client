@@ -1,6 +1,6 @@
 "use client";
 import { FunctionComponent } from "react";
-import classNames from "classnames";
+import clsx from "clsx";
 import useNavigationMenu from "@/contexts/NavigationMenu";
 import NavItemWithChildren from "../../NavItemWithChildren";
 import NavItem from "../../NavItem";
@@ -22,8 +22,8 @@ const NavigationHorizontal: FunctionComponent<NavigationProps> = ({
   const { close } = useNavigationMenu();
 
   return (
-    <nav className={classNames(styles.horizontalNavigation, className)}>
-      <ul className={classNames("c-nav-list--desktop", styles.navigationList)}>
+    <nav className={clsx(styles.horizontalNavigation, className)}>
+      <ul className={clsx("c-nav-list--desktop", styles.navigationList)}>
         {items.map(({ id, title, uri, children }) => {
           const hasChildren = children && children.length > 0;
 

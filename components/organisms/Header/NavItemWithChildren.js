@@ -1,7 +1,7 @@
 "use client";
 import { useRef } from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
+import clsx from "clsx";
 import Subnavigation from "./Subnavigation";
 import IconComposer from "@rubin-epo/epo-react-lib/IconComposer";
 import { useKeyDownEvent, useFocusTrap } from "@/hooks";
@@ -47,7 +47,7 @@ export default function NavItemWithChildren({
         onClick={handleToggle}
         aria-expanded={isActive}
         aria-haspopup
-        className={classNames({
+        className={clsx({
           [`${baseClassName}__link`]: true,
           [`${baseClassName}__link--is-active`]: isActive,
           [`${baseClassName}__link--${theme}`]: !!theme,
