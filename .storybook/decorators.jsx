@@ -1,5 +1,5 @@
 import React from "react";
-import { GlobalStyles } from "@rubin-epo/epo-react-lib";
+import { GlobalStyles } from "@rubin-epo/epo-react-lib/styles";
 
 const withTheme = (StoryFn) => {
   return (

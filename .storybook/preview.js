@@ -1,17 +1,20 @@
 import "@/styles/styles.scss";
 import globalDecorators from "./decorators";
-import i18n from "./i18next.js";
+import i18n from "./i18next";
 
 const preview = {
-  globals: {
+  parameters: {
+    i18n,
+  },
+
+  tags: ["autodocs"],
+
+  initialGlobals: {
     locale: "en",
     locales: {
       en: "English",
       es: "Español",
     },
-  },
-  parameters: {
-    i18n,
   },
 };
 export default preview;
