@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import Link from "next/link";
-import classNames from "classnames";
+import clsx from "clsx";
 import { IconComposer } from "@rubin-epo/epo-react-lib";
 
 function NavItem({ href, onClick, title, theme, className, icon }) {
@@ -21,7 +21,7 @@ function NavItem({ href, onClick, title, theme, className, icon }) {
       <InteractiveTag
         href={href}
         onClick={onClick}
-        className={classNames({
+        className={clsx({
           "c-nav-list__link": true,
           [`c-nav-list__link--${theme}`]: !!theme,
           [className]: !!className,

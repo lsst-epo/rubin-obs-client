@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import classNames from "classnames";
+import clsx from "clsx";
 import GlobalDataContext from "@/contexts/GlobalData";
 import { IconComposer } from "@rubin-epo/epo-react-lib";
 
@@ -11,7 +11,7 @@ export default function ContactInfo({ className }) {
 
         return (
           <ul
-            className={classNames({
+            className={clsx({
               "c-contact-info": true,
               [`${className}`]: !!className,
             })}

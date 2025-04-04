@@ -1,7 +1,7 @@
 "use client";
 import PropTypes from "prop-types";
 import { useId } from "react";
-import classNames from "classnames";
+import clsx from "clsx";
 import {
   ResponsiveImage,
   Image,
@@ -47,7 +47,7 @@ const SlideTile = ({
         as={link?.url ? MixedLink : "div"}
         {...link}
         aria-labelledby={link?.url ? uid : null}
-        className={classNames(
+        className={clsx(
           `${type}`,
           `${isFeature ? "featured" : ""} `,
           className

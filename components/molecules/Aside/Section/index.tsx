@@ -1,5 +1,5 @@
 import { FC, PropsWithChildren } from "react";
-import classNames from "classnames";
+import clsx from "clsx";
 import styles from "./styles.module.css";
 
 interface AsideSectionProps {
@@ -13,7 +13,7 @@ const AsideSection: FC<PropsWithChildren<AsideSectionProps>> = ({
   className,
 }) => {
   return (
-    <section className={classNames(styles.section, className)}>
+    <section className={clsx(styles.section, className)}>
       {title && <h3 className={styles.title}>{title}</h3>}
       {children}
     </section>

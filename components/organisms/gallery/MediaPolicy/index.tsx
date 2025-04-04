@@ -5,7 +5,7 @@ import { Trans } from "react-i18next/TransWithoutContext";
 import { getMediaPolicyPage } from "@/lib/api/galleries/media-policy";
 import { addLocaleUriSegment, useTranslation } from "@/lib/i18n";
 import styles from "./styles.module.css";
-import classNames from "classnames";
+import clsx from "clsx";
 
 const MediaPolicyContent: FC<{ locale: string }> = async ({ locale }) => {
   const { t } = await useTranslation(locale);
@@ -30,7 +30,7 @@ const MediaPolicyContent: FC<{ locale: string }> = async ({ locale }) => {
 
 const MediaPolicy: FC<{ locale: string }> = async (props) => {
   return (
-    <div className={classNames(styles.textWrapper, "c-content-rte")}>
+    <div className={clsx(styles.textWrapper, "c-content-rte")}>
       <Suspense fallback={<Skeleton width={"min(100%,80ex)"} height="1lh" />}>
         <MediaPolicyContent {...props} />
       </Suspense>

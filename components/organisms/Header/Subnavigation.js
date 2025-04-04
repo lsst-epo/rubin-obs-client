@@ -5,7 +5,7 @@
  */
 import PropTypes from "prop-types";
 import Link from "next/link";
-import classNames from "classnames";
+import clsx from "clsx";
 import internalLinkShape from "@/shapes/link";
 import NavItemWithChildren from "./NavItemWithChildren";
 import useNavigationMenu from "@/contexts/NavigationMenu";
@@ -21,7 +21,7 @@ export default function Subnavigation({
 
   return (
     <ul
-      className={classNames({
+      className={clsx({
         [baseClassName]: true,
         [`${baseClassName}--is-active`]: active,
       })}
