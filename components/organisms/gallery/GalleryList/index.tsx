@@ -5,7 +5,7 @@ import { getLocale } from "@/lib/i18n/server";
 import styles from "./styles.module.css";
 import Link from "next/link";
 import { addLocaleUriSegment, useTranslation } from "@/lib/i18n";
-import classNames from "classnames";
+import clsx from "clsx";
 
 interface GalleryListProps {
   currentGallery: string;
@@ -35,7 +35,7 @@ const GalleryList: FC<GalleryListProps> = async ({ currentGallery }) => {
       bgColor="color-rubin-gray-300"
       className={styles.gallerySection}
     >
-      <span className={classNames("t-heading-tertiary", styles.listTitle)}>
+      <span className={clsx("t-heading-tertiary", styles.listTitle)}>
         {t("gallery.plural-gallery")}
       </span>
       <ul className={styles.galleryList}>

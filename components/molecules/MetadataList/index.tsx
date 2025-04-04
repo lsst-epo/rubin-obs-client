@@ -1,5 +1,5 @@
 import { FunctionComponent, ReactNode } from "react";
-import classNames from "classnames";
+import clsx from "clsx";
 import styles from "./styles.module.css";
 
 export interface MetadataItem {
@@ -19,7 +19,7 @@ const MetadataList: FunctionComponent<MetadataListProps> = ({
   className,
 }) => {
   return (
-    <dl className={classNames(styles.metadataList, className)}>
+    <dl className={clsx(styles.metadataList, className)}>
       {items.map(({ key, value }, i) => {
         return (
           <div className={styles.metadataSet} key={i}>

@@ -3,7 +3,7 @@ import { FC, ReactNode } from "react";
 import { Menu } from "@headlessui/react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import classNames from "classnames";
+import clsx from "clsx";
 import { useTranslation } from "react-i18next";
 import IconComposer from "@rubin-epo/epo-react-lib/IconComposer";
 import styles from "./styles.module.css";
@@ -54,7 +54,7 @@ const FilterDropdownList: FC<FilterDropdownListProps> = ({
 
   return (
     <Menu as="div" className={styles.toggleWrapper}>
-      <Menu.Button className={classNames(styles.toggleButton, className)}>
+      <Menu.Button className={clsx(styles.toggleButton, className)}>
         {icon && <div className={styles.toggleIcon}>{icon}</div>}
         {name}
       </Menu.Button>

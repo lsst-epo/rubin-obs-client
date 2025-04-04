@@ -1,5 +1,5 @@
 import { FC, PropsWithChildren } from "react";
-import classNames from "classnames";
+import clsx from "clsx";
 import Container, {
   type ContainerProps,
 } from "@rubin-epo/epo-react-lib/Container";
@@ -22,7 +22,7 @@ const Filters: FC<PropsWithChildren<FiltersProps>> = ({
   children,
 }) => {
   return (
-    <div className={classNames(styles.filters, className)}>
+    <div className={clsx(styles.filters, className)}>
       <Container
         bgColor="none"
         paddingSize="none"

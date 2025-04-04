@@ -1,6 +1,6 @@
 "use client";
 import { FunctionComponent } from "react";
-import classNames from "classnames";
+import clsx from "clsx";
 import { useTranslation } from "react-i18next";
 import { IconComposer } from "@rubin-epo/epo-react-lib";
 import styles from "./styles.module.scss";
@@ -23,7 +23,7 @@ const Hamburger: FunctionComponent<HamburgerProps> = ({
       aria-haspopup="dialog"
       aria-expanded={active}
       onClick={onClick}
-      className={classNames(styles.hamburger, className)}
+      className={clsx(styles.hamburger, className)}
     >
       <span className="a-hidden">{t("toggle-nav")}</span>
       <IconComposer icon="Hamburger" />

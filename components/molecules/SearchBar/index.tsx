@@ -1,6 +1,6 @@
 "use client";
 import { useCallback, useRef, useState, useId, FC } from "react";
-import classNames from "classnames";
+import clsx from "clsx";
 import { useTranslation } from "react-i18next";
 import { useOnClickOutside, useKeyDownEvent } from "@/hooks/listeners";
 import { IconComposer } from "@rubin-epo/epo-react-lib";
@@ -70,7 +70,7 @@ const SearchBar: FC = () => {
         role="search"
         action=""
         onSubmit={handleSubmit}
-        className={classNames(styles.form)}
+        className={clsx(styles.form)}
         data-expanded={open}
       >
         <label htmlFor={id} className="a-hidden">
