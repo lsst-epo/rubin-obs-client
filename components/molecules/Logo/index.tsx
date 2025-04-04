@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import classNames from "classnames";
+import clsx from "clsx";
 import Link from "next/link";
 import { ImgProps } from "next/dist/shared/lib/get-img-props";
 import Picture from "@rubin-epo/epo-react-lib/Picture";
@@ -46,7 +46,7 @@ const Logo: FunctionComponent<LogoProps> = async ({
     <Link
       prefetch={false}
       href={homeUrl}
-      className={classNames(styles.logoWrapper, className)}
+      className={clsx(styles.logoWrapper, className)}
       data-cy="logo"
     >
       <Picture

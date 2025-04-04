@@ -1,6 +1,6 @@
 "use client";
 import { FC, FormEventHandler, useEffect, useId, useRef } from "react";
-import classNames from "classnames";
+import clsx from "clsx";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import IconComposer from "@rubin-epo/epo-react-lib/IconComposer";
@@ -65,7 +65,7 @@ const Search: FC<SearchProps> = ({ className }) => {
     <form
       ref={formRef}
       onSubmit={handleSubmit}
-      className={classNames(styles.searchFieldset, className)}
+      className={clsx(styles.searchFieldset, className)}
     >
       <button className={styles.searchSubmit} type="submit">
         <IconComposer size="14px" icon="search" />

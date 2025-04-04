@@ -1,6 +1,6 @@
 import { FC } from "react";
 import sanitize from "sanitize-html";
-import classNames from "classnames";
+import clsx from "clsx";
 import { ImageProps } from "next/image";
 import { LinkProps } from "next/link";
 import Frame from "@rubin-epo/epo-react-lib/Frame";
@@ -23,7 +23,7 @@ const AsideImage: FC<AsideImageProps> = ({
   return (
     <Frame aspectRatio="8:5">
       <LinkedImage
-        className={classNames(styles.image, className)}
+        className={clsx(styles.image, className)}
         title={
           title
             ? sanitize(title, { allowedTags: [], allowedAttributes: {} })

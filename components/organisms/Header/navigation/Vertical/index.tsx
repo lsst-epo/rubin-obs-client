@@ -1,6 +1,6 @@
 "use client";
 import { FunctionComponent, useCallback } from "react";
-import classNames from "classnames";
+import clsx from "clsx";
 import Slideout from "@rubin-epo/epo-react-lib/Slideout";
 import { isDefaultLocale } from "@/lib/i18n";
 import { fallbackLng } from "@/lib/i18n/settings";
@@ -48,7 +48,7 @@ const NavigationVertical: FunctionComponent<NavigationProps> = ({
         showBackground={false}
         slideFrom="right"
       >
-        <nav className={classNames(styles.verticalNavigation, className)}>
+        <nav className={clsx(styles.verticalNavigation, className)}>
           <ul className="c-nav-list--mobile">
             {items.map(({ id, title, uri, children }) => {
               const hasChildren = children && children.length > 0;

@@ -1,7 +1,7 @@
 "use client";
 
 import { FC, useState } from "react";
-import classNames from "classnames";
+import clsx from "clsx";
 import Image from "next/image";
 import { ImageObject } from "schema-dts";
 import Skeleton from "react-loading-skeleton";
@@ -36,7 +36,7 @@ const GalleryImage: FC<GalleryImageProps> = ({
   return (
     <>
       <StructuredData jsonLd={metadata} />
-      <div className={classNames(styles.stack, className)}>
+      <div className={clsx(styles.stack, className)}>
         <Image
           {...{ width, height, src, title, alt }}
           data-cy="gallery-image"

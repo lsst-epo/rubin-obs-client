@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import classNames from "classnames";
+import clsx from "clsx";
 import Link from "next/link";
 import styles from "./styles.module.css";
 
@@ -23,7 +23,7 @@ const TagList: FunctionComponent<TagListProps> = ({
   return (
     <ul
       data-no-break={!withLinebreaks}
-      className={classNames(styles.tagList, className)}
+      className={clsx(styles.tagList, className)}
     >
       {tags.map(({ name, destination }) => {
         const tagName = showPound ? `#${name}` : name;

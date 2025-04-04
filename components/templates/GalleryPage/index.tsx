@@ -14,7 +14,7 @@ import {
 } from "@/lib/api/galleries/schema";
 import GalleryList from "@/components/organisms/gallery/GalleryList";
 import styles from "./styles.module.css";
-import classNames from "classnames";
+import clsx from "clsx";
 
 interface GalleryPageProps {
   gallery: string;
@@ -68,7 +68,7 @@ const GalleryPage: FC<WithSearchParams<GalleryPageProps>> = async ({
       </Filters>
       <GalleryList currentGallery={gallery} />
       <Container width="wide">
-        <h1 className={classNames("t-heading-secondary", styles.galleryTitle)}>
+        <h1 className={clsx("t-heading-secondary", styles.galleryTitle)}>
           {metadata?.title}
         </h1>
         <PreviewGrid {...{ locale, gallery, filters }} />
