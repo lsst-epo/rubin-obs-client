@@ -1,3 +1,4 @@
+"use client";
 import PropTypes from "prop-types";
 import { useGlobalData } from "@/lib/utils";
 import { makeDateObject } from "@/helpers/dates";

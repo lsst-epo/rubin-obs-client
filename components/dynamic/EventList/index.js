@@ -1,10 +1,12 @@
+"use client";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { Grid, IconComposer } from "@rubin-epo/epo-react-lib";
 import DataList from "@/dynamic/DataList";
 import Tile from "@/atomic/Tile";
 import EventTime from "@/components/EventTime";
-import { checkIfBetweenDates, createLocationString } from "@/lib/utils";
+import { checkIfBetweenDates } from "@/lib/utils/dates";
+import { createLocationString } from "@/lib/helpers/location";
 import * as Styled from "./styles";
 
 const EventList = ({

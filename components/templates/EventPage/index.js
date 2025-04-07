@@ -1,11 +1,10 @@
-"use client";
 import PropTypes from "prop-types";
-import { useTranslation } from "react-i18next";
-import {
-  checkIfBetweenDates,
-  createLocationString,
-  useCustomBreadcrumbs,
-} from "@/lib/utils";
+import getRootPages from "@/services/craft/globals/rootPages";
+import { getLocale } from "@/lib/i18n/server";
+import { createLocationString } from "@/lib/helpers/location";
+import { checkIfBetweenDates } from "@/lib/utils/dates";
+import { getCustomBreadcrumbs } from "@/lib/helpers/breadcrumbs";
+import { useTranslation } from "@/lib/i18n";
 import Hero from "@/components/molecules/Hero";
 import ContentBlockFactory from "@/factories/ContentBlockFactory";
 import { Share } from "@/content-blocks";
@@ -15,7 +14,7 @@ import EventList from "@/dynamic/EventList";
 import EventTime from "@/components/EventTime";
 import * as Styled from "./styles";
 
-export default function EventPage({
+export default async function EventPage({
   data: {
     address,
     city,
@@ -39,8 +38,12 @@ export default function EventPage({
     uri,
   },
 }) {
-  const { t } = useTranslation();
-  const customBreadcrumbs = useCustomBreadcrumbs("Events");
+  const { t } = await useTranslation(getLocale());
+  const rootPages = await getRootPages();
+  const customBreadcrumbs = getCustomBreadcrumbs({
+    rootPages,
+    header: "Events",
+  });
   const rootHomeLink = customBreadcrumbs.slice(-1)[0];
 
   const pageLink = {

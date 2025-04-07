@@ -1,3 +1,4 @@
+"server-only";
 import PropTypes from "prop-types";
 import {
   Image,
@@ -22,6 +23,8 @@ import {
   PeopleBlock,
   KeyNumbersGridBlock,
 } from "@/content-blocks";
+import SkyviewerBlock from "@/components/content-blocks/Skyviewer";
+import { getLocale } from "@/lib/i18n/server";
 
 const blockMap = {
   accordionGroup: AccordionGroup,
@@ -51,12 +54,14 @@ const blockMap = {
   publicationsList: PublicationsList,
   peopleBlock: PeopleBlock,
   keyNumbersGrid: KeyNumbersGridBlock,
+  skyviewer: SkyviewerBlock,
 };
 
 export default function ContentBlockFactory({ type, data, pageId }) {
+  const locale = getLocale();
   const Block = blockMap[type];
   if (!Block) return null;
-  return <Block {...data} pageId={pageId} />;
+  return <Block {...data} pageId={pageId} locale={locale} />;
 }
 
 ContentBlockFactory.propTypes = {
