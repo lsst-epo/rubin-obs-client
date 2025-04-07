@@ -1,5 +1,5 @@
 import "./env.config.js";
-import { env } from "./env";
+import { env } from "./env.js";
 import { defineConfig } from "cypress";
 
 const config = defineConfig({
