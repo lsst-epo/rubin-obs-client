@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { zStack } from "@/styles/globalStyles";
-import { Dialog as BaseDialog } from "@headlessui/react";
+import { Dialog as BaseDialog, DialogBackdrop } from "@headlessui/react";
 import IconButton from "@/components/atomic/Button/IconButton";
 
-export const Overlay = styled(BaseDialog.Overlay)`
+export const Overlay = styled(DialogBackdrop)`
   position: fixed;
   top: 0;
   width: 100%;

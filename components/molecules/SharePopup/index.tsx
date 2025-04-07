@@ -1,6 +1,6 @@
 "use client";
 import { FC, useState } from "react";
-import { Popover } from "@headlessui/react";
+import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
 import { usePopper } from "react-popper";
 import { useTranslation } from "react-i18next";
 import IconComposer from "@rubin-epo/epo-react-lib/IconComposer";
@@ -41,18 +41,18 @@ const SharePopup: FC<SharePopupProps> = ({ title, url, className }) => {
 
   return (
     <Popover className={className}>
-      <Popover.Button ref={setReferenceElement} className={styles.button}>
+      <PopoverButton ref={setReferenceElement} className={styles.button}>
         <IconComposer size="0.75em" icon="shareToggle" />
         <span className="a-hidden">{t("share.label_item", { title })}</span>
-      </Popover.Button>
-      <Popover.Panel
+      </PopoverButton>
+      <PopoverPanel
         ref={setPopperElement}
         style={popperStyles.popper}
         {...attributes.popper}
         className={styles.panel}
       >
         <ShareButtons title={title} url={createFinalUrl(url)} />
-      </Popover.Panel>
+      </PopoverPanel>
     </Popover>
   );
 };

@@ -1,6 +1,6 @@
 "use client";
 import { FC, ReactNode } from "react";
-import { Menu } from "@headlessui/react";
+import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import clsx from "clsx";
@@ -54,13 +54,13 @@ const FilterDropdownList: FC<FilterDropdownListProps> = ({
 
   return (
     <Menu as="div" className={styles.toggleWrapper}>
-      <Menu.Button className={clsx(styles.toggleButton, className)}>
+      <MenuButton className={clsx(styles.toggleButton, className)}>
         {icon && <div className={styles.toggleIcon}>{icon}</div>}
         {name}
-      </Menu.Button>
-      <Menu.Items className={styles.filterList}>
+      </MenuButton>
+      <MenuItems className={styles.filterList}>
         {includeReset && (
-          <Menu.Item>
+          <MenuItem>
             <Link
               className={styles.filterLink}
               href={{ query: resetParams.toString() }}
@@ -72,12 +72,12 @@ const FilterDropdownList: FC<FilterDropdownListProps> = ({
               )}
               {t("filters.all")}
             </Link>
-          </Menu.Item>
+          </MenuItem>
         )}
         {filters.map(({ name, query, value, active }) => {
           const isActive = active || paramsWithoutPage.has(query, value);
           return (
-            <Menu.Item key={name}>
+            <MenuItem key={name}>
               <Link
                 className={styles.filterLink}
                 aria-current={isActive ? "page" : undefined}
@@ -90,10 +90,10 @@ const FilterDropdownList: FC<FilterDropdownListProps> = ({
                 )}
                 {name}
               </Link>
-            </Menu.Item>
+            </MenuItem>
           );
         })}
-      </Menu.Items>
+      </MenuItems>
     </Menu>
   );
 };

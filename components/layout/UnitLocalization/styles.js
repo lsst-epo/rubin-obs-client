@@ -1,5 +1,9 @@
 import styled from "styled-components";
-import { RadioGroup as BaseRadioGroup } from "@headlessui/react";
+import {
+  RadioGroup as BaseRadioGroup,
+  Label as BaseLabel,
+  Radio,
+} from "@headlessui/react";
 
 export const LocalizationBar = styled.div`
   display: flex;
@@ -28,12 +32,12 @@ export const RadioGroup = styled(BaseRadioGroup)`
   padding-inline: var(--PADDING_SMALL, 20px);
   border-left: 1px solid #6a6e6e;
 `;
-export const RadioGroupLabel = styled(BaseRadioGroup.Label)`
+export const RadioGroupLabel = styled(BaseLabel)`
   font-size: 50%;
   line-height: 1;
 `;
 
-export const RadioGroupOption = styled(BaseRadioGroup.Option)`
+export const RadioGroupOption = styled(Radio)`
   --radio-option-size: 18px;
   --radio-option-outline: none;
   --radio-option-checked-background: transparent;
