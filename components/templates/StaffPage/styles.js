@@ -1,3 +1,4 @@
+"use client";
 import styled from "styled-components";
 import { fluidScale, respond, containerRegular } from "@/styles/globalStyles";
 import AsideSection from "@/components/molecules/Aside/Section";
