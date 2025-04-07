@@ -1,8 +1,7 @@
-"use client";
 import PropTypes from "prop-types";
-import { useTranslation } from "react-i18next";
-import { useGlobalData } from "@/lib/utils";
-import { addLocaleUriSegment } from "@/lib/i18n";
+import { getLocale } from "@/lib/i18n/server";
+import { addLocaleUriSegment, useTranslation } from "@/lib/i18n";
+import getRootPages from "@/services/craft/globals/rootPages";
 import { Share } from "@/content-blocks";
 import StaffList from "@/dynamic/StaffList";
 import ContentBlockFactory from "@/factories/ContentBlockFactory";
@@ -27,7 +26,7 @@ function getParentEntry(rootPages) {
   return parentRootPage?.pageEntry?.[0];
 }
 
-export default function StaffPage({
+export default async function StaffPage({
   data: {
     id,
     uri,
@@ -43,8 +42,8 @@ export default function StaffPage({
   const {
     t,
     i18n: { language },
-  } = useTranslation();
-  const rootPages = useGlobalData("rootPages");
+  } = await useTranslation(getLocale());
+  const rootPages = await getRootPages();
   const parentUri = getParentUri(uri);
   const parentEntry = getParentEntry(rootPages);
 
