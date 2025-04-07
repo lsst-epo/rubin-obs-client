@@ -1,7 +1,7 @@
 "use client";
 import PropTypes from "prop-types";
 import { Container } from "@rubin-epo/epo-react-lib";
-import { Tab } from "@headlessui/react";
+import { TabGroup, TabList, Tab, TabPanels, TabPanel } from "@headlessui/react";
 import { useGlobalData } from "@/lib/utils";
 import ComplexTable from "../ComplexTable";
 import * as Styled from "./styles";
@@ -18,18 +18,18 @@ export default function TableGroup({ sites = [], items }) {
 
   return (
     <Container width="wide">
-      <Tab.Group>
-        <Tab.List as={Styled.TabList}>
+      <TabGroup>
+        <TabList as={Styled.TabList}>
           {items.map(({ plainText }, i) => (
             <Tab as={Styled.Tab} key={`tab${i}`}>
               {plainText}
             </Tab>
           ))}
-        </Tab.List>
-        <Tab.Panels>
+        </TabList>
+        <TabPanels>
           {items.map(
             ({ complexTable, sites, plainText, verticalAlignment }, i) => (
-              <Tab.Panel key={`panel${i}`}>
+              <TabPanel key={`panel${i}`}>
                 <ComplexTable
                   sites={sites}
                   complexTable={complexTable}
@@ -38,11 +38,11 @@ export default function TableGroup({ sites = [], items }) {
                   styleAs="secondary"
                   isChild
                 />
-              </Tab.Panel>
+              </TabPanel>
             )
           )}
-        </Tab.Panels>
-      </Tab.Group>
+        </TabPanels>
+      </TabGroup>
     </Container>
   );
 }

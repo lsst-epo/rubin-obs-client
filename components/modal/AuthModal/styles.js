@@ -5,10 +5,10 @@ import {
   respond,
   zStack,
 } from "@/styles/globalStyles";
-import { Dialog as BaseDialog } from "@headlessui/react";
+import { Dialog as BaseDialog, DialogBackdrop } from "@headlessui/react";
 import { FormButtons as BaseFormButtons } from "@rubin-epo/epo-react-lib";
 
-export const Overlay = styled(BaseDialog.Overlay)`
+export const Overlay = styled(DialogBackdrop)`
   position: fixed;
   top: 0;
   width: 100%;
