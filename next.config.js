@@ -29,6 +29,7 @@ export default {
         hostname: "noirlab.edu",
       },
     ],
+    minimumCacheTTL: 3600, // 1 hour
   },
   experimental: {
     forceSwcTransforms: true,
