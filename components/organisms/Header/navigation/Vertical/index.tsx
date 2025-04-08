@@ -1,7 +1,7 @@
 "use client";
 import { FunctionComponent, useCallback } from "react";
+import { Transition } from "@headlessui/react";
 import clsx from "clsx";
-import Slideout from "@rubin-epo/epo-react-lib/Slideout";
 import { isDefaultLocale } from "@/lib/i18n";
 import { fallbackLng } from "@/lib/i18n/settings";
 import Hamburger from "@/components/atomic/Button/Hamburger";
@@ -42,12 +42,7 @@ const NavigationVertical: FunctionComponent<NavigationProps> = ({
         onClick={handleOpenToggle}
         className={styles.icon}
       />
-      <Slideout
-        className={styles.slideOut}
-        isOpen={open}
-        showBackground={false}
-        slideFrom="right"
-      >
+      <Transition as="div" className={styles.slideOut} show={open}>
         <nav className={clsx(styles.verticalNavigation, className)}>
           <ul className="c-nav-list--mobile">
             {items.map(({ id, title, uri, children }) => {
@@ -79,7 +74,7 @@ const NavigationVertical: FunctionComponent<NavigationProps> = ({
             })}
           </ul>
         </nav>
-      </Slideout>
+      </Transition>
     </>
   );
 };
