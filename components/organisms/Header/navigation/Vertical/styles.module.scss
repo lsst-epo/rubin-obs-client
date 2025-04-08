@@ -25,9 +25,18 @@
 .slideOut {
   --offset-slideout: calc(var(--header-height) * 2);
 
+  position: fixed;
   top: var(--offset-slideout) !important;
   right: 0;
   height: calc(100vh - var(--offset-slideout)) !important;
+  transition-delay: 100ms;
+  transition-duration: 400ms;
+  transition-property: transform;
+  transform: translateX(0);
+
+  &[data-closed] {
+    transform: translateX(100%);
+  }
 }
 
 .icon {
