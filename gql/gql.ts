@@ -44,6 +44,8 @@ const documents = {
     types.GetNavigationItemsDocument,
   "\n    query SearchResultsPage($site: [String]) {\n      searchResultsEntries(site: $site) {\n        ... on searchResults_searchResults_Entry {\n          title\n          id\n          dynamicComponent\n        }\n      }\n    }\n  ":
     types.SearchResultsPageDocument,
+  "\n  fragment shareBlock on contentBlocks_share_BlockType {\n    id\n    typeHandle\n    backgroundColor\n    shareVariant\n    text\n  }\n":
+    types.ShareBlockFragmentDoc,
   "\n  fragment skyviewerBlock on contentBlocks_skyviewer_BlockType {\n    id\n    embedTitle\n    typeHandle\n    captionRichText\n    dec\n    fov\n    ra\n    fullWidth\n    backgroundColor\n  }\n":
     types.SkyviewerBlockFragmentDoc,
   "\n  fragment skyviewerNewsBlock on contentBlocksNews_skyviewer_BlockType {\n    id\n    embedTitle\n    typeHandle\n    captionRichText\n    dec\n    fov\n    ra\n    fullWidth\n    backgroundColor\n  }\n":
@@ -164,6 +166,12 @@ export function graphql(
 export function graphql(
   source: "\n    query SearchResultsPage($site: [String]) {\n      searchResultsEntries(site: $site) {\n        ... on searchResults_searchResults_Entry {\n          title\n          id\n          dynamicComponent\n        }\n      }\n    }\n  "
 ): (typeof documents)["\n    query SearchResultsPage($site: [String]) {\n      searchResultsEntries(site: $site) {\n        ... on searchResults_searchResults_Entry {\n          title\n          id\n          dynamicComponent\n        }\n      }\n    }\n  "];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: "\n  fragment shareBlock on contentBlocks_share_BlockType {\n    id\n    typeHandle\n    backgroundColor\n    shareVariant\n    text\n  }\n"
+): (typeof documents)["\n  fragment shareBlock on contentBlocks_share_BlockType {\n    id\n    typeHandle\n    backgroundColor\n    shareVariant\n    text\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

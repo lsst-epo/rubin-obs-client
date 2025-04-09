@@ -1,17 +1,21 @@
 "use client";
-import { FC, useState } from "react";
+import { FC, MouseEventHandler, useState } from "react";
 import { Popover, PopoverButton, PopoverPanel } from "@headlessui/react";
+import { usePathname } from "next/navigation";
 import { usePopper } from "react-popper";
 import { useTranslation } from "react-i18next";
 import IconComposer from "@rubin-epo/epo-react-lib/IconComposer";
+import Button from "@rubin-epo/epo-react-lib/Button";
 import { env } from "@/env";
 import { isAbsoluteUrl } from "@/helpers";
-import ShareButtons from "@/atomic/Share";
+import ShareButtons from "@/components/molecules/Share";
 import styles from "./styles.module.css";
+import { shouldShare } from "@/lib/utils/share";
 
 const BASE_URL = env.NEXT_PUBLIC_BASE_URL;
 
-function createFinalUrl(url: string) {
+function createFinalUrl(url?: string) {
+  if (!url) return;
   if (isAbsoluteUrl(url)) return url;
 
   const urlObj = new URL(url, BASE_URL);
@@ -19,12 +23,19 @@ function createFinalUrl(url: string) {
 }
 
 interface SharePopupProps {
-  title: string;
-  url: string;
+  variant?: "primary" | "block";
+  title?: string;
+  url?: string;
   className?: string;
 }
 
-const SharePopup: FC<SharePopupProps> = ({ title, url, className }) => {
+const SharePopup: FC<SharePopupProps> = ({
+  variant,
+  title,
+  url,
+  className,
+}) => {
+  const pathname = usePathname();
   const { t } = useTranslation();
   const [referenceElement, setReferenceElement] =
     useState<HTMLButtonElement | null>(null);
@@ -39,19 +50,50 @@ const SharePopup: FC<SharePopupProps> = ({ title, url, className }) => {
     }
   );
 
+  const finalUrl = createFinalUrl(url || pathname || undefined);
+
+  const handleClick: MouseEventHandler = async (event) => {
+    if (shouldShare()) {
+      event.preventDefault();
+
+      const data: ShareData = { title, url: finalUrl };
+
+      try {
+        navigator.share(data);
+      } catch (error) {
+        console.warn(error);
+      }
+    }
+  };
+
+  const isBlock = variant === "block";
+
+  const sharedProps = {
+    ref: setReferenceElement,
+    onClick: handleClick,
+  };
+
+  const RenderedPopoverButton = isBlock ? (
+    <PopoverButton {...sharedProps} as={Button} isBlock>
+      {t("share.label_item", { title })}
+    </PopoverButton>
+  ) : (
+    <PopoverButton {...sharedProps} className={styles.button}>
+      <IconComposer size="0.75em" icon="shareToggle" />
+      <span className="a-hidden">{t("share.label_item", { title })}</span>
+    </PopoverButton>
+  );
+
   return (
     <Popover className={className}>
-      <PopoverButton ref={setReferenceElement} className={styles.button}>
-        <IconComposer size="0.75em" icon="shareToggle" />
-        <span className="a-hidden">{t("share.label_item", { title })}</span>
-      </PopoverButton>
+      {RenderedPopoverButton}
       <PopoverPanel
         ref={setPopperElement}
         style={popperStyles.popper}
         {...attributes.popper}
         className={styles.panel}
       >
-        <ShareButtons title={title} url={createFinalUrl(url)} />
+        <ShareButtons title={title} url={finalUrl} />
       </PopoverPanel>
     </Popover>
   );
