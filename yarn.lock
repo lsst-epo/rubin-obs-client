@@ -3165,18 +3165,19 @@
   resolved "https://registry.yarnpkg.com/@rtsao/scc/-/scc-1.1.0.tgz#927dd2fae9bc3361403ac2c7a00c32ddce9ad7e8"
   integrity sha512-zt6OdqaDoOnJ1ZYsCYGt9YmWzDXl4vQdKTyJev62gFhRGKdx7mcT54V9KIjg+d2wi9EXsPvAPKe7i7WjfVWB8g==
 
-"@rubin-epo/epo-react-lib@^2.7.1":
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/@rubin-epo/epo-react-lib/-/epo-react-lib-2.7.1.tgz#327a1b1690e95ebb9d3144a212b16449b3a7db5f"
-  integrity sha512-vF7ENqiFbsvPLSqnRMiISxTOsYKiw1lVVRjNevwS79ZQaUgbjP9El4m9BUFx+cnNYYm/2GBvgYtnABNobvEg1Q==
+"@rubin-epo/epo-react-lib@^2.8.0":
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/@rubin-epo/epo-react-lib/-/epo-react-lib-2.8.0.tgz#641b3c6a10937fad0ba84ce9e9220dcd324c4129"
+  integrity sha512-puCt5rSly/GdqkT/PsX/0ZG8wKyRRAlwc3uG1hMF6jbTeKHhkOgRUIKJCtzZAYrhI5i7xwh74fTiCPBFBOMl5w==
   dependencies:
     "@castiron/style-mixins" "^1.0.6"
     "@headlessui/react" "^2.2.0"
     flickity "^3.0.0"
     focus-trap "^7.4.2"
     lodash "^4.17.21"
+    react-icons "^5.5.0"
     react-player "^2.14.1"
-    react-share "^4.4.1"
+    react-share "^5.2.2"
     react-slider "^2.0.6"
     styled-components "^6.1.16"
     utopia-core "^1.6.0"
@@ -11543,6 +11544,11 @@ react-i18next@13:
     "@babel/runtime" "^7.22.5"
     html-parse-stringify "^3.0.1"
 
+react-icons@^5.5.0:
+  version "5.5.0"
+  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-5.5.0.tgz#8aa25d3543ff84231685d3331164c00299cdfaf2"
+  integrity sha512-MEFcXdkP3dLo8uumGI5xN3lDFNsRtrjbOEKDLD7yv76v4wpnEq2Lt2qeHaQOr34I/wPN3s3+N08WkQ+CW37Xiw==
+
 react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
@@ -11598,10 +11604,10 @@ react-refresh@^0.14.0:
   resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.14.2.tgz#3833da01ce32da470f1f936b9d477da5c7028bf9"
   integrity sha512-jCvmsr+1IUSMUyzOkRcvnVbX3ZYC6g9TDrDbFuFmRDq7PD4yaGbLKNQL6k2jnArV8hjYxh7hVhAZB6s9HDGpZA==
 
-react-share@^4.4.1:
-  version "4.4.1"
-  resolved "https://registry.yarnpkg.com/react-share/-/react-share-4.4.1.tgz#4bfb0b512e26afedfea2fb66eb13c95c28fb216a"
-  integrity sha512-AJ9m9RiJssqvYg7MoJUc9J0D7b/liWrsfQ99ndKc5vJ4oVHHd4Fy87jBlKEQPibT40oYA3AQ/a9/oQY6/yaigw==
+react-share@^5.2.2:
+  version "5.2.2"
+  resolved "https://registry.yarnpkg.com/react-share/-/react-share-5.2.2.tgz#bd011e9c53a6adf97ef75c062a2e8b24744c4de2"
+  integrity sha512-z0nbOX6X6vHHWAvXduNkYeJUKTKNpKM5Xpmc5a2BxjJhUWl+sE7AsSEMmYEUj2DuDjZr5m7KFIGF0sQPKcUN6w==
   dependencies:
     classnames "^2.3.2"
     jsonp "^0.2.1"
