@@ -1,0 +1,27 @@
+.container {
+  padding-block: var(--size-spacing-l);
+}
+
+.content {
+  text-align: center;
+
+  @media (--phablet) {
+    text-align: start;
+  }
+}
+
+.mobile {
+  display: block;
+
+  @media (--phablet) {
+    display: none;
+  }
+}
+
+.large {
+  display: none;
+
+  @media (--phablet) {
+    display: inherit;
+  }
+}

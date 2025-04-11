@@ -201,7 +201,7 @@ export const FooterButton = styled(MixedLink)`
 `;
 
 export const SharePopup = styled(SharePopupComponent)`
-  --color-background-button: transparent;
+  --color-background-button-share: transparent;
   --color-font-button: var(--neutral40);
 
   position: absolute;

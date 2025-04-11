@@ -1,7 +1,7 @@
 .button {
   aspect-ratio: 1;
   background-color: var(
-    --color-background-button,
+    --color-background-button-share,
     var(--color-background-tile-light)
   );
   border-radius: calc(var(--size-spacing-m) / 2);
