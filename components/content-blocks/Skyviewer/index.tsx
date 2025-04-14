@@ -53,7 +53,7 @@ const SkyviewerBlock: FC<SkyviewerProps> = ({ locale, ...props }) => {
 
   const params = new URLSearchParams({ ra, dec, fov });
   const path = addLocaleUriSegment(locale, `embed?${params.toString()}`);
-  const src = new URL(`${env.SKYVIEWER_BASE_URL}${path}`);
+  const src = new URL(path, env.SKYVIEWER_BASE_URL);
   const allowed = [
     "fullscreen",
     "clipboard-write",
