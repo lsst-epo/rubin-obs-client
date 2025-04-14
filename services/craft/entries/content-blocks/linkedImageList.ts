@@ -6,6 +6,7 @@ const LinkedImageListBlockFragment = graphql(`
     typeHandle
     description
     header
+    variant: linkedImageListVariant
     linkedImageList {
       ... on linkedImageList_linkedImage_BlockType {
         id
