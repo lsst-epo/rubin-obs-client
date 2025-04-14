@@ -471,5 +471,8 @@
   "preview_mode": {
     "is_enabled": "Preview mode is enabled",
     "disable": "Disable"
+  },
+  "scroll_carousel": {
+    "label": "Go to slide {{value}}"
   }
 }

@@ -1,0 +1,49 @@
+.container {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.scrollContainer {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: inline mandatory;
+  scroll-behavior: smooth;
+  width: 100%;
+  height: 100%;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  & > * {
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+    scroll-snap-align: start;
+  }
+}
+
+.mobileNavigation {
+  display: flex;
+  gap: var(--size-spacing-xs);
+  position: absolute;
+  z-index: 1;
+  bottom: var(--size-spacing-xs);
+}
+
+.dotButton {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-color: #fff;
+  width: var(--size-spacing-s);
+
+  &[data-checked] {
+    outline: 2px solid #fff;
+    outline-offset: 1px;
+  }
+
+  &:not([data-disabled]) {
+    cursor: pointer;
+  }
+}
