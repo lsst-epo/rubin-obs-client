@@ -1,5 +1,6 @@
 import { FC } from "react";
 import FlexibleLinkedImageList from "@/components/organisms/LinkedImageList/Flexible";
+import StaticLinkedImageList from "@/components/organisms/LinkedImageList/Static";
 import { FragmentType, useFragment } from "@/gql";
 import { LinkedImageListBlockFragmentDoc } from "@/gql/graphql";
 import { MetadataAssetSchema } from "@/lib/api/galleries/schema";
@@ -37,7 +38,7 @@ const LinkedImageListBlock: FC<LinkedImageListBlockProps> = ({
   locale,
   ...props
 }) => {
-  const { header, description, linkedImageList } = useFragment(
+  const { header, description, variant, linkedImageList } = useFragment(
     LinkedImageListBlockFragmentDoc,
     props
   );
@@ -46,12 +47,14 @@ const LinkedImageListBlock: FC<LinkedImageListBlockProps> = ({
 
   if (!list) return null;
 
-  return (
+  return variant === "flexible" ? (
     <FlexibleLinkedImageList
       {...{ list }}
       title={header || undefined}
       description={description || undefined}
     />
+  ) : (
+    <StaticLinkedImageList list={list} />
   );
 };
 

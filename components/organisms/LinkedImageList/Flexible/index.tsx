@@ -6,7 +6,7 @@ import LinkedImageListItem from "@/components/molecules/LinkedImageListItem";
 import ScrollCarousel from "@/components/molecules/ScrollCarousel";
 import styles from "./styles.module.css";
 
-interface LinkedImage {
+export interface LinkedImage {
   id: string;
   image?: CantoAssetMetadata;
   link: {

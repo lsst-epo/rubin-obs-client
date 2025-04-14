@@ -19,6 +19,12 @@
     --color-accent-item: #ff9966;
     --color-overlay-item: #30e0e3;
   }
+
+  &:hover,
+  &:focus-within {
+    --outline-counter-style: solid;
+    --opacity-image-overlay: 0.7;
+  }
 }
 
 .link {
@@ -32,11 +38,7 @@
   text-decoration: none;
   padding: var(--size-spacing-2xs);
 
-  &:hover,
-  &:focus-within {
-    --outline-counter: 4px solid #fff;
-    --opacity-image-overlay: 0.7;
-
+  &:focus-visible {
     outline: none;
   }
 
@@ -79,7 +81,8 @@
     align-items: center;
     justify-content: center;
     width: var(--size-spacing-l);
-    outline: var(--outline-counter);
+    outline: 4px #fff;
+    outline-style: var(--outline-counter-style);
     text-shadow: none;
     font-weight: bold;
   }

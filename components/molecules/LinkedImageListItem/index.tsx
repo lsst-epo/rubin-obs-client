@@ -9,6 +9,7 @@ interface LinkedImageListItemProps extends LinkProps {
   target?: string;
   count: number;
   text?: string;
+  active?: boolean;
   image?: ImageProps;
 }
 
@@ -18,10 +19,15 @@ const LinkedImageListItem: FC<LinkedImageListItemProps> = ({
   text,
   target,
   count,
+  active,
   ...props
 }) => {
   return (
-    <li value={count} className={clsx(styles.item, className)}>
+    <li
+      value={count}
+      data-active={active}
+      className={clsx(styles.item, className)}
+    >
       <Link className={styles.link} target={target} {...props}>
         {image && (
           <Image {...image} className={clsx(styles.image, image.className)} />
