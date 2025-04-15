@@ -6,7 +6,7 @@
 
   &[data-variant="large"] {
     justify-content: space-between;
-    --size-button: var(--size-spacing-2xl-3xl);
+    --size-button: var(--size-spacing-xl-2xl);
     --size-button-icon: var(--size-spacing-m);
   }
 }

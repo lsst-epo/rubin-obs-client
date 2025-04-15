@@ -44,7 +44,9 @@ const documents = {
     types.GetNavigationItemsDocument,
   "\n    query SearchResultsPage($site: [String]) {\n      searchResultsEntries(site: $site) {\n        ... on searchResults_searchResults_Entry {\n          title\n          id\n          dynamicComponent\n        }\n      }\n    }\n  ":
     types.SearchResultsPageDocument,
-  "\n  fragment linkedImageListBlock on contentBlocks_linkedImageList_BlockType {\n    id\n    typeHandle\n    description\n    header\n    variant: linkedImageListVariant\n    linkedImageList {\n      ... on linkedImageList_linkedImage_BlockType {\n        id\n        image {\n          additional {\n            AltTextEN\n            AltTextES\n            TitleEN\n            TitleES\n          }\n          height\n          id\n          name\n          scheme\n          url {\n            directUrlOriginal\n            directUrlPreview\n            directUrlPreviewPlay\n          }\n          width\n        }\n        link: imageLink {\n          customText\n          target\n          text\n          title\n          type\n          url\n        }\n      }\n    }\n  }\n":
+  "\n  fragment imageComparisonBlock on contentBlocks_imageComparison_BlockType {\n    id\n    typeHandle\n    backgroundColor\n    caption: captionRichText\n    images: multipleCantoAssets {\n      ...CantoAssetMetadata\n    }\n  }\n":
+    types.ImageComparisonBlockFragmentDoc,
+  "\n  fragment linkedImageListBlock on contentBlocks_linkedImageList_BlockType {\n    id\n    typeHandle\n    description\n    header\n    variant: linkedImageListVariant\n    linkedImageList {\n      ... on linkedImageList_linkedImage_BlockType {\n        id\n        image {\n          ...CantoAssetMetadata\n        }\n        link: imageLink {\n          customText\n          target\n          text\n          title\n          type\n          url\n        }\n      }\n    }\n  }\n":
     types.LinkedImageListBlockFragmentDoc,
   "\n  fragment shareBlock on contentBlocks_share_BlockType {\n    id\n    typeHandle\n    backgroundColor\n    shareVariant\n    text\n  }\n":
     types.ShareBlockFragmentDoc,
@@ -52,6 +54,8 @@ const documents = {
     types.SkyviewerBlockFragmentDoc,
   "\n  fragment skyviewerNewsBlock on contentBlocksNews_skyviewer_BlockType {\n    id\n    embedTitle\n    typeHandle\n    captionRichText\n    dec\n    fov\n    ra\n    fullWidth\n    backgroundColor\n  }\n":
     types.SkyviewerNewsBlockFragmentDoc,
+  "fragment CantoAssetMetadata on CantoDamAssetInterface {\n  additional {\n    AltTextEN\n    AltTextES\n    TitleEN\n    TitleES\n  }\n  height\n  id\n  name\n  scheme\n  url {\n    directUrlOriginal\n    directUrlPreview\n    directUrlPreviewPlay\n  }\n  width\n}":
+    types.CantoAssetMetadataFragmentDoc,
   "\n    query getLogos($set: [String], $site: [String]) {\n      siteInfo: globalSet(handle: $set, site: $site) {\n        ... on siteInfo_GlobalSet {\n          __typename\n          logoLarge {\n            url {\n              directUrlOriginal\n            }\n            width\n            height\n          }\n          logoSmall {\n            url {\n              directUrlOriginal\n            }\n            width\n            height\n          }\n        }\n      }\n    }\n  ":
     types.GetLogosDocument,
   "\n  fragment rootPageInfoFragment on rootPageInformation_GlobalSet {\n    name\n    handle\n    customBreadcrumbs {\n      ... on customBreadcrumbs_ancestorsAndRoot_BlockType {\n        header\n        pageEntry {\n          id\n          title\n          uri\n        }\n      }\n    }\n  }\n":
@@ -172,8 +176,14 @@ export function graphql(
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: "\n  fragment linkedImageListBlock on contentBlocks_linkedImageList_BlockType {\n    id\n    typeHandle\n    description\n    header\n    variant: linkedImageListVariant\n    linkedImageList {\n      ... on linkedImageList_linkedImage_BlockType {\n        id\n        image {\n          additional {\n            AltTextEN\n            AltTextES\n            TitleEN\n            TitleES\n          }\n          height\n          id\n          name\n          scheme\n          url {\n            directUrlOriginal\n            directUrlPreview\n            directUrlPreviewPlay\n          }\n          width\n        }\n        link: imageLink {\n          customText\n          target\n          text\n          title\n          type\n          url\n        }\n      }\n    }\n  }\n"
-): (typeof documents)["\n  fragment linkedImageListBlock on contentBlocks_linkedImageList_BlockType {\n    id\n    typeHandle\n    description\n    header\n    variant: linkedImageListVariant\n    linkedImageList {\n      ... on linkedImageList_linkedImage_BlockType {\n        id\n        image {\n          additional {\n            AltTextEN\n            AltTextES\n            TitleEN\n            TitleES\n          }\n          height\n          id\n          name\n          scheme\n          url {\n            directUrlOriginal\n            directUrlPreview\n            directUrlPreviewPlay\n          }\n          width\n        }\n        link: imageLink {\n          customText\n          target\n          text\n          title\n          type\n          url\n        }\n      }\n    }\n  }\n"];
+  source: "\n  fragment imageComparisonBlock on contentBlocks_imageComparison_BlockType {\n    id\n    typeHandle\n    backgroundColor\n    caption: captionRichText\n    images: multipleCantoAssets {\n      ...CantoAssetMetadata\n    }\n  }\n"
+): (typeof documents)["\n  fragment imageComparisonBlock on contentBlocks_imageComparison_BlockType {\n    id\n    typeHandle\n    backgroundColor\n    caption: captionRichText\n    images: multipleCantoAssets {\n      ...CantoAssetMetadata\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: "\n  fragment linkedImageListBlock on contentBlocks_linkedImageList_BlockType {\n    id\n    typeHandle\n    description\n    header\n    variant: linkedImageListVariant\n    linkedImageList {\n      ... on linkedImageList_linkedImage_BlockType {\n        id\n        image {\n          ...CantoAssetMetadata\n        }\n        link: imageLink {\n          customText\n          target\n          text\n          title\n          type\n          url\n        }\n      }\n    }\n  }\n"
+): (typeof documents)["\n  fragment linkedImageListBlock on contentBlocks_linkedImageList_BlockType {\n    id\n    typeHandle\n    description\n    header\n    variant: linkedImageListVariant\n    linkedImageList {\n      ... on linkedImageList_linkedImage_BlockType {\n        id\n        image {\n          ...CantoAssetMetadata\n        }\n        link: imageLink {\n          customText\n          target\n          text\n          title\n          type\n          url\n        }\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -192,6 +202,12 @@ export function graphql(
 export function graphql(
   source: "\n  fragment skyviewerNewsBlock on contentBlocksNews_skyviewer_BlockType {\n    id\n    embedTitle\n    typeHandle\n    captionRichText\n    dec\n    fov\n    ra\n    fullWidth\n    backgroundColor\n  }\n"
 ): (typeof documents)["\n  fragment skyviewerNewsBlock on contentBlocksNews_skyviewer_BlockType {\n    id\n    embedTitle\n    typeHandle\n    captionRichText\n    dec\n    fov\n    ra\n    fullWidth\n    backgroundColor\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: "fragment CantoAssetMetadata on CantoDamAssetInterface {\n  additional {\n    AltTextEN\n    AltTextES\n    TitleEN\n    TitleES\n  }\n  height\n  id\n  name\n  scheme\n  url {\n    directUrlOriginal\n    directUrlPreview\n    directUrlPreviewPlay\n  }\n  width\n}"
+): (typeof documents)["fragment CantoAssetMetadata on CantoDamAssetInterface {\n  additional {\n    AltTextEN\n    AltTextES\n    TitleEN\n    TitleES\n  }\n  height\n  id\n  name\n  scheme\n  url {\n    directUrlOriginal\n    directUrlPreview\n    directUrlPreviewPlay\n  }\n  width\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
