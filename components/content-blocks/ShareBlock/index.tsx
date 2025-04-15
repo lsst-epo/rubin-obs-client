@@ -22,19 +22,14 @@ const ShareContentBlock: FC<ShareBlockProps> = async ({ locale, ...props }) => {
   const isLargeBlock = shareVariant === "large";
   const hasBackgroundColor =
     isLargeBlock && typeof backgroundColor === "string";
-  const isDark = hasBackgroundColor && backgroundColor.includes("invert");
   const hasOverrideText = typeof text === "string" && text.length > 0;
 
   return (
     <Container
       className={styles.container}
+      darkMode={backgroundColor?.includes("invert")}
       bgColor={hasBackgroundColor ? backgroundColor : undefined}
       paddingSize={isLargeBlock ? "medium" : "small"}
-      elAttributes={{
-        style: {
-          color: isDark && "var(--color-font-invert)",
-        },
-      }}
     >
       <Stack className={styles.content}>
         {isLargeBlock && (

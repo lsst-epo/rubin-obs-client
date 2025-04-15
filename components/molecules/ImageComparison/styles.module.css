@@ -1,0 +1,33 @@
+.container {
+  position: relative;
+}
+
+.handle {
+  height: 100%;
+  width: 1px;
+  background-color: currentcolor;
+}
+
+.skeletonWrapper {
+  display: block;
+  height: 0;
+}
+
+.skeleton {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+}
+
+.hiddenClick {
+  cursor: pointer;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  &:focus-visible,
+  &[data-focus] {
+    outline: none;
+  }
+}

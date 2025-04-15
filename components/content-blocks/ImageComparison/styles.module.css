@@ -1,0 +1,17 @@
+.figure {
+  border: 1px solid transparent;
+
+  &:hover,
+  &:focus-within {
+    border-color: currentcolor;
+    outline: 6px solid var(--color-rubin-teal-500);
+  }
+
+  @media (--phablet-max) {
+    --figure-padding: 0;
+
+    & figcaption {
+      padding: var(--size-spacing-xs);
+    }
+  }
+}
