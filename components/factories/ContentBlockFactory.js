@@ -25,6 +25,7 @@ import {
 } from "@/content-blocks";
 import SkyviewerBlock from "@/components/content-blocks/Skyviewer";
 import LinkedImageListBlock from "@/components/content-blocks/LinkedImageList";
+import ImageComparisonBlock from "@/components/content-blocks/ImageComparison";
 import { getLocale } from "@/lib/i18n/server";
 
 const blockMap = {
@@ -57,6 +58,7 @@ const blockMap = {
   keyNumbersGrid: KeyNumbersGridBlock,
   skyviewer: SkyviewerBlock,
   linkedImageList: LinkedImageListBlock,
+  imageComparison: ImageComparisonBlock,
 };
 
 export default function ContentBlockFactory({ type, data, pageId }) {

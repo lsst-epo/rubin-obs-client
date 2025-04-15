@@ -11,22 +11,7 @@ const LinkedImageListBlockFragment = graphql(`
       ... on linkedImageList_linkedImage_BlockType {
         id
         image {
-          additional {
-            AltTextEN
-            AltTextES
-            TitleEN
-            TitleES
-          }
-          height
-          id
-          name
-          scheme
-          url {
-            directUrlOriginal
-            directUrlPreview
-            directUrlPreviewPlay
-          }
-          width
+          ...CantoAssetMetadata
         }
         link: imageLink {
           customText

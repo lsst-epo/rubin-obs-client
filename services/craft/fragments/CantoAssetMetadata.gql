@@ -1,0 +1,18 @@
+fragment CantoAssetMetadata on CantoDamAssetInterface {
+  additional {
+    AltTextEN
+    AltTextES
+    TitleEN
+    TitleES
+  }
+  height
+  id
+  name
+  scheme
+  url {
+    directUrlOriginal
+    directUrlPreview
+    directUrlPreviewPlay
+  }
+  width
+}
