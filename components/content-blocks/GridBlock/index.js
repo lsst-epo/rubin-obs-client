@@ -1,15 +1,16 @@
-"use client";
+import clsx from "clsx";
 import PropTypes from "prop-types";
-import styled from "styled-components";
-import { Container, MixedLink } from "@rubin-epo/epo-react-lib";
+import Container from "@rubin-epo/epo-react-lib/Container";
+import MixedLink from "@rubin-epo/epo-react-lib/MixedLink";
+import { isDarkMode } from "@/helpers/styles";
 import { mixedLinkShape } from "@/shapes/link";
 import CTAGrid from "./CTAGrid";
 import ImageGrid from "./ImageGrid";
 import MainGrid from "./MainGrid";
 import NewsGrid from "./NewsGrid";
 import CarouselGrid from "./CarouselGrid";
-import { fluidScale } from "@/styles/globalStyles";
 import InvestigationGrid from "./InvestigationGrid";
+import styles from "./styles.module.css";
 
 function getLimit(numberOfItems) {
   switch (numberOfItems) {
@@ -24,6 +25,7 @@ function getLimit(numberOfItems) {
 }
 
 export default function GridBlock({
+  backgroundColor,
   numberOfItems,
   postType,
   header,
@@ -55,19 +57,24 @@ export default function GridBlock({
   const containerWidth = widthMap[typeHandle] || undefined;
 
   return (
-    <Container width={containerWidth}>
+    <Container
+      darkMode={isDarkMode(backgroundColor)}
+      bgColor={backgroundColor || undefined}
+      width={containerWidth}
+    >
       <div>
         {header && (
-          <Header
-            className={
+          <h2
+            className={clsx(
+              styles.header,
               typeHandle === "investigationGrid" ? "t-align-center" : undefined
-            }
-            $addBorder={
+            )}
+            data-has-border={
               typeHandle === "relatedContent" || typeHandle === "staffGrid"
             }
           >
             {header}
-          </Header>
+          </h2>
         )}
         <ContentGrid
           items={items}
@@ -77,30 +84,16 @@ export default function GridBlock({
           pageId={pageId}
         />
         {mixedLink?.url && (
-          <StyledMixedLink
+          <MixedLink
             {...mixedLink}
             params={pathParams}
-            className="c-buttonish c-buttonish--block"
+            className={clsx(styles.link, "c-buttonish", "c-buttonish--block")}
           />
         )}
       </div>
     </Container>
   );
 }
-
-const Header = styled.h2`
-  margin-bottom: ${fluidScale("100px", "60px")};
-
-  ${(p) =>
-    p.$addBorder &&
-    `padding-bottom: 10px;
-    margin-bottom: 30px;
-    border-bottom: 10px solid var(--turquoise85);`}
-`;
-
-const StyledMixedLink = styled(MixedLink)`
-  margin-top: 40px;
-`;
 
 GridBlock.displayName = "ContentBlock.GridBlock";
 
@@ -114,4 +107,5 @@ GridBlock.propTypes = {
   mixedLink: mixedLinkShape,
   plainText: PropTypes.string,
   pageId: PropTypes.string,
+  backgroundColor: PropTypes.string,
 };

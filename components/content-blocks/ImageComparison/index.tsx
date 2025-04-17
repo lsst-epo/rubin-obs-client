@@ -4,6 +4,7 @@ import Container from "@rubin-epo/epo-react-lib/Container";
 import Figure from "@rubin-epo/epo-react-lib/Figure";
 import { FragmentType, useFragment } from "@/gql";
 import { ImageComparisonBlockFragmentDoc } from "@/gql/graphql";
+import { isDarkMode } from "@/helpers/styles";
 import { MetadataAssetSchema } from "@/lib/api/galleries/schema";
 import { ImageProps } from "next/image";
 import { assetAlt } from "@/lib/api/canto/metadata";
@@ -45,7 +46,7 @@ const ImageComparisonBlock: FC<ImageComparisonBlockProps> = ({
 
   return (
     <Container
-      darkMode={backgroundColor?.includes("invert")}
+      darkMode={isDarkMode(backgroundColor)}
       bgColor={backgroundColor || undefined}
     >
       <Figure

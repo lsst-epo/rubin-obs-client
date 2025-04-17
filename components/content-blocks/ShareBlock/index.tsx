@@ -7,6 +7,7 @@ import { useTranslation } from "@/lib/i18n";
 import Share from "@/components/molecules/Share";
 import SharePopup from "@/components/molecules/SharePopup";
 import styles from "./styles.module.css";
+import { isDarkMode } from "@/helpers/styles";
 
 interface ShareBlockProps extends FragmentType<typeof ShareBlockFragmentDoc> {
   locale: string;
@@ -27,7 +28,7 @@ const ShareContentBlock: FC<ShareBlockProps> = async ({ locale, ...props }) => {
   return (
     <Container
       className={styles.container}
-      darkMode={backgroundColor?.includes("invert")}
+      darkMode={isDarkMode(backgroundColor)}
       bgColor={hasBackgroundColor ? backgroundColor : undefined}
       paddingSize={isLargeBlock ? "medium" : "small"}
     >

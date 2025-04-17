@@ -1,0 +1,13 @@
+.header {
+  margin-block-end: var(--size-spacing-xl-2xl);
+
+  &[data-has-border="true"] {
+    padding-block-end: var(--size-spacing-xs);
+    margin-block-end: var(--size-spacing-m);
+    border-block-end: 10px solid var(--color-rubin-teal-300);
+  }
+}
+
+.link {
+  margin-block-start: var(--size-spacing-l);
+}

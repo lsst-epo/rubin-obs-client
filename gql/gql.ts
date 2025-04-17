@@ -54,6 +54,10 @@ const documents = {
     types.SkyviewerBlockFragmentDoc,
   "\n  fragment skyviewerNewsBlock on contentBlocksNews_skyviewer_BlockType {\n    id\n    embedTitle\n    typeHandle\n    captionRichText\n    dec\n    fov\n    ra\n    fullWidth\n    backgroundColor\n  }\n":
     types.SkyviewerNewsBlockFragmentDoc,
+  "\n  fragment textBlock on contentBlocks_text_BlockType {\n    id\n    typeHandle\n    backgroundColor\n    text\n  }\n":
+    types.TextBlockFragmentDoc,
+  "\n  fragment videoBlock on contentBlocks_video_BlockType {\n    id\n    typeHandle\n    backgroundColor\n    caption\n    url: externalUrlTranslatable\n  }\n":
+    types.VideoBlockFragmentDoc,
   "fragment CantoAssetMetadata on CantoDamAssetInterface {\n  additional {\n    AltTextEN\n    AltTextES\n    TitleEN\n    TitleES\n  }\n  height\n  id\n  name\n  scheme\n  url {\n    directUrlOriginal\n    directUrlPreview\n    directUrlPreviewPlay\n  }\n  width\n}":
     types.CantoAssetMetadataFragmentDoc,
   "\n    query getLogos($set: [String], $site: [String]) {\n      siteInfo: globalSet(handle: $set, site: $site) {\n        ... on siteInfo_GlobalSet {\n          __typename\n          logoLarge {\n            url {\n              directUrlOriginal\n            }\n            width\n            height\n          }\n          logoSmall {\n            url {\n              directUrlOriginal\n            }\n            width\n            height\n          }\n        }\n      }\n    }\n  ":
@@ -202,6 +206,18 @@ export function graphql(
 export function graphql(
   source: "\n  fragment skyviewerNewsBlock on contentBlocksNews_skyviewer_BlockType {\n    id\n    embedTitle\n    typeHandle\n    captionRichText\n    dec\n    fov\n    ra\n    fullWidth\n    backgroundColor\n  }\n"
 ): (typeof documents)["\n  fragment skyviewerNewsBlock on contentBlocksNews_skyviewer_BlockType {\n    id\n    embedTitle\n    typeHandle\n    captionRichText\n    dec\n    fov\n    ra\n    fullWidth\n    backgroundColor\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: "\n  fragment textBlock on contentBlocks_text_BlockType {\n    id\n    typeHandle\n    backgroundColor\n    text\n  }\n"
+): (typeof documents)["\n  fragment textBlock on contentBlocks_text_BlockType {\n    id\n    typeHandle\n    backgroundColor\n    text\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: "\n  fragment videoBlock on contentBlocks_video_BlockType {\n    id\n    typeHandle\n    backgroundColor\n    caption\n    url: externalUrlTranslatable\n  }\n"
+): (typeof documents)["\n  fragment videoBlock on contentBlocks_video_BlockType {\n    id\n    typeHandle\n    backgroundColor\n    caption\n    url: externalUrlTranslatable\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

@@ -1,0 +1,41 @@
+.container {
+  color: light-dark(var(--color-font-primary), var(--color-font-invert));
+
+  &[data-dark-mode="true"] {
+    color-scheme: dark;
+  }
+
+  &[data-float="true"] {
+    padding: var(--size-spacing-s);
+
+    @media (--tablet) {
+      padding: 0;
+      float: var(--direction-float);
+      inline-size: 50%;
+
+      & > figure {
+        max-inline-size: calc(var(--CONTAINER_NARROW) * 0.5);
+        margin-inline: auto;
+        padding: var(--size-spacing-m) var(--size-spacing-m) 0;
+      }
+    }
+  }
+
+  &[data-float-direction="left"] {
+    @media (--tablet) {
+      & > figure {
+        padding-inline-start: 0;
+        margin-inline-end: 0;
+      }
+    }
+  }
+
+  &[data-float-direction="right"] {
+    @media (--tablet) {
+      & > figure {
+        padding-inline-end: 0;
+        margin-inline-start: 0;
+      }
+    }
+  }
+}
