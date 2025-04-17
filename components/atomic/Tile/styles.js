@@ -614,7 +614,6 @@ export const MixedLink = styled(BaseMixedLink)`
     .title {
       font-size: 18px;
       font-weight: 800;
-      color: var(--neutral80);
     }
 
     .text {
@@ -623,7 +622,10 @@ export const MixedLink = styled(BaseMixedLink)`
 
     @media (max-width: ${BREAK_PHABLET}) {
       grid-template-rows: minmax(0, max-content) max-content;
-      background-color: var(--neutral10);
+      background-color: light-dark(
+        var(--color-background-tile-light),
+        var(--black)
+      );
 
       .title,
       .subtitle {
@@ -839,20 +841,10 @@ export const MixedLink = styled(BaseMixedLink)`
       outline: none;
       opacity: 0.7;
     }
-
-    .title {
-      color: var(--turquoise60);
-    }
   }
 
   &:hover,
   &:focus-visible {
-    &.pages,
-    &.news,
-    &.slideshows {
-      color: var(--turquoise85);
-    }
-
     &.darkSlide {
       color: var(--turquoise55);
     }
