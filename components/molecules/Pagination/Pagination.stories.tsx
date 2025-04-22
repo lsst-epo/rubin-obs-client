@@ -1,15 +1,15 @@
-import { type StoryObj, type Meta } from "@storybook/react";
+import { type StoryObj, type Meta, type StoryFn } from "@storybook/react";
 
 import Pagination from ".";
 
-const limit = 10;
-const offset = 1;
-const page = 13;
-const total = 20;
-
 const meta: Meta<typeof Pagination> = {
   component: Pagination,
-  //   argTypes: {},
+  argTypes: {
+    limit: { control: "number", description: "" },
+    offset: { control: "number", description: "" },
+    page: { control: "number", description: "current page number" },
+    total: { control: "number", description: "total number of pages" },
+  },
   parameters: {
     nextjs: {
       appDirectory: true,
@@ -18,23 +18,19 @@ const meta: Meta<typeof Pagination> = {
 };
 export default meta;
 
-// const Template: StoryFn<typeof Pagination> = (args) => {
-//   return (
-//     <Pagination {...args}>
-
-//     </Pagination>
-//   );
-// };
-
-// export const Primary: StoryObj<typeof Pagination> = Template.bind({});
-
-type Story = StoryObj<typeof Pagination>;
-
-export const FirstStory: Story = {
-  args: {
-    limit,
-    offset,
-    page,
-    total,
-  },
+const Template: StoryFn<typeof Pagination> = (args) => {
+  return <Pagination {...args} />;
 };
+
+export const Primary: StoryObj<typeof Pagination> = Template.bind({});
+
+// type Story = StoryObj<typeof Pagination>;
+
+// export const FirstStory: Story = {
+//   args: {
+//     limit,
+//     offset,
+//     page,
+//     total,
+//   },
+// };
