@@ -7,6 +7,22 @@ const VideoBlockFragment = graphql(`
     backgroundColor
     caption
     url: externalUrlTranslatable
+    cantoAsset: videoType
+    fullscreenVideo
+    cantoAssets: responsiveAssets {
+      ... on responsiveAssets_asset_BlockType {
+        orientation
+        asset(where: { key: "scheme", value: "video" }) {
+          ...CantoAssetMetadata
+          default {
+            DateUploaded
+          }
+          metadata {
+            MIMEType
+          }
+        }
+      }
+    }
   }
 `);
 
