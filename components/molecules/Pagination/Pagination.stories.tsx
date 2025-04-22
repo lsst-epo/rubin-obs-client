@@ -23,14 +23,3 @@ const Template: StoryFn<typeof Pagination> = (args) => {
 };
 
 export const Primary: StoryObj<typeof Pagination> = Template.bind({});
-
-// type Story = StoryObj<typeof Pagination>;
-
-// export const FirstStory: Story = {
-//   args: {
-//     limit,
-//     offset,
-//     page,
-//     total,
-//   },
-// };
