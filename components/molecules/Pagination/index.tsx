@@ -21,6 +21,7 @@ const Pagination: FC<PaginationProps> = ({
   const { t } = useTranslation();
   const { queryParams } = useQueryParams();
   const query = queryParams ? Object.fromEntries(queryParams) : {};
+
   const from = offset + 1;
   let to = offset + limit;
   to = to > total ? total : to;
@@ -30,13 +31,19 @@ const Pagination: FC<PaginationProps> = ({
   let pageArray: Array<string | number>;
   /* eslint-disable */
   if (numberOfPages > 10) {
-    currentPage < 6
-      ? (pageArray = new Array(8).fill(null).map((x, i) => i + 1))
-      : (pageArray = new Array(8)
-          .fill(null)
-          .map((x, i) => currentPage - 4 + i));
-
-    pageArray = pageArray.concat("...").concat(numberOfPages);
+    if (currentPage < 6) {
+      pageArray = new Array(8).fill(null).map((x, i) => i + 1);
+      pageArray = pageArray.concat("...").concat(numberOfPages);
+    } else if (currentPage >= 6 && currentPage < numberOfPages - 5) {
+      pageArray = new Array(6).fill(null).map((x, i) => currentPage - 2 + i);
+      pageArray = [1, "..."]
+        .concat(pageArray)
+        .concat("...")
+        .concat(numberOfPages);
+    } else {
+      pageArray = new Array(8).fill(null).map((x, i) => numberOfPages - 7 + i);
+      pageArray = [1, "..."].concat(pageArray);
+    }
   } else {
     pageArray = new Array(numberOfPages).fill(null).map((x, i) => i + 1);
   }
@@ -55,6 +62,7 @@ const Pagination: FC<PaginationProps> = ({
         <div>
           <ul className={styles.paginationList}>
             {pageArray.map((page, index) => {
+              console.log(total);
               return typeof page === "number" ? (
                 <li key={index}>
                   <Link

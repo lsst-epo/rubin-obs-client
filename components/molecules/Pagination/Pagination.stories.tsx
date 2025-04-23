@@ -5,7 +5,7 @@ import Pagination from ".";
 const meta: Meta<typeof Pagination> = {
   component: Pagination,
   argTypes: {
-    limit: { control: "number", description: "" },
+    limit: { control: "number", description: "number of items per page" },
     offset: { control: "number", description: "" },
     page: { control: "number", description: "current page number" },
     total: { control: "number", description: "total number of pages" },
