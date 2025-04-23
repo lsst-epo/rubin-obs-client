@@ -18,11 +18,6 @@ const meta: Meta<typeof Pagination> = {
     ),
   ],
   argTypes: {},
-  parameters: {
-    nextjs: {
-      appDirectory: true,
-    },
-  },
 };
 export default meta;
 
