@@ -68,7 +68,14 @@ export default function CalloutEntry({ callout }) {
     hero?.[0];
 
   return (
-    <Styled.Section $bgColor={backgroundColor} $width="full" $overlay={false}>
+    <Styled.Section
+      style={{ "--color-background-section": `var(--${backgroundColor})` }}
+      data-dark-mode={
+        backgroundColor.includes("invert") || backgroundColor.includes("black")
+      }
+      $width="full"
+      $overlay={false}
+    >
       <Styled.Inner $isImage={!!calloutImage}>
         {calloutImage && (
           <Styled.ImageWrapper>
