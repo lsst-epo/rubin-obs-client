@@ -1,15 +1,23 @@
-import { type StoryObj, type Meta, type StoryFn } from "@storybook/react";
+import { type StoryObj, type Meta } from "@storybook/react";
 
 import Pagination from ".";
 
+// Values based of the main site gallery page at time of writing
+const limit = 30;
+const offset = 0;
+const page = 1;
+const total = 495;
+
 const meta: Meta<typeof Pagination> = {
   component: Pagination,
-  argTypes: {
-    limit: { control: "number", description: "number of items per page" },
-    offset: { control: "number", description: "" },
-    page: { control: "number", description: "current page number" },
-    total: { control: "number", description: "total number of pages" },
-  },
+  decorators: [
+    (Story) => (
+      <ul>
+        <Story />
+      </ul>
+    ),
+  ],
+  argTypes: {},
   parameters: {
     nextjs: {
       appDirectory: true,
@@ -18,8 +26,11 @@ const meta: Meta<typeof Pagination> = {
 };
 export default meta;
 
-const Template: StoryFn<typeof Pagination> = (args) => {
-  return <Pagination {...args} />;
+export const Primary: StoryObj<typeof Pagination> = {
+  args: {
+    limit,
+    offset,
+    page,
+    total,
+  },
 };
-
-export const Primary: StoryObj<typeof Pagination> = Template.bind({});
