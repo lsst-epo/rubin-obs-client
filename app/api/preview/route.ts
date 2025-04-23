@@ -75,15 +75,12 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     segments.push(data.entry.uri);
   }
 
-  const params = new URLSearchParams();
-
-  if (previewToken) {
-    params.set("preview", previewToken);
-  }
-
   // Redirect to the path from the fetched entry
   // We don't redirect to searchParams.uri as that might lead to open redirect vulnerabilities
-  const redirectPath = addLocaleUriSegment(locale, segments.join("/"));
+  const { pathname } = new URL(
+    addLocaleUriSegment(locale, segments.join("/")),
+    env.NEXT_PUBLIC_BASE_URL
+  );
 
-  redirect(redirectPath, RedirectType.replace);
+  redirect(pathname, RedirectType.replace);
 }
