@@ -13,7 +13,14 @@ export default function CalloutWrapper({
   isImage,
 }) {
   return (
-    <Section $bgColor={backgroundColor} $width={width} $overlay={overlay}>
+    <Section
+      style={{ "--color-background-section": `var(--${backgroundColor})` }}
+      data-dark-mode={
+        backgroundColor.includes("invert") || backgroundColor.includes("black")
+      }
+      $width={width}
+      $overlay={overlay}
+    >
       <Inner
         $isImage={isImage}
         $order={order}

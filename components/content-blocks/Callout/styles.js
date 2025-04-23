@@ -4,7 +4,6 @@ import {
   fluidScale,
   containerFullBleed,
   containerRegular,
-  needsDarkColor,
   pxToEm,
   respond,
   tokens,
@@ -16,14 +15,16 @@ const gap = "40px";
 const linkPadding = pxToEm("18px", "16px");
 
 export const Section = styled.section`
-  color: ${(p) =>
-    needsDarkColor(tokens[p.$bgColor]) ? tokens.neutral80 : tokens.white};
-  background-color: ${(p) => tokens[p.$bgColor]};
+  background-color: var(--color-background-section);
   ${(p) => p.$width === "block" && containerFullBleed("CONTAINER_REGULAR")};
   ${(p) =>
     p.$overlay &&
     `position: relative; top: -100px; background-color: transparent;
     ${respond(`top: -60px;`)}`};
+
+  &[data-dark-mode="true"] {
+    color: var(--color-font-invert);
+  }
 `;
 
 export const Inner = styled.div`
