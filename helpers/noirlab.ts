@@ -1,5 +1,7 @@
+"server-only";
 import { AsideImageProps } from "@/components/molecules/Aside/Image";
 import { env } from "@/env";
+import { addLocaleUriSegment } from "@/lib/i18n";
 import { Category, ImageMini, VideoMini } from "@/services/noirlab";
 import sanitize from "sanitize-html";
 
@@ -24,15 +26,32 @@ export const isRubinAsset = (categories: Array<Category>): boolean => {
   return categories.some(({ slug }) => slug === "rubin");
 };
 
-export const rewriteAssetUrl = (url: string) => {
-  const [, , scheme, id] = new URL(url).pathname.replace(/\/$/, "").split("/");
+export const rewriteAssetUrl = ({
+  url,
+  locale,
+}: {
+  url: string;
+  locale?: string;
+}) => {
+  const parts = new URL(url).pathname.replace(/\/$/, "").split("/");
+  const id = parts.pop();
+  const scheme = parts.pop();
   const rewrittenPath = new URL(
-    `/gallery/collections/news-${scheme}/${id}`,
+    addLocaleUriSegment(locale, `/gallery/collections/news-${scheme}/${id}`),
     env.NEXT_PUBLIC_BASE_URL
   );
 
-  return rewrittenPath.href;
+  return rewrittenPath.toString();
 };
+
+interface AssetProps {
+  title: string;
+  url: string;
+  image: string;
+  width?: number;
+  height?: number;
+  locale?: string;
+}
 
 const mapAssetToAside = ({
   title,
@@ -40,13 +59,8 @@ const mapAssetToAside = ({
   image,
   width = 1920,
   height = 1080,
-}: {
-  title: string;
-  url: string;
-  image: string;
-  width?: number;
-  height?: number;
-}): AsideImageProps => {
+  locale,
+}: AssetProps): AsideImageProps => {
   return {
     title,
     image: {
@@ -56,14 +70,14 @@ const mapAssetToAside = ({
       height,
     },
     link: {
-      href: rewriteAssetUrl(url),
+      href: rewriteAssetUrl({ url, locale }),
     },
   };
 };
 
 export const imagesToAsides = (images: Array<ImageMini>) => {
   return images
-    .map(({ title, url, width, height, formats: { newsfeature } }) => {
+    .map(({ title, url, width, height, lang, formats: { newsfeature } }) => {
       return newsfeature
         ? mapAssetToAside({
             title,
@@ -71,6 +85,7 @@ export const imagesToAsides = (images: Array<ImageMini>) => {
             image: newsfeature,
             width: width || undefined,
             height: height || undefined,
+            locale: lang,
           })
         : undefined;
     })
@@ -78,12 +93,13 @@ export const imagesToAsides = (images: Array<ImageMini>) => {
 };
 export const videosToAsides = (videos: Array<VideoMini>) => {
   return videos
-    .map(({ title, url, formats: { newsfeature } }) => {
+    .map(({ title, url, lang, formats: { newsfeature } }) => {
       return newsfeature
         ? mapAssetToAside({
             title,
             url,
             image: newsfeature,
+            locale: lang,
           })
         : undefined;
     })

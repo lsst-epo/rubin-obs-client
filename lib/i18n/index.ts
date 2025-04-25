@@ -67,7 +67,7 @@ const shiftToSegments = (segments: Array<string>) => {
 };
 
 export const addLocaleUriSegment = (
-  locale: string,
+  locale = fallbackLng,
   uri: string,
   options: {
     includeLeadingSlash?: boolean;
