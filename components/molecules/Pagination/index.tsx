@@ -2,8 +2,8 @@
 import React, { FC } from "react";
 import Link from "next/link";
 import { Trans, useTranslation } from "react-i18next";
-import useQueryParams from "@/lib/routing/useQueryParams";
 import styles from "./styles.module.scss";
+import { useSearchParams } from "next/navigation";
 
 interface PaginationProps {
   limit: number;
@@ -19,7 +19,8 @@ const Pagination: FC<PaginationProps> = ({
   total,
 }) => {
   const { t } = useTranslation();
-  const { queryParams } = useQueryParams();
+  // const { queryParams } = useQueryParams();
+  const queryParams = useSearchParams();
   const query = queryParams ? Object.fromEntries(queryParams) : {};
 
   const from = offset + 1;
