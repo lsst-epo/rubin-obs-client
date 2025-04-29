@@ -10,13 +10,6 @@ const total = 495;
 
 const meta: Meta<typeof Pagination> = {
   component: Pagination,
-  decorators: [
-    (Story) => (
-      <ul>
-        <Story />
-      </ul>
-    ),
-  ],
   argTypes: {},
 };
 export default meta;

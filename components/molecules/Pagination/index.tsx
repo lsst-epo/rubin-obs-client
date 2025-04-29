@@ -19,7 +19,6 @@ const Pagination: FC<PaginationProps> = ({
   total,
 }) => {
   const { t } = useTranslation();
-  // const { queryParams } = useQueryParams();
   const queryParams = useSearchParams();
   const query = queryParams ? Object.fromEntries(queryParams) : {};
 
@@ -63,7 +62,6 @@ const Pagination: FC<PaginationProps> = ({
         <div>
           <ul className={styles.paginationList}>
             {pageArray.map((page, index) => {
-              console.log(total);
               return typeof page === "number" ? (
                 <li key={index}>
                   <Link
