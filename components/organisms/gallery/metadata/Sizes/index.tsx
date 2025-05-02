@@ -3,7 +3,6 @@ import Link from "next/link";
 import { generateAllPreviewSizes } from "@/lib/api/canto/resize";
 import MetadataSection from "../Section";
 import styles from "./styles.module.css";
-import { getLocale } from "@/lib/i18n/server";
 import { useTranslation } from "@/lib/i18n";
 
 interface ImageSizesProps {
@@ -19,8 +18,7 @@ const ImageSizes: FunctionComponent<ImageSizesProps> = async ({
   width,
   height,
 }) => {
-  const locale = getLocale();
-  const { t } = await useTranslation(locale);
+  const { t } = await useTranslation();
   const sizes = generateAllPreviewSizes(directUrlPreview, width, height);
 
   const labelFromSize = (width: number, height: number) => {

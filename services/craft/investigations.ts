@@ -4,7 +4,7 @@ import { gql } from "@urql/core";
 import queryAPI from "@/lib/api/client/query";
 import { cantoSingleAsset } from "@/api/fragments/image";
 import { getSiteFromLocale } from "@/lib/helpers/site";
-import { getLocale } from "@/lib/i18n/server";
+import { getLocale } from "next-intl/server";
 
 export async function addRelatedInvestigation(entryData) {
   if (!entryData || !entryData.id) return null;
@@ -13,7 +13,7 @@ export async function addRelatedInvestigation(entryData) {
 }
 
 export async function getRelatedInvestigation(entryData) {
-  const site = getSiteFromLocale(getLocale());
+  const site = getSiteFromLocale(await getLocale());
   if (!entryData) return null;
 
   const { id, ancestors = [] } = entryData;

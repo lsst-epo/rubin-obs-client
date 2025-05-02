@@ -40,4 +40,6 @@ export const GalleryLayout: FunctionComponent<PropsWithChildren> = ({
   return <>{children}</>;
 };
 
+export const dynamic = "force-dynamic";
+
 export default GalleryLayout;

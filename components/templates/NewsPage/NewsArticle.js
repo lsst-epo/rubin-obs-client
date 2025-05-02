@@ -6,7 +6,6 @@ import Container from "@rubin-epo/epo-react-lib/Container";
 import { Share } from "@/content-blocks";
 import Contacts from "./Contacts";
 import * as Styled from "./styles";
-import { getLocale } from "@/lib/i18n/server";
 
 export default async function NewsArticle({ data }) {
   const {
@@ -29,7 +28,7 @@ export default async function NewsArticle({ data }) {
   const {
     t,
     i18n: { resolvedLanguage },
-  } = await useTranslation(getLocale());
+  } = await useTranslation();
   const localizedDate = makeDateString(date, { locale: resolvedLanguage });
 
   return (
