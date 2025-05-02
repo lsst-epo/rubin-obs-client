@@ -1,4 +1,5 @@
 import { graphql } from "@/gql/gql";
+import { getLocale } from "next-intl/server";
 import sample from "lodash/sample";
 import queryAPI from "@/lib/api/client/query";
 import { getSiteFromLocale } from "@/lib/helpers/site";
@@ -11,7 +12,6 @@ import {
 } from "./schema";
 import { addLocaleUriSegment } from "@/lib/i18n";
 import { assetTitle } from "../canto/metadata";
-import { getLocale } from "@/lib/i18n/server";
 import z from "zod";
 import { getMainGallery } from ".";
 import tags from "../client/tags";
@@ -230,7 +230,7 @@ export async function getAssetFromGallery(
 }
 
 export const getRandomAsset = async () => {
-  const site = getSiteFromLocale(getLocale());
+  const site = getSiteFromLocale(await getLocale());
 
   const query = graphql(`
     query RandomAssetQuery($site: [String], $scheme: [String]) {
@@ -321,7 +321,7 @@ const linkedPostSchema = z.array(
 );
 
 export const getLinkedPosts = async (id: string) => {
-  const site = getSiteFromLocale(getLocale());
+  const site = getSiteFromLocale(await getLocale());
 
   const query = graphql(`
     query LinkedPosts($site: [String], $id: String) {
@@ -372,7 +372,7 @@ export const getLinkedPosts = async (id: string) => {
 };
 
 export const getGalleryForAsset = async (id: string) => {
-  const locale = getLocale();
+  const locale = await getLocale();
   const site = getSiteFromLocale(locale);
 
   const query = graphql(`

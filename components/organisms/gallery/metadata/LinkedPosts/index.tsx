@@ -1,8 +1,8 @@
 import { FC } from "react";
+import { getLocale } from "next-intl/server";
 import { CantoAssetScheme } from "@/lib/api/galleries/schema";
 import { getLinkedPosts } from "@/lib/api/galleries/asset";
 import { addLocaleUriSegment, useTranslation } from "@/lib/i18n";
-import { getLocale } from "@/lib/i18n/server";
 import MetadataSection from "../Section";
 import TagList from "@/components/molecules/TagList";
 
@@ -12,7 +12,7 @@ interface LinkedPostsProps {
 }
 
 const LinkedPosts: FC<LinkedPostsProps> = async ({ id, scheme }) => {
-  const locale = getLocale();
+  const locale = await getLocale();
   const { t } = await useTranslation(locale);
   const posts = await getLinkedPosts(id);
 
