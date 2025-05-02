@@ -54,4 +54,6 @@ const SearchPage: FC<WithSearchParams<LocaleProps>> = async ({
   );
 };
 
+export const dynamic = "force-dynamic";
+
 export default SearchPage;

@@ -1,6 +1,7 @@
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import { createJiti } from "jiti";
+import createNextIntlPlugin from "next-intl/plugin";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -9,8 +10,10 @@ const jiti = createJiti(__filename);
 
 await jiti.import("./env");
 
+const withNextIntl = createNextIntlPlugin("./lib/i18n/request.ts");
+
 /** @type {import('next').NextConfig} */
-export default {
+export default withNextIntl({
   async generateBuildId() {
     return "rubin-obs-client-next-build-id";
   },
@@ -59,4 +62,4 @@ export default {
     };
     return config;
   },
-};
+});

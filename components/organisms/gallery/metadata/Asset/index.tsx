@@ -1,12 +1,12 @@
 import { FunctionComponent } from "react";
 import convert from "convert";
-import { getLocale } from "@/lib/i18n/server";
 import { useTranslation } from "@/lib/i18n";
 import MetadataList, {
   MetadataItem,
 } from "@/components/molecules/MetadataList";
 import MetadataSection from "../Section";
 import formatDuration from "@/lib/utils/duration";
+import { getLocale } from "next-intl/server";
 
 interface DocumentMetadataProps {
   scheme: "document";
@@ -33,7 +33,7 @@ interface VideoMetadataProps {
 const AssetMetadata: FunctionComponent<
   DocumentMetadataProps | ImageMetadataProps | VideoMetadataProps
 > = async (props) => {
-  const locale = getLocale();
+  const locale = await getLocale();
   const { t } = await useTranslation(locale);
 
   const items: Array<MetadataItem> = [];

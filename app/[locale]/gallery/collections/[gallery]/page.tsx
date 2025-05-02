@@ -20,4 +20,6 @@ const Gallery: FunctionComponent<WithSearchParams<GalleryProps>> = async ({
   return <GalleryPage {...{ locale, gallery, searchParams }} />;
 };
 
+export const dynamic = "force-dynamic";
+
 export default Gallery;

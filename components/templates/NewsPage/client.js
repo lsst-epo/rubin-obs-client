@@ -6,9 +6,9 @@ import NewsList from "@/dynamic/NewsList";
 import MediaAside from "@/components/organisms/MediaAside";
 import * as Styled from "./styles";
 import { getReleaseHero } from "@/lib/api/noirlab";
-import { getLocale } from "@/lib/i18n/server";
 import { useTranslation } from "@/lib/i18n";
 import { getGlobalData } from "@/lib/api/globals";
+import { getLocale } from "next-intl/server";
 
 export default async function NewsPage({ data }) {
   const {
@@ -26,7 +26,7 @@ export default async function NewsPage({ data }) {
     videos: releaseVideos,
   } = data;
 
-  const locale = getLocale();
+  const locale = await getLocale();
   const { t } = await useTranslation(locale);
 
   if (hero.length === 0 && releaseImages) {

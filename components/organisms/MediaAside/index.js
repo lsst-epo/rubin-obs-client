@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 import Link from "next/link";
+import { getLocale } from "next-intl/server";
 import IconComposer from "@rubin-epo/epo-react-lib/IconComposer";
 import { imagesToAsides, videosToAsides } from "@/helpers/noirlab";
 import { addLocaleUriSegment, useTranslation } from "@/lib/i18n";
-import { getLocale } from "@/lib/i18n/server";
 import Aside from "@/components/molecules/Aside/index";
 import AsideSection from "@/components/molecules/Aside/Section";
 import TagList from "@/components/molecules/TagList";
@@ -18,7 +18,7 @@ export default async function MediaAside({
   tags,
   rootHomeLink,
 }) {
-  const locale = getLocale();
+  const locale = await getLocale();
   const { t } = await useTranslation(locale);
   // This adds the document icon from the designs, if there is a text-style link near the start.
   let manualDoc = manualAssets.some(
