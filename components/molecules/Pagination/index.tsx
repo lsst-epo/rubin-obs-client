@@ -2,8 +2,8 @@
 import React, { FC } from "react";
 import Link from "next/link";
 import { Trans, useTranslation } from "react-i18next";
-import useQueryParams from "@/lib/routing/useQueryParams";
 import styles from "./styles.module.scss";
+import { useSearchParams } from "next/navigation";
 
 interface PaginationProps {
   limit: number;
@@ -19,8 +19,9 @@ const Pagination: FC<PaginationProps> = ({
   total,
 }) => {
   const { t } = useTranslation();
-  const { queryParams } = useQueryParams();
+  const queryParams = useSearchParams();
   const query = queryParams ? Object.fromEntries(queryParams) : {};
+
   const from = offset + 1;
   let to = offset + limit;
   to = to > total ? total : to;
@@ -30,13 +31,19 @@ const Pagination: FC<PaginationProps> = ({
   let pageArray: Array<string | number>;
   /* eslint-disable */
   if (numberOfPages > 10) {
-    currentPage < 6
-      ? (pageArray = new Array(8).fill(null).map((x, i) => i + 1))
-      : (pageArray = new Array(8)
-          .fill(null)
-          .map((x, i) => currentPage - 4 + i));
-
-    pageArray = pageArray.concat("...").concat(numberOfPages);
+    if (currentPage < 6) {
+      pageArray = new Array(8).fill(null).map((x, i) => i + 1);
+      pageArray = pageArray.concat("...").concat(numberOfPages);
+    } else if (currentPage >= 6 && currentPage < numberOfPages - 5) {
+      pageArray = new Array(6).fill(null).map((x, i) => currentPage - 2 + i);
+      pageArray = [1, "..."]
+        .concat(pageArray)
+        .concat("...")
+        .concat(numberOfPages);
+    } else {
+      pageArray = new Array(8).fill(null).map((x, i) => numberOfPages - 7 + i);
+      pageArray = [1, "..."].concat(pageArray);
+    }
   } else {
     pageArray = new Array(numberOfPages).fill(null).map((x, i) => i + 1);
   }

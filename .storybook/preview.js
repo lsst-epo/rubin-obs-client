@@ -5,6 +5,9 @@ import i18n from "./i18next";
 const preview = {
   parameters: {
     i18n,
+    nextjs: {
+      appDirectory: true,
+    },
   },
 
   tags: ["autodocs"],
