@@ -2,7 +2,6 @@ import { FC, Suspense } from "react";
 import Container from "@rubin-epo/epo-react-lib/Container";
 import Grid from "@rubin-epo/epo-react-lib/Grid";
 import { useTranslation } from "@/lib/i18n";
-import { getLocale } from "@/lib/i18n/server";
 import Buttonish from "@rubin-epo/epo-react-lib/Buttonish";
 import { getSiblings } from "@/services/craft/siblings";
 import Button from "@rubin-epo/epo-react-lib/Button";
@@ -25,7 +24,7 @@ const SiblingNavigationContent: FC<SiblingNavigationContentProps> = async ({
   parentId,
   level,
 }) => {
-  const { t } = await useTranslation(getLocale());
+  const { t } = await useTranslation();
   const data = await getSiblings(parentId, uri, level);
 
   if (!data) {
@@ -65,7 +64,7 @@ const SiblingNavigation: FC<SiblingNavigationProps> = async ({
   returnTo,
   ...props
 }) => {
-  const { t } = await useTranslation(getLocale());
+  const { t } = await useTranslation();
 
   return (
     <Container width="narrow" paddingSize="large" className="l-mar-top-small">

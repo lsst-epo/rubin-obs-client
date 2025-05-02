@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import getRootPages from "@/services/craft/globals/rootPages";
-import { getLocale } from "@/lib/i18n/server";
 import { createLocationString } from "@/lib/helpers/location";
 import { checkIfBetweenDates } from "@/lib/utils/dates";
 import { getCustomBreadcrumbs } from "@/lib/helpers/breadcrumbs";
@@ -38,7 +37,7 @@ export default async function EventPage({
     uri,
   },
 }) {
-  const { t } = await useTranslation(getLocale());
+  const { t } = await useTranslation();
   const rootPages = await getRootPages();
   const customBreadcrumbs = getCustomBreadcrumbs({
     rootPages,

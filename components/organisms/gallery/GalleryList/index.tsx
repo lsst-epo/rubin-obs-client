@@ -1,7 +1,7 @@
 import { FC } from "react";
+import { getLocale } from "next-intl/server";
 import Container from "@rubin-epo/epo-react-lib/Container";
 import { getAllGalleries, getMainGallery } from "@/lib/api/galleries";
-import { getLocale } from "@/lib/i18n/server";
 import styles from "./styles.module.css";
 import Link from "next/link";
 import { addLocaleUriSegment, useTranslation } from "@/lib/i18n";
@@ -12,7 +12,7 @@ interface GalleryListProps {
 }
 
 const GalleryList: FC<GalleryListProps> = async ({ currentGallery }) => {
-  const locale = getLocale();
+  const locale = await getLocale();
   const mainGallery = await getMainGallery(locale);
   const galleries = await getAllGalleries(locale);
   const { t } = await useTranslation(locale);

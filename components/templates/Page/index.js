@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import Container from "@rubin-epo/epo-react-lib/Container";
-import { getLocale } from "@/lib/i18n/server";
 import { useTranslation } from "@/lib/i18n";
 import internalLinkShape from "@/shapes/link";
 import pageShape from "@/shapes/page";
@@ -51,8 +50,7 @@ export default async function Page({
   breadcrumbs,
   children,
 }) {
-  const locale = getLocale();
-  const { t } = await useTranslation(locale);
+  const { t } = await useTranslation();
 
   const pageLink = {
     id,

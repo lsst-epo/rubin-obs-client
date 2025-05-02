@@ -4,8 +4,8 @@ import { graphql } from "@/gql/gql";
 import queryAPI from "@/lib/api/client/query";
 import { getSiteFromLocale } from "@/lib/helpers/site";
 import tags from "@/lib/api/client/tags";
-import { getLocale } from "@/lib/i18n/server";
 import { z } from "zod";
+import { getLocale } from "next-intl/server";
 
 const logoSchema = z.object({
   url: z
@@ -24,7 +24,7 @@ const siteInfoSchema = z.object({
 });
 
 export async function getLogos() {
-  const locale = getLocale();
+  const locale = await getLocale();
   const site = getSiteFromLocale(locale);
 
   const query = graphql(`

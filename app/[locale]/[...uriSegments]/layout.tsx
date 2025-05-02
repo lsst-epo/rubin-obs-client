@@ -120,4 +120,6 @@ const UriSegmentsLayout: FC<PropsWithChildren<UriSegmentProps>> = ({
   return <>{children}</>;
 };
 
+export const dynamic = "force-dynamic";
+
 export default UriSegmentsLayout;
