@@ -1,5 +1,6 @@
 "server-only";
 import PropTypes from "prop-types";
+import { getLocale } from "next-intl/server";
 import {
   Image,
   Text,
@@ -27,7 +28,6 @@ import SkyviewerBlock from "@/components/content-blocks/Skyviewer";
 import LinkedImageListBlock from "@/components/content-blocks/LinkedImageList";
 import ImageComparisonBlock from "@/components/content-blocks/ImageComparison";
 import FirstLookWidgetsBlock from "@/components/content-blocks/FirstLookWidgets";
-import { getLocale } from "@/lib/i18n/server";
 
 const blockMap = {
   accordionGroup: AccordionGroup,
@@ -63,8 +63,8 @@ const blockMap = {
   firstLookWidgets: FirstLookWidgetsBlock,
 };
 
-export default function ContentBlockFactory({ type, data, pageId }) {
-  const locale = getLocale();
+export default async function ContentBlockFactory({ type, data, pageId }) {
+  const locale = await getLocale();
   const Block = blockMap[type];
   if (!Block) return null;
   return <Block {...data} pageId={pageId} locale={locale} />;

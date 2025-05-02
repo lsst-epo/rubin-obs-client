@@ -1,7 +1,6 @@
 import { FunctionComponent } from "react";
 import MetadataSection from "../Section";
 import TagList from "@/components/molecules/TagList";
-import { getLocale } from "@/lib/i18n/server";
 import { useTranslation } from "@/lib/i18n";
 
 interface AssetTagsProps {
@@ -13,8 +12,7 @@ const AssetTags: FunctionComponent<AssetTagsProps> = async ({
   tags,
   parentUri,
 }) => {
-  const locale = getLocale();
-  const { t } = await useTranslation(locale);
+  const { t } = await useTranslation();
   if (tags.length === 0) return null;
 
   const tagsWithLinks = tags.map((tag) => {
