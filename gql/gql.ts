@@ -56,9 +56,9 @@ const documents = {
     types.SkyviewerNewsBlockFragmentDoc,
   "\n  fragment textBlock on contentBlocks_text_BlockType {\n    id\n    typeHandle\n    backgroundColor\n    text\n  }\n":
     types.TextBlockFragmentDoc,
-  "\n  fragment videoBlock on contentBlocks_video_BlockType {\n    id\n    typeHandle\n    backgroundColor\n    caption\n    url: externalUrlTranslatable\n  }\n":
+  '\n  fragment videoBlock on contentBlocks_video_BlockType {\n    id\n    typeHandle\n    backgroundColor\n    caption\n    url: externalUrlTranslatable\n    cantoAsset: videoType\n    fullscreenVideo\n    cantoAssets: responsiveAssets {\n      ... on responsiveAssets_asset_BlockType {\n        orientation\n        asset(where: { key: "scheme", value: "video" }) {\n          ...CantoAssetMetadata\n          default {\n            DateUploaded\n          }\n          metadata {\n            MIMEType\n          }\n        }\n      }\n    }\n  }\n':
     types.VideoBlockFragmentDoc,
-  "fragment CantoAssetMetadata on CantoDamAssetInterface {\n  additional {\n    AltTextEN\n    AltTextES\n    TitleEN\n    TitleES\n  }\n  height\n  id\n  name\n  scheme\n  url {\n    directUrlOriginal\n    directUrlPreview\n    directUrlPreviewPlay\n  }\n  width\n}":
+  "fragment CantoAssetMetadata on CantoDamAssetInterface {\n  additional {\n    AltTextEN\n    AltTextES\n    TitleEN\n    TitleES\n    CaptionEN\n    CaptionES\n    Credit\n  }\n  height\n  id\n  name\n  scheme\n  url {\n    directUrlOriginal\n    directUrlPreview\n    directUrlPreviewPlay\n  }\n  width\n}":
     types.CantoAssetMetadataFragmentDoc,
   "\n    query getLogos($set: [String], $site: [String]) {\n      siteInfo: globalSet(handle: $set, site: $site) {\n        ... on siteInfo_GlobalSet {\n          __typename\n          logoLarge {\n            url {\n              directUrlOriginal\n            }\n            width\n            height\n          }\n          logoSmall {\n            url {\n              directUrlOriginal\n            }\n            width\n            height\n          }\n        }\n      }\n    }\n  ":
     types.GetLogosDocument,
@@ -216,14 +216,14 @@ export function graphql(
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: "\n  fragment videoBlock on contentBlocks_video_BlockType {\n    id\n    typeHandle\n    backgroundColor\n    caption\n    url: externalUrlTranslatable\n  }\n"
-): (typeof documents)["\n  fragment videoBlock on contentBlocks_video_BlockType {\n    id\n    typeHandle\n    backgroundColor\n    caption\n    url: externalUrlTranslatable\n  }\n"];
+  source: '\n  fragment videoBlock on contentBlocks_video_BlockType {\n    id\n    typeHandle\n    backgroundColor\n    caption\n    url: externalUrlTranslatable\n    cantoAsset: videoType\n    fullscreenVideo\n    cantoAssets: responsiveAssets {\n      ... on responsiveAssets_asset_BlockType {\n        orientation\n        asset(where: { key: "scheme", value: "video" }) {\n          ...CantoAssetMetadata\n          default {\n            DateUploaded\n          }\n          metadata {\n            MIMEType\n          }\n        }\n      }\n    }\n  }\n'
+): (typeof documents)['\n  fragment videoBlock on contentBlocks_video_BlockType {\n    id\n    typeHandle\n    backgroundColor\n    caption\n    url: externalUrlTranslatable\n    cantoAsset: videoType\n    fullscreenVideo\n    cantoAssets: responsiveAssets {\n      ... on responsiveAssets_asset_BlockType {\n        orientation\n        asset(where: { key: "scheme", value: "video" }) {\n          ...CantoAssetMetadata\n          default {\n            DateUploaded\n          }\n          metadata {\n            MIMEType\n          }\n        }\n      }\n    }\n  }\n'];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: "fragment CantoAssetMetadata on CantoDamAssetInterface {\n  additional {\n    AltTextEN\n    AltTextES\n    TitleEN\n    TitleES\n  }\n  height\n  id\n  name\n  scheme\n  url {\n    directUrlOriginal\n    directUrlPreview\n    directUrlPreviewPlay\n  }\n  width\n}"
-): (typeof documents)["fragment CantoAssetMetadata on CantoDamAssetInterface {\n  additional {\n    AltTextEN\n    AltTextES\n    TitleEN\n    TitleES\n  }\n  height\n  id\n  name\n  scheme\n  url {\n    directUrlOriginal\n    directUrlPreview\n    directUrlPreviewPlay\n  }\n  width\n}"];
+  source: "fragment CantoAssetMetadata on CantoDamAssetInterface {\n  additional {\n    AltTextEN\n    AltTextES\n    TitleEN\n    TitleES\n    CaptionEN\n    CaptionES\n    Credit\n  }\n  height\n  id\n  name\n  scheme\n  url {\n    directUrlOriginal\n    directUrlPreview\n    directUrlPreviewPlay\n  }\n  width\n}"
+): (typeof documents)["fragment CantoAssetMetadata on CantoDamAssetInterface {\n  additional {\n    AltTextEN\n    AltTextES\n    TitleEN\n    TitleES\n    CaptionEN\n    CaptionES\n    Credit\n  }\n  height\n  id\n  name\n  scheme\n  url {\n    directUrlOriginal\n    directUrlPreview\n    directUrlPreviewPlay\n  }\n  width\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

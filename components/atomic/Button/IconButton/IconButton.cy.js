@@ -1,4 +1,4 @@
-import IconButton from "./index.js";
+import IconButton from "./index";
 
 describe("<IconButton>", () => {
   it("IconButton Exists", () => {
