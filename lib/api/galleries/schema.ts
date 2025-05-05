@@ -42,18 +42,22 @@ export const BreadcrumbAssetSchema = z.object({
 });
 
 export const MetadataAssetSchema = z.object({
-  additional: z.object({
-    AltTextEN: z.string().nullable(),
-    AltTextES: z.string().nullable(),
-    TitleEN: z.string().nullable(),
-    TitleES: z.string().nullable(),
-  }),
+  additional: AdditionalSchema,
   height: z.coerce.number(),
   id: z.string(),
   name: z.string(),
   scheme: CantoScheme,
   url: AssetUrlSchema,
   width: z.coerce.number(),
+});
+export const MetadataVideoSchema = MetadataAssetSchema.extend({
+  scheme: z.literal("video"),
+  default: z.object({
+    DateUploaded: z.string(),
+  }),
+  metadata: z.object({
+    MIMEType: z.string(),
+  }),
 });
 
 export const DetailedAssetSchema = z
@@ -134,4 +138,5 @@ export type CantoAssetAdditional = z.infer<typeof AdditionalSchema>;
 export type CantoAssetDetailed = z.infer<typeof DetailedAssetSchema>;
 export type CantoAssetUrl = z.infer<typeof AssetUrlSchema>;
 export type CantoAssetMetadata = z.infer<typeof MetadataAssetSchema>;
+export type CantoVideoMetadata = z.infer<typeof MetadataVideoSchema>;
 export type GalleryDataFilters = z.infer<typeof GalleryFilterSchema>;

@@ -4,6 +4,9 @@ fragment CantoAssetMetadata on CantoDamAssetInterface {
     AltTextES
     TitleEN
     TitleES
+    CaptionEN
+    CaptionES
+    Credit
   }
   height
   id
