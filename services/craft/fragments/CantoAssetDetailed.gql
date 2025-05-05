@@ -1,0 +1,41 @@
+fragment CantoAssetDetailed on CantoDamAssetInterface {
+  additional {
+    AltTextEN
+    AltTextES
+    CaptionEN
+    CaptionES
+    Credit
+    TitleEN
+    TitleES
+  }
+  default {
+    ContentType
+    DateCreated
+    DateModified
+    DateUploaded
+    Size
+  }
+  approvalStatus
+  height
+  id
+  keyword
+  name
+  owner
+  ownerName
+  scheme
+  size
+  smartTags
+  tag
+  time
+  url {
+    directUrlOriginal
+    directUrlPreview
+    directUrlPreviewPlay
+    download
+    metadata
+    preview
+    PNG
+    HighJPG
+  }
+  width
+}
