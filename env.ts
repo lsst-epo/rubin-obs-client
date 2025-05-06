@@ -14,6 +14,8 @@ export const env = createEnv({
     CRAFT_SECRET_TOKEN: z.string().min(1),
     GOOGLE_APP_SECRET: z.string().min(1),
     SKYVIEWER_BASE_URL: z.string().url(),
+    NOIRLAB_OAUTH_AUTH_URL: z.string().url(),
+    NOIRLAB_OAUTH_CREDENTIALS: z.string(),
   },
   client: {
     NEXT_PUBLIC_API_URL: z.string().url(),

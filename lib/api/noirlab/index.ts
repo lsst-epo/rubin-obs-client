@@ -6,6 +6,7 @@ import {
   ReleasesService,
 } from "@/services/noirlab";
 import { Locale } from "@/lib/i18n/settings";
+import { client } from "@/services/noirlab/oauthRetry";
 
 export const NOIRLabServices = {
   "news-post": AnnouncementsService.announcementsRetrieve,
@@ -87,6 +88,7 @@ export const generateNOIRLabMetadata = async (
         lang: locale as Locale,
         translation_mode: "fallback",
       },
+      client,
     });
 
     return {
