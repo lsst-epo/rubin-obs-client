@@ -406,22 +406,7 @@ export async function getGalleryData({
             sortBy: $sortBy
             sortByDesc: $sortByDesc
           ) {
-            additional {
-              AltTextEN
-              AltTextES
-              TitleEN
-              TitleES
-            }
-            height
-            id
-            name
-            scheme
-            url {
-              directUrlOriginal
-              directUrlPreview
-              directUrlPreviewPlay
-            }
-            width
+            ...CantoAssetMetadata
           }
         }
       }
