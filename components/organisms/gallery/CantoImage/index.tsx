@@ -4,8 +4,10 @@ import { CantoAssetDetailed } from "@/lib/api/galleries/schema";
 import { assetAlt, assetCaption } from "@/lib/api/canto/metadata";
 import { resizeCantoImage } from "@/lib/api/canto/resize";
 import GalleryImage from "@/components/molecules/GalleryImage";
+import { LinkProps } from "next/link";
 
 interface CantoImageProps {
+  link?: LinkProps;
   locale: string;
   asset: CantoAssetDetailed;
   license?: string;
@@ -13,6 +15,7 @@ interface CantoImageProps {
 
 const CantoImage: FunctionComponent<CantoImageProps> = ({
   locale,
+  link,
   asset,
   license,
 }) => {
@@ -37,7 +40,7 @@ const CantoImage: FunctionComponent<CantoImageProps> = ({
 
   return (
     <GalleryImage
-      {...{ width, height }}
+      {...{ width, height, link }}
       metadata={structuredData}
       alt={assetAlt(additional, locale)}
       src={resizeCantoImage(url.directUrlPreview, 2050)}

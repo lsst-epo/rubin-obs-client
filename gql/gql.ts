@@ -44,6 +44,10 @@ const documents = {
     types.GetNavigationItemsDocument,
   "\n    query SearchResultsPage($site: [String]) {\n      searchResultsEntries(site: $site) {\n        ... on searchResults_searchResults_Entry {\n          title\n          id\n          dynamicComponent\n        }\n      }\n    }\n  ":
     types.SearchResultsPageDocument,
+  '\n  fragment imageBlock on contentBlocks_image_BlockType {\n    id\n    typeHandle\n    caption\n    image: contentImage {\n      ... on contentImages_Asset {\n        altText\n        width\n        height\n        url @transform(mode: "fit", width: 900)\n      }\n    }\n    cantoImage: cantoAssetSingle {\n      ...CantoAssetDetailed\n    }\n    floatDirection\n    backgroundColor\n  }\n':
+    types.ImageBlockFragmentDoc,
+  '\n  fragment imageBlockNews on contentBlocksNews_image_BlockType {\n    id\n    typeHandle\n    caption\n    image: contentImage {\n      ... on contentImages_Asset {\n        altText\n        width\n        height\n        url @transform(mode: "fit", width: 900)\n      }\n    }\n    cantoImage: cantoAssetSingle {\n      ...CantoAssetDetailed\n    }\n    floatDirection\n  }\n':
+    types.ImageBlockNewsFragmentDoc,
   "\n  fragment imageComparisonBlock on contentBlocks_imageComparison_BlockType {\n    id\n    typeHandle\n    backgroundColor\n    caption: captionRichText\n    images: multipleCantoAssets {\n      ...CantoAssetMetadata\n    }\n  }\n":
     types.ImageComparisonBlockFragmentDoc,
   "\n  fragment linkedImageListBlock on contentBlocks_linkedImageList_BlockType {\n    id\n    typeHandle\n    description\n    header\n    variant: linkedImageListVariant\n    linkedImageList {\n      ... on linkedImageList_linkedImage_BlockType {\n        id\n        image {\n          ...CantoAssetMetadata\n        }\n        link: imageLink {\n          customText\n          target\n          text\n          title\n          type\n          url\n        }\n      }\n    }\n  }\n":
@@ -58,6 +62,8 @@ const documents = {
     types.TextBlockFragmentDoc,
   '\n  fragment videoBlock on contentBlocks_video_BlockType {\n    id\n    typeHandle\n    backgroundColor\n    caption\n    url: externalUrlTranslatable\n    cantoAsset: videoType\n    fullscreenVideo\n    cantoAssets: responsiveAssets {\n      ... on responsiveAssets_asset_BlockType {\n        orientation\n        asset(where: { key: "scheme", value: "video" }) {\n          ...CantoAssetMetadata\n          default {\n            DateUploaded\n          }\n          metadata {\n            MIMEType\n          }\n        }\n      }\n    }\n  }\n':
     types.VideoBlockFragmentDoc,
+  "fragment CantoAssetDetailed on CantoDamAssetInterface {\n  additional {\n    AltTextEN\n    AltTextES\n    CaptionEN\n    CaptionES\n    Credit\n    TitleEN\n    TitleES\n  }\n  default {\n    ContentType\n    DateCreated\n    DateModified\n    DateUploaded\n    Size\n  }\n  approvalStatus\n  height\n  id\n  keyword\n  name\n  owner\n  ownerName\n  scheme\n  size\n  smartTags\n  tag\n  time\n  url {\n    directUrlOriginal\n    directUrlPreview\n    directUrlPreviewPlay\n    download\n    metadata\n    preview\n    PNG\n    HighJPG\n  }\n  width\n}":
+    types.CantoAssetDetailedFragmentDoc,
   "fragment CantoAssetMetadata on CantoDamAssetInterface {\n  additional {\n    AltTextEN\n    AltTextES\n    TitleEN\n    TitleES\n    CaptionEN\n    CaptionES\n    Credit\n  }\n  height\n  id\n  name\n  scheme\n  url {\n    directUrlOriginal\n    directUrlPreview\n    directUrlPreviewPlay\n  }\n  width\n}":
     types.CantoAssetMetadataFragmentDoc,
   "\n    query getLogos($set: [String], $site: [String]) {\n      siteInfo: globalSet(handle: $set, site: $site) {\n        ... on siteInfo_GlobalSet {\n          __typename\n          logoLarge {\n            url {\n              directUrlOriginal\n            }\n            width\n            height\n          }\n          logoSmall {\n            url {\n              directUrlOriginal\n            }\n            width\n            height\n          }\n        }\n      }\n    }\n  ":
@@ -180,6 +186,18 @@ export function graphql(
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
+  source: '\n  fragment imageBlock on contentBlocks_image_BlockType {\n    id\n    typeHandle\n    caption\n    image: contentImage {\n      ... on contentImages_Asset {\n        altText\n        width\n        height\n        url @transform(mode: "fit", width: 900)\n      }\n    }\n    cantoImage: cantoAssetSingle {\n      ...CantoAssetDetailed\n    }\n    floatDirection\n    backgroundColor\n  }\n'
+): (typeof documents)['\n  fragment imageBlock on contentBlocks_image_BlockType {\n    id\n    typeHandle\n    caption\n    image: contentImage {\n      ... on contentImages_Asset {\n        altText\n        width\n        height\n        url @transform(mode: "fit", width: 900)\n      }\n    }\n    cantoImage: cantoAssetSingle {\n      ...CantoAssetDetailed\n    }\n    floatDirection\n    backgroundColor\n  }\n'];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: '\n  fragment imageBlockNews on contentBlocksNews_image_BlockType {\n    id\n    typeHandle\n    caption\n    image: contentImage {\n      ... on contentImages_Asset {\n        altText\n        width\n        height\n        url @transform(mode: "fit", width: 900)\n      }\n    }\n    cantoImage: cantoAssetSingle {\n      ...CantoAssetDetailed\n    }\n    floatDirection\n  }\n'
+): (typeof documents)['\n  fragment imageBlockNews on contentBlocksNews_image_BlockType {\n    id\n    typeHandle\n    caption\n    image: contentImage {\n      ... on contentImages_Asset {\n        altText\n        width\n        height\n        url @transform(mode: "fit", width: 900)\n      }\n    }\n    cantoImage: cantoAssetSingle {\n      ...CantoAssetDetailed\n    }\n    floatDirection\n  }\n'];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
   source: "\n  fragment imageComparisonBlock on contentBlocks_imageComparison_BlockType {\n    id\n    typeHandle\n    backgroundColor\n    caption: captionRichText\n    images: multipleCantoAssets {\n      ...CantoAssetMetadata\n    }\n  }\n"
 ): (typeof documents)["\n  fragment imageComparisonBlock on contentBlocks_imageComparison_BlockType {\n    id\n    typeHandle\n    backgroundColor\n    caption: captionRichText\n    images: multipleCantoAssets {\n      ...CantoAssetMetadata\n    }\n  }\n"];
 /**
@@ -218,6 +236,12 @@ export function graphql(
 export function graphql(
   source: '\n  fragment videoBlock on contentBlocks_video_BlockType {\n    id\n    typeHandle\n    backgroundColor\n    caption\n    url: externalUrlTranslatable\n    cantoAsset: videoType\n    fullscreenVideo\n    cantoAssets: responsiveAssets {\n      ... on responsiveAssets_asset_BlockType {\n        orientation\n        asset(where: { key: "scheme", value: "video" }) {\n          ...CantoAssetMetadata\n          default {\n            DateUploaded\n          }\n          metadata {\n            MIMEType\n          }\n        }\n      }\n    }\n  }\n'
 ): (typeof documents)['\n  fragment videoBlock on contentBlocks_video_BlockType {\n    id\n    typeHandle\n    backgroundColor\n    caption\n    url: externalUrlTranslatable\n    cantoAsset: videoType\n    fullscreenVideo\n    cantoAssets: responsiveAssets {\n      ... on responsiveAssets_asset_BlockType {\n        orientation\n        asset(where: { key: "scheme", value: "video" }) {\n          ...CantoAssetMetadata\n          default {\n            DateUploaded\n          }\n          metadata {\n            MIMEType\n          }\n        }\n      }\n    }\n  }\n'];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: "fragment CantoAssetDetailed on CantoDamAssetInterface {\n  additional {\n    AltTextEN\n    AltTextES\n    CaptionEN\n    CaptionES\n    Credit\n    TitleEN\n    TitleES\n  }\n  default {\n    ContentType\n    DateCreated\n    DateModified\n    DateUploaded\n    Size\n  }\n  approvalStatus\n  height\n  id\n  keyword\n  name\n  owner\n  ownerName\n  scheme\n  size\n  smartTags\n  tag\n  time\n  url {\n    directUrlOriginal\n    directUrlPreview\n    directUrlPreviewPlay\n    download\n    metadata\n    preview\n    PNG\n    HighJPG\n  }\n  width\n}"
+): (typeof documents)["fragment CantoAssetDetailed on CantoDamAssetInterface {\n  additional {\n    AltTextEN\n    AltTextES\n    CaptionEN\n    CaptionES\n    Credit\n    TitleEN\n    TitleES\n  }\n  default {\n    ContentType\n    DateCreated\n    DateModified\n    DateUploaded\n    Size\n  }\n  approvalStatus\n  height\n  id\n  keyword\n  name\n  owner\n  ownerName\n  scheme\n  size\n  smartTags\n  tag\n  time\n  url {\n    directUrlOriginal\n    directUrlPreview\n    directUrlPreviewPlay\n    download\n    metadata\n    preview\n    PNG\n    HighJPG\n  }\n  width\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

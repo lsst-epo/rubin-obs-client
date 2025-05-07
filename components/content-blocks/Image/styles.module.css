@@ -39,3 +39,21 @@
     }
   }
 }
+
+.figure {
+  &[data-with-background="true"] {
+    &:focus-within,
+    &:has(a > img:hover) {
+      border-color: currentcolor;
+      outline: 6px solid var(--color-rubin-teal-500);
+    }
+  }
+
+  &[data-with-background="false"] {
+    & a:focus-visible,
+    & a:hover {
+      border-color: currentcolor;
+      outline: 6px solid var(--color-rubin-teal-500);
+    }
+  }
+}

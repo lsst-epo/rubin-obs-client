@@ -1,6 +1,7 @@
 "use client";
 
 import { FC, useState } from "react";
+import Link, { LinkProps } from "next/link";
 import clsx from "clsx";
 import Image from "next/image";
 import { ImageObject } from "schema-dts";
@@ -10,6 +11,7 @@ import StructuredData from "@/components/atomic/StructuredData";
 import styles from "./styles.module.css";
 
 interface GalleryImageProps {
+  link?: LinkProps;
   width: number;
   height: number;
   src: string;
@@ -20,6 +22,7 @@ interface GalleryImageProps {
 }
 
 const GalleryImage: FC<GalleryImageProps> = ({
+  link,
   width,
   height,
   src,
@@ -32,21 +35,30 @@ const GalleryImage: FC<GalleryImageProps> = ({
   const aspectRatio = width / height;
   const landscapeSizes = `(max-width: ${tokens.BREAK_TABLET}) 100vw, 1435px`;
   const portraitSizes = `(max-width: ${tokens.BREAK_TABLET}) 100vw, 700px`;
+  const image = (
+    <Image
+      {...{ width, height, src, title, alt }}
+      data-cy="gallery-image"
+      sizes={aspectRatio < 1 ? portraitSizes : landscapeSizes}
+      quality={85}
+      priority
+      fetchPriority="high"
+      className={link ? undefined : styles.image}
+      onLoadingComplete={() => setLoading(false)}
+    />
+  );
 
   return (
     <>
       <StructuredData jsonLd={metadata} />
       <div className={clsx(styles.stack, className)}>
-        <Image
-          {...{ width, height, src, title, alt }}
-          data-cy="gallery-image"
-          sizes={aspectRatio < 1 ? portraitSizes : landscapeSizes}
-          quality={85}
-          priority
-          fetchPriority="high"
-          className={styles.image}
-          onLoadingComplete={() => setLoading(false)}
-        />
+        {link ? (
+          <Link className={link ? styles.image : undefined} {...link}>
+            {image}
+          </Link>
+        ) : (
+          image
+        )}
         {isLoading && (
           <Skeleton
             containerClassName={styles.skeletonWrapper}

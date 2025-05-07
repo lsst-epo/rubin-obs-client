@@ -1,27 +1,30 @@
-"use client";
 import PropTypes from "prop-types";
+import getRootPages from "@/services/craft/globals/rootPages";
+import { getCustomBreadcrumbs } from "@/lib/helpers/breadcrumbs";
 import Breadcrumbs from "@/page/Breadcrumbs";
-import { useCustomBreadcrumbs, imageShaper } from "@/lib/utils";
-import {
-  Container,
-  ResponsiveImage,
-  Buttonish,
-} from "@rubin-epo/epo-react-lib";
-import { Share } from "@/content-blocks";
-import { useTranslation } from "react-i18next";
+import Container from "@rubin-epo/epo-react-lib/Container";
+import ResponsiveImage from "@rubin-epo/epo-react-lib/ResponsiveImage";
+import Buttonish from "@rubin-epo/epo-react-lib/Buttonish";
+import ShareContentBlock from "@/components/content-blocks/ShareBlock";
+import { useTranslation } from "@/lib/i18n";
+import { cantoToImageShape } from "@/lib/api/canto";
 
-export default function GlossaryPage({ data }) {
-  const { t } = useTranslation();
+export default async function GlossaryPage({ data, locale }) {
+  const { t } = await useTranslation(locale);
 
   const { id, title, uri, text, cantoAssetSingle } = data;
 
-  const customBreadcrumbs = useCustomBreadcrumbs("Glossary");
+  const rootPages = await getRootPages();
+  const customBreadcrumbs = getCustomBreadcrumbs({
+    rootPages,
+    header: "Glossary",
+  });
 
   const glossaryCrumb = customBreadcrumbs.find((b) =>
     b.uri.includes("glossary")
   );
 
-  const image = imageShaper("EN", cantoAssetSingle[0]);
+  const image = cantoToImageShape(cantoAssetSingle[0]);
 
   const pageLink = {
     id,
@@ -35,7 +38,7 @@ export default function GlossaryPage({ data }) {
       <Container width="narrow">
         <h1>{title}</h1>
       </Container>
-      <Share />
+      <ShareContentBlock />
       <Container width="narrow">
         <div
           className="c-content-rte"
@@ -64,4 +67,5 @@ GlossaryPage.propTypes = {
     cantoAssetSingle: PropTypes.array,
     caption: PropTypes.string,
   }),
+  locale: PropTypes.string,
 };
