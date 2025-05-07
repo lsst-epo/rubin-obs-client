@@ -37,7 +37,7 @@ const ImageContentBlock: FC<ImageContentBlockProps> = ({
   const renderedImage = cantoAsset ? (
     <InlineCantoImage asset={cantoAsset} locale={locale} />
   ) : (
-    <Image image={image[0]} />
+    <Image image={image} />
   );
 
   const hasFloat = floatDirection === "right" || floatDirection === "left";
