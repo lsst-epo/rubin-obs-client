@@ -123,6 +123,12 @@ export const getSitemapData = async (
           uri
         }
       }
+      galleries: galleriesEntries(site: $site) {
+        ... on galleries_gallery_Entry {
+          dateUpdated
+          uri
+        }
+      }
     }
   `;
 
@@ -137,4 +143,4 @@ export const getSitemapData = async (
   return Object.values<any>(data).flat();
 };
 
-// todo: write function to query for gallery data
+// todo: add query for gallery data

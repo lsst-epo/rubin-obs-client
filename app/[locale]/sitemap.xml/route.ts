@@ -19,13 +19,13 @@ export async function GET(
       "xhtml:link": generateAlternateLanguages(uri, locale),
     };
   });
-  const { siteTitle, news } = await getSiteMapNewsData(locale);
 
   const today = new Date();
   const recentNewsThreshold = new Date(
     today.getTime() - 1000 * 60 * 60 * 24 * 2
   );
 
+  const { siteTitle, news } = await getSiteMapNewsData(locale);
   const newsData = news.map(({ uri, dateUpdated, title, date }) => {
     const entry = {
       loc: generateSitemapUrl(uri, locale),
