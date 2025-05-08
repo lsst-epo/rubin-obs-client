@@ -47,6 +47,9 @@ export async function GET(
     return entry;
   });
 
+  // todo: retrieve gallery sitemap data
+  // todo: map gallery sitemap data to JS objects with loc, lastmod, and "xhtml:link" attributes
+
   const data = {
     "?xml": {
       $version: "1.0",
@@ -57,6 +60,7 @@ export async function GET(
       "$xmlns:xhtml": "http://www.w3.org/1999/xhtml",
       "$xmlns:news": "http://www.google.com/schemas/sitemap-news/0.9",
       url: pageData.concat(newsData),
+      // todo: concat gallery data
     },
   };
   const builder = new XMLBuilder({
