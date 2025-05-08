@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import { getLocale } from "@/lib/i18n/server";
 import { addLocaleUriSegment, useTranslation } from "@/lib/i18n";
 import getRootPages from "@/services/craft/globals/rootPages";
 import { Share } from "@/content-blocks";
@@ -42,7 +41,7 @@ export default async function StaffPage({
   const {
     t,
     i18n: { language },
-  } = await useTranslation(getLocale());
+  } = await useTranslation();
   const rootPages = await getRootPages();
   const parentUri = getParentUri(uri);
   const parentEntry = getParentEntry(rootPages);

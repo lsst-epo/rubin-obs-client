@@ -1,10 +1,13 @@
 import { FunctionComponent, PropsWithChildren, Suspense } from "react";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { hasLocale } from "next-intl";
+import { setRequestLocale } from "next-intl/server";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GlobalStyles } from "@rubin-epo/epo-react-lib/styles";
 import { env } from "@/env";
 import { getGlobalData } from "@/lib/api/globals";
+import { routing } from "@/lib/i18n/routing";
 import { languages } from "@/lib/i18n/settings";
 import SourceSansPro from "@/lib/styles/font";
 import StyledComponentsRegistry from "@/lib/styles/registry";
@@ -21,7 +24,7 @@ const GOOGLE_APP_ID = env.NEXT_PUBLIC_GOOGLE_APP_ID;
 export async function generateMetadata({
   params: { locale },
 }: LocaleProps): Promise<Metadata> {
-  if (!languages.includes(locale)) {
+  if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
 
@@ -69,15 +72,15 @@ export const generateStaticParams = () => {
   });
 };
 
-export const dynamic = "force-dynamic";
-
 const LocaleLayout: FunctionComponent<PropsWithChildren<LocaleProps>> = async ({
   params: { locale },
   children,
 }) => {
-  if (!languages.includes(locale)) {
+  if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
+
+  setRequestLocale(locale);
 
   return (
     <html lang={locale}>

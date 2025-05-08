@@ -1,12 +1,12 @@
 "server-only";
+import { getLocale } from "next-intl/server";
 import { graphql } from "@/gql/gql";
 import queryAPI from "@/lib/api/client/query";
 import { getSiteFromLocale } from "@/lib/helpers/site";
-import { getLocale } from "@/lib/i18n/server";
 import tags from "@/lib/api/client/tags";
 
 export async function getSiblings(parentId: string, uri: string, level = 1) {
-  const site = getSiteFromLocale(getLocale());
+  const site = getSiteFromLocale(await getLocale());
 
   const query = graphql(`
     query GetSiblings(

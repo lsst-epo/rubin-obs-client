@@ -1,6 +1,6 @@
 import { NextResponse, NextRequest } from "next/server";
-import { i18nRouter } from "next-i18n-router";
-import { cookieName, fallbackLng, languages } from "./lib/i18n/settings";
+import createMiddleware from "next-intl/middleware";
+import { routing } from "@/lib/i18n/routing";
 import { env } from "@/env";
 
 const ignorableFileExtensions = ["woff", "ico", "png", "jpeg", "jpg"];
@@ -43,11 +43,8 @@ export function middleware(request: NextRequest) {
       return NextResponse.redirect(redirectUrl);
     }
   } else {
-    const res = i18nRouter(request, {
-      locales: languages,
-      defaultLocale: fallbackLng,
-      localeCookie: cookieName,
-    });
+    const i18nRouter = createMiddleware(routing);
+    const res = i18nRouter(request);
 
     logEntry.httpRequest.status = res.status;
     logEntry.httpRequest.redirected = res.redirected;
