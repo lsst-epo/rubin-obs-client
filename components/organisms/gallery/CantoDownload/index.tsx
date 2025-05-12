@@ -1,5 +1,4 @@
 import { useTranslation } from "@/lib/i18n";
-import { getLocale } from "@/lib/i18n/server";
 import Buttonish from "@rubin-epo/epo-react-lib/Buttonish";
 import { FunctionComponent } from "react";
 
@@ -10,8 +9,7 @@ interface CantoDownloadProps {
 const CantoDownload: FunctionComponent<CantoDownloadProps> = async ({
   directUrlOriginal,
 }) => {
-  const locale = getLocale();
-  const { t } = await useTranslation(locale);
+  const { t } = await useTranslation();
   const { pathname, searchParams, search } = new URL(directUrlOriginal);
   const [, , scheme, contentId, directUrlOriginalHash] = pathname.split("/");
 

@@ -2,7 +2,7 @@
 import { graphql, useFragment } from "@/gql";
 import queryAPI from "@/lib/api/client/query";
 import { getSiteFromLocale } from "@/lib/helpers/site";
-import { getLocale } from "@/lib/i18n/server";
+import { getLocale } from "next-intl/server";
 
 export const RootPagesFragment = graphql(`
   fragment rootPageInfoFragment on rootPageInformation_GlobalSet {
@@ -22,7 +22,7 @@ export const RootPagesFragment = graphql(`
 `);
 
 const getRootPages = async () => {
-  const site = getSiteFromLocale(getLocale());
+  const site = getSiteFromLocale(await getLocale());
 
   const query = graphql(`
     query getRootPages($site: [String], $set: [String]) {

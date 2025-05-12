@@ -57,4 +57,6 @@ const UriSegmentsPage: FunctionComponent<
   return <Template {...{ section, breadcrumbs, data, locale, searchParams }} />;
 };
 
+export const dynamic = "force-dynamic";
+
 export default UriSegmentsPage;

@@ -1,22 +1,11 @@
 "use client";
 import PropTypes from "prop-types";
 import { useEffect, useId, useState } from "react";
-import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import { useRouter, usePathname } from "@/lib/i18n/navigation";
+import { useSearchParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { fallbackLng } from "@/lib/i18n/settings";
 import * as Styled from "./styles";
-
-const filterSearchParams = (searchParams) => {
-  const filteredParams = [];
-
-  searchParams.forEach((value, key) => {
-    if (key !== "locale" && key !== "uriSegments") {
-      filteredParams.push(`${key}=${value}`);
-    }
-  });
-
-  return `?${filteredParams.join("&")}`;
-};
 
 export default function LanguageSelect({ className }) {
   const id = useId();
@@ -40,18 +29,8 @@ export default function LanguageSelect({ className }) {
     const newLocale = isDefaultLocale ? "es" : "en";
 
     if (newLocale !== locale) {
-      const parts = pathname?.split("/") || [];
-      parts.shift();
-
-      if (locale !== fallbackLng) {
-        parts.shift();
-      }
-
-      const route = `/${newLocale}/${parts.join("/")}${filterSearchParams(
-        searchParams
-      )}`;
       setLoading(true);
-      router.replace(route, { scroll: false });
+      router.replace({ pathname, query: searchParams }, { locale: newLocale });
       changeLanguage(newLocale);
     }
   };

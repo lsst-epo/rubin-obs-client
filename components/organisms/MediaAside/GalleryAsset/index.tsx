@@ -1,11 +1,11 @@
 import { FC, Suspense } from "react";
 import { ImageProps } from "next/image";
+import { getLocale } from "next-intl/server";
 import AsideImage from "@/components/molecules/Aside/Image";
 import { cantoToImageProps } from "@/lib/api/canto";
 import { assetTitle } from "@/lib/api/canto/metadata";
 import { getGalleryForAsset } from "@/lib/api/galleries/asset";
 import { addLocaleUriSegment } from "@/lib/i18n";
-import { getLocale } from "@/lib/i18n/server";
 
 interface GalleryAssetProps {
   asset: any;
@@ -24,7 +24,7 @@ const GalleryAssetContent: FC<GalleryAssetContentProps> = async ({
 }) => {
   const uri = await getGalleryForAsset(id);
   const link = uri
-    ? { href: addLocaleUriSegment(getLocale(), `${uri}/${id}`) }
+    ? { href: addLocaleUriSegment(await getLocale(), `${uri}/${id}`) }
     : undefined;
 
   return <AsideImage title={caption} {...{ image, link }} />;
