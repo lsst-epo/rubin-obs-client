@@ -117,12 +117,6 @@ export const getSitemapData = async (
           uri
         }
       }
-      voice: slideshowsEntries(site: $site) {
-        ... on slideshows_slideshow_Entry {
-          dateUpdated
-          uri
-        }
-      }
       galleries: galleriesEntries(site: $site) {
         ... on galleries_gallery_Entry {
           dateUpdated
