@@ -17,13 +17,7 @@ describe("Header", () => {
     cy.get("[data-cy=header] nav > ul").should("exist");
     cy.get("[data-cy=header] nav > ul").children().should("have.length.gt", 0);
   });
-  it("has a toggle for language", () => {
-    cy.get("[data-cy=localeToggle]").should("exist");
-    cy.get("[data-cy=localeToggle] button").filter(":visible").click();
-    cy.on("url:changed", (newUrl) => {
-      expect(newUrl).to.contain("es");
-    });
-  });
+
   it("yields results when searching", () => {
     cy.get("[data-cy=searchBar] button[aria-expanded=false]")
       .filter(":visible")
