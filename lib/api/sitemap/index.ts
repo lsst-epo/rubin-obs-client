@@ -136,5 +136,3 @@ export const getSitemapData = async (
 
   return Object.values<any>(data).flat();
 };
-
-// todo: add query for gallery data
