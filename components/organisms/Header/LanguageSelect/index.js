@@ -33,6 +33,7 @@ export default function LanguageSelect({ className }) {
 
   useEffect(() => {
     setLoading(false);
+    router.refresh();
   }, [pathname]);
 
   const handleClick = () => {
