@@ -4,7 +4,10 @@ import { z } from "zod";
 export const env = createEnv({
   emptyStringAsUndefined: true,
   shared: {
-    NODE_ENV: z.enum(["development", "test", "production"]).default("test"),
+    NODE_ENV: z
+      .enum(["development", "test", "production"])
+      .catch("test")
+      .default("test"),
   },
   server: {
     BING_INDEXNOW_KEY: z.string().min(1).optional(),
