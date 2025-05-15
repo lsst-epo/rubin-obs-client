@@ -26,6 +26,7 @@ import {
 import SkyviewerBlock from "@/components/content-blocks/Skyviewer";
 import LinkedImageListBlock from "@/components/content-blocks/LinkedImageList";
 import ImageComparisonBlock from "@/components/content-blocks/ImageComparison";
+import FirstLookWidgetsBlock from "@/components/content-blocks/FirstLookWidgets";
 import { getLocale } from "@/lib/i18n/server";
 
 const blockMap = {
@@ -59,6 +60,7 @@ const blockMap = {
   skyviewer: SkyviewerBlock,
   linkedImageList: LinkedImageListBlock,
   imageComparison: ImageComparisonBlock,
+  firstLookWidgets: FirstLookWidgetsBlock,
 };
 
 export default function ContentBlockFactory({ type, data, pageId }) {

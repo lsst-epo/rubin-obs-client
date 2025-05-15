@@ -474,5 +474,13 @@
   },
   "scroll_carousel": {
     "label": "Go to slide {{value}}"
+  },
+  "first_look": {
+    "icon_group": {
+      "galaxies": "Galaxies",
+      "stars": "Stars",
+      "asteroids": "Asteroids",
+      "tnos": "TNO's"
+    }
   }
 }

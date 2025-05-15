@@ -2,7 +2,9 @@ import { type StorybookConfig } from "@storybook/nextjs";
 
 const config: StorybookConfig = {
   stories: ["../components/**/*.stories.@(js|jsx|ts|tsx)"],
-
+  features: {
+    experimentalRSC: true,
+  },
   addons: [
     "@storybook/addon-a11y",
     "@storybook/addon-links",
