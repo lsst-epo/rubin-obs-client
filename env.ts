@@ -17,6 +17,10 @@ export const env = createEnv({
     CRAFT_SECRET_TOKEN: z.string().min(1),
     GOOGLE_APP_SECRET: z.string().min(1),
     SKYVIEWER_BASE_URL: z.string().url(),
+    NOIRLAB_REVALIDATE: z.coerce
+      .number()
+      .min(1)
+      .catch(60 * 5),
   },
   client: {
     NEXT_PUBLIC_API_URL: z.string().url(),
@@ -26,6 +30,7 @@ export const env = createEnv({
     NEXT_PUBLIC_GOOGLE_APP_ID: z.string().min(1),
     NEXT_PUBLIC_HASURA_SECRET: z.string().min(1).optional(),
     NEXT_PUBLIC_NOIRLAB_BASE_URL: z.string().url(),
+
     NEXT_PUBLIC_PLAUSIBLE_DOMAIN: z.string().min(1).optional(),
     NEXT_PUBLIC_SURVEY_SPARROW: z
       .enum(["true", "false"])

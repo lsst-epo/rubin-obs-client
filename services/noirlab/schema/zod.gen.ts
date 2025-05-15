@@ -395,6 +395,7 @@ export const zImageItem = z.union([
       .regex(/^[-a-zA-Z0-9_]+$/),
     url: z.string().readonly(),
     lang: z.string().max(7).optional(),
+    source: z.union([z.string(), z.null()]).optional(),
     title: z.string().max(255),
     width: z
       .union([z.number().int().gte(0).lte(2147483647), z.null()])
@@ -536,6 +537,7 @@ export const zImageTiny = z.object({
     .regex(/^[-a-zA-Z0-9_]+$/),
   url: z.string().readonly(),
   lang: z.string().max(7).optional(),
+  source: z.union([z.string(), z.null()]).optional(),
   title: z.string().max(255),
   width: z
     .union([z.number().int().gte(0).lte(2147483647), z.null()])
