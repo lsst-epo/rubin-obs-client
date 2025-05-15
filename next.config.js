@@ -26,7 +26,7 @@ export default {
       },
       {
         protocol: "https",
-        hostname: "noirlab.edu",
+        hostname: "**.noirlab.edu",
       },
     ],
     minimumCacheTTL: 3600, // 1 hour
