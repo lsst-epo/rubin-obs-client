@@ -44,6 +44,8 @@ const documents = {
     types.GetNavigationItemsDocument,
   "\n    query SearchResultsPage($site: [String]) {\n      searchResultsEntries(site: $site) {\n        ... on searchResults_searchResults_Entry {\n          title\n          id\n          dynamicComponent\n        }\n      }\n    }\n  ":
     types.SearchResultsPageDocument,
+  "\n  fragment firstLookWidgetsBlock on contentBlocks_firstLookWidgets_BlockType {\n    id\n    typeHandle\n    backgroundColor\n    filmReel {\n      ... on filmReel_item_BlockType {\n        text\n        share\n      }\n    }\n    firstLookWidget\n  }\n":
+    types.FirstLookWidgetsBlockFragmentDoc,
   '\n  fragment imageBlock on contentBlocks_image_BlockType {\n    id\n    typeHandle\n    caption\n    image: contentImage {\n      ... on contentImages_Asset {\n        altText\n        width\n        height\n        url @transform(mode: "fit", width: 900)\n      }\n    }\n    cantoImage: cantoAssetSingle {\n      ...CantoAssetDetailed\n    }\n    floatDirection\n    backgroundColor\n  }\n':
     types.ImageBlockFragmentDoc,
   '\n  fragment imageBlockNews on contentBlocksNews_image_BlockType {\n    id\n    typeHandle\n    caption\n    image: contentImage {\n      ... on contentImages_Asset {\n        altText\n        width\n        height\n        url @transform(mode: "fit", width: 900)\n      }\n    }\n    cantoImage: cantoAssetSingle {\n      ...CantoAssetDetailed\n    }\n    floatDirection\n  }\n':
@@ -182,6 +184,12 @@ export function graphql(
 export function graphql(
   source: "\n    query SearchResultsPage($site: [String]) {\n      searchResultsEntries(site: $site) {\n        ... on searchResults_searchResults_Entry {\n          title\n          id\n          dynamicComponent\n        }\n      }\n    }\n  "
 ): (typeof documents)["\n    query SearchResultsPage($site: [String]) {\n      searchResultsEntries(site: $site) {\n        ... on searchResults_searchResults_Entry {\n          title\n          id\n          dynamicComponent\n        }\n      }\n    }\n  "];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: "\n  fragment firstLookWidgetsBlock on contentBlocks_firstLookWidgets_BlockType {\n    id\n    typeHandle\n    backgroundColor\n    filmReel {\n      ... on filmReel_item_BlockType {\n        text\n        share\n      }\n    }\n    firstLookWidget\n  }\n"
+): (typeof documents)["\n  fragment firstLookWidgetsBlock on contentBlocks_firstLookWidgets_BlockType {\n    id\n    typeHandle\n    backgroundColor\n    filmReel {\n      ... on filmReel_item_BlockType {\n        text\n        share\n      }\n    }\n    firstLookWidget\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
