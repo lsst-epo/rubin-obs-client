@@ -21,7 +21,6 @@ const NOIRLabVideoAsset: FC<NOIRLabAssetProps<Locale>> = async ({
   const { data, error } = await MediaService.mediaVideosRetrieve({
     path: { id: asset },
     query: { lang: locale, translation_mode: "fallback" },
-    cache: "force-cache",
   });
 
   if (error || !data || !isRubinAsset(data.categories)) {

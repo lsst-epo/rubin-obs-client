@@ -820,6 +820,13 @@ export const ImageTinySchema = {
       title: "Language",
       maxLength: 7,
     },
+    source: {
+      type: "string",
+      description:
+        "Id of image - used in the URL for the image as well as the filename for the different formats.",
+      nullable: true,
+      title: "Translation source",
+    },
     title: {
       type: "string",
       description: "General descriptive title given to the image resource.",
