@@ -8,7 +8,7 @@ export default defineConfig({
   output: {
     format: "prettier",
     lint: "eslint",
-    path: "./services/noirlab",
+    path: "./services/noirlab/schema",
   },
   plugins: [
     ...defaultPlugins,

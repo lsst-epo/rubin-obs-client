@@ -283,6 +283,10 @@ export type ImageTiny = {
   readonly url: string;
   lang?: string;
   /**
+   * Id of image - used in the URL for the image as well as the filename for the different formats.
+   */
+  source?: string | null;
+  /**
    * General descriptive title given to the image resource.
    */
   title: string;
