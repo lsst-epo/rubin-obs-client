@@ -85,8 +85,21 @@ export const getSitemapGalleryData = async (locale: string) => {
     query ImageSitemapData($site: [String]) {
       galleries: galleriesEntries(site: $site) {
         ... on galleries_gallery_Entry {
+<<<<<<< HEAD
           dateUpdated
           uri
+=======
+          uri
+          assetAlbum {
+            url {
+              directUrlOriginal
+            }
+            id
+            metadata {
+              FileType
+            }
+          }
+>>>>>>> a5218e6 (refactor: pulled gallery query out of getSitemapData into it's own function)
         }
       }
     }
