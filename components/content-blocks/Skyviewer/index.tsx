@@ -60,12 +60,14 @@ const SkyviewerBlock: FC<SkyviewerProps> = ({ locale, ...props }) => {
     "clipboard-read",
     "web-share",
   ].join("; ");
+  /** {@link https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/sandbox} */
   const sandbox = [
     "allow-downloads",
     "allow-scripts",
     "allow-popups",
     "allow-popups-to-escape-sandbox",
     "allow-same-origin",
+    "allow-forms",
   ].join(" ");
 
   const iframe = (
