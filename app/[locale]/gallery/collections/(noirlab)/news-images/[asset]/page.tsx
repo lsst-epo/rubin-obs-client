@@ -20,7 +20,6 @@ const NOIRLabImageAsset: FC<NOIRLabAssetProps<Locale>> = async ({
   const { data, error } = await MediaService.mediaImagesRetrieve({
     path: { id: asset },
     query: { lang: locale, translation_mode: "fallback" },
-    cache: "force-cache",
   });
 
   if (error || !data || !isRubinAsset(data.categories)) {

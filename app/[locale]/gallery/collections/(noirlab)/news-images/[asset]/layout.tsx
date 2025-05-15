@@ -11,7 +11,6 @@ export const generateMetadata = async ({
   const { data, error } = await MediaService.mediaImagesRetrieve({
     path: { id: asset },
     query: { lang: locale, translation_mode: "fallback" },
-    cache: "force-cache",
   });
 
   if (error || !data || !isRubinAsset(data.categories)) {
@@ -45,5 +44,3 @@ const NOIRLabImageAssetLayout: FC<PropsWithChildren> = ({ children }) => {
 };
 
 export default NOIRLabImageAssetLayout;
-
-export const revalidate = 3600;
