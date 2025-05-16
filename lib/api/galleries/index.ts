@@ -20,6 +20,7 @@ import {
   WhereNotInFiltersInput,
 } from "@/gql/graphql";
 import { getLocale } from "@/lib/i18n/server";
+import tags from "../client/tags";
 
 const sortBy = ({ sort }: GalleryDataFilters): InputMaybe<SortByInput> => {
   if (sort === "asc") {
@@ -148,7 +149,11 @@ export async function getMainGallery(locale: string) {
     }
   `);
 
-  const { data } = await queryAPI({ query, variables: { site } });
+  const { data } = await queryAPI({
+    query,
+    variables: { site },
+    fetchOptions: { next: { tags: [tags.gallery] } },
+  });
 
   if (!data) return;
 
@@ -215,7 +220,11 @@ export async function getAllGalleries(locale: string) {
     }
   `);
 
-  const { data } = await queryAPI({ query, variables: { site } });
+  const { data } = await queryAPI({
+    query,
+    variables: { site },
+    fetchOptions: { next: { tags: [tags.gallery] } },
+  });
 
   if (!data || !data.galleriesEntries) return [];
 
@@ -237,7 +246,11 @@ export async function getAllGallerySlugs(locale: string) {
     }
   `);
 
-  const { data } = await queryAPI({ query, variables: { site } });
+  const { data } = await queryAPI({
+    query,
+    variables: { site },
+    fetchOptions: { next: { tags: [tags.gallery] } },
+  });
   const galleries: Array<{ gallery: string }> = [];
 
   data?.galleriesEntries?.forEach((gallery) => {
@@ -334,6 +347,11 @@ export async function getGalleryMetadata(
       site,
       uri,
       slug: gallery,
+    },
+    fetchOptions: {
+      next: {
+        tags: [gallery],
+      },
     },
   });
 
@@ -436,6 +454,7 @@ export async function getGalleryData({
       sortBy: sortBy(filters),
       sortByDesc: sortByDesc(filters),
     },
+    fetchOptions: { next: { tags: [gallery] } },
   });
 
   if (!data || !data.galleriesEntries || !data.galleriesEntries[0])
