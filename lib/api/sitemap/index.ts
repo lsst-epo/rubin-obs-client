@@ -41,7 +41,7 @@ export const generateAlternateLanguages = (uri: string, locale: string) => {
     }, {});
 };
 
-export const getSiteMapNewsData = async (locale: string) => {
+export const getSitemapNewsData = async (locale: string) => {
   const site = getSiteFromLocale(locale);
 
   const query = gql`
@@ -76,6 +76,39 @@ export const getSiteMapNewsData = async (locale: string) => {
   )[0];
 
   return { siteTitle, news: newsEntries };
+};
+
+export const getSitemapGalleryData = async (locale: string) => {
+  const site = getSiteFromLocale(locale);
+
+  const query = gql`
+    query ImageSitemapData($site: [String]) {
+      galleries: galleriesEntries(site: $site) {
+        ... on galleries_gallery_Entry {
+          uri
+          assetAlbum {
+            url {
+              directUrlOriginal
+            }
+            id
+            metadata {
+              FileType
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  const { data } = await queryAPI({
+    query,
+    variables: { site },
+    fetchOptions: {
+      next: { tags: [tags.globals] },
+    },
+  });
+
+  return data;
 };
 
 export const getSitemapData = async (
@@ -113,12 +146,6 @@ export const getSitemapData = async (
       }
       glossary: glossaryTermsEntries(site: $site) {
         ... on glossaryTerms_glossaryTerm_Entry {
-          dateUpdated
-          uri
-        }
-      }
-      galleries: galleriesEntries(site: $site) {
-        ... on galleries_gallery_Entry {
           dateUpdated
           uri
         }
