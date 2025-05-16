@@ -49,16 +49,6 @@ export async function GET(
   });
 
   const { galleries } = await getSitemapGalleryData(locale);
-<<<<<<< HEAD
-  const galleryData = galleries.map(({ uri, dateUpdated }) => {
-    const entry = {
-      loc: generateSitemapUrl(uri, locale),
-      lastmod: dateUpdated,
-      "xhtml:link": generateAlternateLanguages(uri, locale),
-    };
-
-    return entry;
-=======
   const imageData: any[] = [];
   galleries.forEach((gallery) => {
     const { uri, assetAlbum } = gallery;
@@ -74,7 +64,6 @@ export async function GET(
         });
       }
     });
->>>>>>> a5218e6 (refactor: pulled gallery query out of getSitemapData into it's own function)
   });
 
   const data = {
@@ -86,13 +75,8 @@ export async function GET(
       $xmlns: "http://www.sitemaps.org/schemas/sitemap/0.9",
       "$xmlns:xhtml": "http://www.w3.org/1999/xhtml",
       "$xmlns:news": "http://www.google.com/schemas/sitemap-news/0.9",
-<<<<<<< HEAD
-      // "xmlns:image":"http://www.google.com/schemas/sitemap-image/1.1",
-      url: pageData.concat(newsData, galleryData),
-=======
       "$xmlns:image": "http://www.google.com/schemas/sitemap-image/1.1",
       url: pageData.concat(newsData, imageData),
->>>>>>> a5218e6 (refactor: pulled gallery query out of getSitemapData into it's own function)
     },
   };
   const builder = new XMLBuilder({
