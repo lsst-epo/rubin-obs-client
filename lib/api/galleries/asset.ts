@@ -14,6 +14,7 @@ import { assetTitle } from "../canto/metadata";
 import { getLocale } from "@/lib/i18n/server";
 import z from "zod";
 import { getMainGallery } from ".";
+import tags from "../client/tags";
 
 export async function getRecentAssets(locale: string, gallery: string) {
   const site = getSiteFromLocale(locale);
@@ -41,6 +42,7 @@ export async function getRecentAssets(locale: string, gallery: string) {
       uri: `gallery/collections/${gallery}`,
       scheme: SupportedCantoScheme.options,
     },
+    fetchOptions: { next: { tags: [gallery] } },
   });
 
   const assets: Array<{ asset: string }> = [];
@@ -99,6 +101,7 @@ export async function getAssetBreadcrumb({
       id: asset,
       scheme: SupportedCantoScheme.options,
     },
+    fetchOptions: { next: { tags: [gallery] } },
   });
 
   if (!data || !data.galleriesEntries || !data.galleriesEntries[0]) {
@@ -200,6 +203,11 @@ export async function getAssetFromGallery(
   const { data } = await queryAPI({
     query,
     variables: { site, uri: `gallery/collections/${gallery}`, id },
+    fetchOptions: {
+      next: {
+        tags: [gallery],
+      },
+    },
   });
 
   if (!data || !data.galleriesEntries || !data.galleriesEntries[0]) {
@@ -384,6 +392,7 @@ export const getGalleryForAsset = async (id: string) => {
   const { data } = await queryAPI({
     query,
     variables: { site, id },
+    fetchOptions: { next: { tags: [tags.gallery] } },
   });
 
   if (!data || !data.galleriesEntries) return;

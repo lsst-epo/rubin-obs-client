@@ -1,4 +1,5 @@
 const globals = "globals";
-const tags = { globals };
+const gallery = "gallery";
+const tags = { globals, gallery };
 
 export default tags;
