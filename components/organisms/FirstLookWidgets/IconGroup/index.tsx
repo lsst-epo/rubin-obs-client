@@ -2,14 +2,13 @@ import clsx from "clsx";
 import { FC, ReactNode } from "react";
 import styles from "./styles.module.css";
 import { useTranslation } from "@/lib/i18n";
-import { getLocale } from "@/lib/i18n/server";
 
 interface IconGroupProps {
   className?: string;
 }
 
 const IconGroup: FC<IconGroupProps> = async ({ className }) => {
-  const { t } = await useTranslation(getLocale());
+  const { t } = await useTranslation();
 
   const icons: Array<{ name: string; icon: ReactNode }> = [
     {
