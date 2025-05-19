@@ -9,8 +9,8 @@ import Button from "@rubin-epo/epo-react-lib/Button";
 import { env } from "@/env";
 import { isAbsoluteUrl } from "@/helpers";
 import ShareButtons from "@/components/molecules/Share";
-import styles from "./styles.module.css";
 import { shouldShare } from "@/lib/utils/share";
+import styles from "./styles.module.css";
 
 const BASE_URL = env.NEXT_PUBLIC_BASE_URL;
 
@@ -26,6 +26,7 @@ interface SharePopupProps {
   variant?: "primary" | "block";
   title?: string;
   url?: string;
+  file?: { url: string; name: string; type: string };
   className?: string;
 }
 
@@ -33,6 +34,7 @@ const SharePopup: FC<SharePopupProps> = ({
   variant,
   title,
   url,
+  file,
   className,
 }) => {
   const pathname = usePathname();
@@ -56,13 +58,23 @@ const SharePopup: FC<SharePopupProps> = ({
     if (shouldShare()) {
       event.preventDefault();
 
-      const data: ShareData = { title, url: finalUrl };
+      const files: Array<File> = [];
 
-      try {
-        navigator.share(data);
-      } catch (error) {
-        console.warn(error);
+      if (file) {
+        const { url, type, name } = file;
+        const response = await fetch(url, { cache: "force-cache" });
+
+        if (response.ok) {
+          const blob = await response.blob();
+          files.push(new File([blob], name, { type }));
+        }
       }
+
+      const data: ShareData = { title, url: finalUrl, files };
+
+      navigator.share(data).catch((error) => {
+        console.warn(error);
+      });
     }
   };
 
