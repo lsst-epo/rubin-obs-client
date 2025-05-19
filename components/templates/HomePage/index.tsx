@@ -36,7 +36,8 @@ const HomePage: FC<HomePageProps> = async ({
   // If there is a newsEntry or customHero, display alternate hero area
   const news = newsEntry?.[0];
   const custom = customHero?.[0];
-  const isAlternate = news || custom;
+  const hasHero = !!hero[0] || !!news || !!custom;
+  const isAlternate = hasHero && (news || custom);
 
   const altFlag = custom?.flag || t(`breaking-news`);
   const altHero =
@@ -86,41 +87,49 @@ const HomePage: FC<HomePageProps> = async ({
 
   return (
     <>
-      {isAlternate ? (
-        <div className={styles.heroWrapper}>
-          {altFlag && <h4 className={styles.flag}>{altFlag}</h4>}
-          <div className={styles.newsHero}>
-            <Hero data={altHero} {...{ focalPointX, focalPointY }} />
-          </div>
-          <div className={styles.heroContent}>
-            {!custom && news?.postType?.[0]?.title && (
-              <h4>{news.postType[0].title}</h4>
-            )}
-            <h1>{altHeader}</h1>
-            <div className={styles.details}>
-              <span>
-                {!custom && news?.date && <h4>{makeDateString(news.date)}</h4>}
-                <div>{makeTruncatedString(altTeaser, 30)}</div>
-              </span>
-              {custom?.mixedLink?.element || custom?.mixedLink?.url ? (
-                <MixedLink {...custom.mixedLink} className="c-buttonish" />
-              ) : news?.uri ? (
-                <Buttonish url={`/${news.uri}`}>{t(`read-more`)}</Buttonish>
-              ) : null}
+      {hasHero && (
+        <>
+          {" "}
+          {isAlternate ? (
+            <div className={styles.heroWrapper}>
+              {altFlag && <h4 className={styles.flag}>{altFlag}</h4>}
+              <div className={styles.newsHero}>
+                <Hero data={altHero} {...{ focalPointX, focalPointY }} />
+              </div>
+              <div className={styles.heroContent}>
+                {!custom && news?.postType?.[0]?.title && (
+                  <h4>{news.postType[0].title}</h4>
+                )}
+                <h1>{altHeader}</h1>
+                <div className={styles.details}>
+                  <span>
+                    {!custom && news?.date && (
+                      <h4>{makeDateString(news.date)}</h4>
+                    )}
+                    <div>{makeTruncatedString(altTeaser, 30)}</div>
+                  </span>
+                  {custom?.mixedLink?.element || custom?.mixedLink?.url ? (
+                    <MixedLink {...custom.mixedLink} className="c-buttonish" />
+                  ) : news?.uri ? (
+                    <Buttonish url={`/${news.uri}`}>{t(`read-more`)}</Buttonish>
+                  ) : null}
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      ) : (
-        <div className={styles.heroWrapper}>
-          <div className={styles.heroContainer}>
-            <Hero data={hero} {...{ focalPointX, focalPointY }} />
-          </div>
-          <div className={styles.heroContent}>
-            <h1>{title}</h1>
-            <div className={styles.details}>{description}</div>
-          </div>
-        </div>
+          ) : (
+            <div className={styles.heroWrapper}>
+              <div className={styles.heroContainer}>
+                <Hero data={hero} {...{ focalPointX, focalPointY }} />
+              </div>
+              <div className={styles.heroContent}>
+                <h1>{title}</h1>
+                <div className={styles.details}>{description}</div>
+              </div>
+            </div>
+          )}
+        </>
       )}
+
       {sliderArray.length > 0 && (
         <div className={styles.tabsContainer}>
           <Tabs labels={labelMap}>{Sliders}</Tabs>
