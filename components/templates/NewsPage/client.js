@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import Breadcrumbs from "@/page/Breadcrumbs";
 import NewsHero from "./NewsHero";
-import NewsArticle from "./NewsArticle";
+import NewsArticle from "./Article";
 import NewsList from "@/dynamic/NewsList";
 import MediaAside from "@/components/organisms/MediaAside";
 import * as Styled from "./styles";
@@ -94,7 +94,7 @@ export default async function NewsPage({ data }) {
         {...{ focalPointX, focalPointY }}
       />
       <Styled.NewsDetail $showAside={showAside}>
-        {data && <NewsArticle data={data} />}
+        {data && <NewsArticle data={data} hero={hero[0]} />}
         {showAside && (
           <MediaAside
             manualAssets={manualAssets}
