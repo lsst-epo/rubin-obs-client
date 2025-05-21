@@ -9,6 +9,7 @@ const VideoBlockFragment = graphql(`
     url: externalUrlTranslatable
     cantoAsset: videoType
     fullscreenVideo
+    fullWidth
     cantoAssets: responsiveAssets {
       ... on responsiveAssets_asset_BlockType {
         orientation
