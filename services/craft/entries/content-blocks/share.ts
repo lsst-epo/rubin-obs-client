@@ -5,6 +5,7 @@ const ShareBlockFragment = graphql(`
     id
     typeHandle
     backgroundColor
+    shareTitle
     shareVariant
     text
   }

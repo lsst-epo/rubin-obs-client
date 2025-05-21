@@ -15,7 +15,7 @@ interface ShareBlockProps extends FragmentType<typeof ShareBlockFragmentDoc> {
 
 const ShareContentBlock: FC<ShareBlockProps> = async ({ locale, ...props }) => {
   const { t } = await useTranslation(locale);
-  const { shareVariant, text, backgroundColor } = useFragment(
+  const { shareVariant, shareTitle, text, backgroundColor } = useFragment(
     ShareBlockFragmentDoc,
     props
   );
@@ -23,6 +23,8 @@ const ShareContentBlock: FC<ShareBlockProps> = async ({ locale, ...props }) => {
   const isLargeBlock = shareVariant === "large";
   const hasBackgroundColor =
     isLargeBlock && typeof backgroundColor === "string";
+  const hasOverrideTitle =
+    typeof shareTitle === "string" && shareTitle.length > 0;
   const hasOverrideText = typeof text === "string" && text.length > 0;
 
   return (
@@ -35,7 +37,7 @@ const ShareContentBlock: FC<ShareBlockProps> = async ({ locale, ...props }) => {
       <Stack className={styles.content}>
         {isLargeBlock && (
           <>
-            <h3>{t("share.callout_cta")}</h3>
+            <h3>{hasOverrideTitle ? shareTitle : t("share.callout_cta")}</h3>
             <div
               dangerouslySetInnerHTML={{
                 __html: hasOverrideText ? text : t("share.callout_text"),
@@ -49,6 +51,7 @@ const ShareContentBlock: FC<ShareBlockProps> = async ({ locale, ...props }) => {
         />
         <SharePopup
           variant={isLargeBlock ? "block" : "primary"}
+          title={hasOverrideTitle ? shareTitle : undefined}
           className={styles.mobile}
         />
       </Stack>
