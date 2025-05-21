@@ -1,0 +1,44 @@
+.heading {
+  margin-block-start: var(--size-spacing-l);
+}
+
+.contactList {
+  display: block;
+
+  & > * + * {
+    margin-block-start: var(--size-spacing-m);
+  }
+}
+
+.contact {
+  font-style: normal;
+}
+
+.contactRow {
+  display: flex;
+  align-items: center;
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 3px;
+  margin-right: 10px;
+
+  &.telephone {
+    padding-top: 2px;
+  }
+
+  &.email {
+    width: 30px;
+    height: 20px;
+    padding-top: 2px;
+    padding-left: 0;
+    margin-right: 7px;
+  }
+}
+
+.contactListItemIcon {
+  color: var(--color-rubin-teal-400);
+}
