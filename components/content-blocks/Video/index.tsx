@@ -9,10 +9,12 @@ import { MetadataVideoSchema } from "@/lib/api/galleries/schema";
 import FeaturedVideoDialog from "@/components/molecules/FeaturedVideoDialog";
 import YouTubePlayer from "@/components/molecules/players/YouTube";
 import CantoPlayer from "@/components/molecules/players/Canto";
+import styles from "./styles.module.css";
 
 const VideoBaseSchema = z.object({
   id: z.string(),
   typeHandle: z.string(),
+  fullWidth: z.boolean().catch(false),
   backgroundColor: z
     .string()
     .nullable()
@@ -67,7 +69,7 @@ const VideoBlock: FC<VideoBlockProps> = ({ locale, ...props }) => {
 
   if (!video) return null;
 
-  const { fullscreenVideo, caption, id } = video;
+  const { fullscreenVideo, fullWidth, caption, id } = video;
 
   if (fullscreenVideo) {
     return (
@@ -76,21 +78,37 @@ const VideoBlock: FC<VideoBlockProps> = ({ locale, ...props }) => {
   }
 
   const { backgroundColor, cantoAsset, url } = video;
-  const Player = cantoAsset ? (
+  const darkMode = isDarkMode(backgroundColor);
+
+  const player = cantoAsset ? (
     <CantoPlayer videos={video.cantoAssets} locale={locale} />
   ) : (
     <YouTubePlayer url={url} />
   );
 
-  return (
+  const figure = (
+    <Figure caption={caption} withBackground={!fullWidth}>
+      {player}
+    </Figure>
+  );
+
+  return fullWidth ? (
+    <section
+      className={styles.container}
+      data-dark-mode={darkMode}
+      style={{
+        backgroundColor: backgroundColor && `var(--${backgroundColor})`,
+      }}
+    >
+      {figure}
+    </section>
+  ) : (
     <Container
-      darkMode={isDarkMode(backgroundColor)}
+      darkMode={darkMode}
       bgColor={backgroundColor || undefined}
       paddingSize="medium"
     >
-      <Figure caption={caption} withBackground>
-        {Player}
-      </Figure>
+      {figure}
     </Container>
   );
 };

@@ -6,9 +6,9 @@ import { env } from "@/env";
 import { FragmentType, useFragment } from "@/gql";
 import { SkyviewerBlockFragmentDoc } from "@/gql/graphql";
 import { addLocaleUriSegment } from "@/lib/i18n";
+import { isDarkMode } from "@/helpers/styles";
 import RichTextContent from "@/components/atomic/RichTextContent";
 import styles from "./styles.module.css";
-
 const skyviewerDefaultsSchema = z.object({
   embedTitle: z.string(),
   ra: z
@@ -83,12 +83,16 @@ const SkyviewerBlock: FC<SkyviewerProps> = ({ locale, ...props }) => {
     />
   );
 
+  const darkMode = isDarkMode(backgroundColor);
   const caption = captionRichText && <RichTextContent text={captionRichText} />;
 
   return fullWidth ? (
     <section
       className={styles.container}
-      style={{ backgroundColor: backgroundColor && `--${backgroundColor}` }}
+      data-dark-mode={darkMode}
+      style={{
+        backgroundColor: backgroundColor && `var(--${backgroundColor})`,
+      }}
     >
       {iframe}
       {caption}
