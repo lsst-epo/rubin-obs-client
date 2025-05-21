@@ -1,0 +1,33 @@
+fragment SiteInfoFragment on siteInfo_GlobalSet {
+  language
+  name
+  handle
+  siteTitle
+  siteDescription
+  siteImage {
+    ... on generalImages_Asset {
+      altText
+      width
+      height
+      url @transform(mode: "crop", width: 800)
+    }
+  }
+  email
+  facebook
+  instagram
+  linkedIn
+  twitter
+  youTube
+  contactInfo {
+    ... on contactInfo_mail_BlockType {
+      id
+      text
+      typeHandle
+    }
+    ... on contactInfo_phone_BlockType {
+      id
+      text
+      typeHandle
+    }
+  }
+}

@@ -74,6 +74,8 @@ const documents = {
     types.CantoAssetDetailedFragmentDoc,
   "fragment CantoAssetMetadata on CantoDamAssetInterface {\n  additional {\n    AltTextEN\n    AltTextES\n    TitleEN\n    TitleES\n    CaptionEN\n    CaptionES\n    Credit\n  }\n  height\n  id\n  name\n  scheme\n  url {\n    directUrlOriginal\n    directUrlPreview\n    directUrlPreviewPlay\n  }\n  width\n}":
     types.CantoAssetMetadataFragmentDoc,
+  'fragment SiteInfoFragment on siteInfo_GlobalSet {\n  language\n  name\n  handle\n  siteTitle\n  siteDescription\n  siteImage {\n    ... on generalImages_Asset {\n      altText\n      width\n      height\n      url @transform(mode: "crop", width: 800)\n    }\n  }\n  email\n  facebook\n  instagram\n  linkedIn\n  twitter\n  youTube\n  contactInfo {\n    ... on contactInfo_mail_BlockType {\n      id\n      text\n      typeHandle\n    }\n    ... on contactInfo_phone_BlockType {\n      id\n      text\n      typeHandle\n    }\n  }\n}':
+    types.SiteInfoFragmentFragmentDoc,
   "\n    query getLogos($set: [String], $site: [String]) {\n      siteInfo: globalSet(handle: $set, site: $site) {\n        ... on siteInfo_GlobalSet {\n          __typename\n          logoLarge {\n            url {\n              directUrlOriginal\n            }\n            width\n            height\n          }\n          logoSmall {\n            url {\n              directUrlOriginal\n            }\n            width\n            height\n          }\n        }\n      }\n    }\n  ":
     types.GetLogosDocument,
   "\n  fragment rootPageInfoFragment on rootPageInformation_GlobalSet {\n    name\n    handle\n    customBreadcrumbs {\n      ... on customBreadcrumbs_ancestorsAndRoot_BlockType {\n        header\n        pageEntry {\n          id\n          title\n          uri\n        }\n      }\n    }\n  }\n":
@@ -280,6 +282,12 @@ export function graphql(
 export function graphql(
   source: "fragment CantoAssetMetadata on CantoDamAssetInterface {\n  additional {\n    AltTextEN\n    AltTextES\n    TitleEN\n    TitleES\n    CaptionEN\n    CaptionES\n    Credit\n  }\n  height\n  id\n  name\n  scheme\n  url {\n    directUrlOriginal\n    directUrlPreview\n    directUrlPreviewPlay\n  }\n  width\n}"
 ): (typeof documents)["fragment CantoAssetMetadata on CantoDamAssetInterface {\n  additional {\n    AltTextEN\n    AltTextES\n    TitleEN\n    TitleES\n    CaptionEN\n    CaptionES\n    Credit\n  }\n  height\n  id\n  name\n  scheme\n  url {\n    directUrlOriginal\n    directUrlPreview\n    directUrlPreviewPlay\n  }\n  width\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: 'fragment SiteInfoFragment on siteInfo_GlobalSet {\n  language\n  name\n  handle\n  siteTitle\n  siteDescription\n  siteImage {\n    ... on generalImages_Asset {\n      altText\n      width\n      height\n      url @transform(mode: "crop", width: 800)\n    }\n  }\n  email\n  facebook\n  instagram\n  linkedIn\n  twitter\n  youTube\n  contactInfo {\n    ... on contactInfo_mail_BlockType {\n      id\n      text\n      typeHandle\n    }\n    ... on contactInfo_phone_BlockType {\n      id\n      text\n      typeHandle\n    }\n  }\n}'
+): (typeof documents)['fragment SiteInfoFragment on siteInfo_GlobalSet {\n  language\n  name\n  handle\n  siteTitle\n  siteDescription\n  siteImage {\n    ... on generalImages_Asset {\n      altText\n      width\n      height\n      url @transform(mode: "crop", width: 800)\n    }\n  }\n  email\n  facebook\n  instagram\n  linkedIn\n  twitter\n  youTube\n  contactInfo {\n    ... on contactInfo_mail_BlockType {\n      id\n      text\n      typeHandle\n    }\n    ... on contactInfo_phone_BlockType {\n      id\n      text\n      typeHandle\n    }\n  }\n}'];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
