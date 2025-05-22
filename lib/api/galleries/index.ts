@@ -1,5 +1,4 @@
 "server-only";
-import { getLocale } from "next-intl/server";
 import { graphql } from "@/gql/gql";
 import queryAPI from "@/lib/api/client/query";
 import { getSiteFromLocale } from "@/lib/helpers/site";
@@ -54,11 +53,13 @@ const forPage = ({ limit, page }: GalleryDataFilters): ForPageInput => {
   return { items: limit, page };
 };
 
-const whereContainsIn = async ({
+const whereContainsIn = ({
   search,
-}: GalleryDataFilters): Promise<Array<WhereContainsInFilterInput>> => {
+  locale,
+}: GalleryDataFilters & {
+  locale: string;
+}): Array<WhereContainsInFilterInput> => {
   const whereContainsIn: Array<WhereContainsInFilterInput> = [];
-  const locale = (await getLocale()).toUpperCase();
 
   if (search) {
     whereContainsIn.push({
@@ -450,7 +451,7 @@ export async function getGalleryData({
       whereNotIn: whereNotIn(filters),
       whereIn: whereIn(filters),
       forPage: forPage(filters),
-      whereContainsIn: whereContainsIn(filters),
+      whereContainsIn: whereContainsIn({ ...filters, locale }),
       sortBy: sortBy(filters),
       sortByDesc: sortByDesc(filters),
     },
