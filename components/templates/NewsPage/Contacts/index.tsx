@@ -1,9 +1,12 @@
 "use client";
 import { FunctionComponent } from "react";
+import clsx from "clsx";
 import { useTranslation } from "react-i18next";
+import IconComposer from "@rubin-epo/epo-react-lib/IconComposer";
 import { ReleaseContact } from "@/services/noirlab";
 import Stack from "@rubin-epo/epo-react-lib/Stack";
-import * as Styled from "../styles";
+import RichTextContent from "@/components/atomic/RichTextContent";
+import styles from "./styles.module.css";
 
 interface ContactsProps {
   contacts: Array<ReleaseContact> | (string | undefined);
@@ -15,79 +18,88 @@ const Contacts: FunctionComponent<ContactsProps> = ({ contacts = [] }) => {
 
   return (
     <>
-      <Styled.ArticleHeading>{t(`news.contacts`)}</Styled.ArticleHeading>
+      <h3 className={styles.heading}>{t(`news.contacts`)}</h3>
       {Array.isArray(contacts) ? (
-        <Styled.ContactList>
-          {contacts.map((contact, i) => {
+        <ul className={styles.contactList}>
+          {contacts.map((contact) => {
             const { name, affiliation, city, telephone, email } = contact;
             return (
               <li key={name}>
-                <Styled.Contact>
+                <address className={styles.contact}>
                   {name && (
-                    <Styled.ContactRow>
-                      <Styled.IconWrapper className="name">
-                        <Styled.ContactListItemIcon
+                    <div className={styles.contactRow}>
+                      <div className={clsx(styles.iconWrapper)}>
+                        <IconComposer
+                          className={styles.contactListItemIcon}
                           icon="Account"
                           size={iconSize}
                         />
-                      </Styled.IconWrapper>
-                      <div className="c-content-rte">{name}</div>
-                    </Styled.ContactRow>
+                      </div>
+                      <RichTextContent text={name} />
+                    </div>
                   )}
                   {affiliation && (
-                    <Styled.ContactRow>
-                      <Styled.IconWrapper className="affiliation">
-                        <Styled.ContactListItemIcon
+                    <div className={styles.contactRow}>
+                      <div className={clsx(styles.iconWrapper)}>
+                        <IconComposer
+                          className={styles.contactListItemIcon}
                           icon="Globe"
                           size={iconSize}
                         />
-                      </Styled.IconWrapper>
-                      <div className="c-content-rte">{affiliation}</div>
-                    </Styled.ContactRow>
+                      </div>
+                      <RichTextContent text={affiliation} />
+                    </div>
                   )}
                   {city && (
-                    <Styled.ContactRow>
-                      <Styled.IconWrapper className="city">
-                        <Styled.ContactListItemIcon
+                    <div className={styles.contactRow}>
+                      <div className={clsx(styles.iconWrapper)}>
+                        <IconComposer
+                          className={styles.contactListItemIcon}
                           icon="Team"
                           size={iconSize}
                         />
-                      </Styled.IconWrapper>
-                      <div className="c-content-rte">{city}</div>
-                    </Styled.ContactRow>
+                      </div>
+                      <RichTextContent text={city} />
+                    </div>
                   )}
                   {telephone && (
-                    <Styled.ContactRow>
-                      <Styled.IconWrapper className="telephone">
-                        <Styled.ContactListItemIcon
+                    <div className={styles.contactRow}>
+                      <div
+                        className={clsx(styles.iconWrapper, styles.telephone)}
+                      >
+                        <IconComposer
+                          className={styles.contactListItemIcon}
                           icon="Phone"
                           size={iconSize}
                         />
-                      </Styled.IconWrapper>
+                      </div>
                       <div className="c-content-rte">
                         <a href={`tel:${telephone}`}>{telephone}</a>
                         <a href={`tel:${telephone}`}>{telephone}</a>
                       </div>
-                    </Styled.ContactRow>
+                    </div>
                   )}
                   {email && (
-                    <Styled.ContactRow>
-                      <Styled.IconWrapper className="email">
-                        <Styled.ContactListItemIcon icon="Mail" />
-                      </Styled.IconWrapper>
+                    <div className={styles.contactRow}>
+                      <div className={clsx(styles.iconWrapper, styles.email)}>
+                        <IconComposer
+                          className={styles.contactListItemIcon}
+                          icon="Mail"
+                        />
+                      </div>
                       <div className="c-content-rte">
                         <a href={`mailto:${email}`}>{email}</a>
                       </div>
-                    </Styled.ContactRow>
+                    </div>
                   )}
-                </Styled.Contact>
+                </address>
               </li>
             );
           })}
-        </Styled.ContactList>
+        </ul>
       ) : (
         <Stack recursive>
-          <div dangerouslySetInnerHTML={{ __html: contacts }} />
+          <RichTextContent text={contacts} />
         </Stack>
       )}
     </>

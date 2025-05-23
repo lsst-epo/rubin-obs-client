@@ -8,7 +8,7 @@ import {
   tokens,
 } from "@/styles/globalStyles";
 import { aHidden } from "@/styles/mixins/appearance";
-import { IconComposer, token } from "@rubin-epo/epo-react-lib";
+import { token } from "@rubin-epo/epo-react-lib";
 
 export const HeroFigure = styled.figure`
   ${containerFullBleed("CONTAINER_FULL")}
@@ -75,62 +75,4 @@ export const NewsDetail = styled.div`
         ? "grid-template-columns: minmax(75%, 1fr) minmax(25%, 250px)"
         : "grid-template-columns: 1fr"};
   }
-`;
-
-export const Pretitle = styled.time`
-  padding-bottom: 10px;
-`;
-
-export const Subtitle = styled.div`
-  padding-top: 10px;
-`;
-
-export const SubtitleSecondary = styled.div`
-  padding-top: 10px;
-  padding-bottom: 10px;
-`;
-
-export const ArticleHeading = styled.h3`
-  padding-top: 48px;
-`;
-
-export const ContactList = styled.ul`
-  display: block;
-
-  & > * + * {
-    margin-block-start: 25px;
-  }
-`;
-
-export const Contact = styled.address`
-  font-style: normal;
-`;
-
-export const ContactRow = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-export const IconWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-left: 3px;
-  margin-right: 10px;
-
-  &.telephone {
-    padding-top: 2px;
-  }
-
-  &.email {
-    width: 30px;
-    height: 20px;
-    padding-top: 2px;
-    padding-left: 0;
-    margin-right: 7px;
-  }
-`;
-
-export const ContactListItemIcon = styled(IconComposer)`
-  color: ${tokens.turquoise60};
 `;

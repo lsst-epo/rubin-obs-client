@@ -1,11 +1,13 @@
 import { gql } from "@urql/core";
 import { print } from "graphql";
-import { RootPageInfoFragmentFragmentDoc } from "@/gql/graphql";
+import {
+  RootPageInfoFragmentFragmentDoc,
+  SiteInfoFragmentFragmentDoc,
+} from "@/gql/graphql";
 import { fallbackLng } from "@/lib/i18n/settings";
 import queryAPI from "@/lib/api/client/query";
 import { linkFragment } from "@/lib/api/fragments/link";
 import {
-  siteInfoFragment,
   footerFragment,
   contactFormFragment,
 } from "@/lib/api/fragments/global";
@@ -17,7 +19,7 @@ export async function getGlobalData(locale = fallbackLng) {
   const site = getSiteFromLocale(locale);
   const query = gql`
     ${linkFragment}
-    ${siteInfoFragment}
+    ${print(SiteInfoFragmentFragmentDoc)}
     ${footerFragment}
     ${print(RootPageInfoFragmentFragmentDoc)}
     ${contactFormFragment}
@@ -25,7 +27,7 @@ export async function getGlobalData(locale = fallbackLng) {
     query getGlobalData($site: [String]) {
       globals: globalSets(site: $site) {
         ...rootPageInfoFragment
-        ...siteInfoFragment
+        ...SiteInfoFragment
         ...footerFragment
         ...contactFormFragment
       }

@@ -4,9 +4,10 @@ import { env } from "@/env";
 import { AnnouncementsService, ReleasesService } from "@/services/noirlab";
 import { Locale } from "@/lib/i18n/settings";
 import NewsPageClient from "./client";
+import { useTranslation } from "@/lib/i18n";
 
 const sanitize = (dirty: string | undefined) => {
-  if (typeof dirty === "undefined") return;
+  if (typeof dirty === "undefined") return "";
 
   try {
     const { hostname: noirLabHostname } = new URL(
@@ -23,8 +24,38 @@ const sanitize = (dirty: string | undefined) => {
 
     return sanitizeHtml(dirty, sanitizeOptions);
   } catch {
-    return undefined;
+    return "";
   }
+};
+
+interface ContentBlockArgs {
+  text: string;
+  id: string;
+}
+
+const makeTextContentBlock = ({
+  text,
+  id,
+}: ContentBlockArgs): {
+  typeHandle: string;
+  id: string;
+  text: string;
+  __typename: string;
+} => {
+  return {
+    typeHandle: "text",
+    text,
+    id,
+    __typename: "contentBlocksNews_text_BlockType",
+  };
+};
+
+const makeBlockWithHeader = ({
+  text,
+  id,
+  header,
+}: ContentBlockArgs & { header: string }) => {
+  return makeTextContentBlock({ text: `<h3>${header}</h3>${text}`, id });
 };
 
 const NewsPage: FunctionComponent<{
@@ -32,13 +63,14 @@ const NewsPage: FunctionComponent<{
   data: PageEntry;
   locale: string;
 }> = async ({ data, section, locale }) => {
+  const { t } = await useTranslation(locale);
   const { postType, pressReleaseId } = data;
   const { slug } = postType[0];
 
-  // Announcements
-  if (slug !== "feature" && pressReleaseId) {
-    const { data: release, error } =
-      await AnnouncementsService.announcementsRetrieve({
+  // Press Releases
+  if (pressReleaseId) {
+    if (slug === "press-release") {
+      const { data: release } = await ReleasesService.releasesRetrieve({
         path: { id: pressReleaseId },
         query: {
           lang: locale as Locale,
@@ -46,73 +78,105 @@ const NewsPage: FunctionComponent<{
         },
       });
 
-    if (!error && release) {
-      const {
-        title,
-        url: releaseUrl,
-        description,
-        subtitle,
-        images,
-        videos,
-        links,
-        contacts,
-      } = release;
+      if (release) {
+        const {
+          title,
+          url,
+          description,
+          headline,
+          subtitle,
+          images,
+          videos,
+          id,
+          more_information: moreInformation,
+          links,
+          contacts,
+        } = release;
 
-      const combinedData = {
-        ...data,
-        title,
-        releaseUrl,
-        subtitle,
-        releaseDescription: sanitize(description),
-        links: sanitize(links),
-        contacts,
-        images,
-        videos,
-      };
+        const combinedData = {
+          ...data,
+          title,
+          description: headline,
+          subtitle,
+          contentBlocksNews: [
+            makeTextContentBlock({
+              text: sanitize(description),
+              id: `${id}-text`,
+            }),
+            makeBlockWithHeader({
+              text: sanitize(moreInformation),
+              id: `${id}-more-info`,
+              header: t("news.more-info"),
+            }),
+            makeTextContentBlock({
+              text: `<a href="${url}" target="_blank" rel="noopener noreferrer">
+              ${t("news.release-link")}</a>`,
+              id: `${id}-link`,
+            }),
+            makeBlockWithHeader({
+              text: sanitize(links),
+              id: `${id}-links`,
+              header: t("news.links"),
+            }),
+          ],
+          contacts,
+          images,
+          videos,
+        };
 
-      return <NewsPageClient data={combinedData} {...{ section, locale }} />;
-    }
-  }
+        return <NewsPageClient data={combinedData} {...{ section, locale }} />;
+      }
+    } else {
+      const { data: release } =
+        await AnnouncementsService.announcementsRetrieve({
+          path: { id: pressReleaseId },
+          query: {
+            lang: locale as Locale,
+            translation_mode: "fallback",
+          },
+        });
 
-  // Press Releases
-  if (slug === "press-release" && pressReleaseId) {
-    const { data: release, error } = await ReleasesService.releasesRetrieve({
-      path: { id: pressReleaseId },
-      query: {
-        lang: locale as Locale,
-        translation_mode: "fallback",
-      },
-    });
+      if (release) {
+        const {
+          title,
+          url,
+          description,
+          subtitle,
+          images,
+          videos,
+          links,
+          contacts,
+          id,
+        } = release;
 
-    if (!error && release) {
-      const {
-        title,
-        url: releaseUrl,
-        description,
-        headline,
-        subtitle,
-        images,
-        videos,
-        more_information: moreInformation,
-        links,
-        contacts,
-      } = release;
+        const combinedData = {
+          ...data,
+          title,
+          subtitle,
+          contentBlocksNews: [
+            makeTextContentBlock({
+              text: sanitize(description),
+              id: `${id}-text`,
+            }),
+            makeBlockWithHeader({
+              text: `<a href="${url}" target="_blank" rel="noopener noreferrer">
+              ${t("news.release-link")}</a>`,
+              id: `${id}-more-info`,
+              header: t("news.more-info"),
+            }),
+            makeBlockWithHeader({
+              text: sanitize(links),
+              id: `${id}-links`,
+              header: t("news.links"),
+            }),
+          ],
+          contacts,
+          images,
+          videos,
+        };
 
-      const combinedData = {
-        ...data,
-        title,
-        releaseUrl,
-        headline,
-        subtitle,
-        releaseDescription: sanitize(description),
-        moreInformation: sanitize(moreInformation),
-        links: sanitize(links),
-        contacts,
-        images,
-        videos,
-      };
-
-      return <NewsPageClient data={combinedData} {...{ section, locale }} />;
+        return <NewsPageClient data={combinedData} {...{ section, locale }} />;
+      }
     }
   }
 
