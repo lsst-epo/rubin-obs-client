@@ -1,15 +1,13 @@
 import { FunctionComponent, PropsWithChildren } from "react";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getAllGalleries, getGalleryMetadata } from "@/lib/api/galleries";
+import { getAllGallerySlugs, getGalleryMetadata } from "@/lib/api/galleries";
 import { assetToOpenGraphImage } from "@/lib/api/canto/metadata";
-
-export const dynamicParams = false;
 
 export async function generateStaticParams({
   params: { locale },
 }: LocaleProps) {
-  return getAllGalleries(locale);
+  return getAllGallerySlugs(locale);
 }
 
 export async function generateMetadata({
@@ -39,7 +37,5 @@ export const GalleryLayout: FunctionComponent<PropsWithChildren> = ({
 }) => {
   return <>{children}</>;
 };
-
-export const dynamic = "force-dynamic";
 
 export default GalleryLayout;
