@@ -13,6 +13,11 @@ export async function GET(
   { params: { locale } }: LocaleProps
 ) {
   const pages = await getSitemapData(locale);
+
+  if (!pages) {
+    return new NextResponse("Internal Server Error", { status: 500 });
+  }
+
   const pageData = pages.map(({ uri, dateUpdated }) => {
     return {
       loc: generateSitemapUrl(uri, locale),
