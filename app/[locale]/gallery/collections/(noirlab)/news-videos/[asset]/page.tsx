@@ -13,10 +13,12 @@ import GalleryVideo from "@/components/molecules/GalleryVideo";
 import AssetMetadata from "@/components/organisms/gallery/metadata/Asset";
 import GalleryYoutubeVideo from "@/components/molecules/GalleryYoutubeVideo";
 import SharePopup from "@/components/molecules/SharePopup";
+import { setRequestLocale } from "next-intl/server";
 
 const NOIRLabVideoAsset: FC<NOIRLabAssetProps<Locale>> = async ({
   params: { locale, asset },
 }) => {
+  setRequestLocale(locale);
   const { t } = await useTranslation(locale);
   const { data, error } = await MediaService.mediaVideosRetrieve({
     path: { id: asset },

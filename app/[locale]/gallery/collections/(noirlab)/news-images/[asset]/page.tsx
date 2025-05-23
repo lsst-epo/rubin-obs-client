@@ -12,10 +12,12 @@ import AssetMetadata from "@/components/organisms/gallery/metadata/Asset";
 import NOIRLabImageSizes from "@/components/organisms/gallery/NOIRLabImageSizes";
 import GalleryImage from "@/components/molecules/GalleryImage";
 import SharePopup from "@/components/molecules/SharePopup";
+import { setRequestLocale } from "next-intl/server";
 
 const NOIRLabImageAsset: FC<NOIRLabAssetProps<Locale>> = async ({
   params: { locale, asset },
 }) => {
+  setRequestLocale(locale);
   const { t } = await useTranslation(locale);
   const { data, error } = await MediaService.mediaImagesRetrieve({
     path: { id: asset },

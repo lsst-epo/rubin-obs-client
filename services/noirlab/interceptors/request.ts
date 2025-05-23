@@ -7,10 +7,6 @@ const addCaching = (options: RequestOptions) => {
   const isMedia = new RegExp(/\/media\/(images|videos)\//).test(options.url);
 
   if (isServer) {
-    if (!options.cache) {
-      options.cache = "force-cache";
-    }
-
     if (isMedia) {
       options.next = {
         revalidate: env.NOIRLAB_REVALIDATE,

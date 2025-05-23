@@ -5,6 +5,26 @@ import { MediaService } from "@/services/noirlab";
 import { type Locale } from "@/lib/i18n/settings";
 import { extractDescription, isRubinAsset } from "@/helpers/noirlab";
 
+export const generateStaticParams = async ({
+  params: { locale },
+}: LocaleProps) => {
+  const { data } = await MediaService.mediaVideosList({
+    query: {
+      lang: locale as Locale,
+      translation_mode: "fallback",
+      category: "rubin",
+      page: 1,
+      page_size: 50,
+    },
+  });
+
+  return (
+    data?.results?.map((video) => {
+      return { asset: video.id };
+    }) || []
+  );
+};
+
 export const generateMetadata = async ({
   params: { locale, asset },
 }: NOIRLabAssetProps<Locale>): Promise<Metadata> => {

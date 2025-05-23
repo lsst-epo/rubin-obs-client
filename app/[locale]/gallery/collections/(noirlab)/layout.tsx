@@ -17,6 +17,4 @@ const NOIRLabAssetLayout: FC<PropsWithChildren<LocaleProps>> = async ({
   );
 };
 
-export const dynamic = "force-dynamic";
-
 export default NOIRLabAssetLayout;
