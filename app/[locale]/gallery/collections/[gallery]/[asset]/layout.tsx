@@ -1,18 +1,37 @@
 import { FunctionComponent, PropsWithChildren } from "react";
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
 import Container from "@rubin-epo/epo-react-lib/Container";
 import Stack from "@rubin-epo/epo-react-lib/Stack";
-import { getAssetBreadcrumb, getRecentAssets } from "@/lib/api/galleries/asset";
+import {
+  getAssetBreadcrumb,
+  getAssetFromGallery,
+  getFirstPageAssets,
+} from "@/lib/api/galleries/asset";
 import { useTranslation } from "@/lib/i18n";
 import { isMainGallery } from "@/lib/api/galleries";
 import { buildParentPath } from "@/lib/helpers/gallery";
 import Breadcrumbs from "@/components/page/Breadcrumbs";
 import BackButton from "@/components/molecules/BackButton";
 import MediaPolicy from "@/components/organisms/gallery/MediaPolicy";
+import { assetToPageMetadata } from "@/lib/api/canto/metadata";
 
 export async function generateStaticParams({
   params: { locale, gallery },
 }: GalleryProps) {
-  return getRecentAssets(locale, gallery);
+  return getFirstPageAssets(locale, gallery);
+}
+
+export async function generateMetadata({
+  params: { locale, gallery, asset: id },
+}: GalleryAssetProps): Promise<Metadata> {
+  const asset = await getAssetFromGallery(gallery, id, locale);
+
+  if (!asset) {
+    notFound();
+  }
+
+  return assetToPageMetadata(asset, locale);
 }
 
 const AssetLayout: FunctionComponent<
