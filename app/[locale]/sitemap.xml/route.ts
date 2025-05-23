@@ -48,16 +48,23 @@ export async function GET(
     return entry;
   });
 
-  const { galleries } = await getSitemapGalleryData(locale);
+  const result = await getSitemapGalleryData(locale);
   const imageData: any[] = [];
-  const galleryData = galleries.map(({ uri, dateUpdated, assetAlbum }) => {
-    const entry = {
+  const galleryData: any[] = [];
+  result?.galleries?.forEach((gallery) => {
+    if (!gallery) return;
+
+    const { uri, dateUpdated, assetAlbum } = gallery;
+    if (!uri || !dateUpdated || !assetAlbum) return;
+
+    galleryData.push({
       loc: generateSitemapUrl(uri, locale),
       lastmod: dateUpdated,
       "xhtml:link": generateAlternateLanguages(uri, locale),
-    };
+    });
 
     assetAlbum.forEach((asset) => {
+      if (!asset) return;
       const {
         id,
         scheme,
@@ -72,8 +79,6 @@ export async function GET(
         });
       }
     });
-
-    return entry;
   });
 
   const data = {

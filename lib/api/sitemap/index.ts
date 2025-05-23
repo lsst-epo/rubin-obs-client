@@ -5,6 +5,7 @@ import queryAPI from "@/lib/api/client/query";
 import tags from "@/lib/api/client/tags";
 import { CRAFT_HOMEPAGE_URI } from "@/lib/constants";
 import { fallbackLng, languages } from "@/lib/i18n/settings";
+import { graphql } from "@/gql/gql";
 
 interface PageMetadata {
   uri: string;
@@ -81,13 +82,15 @@ export const getSitemapNewsData = async (locale: string) => {
 export const getSitemapGalleryData = async (locale: string) => {
   const site = getSiteFromLocale(locale);
 
-  const query = gql(`
+  const query = graphql(`
     query ImageSitemapData($site: [String]) {
-        galleries: galleriesEntries(site: $site) {
+      galleries: galleriesEntries(site: $site) {
         ... on galleries_gallery_Entry {
           uri
           dateUpdated
-          assetAlbum(whereIn: {key: "scheme", values: ["image", "video", "document"]}) {
+          assetAlbum(
+            whereIn: { key: "scheme", values: ["image", "video", "document"] }
+          ) {
             id
             scheme
             url {
