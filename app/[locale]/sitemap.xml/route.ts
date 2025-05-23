@@ -4,7 +4,8 @@ import {
   generateAlternateLanguages,
   generateSitemapUrl,
   getSitemapData,
-  getSiteMapNewsData,
+  getSitemapNewsData,
+  getSitemapGalleryData,
 } from "@/lib/api/sitemap";
 
 export async function GET(
@@ -25,7 +26,7 @@ export async function GET(
     today.getTime() - 1000 * 60 * 60 * 24 * 2
   );
 
-  const { siteTitle, news } = await getSiteMapNewsData(locale);
+  const { siteTitle, news } = await getSitemapNewsData(locale);
   const newsData = news.map(({ uri, dateUpdated, title, date }) => {
     const entry = {
       loc: generateSitemapUrl(uri, locale),
@@ -47,6 +48,39 @@ export async function GET(
     return entry;
   });
 
+  const result = await getSitemapGalleryData(locale);
+  const imageData: any[] = [];
+  const galleryData: any[] = [];
+  result?.galleries?.forEach((gallery) => {
+    if (!gallery) return;
+
+    const { uri, dateUpdated, assetAlbum } = gallery;
+    if (!uri || !dateUpdated || !assetAlbum) return;
+
+    galleryData.push({
+      loc: generateSitemapUrl(uri, locale),
+      lastmod: dateUpdated,
+      "xhtml:link": generateAlternateLanguages(uri, locale),
+    });
+
+    assetAlbum.forEach((asset) => {
+      if (!asset) return;
+      const {
+        id,
+        scheme,
+        url: { directUrlOriginal },
+      } = asset;
+      if (scheme === "image") {
+        imageData.push({
+          loc: generateSitemapUrl(uri.concat("/").concat(id), locale),
+          "image:image": {
+            "image:loc": directUrlOriginal,
+          },
+        });
+      }
+    });
+  });
+
   const data = {
     "?xml": {
       $version: "1.0",
@@ -56,7 +90,8 @@ export async function GET(
       $xmlns: "http://www.sitemaps.org/schemas/sitemap/0.9",
       "$xmlns:xhtml": "http://www.w3.org/1999/xhtml",
       "$xmlns:news": "http://www.google.com/schemas/sitemap-news/0.9",
-      url: pageData.concat(newsData),
+      "$xmlns:image": "http://www.google.com/schemas/sitemap-image/1.1",
+      url: pageData.concat(newsData, galleryData, imageData),
     },
   };
   const builder = new XMLBuilder({
