@@ -115,10 +115,10 @@ export const getSitemapGalleryData = async (locale: string) => {
 
 export const getSitemapData = async (
   locale: string
-): Promise<Array<PageMetadata>> => {
+): Promise<Array<PageMetadata> | undefined> => {
   const site = getSiteFromLocale(locale);
 
-  const query = gql`
+  const query = graphql(`
     query SitemapData($site: [String]) {
       pages: entries(
         site: $site
@@ -153,7 +153,7 @@ export const getSitemapData = async (
         }
       }
     }
-  `;
+  `);
 
   const { data } = await queryAPI({
     query,
@@ -163,5 +163,5 @@ export const getSitemapData = async (
     },
   });
 
-  return Object.values<any>(data).flat();
+  return data ? Object.values<any>(data).flat() : undefined;
 };
