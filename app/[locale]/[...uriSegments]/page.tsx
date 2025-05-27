@@ -1,5 +1,6 @@
 import { FunctionComponent } from "react";
 import { notFound, redirect, RedirectType } from "next/navigation";
+import { setRequestLocale } from "next-intl/server";
 import { getBreadcrumbsById } from "@/lib/api/metadata";
 import { getEntrySectionByUri } from "@/lib/api/entries/index";
 import { getEntryDataByUri } from "@/lib/api/entry";
@@ -26,6 +27,7 @@ const pageMap = {
 const UriSegmentsPage: FunctionComponent<
   WithSearchParams<UriSegmentProps>
 > = async ({ params: { locale, uriSegments }, searchParams = {} }) => {
+  setRequestLocale(locale);
   const uri = uriSegments.join("/");
 
   const entrySectionType = await getEntrySectionByUri(uri, locale);
@@ -56,7 +58,5 @@ const UriSegmentsPage: FunctionComponent<
 
   return <Template {...{ section, breadcrumbs, data, locale, searchParams }} />;
 };
-
-export const dynamic = "force-dynamic";
 
 export default UriSegmentsPage;
