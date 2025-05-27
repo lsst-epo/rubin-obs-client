@@ -18,6 +18,4 @@ const RootPage: FunctionComponent<LocaleProps> = async ({
   return <HomePageTemplate data={data} locale={locale} />;
 };
 
-export const dynamic = "error";
-
 export default RootPage;
