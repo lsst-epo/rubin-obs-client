@@ -1,19 +1,18 @@
-"use client";
 import PropTypes from "prop-types";
-import { useTranslation } from "react-i18next";
 import Social from "./Social";
 import Nav from "./Nav";
 import ContactForm from "./ContactForm";
 import { Image } from "@rubin-epo/epo-react-lib";
 import { socialInfoShape } from "@/shapes/siteInfo";
 import footerContentShape from "@/shapes/footerContent";
+import { useTranslation } from "@/lib/i18n";
 
-export default function Footer({
+export default async function Footer({
   socialInfo,
   content: { links, colophon, supportersLogos, supportersLogosAlt },
   contactForm,
 }) {
-  const { t } = useTranslation();
+  const { t } = await useTranslation();
   const supportersImage = supportersLogos && supportersLogos[0];
 
   return (

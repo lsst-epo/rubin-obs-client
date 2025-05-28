@@ -10,7 +10,7 @@ import {
 import { getGlobalData } from "@/lib/api/globals";
 import { GlobalDataProvider } from "@/contexts/GlobalData";
 import Header from "@/components/organisms/Header";
-import Footer from "@/components/global/Footer";
+import Footer from "@/components/organisms/Footer";
 import Center from "@rubin-epo/epo-react-lib/Center";
 
 const PageWrapper: FunctionComponent<
