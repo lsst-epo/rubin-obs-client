@@ -1,24 +1,26 @@
-import PropTypes from "prop-types";
 import Social from "./Social";
-import Nav from "./Nav";
+import Links from "./Links";
 import ContactForm from "./ContactForm";
 import { Image } from "@rubin-epo/epo-react-lib";
-import { socialInfoShape } from "@/shapes/siteInfo";
-import footerContentShape from "@/shapes/footerContent";
+import getFooter from "@/services/craft/globals/footer";
+import getContactForm from "@/services/craft/globals/contactForm";
 import { useTranslation } from "@/lib/i18n";
 
-export default async function Footer({
-  socialInfo,
-  content: { links, colophon, supportersLogos, supportersLogosAlt },
-  contactForm,
-}) {
+export default async function Footer() {
+  const footer = await getFooter();
+  const contactForm = await getContactForm();
   const { t } = await useTranslation();
+
+  if (!footer) return null;
+
+  const { links, colophon, supportersLogos, supportersLogosAlt } = footer;
+
   const supportersImage = supportersLogos && supportersLogos[0];
 
   return (
     <footer className="c-global-footer">
-      <Social socialInfo={socialInfo} />
-      <Nav links={links} />
+      <Social />
+      <Links links={links} />
       <div className="c-global-footer__main">
         <div className="c-global-footer__form-block">
           <h3 className="c-global-footer__heading">
@@ -31,7 +33,7 @@ export default async function Footer({
             />
           )}
         </div>
-        <div className="c-global-footer__colophon-block">
+        <div data-cy="colophon" className="c-global-footer__colophon-block">
           {colophon && (
             <div
               dangerouslySetInnerHTML={{ __html: colophon }}
@@ -50,9 +52,3 @@ export default async function Footer({
 }
 
 Footer.displayName = "Global.Footer";
-
-Footer.propTypes = {
-  socialInfo: socialInfoShape,
-  content: footerContentShape,
-  contactForm: PropTypes.object,
-};

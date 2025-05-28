@@ -17,29 +17,13 @@ const PageWrapper: FunctionComponent<
   PropsWithChildren<{ locale: string }>
 > = async ({ locale, children }) => {
   const globalData = await getGlobalData(locale);
-  const {
-    footerContent,
-    contactForm,
-    siteInfo: { email, facebook, instagram, linkedIn, twitter, youTube },
-  } = globalData;
 
   return (
     <GlobalDataProvider data={globalData}>
       <Center maxWidth="2000px">
         <Header locale={locale} />
         <main id="page-content">{children}</main>
-        <Footer
-          socialInfo={{
-            email,
-            facebook,
-            instagram,
-            linkedIn,
-            twitter,
-            youTube,
-          }}
-          content={footerContent}
-          contactForm={contactForm}
-        />
+        <Footer />
         <Suspense>
           <SignInModal />
           <RegisterModal />

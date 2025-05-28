@@ -2,13 +2,13 @@
   --color-font-social: var(--color-font-invert);
   --color-background-social: var(--color-rubin-teal-400);
 
-  padding-block: var(--size-spacing-s-m);
   color: var(--color-font-social);
   background-color: var(--color-background-social);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--size-spacing-s);
+  gap: var(--size-spacing-s-m);
+  height: var(--size-spacing-xl-2xl);
 }
 
 .header {

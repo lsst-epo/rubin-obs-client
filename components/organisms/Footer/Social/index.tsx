@@ -1,5 +1,4 @@
 import { FC } from "react";
-import clsx from "clsx";
 import { type TFunction } from "i18next";
 import {
   FaLinkedinIn,
@@ -13,6 +12,7 @@ import ExternalLink from "@rubin-epo/epo-react-lib/ExternalLink";
 import { useTranslation } from "@/lib/i18n";
 import { capitalize } from "@/helpers";
 import styles from "./styles.module.css";
+import getSocials from "@/services/craft/globals/socials";
 
 const hiddenText = (account: string, t: TFunction) => {
   if (account === "email") return t("social.email-rubin");
@@ -47,29 +47,34 @@ const Item: FC<ItemProps> = async ({ account, url }) => {
 
   if (!icon) return null;
 
+  const title = hiddenText(account, t);
+
   return (
     <li className={styles.item}>
-      <ExternalLink href={finalizedUrl(account, url)} className={styles.link}>
-        <span className="a-hidden">{hiddenText(account, t)}</span>
+      <ExternalLink
+        href={finalizedUrl(account, url)}
+        title={title}
+        className={styles.link}
+      >
+        <span className="a-hidden">{title}</span>
         {icon}
       </ExternalLink>
     </li>
   );
 };
 
-interface SocialProps {
-  socialInfo: any;
-  className?: string;
-}
-
-const Social: FC<SocialProps> = async ({ socialInfo, className }) => {
+const Social: FC = async () => {
+  const socials = await getSocials();
   const { t } = await useTranslation();
+
+  if (!socials) return null;
+
   return (
-    <section className={clsx(styles.social, className)}>
+    <section data-cy="socials" className={styles.social}>
       <h3 className={styles.header}>{t("social.connect")}</h3>
       <ul className={styles.list}>
-        {Object.keys(socialInfo).map((account) => (
-          <Item key={account} account={account} url={socialInfo[account]} />
+        {Object.keys(socials).map((account) => (
+          <Item key={account} account={account} url={socials[account]} />
         ))}
       </ul>
     </section>
