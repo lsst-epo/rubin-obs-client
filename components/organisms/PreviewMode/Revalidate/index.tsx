@@ -1,10 +1,11 @@
 "use client";
 import { FC, useEffect, useId, useState, useTransition } from "react";
-import { usePathname, useRouter } from "@/lib/i18n/navigation";
-import { useTranslation } from "react-i18next";
+import { useSearchParams } from "next/navigation";
 import { Transition } from "@headlessui/react";
-import styles from "./styles.module.css";
+import { useTranslation } from "react-i18next";
+import { usePathname, useRouter } from "@/lib/i18n/navigation";
 import revalidate from "@/services/actions/revalidate";
+import styles from "./styles.module.css";
 
 const RevalidateCurrentPath: FC<{ token: string }> = ({ token }) => {
   const id = useId();
@@ -16,37 +17,33 @@ const RevalidateCurrentPath: FC<{ token: string }> = ({ token }) => {
   const { t } = useTranslation();
   const [isPending, startTransition] = useTransition();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const router = useRouter();
 
   useEffect(() => {
     setRevalidationState(undefined);
   }, [pathname]);
 
-  const handleRevalidate = async () => {
-    const revalidated = await revalidate({ uri: pathname, token });
+  useEffect(() => {
+    if (searchParams) {
+      const paths = searchParams.getAll("paths");
 
-    if (revalidated) {
-      console.info({ revalidated });
-      router.replace(
-        {
-          pathname,
-          query: { "": new Date().getMilliseconds().toString() },
-        },
-        { scroll: false }
-      );
-      setRevalidationState({
-        state: "success",
-        message: t("preview_mode.revalidate", {
-          context: "success",
-          pathname: revalidated.paths[0],
-        }),
-      });
-    } else {
-      setRevalidationState({
-        state: "error",
-        message: t("preview_mode.revalidate", { context: "error" }),
-      });
+      if (paths.includes(pathname)) {
+        setRevalidationState({
+          state: "success",
+          message: t("preview_mode.revalidate", {
+            context: "success",
+            pathname,
+          }),
+        });
+      }
+
+      router.replace({ pathname, query: {} });
     }
+  }, [searchParams]);
+
+  const handleRevalidate = async () => {
+    await revalidate({ uri: pathname, token });
   };
 
   return (

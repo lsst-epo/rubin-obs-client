@@ -2,6 +2,7 @@
 
 import { env } from "@/env";
 import revalidateUri from "@/services/revalidation";
+import { redirect, RedirectType } from "next/navigation";
 
 export default async function revalidate({
   uri,
@@ -11,6 +12,18 @@ export default async function revalidate({
   token: string;
 }) {
   if (uri && token === env.CRAFT_REVALIDATE_SECRET_TOKEN) {
-    return revalidateUri(uri);
+    const revalidation = revalidateUri(uri);
+
+    const params = new URLSearchParams({
+      now: new Date().getTime().toString(),
+    });
+
+    Object.entries(revalidation).forEach(([key, revalidated]) => {
+      revalidated.forEach((value) => {
+        params.append(key, value);
+      });
+    });
+
+    redirect(`?${params.toString()}`, RedirectType.replace);
   }
 }
