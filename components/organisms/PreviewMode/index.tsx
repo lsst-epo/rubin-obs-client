@@ -1,15 +1,20 @@
 import { draftMode } from "next/headers";
-import { FC, PropsWithChildren } from "react";
+import { FC } from "react";
+import { env } from "@/env";
 import Banner from "./Banner";
+import DisablePreviewMode from "./Disable";
+import RevalidateCurrentPath from "./Revalidate";
 
-const PreviewMode: FC<PropsWithChildren> = ({ children }) => {
+const PreviewMode: FC = () => {
   const { isEnabled } = draftMode();
 
+  if (!isEnabled) return null;
+
   return (
-    <>
-      {isEnabled && <Banner />}
-      {children}
-    </>
+    <Banner>
+      <RevalidateCurrentPath token={env.CRAFT_REVALIDATE_SECRET_TOKEN} />
+      <DisablePreviewMode />
+    </Banner>
   );
 };
 

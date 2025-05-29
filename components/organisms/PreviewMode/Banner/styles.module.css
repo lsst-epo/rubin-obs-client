@@ -16,13 +16,14 @@
   display: flex;
   align-items: center;
   gap: 1ex;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
-.disableButton {
+.actions {
   display: flex;
   align-items: center;
-  padding: var(--size-spacing-3xs) var(--size-spacing-2xs);
-  border: 2px solid currentcolor;
-  border-radius: var(--size-spacing-2xs);
-  height: var(--size-spacing-s);
+  justify-content: flex-end;
+  flex-grow: 1;
+  gap: var(--size-spacing-3xs);
 }

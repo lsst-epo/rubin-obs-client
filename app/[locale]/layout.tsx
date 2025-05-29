@@ -98,9 +98,8 @@ const LocaleLayout: FunctionComponent<PropsWithChildren<LocaleProps>> = async ({
                   <SkeletonGlobal>
                     <GoogleOAuthProvider clientId={GOOGLE_APP_ID}>
                       <GlobalStyles />
-                      <PreviewMode>
-                        <PageWrapper {...{ locale }}>{children}</PageWrapper>
-                      </PreviewMode>
+                      <PreviewMode />
+                      <PageWrapper {...{ locale }}>{children}</PageWrapper>
                     </GoogleOAuthProvider>
                   </SkeletonGlobal>
                 </StyledComponentsRegistry>
