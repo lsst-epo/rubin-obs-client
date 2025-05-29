@@ -7,6 +7,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GlobalStyles } from "@rubin-epo/epo-react-lib/styles";
 import { env } from "@/env";
 import { getGlobalData } from "@/lib/api/globals";
+import getSocials from "@/services/craft/globals/socials";
 import { routing } from "@/lib/i18n/routing";
 import { languages } from "@/lib/i18n/settings";
 import SourceSansPro from "@/lib/styles/font";
@@ -29,7 +30,8 @@ export async function generateMetadata({
   }
 
   const { siteInfo: metadata } = await getGlobalData(locale);
-  const { siteTitle, siteDescription, siteImage, language, twitter } = metadata;
+  const socials = await getSocials();
+  const { siteTitle, siteDescription, siteImage, language } = metadata;
   const { url, width, height, altText: alt } = siteImage[0];
 
   return {
@@ -47,7 +49,9 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      site: `@${twitter.substring(twitter.lastIndexOf("/") + 1)}`,
+      site: `@${socials?.twitter?.substring(
+        socials?.twitter.lastIndexOf("/") + 1
+      )}`,
     },
     icons: {
       icon: [

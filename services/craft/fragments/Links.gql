@@ -1,0 +1,14 @@
+fragment LinksFragment on links_link_BlockType {
+  mixedLink {
+    ... on linkField_Link {
+      customText
+      text
+      title
+      type
+      url
+      element {
+        uri
+      }
+    }
+  }
+}

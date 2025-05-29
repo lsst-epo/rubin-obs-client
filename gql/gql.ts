@@ -74,14 +74,22 @@ const documents = {
     types.CantoAssetDetailedFragmentDoc,
   "fragment CantoAssetMetadata on CantoDamAssetInterface {\n  additional {\n    AltTextEN\n    AltTextES\n    TitleEN\n    TitleES\n    CaptionEN\n    CaptionES\n    Credit\n  }\n  height\n  id\n  name\n  scheme\n  url {\n    directUrlOriginal\n    directUrlPreview\n    directUrlPreviewPlay\n  }\n  width\n}":
     types.CantoAssetMetadataFragmentDoc,
-  'fragment SiteInfoFragment on siteInfo_GlobalSet {\n  language\n  name\n  handle\n  siteTitle\n  siteDescription\n  siteImage {\n    ... on generalImages_Asset {\n      altText\n      width\n      height\n      url @transform(mode: "crop", width: 800)\n    }\n  }\n  email\n  facebook\n  instagram\n  linkedIn\n  twitter\n  youTube\n  contactInfo {\n    ... on contactInfo_mail_BlockType {\n      id\n      text\n      typeHandle\n    }\n    ... on contactInfo_phone_BlockType {\n      id\n      text\n      typeHandle\n    }\n  }\n}':
+  "fragment LinksFragment on links_link_BlockType {\n  mixedLink {\n    ... on linkField_Link {\n      customText\n      text\n      title\n      type\n      url\n      element {\n        uri\n      }\n    }\n  }\n}":
+    types.LinksFragmentFragmentDoc,
+  'fragment SiteInfoFragment on siteInfo_GlobalSet {\n  language\n  name\n  handle\n  siteTitle\n  siteDescription\n  siteImage {\n    ... on generalImages_Asset {\n      altText\n      width\n      height\n      url @transform(mode: "crop", width: 800)\n    }\n  }\n  contactInfo {\n    ... on contactInfo_mail_BlockType {\n      id\n      text\n      typeHandle\n    }\n    ... on contactInfo_phone_BlockType {\n      id\n      text\n      typeHandle\n    }\n  }\n}':
     types.SiteInfoFragmentFragmentDoc,
+  "\n    query getContactForm($set: [String], $site: [String]) {\n      contactForm: globalSet(handle: $set, site: $site) {\n        ... on contactForm_GlobalSet {\n          contactFormTopics {\n            ... on contactFormTopics_topic_BlockType {\n              id\n              value: topicValue\n              label: topicLabel\n            }\n          }\n        }\n      }\n    }\n  ":
+    types.GetContactFormDocument,
+  '\n    query getFooter($set: [String], $site: [String]) {\n      footer: globalSet(handle: $set, site: $site) {\n        ... on footer_GlobalSet {\n          id\n          name\n          handle\n          links {\n            ...LinksFragment\n          }\n          colophon\n          supportersLogos {\n            ... on generalImages_Asset {\n              altText\n              width\n              height\n              url @transform(mode: "fit", width: 1000)\n            }\n          }\n          supportersLogosAlt\n        }\n      }\n    }\n  ':
+    types.GetFooterDocument,
   "\n    query getLogos($set: [String], $site: [String]) {\n      siteInfo: globalSet(handle: $set, site: $site) {\n        ... on siteInfo_GlobalSet {\n          __typename\n          logoLarge {\n            url {\n              directUrlOriginal\n            }\n            width\n            height\n          }\n          logoSmall {\n            url {\n              directUrlOriginal\n            }\n            width\n            height\n          }\n        }\n      }\n    }\n  ":
     types.GetLogosDocument,
   "\n  fragment rootPageInfoFragment on rootPageInformation_GlobalSet {\n    name\n    handle\n    customBreadcrumbs {\n      ... on customBreadcrumbs_ancestorsAndRoot_BlockType {\n        header\n        pageEntry {\n          id\n          title\n          uri\n        }\n      }\n    }\n  }\n":
     types.RootPageInfoFragmentFragmentDoc,
   "\n    query getRootPages($site: [String], $set: [String]) {\n      rootPages: globalSet(handle: $set, site: $site) {\n        ...rootPageInfoFragment\n      }\n    }\n  ":
     types.GetRootPagesDocument,
+  "\n    query getSocials($set: [String], $site: [String]) {\n      socials: globalSet(handle: $set, site: $site) {\n        ... on siteInfo_GlobalSet {\n          email\n          facebook\n          instagram\n          linkedIn\n          twitter\n          youTube\n        }\n      }\n    }\n  ":
+    types.GetSocialsDocument,
   '\n    query RelatedInvestigation($site: [String], $ids: [QueryArgument]) {\n      investigation: entry(type: "investigation", landingPage: $ids, site: $site) {\n        sectionHandle\n        ... on investigations_investigation_Entry {\n          uri\n          title\n          duration: plainText\n          typeHandle\n          externalUrl: externalUrlTranslatable\n          status: investigationStatus\n          landingPage {\n            ... on pages_investigationLandingPage_Entry {\n              id\n              uri\n              title\n            }\n          }\n          \n        }\n      }\n    }\n  ':
     types.RelatedInvestigationDocument,
   '\n    query GetSiblings(\n      $uri: [String]\n      $site: [String]\n      $parentId: Int\n      $level: Int\n    ) {\n      siblings: entry(uri: $uri, site: $site) {\n        prev(\n          descendantOf: $parentId\n          section: "pages"\n          site: $site\n          level: $level\n        ) {\n          uri\n          title\n        }\n        next(\n          descendantOf: $parentId\n          section: "pages"\n          site: $site\n          level: $level\n        ) {\n          uri\n          title\n        }\n      }\n    }\n  ':
@@ -286,8 +294,26 @@ export function graphql(
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: 'fragment SiteInfoFragment on siteInfo_GlobalSet {\n  language\n  name\n  handle\n  siteTitle\n  siteDescription\n  siteImage {\n    ... on generalImages_Asset {\n      altText\n      width\n      height\n      url @transform(mode: "crop", width: 800)\n    }\n  }\n  email\n  facebook\n  instagram\n  linkedIn\n  twitter\n  youTube\n  contactInfo {\n    ... on contactInfo_mail_BlockType {\n      id\n      text\n      typeHandle\n    }\n    ... on contactInfo_phone_BlockType {\n      id\n      text\n      typeHandle\n    }\n  }\n}'
-): (typeof documents)['fragment SiteInfoFragment on siteInfo_GlobalSet {\n  language\n  name\n  handle\n  siteTitle\n  siteDescription\n  siteImage {\n    ... on generalImages_Asset {\n      altText\n      width\n      height\n      url @transform(mode: "crop", width: 800)\n    }\n  }\n  email\n  facebook\n  instagram\n  linkedIn\n  twitter\n  youTube\n  contactInfo {\n    ... on contactInfo_mail_BlockType {\n      id\n      text\n      typeHandle\n    }\n    ... on contactInfo_phone_BlockType {\n      id\n      text\n      typeHandle\n    }\n  }\n}'];
+  source: "fragment LinksFragment on links_link_BlockType {\n  mixedLink {\n    ... on linkField_Link {\n      customText\n      text\n      title\n      type\n      url\n      element {\n        uri\n      }\n    }\n  }\n}"
+): (typeof documents)["fragment LinksFragment on links_link_BlockType {\n  mixedLink {\n    ... on linkField_Link {\n      customText\n      text\n      title\n      type\n      url\n      element {\n        uri\n      }\n    }\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: 'fragment SiteInfoFragment on siteInfo_GlobalSet {\n  language\n  name\n  handle\n  siteTitle\n  siteDescription\n  siteImage {\n    ... on generalImages_Asset {\n      altText\n      width\n      height\n      url @transform(mode: "crop", width: 800)\n    }\n  }\n  contactInfo {\n    ... on contactInfo_mail_BlockType {\n      id\n      text\n      typeHandle\n    }\n    ... on contactInfo_phone_BlockType {\n      id\n      text\n      typeHandle\n    }\n  }\n}'
+): (typeof documents)['fragment SiteInfoFragment on siteInfo_GlobalSet {\n  language\n  name\n  handle\n  siteTitle\n  siteDescription\n  siteImage {\n    ... on generalImages_Asset {\n      altText\n      width\n      height\n      url @transform(mode: "crop", width: 800)\n    }\n  }\n  contactInfo {\n    ... on contactInfo_mail_BlockType {\n      id\n      text\n      typeHandle\n    }\n    ... on contactInfo_phone_BlockType {\n      id\n      text\n      typeHandle\n    }\n  }\n}'];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: "\n    query getContactForm($set: [String], $site: [String]) {\n      contactForm: globalSet(handle: $set, site: $site) {\n        ... on contactForm_GlobalSet {\n          contactFormTopics {\n            ... on contactFormTopics_topic_BlockType {\n              id\n              value: topicValue\n              label: topicLabel\n            }\n          }\n        }\n      }\n    }\n  "
+): (typeof documents)["\n    query getContactForm($set: [String], $site: [String]) {\n      contactForm: globalSet(handle: $set, site: $site) {\n        ... on contactForm_GlobalSet {\n          contactFormTopics {\n            ... on contactFormTopics_topic_BlockType {\n              id\n              value: topicValue\n              label: topicLabel\n            }\n          }\n        }\n      }\n    }\n  "];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: '\n    query getFooter($set: [String], $site: [String]) {\n      footer: globalSet(handle: $set, site: $site) {\n        ... on footer_GlobalSet {\n          id\n          name\n          handle\n          links {\n            ...LinksFragment\n          }\n          colophon\n          supportersLogos {\n            ... on generalImages_Asset {\n              altText\n              width\n              height\n              url @transform(mode: "fit", width: 1000)\n            }\n          }\n          supportersLogosAlt\n        }\n      }\n    }\n  '
+): (typeof documents)['\n    query getFooter($set: [String], $site: [String]) {\n      footer: globalSet(handle: $set, site: $site) {\n        ... on footer_GlobalSet {\n          id\n          name\n          handle\n          links {\n            ...LinksFragment\n          }\n          colophon\n          supportersLogos {\n            ... on generalImages_Asset {\n              altText\n              width\n              height\n              url @transform(mode: "fit", width: 1000)\n            }\n          }\n          supportersLogosAlt\n        }\n      }\n    }\n  '];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -306,6 +332,12 @@ export function graphql(
 export function graphql(
   source: "\n    query getRootPages($site: [String], $set: [String]) {\n      rootPages: globalSet(handle: $set, site: $site) {\n        ...rootPageInfoFragment\n      }\n    }\n  "
 ): (typeof documents)["\n    query getRootPages($site: [String], $set: [String]) {\n      rootPages: globalSet(handle: $set, site: $site) {\n        ...rootPageInfoFragment\n      }\n    }\n  "];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: "\n    query getSocials($set: [String], $site: [String]) {\n      socials: globalSet(handle: $set, site: $site) {\n        ... on siteInfo_GlobalSet {\n          email\n          facebook\n          instagram\n          linkedIn\n          twitter\n          youTube\n        }\n      }\n    }\n  "
+): (typeof documents)["\n    query getSocials($set: [String], $site: [String]) {\n      socials: globalSet(handle: $set, site: $site) {\n        ... on siteInfo_GlobalSet {\n          email\n          facebook\n          instagram\n          linkedIn\n          twitter\n          youTube\n        }\n      }\n    }\n  "];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

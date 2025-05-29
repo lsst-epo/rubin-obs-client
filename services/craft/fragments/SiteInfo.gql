@@ -12,12 +12,6 @@ fragment SiteInfoFragment on siteInfo_GlobalSet {
       url @transform(mode: "crop", width: 800)
     }
   }
-  email
-  facebook
-  instagram
-  linkedIn
-  twitter
-  youTube
   contactInfo {
     ... on contactInfo_mail_BlockType {
       id
