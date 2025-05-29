@@ -2,9 +2,9 @@
 import { FC, useEffect, useId, useState, useTransition } from "react";
 import { usePathname } from "@/lib/i18n/navigation";
 import { useTranslation } from "react-i18next";
-import { useRouter } from "next/navigation";
 import { Transition } from "@headlessui/react";
 import styles from "./styles.module.css";
+import revalidate from "@/services/actions/revalidate";
 
 const RevalidateCurrentPath: FC<{ token: string }> = ({ token }) => {
   const id = useId();
@@ -15,7 +15,6 @@ const RevalidateCurrentPath: FC<{ token: string }> = ({ token }) => {
   }>();
   const { t } = useTranslation();
   const [isPending, startTransition] = useTransition();
-  const { refresh } = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
@@ -23,27 +22,20 @@ const RevalidateCurrentPath: FC<{ token: string }> = ({ token }) => {
   }, [pathname]);
 
   const handleRevalidate = async () => {
-    const params = new URLSearchParams({ uri: pathname, secret: token });
+    const revalidated = await revalidate({ uri: pathname, token });
 
-    const response = await fetch(`api/revalidate?${params.toString()}`, {
-      cache: "no-store",
-    });
-
-    if (response.ok) {
-      refresh();
+    if (revalidated) {
       setRevalidationState({
         state: "success",
         message: t("preview_mode.revalidate", {
           context: "success",
-          pathname,
+          pathname: revalidated.paths[0],
         }),
       });
     } else {
       setRevalidationState({
         state: "error",
-        message:
-          response.statusText ||
-          t("preview_mode.revalidate", { context: "error" }),
+        message: t("preview_mode.revalidate", { context: "error" }),
       });
     }
   };
