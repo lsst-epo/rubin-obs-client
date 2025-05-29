@@ -1,6 +1,6 @@
 "use client";
 import { FC, useEffect, useId, useState, useTransition } from "react";
-import { usePathname } from "@/lib/i18n/navigation";
+import { usePathname, useRouter } from "@/lib/i18n/navigation";
 import { useTranslation } from "react-i18next";
 import { Transition } from "@headlessui/react";
 import styles from "./styles.module.css";
@@ -16,6 +16,7 @@ const RevalidateCurrentPath: FC<{ token: string }> = ({ token }) => {
   const { t } = useTranslation();
   const [isPending, startTransition] = useTransition();
   const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     setRevalidationState(undefined);
@@ -25,6 +26,14 @@ const RevalidateCurrentPath: FC<{ token: string }> = ({ token }) => {
     const revalidated = await revalidate({ uri: pathname, token });
 
     if (revalidated) {
+      console.info({ revalidated });
+      router.replace(
+        {
+          pathname,
+          query: { "": new Date().getMilliseconds().toString() },
+        },
+        { scroll: false }
+      );
       setRevalidationState({
         state: "success",
         message: t("preview_mode.revalidate", {

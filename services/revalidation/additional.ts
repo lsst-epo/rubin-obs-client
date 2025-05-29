@@ -8,7 +8,7 @@ type Revalidator = (props: {
 }) => void;
 
 const revalidateGalleries: Revalidator = ({ parts, tagCollection }) => {
-  const [, , slug] = parts;
+  const slug = parts.pop();
 
   if (slug) {
     tagCollection.add(slug);
@@ -21,19 +21,22 @@ const revalidators: Record<string, Revalidator> = {
 };
 
 const additionalRevalidations: Revalidator = ({ parts, tagCollection }) => {
-  const section = parts[0];
-  const revalidator = revalidators[section];
+  const section = parts.find((part) => part.length > 0);
 
-  if (tags[section]) {
+  if (section) {
+    const revalidator = revalidators[section];
     const tag = tags[section];
-    tagCollection.add(tag);
-    revalidateTag(tag);
+
+    if (tag) {
+      tagCollection.add(tag);
+      revalidateTag(tag);
+    }
+
+    revalidator && revalidator({ parts, tagCollection });
+
+    tagCollection.add(tags.globals);
+    revalidateTag(tags.globals);
   }
-
-  revalidator && revalidator({ parts, tagCollection });
-
-  tagCollection.add(tags.globals);
-  revalidateTag(tags.globals);
 };
 
 export default additionalRevalidations;
