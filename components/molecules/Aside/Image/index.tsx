@@ -15,7 +15,7 @@ export interface AsideImageProps {
 }
 
 const AsideImage: FC<AsideImageProps> = ({
-  link = { href: "#" },
+  link = { href: "" },
   image,
   title,
   className,
@@ -33,7 +33,7 @@ const AsideImage: FC<AsideImageProps> = ({
           ...image,
           sizes: "270px",
         }}
-        link={{ ...link, prefetch: null }}
+        link={{ prefetch: null, ...link }}
       />
     </Frame>
   );
