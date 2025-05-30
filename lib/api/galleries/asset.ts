@@ -9,53 +9,30 @@ import {
   BreadcrumbAssetSchema,
   SupportedCantoScheme,
   UnsupportedCantoScheme,
+  GalleryDataFilters,
 } from "./schema";
 import { addLocaleUriSegment } from "@/lib/i18n";
 import { assetTitle } from "../canto/metadata";
 import z from "zod";
-import { getMainGallery } from ".";
+import { getGalleryData, getMainGallery } from ".";
 import tags from "../client/tags";
 
-export async function getRecentAssets(locale: string, gallery: string) {
-  const site = getSiteFromLocale(locale);
+export async function getFirstPageAssets(locale: string, gallery: string) {
+  const filters: GalleryDataFilters = {
+    page: 1,
+    limit: 30,
+    type: SupportedCantoScheme.options,
+    sort: "desc",
+    tag: [],
+  };
 
-  const query = graphql(`
-    query RecentAssetsQuery(
-      $site: [String]
-      $uri: [String]
-      $scheme: [String]
-    ) {
-      galleriesEntries(uri: $uri, site: $site) {
-        ... on galleries_gallery_Entry {
-          assetAlbum(whereIn: { key: "scheme", values: $scheme }) {
-            id
-          }
-        }
-      }
-    }
-  `);
+  const data = await getGalleryData({ gallery, locale, filters });
+  const slugs =
+    data?.assetAlbum.map(({ id }) => {
+      return { asset: id };
+    }) || [];
 
-  const { data } = await queryAPI({
-    query,
-    variables: {
-      site,
-      uri: `gallery/collections/${gallery}`,
-      scheme: SupportedCantoScheme.options,
-    },
-    fetchOptions: { next: { tags: [gallery] } },
-  });
-
-  const assets: Array<{ asset: string }> = [];
-
-  data?.galleriesEntries?.forEach((entry) => {
-    entry?.assetAlbum?.forEach((album) => {
-      if (album) {
-        assets.push({ asset: (album as Record<string, string>).id });
-      }
-    });
-  });
-
-  return assets;
+  return slugs;
 }
 
 export async function getAssetBreadcrumb({

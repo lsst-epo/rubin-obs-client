@@ -1,13 +1,8 @@
 import { ComponentType, FunctionComponent } from "react";
-import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { env } from "@/env";
 import { getAssetFromGallery } from "@/lib/api/galleries/asset";
-import {
-  assetCaption,
-  assetTitle,
-  assetToPageMetadata,
-} from "@/lib/api/canto/metadata";
+import { assetCaption, assetTitle } from "@/lib/api/canto/metadata";
 import { SupportedCantoAssetScheme } from "@/lib/api/galleries/schema";
 import { isMainGallery } from "@/lib/api/galleries";
 import { getMediaPolicyPage } from "@/lib/api/galleries/media-policy";
@@ -25,18 +20,7 @@ import LinkedPosts from "@/components/organisms/gallery/metadata/LinkedPosts";
 import CantoDownload from "@/components/organisms/gallery/CantoDownload";
 import BackToGallery from "@/components/organisms/gallery/BackToGallery";
 import DocumentInfo from "@/components/molecules/DocumentInfo";
-
-export async function generateMetadata({
-  params: { locale, gallery, asset: id },
-}: GalleryAssetProps): Promise<Metadata> {
-  const asset = await getAssetFromGallery(gallery, id, locale);
-
-  if (!asset) {
-    notFound();
-  }
-
-  return assetToPageMetadata(asset, locale);
-}
+import { setRequestLocale } from "next-intl/server";
 
 const assetComponent: Record<SupportedCantoAssetScheme, ComponentType<any>> = {
   image: CantoImage,
@@ -47,6 +31,7 @@ const assetComponent: Record<SupportedCantoAssetScheme, ComponentType<any>> = {
 const GalleryAsset: FunctionComponent<GalleryAssetProps> = async ({
   params: { locale, gallery, asset: id },
 }) => {
+  setRequestLocale(locale);
   const { t } = await useTranslation(locale);
   const asset = await getAssetFromGallery(gallery, id, locale);
 
