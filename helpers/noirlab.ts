@@ -2,6 +2,7 @@
 import { AsideImageProps } from "@/components/molecules/Aside/Image";
 import { env } from "@/env";
 import { addLocaleUriSegment } from "@/lib/i18n";
+import { fallbackLng } from "@/lib/i18n/settings";
 import { Category, ImageMini, VideoMini } from "@/services/noirlab";
 import sanitize from "sanitize-html";
 
@@ -51,6 +52,7 @@ interface AssetProps {
   width?: number;
   height?: number;
   locale?: string;
+  currentLocale: string;
 }
 
 const mapAssetToAside = ({
@@ -60,6 +62,7 @@ const mapAssetToAside = ({
   width = 1920,
   height = 1080,
   locale,
+  currentLocale,
 }: AssetProps): AsideImageProps => {
   return {
     title,
@@ -71,37 +74,63 @@ const mapAssetToAside = ({
     },
     link: {
       href: rewriteAssetUrl({ url, locale }),
+      prefetch: locale === currentLocale ? null : false,
     },
   };
 };
 
-export const imagesToAsides = (images: Array<ImageMini>) => {
-  return images
-    .map(({ title, url, width, height, lang, formats: { newsfeature } }) => {
-      return newsfeature
-        ? mapAssetToAside({
-            title,
-            url,
-            image: newsfeature,
-            width: width || undefined,
-            height: height || undefined,
-            locale: lang,
-          })
-        : undefined;
-    })
-    .filter((aside) => !!aside);
+const filterInvalidAssets = <T extends ImageMini | VideoMini>(
+  asset: T,
+  currentLocale: string
+): asset is T & {
+  formats: T["formats"] & {
+    newsfeature: Required<NonNullable<T["formats"]["newsfeature"]>>;
+  };
+} => {
+  if (
+    currentLocale === fallbackLng &&
+    asset.lang &&
+    asset.lang !== currentLocale
+  ) {
+    return false;
+  }
+
+  if (!asset.formats.newsfeature) return false;
+
+  return true;
 };
-export const videosToAsides = (videos: Array<VideoMini>) => {
+
+export const imagesToAsides = (
+  images: Array<ImageMini>,
+  currentLocale: string
+) => {
+  return images
+    .filter((asset) => filterInvalidAssets(asset, currentLocale))
+    .map(({ title, url, width, height, lang, formats: { newsfeature } }) => {
+      return mapAssetToAside({
+        title,
+        url,
+        image: newsfeature,
+        width: width || undefined,
+        height: height || undefined,
+        locale: lang,
+        currentLocale,
+      });
+    });
+};
+export const videosToAsides = (
+  videos: Array<VideoMini>,
+  currentLocale: string
+) => {
   return videos
+    .filter((asset) => filterInvalidAssets(asset, currentLocale))
     .map(({ title, url, lang, formats: { newsfeature } }) => {
-      return newsfeature
-        ? mapAssetToAside({
-            title,
-            url,
-            image: newsfeature,
-            locale: lang,
-          })
-        : undefined;
-    })
-    .filter((aside) => !!aside);
+      return mapAssetToAside({
+        title,
+        url,
+        image: newsfeature as string,
+        locale: lang,
+        currentLocale,
+      });
+    });
 };

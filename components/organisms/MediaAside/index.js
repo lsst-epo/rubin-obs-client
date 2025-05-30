@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
-import Link from "next/link";
+import { getPathname, Link } from "@/lib/i18n/navigation";
 import { getLocale } from "next-intl/server";
 import IconComposer from "@rubin-epo/epo-react-lib/IconComposer";
 import { imagesToAsides, videosToAsides } from "@/helpers/noirlab";
-import { addLocaleUriSegment, useTranslation } from "@/lib/i18n";
+import { useTranslation } from "@/lib/i18n";
 import Aside from "@/components/molecules/Aside/index";
 import AsideSection from "@/components/molecules/Aside/Section";
 import TagList from "@/components/molecules/TagList";
@@ -28,10 +28,10 @@ export default async function MediaAside({
   const tagsWithLinks = tags.map(({ slug, title }) => {
     return {
       name: title,
-      destination: addLocaleUriSegment(
+      destination: getPathname({
+        href: { pathname: `/${rootHomeLink?.uri}`, query: { search: slug } },
         locale,
-        `/${rootHomeLink?.uri}?search=${slug}`
-      ),
+      }),
     };
   });
 
@@ -46,8 +46,8 @@ export default async function MediaAside({
           link: { href: url },
         };
       }),
-    ...imagesToAsides(releaseImages),
-    ...videosToAsides(releaseVideos),
+    ...imagesToAsides(releaseImages, locale),
+    ...videosToAsides(releaseVideos, locale),
   ];
 
   return (
