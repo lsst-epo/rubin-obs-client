@@ -5,6 +5,7 @@ import indexNow from "@/services/revalidation/indexNow";
 import additionalRevalidations from "@/services/revalidation/additional";
 import { languages } from "@/lib/i18n/settings";
 import { getPathname } from "@/lib/i18n/navigation";
+import { isDefaultLocale } from "@/lib/i18n";
 
 const CRAFT_HOMEPAGE_URI = "__home__";
 const ENV = env.CLOUD_ENV;
@@ -17,7 +18,11 @@ const revalidate = (uri: string) => {
     const parts: Array<string> =
       uri === CRAFT_HOMEPAGE_URI ? [] : uri.split("/");
 
-    const path = getPathname({ href: parts.join("/"), locale });
+    const path = getPathname({
+      href: `/${parts.join("/")}`,
+      locale,
+      forcePrefix: !isDefaultLocale(locale),
+    });
 
     paths.push(path);
 
