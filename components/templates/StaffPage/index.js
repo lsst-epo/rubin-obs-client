@@ -6,7 +6,7 @@ import StaffList from "@/dynamic/StaffList";
 import ContentBlockFactory from "@/factories/ContentBlockFactory";
 import { NestedProvider } from "@/contexts/Nested";
 import Image from "@rubin-epo/epo-react-lib/Image";
-import Breadcrumbs from "@/page/Breadcrumbs";
+import Breadcrumbs from "@/components/molecules/Breadcrumbs";
 import PageContent from "@/page/PageContent";
 import Aside from "@/components/molecules/Aside";
 import AsideSection from "@/components/molecules/Aside/Section";
@@ -64,7 +64,7 @@ export default async function StaffPage({
 
   return (
     <>
-      <Breadcrumbs breadcrumbs={breadcrumbs} />
+      <Breadcrumbs breadcrumbs={breadcrumbs} locale={language} />
       <PageContent
         overlapHero={!!heroImage?.length}
         heroImage={heroImage}

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { useCustomBreadcrumbs } from "@/lib/utils";
-import Breadcrumbs from "@/page/Breadcrumbs";
+import Breadcrumbs from "@/components/molecules/Breadcrumbs";
 import {
   CarouselLayout as Carousel,
   Container,
@@ -18,7 +18,10 @@ export default function SlideshowPage({
     entry: { openGraphImage, id, description, title, uri, items },
   },
 }) {
-  const { t } = useTranslation();
+  const {
+    t,
+    i18n: { language: locale },
+  } = useTranslation();
 
   const customBreadcrumbs = useCustomBreadcrumbs("Slideshows");
   const rootHomeLink = customBreadcrumbs.slice(-1)[0];
@@ -41,7 +44,10 @@ export default function SlideshowPage({
 
   return (
     <>
-      <Breadcrumbs breadcrumbs={[...customBreadcrumbs, pageLink]} />
+      <Breadcrumbs
+        breadcrumbs={[...customBreadcrumbs, pageLink]}
+        locale={locale}
+      />
       <h1 className="a-hidden">{title}</h1>
       <Modalish>
         <Carousel>

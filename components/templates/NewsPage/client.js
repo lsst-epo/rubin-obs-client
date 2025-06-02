@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import Breadcrumbs from "@/page/Breadcrumbs";
+import Breadcrumbs from "@/components/molecules/Breadcrumbs";
 import NewsHero from "./NewsHero";
 import NewsArticle from "./Article";
 import NewsList from "@/dynamic/NewsList";
@@ -86,7 +86,10 @@ export default async function NewsPage({ data }) {
 
   return (
     <>
-      <Breadcrumbs breadcrumbs={[...customBreadcrumbs, pageLink]} />
+      <Breadcrumbs
+        breadcrumbs={[...customBreadcrumbs, pageLink]}
+        locale={locale}
+      />
       <NewsHero
         caption={heroCaption}
         data={hero}
