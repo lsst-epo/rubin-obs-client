@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import getRootPages from "@/services/craft/globals/rootPages";
 import { getCustomBreadcrumbs } from "@/lib/helpers/breadcrumbs";
-import Breadcrumbs from "@/page/Breadcrumbs";
+import Breadcrumbs from "@/components/molecules/Breadcrumbs";
 import Container from "@rubin-epo/epo-react-lib/Container";
 import ResponsiveImage from "@rubin-epo/epo-react-lib/ResponsiveImage";
 import Buttonish from "@rubin-epo/epo-react-lib/Buttonish";
@@ -34,7 +34,10 @@ export default async function GlossaryPage({ data, locale }) {
 
   return (
     <>
-      <Breadcrumbs breadcrumbs={[...customBreadcrumbs, pageLink]} />
+      <Breadcrumbs
+        breadcrumbs={[...customBreadcrumbs, pageLink]}
+        locale={locale}
+      />
       <Container width="narrow">
         <h1>{title}</h1>
       </Container>

@@ -5,7 +5,7 @@ import { getAssetBreadcrumb, getRecentAssets } from "@/lib/api/galleries/asset";
 import { useTranslation } from "@/lib/i18n";
 import { isMainGallery } from "@/lib/api/galleries";
 import { buildParentPath } from "@/lib/helpers/gallery";
-import Breadcrumbs from "@/components/page/Breadcrumbs";
+import Breadcrumbs from "@/components/molecules/Breadcrumbs";
 import BackButton from "@/components/molecules/BackButton";
 import MediaPolicy from "@/components/organisms/gallery/MediaPolicy";
 
@@ -35,7 +35,7 @@ const AssetLayout: FunctionComponent<
 
   return (
     <>
-      <Breadcrumbs breadcrumbs={breadcrumbs} />
+      <Breadcrumbs breadcrumbs={breadcrumbs} locale={locale} />
       <Container width="wide">
         <Stack>
           {children}
