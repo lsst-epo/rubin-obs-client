@@ -9,7 +9,7 @@ import {
 import { makeTruncatedString } from "@/lib/utils/strings";
 import { cantoToImageShape } from "@/lib/api/canto";
 import { makeDateString } from "@/helpers/dates";
-import Breadcrumbs from "@/components/page/Breadcrumbs";
+import Breadcrumbs from "@/components/molecules/Breadcrumbs";
 import { Grid } from "@rubin-epo/epo-react-lib";
 import DataList from "@/dynamic/DataList";
 import Tile from "@/atomic/Tile";
@@ -52,13 +52,16 @@ const SearchList = ({
         <Breadcrumbs
           breadcrumbs={[...customBreadcrumbs, pageLink]}
           type="search"
+          locale={locale}
         />
       );
     }
 
     // finally, pages :)
     const crumbsArray = makeBreadcrumbs(entry.uri);
-    return <Breadcrumbs breadcrumbs={crumbsArray} type="search" />;
+    return (
+      <Breadcrumbs breadcrumbs={crumbsArray} type="search" locale={locale} />
+    );
   };
 
   const makeSubtitle = (entry) => {

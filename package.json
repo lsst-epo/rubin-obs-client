@@ -57,7 +57,6 @@
     "**/styles.{js,ts}": "yarn fix:styles"
   },
   "dependencies": {
-    "@castiron/components-breadcrumbs": "2.0.2",
     "@castiron/style-mixins": "^1.0.6",
     "@headlessui/react": "^2.2.1",
     "@hey-api/client-next": "^0.2.3",
