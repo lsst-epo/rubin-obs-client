@@ -1515,11 +1515,6 @@
     "@babel/helper-string-parser" "^7.25.9"
     "@babel/helper-validator-identifier" "^7.25.9"
 
-"@castiron/components-breadcrumbs@2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@castiron/components-breadcrumbs/-/components-breadcrumbs-2.0.2.tgz#62f4298090bc35cca2832e582e2f97f75e347459"
-  integrity sha512-VrKD3qvlGU4erPoGQ1Dj50KzLFEyDKvD+VsxTAie/yjI/HR5n3x2ipRjuKqslmZHp6D8vbmZJXmvzQBySVlpCA==
-
 "@castiron/style-mixins@^1.0.6":
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/@castiron/style-mixins/-/style-mixins-1.0.7.tgz#512331651f1ff939fee07815d17dc710d40a1aaf"
