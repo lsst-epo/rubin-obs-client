@@ -1,10 +1,11 @@
 import { FC } from "react";
 import { notFound } from "next/navigation";
-import Container from "@rubin-epo/epo-react-lib/Container";
 import { getSearchPage } from "@/lib/api/search";
 import DynamicComponentFactory from "@/components/factories/DynamicComponentFactory";
 import FilterBar from "@/components/page/FilterBar";
+import SearchHeader from "@/components/molecules/SearchHeader";
 import { FilterParamsProvider } from "@/contexts/FilterParams";
+import { setRequestLocale } from "next-intl/server";
 
 export async function generateMetadata({ params: { locale } }: LocaleProps) {
   const data = await getSearchPage(locale);
@@ -20,32 +21,21 @@ export async function generateMetadata({ params: { locale } }: LocaleProps) {
 
 const SearchPage: FC<WithSearchParams<LocaleProps>> = async ({
   params: { locale },
-  searchParams = {},
 }) => {
-  const { search } = searchParams;
-
+  setRequestLocale(locale);
   const data = await getSearchPage(locale);
 
   if (!data || !data.id) {
     notFound();
   }
 
-  const searchString = Array.isArray(search) ? search[0] : search;
-
   const { title, id, dynamicComponent } = data;
-  const keyphrase = searchString
-    ?.replace("+", " ")
-    .replace(/(^|\s)\S/g, (t) => t.toLocaleUpperCase(locale));
 
   return (
     <FilterParamsProvider>
       <FilterBar filterType={dynamicComponent} />
-      <Container className="c-page-header">
-        <h1>
-          {title}
-          {keyphrase && <span>&nbsp;&quot;{keyphrase}&quot;</span>}
-        </h1>
-      </Container>
+
+      <SearchHeader title={title!} locale={locale} />
 
       {dynamicComponent && (
         <DynamicComponentFactory componentType={dynamicComponent} pageId={id} />
@@ -54,6 +44,6 @@ const SearchPage: FC<WithSearchParams<LocaleProps>> = async ({
   );
 };
 
-export const dynamic = "force-dynamic";
+export const dynamic = "error";
 
 export default SearchPage;
