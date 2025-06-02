@@ -7,7 +7,7 @@ import { useTranslation } from "@/lib/i18n";
 import Hero from "@/components/molecules/Hero";
 import ContentBlockFactory from "@/factories/ContentBlockFactory";
 import { Share } from "@/content-blocks";
-import Breadcrumbs from "@/page/Breadcrumbs";
+import Breadcrumbs from "@/components/molecules/Breadcrumbs";
 import { Container } from "@rubin-epo/epo-react-lib";
 import EventList from "@/dynamic/EventList";
 import EventTime from "@/components/EventTime";
@@ -37,7 +37,10 @@ export default async function EventPage({
     uri,
   },
 }) {
-  const { t } = await useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = await useTranslation();
   const rootPages = await getRootPages();
   const customBreadcrumbs = getCustomBreadcrumbs({
     rootPages,
@@ -67,7 +70,10 @@ export default async function EventPage({
 
   return (
     <>
-      <Breadcrumbs breadcrumbs={[...customBreadcrumbs, pageLink]} />
+      <Breadcrumbs
+        breadcrumbs={[...customBreadcrumbs, pageLink]}
+        locale={language}
+      />
       <Hero data={hero} {...{ focalPointX, focalPointY }} />
       <Container paddingSize="medium">
         <div>

@@ -6,7 +6,7 @@ import pageShape from "@/shapes/page";
 import { NestedProvider } from "@/contexts/Nested";
 import ContentBlockFactory from "@/factories/ContentBlockFactory";
 import DynamicComponentFactory from "@/factories/DynamicComponentFactory";
-import Breadcrumbs from "@/page/Breadcrumbs";
+import Breadcrumbs from "@/components/molecules/Breadcrumbs";
 import FilterBar from "@/components/page/FilterBar";
 import NavButtons from "@/components/layout/NavButtons";
 import SubHero from "@/components/page/SubHero";
@@ -50,7 +50,10 @@ export default async function Page({
   breadcrumbs,
   children,
 }) {
-  const { t } = await useTranslation();
+  const {
+    t,
+    i18n: { language },
+  } = await useTranslation();
 
   const pageLink = {
     id,
@@ -86,7 +89,12 @@ export default async function Page({
 
   return (
     <AuthorizePage typeHandle={typeHandle}>
-      {breadcrumbs && <Breadcrumbs breadcrumbs={[...breadcrumbs, pageLink]} />}
+      {breadcrumbs && (
+        <Breadcrumbs
+          breadcrumbs={[...breadcrumbs, pageLink]}
+          locale={language}
+        />
+      )}
       {investigation && <InvestigationHero investigation={investigation} />}
       {showSiblingNav && (
         <GuideNavigation
