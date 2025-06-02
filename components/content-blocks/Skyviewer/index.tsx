@@ -98,7 +98,11 @@ const SkyviewerBlock: FC<SkyviewerProps> = ({ locale, ...props }) => {
       {caption}
     </section>
   ) : (
-    <Container paddingSize="small">
+    <Container
+      darkMode={darkMode}
+      bgColor={backgroundColor}
+      paddingSize="small"
+    >
       <Figure caption={caption} withBackground>
         {iframe}
       </Figure>
