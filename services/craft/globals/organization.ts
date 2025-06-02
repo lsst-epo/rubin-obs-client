@@ -10,9 +10,13 @@ import { getLogos } from "./logos";
 import getSocials from "./socials";
 
 export async function getOrganizationData() {
-  const logos = await getLogos();
-  const socials = await getSocials();
-  const { siteInfo } = await getGlobalData(await getLocale());
+  const locale = await getLocale();
+  const [logos, socials, { siteInfo }] = await Promise.all([
+    getLogos(),
+    getSocials(),
+    getGlobalData(locale),
+  ]);
+
   /* eslint-disable react-hooks/rules-of-hooks */
   const { siteTitle: name, siteImage } = useFragment(
     SiteInfoFragmentFragmentDoc,
