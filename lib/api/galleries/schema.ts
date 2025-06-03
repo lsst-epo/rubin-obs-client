@@ -72,7 +72,7 @@ export const DetailedAssetSchema = z
     ownerName: z.string().nullable(),
     scheme: SupportedCantoScheme,
     size: z.string(),
-    smartTags: z.array(z.string()),
+    smartTags: z.array(z.string()).nullable(),
     tag: z.array(z.string()).nullable(),
     time: z.string(),
     url: AssetUrlSchema,
