@@ -18,6 +18,7 @@ const VideoBaseSchema = z.object({
   backgroundColor: z
     .string()
     .nullable()
+    .catch(null)
     .transform((output) => output ?? undefined),
   caption: z
     .string()
@@ -28,7 +29,7 @@ const VideoBaseSchema = z.object({
 const YouTubeVideoSchema = VideoBaseSchema.extend({
   url: z.string().url(),
   fullscreenVideo: z.literal(false).optional().catch(false).default(false),
-  cantoAsset: z.literal(false),
+  cantoAsset: z.literal(false).optional().default(false),
 });
 
 const CantoVideoSchema = VideoBaseSchema.extend({
@@ -50,7 +51,7 @@ const CantoVideoSchema = VideoBaseSchema.extend({
     .max(2),
   cantoAsset: z.literal(true),
   fullscreenVideo: z.boolean(),
-  url: z.literal(null),
+  url: z.string().nullable(),
 });
 
 const VideoSchema = z.discriminatedUnion("cantoAsset", [
