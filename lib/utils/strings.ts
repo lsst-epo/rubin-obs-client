@@ -1,3 +1,5 @@
+import sanitize from "sanitize-html";
+
 export function makeTruncatedString(str: string, max = 50) {
   if (!str) return "";
 
@@ -6,3 +8,9 @@ export function makeTruncatedString(str: string, max = 50) {
 
   return array.slice(0, max).join(" ") + ellipsis;
 }
+
+export const striptags = (dirty: string) =>
+  sanitize(dirty, {
+    allowedTags: [],
+    allowedAttributes: {},
+  });
