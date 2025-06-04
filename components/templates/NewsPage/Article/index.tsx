@@ -1,21 +1,21 @@
 import { FC } from "react";
 import { NewsArticle } from "schema-dts";
 import clsx from "clsx";
-import sanitizeHtml from "sanitize-html";
 import { type ImageShape } from "@rubin-epo/epo-react-lib/Image";
 import Container from "@rubin-epo/epo-react-lib/Container";
 import { ImageMini } from "@/services/noirlab";
 import { getOrganizationData } from "@/services/craft/globals/organization";
 import { useTranslation } from "@/lib/i18n";
+import { striptags } from "@/lib/utils/strings";
 import { makeDateString } from "@/helpers/dates";
 import StructuredData from "@/components/atomic/StructuredData";
 import ContentBlockFactory from "@/factories/ContentBlockFactory";
 import { Share } from "@/content-blocks";
 import Contacts from "../Contacts";
 import * as Styled from "../styles";
-import styles from "./styles.module.css";
 import { getPathname } from "@/lib/i18n/navigation";
 import { env } from "@/env";
+import styles from "./styles.module.css";
 
 interface ArticleData extends Record<string, any> {
   date: string;
@@ -29,12 +29,6 @@ interface ArticleProps {
   data: ArticleData;
   hero?: ImageShape;
 }
-
-const striptags = (dirty: string) =>
-  sanitizeHtml(dirty, {
-    allowedTags: [],
-    allowedAttributes: {},
-  });
 
 const Article: FC<ArticleProps> = async ({ data, hero }) => {
   const {
