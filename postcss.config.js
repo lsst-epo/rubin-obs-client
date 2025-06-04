@@ -24,5 +24,6 @@ export default {
       { files: ["./theme/styles/abstracts/media.css"] },
     ],
     "postcss-custom-media",
+    ["postcss-utopia", { minWidth: 320, maxWidth: 1240 }],
   ],
 };

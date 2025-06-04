@@ -11314,6 +11314,14 @@ postcss-styled-syntax@^0.7.0:
   dependencies:
     typescript "^5.6.3"
 
+postcss-utopia@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/postcss-utopia/-/postcss-utopia-1.1.0.tgz#00aebd1432f13bfc93e281576e2925d83b16a69b"
+  integrity sha512-ZzrQvD+WAISDDts0YHn8ChCPfaprMvN2pokl2Yzpa0isuDT9oTbwuwo0Mbwww/c8eMG7uia7PIBVmWWRSLuwDw==
+  dependencies:
+    postcss-value-parser "^4.2.0"
+    utopia-core "^1.3.0"
+
 postcss-value-parser@^4.0.2, postcss-value-parser@^4.1.0, postcss-value-parser@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/postcss-value-parser/-/postcss-value-parser-4.2.0.tgz#723c09920836ba6d3e5af019f92bc0971c02e514"
@@ -13831,7 +13839,7 @@ utils-merge@1.0.1:
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
   integrity sha512-pMZTvIkT1d+TFGvDOqodOclx0QWkkgi6Tdoa8gC8ffGAAqz9pzPTZWAybbsHHoED/ztMtkv/VoYTYyShUn81hA==
 
-utopia-core@^1.6.0:
+utopia-core@^1.3.0, utopia-core@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/utopia-core/-/utopia-core-1.6.0.tgz#dbbb1906a7cb96034ac5aa213dd34aa74dff23b2"
   integrity sha512-1t74XWRugoMxwbPufCBlBRBfp4ebwXh9dLRoEEywAroO3prOQUyGykX4G4o5kHyX5PbfB3Zly1AjP2epeq6ycA==
