@@ -1,7 +1,7 @@
 export const createLocationString = (
-  city: string,
-  state: string,
-  country: string,
+  city = "",
+  state = "",
+  country = "",
   address = "",
   isFull = false
 ) => {
