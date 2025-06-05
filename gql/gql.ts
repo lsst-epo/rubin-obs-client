@@ -16,8 +16,6 @@ import type { TypedDocumentNode as DocumentNode } from "@graphql-typed-document-
 const documents = {
   "\n  query PagePreviewQuery($site: [String], $uri: [String]) {\n    entry(site: $site, uri: $uri) {\n      __typename\n      uri\n      title\n    }\n  }\n":
     types.PagePreviewQueryDocument,
-  '\n    query RecentAssetsQuery(\n      $site: [String]\n      $uri: [String]\n      $scheme: [String]\n    ) {\n      galleriesEntries(uri: $uri, site: $site) {\n        ... on galleries_gallery_Entry {\n          assetAlbum(whereIn: { key: "scheme", values: $scheme }) {\n            id\n          }\n        }\n      }\n    }\n  ':
-    types.RecentAssetsQueryDocument,
   '\n    query GalleryTitleQuery(\n      $site: [String]\n      $uri: [String]\n      $id: String\n      $scheme: [String]\n    ) {\n      galleriesEntries(uri: $uri, site: $site) {\n        ... on galleries_gallery_Entry {\n          id\n          title\n          assetAlbum(\n            whereIn: { key: "scheme", values: $scheme }\n            where: { key: "id", value: $id }\n          ) {\n            additional {\n              TitleEN\n              TitleES\n            }\n            id\n            name\n          }\n        }\n      }\n    }\n  ':
     types.GalleryTitleQueryDocument,
   '\n    query GalleryImageQuery($site: [String], $uri: [String], $id: String) {\n      galleriesEntries(uri: $uri, site: $site) {\n        ... on galleries_gallery_Entry {\n          assetAlbum(where: { key: "id", value: $id }) {\n            additional {\n              AltTextEN\n              AltTextES\n              CaptionEN\n              CaptionES\n              Credit\n              TitleEN\n              TitleES\n            }\n            default {\n              ContentType\n              DateCreated\n              DateModified\n              DateUploaded\n              Size\n            }\n            approvalStatus\n            height\n            id\n            keyword\n            name\n            owner\n            ownerName\n            scheme\n            size\n            smartTags\n            tag\n            time\n            url {\n              directUrlOriginal\n              directUrlPreview\n              directUrlPreviewPlay\n              download\n              metadata\n              preview\n              PNG\n              HighJPG\n            }\n            width\n          }\n        }\n      }\n    }\n  ':
@@ -52,6 +50,8 @@ const documents = {
     types.SitemapDataDocument,
   "\n  fragment accordionGroupBlock on contentBlocks_accordionGroup_BlockType {\n    id\n    typeHandle\n    header\n    backgroundColor\n    accordions: children {\n      ... on contentBlocks_accordion_BlockType {\n        id\n        text\n        header\n      }\n    }\n  }\n":
     types.AccordionGroupBlockFragmentDoc,
+  '\n  fragment ctaGridBlock on contentBlocks_ctaGrid_BlockType {\n    typeHandle\n    id\n    header\n    backgroundColor\n    fullWidth\n    mixedLink {\n      ...MixedLinkFragment\n    }\n    items: children {\n      ... on contentBlocks_cta_BlockType {\n        id\n        contentImage {\n          ... on contentImages_Asset {\n            altText\n            width\n            height\n            url @transform(mode: "crop", width: 572, height: 316)\n          }\n        }\n        mixedLink {\n          ...MixedLinkFragment\n        }\n      }\n    }\n  }\n':
+    types.CtaGridBlockFragmentDoc,
   "\n  fragment firstLookWidgetsBlock on contentBlocks_firstLookWidgets_BlockType {\n    id\n    typeHandle\n    backgroundColor\n    filmReel {\n      ... on filmReel_item_BlockType {\n        text\n        share\n      }\n    }\n    firstLookWidget\n  }\n":
     types.FirstLookWidgetsBlockFragmentDoc,
   '\n  fragment imageBlock on contentBlocks_image_BlockType {\n    id\n    typeHandle\n    caption\n    image: contentImage {\n      ... on contentImages_Asset {\n        altText\n        width\n        height\n        url @transform(mode: "fit", width: 900)\n      }\n    }\n    cantoImage: cantoAssetSingle {\n      ...CantoAssetDetailed\n    }\n    floatDirection\n    backgroundColor\n  }\n':
@@ -60,6 +60,8 @@ const documents = {
     types.ImageBlockNewsFragmentDoc,
   "\n  fragment imageComparisonBlock on contentBlocks_imageComparison_BlockType {\n    id\n    typeHandle\n    backgroundColor\n    caption: captionRichText\n    images: multipleCantoAssets {\n      ...CantoAssetMetadata\n    }\n  }\n":
     types.ImageComparisonBlockFragmentDoc,
+  "\n  fragment keyNumbersBlock on contentBlocks_keyNumbersGrid_BlockType {\n    id\n    typeHandle\n    header\n    backgroundColor\n    fullWidth\n    keyNumbers: children {\n      ... on contentBlocks_keyNumbersGridItem_BlockType {\n        header\n        footer\n        id\n        postscript\n        subheading\n      }\n    }\n    mixedLink {\n      ...MixedLinkFragment\n    }\n  }\n":
+    types.KeyNumbersBlockFragmentDoc,
   "\n  fragment linkedImageListBlock on contentBlocks_linkedImageList_BlockType {\n    id\n    typeHandle\n    description\n    header\n    variant: linkedImageListVariant\n    linkedImageList {\n      ... on linkedImageList_linkedImage_BlockType {\n        id\n        image {\n          ...CantoAssetMetadata\n        }\n        link: imageLink {\n          customText\n          target\n          text\n          title\n          type\n          url\n        }\n      }\n    }\n  }\n":
     types.LinkedImageListBlockFragmentDoc,
   "\n  fragment shareBlock on contentBlocks_share_BlockType {\n    id\n    typeHandle\n    backgroundColor\n    shareTitle\n    shareVariant\n    text\n  }\n":
@@ -78,6 +80,8 @@ const documents = {
     types.CantoAssetMetadataFragmentDoc,
   "fragment LinksFragment on links_link_BlockType {\n  mixedLink {\n    ... on linkField_Link {\n      customText\n      text\n      title\n      type\n      url\n      element {\n        uri\n      }\n    }\n  }\n}":
     types.LinksFragmentFragmentDoc,
+  "fragment MixedLinkFragment on linkField_Link {\n  customText\n  text\n  title\n  type\n  url\n  element {\n    uri\n  }\n}":
+    types.MixedLinkFragmentFragmentDoc,
   'fragment SiteInfoFragment on siteInfo_GlobalSet {\n  language\n  name\n  handle\n  siteTitle\n  siteDescription\n  siteImage {\n    ... on generalImages_Asset {\n      altText\n      width\n      height\n      url @transform(mode: "crop", width: 800)\n    }\n  }\n  contactInfo {\n    ... on contactInfo_mail_BlockType {\n      id\n      text\n      typeHandle\n    }\n    ... on contactInfo_phone_BlockType {\n      id\n      text\n      typeHandle\n    }\n  }\n}':
     types.SiteInfoFragmentFragmentDoc,
   "\n    query getContactForm($set: [String], $site: [String]) {\n      contactForm: globalSet(handle: $set, site: $site) {\n        ... on contactForm_GlobalSet {\n          contactFormTopics {\n            ... on contactFormTopics_topic_BlockType {\n              id\n              value: topicValue\n              label: topicLabel\n            }\n          }\n        }\n      }\n    }\n  ":
@@ -118,12 +122,6 @@ export function graphql(source: string): unknown;
 export function graphql(
   source: "\n  query PagePreviewQuery($site: [String], $uri: [String]) {\n    entry(site: $site, uri: $uri) {\n      __typename\n      uri\n      title\n    }\n  }\n"
 ): (typeof documents)["\n  query PagePreviewQuery($site: [String], $uri: [String]) {\n    entry(site: $site, uri: $uri) {\n      __typename\n      uri\n      title\n    }\n  }\n"];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(
-  source: '\n    query RecentAssetsQuery(\n      $site: [String]\n      $uri: [String]\n      $scheme: [String]\n    ) {\n      galleriesEntries(uri: $uri, site: $site) {\n        ... on galleries_gallery_Entry {\n          assetAlbum(whereIn: { key: "scheme", values: $scheme }) {\n            id\n          }\n        }\n      }\n    }\n  '
-): (typeof documents)['\n    query RecentAssetsQuery(\n      $site: [String]\n      $uri: [String]\n      $scheme: [String]\n    ) {\n      galleriesEntries(uri: $uri, site: $site) {\n        ... on galleries_gallery_Entry {\n          assetAlbum(whereIn: { key: "scheme", values: $scheme }) {\n            id\n          }\n        }\n      }\n    }\n  '];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -230,6 +228,12 @@ export function graphql(
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
+  source: '\n  fragment ctaGridBlock on contentBlocks_ctaGrid_BlockType {\n    typeHandle\n    id\n    header\n    backgroundColor\n    fullWidth\n    mixedLink {\n      ...MixedLinkFragment\n    }\n    items: children {\n      ... on contentBlocks_cta_BlockType {\n        id\n        contentImage {\n          ... on contentImages_Asset {\n            altText\n            width\n            height\n            url @transform(mode: "crop", width: 572, height: 316)\n          }\n        }\n        mixedLink {\n          ...MixedLinkFragment\n        }\n      }\n    }\n  }\n'
+): (typeof documents)['\n  fragment ctaGridBlock on contentBlocks_ctaGrid_BlockType {\n    typeHandle\n    id\n    header\n    backgroundColor\n    fullWidth\n    mixedLink {\n      ...MixedLinkFragment\n    }\n    items: children {\n      ... on contentBlocks_cta_BlockType {\n        id\n        contentImage {\n          ... on contentImages_Asset {\n            altText\n            width\n            height\n            url @transform(mode: "crop", width: 572, height: 316)\n          }\n        }\n        mixedLink {\n          ...MixedLinkFragment\n        }\n      }\n    }\n  }\n'];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
   source: "\n  fragment firstLookWidgetsBlock on contentBlocks_firstLookWidgets_BlockType {\n    id\n    typeHandle\n    backgroundColor\n    filmReel {\n      ... on filmReel_item_BlockType {\n        text\n        share\n      }\n    }\n    firstLookWidget\n  }\n"
 ): (typeof documents)["\n  fragment firstLookWidgetsBlock on contentBlocks_firstLookWidgets_BlockType {\n    id\n    typeHandle\n    backgroundColor\n    filmReel {\n      ... on filmReel_item_BlockType {\n        text\n        share\n      }\n    }\n    firstLookWidget\n  }\n"];
 /**
@@ -250,6 +254,12 @@ export function graphql(
 export function graphql(
   source: "\n  fragment imageComparisonBlock on contentBlocks_imageComparison_BlockType {\n    id\n    typeHandle\n    backgroundColor\n    caption: captionRichText\n    images: multipleCantoAssets {\n      ...CantoAssetMetadata\n    }\n  }\n"
 ): (typeof documents)["\n  fragment imageComparisonBlock on contentBlocks_imageComparison_BlockType {\n    id\n    typeHandle\n    backgroundColor\n    caption: captionRichText\n    images: multipleCantoAssets {\n      ...CantoAssetMetadata\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: "\n  fragment keyNumbersBlock on contentBlocks_keyNumbersGrid_BlockType {\n    id\n    typeHandle\n    header\n    backgroundColor\n    fullWidth\n    keyNumbers: children {\n      ... on contentBlocks_keyNumbersGridItem_BlockType {\n        header\n        footer\n        id\n        postscript\n        subheading\n      }\n    }\n    mixedLink {\n      ...MixedLinkFragment\n    }\n  }\n"
+): (typeof documents)["\n  fragment keyNumbersBlock on contentBlocks_keyNumbersGrid_BlockType {\n    id\n    typeHandle\n    header\n    backgroundColor\n    fullWidth\n    keyNumbers: children {\n      ... on contentBlocks_keyNumbersGridItem_BlockType {\n        header\n        footer\n        id\n        postscript\n        subheading\n      }\n    }\n    mixedLink {\n      ...MixedLinkFragment\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -304,6 +314,12 @@ export function graphql(
 export function graphql(
   source: "fragment LinksFragment on links_link_BlockType {\n  mixedLink {\n    ... on linkField_Link {\n      customText\n      text\n      title\n      type\n      url\n      element {\n        uri\n      }\n    }\n  }\n}"
 ): (typeof documents)["fragment LinksFragment on links_link_BlockType {\n  mixedLink {\n    ... on linkField_Link {\n      customText\n      text\n      title\n      type\n      url\n      element {\n        uri\n      }\n    }\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: "fragment MixedLinkFragment on linkField_Link {\n  customText\n  text\n  title\n  type\n  url\n  element {\n    uri\n  }\n}"
+): (typeof documents)["fragment MixedLinkFragment on linkField_Link {\n  customText\n  text\n  title\n  type\n  url\n  element {\n    uri\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
