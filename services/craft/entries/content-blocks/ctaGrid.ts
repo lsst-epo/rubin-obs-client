@@ -1,0 +1,32 @@
+import { graphql } from "@/gql";
+
+const CTAGridBlockFragment = graphql(`
+  fragment ctaGridBlock on contentBlocks_ctaGrid_BlockType {
+    typeHandle
+    id
+    header
+    backgroundColor
+    fullWidth
+    mixedLink {
+      ...MixedLinkFragment
+    }
+    items: children {
+      ... on contentBlocks_cta_BlockType {
+        id
+        contentImage {
+          ... on contentImages_Asset {
+            altText
+            width
+            height
+            url @transform(mode: "crop", width: 572, height: 316)
+          }
+        }
+        mixedLink {
+          ...MixedLinkFragment
+        }
+      }
+    }
+  }
+`);
+
+export default CTAGridBlockFragment;

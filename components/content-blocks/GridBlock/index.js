@@ -33,6 +33,7 @@ export default function GridBlock({
   mixedLink,
   pageId,
   typeHandle,
+  fullWidth,
 }) {
   const listTypeId = postType?.[0]?.id;
   const pathParams = listTypeId && { filter: listTypeId };
@@ -47,7 +48,7 @@ export default function GridBlock({
   };
 
   const widthMap = {
-    ctaGrid: undefined,
+    ctaGrid: fullWidth ? "wide" : "narrow",
     imageGrid: undefined,
     news: undefined,
     investigationGrid: "regular",
@@ -62,35 +63,30 @@ export default function GridBlock({
       bgColor={backgroundColor || undefined}
       width={containerWidth}
     >
-      <div>
-        {header && (
-          <h2
-            className={clsx(
-              styles.header,
-              typeHandle === "investigationGrid" ? "t-align-center" : undefined
-            )}
-            data-has-border={
-              typeHandle === "relatedContent" || typeHandle === "staffGrid"
-            }
-          >
-            {header}
-          </h2>
-        )}
-        <ContentGrid
-          items={items}
-          limit={limit}
-          listTypeId={listTypeId}
-          sectionHandle={typeHandle}
-          pageId={pageId}
+      {header && (
+        <h2
+          className={clsx(
+            styles.header,
+            typeHandle === "investigationGrid" ? "t-align-center" : undefined
+          )}
+        >
+          {header}
+        </h2>
+      )}
+      <ContentGrid
+        items={items}
+        limit={limit}
+        listTypeId={listTypeId}
+        sectionHandle={typeHandle}
+        pageId={pageId}
+      />
+      {mixedLink?.url && (
+        <MixedLink
+          {...mixedLink}
+          params={pathParams}
+          className={clsx(styles.link, "c-buttonish", "c-buttonish--block")}
         />
-        {mixedLink?.url && (
-          <MixedLink
-            {...mixedLink}
-            params={pathParams}
-            className={clsx(styles.link, "c-buttonish", "c-buttonish--block")}
-          />
-        )}
-      </div>
+      )}
     </Container>
   );
 }
@@ -108,4 +104,5 @@ GridBlock.propTypes = {
   plainText: PropTypes.string,
   pageId: PropTypes.string,
   backgroundColor: PropTypes.string,
+  fullWidth: PropTypes.bool,
 };
