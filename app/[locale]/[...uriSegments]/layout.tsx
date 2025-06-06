@@ -104,14 +104,7 @@ export async function generateMetadata(
 export async function generateStaticParams({
   params: { locale },
 }: LocaleProps) {
-  const data = await getEntriesByLocale(locale);
-
-  return data.entries.map(({ uri }) => {
-    return {
-      locale,
-      uriSegments: uri.split("/"),
-    };
-  });
+  return getEntriesByLocale(locale);
 }
 
 const UriSegmentsLayout: FC<PropsWithChildren<UriSegmentProps>> = ({
