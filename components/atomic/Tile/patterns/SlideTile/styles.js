@@ -681,10 +681,6 @@ export const MixedLink = styled(BaseMixedLink)`
     .pretitle {
       font-size: 16px;
       font-weight: 700;
-
-      li:last-of-type {
-        display: none;
-      }
     }
 
     .title {
