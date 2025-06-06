@@ -1,0 +1,22 @@
+.breadcrumbs {
+  font-size: 100%;
+  padding-block-start: 0;
+
+  & > ol {
+    padding: 0;
+    margin: 0;
+
+    & > li:first-child {
+      margin: 0;
+
+      & a {
+        padding-inline-start: 0;
+      }
+    }
+  }
+}
+
+.pretitleContainer {
+  display: flex;
+  justify-content: space-between;
+}

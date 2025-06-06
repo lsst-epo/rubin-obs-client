@@ -1,21 +1,28 @@
-import PropTypes from "prop-types";
-import striptags from "striptags";
+import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  makeBreadcrumbs,
-  makeCustomBreadcrumbs,
-  useGlobalData,
-} from "@/lib/utils";
-import { makeTruncatedString } from "@/lib/utils/strings";
+import { makeCustomBreadcrumbs, useGlobalData } from "@/lib/utils";
+import { makeTruncatedString, striptags } from "@/lib/utils/strings";
 import { cantoToImageShape } from "@/lib/api/canto";
+import { makeBreadcrumbs } from "@/lib/helpers/breadcrumbs";
 import { makeDateString } from "@/helpers/dates";
 import Breadcrumbs from "@/components/molecules/Breadcrumbs";
-import { Grid } from "@rubin-epo/epo-react-lib";
+import Grid from "@rubin-epo/epo-react-lib/Grid";
 import DataList from "@/dynamic/DataList";
 import Tile from "@/atomic/Tile";
-import * as Styled from "./styles";
+import styles from "./styles.module.css";
 
-const SearchList = ({
+interface SearchListProps {
+  button?: {
+    uri: string | null;
+    text: string | null;
+  };
+  excludeId: string | null;
+  header: string | null;
+  limit: string | number | null;
+  isWide: boolean;
+}
+
+const SearchList: FC<SearchListProps> = ({
   button,
   excludeId = null,
   header,
@@ -48,19 +55,34 @@ const SearchList = ({
 
     if (entry.typeHandle === "slideshow") {
       customBreadcrumbs = makeCustomBreadcrumbs(rootPages, "Slideshows");
+
+      customBreadcrumbs.pop();
+
       return (
         <Breadcrumbs
+          className={styles.breadcrumbs}
           breadcrumbs={[...customBreadcrumbs, pageLink]}
-          type="search"
           locale={locale}
+          includesCurrentPage={false}
         />
       );
     }
 
     // finally, pages :)
-    const crumbsArray = makeBreadcrumbs(entry.uri);
+    const breadcrumbs = makeBreadcrumbs({
+      uri: entry.uri,
+      title: entry.title,
+      locale,
+    });
+
+    breadcrumbs.pop();
+
     return (
-      <Breadcrumbs breadcrumbs={crumbsArray} type="search" locale={locale} />
+      <Breadcrumbs
+        includesCurrentPage={false}
+        className={styles.breadcrumbs}
+        {...{ breadcrumbs, locale }}
+      />
     );
   };
 
@@ -80,14 +102,14 @@ const SearchList = ({
     }[entry.typeHandle];
 
     return (
-      <Styled.PretitleContainer>
+      <div className={styles.pretitleContainer}>
         <div>{type ? `${type} ` : ``}</div>
         <div>
           {entry.date
             ? `${t("published")} ${makeDateString(entry.date, { locale })}`
             : ``}
         </div>
-      </Styled.PretitleContainer>
+      </div>
     );
   };
 
@@ -103,7 +125,7 @@ const SearchList = ({
       {({ entries }) => (
         <>
           {entries?.length > 0 && (
-            <Grid columns={1}>
+            <Grid columns={1} tablet={1} showFeature={false}>
               {entries.map((entry) => {
                 const { cantoAssetSingle } = entry;
 
@@ -137,12 +159,6 @@ const SearchList = ({
   );
 };
 
-SearchList.propTypes = {
-  excludeId: PropTypes.string,
-  limit: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  header: PropTypes.string,
-  button: PropTypes.object,
-  isWide: PropTypes.bool,
-};
+SearchList.displayName = "Dynamic.SearchList";
 
 export default SearchList;
