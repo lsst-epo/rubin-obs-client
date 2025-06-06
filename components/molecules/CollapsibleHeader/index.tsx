@@ -17,6 +17,7 @@ const CollapsibleHeader: FunctionComponent<PropsWithChildren> = ({
 
   return (
     <Headroom
+      upTolerance={60}
       downTolerance={2}
       pin={pinned}
       style={{ zIndex: "var(--elevation-element-header, 25)" }}
