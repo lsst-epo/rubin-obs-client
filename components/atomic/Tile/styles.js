@@ -673,10 +673,6 @@ export const MixedLink = styled(BaseMixedLink)`
       nav {
         background-color: transparent;
       }
-
-      li:last-of-type {
-        display: none;
-      }
     }
 
     .title-link {

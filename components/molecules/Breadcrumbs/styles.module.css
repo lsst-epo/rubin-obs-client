@@ -12,22 +12,9 @@
 .list {
   display: flex;
   flex-wrap: wrap;
-
-  &[data-type="search"] {
-    & li:first-child {
-      margin-left: 0;
-
-      & a {
-        padding-left: 0;
-      }
-    }
-  }
-
-  &:not([data-type="search"]) {
-    max-width: var(--size-container-regular);
-    margin-inline: auto;
-    padding-inline: var(--size-spacing-2xs);
-  }
+  max-width: var(--size-container-regular);
+  margin-inline: auto;
+  padding-inline: var(--size-spacing-2xs);
 }
 
 .item {
@@ -60,6 +47,6 @@
 
   &:hover {
     font-weight: bold;
-    color: #062e2c;
+    color: var(--color-rubin-teal-700);
   }
 }

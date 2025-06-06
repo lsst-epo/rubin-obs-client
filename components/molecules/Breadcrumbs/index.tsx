@@ -5,20 +5,20 @@ import clsx from "clsx";
 import { BreadcrumbList, ListItem } from "schema-dts";
 import { env } from "@/env";
 import StructuredData from "@/components/atomic/StructuredData";
-import styles from "./styles.module.css";
 import { isDefaultLocale } from "@/lib/i18n";
+import styles from "./styles.module.css";
 
 interface BreadcrumbsProps {
   breadcrumbs: Array<InternalLink>;
-  type?: "search";
   locale?: string;
+  includesCurrentPage?: boolean;
   className?: string;
 }
 
 const Breadcrumbs: FC<BreadcrumbsProps> = ({
   breadcrumbs,
-  type,
   locale = fallbackLng,
+  includesCurrentPage = true,
   className,
 }) => {
   if (!breadcrumbs || breadcrumbs.length <= 1) return null;
@@ -48,7 +48,7 @@ const Breadcrumbs: FC<BreadcrumbsProps> = ({
     <>
       <StructuredData jsonLd={structuredBreadcrumbs} />
       <nav data-cy="breadcrumb" className={clsx(styles.breadcrumb, className)}>
-        <ol data-type={type} className={styles.list}>
+        <ol className={styles.list}>
           {breadcrumbs.map(({ id, uri, title }, i) => {
             if (!uri) return null;
 
@@ -58,8 +58,11 @@ const Breadcrumbs: FC<BreadcrumbsProps> = ({
                   className={styles.link}
                   href={`/${uri}`}
                   aria-current={
-                    i === breadcrumbs.length - 1 ? "page" : undefined
+                    includesCurrentPage && i === breadcrumbs.length - 1
+                      ? "page"
+                      : undefined
                   }
+                  prefetch={false}
                 >
                   {title}
                 </Link>
