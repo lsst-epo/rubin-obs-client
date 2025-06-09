@@ -170,5 +170,5 @@ export async function getEntryDataByUri(
   });
 
   // Get the related investigation
-  return { ...data.entry, ...(await addRelatedInvestigation(data.entry)) };
+  return { ...data?.entry, ...(await addRelatedInvestigation(data?.entry)) };
 }
