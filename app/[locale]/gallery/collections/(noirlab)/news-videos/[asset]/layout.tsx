@@ -40,8 +40,10 @@ export const generateMetadata = async ({
   const {
     title,
     description,
-    formats: { thumb350x },
+    formats: { thumb350x, hd_1080_screen: videoUrl },
   } = data;
+
+  const hasVideo = !!videoUrl;
 
   const images = thumb350x
     ? {
@@ -55,7 +57,25 @@ export const generateMetadata = async ({
     description: extractDescription(description),
     openGraph: {
       images,
+      videos: hasVideo
+        ? {
+            url: videoUrl,
+            width: 1920,
+            height: 1080,
+          }
+        : undefined,
     },
+    twitter: hasVideo
+      ? {
+          card: "player",
+          players: {
+            playerUrl: videoUrl,
+            streamUrl: videoUrl,
+            width: 1920,
+            height: 1080,
+          },
+        }
+      : undefined,
   };
 };
 
