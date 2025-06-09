@@ -66,6 +66,7 @@ export const assetToPageMetadata = (
     height,
     url: { directUrlOriginal, directUrlPreviewPlay },
   } = asset;
+  const isVideo = scheme === "video";
 
   const twitterVideo: Twitter = {
     card: "player",
@@ -82,8 +83,13 @@ export const assetToPageMetadata = (
     description: assetCaption(additional, locale),
     openGraph: {
       images: assetToOpenGraphImage(asset, locale),
+      videos: {
+        url: directUrlPreviewPlay || directUrlOriginal,
+        width,
+        height,
+      },
     },
-    twitter: scheme === "video" ? twitterVideo : undefined,
+    twitter: isVideo ? twitterVideo : undefined,
   };
 };
 
