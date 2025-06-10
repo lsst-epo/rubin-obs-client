@@ -25,5 +25,6 @@ export default {
     ],
     "postcss-custom-media",
     ["postcss-utopia", { minWidth: 320, maxWidth: 1240 }],
+    ["postcss-utopia", {}],
   ],
 };

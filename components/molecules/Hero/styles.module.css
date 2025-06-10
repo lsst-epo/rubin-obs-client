@@ -1,0 +1,15 @@
+.heroContainer {
+  position: relative;
+  width: 100%;
+  max-width: var(--size-width-center, 2000px);
+  height: var(--Hero-height, clamp(400px, 0px + 100vw, 540px));
+  margin: 0 auto;
+  overflow: auto;
+}
+
+.heroImage {
+  /* stylelint-disable declaration-no-important */
+  height: 100% !important;
+  object-fit: cover;
+  object-position: var(--Hero-object-position, center);
+}
