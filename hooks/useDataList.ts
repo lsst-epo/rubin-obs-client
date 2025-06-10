@@ -1,4 +1,4 @@
-import { gql } from "graphql-request";
+import { type AnyVariables, gql, type TypedDocumentNode } from "@urql/core";
 import { useQuery } from "urql";
 import { eventFragment } from "@/lib/api/fragments/event";
 import { jobFragment } from "@/lib/api/fragments/job";
@@ -65,10 +65,10 @@ export default function useDataList({
   site = "default",
   isSitewideSearch = false,
 }) {
-  let theSection;
-  let theOrderBy;
+  let theSection: string | null;
+  let theOrderBy: string;
   let theDateFilter: string | null = null;
-  let query: string = "";
+  let query: TypedDocumentNode<any, AnyVariables>;
 
   const date = new Date();
   const today = new Date(date.getTime() - date.getTimezoneOffset() * 60000)
@@ -177,7 +177,7 @@ export default function useDataList({
             ...eventFragment
             ...jobFragment
             ...newsPostFragment
-            ...pageFragment
+            ...PagePreview
             ...studentPageFragment
             ...slideshowFragment
             ...staffProfileFragment

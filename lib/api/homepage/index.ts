@@ -1,5 +1,4 @@
 import { getSiteFromLocale } from "@/lib/helpers/site";
-
 import queryAPI from "@/lib/api/client/server";
 import { CRAFT_HOMEPAGE_URI } from "@/lib/constants";
 import { graphql } from "@/gql";
