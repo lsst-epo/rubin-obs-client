@@ -1,8 +1,12 @@
+:root {
+  --Hero-height-fallback: utopia.clamp(400, 540);
+}
+
 .heroContainer {
   position: relative;
   width: 100%;
   max-width: var(--size-width-center, 2000px);
-  height: var(--Hero-height, clamp(400px, 0px + 100vw, 540px));
+  height: var(--Hero-height, var(--Hero-height-fallback));
   margin: 0 auto;
   overflow: auto;
 }
