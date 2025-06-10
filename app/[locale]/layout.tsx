@@ -19,6 +19,7 @@ import RootScripts from "./scripts";
 import { HistoryProvider } from "@/contexts/History";
 import PreviewMode from "@/components/organisms/PreviewMode";
 import SkeletonGlobal from "@/components/organisms/SkeletonGlobal";
+import ClientCache from "@/contexts/ClientCache";
 
 const GOOGLE_APP_ID = env.NEXT_PUBLIC_GOOGLE_APP_ID;
 
@@ -92,20 +93,23 @@ const LocaleLayout: FunctionComponent<PropsWithChildren<LocaleProps>> = async ({
       <body className={SourceSansPro.variable}>
         <I18NextClientProvider {...{ locale }}>
           <Suspense>
-            <HistoryProvider>
-              <AuthenticationContextProvider>
-                <StyledComponentsRegistry>
-                  <SkeletonGlobal>
+            <HistoryProvider />
+          </Suspense>
+          <ClientCache>
+            <StyledComponentsRegistry>
+              <SkeletonGlobal>
+                <Suspense>
+                  <AuthenticationContextProvider>
                     <GoogleOAuthProvider clientId={GOOGLE_APP_ID}>
                       <GlobalStyles />
                       <PreviewMode />
                       <PageWrapper {...{ locale }}>{children}</PageWrapper>
                     </GoogleOAuthProvider>
-                  </SkeletonGlobal>
-                </StyledComponentsRegistry>
-              </AuthenticationContextProvider>
-            </HistoryProvider>
-          </Suspense>
+                  </AuthenticationContextProvider>
+                </Suspense>
+              </SkeletonGlobal>
+            </StyledComponentsRegistry>
+          </ClientCache>
         </I18NextClientProvider>
         <RootScripts {...{ locale }} />
       </body>

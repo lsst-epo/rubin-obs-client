@@ -1,6 +1,6 @@
 "server-only";
 import { graphql } from "@/gql/gql";
-import queryAPI from "@/lib/api/client/query";
+import queryAPI from "@/lib/api/client/server";
 import { getSiteFromLocale } from "@/lib/helpers/site";
 import {
   CantoAssetMetadata,

@@ -5,7 +5,7 @@ import {
   SiteInfoFragmentFragmentDoc,
 } from "@/gql/graphql";
 import { fallbackLng } from "@/lib/i18n/settings";
-import queryAPI from "@/lib/api/client/query";
+import queryAPI from "@/lib/api/client/server";
 import { categoriesFragment } from "@/lib/api/fragments/categories";
 import { getSiteFromLocale } from "@/lib/helpers/site";
 import tags from "../client/tags";
@@ -31,6 +31,10 @@ export async function getGlobalData(locale = fallbackLng) {
     variables: { site },
     fetchOptions: { next: { tags: [tags.globals] } },
   });
+
+  if (error) {
+    throw new Error(error.message);
+  }
 
   const globals = data.globals
     ? data.globals.reduce(
