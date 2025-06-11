@@ -1,7 +1,7 @@
 "server-only";
 
 import { graphql } from "@/gql";
-import queryAPI from "@/lib/api/client/server";
+import queryAPI from "@/lib/api/client/query";
 import tags from "@/lib/api/client/tags";
 import { getSiteFromLocale } from "@/lib/helpers/site";
 import { getLocale } from "next-intl/server";

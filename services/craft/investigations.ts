@@ -1,7 +1,7 @@
 "server-only";
 
 import { gql } from "@urql/core";
-import queryAPI from "@/lib/api/client/server";
+import queryAPI from "@/lib/api/client/query";
 import { cantoSingleAsset } from "@/api/fragments/image";
 import { getSiteFromLocale } from "@/lib/helpers/site";
 import { getLocale } from "next-intl/server";

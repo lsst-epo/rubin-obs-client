@@ -3,7 +3,7 @@ import { redirect, RedirectType } from "next/navigation";
 import { env } from "@/env";
 import { graphql } from "@/gql/gql";
 import { fallbackLng } from "@/lib/i18n/settings";
-import queryAPI from "@/lib/api/client/server";
+import queryAPI from "@/lib/api/client/query";
 import { getLocaleString, getSiteFromLocale } from "@/lib/helpers/site";
 import previewSession from "@/services/sessions/preview";
 import { addLocaleUriSegment } from "@/lib/i18n";

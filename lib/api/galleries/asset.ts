@@ -1,7 +1,7 @@
 import { graphql } from "@/gql/gql";
 import { getLocale } from "next-intl/server";
 import sample from "lodash/sample";
-import queryAPI from "@/lib/api/client/server";
+import queryAPI from "@/lib/api/client/query";
 import { getSiteFromLocale } from "@/lib/helpers/site";
 import {
   DetailedAssetSchema,

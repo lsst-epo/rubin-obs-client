@@ -1,5 +1,5 @@
 import { gql } from "@urql/core";
-import queryAPI from "@/lib/api/client/server";
+import queryAPI from "@/lib/api/client/query";
 import { getSiteFromLocale } from "@/lib/helpers/site";
 import { fallbackLng } from "@/lib/i18n/settings";
 import { cantoSingleAsset, getImageFields } from "../fragments/image";

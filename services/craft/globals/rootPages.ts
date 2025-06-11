@@ -1,6 +1,6 @@
 "server-only";
 import { graphql, useFragment } from "@/gql";
-import queryAPI from "@/lib/api/client/server";
+import queryAPI from "@/lib/api/client/query";
 import { getSiteFromLocale } from "@/lib/helpers/site";
 import { getLocale } from "next-intl/server";
 

@@ -1,7 +1,7 @@
 import { gql } from "@urql/core";
 import { env } from "@/env";
 import { getSiteFromLocale } from "@/lib/helpers/site";
-import queryAPI from "@/lib/api/client/server";
+import queryAPI from "@/lib/api/client/query";
 import tags from "@/lib/api/client/tags";
 import { CRAFT_HOMEPAGE_URI } from "@/lib/constants";
 import { fallbackLng, languages } from "@/lib/i18n/settings";
