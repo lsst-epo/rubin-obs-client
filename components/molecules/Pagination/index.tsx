@@ -1,9 +1,9 @@
 "use client";
 import React, { FC } from "react";
 import Link from "next/link";
-import { Trans, useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
 import { useSearchParams } from "next/navigation";
+import { Trans, useTranslation } from "react-i18next";
+import styles from "./styles.module.css";
 
 interface PaginationProps {
   limit: number;
@@ -67,6 +67,7 @@ const Pagination: FC<PaginationProps> = ({
                   <Link
                     aria-current={page === currentPage ? "page" : false}
                     href={{ query: { ...query, page } }}
+                    prefetch={false}
                   >
                     {page}
                   </Link>
@@ -79,7 +80,11 @@ const Pagination: FC<PaginationProps> = ({
         </div>
         <div>
           {prev > 0 ? (
-            <Link rel="prev" href={{ query: { ...query, page: prev } }}>
+            <Link
+              rel="prev"
+              href={{ query: { ...query, page: prev } }}
+              prefetch={false}
+            >
               {t("pagination.previous")}
             </Link>
           ) : (
@@ -98,7 +103,11 @@ const Pagination: FC<PaginationProps> = ({
       <nav className={styles.navMobile} aria-label={t("pagination.label")}>
         <div>
           {prev > 0 ? (
-            <Link rel="prev" href={{ query: { ...query, page: prev } }}>
+            <Link
+              rel="prev"
+              href={{ query: { ...query, page: prev } }}
+              prefetch={false}
+            >
               &lt;&lt;
             </Link>
           ) : (

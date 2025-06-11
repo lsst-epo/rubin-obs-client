@@ -53,6 +53,7 @@ export default function Subnavigation({
                 className={`${baseClassName}__link`}
                 tabIndex={active ? 0 : -1}
                 onClick={close}
+                prefetch={false}
               >
                 {title}
               </Link>
