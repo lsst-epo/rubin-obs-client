@@ -25,7 +25,7 @@ const Hero: FunctionComponent<PropsWithChildren<HeroProps>> = ({
   return (
     <div data-cy="hero" className={clsx(styles.heroContainer, className)}>
       <Image
-        className={styles.heroContainer}
+        className={styles.heroImage}
         {...{ width, height, src, alt }}
         style={{
           "--Hero-object-position": `${focalPointX || 50}% ${
