@@ -19,7 +19,7 @@
   grid-template-columns: repeat(3, 1fr);
   gap: var(--size-spacing-s);
 
-  @include base.respond(functions.break(tablet)) {
+  @media (--tablet-max) {
     display: none;
   }
 
@@ -41,8 +41,7 @@
   & > div:last-child {
     justify-self: end;
   }
-
-  @include base.respond(functions.break(tablet) + 1, min) {
+  @media (--tablet) {
     display: none;
   }
 }
