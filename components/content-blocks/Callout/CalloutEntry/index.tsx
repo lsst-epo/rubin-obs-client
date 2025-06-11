@@ -4,10 +4,12 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { getSiteString, makeReleaseFeature } from "@/lib/utils";
 import { makeDateString } from "@/helpers/dates";
-import * as Styled from "./styles";
-import { Image } from "@rubin-epo/epo-react-lib";
+import Image from "@rubin-epo/epo-react-lib/Image";
 import { useRelease } from "@/lib/api/noirlabReleases";
 import { fallbackLng } from "@/lib/i18n/settings";
+import { Section } from "../styles";
+import * as Styled from "./styles";
+import styles from "./styles.module.css";
 
 const getDateString = (newsDate, eventStart, eventEnd, locale) => {
   if (newsDate) {
@@ -26,7 +28,7 @@ const getDateString = (newsDate, eventStart, eventEnd, locale) => {
   }
 };
 
-export default function CalloutEntry({ callout }) {
+const CalloutEntry = ({ callout }) => {
   const {
     t,
     i18n: { language = fallbackLng },
@@ -68,7 +70,8 @@ export default function CalloutEntry({ callout }) {
     hero?.[0];
 
   return (
-    <Styled.Section
+    <Section
+      className={styles.section}
       style={{ "--color-background-section": `var(--${backgroundColor})` }}
       data-dark-mode={
         backgroundColor.includes("invert") || backgroundColor.includes("black")
@@ -76,14 +79,16 @@ export default function CalloutEntry({ callout }) {
       $width="full"
       $overlay={false}
     >
-      <Styled.Inner $isImage={!!calloutImage}>
+      <Styled.Inner data-has-image={!!calloutImage}>
         {calloutImage && (
           <Styled.ImageWrapper>
             <Image role="presentation" image={calloutImage} />
             <Styled.ImageSticker>{type}</Styled.ImageSticker>
           </Styled.ImageWrapper>
         )}
-        <Styled.Heading id={titleId}>{title}</Styled.Heading>
+        <h2 className={styles.heading} id={titleId}>
+          {title}
+        </h2>
         {calloutDateString && (
           <Styled.Subheading className="t-heading-quaternary">
             {calloutDateString}
@@ -108,9 +113,11 @@ export default function CalloutEntry({ callout }) {
       {typeSlug === "news-post" && (
         <Styled.SharePopup title={title} url={url} />
       )}
-    </Styled.Section>
+    </Section>
   );
-}
+};
+
+CalloutEntry.displayName = "ContentBlock.Callout.Entry";
 
 CalloutEntry.propTypes = {
   callout: PropTypes.shape({
@@ -118,3 +125,5 @@ CalloutEntry.propTypes = {
     backgroundColor: PropTypes.string,
   }).isRequired,
 };
+
+export default CalloutEntry;

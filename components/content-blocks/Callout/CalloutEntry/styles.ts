@@ -7,27 +7,7 @@ import {
   respond,
   tokens,
 } from "@/styles/globalStyles";
-import { Text as CalloutText, Section as CalloutSection } from "../styles";
-
-const mobileMargins = () =>
-  `
-  margin-left: ${fluidScale(
-    "55px",
-    "0px",
-    tokens.BREAK_TABLET,
-    tokens.BREAK_MOBILE
-  )};
-  margin-right: ${fluidScale(
-    "55px",
-    "0px",
-    tokens.BREAK_TABLET,
-    tokens.BREAK_MOBILE
-  )};
-`;
-
-export const Section = styled(CalloutSection)`
-  position: relative;
-`;
+import { Text as CalloutText } from "../styles";
 
 export const Inner = styled.div`
   ${containerRegular()}
@@ -49,9 +29,7 @@ export const Inner = styled.div`
   text-decoration: none;
   transition: color 0.2s, background-color 0.2s;
 
-  ${({ $isImage }) =>
-    !$isImage &&
-    `
+  &[data-has-image="false"] {
     grid-template-areas:
       "image image"
       "title title"
@@ -61,11 +39,10 @@ export const Inner = styled.div`
     gap: 0;
     justify-content: center;
     text-align: center;
-  `}
+  }
 
   ${respond(
-    `
-    grid-template-areas:
+    `grid-template-areas:
       "image image"
       "title title"
       "subtitle subtitle"
@@ -78,21 +55,6 @@ export const Inner = styled.div`
   )}
 `;
 
-export const Heading = styled.h2`
-  grid-area: title;
-
-  ${respond(
-    ` ${mobileMargins()}
-      margin-top: ${fluidScale(
-        "43px",
-        "20px",
-        tokens.BREAK_TABLET,
-        tokens.BREAK_MOBILE
-      )};
-    `
-  )}
-`;
-
 export const Subheading = styled.div`
   grid-area: subtitle;
   margin-top: 0.727em;
@@ -100,7 +62,8 @@ export const Subheading = styled.div`
   font-weight: 700;
 
   ${respond(
-    ` ${mobileMargins()}
+    ` 
+  margin-inline: var(--size-margin-mobile);
       margin-top: 2px;
     `
   )}
@@ -117,7 +80,8 @@ export const Text = styled(CalloutText)`
   grid-area: text;
 
   ${respond(
-    ` ${mobileMargins()}
+    ` 
+  margin-inline: var(--size-margin-mobile);
       margin-top: 20px;
     `
   )}
@@ -139,7 +103,8 @@ export const ImageWrapper = styled.div`
   }
 
   ${respond(
-    ` ${mobileMargins()}
+    ` 
+  margin-inline: var(--size-margin-mobile);
       min-height: ${fluidScale(
         "368px",
         "190px",
@@ -174,7 +139,7 @@ export const ImageSticker = styled.div`
   )}
 `;
 
-export const Footer = styled.div`
+export const Footer = styled.div<{ $isImage: boolean }>`
   display: grid;
   grid-area: footer;
   grid-template-columns: max-content 1fr;
