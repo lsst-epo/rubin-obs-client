@@ -6,7 +6,7 @@ import {
   allPageBlocksFragment,
 } from "@/lib/api/fragments/content-blocks";
 import { getLinkFields, linkFragment } from "@/lib/api/fragments/link";
-import queryAPI from "@/lib/api/client/server";
+import queryAPI from "@/lib/api/client/query";
 import { CRAFT_HOMEPAGE_URI } from "@/lib/constants";
 
 export const getHomepage = async (locale: string) => {

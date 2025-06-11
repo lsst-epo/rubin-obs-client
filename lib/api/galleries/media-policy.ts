@@ -1,5 +1,5 @@
 import { graphql } from "@/gql/gql";
-import queryAPI from "@/lib/api/client/server";
+import queryAPI from "@/lib/api/client/query";
 import { getSiteFromLocale } from "@/lib/helpers/site";
 
 export const getMediaPolicyPage = async (locale: string) => {

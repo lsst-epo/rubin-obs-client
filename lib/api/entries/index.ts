@@ -1,6 +1,6 @@
 import { gql } from "@urql/core";
 import { env } from "@/env";
-import queryAPI from "@/lib/api/client/server";
+import queryAPI from "@/lib/api/client/query";
 import { getSiteFromLocale } from "@/lib/helpers/site";
 import { graphql } from "@/gql";
 

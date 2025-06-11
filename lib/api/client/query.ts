@@ -1,19 +1,31 @@
 "server-only";
 import { RequestInit } from "next/dist/server/web/spec-extension/request";
-import { createClient, fetchExchange, cacheExchange } from "@urql/next";
+import { createClient, fetchExchange, cacheExchange } from "@urql/core";
 import { registerUrql } from "@urql/next/rsc";
-import { retryExchange } from "@urql/exchange-retry";
-import type { AnyVariables, OperationResult } from "@urql/next";
+import { retryExchange, type RetryExchangeOptions } from "@urql/exchange-retry";
+import type { AnyVariables, DocumentInput, OperationResult } from "@urql/core";
 import merge from "lodash/merge";
+import { env } from "@/env";
 import previewSession from "@/services/sessions/preview";
-import { API_URL, options, QueryAPI } from ".";
+
+// None of these options have to be added, these are the default values.
+const options: RetryExchangeOptions = {
+  maxNumberAttempts: 3,
+};
+
+const API_URL = env.NEXT_PUBLIC_API_URL;
 
 const queryAPI = async <Query, Variables extends AnyVariables = AnyVariables>({
   query,
   variables,
   fetchOptions: inputFetchOptions,
   previewToken,
-}: QueryAPI<Query, Variables>): Promise<OperationResult<Query, Variables>> => {
+}: {
+  query: DocumentInput<Query, Variables>;
+  variables: Variables;
+  fetchOptions?: RequestInit;
+  previewToken?: string;
+}): Promise<OperationResult<Query, Variables>> => {
   const token = previewToken || previewSession().token();
   const defaultFetchOptions: RequestInit = {
     cache: "force-cache",

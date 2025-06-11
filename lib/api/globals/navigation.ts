@@ -1,7 +1,7 @@
 import z from "zod";
 import { graphql } from "@/gql/gql";
 import { fallbackLng } from "@/lib/i18n/settings";
-import queryAPI from "@/lib/api/client/server";
+import queryAPI from "@/lib/api/client/query";
 import { getSiteFromLocale } from "@/lib/helpers/site";
 import tags from "../client/tags";
 import { serverTranslation } from "@/lib/i18n";

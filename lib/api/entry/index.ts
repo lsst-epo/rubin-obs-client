@@ -1,5 +1,5 @@
 import { gql } from "@urql/core";
-import queryAPI from "@/lib/api/client/server";
+import queryAPI from "@/lib/api/client/query";
 import { fullBaseFieldsFragment } from "@/lib/api/fragments/shared";
 import { linkFragment } from "@/lib/api/fragments/link";
 import {

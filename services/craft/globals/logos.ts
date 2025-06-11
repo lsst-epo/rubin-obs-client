@@ -1,7 +1,7 @@
 "server-only";
 import { getImageProps } from "next/image";
 import { graphql } from "@/gql/gql";
-import queryAPI from "@/lib/api/client/server";
+import queryAPI from "@/lib/api/client/query";
 import { getSiteFromLocale } from "@/lib/helpers/site";
 import tags from "@/lib/api/client/tags";
 import { z } from "zod";
