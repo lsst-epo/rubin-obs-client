@@ -38,6 +38,29 @@ export default withNextIntl({
     ],
     minimumCacheTTL: 3600, // 1 hour
   },
+  async headers() {
+    return [
+      {
+        source: "/:all*",
+        has: [
+          {
+            type: "query",
+            key: "_rsc",
+          },
+        ],
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public,max-age=3600,s-maxage=3600,stale-while-revalidate",
+          },
+          {
+            key: "cache-control",
+            value: "public,max-age=3600,s-maxage=3600,stale-while-revalidate",
+          },
+        ],
+      },
+    ];
+  },
   experimental: {
     forceSwcTransforms: true,
   },
