@@ -58,7 +58,7 @@ const documents = {
     types.CtaGridBlockFragmentDoc,
   "\n  fragment firstLookWidgetsBlock on contentBlocks_firstLookWidgets_BlockType {\n    id\n    typeHandle\n    backgroundColor\n    filmReel {\n      ... on filmReel_item_BlockType {\n        text\n        share\n      }\n    }\n    firstLookWidget\n  }\n":
     types.FirstLookWidgetsBlockFragmentDoc,
-  '\n  fragment imageBlock on contentBlocks_image_BlockType {\n    id\n    typeHandle\n    caption\n    image: contentImage {\n      ... on contentImages_Asset {\n        altText\n        width\n        height\n        url @transform(mode: "fit", width: 900)\n      }\n    }\n    cantoImage: cantoAssetSingle {\n      ...CantoAssetDetailed\n    }\n    floatDirection\n    backgroundColor\n  }\n':
+  '\n  fragment imageBlock on contentBlocks_image_BlockType {\n    id\n    typeHandle\n    caption\n    image: contentImage {\n      ... on contentImages_Asset {\n        altText\n        width\n        height\n        url @transform(mode: "fit", width: 900)\n      }\n    }\n    cantoImage: cantoAssetSingle {\n      ...CantoAssetDetailed\n    }\n    floatDirection\n    backgroundColor\n    fullWidth\n  }\n':
     types.ImageBlockFragmentDoc,
   '\n  fragment imageBlockNews on contentBlocksNews_image_BlockType {\n    id\n    typeHandle\n    caption\n    image: contentImage {\n      ... on contentImages_Asset {\n        altText\n        width\n        height\n        url @transform(mode: "fit", width: 900)\n      }\n    }\n    cantoImage: cantoAssetSingle {\n      ...CantoAssetDetailed\n    }\n    floatDirection\n  }\n':
     types.ImageBlockNewsFragmentDoc,
@@ -256,8 +256,8 @@ export function graphql(
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: '\n  fragment imageBlock on contentBlocks_image_BlockType {\n    id\n    typeHandle\n    caption\n    image: contentImage {\n      ... on contentImages_Asset {\n        altText\n        width\n        height\n        url @transform(mode: "fit", width: 900)\n      }\n    }\n    cantoImage: cantoAssetSingle {\n      ...CantoAssetDetailed\n    }\n    floatDirection\n    backgroundColor\n  }\n'
-): (typeof documents)['\n  fragment imageBlock on contentBlocks_image_BlockType {\n    id\n    typeHandle\n    caption\n    image: contentImage {\n      ... on contentImages_Asset {\n        altText\n        width\n        height\n        url @transform(mode: "fit", width: 900)\n      }\n    }\n    cantoImage: cantoAssetSingle {\n      ...CantoAssetDetailed\n    }\n    floatDirection\n    backgroundColor\n  }\n'];
+  source: '\n  fragment imageBlock on contentBlocks_image_BlockType {\n    id\n    typeHandle\n    caption\n    image: contentImage {\n      ... on contentImages_Asset {\n        altText\n        width\n        height\n        url @transform(mode: "fit", width: 900)\n      }\n    }\n    cantoImage: cantoAssetSingle {\n      ...CantoAssetDetailed\n    }\n    floatDirection\n    backgroundColor\n    fullWidth\n  }\n'
+): (typeof documents)['\n  fragment imageBlock on contentBlocks_image_BlockType {\n    id\n    typeHandle\n    caption\n    image: contentImage {\n      ... on contentImages_Asset {\n        altText\n        width\n        height\n        url @transform(mode: "fit", width: 900)\n      }\n    }\n    cantoImage: cantoAssetSingle {\n      ...CantoAssetDetailed\n    }\n    floatDirection\n    backgroundColor\n    fullWidth\n  }\n'];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

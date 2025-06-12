@@ -5,6 +5,10 @@
     color-scheme: dark;
   }
 
+  &[data-float="false"] {
+    padding: var(--size-spacing-xs);
+  }
+
   &[data-float="true"] {
     padding: var(--size-spacing-s);
 

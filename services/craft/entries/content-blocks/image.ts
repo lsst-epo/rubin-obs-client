@@ -18,6 +18,7 @@ const ImageBlockFragment = graphql(`
     }
     floatDirection
     backgroundColor
+    fullWidth
   }
 `);
 
