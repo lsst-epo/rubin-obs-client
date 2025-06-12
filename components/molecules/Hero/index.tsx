@@ -1,5 +1,7 @@
 import { FunctionComponent, PropsWithChildren } from "react";
-import * as Styled from "./styles";
+import clsx from "clsx";
+import styles from "./styles.module.css";
+import Image from "next/image";
 
 interface HeroProps {
   data: Array<any>;
@@ -21,8 +23,9 @@ const Hero: FunctionComponent<PropsWithChildren<HeroProps>> = ({
   const { width, height, url: src, altText: alt = "" } = imageData;
 
   return (
-    <Styled.HeroContainer data-cy="hero" className={className}>
-      <Styled.HeroImage
+    <div data-cy="hero" className={clsx(styles.heroContainer, className)}>
+      <Image
+        className={styles.heroImage}
         {...{ width, height, src, alt }}
         style={{
           "--Hero-object-position": `${focalPointX || 50}% ${
@@ -35,7 +38,7 @@ const Hero: FunctionComponent<PropsWithChildren<HeroProps>> = ({
         quality={90}
       />
       {children}
-    </Styled.HeroContainer>
+    </div>
   );
 };
 
