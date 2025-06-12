@@ -1,0 +1,16 @@
+.heroContainer {
+  --Hero-height-fallback: utopia.clamp(300, 400);
+  position: relative;
+  width: 100%;
+  max-width: var(--size-width-center, 2000px);
+  height: var(--Hero-height, var(--Hero-height-fallback));
+  margin: 0 auto;
+  overflow: auto;
+}
+
+.heroImage {
+  /* stylelint-disable declaration-no-important */
+  height: 100% !important;
+  object-fit: cover;
+  object-position: var(--Hero-object-position, center);
+}
