@@ -8,7 +8,7 @@ const __dirname = dirname(__filename);
 
 const jiti = createJiti(__filename);
 
-await jiti.import("./env");
+const { env } = await jiti.import("./env");
 
 const withNextIntl = createNextIntlPlugin("./lib/i18n/request.ts");
 
@@ -39,27 +39,44 @@ export default withNextIntl({
     minimumCacheTTL: 3600, // 1 hour
   },
   async headers() {
-    return [
-      {
-        source: "/:all*",
-        has: [
-          {
-            type: "query",
-            key: "_rsc",
-          },
-        ],
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public,max-age=3600,s-maxage=3600,stale-while-revalidate",
-          },
-          {
-            key: "cache-control",
-            value: "public,max-age=3600,s-maxage=3600,stale-while-revalidate",
-          },
-        ],
-      },
-    ];
+    /** @type {Array<import("next/dist/lib/load-custom-routes").Header>} */
+    const headers = [];
+
+    /** @type {import("next/dist/lib/load-custom-routes").Header} */
+    const rscHeaders = {
+      source: "/:all*",
+      has: [
+        {
+          type: "query",
+          key: "_rsc",
+        },
+      ],
+      headers: [
+        {
+          key: "x-rsc-cache-enabled",
+          value: `${env.NEXT_RSC_CACHE_CONTROL}`,
+        },
+      ],
+    };
+
+    if (env.NEXT_RSC_CACHE_CONTROL) {
+      const cacheControl =
+        "public,max-age=3600,s-maxage=3600,stale-while-revalidate";
+      rscHeaders.headers.push(
+        {
+          key: "Cache-Control",
+          value: cacheControl,
+        },
+        {
+          key: "cache-control",
+          value: cacheControl,
+        }
+      );
+    }
+
+    headers.push(rscHeaders);
+
+    return headers;
   },
   experimental: {
     forceSwcTransforms: true,
