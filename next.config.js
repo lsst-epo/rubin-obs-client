@@ -40,7 +40,23 @@ export default withNextIntl({
   },
   async headers() {
     /** @type {Array<import("next/dist/lib/load-custom-routes").Header>} */
-    const headers = [];
+    const headers = [
+      {
+        source: "/:all*",
+        has: [
+          {
+            type: "cookie",
+            key: "__prerender_bypass",
+          },
+        ],
+        headers: [
+          {
+            key: "clear-site-data",
+            value: `"cache"`,
+          },
+        ],
+      },
+    ];
 
     /** @type {import("next/dist/lib/load-custom-routes").Header} */
     const rscHeaders = {
@@ -49,6 +65,12 @@ export default withNextIntl({
         {
           type: "query",
           key: "_rsc",
+        },
+      ],
+      missing: [
+        {
+          type: "cookie",
+          key: "__prerender_bypass",
         },
       ],
       headers: [
