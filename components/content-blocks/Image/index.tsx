@@ -25,6 +25,7 @@ const ImageContentBlock: FC<ImageContentBlockProps> = ({
     floatDirection,
     image: [image],
     cantoImage,
+    fullWidth,
   } = useFragment(ImageBlockFragmentDoc, props);
 
   const { data: cantoAsset } = z
@@ -53,13 +54,13 @@ const ImageContentBlock: FC<ImageContentBlockProps> = ({
     </Figure>
   );
 
-  return hasFloat ? (
+  return hasFloat || fullWidth ? (
     <section
       data-float={hasFloat}
-      data-float-direction={floatDirection}
+      data-float-direction={floatDirection ?? undefined}
       data-dark-mode={darkMode}
       style={{
-        "--direction-float": floatDirection,
+        "--direction-float": floatDirection ?? undefined,
         backgroundColor: backgroundColor && `var(--${backgroundColor})`,
       }}
       className={styles.container}
