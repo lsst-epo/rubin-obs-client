@@ -40,23 +40,7 @@ export default withNextIntl({
   },
   async headers() {
     /** @type {Array<import("next/dist/lib/load-custom-routes").Header>} */
-    const headers = [
-      {
-        source: "/:all*",
-        has: [
-          {
-            type: "cookie",
-            key: "__prerender_bypass",
-          },
-        ],
-        headers: [
-          {
-            key: "clear-site-data",
-            value: `"cache"`,
-          },
-        ],
-      },
-    ];
+    const headers = [];
 
     /** @type {import("next/dist/lib/load-custom-routes").Header} */
     const rscHeaders = {
@@ -82,6 +66,22 @@ export default withNextIntl({
     };
 
     if (env.NEXT_RSC_CACHE_CONTROL) {
+      headers.push({
+        source: "/:all*",
+        has: [
+          {
+            type: "cookie",
+            key: "__prerender_bypass",
+          },
+        ],
+        headers: [
+          {
+            key: "clear-site-data",
+            value: `"cache"`,
+          },
+        ],
+      });
+
       const cacheControl =
         "public,max-age=3600,s-maxage=3600,stale-while-revalidate";
       rscHeaders.headers.push(
