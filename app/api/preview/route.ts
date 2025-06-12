@@ -82,5 +82,5 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     env.NEXT_PUBLIC_BASE_URL
   );
 
-  redirect(pathname, RedirectType.replace);
+  redirect(`${pathname}?${Date.now()}`, RedirectType.replace);
 }

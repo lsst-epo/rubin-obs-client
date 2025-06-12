@@ -5,7 +5,7 @@
   max-width: var(--size-width-center, 2000px);
   height: var(--Hero-height, var(--Hero-height-fallback));
   margin: 0 auto;
-  overflow: auto;
+  overflow: hidden;
 }
 
 .heroImage {
