@@ -67,7 +67,7 @@ export default withNextIntl({
 
     if (env.NEXT_RSC_CACHE_CONTROL) {
       headers.push({
-        source: "/:all*",
+        source: "/api/preview",
         has: [
           {
             type: "cookie",
