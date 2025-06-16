@@ -1,0 +1,34 @@
+.header {
+  grid-area: text;
+  align-self: center;
+
+  & > * + * {
+    margin-block-start: var(--size-spacing-xs);
+  }
+}
+
+.links {
+  display: flex;
+  gap: var(--size-spacing-2xs);
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+
+  &[data-has-image="true"] {
+    justify-content: flex-start;
+  }
+}
+
+.link {
+  &:nth-of-type(even) {
+    --button-background-color: var(--color-rubin-purple-300, #583671);
+    --button-border-color: var(--color-rubin-purple-300, #583671);
+    --button-color: var(--white);
+  }
+}
+
+.richText {
+  & a {
+    overflow-wrap: anywhere;
+  }
+}
