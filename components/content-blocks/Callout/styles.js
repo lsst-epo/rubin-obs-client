@@ -1,10 +1,10 @@
+"use client";
 import { Image, MixedLink } from "@rubin-epo/epo-react-lib";
 import styled from "styled-components";
 import {
   fluidScale,
   containerFullBleed,
   containerRegular,
-  pxToEm,
   respond,
   tokens,
 } from "@/styles/globalStyles";
@@ -12,7 +12,6 @@ import { aButtonTheme } from "@/styles/mixins/appearance";
 
 const breakpointMin = tokens.BREAK_TABLET_MIN;
 const gap = "40px";
-const linkPadding = pxToEm("18px", "16px");
 
 export const Section = styled.section`
   background-color: var(--color-background-section);
@@ -79,24 +78,22 @@ export const Inner = styled.div`
 `;
 
 export const Header = styled.header`
-  flex-basis: calc(100% / 3);
   grid-area: text;
   align-self: center;
   ${(p) => p.$align === "end" && `align-self: end;`};
+
+  > * + * {
+    margin-block-start: var(--size-spacing-xs);
+  }
 `;
 
 export const Text = styled.div`
-  margin-top: 0.727em;
-
   a {
     overflow-wrap: anywhere;
   }
 `;
 
 export const StyledMixedLink = styled(MixedLink)`
-  margin-top: ${linkPadding};
-  margin-right: ${linkPadding};
-
   &:nth-of-type(even) {
     ${aButtonTheme("secondary")};
   }
