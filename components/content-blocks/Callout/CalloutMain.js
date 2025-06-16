@@ -1,14 +1,15 @@
-/* eslint-disable react/prop-types */
-"use client";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import { linksShape } from "@/shapes/link";
 import Wrapper from "./Wrapper";
-import { Header, Text, StyledMixedLink, StyledImage } from "./styles";
+import { StyledImage } from "./styles";
 import TempList from "@/components/dynamic/TempList";
-import { imageShaper } from "@/lib/utils";
+import { cantoToImageShape } from "@/lib/api/canto";
+import RichTextContent from "@/components/atomic/RichTextContent";
+import MixedLink from "@rubin-epo/epo-react-lib/MixedLink";
+import styles from "./styles.module.css";
 
-export default function CalloutMain({ callout }) {
+export default function CalloutMain({ callout, locale }) {
   const {
     dynamicComponent,
     header,
@@ -19,35 +20,34 @@ export default function CalloutMain({ callout }) {
     ...wrapperProps
   } = callout;
 
-  const calloutImage = imageShaper("EN", cantoAssetSingle[0]);
+  const calloutImage = cantoToImageShape(cantoAssetSingle[0], 800, locale);
+  const hasImage = !!calloutImage;
 
   return (
     <Wrapper
       {...wrapperProps}
       height={dynamicComponent === "alertStream" ? "slim" : ""}
-      isImage={!!calloutImage}
+      isImage={hasImage}
     >
-      <Header>
+      <header className={styles.header}>
         <h2>{header}</h2>
-        {text && (
-          <Text
-            className="c-content-rte"
-            dangerouslySetInnerHTML={{ __html: text }}
-          />
-        )}
-        {links.map((link, index) => (
-          <StyledMixedLink
-            {...link.mixedLink}
-            key={index}
-            className={clsx({
-              "c-buttonish": true,
-              "c-buttonish--educator":
-                wrapperProps.backgroundColor === "orange20",
-            })}
-          />
-        ))}
-      </Header>
-      {calloutImage && (
+        {text && <RichTextContent className={styles.richText} text={text} />}
+        <div className={styles.links} data-has-image={hasImage}>
+          {links.map((link, index) => (
+            <MixedLink
+              {...link.mixedLink}
+              key={index}
+              className={clsx({
+                [styles.link]: true,
+                "c-buttonish": true,
+                "c-buttonish--educator":
+                  wrapperProps.backgroundColor === "orange20",
+              })}
+            />
+          ))}
+        </div>
+      </header>
+      {hasImage && (
         <StyledImage
           role="presentation"
           image={calloutImage}
@@ -72,5 +72,8 @@ CalloutMain.propTypes = {
     order: PropTypes.string,
     width: PropTypes.string,
     ratio: PropTypes.string,
+    dynamicComponent: PropTypes.string,
   }).isRequired,
+
+  locale: PropTypes.string,
 };
