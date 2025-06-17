@@ -1,7 +1,7 @@
 import { Header, RouteHas } from "next/dist/lib/load-custom-routes";
 import { env } from "../env";
 
-const cacheControl = "public,max-age=3600,s-maxage=3600,stale-while-revalidate";
+const cacheControl = "public,max-age=0,s-maxage=3600,stale-while-revalidate";
 
 const excludeNonRSC = (): Array<RouteHas> => {
   const excluded = [
