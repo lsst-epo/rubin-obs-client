@@ -27,6 +27,7 @@
   "toggle-nav": "Alternar menú de navegación",
   "toggle-search": "Alternar búsqueda",
   "homepage": "Página principal",
+  "back": "Atrás",
   "contact-form": {
     "contact-us": "Contáctenos",
     "success": "Gracias. Hemos recibido su mensaje.",
@@ -84,7 +85,9 @@
     "technical": "Técnico",
     "special-event": "Evento especial",
     "scientific-event": "Evento científico",
-    "press-event": "Evento de prensa"
+    "press-event": "Evento de prensa",
+    "age_asc": "Más antiguo primero",
+    "age_desc": "Más nuevo primero"
   },
   "alert": {
     "solar-systems-found": "Sistemas solares encontrados",
@@ -138,6 +141,8 @@
     "download-video": "Descargar video",
     "extraLarge": "Extra grande",
     "file-size": "Tamaño del archivo",
+    "wallpapers": "Wallpapers",
+    "zoomable": "Ajustar el tamaño",
     "filters": {
       "results_one": "{{total}} resultado para",
       "results_other": "{{total}} resultados para",
@@ -375,7 +380,9 @@
     "email": "Correo",
     "email_subject": "¡Hola! Mira esta información de la web del Observatorio Rubin: {{title}}",
     "facebook_quote": "¡Hola! Mira esta información de la web del Observatorio Rubin: {{title}}",
-    "twitter_title": "¡Hola! Mira esta información de la web del Observatorio Rubin: {{title}}"
+    "twitter_title": "¡Hola! Mira esta información de la web del Observatorio Rubin: {{title}}",
+    "callout_cta": "¡Compártelo!",
+    "callout_text": "¡Cuéntale a todos que acaba de comenzar una nueva era para la astronomía!"
   },
   "summit_dashboard": {
     "unit_localization": {
@@ -384,5 +391,20 @@
       "east_abbr": "E",
       "west_abbr": "O"
     }
+  },
+  "first_look": {
+    "icon_group": {
+      "asteroids": "Asteroides",
+      "galaxies": "Galaxias",
+      "stars": "Estrellas",
+      "tnos": "TNO"
+    }
+  },
+  "preview_mode": {
+    "disable": "Desactivar",
+    "is_enabled": "Modo de vista previa activado"
+  },
+  "scroll_carousel": {
+    "label": "Ir a diapositiva {{value}}"
   }
 }
