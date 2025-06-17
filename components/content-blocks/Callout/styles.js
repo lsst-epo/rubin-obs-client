@@ -8,10 +8,9 @@ import {
   respond,
   tokens,
 } from "@/styles/globalStyles";
-import { aButtonTheme } from "@/styles/mixins/appearance";
 
 const breakpointMin = tokens.BREAK_TABLET_MIN;
-const gap = "40px";
+const gap = "var(--size-spacing-l)";
 
 export const Section = styled.section`
   background-color: var(--color-background-section);
@@ -32,8 +31,8 @@ export const Inner = styled.div`
   /* stylelint-disable named-grid-areas-no-invalid */
   grid-template-areas: ${(p) =>
     p.$order === "text" ? `"text image"` : `"image text"`};
-  /* stylelint-enable named-grid-areas-no-invalid */
   ${(p) => `grid-template-columns: ${p.$ratio}% 1fr;`}
+  /* stylelint-enable named-grid-areas-no-invalid */
   gap: ${gap};
   min-height: 360px;
   padding-top: ${fluidScale("50px", "30px")};
@@ -95,7 +94,9 @@ export const Text = styled.div`
 
 export const StyledMixedLink = styled(MixedLink)`
   &:nth-of-type(even) {
-    ${aButtonTheme("secondary")};
+    --button-background-color: var(--color-rubin-purple-300, #583671);
+    --button-border-color: var(--color-rubin-purple-300, #583671);
+    --button-color: var(--white);
   }
 `;
 

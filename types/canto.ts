@@ -14,6 +14,7 @@ export interface CantoImage {
   width: string;
   height: string;
   metadata: CantoAssetAdditional;
+  additional?: CantoAssetAdditional;
 }
 
 export interface CantoDetailedAsset {
