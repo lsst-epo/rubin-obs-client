@@ -2,7 +2,7 @@ import { FC, PropsWithChildren } from "react";
 import { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import { OpenGraph } from "next/dist/lib/metadata/types/opengraph-types";
-import striptags from "striptags";
+import { striptags } from "@/lib/utils/strings";
 import { generateNOIRLabMetadata } from "@/lib/api/noirlab";
 import { resizeCantoImage } from "@/lib/api/canto/resize";
 import {

@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import striptags from "striptags";
+import { striptags } from "@/lib/utils/strings";
 import { useTranslation } from "react-i18next";
 import { Grid } from "@rubin-epo/epo-react-lib";
 import DataList from "@/dynamic/DataList";
