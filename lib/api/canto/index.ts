@@ -65,7 +65,7 @@ export const cantoToImageShape = (
 ): ImageShape | undefined => {
   if (!data) return undefined;
 
-  const { metadata, url } = data;
+  const { metadata, additional, url } = data;
   const { directUrlPreview, directUrlOriginal } = url;
 
   const width = parseInt(data.width);
@@ -80,7 +80,7 @@ export const cantoToImageShape = (
       url: src,
       width: Math.round(width * scale),
       height: Math.round(height * scale),
-      altText: assetAlt(metadata, locale),
+      altText: assetAlt(additional ?? metadata, locale),
     };
   } else {
     return {
@@ -88,7 +88,7 @@ export const cantoToImageShape = (
       url: directUrlOriginal,
       width,
       height,
-      altText: assetAlt(metadata, locale),
+      altText: assetAlt(additional ?? metadata, locale),
     };
   }
 };
@@ -98,10 +98,11 @@ export const cantoToImageProps = (
   options: { locale?: string; usePreviewUrl?: boolean } = {}
 ): ImageProps => {
   const { locale = fallbackLng, usePreviewUrl = false } = options;
-  const { metadata, url, width, height } = data;
+  const { metadata, additional, url, width, height } = data;
   const { directUrlOriginal, directUrlPreview } = url;
 
-  const { altText: alt = "" } = getAssetMetadata(metadata, locale) || {};
+  const { altText: alt = "" } =
+    getAssetMetadata(additional ?? metadata, locale) || {};
 
   return {
     src: usePreviewUrl ? directUrlPreview : directUrlOriginal,

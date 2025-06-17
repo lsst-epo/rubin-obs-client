@@ -15,7 +15,9 @@
   justify-content: center;
 
   &[data-has-image="true"] {
-    justify-content: flex-start;
+    @media (--tablet) {
+      justify-content: flex-start;
+    }
   }
 }
 
@@ -30,5 +32,20 @@
 .richText {
   & a {
     overflow-wrap: anywhere;
+  }
+}
+
+.image {
+  grid-area: image;
+  place-self: center center;
+  width: 100%;
+
+  @media (--tablet-max) {
+    width: auto;
+    max-height: 200px;
+
+    &[data-pad-image="true"] {
+      padding: var(--size-spacing-l);
+    }
   }
 }
