@@ -46,7 +46,7 @@ export async function getEntriesByLocale(locale: string) {
   `);
   const { data } = await queryAPI({
     query,
-    variables: { site, level: isDev ? 1 : 0, limit: 10 },
+    variables: { site, level: isDev ? 1 : 0, limit: 25 },
   });
 
   if (!data) return [];

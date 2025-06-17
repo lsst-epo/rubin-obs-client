@@ -1,5 +1,7 @@
 import { fallbackLng } from "../i18n/settings";
 
+const DEFAULT_SYSTEM_TIME = "America/Los_Angeles";
+
 export const checkIfBetweenDates = (startDate: Date, endDate: Date) => {
   if (!startDate || !endDate) {
     return true;
@@ -45,7 +47,7 @@ export const addTimezoneOffset = ({
       hour12: false,
       hour: "2-digit",
       minute: "2-digit",
-      timeZone: timezone,
+      timeZone: timezone ?? DEFAULT_SYSTEM_TIME,
     })
     .split(":");
   const localHour = parseInt(hour);
@@ -60,7 +62,7 @@ export const addTimezoneOffset = ({
     hour: "2-digit",
     minute: "2-digit",
     second: "2-digit",
-    timeZone: timezone,
+    timeZone: timezone ?? DEFAULT_SYSTEM_TIME,
   })
     .formatToParts(date)
     .reduce((prev, curr) => {
@@ -98,7 +100,7 @@ export const formatStructuredDate = ({
       year: "numeric",
       month: "2-digit",
       day: "2-digit",
-      timeZone: timezone,
+      timeZone: timezone ?? DEFAULT_SYSTEM_TIME,
     })
       .formatToParts(date)
       .reduce((prev, curr) => {
