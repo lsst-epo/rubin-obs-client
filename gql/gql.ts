@@ -54,7 +54,7 @@ const documents = {
     types.SitemapDataDocument,
   "\n  fragment accordionGroupBlock on contentBlocks_accordionGroup_BlockType {\n    id\n    typeHandle\n    header\n    backgroundColor\n    accordions: children {\n      ... on contentBlocks_accordion_BlockType {\n        id\n        text\n        header\n      }\n    }\n  }\n":
     types.AccordionGroupBlockFragmentDoc,
-  "\n  fragment calloutMain on callouts_callout_Entry {\n    backgroundColor\n    dynamicComponent\n    header\n    cantoAssetSingle {\n      ...CantoAssetMetadata\n    }\n    links {\n      ...LinksFragment\n    }\n    padImage\n    order\n    ratio\n    text\n    calloutType: typeHandle\n    width\n  }\n":
+  "\n  fragment CalloutMain on callouts_callout_Entry {\n    backgroundColor\n    dynamicComponent\n    header\n    cantoAssetSingle {\n      ...CantoAssetMetadata\n    }\n    links {\n      ...LinksFragment\n    }\n    padImage\n    order\n    ratio\n    text\n    calloutType: typeHandle\n    width\n  }\n":
     types.CalloutMainFragmentDoc,
   '\n  fragment ctaGridBlock on contentBlocks_ctaGrid_BlockType {\n    typeHandle\n    id\n    header\n    backgroundColor\n    fullWidth\n    mixedLink {\n      ...MixedLinkFragment\n    }\n    items: children {\n      ... on contentBlocks_cta_BlockType {\n        id\n        contentImage {\n          ... on contentImages_Asset {\n            altText\n            width\n            height\n            url @transform(mode: "crop", width: 572, height: 316)\n          }\n        }\n        mixedLink {\n          ...MixedLinkFragment\n        }\n      }\n    }\n  }\n':
     types.CtaGridBlockFragmentDoc,
@@ -246,8 +246,8 @@ export function graphql(
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: "\n  fragment calloutMain on callouts_callout_Entry {\n    backgroundColor\n    dynamicComponent\n    header\n    cantoAssetSingle {\n      ...CantoAssetMetadata\n    }\n    links {\n      ...LinksFragment\n    }\n    padImage\n    order\n    ratio\n    text\n    calloutType: typeHandle\n    width\n  }\n"
-): (typeof documents)["\n  fragment calloutMain on callouts_callout_Entry {\n    backgroundColor\n    dynamicComponent\n    header\n    cantoAssetSingle {\n      ...CantoAssetMetadata\n    }\n    links {\n      ...LinksFragment\n    }\n    padImage\n    order\n    ratio\n    text\n    calloutType: typeHandle\n    width\n  }\n"];
+  source: "\n  fragment CalloutMain on callouts_callout_Entry {\n    backgroundColor\n    dynamicComponent\n    header\n    cantoAssetSingle {\n      ...CantoAssetMetadata\n    }\n    links {\n      ...LinksFragment\n    }\n    padImage\n    order\n    ratio\n    text\n    calloutType: typeHandle\n    width\n  }\n"
+): (typeof documents)["\n  fragment CalloutMain on callouts_callout_Entry {\n    backgroundColor\n    dynamicComponent\n    header\n    cantoAssetSingle {\n      ...CantoAssetMetadata\n    }\n    links {\n      ...LinksFragment\n    }\n    padImage\n    order\n    ratio\n    text\n    calloutType: typeHandle\n    width\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
