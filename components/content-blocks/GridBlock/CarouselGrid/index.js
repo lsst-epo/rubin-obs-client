@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import PropTypes from "prop-types";
-import striptags from "striptags";
+import { striptags } from "@/lib/utils/strings";
 import chunk from "lodash/chunk";
 import Tile from "@/atomic/Tile";
 import Loader from "@/atomic/Loader";

@@ -1,7 +1,6 @@
 "use client";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import striptags from "striptags";
 import { useTranslation } from "react-i18next";
 import {
   CarouselLayout as Carousel,
@@ -11,7 +10,7 @@ import {
 import { SlideTile } from "@/components/atomic";
 import { normalizeItemData, useListForBlock } from "@/lib/utils";
 
-import { makeTruncatedString } from "@/lib/utils/strings";
+import { makeTruncatedString, striptags } from "@/lib/utils/strings";
 import { mixedLinkShape } from "@/components/shapes/link";
 
 const SlideBlock = ({

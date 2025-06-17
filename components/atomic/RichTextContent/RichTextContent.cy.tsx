@@ -1,5 +1,5 @@
 import RichTextContent from "./index";
-import striptags from "striptags";
+import { striptags } from "@/lib/utils/strings";
 import { mount } from "cypress/react18";
 
 const props = {

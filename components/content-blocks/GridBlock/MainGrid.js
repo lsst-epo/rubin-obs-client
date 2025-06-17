@@ -1,6 +1,6 @@
 "use client";
 import PropTypes from "prop-types";
-import striptags from "striptags";
+import { striptags } from "@/lib/utils/strings";
 import { normalizeItemData, useList } from "@/lib/utils";
 import { Grid } from "@rubin-epo/epo-react-lib";
 import Tile from "@/atomic/Tile";
