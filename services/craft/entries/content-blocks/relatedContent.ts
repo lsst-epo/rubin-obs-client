@@ -1,0 +1,86 @@
+import { graphql } from "@/gql";
+
+const RelatedContentBlockFragment = graphql(`
+  fragment relatedContentBlock on contentBlocks_NeoField {
+    ... on contentBlocks_relatedContent_BlockType {
+      id
+      header
+      mixedLink {
+        ...MixedLinkFragment
+      }
+      backgroundColor
+      numberOfItems
+      typeHandle
+      items: children {
+        ... on contentBlocks_relatedContentItem_BlockType {
+          entry: pagePostEntry {
+            ... on pages_pages_Entry {
+              id
+              title
+              uri
+              description
+              featuredImage: cantoAssetSingle {
+                ...CantoAssetMetadata
+              }
+              hero {
+                ... on heroes_Asset {
+                  altText
+                  width
+                  height
+                  url @transform(mode: "crop", width: 900, height: 550)
+                }
+              }
+              image: hero {
+                ... on heroes_Asset {
+                  altText
+                  width
+                  height
+                  url @transform(mode: "crop", width: 900, height: 550)
+                }
+              }
+            }
+            ... on news_post_Entry {
+              id
+              title
+              uri
+              pressReleaseId
+              description: teaser
+              hero {
+                ... on heroes_Asset {
+                  altText
+                  width
+                  height
+                  url @transform(mode: "crop", width: 900, height: 550)
+                }
+              }
+              image: hero {
+                ... on heroes_Asset {
+                  altText
+                  width
+                  height
+                  url @transform(mode: "crop", width: 900, height: 550)
+                }
+              }
+            }
+            ... on investigations_investigation_Entry {
+              id
+              title
+              uri
+              uri
+              status: investigationStatus
+              description: investigationDescription
+              cantoAssetSingle {
+                ...CantoAssetMetadata
+              }
+              landingPage {
+                uri
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`);
+
+export default RelatedContentBlockFragment;
