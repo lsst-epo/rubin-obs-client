@@ -127,15 +127,15 @@ const SearchList: FC<SearchListProps> = ({
           {entries?.length > 0 && (
             <Grid columns={1} tablet={1} showFeature={false}>
               {entries.map((entry) => {
-                const { cantoAssetSingle } = entry;
+                const { cantoAssetSingle, featuredImage } = entry;
 
                 return entry.id ? (
                   <Tile
                     key={entry.id}
                     image={
-                      cantoAssetSingle?.length > 0
-                        ? cantoToImageShape(cantoAssetSingle[0], 240, locale)
-                        : entry.image?.[0]
+                      cantoToImageShape(featuredImage?.[0], 240, locale) ||
+                      cantoToImageShape(cantoAssetSingle?.[0], 240, locale) ||
+                      entry.image?.[0]
                     }
                     link={entry.uri}
                     pretitle={makePretitle(entry)}
