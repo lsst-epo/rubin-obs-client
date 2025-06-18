@@ -1,7 +1,7 @@
 import { graphql } from "@/gql";
 
 const ScheduleBlockFragment = graphql(`
-  fragment simpleTableBlock on contentBlocks_NeoField {
+  fragment simpleTableBlock on contentBlocks_simpleTable_BlockType {
     ... on contentBlocks_simpleTable_BlockType {
       id
       typeHandle
