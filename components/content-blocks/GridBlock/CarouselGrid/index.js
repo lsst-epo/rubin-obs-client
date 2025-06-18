@@ -9,6 +9,7 @@ import { Grid } from "@rubin-epo/epo-react-lib";
 import { useReleases } from "@/lib/api/noirlabReleases";
 import { normalizeItemData, makeReleaseFeature, useList } from "@/lib/utils";
 import * as Styled from "./styles";
+import { cantoToImageShape } from "@/lib/api/canto";
 
 function CarouselGrid({ items = [], limit, listTypeId, pageId }) {
   const section = "pages";
@@ -44,6 +45,7 @@ function CarouselGrid({ items = [], limit, listTypeId, pageId }) {
         image,
         hero,
         images: releaseImages,
+        featuredImage,
         mixedLink,
         externalUrl,
         uri,
@@ -53,6 +55,7 @@ function CarouselGrid({ items = [], limit, listTypeId, pageId }) {
           <Tile
             key={id}
             image={
+              cantoToImageShape(featuredImage?.[0], 800) ||
               image?.[0] ||
               makeReleaseFeature(releaseImages, "screen640")?.[0] ||
               hero?.[0]
