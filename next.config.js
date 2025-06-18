@@ -8,6 +8,7 @@ const __dirname = dirname(__filename);
 
 const jiti = createJiti(__filename);
 
+const { env } = await jiti.import("./env");
 const headers = await jiti.import("./config/headers", { default: true });
 
 const withNextIntl = createNextIntlPlugin("./lib/i18n/request.ts");
@@ -36,7 +37,7 @@ export default withNextIntl({
         hostname: "noirlab.edu",
       },
     ],
-    minimumCacheTTL: 3600, // 1 hour
+    minimumCacheTTL: env.NEXT_IMAGE_MINIMUM_CACHE_TTL,
   },
   headers,
   experimental: {
