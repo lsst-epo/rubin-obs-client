@@ -70,8 +70,6 @@ const documents = {
     types.KeyNumbersBlockFragmentDoc,
   "\n  fragment linkedImageListBlock on contentBlocks_linkedImageList_BlockType {\n    id\n    typeHandle\n    description\n    header\n    variant: linkedImageListVariant\n    linkedImageList {\n      ... on linkedImageList_linkedImage_BlockType {\n        id\n        image {\n          ...CantoAssetMetadata\n        }\n        link: imageLink {\n          customText\n          target\n          text\n          title\n          type\n          url\n        }\n      }\n    }\n  }\n":
     types.LinkedImageListBlockFragmentDoc,
-  "\n  fragment simpleTableBlock on contentBlocks_simpleTable_BlockType {\n    ... on contentBlocks_simpleTable_BlockType {\n      id\n      typeHandle\n      sites\n      simpleTable {\n        ... on simpleTable_tableRow_BlockType {\n          id\n          rowTitle\n          rowContent\n          rowColor\n        }\n      }\n    }\n  }\n":
-    types.SimpleTableBlockFragmentDoc,
   "\n  fragment shareBlock on contentBlocks_share_BlockType {\n    id\n    typeHandle\n    backgroundColor\n    shareTitle\n    shareVariant\n    text\n  }\n":
     types.ShareBlockFragmentDoc,
   "\n  fragment skyviewerBlock on contentBlocks_skyviewer_BlockType {\n    id\n    embedTitle\n    typeHandle\n    captionRichText\n    dec\n    fov\n    ra\n    fullWidth\n    backgroundColor\n  }\n":
@@ -292,12 +290,6 @@ export function graphql(
 export function graphql(
   source: "\n  fragment linkedImageListBlock on contentBlocks_linkedImageList_BlockType {\n    id\n    typeHandle\n    description\n    header\n    variant: linkedImageListVariant\n    linkedImageList {\n      ... on linkedImageList_linkedImage_BlockType {\n        id\n        image {\n          ...CantoAssetMetadata\n        }\n        link: imageLink {\n          customText\n          target\n          text\n          title\n          type\n          url\n        }\n      }\n    }\n  }\n"
 ): (typeof documents)["\n  fragment linkedImageListBlock on contentBlocks_linkedImageList_BlockType {\n    id\n    typeHandle\n    description\n    header\n    variant: linkedImageListVariant\n    linkedImageList {\n      ... on linkedImageList_linkedImage_BlockType {\n        id\n        image {\n          ...CantoAssetMetadata\n        }\n        link: imageLink {\n          customText\n          target\n          text\n          title\n          type\n          url\n        }\n      }\n    }\n  }\n"];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(
-  source: "\n  fragment simpleTableBlock on contentBlocks_simpleTable_BlockType {\n    ... on contentBlocks_simpleTable_BlockType {\n      id\n      typeHandle\n      sites\n      simpleTable {\n        ... on simpleTable_tableRow_BlockType {\n          id\n          rowTitle\n          rowContent\n          rowColor\n        }\n      }\n    }\n  }\n"
-): (typeof documents)["\n  fragment simpleTableBlock on contentBlocks_simpleTable_BlockType {\n    ... on contentBlocks_simpleTable_BlockType {\n      id\n      typeHandle\n      sites\n      simpleTable {\n        ... on simpleTable_tableRow_BlockType {\n          id\n          rowTitle\n          rowContent\n          rowColor\n        }\n      }\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
