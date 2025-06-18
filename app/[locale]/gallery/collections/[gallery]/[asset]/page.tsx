@@ -1,4 +1,5 @@
 import { ComponentType, FunctionComponent } from "react";
+import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { env } from "@/env";
 import { getAssetFromGallery } from "@/lib/api/galleries/asset";
@@ -20,7 +21,7 @@ import LinkedPosts from "@/components/organisms/gallery/metadata/LinkedPosts";
 import CantoDownload from "@/components/organisms/gallery/CantoDownload";
 import BackToGallery from "@/components/organisms/gallery/BackToGallery";
 import DocumentInfo from "@/components/molecules/DocumentInfo";
-import { setRequestLocale } from "next-intl/server";
+import RichTextContent from "@/components/atomic/RichTextContent";
 
 const assetComponent: Record<SupportedCantoAssetScheme, ComponentType<any>> = {
   image: CantoImage,
@@ -107,7 +108,7 @@ const GalleryAsset: FunctionComponent<GalleryAssetProps> = async ({
           {scheme === "document" && (
             <DocumentInfo {...{ locale, title, scheme, dateCreated }} />
           )}
-          <div>{assetCaption(additional, locale)}</div>
+          <RichTextContent text={assetCaption(additional, locale)} />
         </>
       }
       credit={
