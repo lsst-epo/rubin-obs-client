@@ -5,7 +5,7 @@ import AsideImage from "@/components/molecules/Aside/Image";
 import { cantoToImageProps } from "@/lib/api/canto";
 import { assetTitle } from "@/lib/api/canto/metadata";
 import { getGalleryForAsset } from "@/lib/api/galleries/asset";
-import { addLocaleUriSegment } from "@/lib/i18n";
+import { getPathname } from "@/lib/i18n/navigation";
 
 interface GalleryAssetProps {
   asset: any;
@@ -22,16 +22,18 @@ const GalleryAssetContent: FC<GalleryAssetContentProps> = async ({
   image,
   caption,
 }) => {
+  const locale = await getLocale();
   const uri = await getGalleryForAsset(id);
   const link = uri
-    ? { href: addLocaleUriSegment(await getLocale(), `${uri}/${id}`) }
+    ? { href: getPathname({ href: `/${uri}/${id}`, locale }) }
     : undefined;
 
   return <AsideImage title={caption} {...{ image, link }} />;
 };
 
-const GalleryAsset: FC<GalleryAssetProps> = ({ asset }) => {
-  const image = cantoToImageProps(asset);
+const GalleryAsset: FC<GalleryAssetProps> = async ({ asset }) => {
+  const locale = await getLocale();
+  const image = cantoToImageProps(asset, { usePreviewUrl: true, locale });
   const caption = assetTitle(asset.metadata);
 
   if (!image) return null;
