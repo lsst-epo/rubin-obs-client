@@ -2,7 +2,8 @@ import PropTypes from "prop-types";
 import CalloutTwoTone from "./CalloutTwoTone";
 import CalloutMain from "./CalloutMain";
 import CalloutQuote from "./CalloutQuote";
-import CalloutEntry from "./CalloutEntry";
+import CalloutEvent from "./CalloutEvent";
+import CalloutNews from "./CalloutNews";
 
 export default function CalloutContentBlock({ callout: calloutArray }) {
   if (!calloutArray?.length) return null;
@@ -17,10 +18,10 @@ export default function CalloutContentBlock({ callout: calloutArray }) {
       return <CalloutQuote callout={callout} />;
 
     case "calloutNews":
-      return <CalloutEntry callout={callout} />;
+      return <CalloutNews callout={callout} />;
 
     case "calloutEvent":
-      return <CalloutEntry callout={callout} />;
+      return <CalloutEvent callout={callout} />;
 
     default:
       return <CalloutMain callout={callout} />;

@@ -6,6 +6,7 @@ import {
   ReleasesService,
 } from "@/services/noirlab";
 import { Locale } from "@/lib/i18n/settings";
+import { type ImageShape } from "@rubin-epo/epo-react-lib/Image";
 
 export const NOIRLabServices = {
   "news-post": AnnouncementsService.announcementsRetrieve,
@@ -103,3 +104,26 @@ export const generateNOIRLabMetadata = async (
 
   return {};
 };
+
+export function makeReleaseFeature(
+  images: Array<ImageMini>,
+  format: keyof ImageMini["formats"] = "screen"
+): Array<ImageShape> | undefined {
+  if (!images) return;
+  const feature = images[0];
+  if (!feature) return;
+
+  const { title, height, width, formats } = feature;
+  const url = formats[format];
+
+  if (!url) return;
+
+  return [
+    {
+      altText: title,
+      url,
+      height: height ?? undefined,
+      width: width ?? undefined,
+    },
+  ];
+}

@@ -7,7 +7,8 @@ import Tile from "@/atomic/Tile";
 import Loader from "@/atomic/Loader";
 import { Grid } from "@rubin-epo/epo-react-lib";
 import { useReleases } from "@/lib/api/noirlabReleases";
-import { normalizeItemData, makeReleaseFeature, useList } from "@/lib/utils";
+import { makeReleaseFeature } from "@/lib/api/noirlab";
+import { normalizeItemData, useList } from "@/lib/utils";
 import * as Styled from "./styles";
 import { cantoToImageShape } from "@/lib/api/canto";
 
