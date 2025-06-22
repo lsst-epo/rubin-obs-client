@@ -1,8 +1,15 @@
 .container {
+  color: var(--color-font-primary);
   color: light-dark(var(--color-font-primary), var(--color-font-invert));
 
   &[data-dark-mode="true"] {
     color-scheme: dark;
+
+    @supports not (
+      color: light-dark(var(--color-font-primary), var(--color-font-invert))
+    ) {
+      color: var(--color-font-invert);
+    }
   }
 
   &[data-float="false"] {
