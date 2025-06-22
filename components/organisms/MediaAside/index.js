@@ -9,6 +9,7 @@ import AsideSection from "@/components/molecules/Aside/Section";
 import TagList from "@/components/molecules/TagList";
 import AsideImage from "@/components/molecules/Aside/Image";
 import GalleryAsset from "./GalleryAsset";
+import styles from "./styles.module.css";
 
 export default async function MediaAside({
   manualAssets,
@@ -57,9 +58,9 @@ export default async function MediaAside({
           {manualAssets.map((a, i) => {
             if (a.assetHeader) {
               return (
-                <h3 key={i}>
-                  {a.assetHeader}{" "}
+                <h3 className={styles.manualDocHeader} key={i}>
                   {manualDoc === true && <IconComposer icon="Doc" />}
+                  {a.assetHeader}
                 </h3>
               );
             } else if (a.textLink?.length > 0) {
