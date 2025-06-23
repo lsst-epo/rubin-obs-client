@@ -41,6 +41,8 @@ const attachRSCHeaders = (headers: Array<Header>) => {
         type: "cookie",
         key: "__prerender_bypass",
       },
+      { type: "query", key: "secret" },
+      { type: "query", key: "uri" },
       ...excludeNonRSC(),
     ],
     headers: [
