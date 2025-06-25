@@ -13,6 +13,7 @@
     "static:build": "next build --debug",
     "static:export": "next export",
     "start": "next start -p 8080",
+    "debug": "node --max_old_space_size=4096 ./node_modules/next/dist/bin/next dev",
     "bs": "next build && next start -p 3000",
     "prepare": "husky install",
     "precommit": "lint-staged",
