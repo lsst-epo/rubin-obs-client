@@ -34,7 +34,7 @@ const GalleryAssetContent: FC<GalleryAssetContentProps> = async ({
 const GalleryAsset: FC<GalleryAssetProps> = async ({ asset }) => {
   const locale = await getLocale();
   const image = cantoToImageProps(asset, { usePreviewUrl: true, locale });
-  const caption = assetTitle(asset.metadata);
+  const caption = assetTitle(asset.metadata, locale);
 
   if (!image) return null;
 
