@@ -1,0 +1,15 @@
+fragment peopleBlock on contentBlocks_peopleBlock_BlockType {
+  id
+  typeHandle
+  peopleLayout
+  people {
+    ... on people_person_Entry {
+      id
+      name: title
+      personAffiliation
+      cantoAssetSingle {
+        ...CantoAssetSingle
+      }
+    }
+  }
+}

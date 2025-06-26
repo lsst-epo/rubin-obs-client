@@ -1,0 +1,25 @@
+fragment publicationsListBlock on contentBlocks_publicationsList_BlockType {
+  id
+  typeHandle
+  header
+  publications: publication {
+    ... on publications_publication_Entry {
+      id
+      title
+      authorPub
+      creditPub
+      date
+      externalUrl
+    }
+  }
+  mixedLink {
+    customText
+    text
+    title
+    type
+    url
+    element {
+      uri
+    }
+  }
+}

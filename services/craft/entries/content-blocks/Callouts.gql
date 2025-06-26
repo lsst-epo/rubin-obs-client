@@ -1,0 +1,121 @@
+fragment calloutBlock on contentBlocks_callout_BlockType {
+  id
+  typeHandle
+  callout {
+    ...CalloutMain
+    ... on callouts_calloutTwoTone_Entry {
+      backgroundColor
+      backgroundImage: cantoAssetSingle {
+        ...CantoAssetSingle
+      }
+      captionRichText
+      header
+      image: contentImage {
+        ... on contentImages_Asset {
+          altText
+          width
+          height
+          url @transform(mode: "crop", width: 800, height: 550)
+        }
+      }
+      links {
+        ...LinksFragment
+      }
+      text
+      calloutType: typeHandle
+    }
+    ... on callouts_calloutQuote_Entry {
+      calloutType: typeHandle
+      header
+      text
+      colorScheme
+      links {
+        ...LinksFragment
+      }
+      quote
+      attribution
+      imageQuote {
+        ... on contentImages_Asset {
+          altText
+          width
+          height
+          url @transform(mode: "crop", width: 492, height: 492)
+        }
+      }
+    }
+    ... on callouts_calloutNews_Entry {
+      calloutType: typeHandle
+      backgroundColor
+      id
+      entry: newsEntry {
+        ... on news_post_Entry {
+          title
+          url
+          date
+          dateCreated
+          description: teaser
+          pressReleaseId
+          hero {
+            ... on heroes_Asset {
+              altText
+              width
+              height
+              url @transform(mode: "crop", width: 800, height: 550)
+            }
+          }
+          image: hero {
+            ... on heroes_Asset {
+              altText
+              width
+              height
+              url @transform(mode: "crop", width: 800, height: 550)
+            }
+          }
+          entryType: postType {
+            title
+            slug
+          }
+          postType {
+            id
+            title
+            slug
+          }
+        }
+      }
+    }
+    ... on callouts_calloutEvent_Entry {
+      calloutType: typeHandle
+      backgroundColor
+      id
+      entry: eventEntry {
+        ... on events_events_Entry {
+          title
+          url
+          startDate
+          endDate: date
+          description
+          hero {
+            ... on heroes_Asset {
+              altText
+              width
+              height
+              url @transform(mode: "crop", width: 800, height: 550)
+            }
+          }
+          image: hero {
+            ... on heroes_Asset {
+              altText
+              width
+              height
+              url @transform(mode: "crop", width: 800, height: 550)
+            }
+          }
+          entryType: eventType {
+            title
+            slug
+          }
+        }
+      }
+    }
+  }
+}

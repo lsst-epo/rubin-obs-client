@@ -1,0 +1,8 @@
+fragment tableGroupBlock on contentBlocks_tableGroup_BlockType {
+  id
+  typeHandle
+  sites
+  items: children {
+    ...complexTableBlock
+  }
+}

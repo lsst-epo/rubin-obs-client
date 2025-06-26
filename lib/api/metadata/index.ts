@@ -1,13 +1,12 @@
-import { gql } from "@urql/core";
 import queryAPI from "@/lib/api/client/query";
 import { getSiteFromLocale } from "@/lib/helpers/site";
 import { fallbackLng } from "@/lib/i18n/settings";
-import { cantoSingleAsset, getImageFields } from "../fragments/image";
+import { graphql } from "@/gql";
 
 export async function getEntryMetadataByUri(uri: string, locale = fallbackLng) {
   const site = getSiteFromLocale(locale);
 
-  const query = gql`
+  const query = graphql(`
     query EntryMetadata($site: [String], $uri: [String]) {
       entry(site: $site, uri: $uri) {
         ... on homepage_homepage_Entry {
@@ -18,8 +17,11 @@ export async function getEntryMetadataByUri(uri: string, locale = fallbackLng) {
           title
           description
           image: hero {
-            ...on heroes_Asset {
-              ${getImageFields("crop", 1200, 630)}
+            ... on heroes_Asset {
+              altText
+              width
+              height
+              url @transform(mode: "crop", width: 1200, height: 630)
             }
           }
         }
@@ -27,8 +29,11 @@ export async function getEntryMetadataByUri(uri: string, locale = fallbackLng) {
           title
           description
           image: hero {
-            ...on heroes_Asset {
-              ${getImageFields("crop", 1200, 630)}
+            ... on heroes_Asset {
+              altText
+              width
+              height
+              url @transform(mode: "crop", width: 1200, height: 630)
             }
           }
         }
@@ -52,16 +57,21 @@ export async function getEntryMetadataByUri(uri: string, locale = fallbackLng) {
           description: teaser
           title
           image: hero {
-            ...on heroes_Asset {
-              ${getImageFields("crop", 1200, 630)}
+            ... on heroes_Asset {
+              altText
+              width
+              height
+              url @transform(mode: "crop", width: 1200, height: 630)
             }
           }
         }
-        ...on glossaryTerms_glossaryTerm_Entry {
+        ... on glossaryTerms_glossaryTerm_Entry {
           title
-          ${cantoSingleAsset}
+          cantoAssetSingle {
+            ...CantoAssetSingle
+          }
         }
-        ...on searchResults_searchResults_Entry {
+        ... on searchResults_searchResults_Entry {
           title
         }
         ... on slideshows_slideshow_Entry {
@@ -69,22 +79,28 @@ export async function getEntryMetadataByUri(uri: string, locale = fallbackLng) {
           description: richTextDescription
           image: representativeAssetVariant {
             ... on assetVariants_Asset {
-              ${getImageFields("crop", 600, 400)}
+              altText
+              width
+              height
+              url @transform(mode: "crop", width: 600, height: 400)
             }
           }
         }
-        ...on staffProfiles_staffProfiles_Entry {
+        ... on staffProfiles_staffProfiles_Entry {
           title
           description: pullQuote
           image: staffPortrait {
-          ...on staffProfiles_Asset {
-          ${getImageFields("crop", 800, 600)}
+            ... on staffProfiles_Asset {
+              altText
+              width
+              height
+              url @transform(mode: "crop", width: 800, height: 600)
             }
           }
         }
       }
     }
-  `;
+  `);
 
   const { data } = await queryAPI({
     query,
@@ -98,7 +114,7 @@ export async function getBreadcrumbsById(id: number, locale: string) {
   if (!id) return null;
   const site = getSiteFromLocale(locale);
 
-  const query = gql`
+  const query = graphql(`
     query EntryBreadcrumbs($site: [String], $id: Int) {
       entries(section: "pages", site: $site, ancestorOf: $id) {
         id
@@ -106,10 +122,10 @@ export async function getBreadcrumbsById(id: number, locale: string) {
         uri
       }
     }
-  `;
+  `);
   const { data } = await queryAPI({
     query,
     variables: { site, id },
   });
-  return data.entries;
+  return data?.entries;
 }

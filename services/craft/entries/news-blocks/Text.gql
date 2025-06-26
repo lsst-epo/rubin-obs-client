@@ -1,0 +1,5 @@
+fragment textBlockNews on contentBlocksNews_text_BlockType {
+  typeHandle
+  id
+  text
+}

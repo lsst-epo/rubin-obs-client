@@ -1,0 +1,38 @@
+fragment relatedContentBlockNews on contentBlocksNews_relatedContent_BlockType {
+  id
+  header
+  numberOfItems
+  typeHandle
+  items: children {
+    ... on contentBlocksNews_relatedContentItem_BlockType {
+      entry: pagePostEntry {
+        id
+        title
+        uri
+        ... on pages_pages_Entry {
+          description
+          image: hero {
+            ... on heroes_Asset {
+              altText
+              width
+              height
+              url @transform(mode: "crop", width: 900, height: 550)
+            }
+          }
+        }
+        ... on news_post_Entry {
+          date
+          description: teaser
+          image: hero {
+            ... on heroes_Asset {
+              altText
+              width
+              height
+              url @transform(mode: "crop", width: 900, height: 550)
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+fragment ContentBlocksNews on contentBlocksNews_NeoField {
+  ...textBlockNews
+  ...imageBlockNews
+  ...linkBlockNews
+  ...contactBlockNews
+  ...relatedContentBlockNews
+  ...videoBlockNews
+  ...skyviewerNewsBlock
+}

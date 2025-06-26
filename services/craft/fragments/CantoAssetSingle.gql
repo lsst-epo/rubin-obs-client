@@ -1,0 +1,22 @@
+fragment CantoAssetSingle on CantoDamAssetInterface {
+  url {
+    directUrlPreview
+    directUrlOriginal
+    PNG
+    HighJPG
+    LowJPG
+    preview
+  }
+  width
+  height
+  metadata: additional {
+    AltTextEN
+    AltTextES
+    CaptionEN
+    CaptionES
+    Credit
+  }
+  fileInfo: metadata {
+    fileType: FileTypeExtension
+  }
+}

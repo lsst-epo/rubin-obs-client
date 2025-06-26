@@ -1,0 +1,11 @@
+fragment contactBlock on contentBlocks_contact_BlockType {
+  id
+  typeHandle
+  header
+  linkText
+  pageEntry {
+    id
+    uri
+    title
+  }
+}

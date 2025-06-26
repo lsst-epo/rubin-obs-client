@@ -1,0 +1,31 @@
+fragment ContentBlocks on contentBlocks_NeoField {
+  ...accordionGroupBlock
+  ...calloutBlock
+  ...complexTableBlock
+  ...contactBlock
+  ...ctaGridBlock
+  ...imageGridBlock
+  ...imageBlock
+  ...investigationGridBlock
+  ...linkBlock
+  ...newsBlock
+  ...relatedContentBlock
+  ...scheduleBlock
+  ...shareBlock
+  ...simpleTableBlock
+  ...slideBlock
+  ...staffGridBlock
+  ...tableGroupBlock
+  ...textBlock
+  ...videoBlock
+  ...downloadListBlock
+  ...embedBlock
+  ...summitStatusBlock
+  ...publicationsListBlock
+  ...peopleBlock
+  ...keyNumbersBlock
+  ...skyviewerBlock
+  ...linkedImageListBlock
+  ...imageComparisonBlock
+  ...firstLookWidgetsBlock
+}

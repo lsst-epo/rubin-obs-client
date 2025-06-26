@@ -1,0 +1,20 @@
+fragment complexTableBlock on contentBlocks_complexTable_BlockType {
+  id
+  typeHandle
+  plainText
+  verticalAlignment
+  sites
+  complexTable {
+    ... on complexTable_BlockType {
+      tableRow {
+        ... on tableRow_tableCell_BlockType {
+          id
+          cellWidth
+          cellBackground
+          cellContent
+          hasFlexibleCellWidth
+        }
+      }
+    }
+  }
+}

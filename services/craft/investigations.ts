@@ -1,10 +1,9 @@
 "server-only";
 
-import { gql } from "@urql/core";
 import queryAPI from "@/lib/api/client/query";
-import { cantoSingleAsset } from "@/api/fragments/image";
 import { getSiteFromLocale } from "@/lib/helpers/site";
 import { getLocale } from "next-intl/server";
+import { graphql } from "@/gql";
 
 export async function addRelatedInvestigation(entryData) {
   if (!entryData || !entryData.id) return null;
@@ -23,9 +22,13 @@ export async function getRelatedInvestigation(entryData) {
   // Check if this page or any of it's ancestors have a related investigation
   const ids = [id].concat(ancestors.map((a) => a.id));
 
-  const query = gql(`
+  const query = graphql(`
     query RelatedInvestigation($site: [String], $ids: [QueryArgument]) {
-      investigation: entry(type: "investigation", landingPage: $ids, site: $site) {
+      investigation: entry(
+        type: "investigation"
+        landingPage: $ids
+        site: $site
+      ) {
         sectionHandle
         ... on investigations_investigation_Entry {
           uri
@@ -41,7 +44,9 @@ export async function getRelatedInvestigation(entryData) {
               title
             }
           }
-          ${cantoSingleAsset}
+          cantoAssetSingle {
+            ...CantoAssetMetadata
+          }
         }
       }
     }

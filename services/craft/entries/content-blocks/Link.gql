@@ -1,0 +1,14 @@
+fragment linkBlock on contentBlocks_link_BlockType {
+  id
+  typeHandle
+  mixedLink {
+    customText
+    text
+    title
+    type
+    url
+    element {
+      uri
+    }
+  }
+}
