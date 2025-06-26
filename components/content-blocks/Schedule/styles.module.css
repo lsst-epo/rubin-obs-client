@@ -1,0 +1,32 @@
+.date {
+ font-weight: bold;
+}
+ 
+.description {
+  margin: var(--size-spacing-l) 0;
+}
+
+.schedule {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: var(--size-spacing-l);
+  margin-top: var(--size-spacing-l);
+
+  > .row {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    grid-gap: var(--size-spacing-m);
+
+    &.bold {
+      font-weight: bold;
+    }
+  }
+}
+
+.row {
+  list-style-type: none;
+
+  &[data-bold="true"] {
+    font-weight: bold;
+  }
+}

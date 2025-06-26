@@ -3,7 +3,7 @@ import { FragmentType, useFragment } from "@/gql";
 import { ScheduleBlockFragmentDoc } from "@/gql/graphql";
 import { makeDateString } from "@/helpers/dates";
 import { Container } from "@rubin-epo/epo-react-lib";
-import styled from "styled-components";
+import styles from "./styles.module.css";
 
 interface ScheduleProps extends FragmentType<typeof ScheduleBlockFragmentDoc> {
   locale: string;
@@ -19,48 +19,25 @@ const ScheduleBlock: FC<ScheduleProps> = ({ locale, ...props }) => {
 
   return scheduleRows ? (
     <Container>
-      <Date>{localizedDate}</Date>
-      <Description>{description}</Description>
-      <Schedule>
+      <div className={styles.date}>{localizedDate}</div>
+      <div className={styles.description}>{description}</div>
+      <ol className={styles.schedule}>
         {scheduleRows?.map((row, i) => {
           if (row?.__typename === "contentBlocks_scheduleRow_BlockType") {
             return (
-              <div key={i} className={row.bold ? "bold" : ""}>
+              <li key={i} data-bold={row.bold} className={styles.row}>
                 <div>
                   {row.startTime}
                   {row.endTime && "-" + row.endTime}
                 </div>
                 <div> {row.description}</div>
-              </div>
+              </li>
             );
           } else return null;
         })}
-      </Schedule>
+      </ol>
     </Container>
   ) : null;
 };
-
-const Date = styled.div`
-  font-weight: bold;
-`;
-
-const Description = styled.div`
-  margin: 2rem 0;
-`;
-
-const Schedule = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 2rem;
-  margin-top: 2rem;
-  > div {
-    display: grid;
-    grid-template-columns: max-content 1fr;
-    grid-gap: 30px;
-    &.bold {
-      font-weight: bold;
-    }
-  }
-`;
 
 export default ScheduleBlock;
