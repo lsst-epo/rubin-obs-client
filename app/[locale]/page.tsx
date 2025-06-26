@@ -17,7 +17,7 @@ const RootPage: FunctionComponent<LocaleProps> = async ({
   ]);
 
   // Handle 404 if there is no data
-  if (!data?.id) {
+  if (!data || data.__typename !== "homepage_homepage_Entry" || !data.id) {
     notFound();
   }
 

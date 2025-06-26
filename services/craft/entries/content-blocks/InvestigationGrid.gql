@@ -1,0 +1,27 @@
+fragment investigationGridBlock on contentBlocks_investigationGrid_BlockType {
+  typeHandle
+  id
+  header
+  items: children {
+    ... on contentBlocks_investigationCta_BlockType {
+      id
+      useExternalLink
+      investigation {
+        ... on investigations_investigation_Entry {
+          id
+          uri
+          title
+          externalUrl: externalUrlTranslatable
+          status: investigationStatus
+          cantoAssetSingle {
+            ...CantoAssetSingle
+          }
+          landingPage {
+            uri
+            title
+          }
+        }
+      }
+    }
+  }
+}

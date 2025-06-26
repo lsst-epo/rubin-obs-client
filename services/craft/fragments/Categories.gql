@@ -1,0 +1,6 @@
+fragment CategoriesFragment on CategoryInterface {
+  id
+  slug
+  groupHandle
+  title
+}

@@ -1,0 +1,29 @@
+fragment imageGridBlock on contentBlocks_imageGrid_BlockType {
+  typeHandle
+  id
+  header
+  mixedLink {
+    customText
+    text
+    title
+    type
+    url
+    element {
+      uri
+    }
+  }
+  items: children {
+    ... on contentBlocks_imageGridItem_BlockType {
+      id
+      header
+      contentImage {
+        ... on contentImages_Asset {
+          altText
+          width
+          height
+          url @transform(mode: "crop", width: 572, height: 316)
+        }
+      }
+    }
+  }
+}

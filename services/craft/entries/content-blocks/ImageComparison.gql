@@ -1,0 +1,9 @@
+fragment imageComparisonBlock on contentBlocks_imageComparison_BlockType {
+  id
+  typeHandle
+  backgroundColor
+  caption: captionRichText
+  images: multipleCantoAssets {
+    ...CantoAssetMetadata
+  }
+}

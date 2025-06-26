@@ -1,0 +1,36 @@
+fragment staffGridBlock on contentBlocks_staffGrid_BlockType {
+  id
+  header
+  mixedLink {
+    customText
+    text
+    title
+    type
+    url
+    element {
+      uri
+    }
+  }
+  numberOfItems
+  typeHandle
+  items: children {
+    ... on contentBlocks_staffGridItem_BlockType {
+      entry: staffEntry {
+        ... on staffProfiles_staffProfiles_Entry {
+          id
+          title
+          plainText
+          image: staffPortrait {
+            ... on staffProfiles_Asset {
+              altText
+              width
+              height
+              url @transform(mode: "crop", width: 400, height: 400)
+            }
+          }
+          uri
+        }
+      }
+    }
+  }
+}

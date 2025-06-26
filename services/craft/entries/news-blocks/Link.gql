@@ -1,0 +1,6 @@
+fragment linkBlockNews on contentBlocksNews_linkedAsset_BlockType {
+  id
+  typeHandle
+  url: externalUrl
+  text: header
+}

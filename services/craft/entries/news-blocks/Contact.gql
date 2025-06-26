@@ -1,0 +1,24 @@
+fragment contactBlockNews on contentBlocksNews_contactStaff_BlockType {
+  id
+  typeHandle
+  header
+  staffEntry {
+    title
+    ... on staffProfiles_staffProfiles_Entry {
+      email
+      phoneNumber {
+        number
+      }
+      plainText
+      subLocation {
+        ... on location_Category {
+          address
+          city
+          country
+          state
+          title
+        }
+      }
+    }
+  }
+}
