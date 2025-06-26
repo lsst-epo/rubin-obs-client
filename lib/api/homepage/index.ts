@@ -1,30 +1,26 @@
-import { gql } from "@urql/core";
 import { getSiteFromLocale } from "@/lib/helpers/site";
-import { getImageFields } from "@/lib/api/fragments/image";
-import {
-  allPageBlocks,
-  allPageBlocksFragment,
-} from "@/lib/api/fragments/content-blocks";
-import { getLinkFields, linkFragment } from "@/lib/api/fragments/link";
+
 import queryAPI from "@/lib/api/client/query";
 import { CRAFT_HOMEPAGE_URI } from "@/lib/constants";
+import { graphql } from "@/gql";
 
 export const getHomepage = async (locale: string) => {
   const site = getSiteFromLocale(locale);
 
-  const query = gql`
-    ${linkFragment}
-    ${allPageBlocksFragment}
+  const query = graphql(`
     query Homepage($site: [String], $uri: [String]) {
       entry(site: $site, uri: $uri) {
-        ...on homepage_homepage_Entry {
+        ... on homepage_homepage_Entry {
           title
           id
           description
           pageType
           hero {
-            ...on heroes_Asset {
-              ${getImageFields("crop", 1920, 1067)}
+            ... on heroes_Asset {
+              altText
+              width
+              height
+              url @transform(mode: "crop", width: 1920, height: 1067)
             }
           }
           focalPointX
@@ -42,14 +38,17 @@ export const getHomepage = async (locale: string) => {
                 }
               }
               hero {
-                ...on heroes_Asset {
-                  ${getImageFields("crop", 1920, 1067)}
+                ... on heroes_Asset {
+                  altText
+                  width
+                  height
+                  url @transform(mode: "crop", width: 1920, height: 1067)
                 }
               }
             }
           }
           contentBlocks {
-            ${allPageBlocks}
+            ...ContentBlocks
           }
           customHero {
             ... on customHero_customHero_BlockType {
@@ -57,13 +56,23 @@ export const getHomepage = async (locale: string) => {
               flag
               header
               mixedLink {
-                ${getLinkFields()}
+                customText
+                text
+                title
+                type
+                url
+                element {
+                  uri
+                }
               }
               teaser
               title
               image {
                 ... on heroes_Asset {
-                  ${getImageFields("crop", 1920, 1067)}
+                  altText
+                  width
+                  height
+                  url @transform(mode: "crop", width: 1920, height: 1067)
                 }
               }
             }
@@ -71,7 +80,7 @@ export const getHomepage = async (locale: string) => {
         }
       }
     }
-  `;
+  `);
 
   const { data } = await queryAPI({
     query,

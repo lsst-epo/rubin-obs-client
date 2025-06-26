@@ -1,0 +1,11 @@
+fragment BaseFields on EntryInterface {
+  id
+  uri
+  title
+  language
+  typeHandle
+  localized {
+    uri
+    language
+  }
+}

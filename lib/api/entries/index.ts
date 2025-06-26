@@ -1,4 +1,3 @@
-import { gql } from "@urql/core";
 import { env } from "@/env";
 import queryAPI from "@/lib/api/client/query";
 import { getSiteFromLocale } from "@/lib/helpers/site";
@@ -72,17 +71,17 @@ export async function getEntriesByLocale(locale: string) {
 
 export async function getEntrySectionByUri(uri = "__home__", locale: string) {
   const site = getSiteFromLocale(locale);
-  const query = gql`
+  const query = graphql(`
     query getEntrySectionByUri($site: [String], $uri: [String]) {
       entry(uri: $uri, site: $site) {
         sectionHandle
         typeHandle
       }
     }
-  `;
+  `);
   const { data } = await queryAPI({
     query,
     variables: { uri: decodeURI(uri), site },
   });
-  return data.entry;
+  return data?.entry;
 }

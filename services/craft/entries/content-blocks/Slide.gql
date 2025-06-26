@@ -1,0 +1,37 @@
+fragment slideBlock on contentBlocks_slideBlock_BlockType {
+  id
+  header
+  mixedLink {
+    customText
+    text
+    title
+    type
+    url
+    element {
+      uri
+    }
+  }
+  numberOfItems
+  dynamicComponent
+  typeHandle
+  items: children {
+    ... on contentBlocks_slide_BlockType {
+      staffEntry {
+        id
+        title
+        uri
+        ... on staffProfiles_staffProfiles_Entry {
+          description: staffBio
+          image: staffPortrait {
+            ... on staffProfiles_Asset {
+              altText
+              width
+              height
+              url @transform(mode: "crop", width: 400, height: 400)
+            }
+          }
+        }
+      }
+    }
+  }
+}

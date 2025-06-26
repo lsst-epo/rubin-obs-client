@@ -69,9 +69,9 @@ export async function generateMetadata(
     );
   }
 
-  const { entry } = await getEntryMetadataByUri(uri, locale);
+  const metadata = await getEntryMetadataByUri(uri, locale);
 
-  if (!entry) {
+  if (!metadata?.entry) {
     notFound();
   }
 
@@ -82,7 +82,7 @@ export async function generateMetadata(
     cantoAssetSingle = [],
     pressReleaseId,
     postType,
-  } = entry;
+  } = metadata.entry as any;
 
   const previousImages = (await parent).openGraph?.images || [];
 

@@ -1,0 +1,8 @@
+fragment shareBlock on contentBlocks_share_BlockType {
+  id
+  typeHandle
+  backgroundColor
+  shareTitle
+  shareVariant
+  text
+}

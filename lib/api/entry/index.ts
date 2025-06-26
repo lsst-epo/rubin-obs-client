@@ -1,21 +1,19 @@
 import { gql } from "@urql/core";
 import queryAPI from "@/lib/api/client/query";
 import { fullBaseFieldsFragment } from "@/lib/api/fragments/shared";
-import { linkFragment } from "@/lib/api/fragments/link";
-import {
-  allPageBlocksFragment,
-  allNewsBlocksFragment,
-} from "@/api/fragments/content-blocks";
-import { eventFragmentFull } from "@/lib/api/fragments/event";
-import { newsPostFragmentFull } from "@/lib/api/fragments/news-post";
-import { pageFragmentFull, redirectFragment } from "@/lib/api/fragments/page";
-import { staffProfileFragmentFull } from "@/lib/api/fragments/staff-profile";
+import { allPageBlocksFragment } from "@/api/fragments/content-blocks";
+import { redirectFragment } from "@/lib/api/fragments/page";
 import { glossaryTermFragmentFull } from "@/lib/api/fragments/glossary-term";
 import { studentPageFragmentFull } from "@/lib/api/fragments/student-page";
-import { educatorPageFragmentFull } from "@/lib/api/fragments/educator-page";
 import { investigationLandingPageFragmentFull } from "@/lib/api/fragments/investigation-landing-page";
 import { addRelatedInvestigation } from "@/services/craft/investigations";
 import { getSiteFromLocale } from "../../helpers/site";
+import { cantoAssetSingleFragment } from "../fragments/image";
+import NewsPostQuery from "@/services/craft/entries/news";
+import StaffProfileQuery from "@/services/craft/entries/staffProfile";
+import PageQuery from "@/services/craft/entries/page";
+import EducatorPageQuery from "@/services/craft/entries/educatorPage";
+import EventQuery from "@/services/craft/entries/event";
 
 function entryQueryify(fragment: string) {
   return gql`
@@ -36,55 +34,31 @@ function entryQueryify(fragment: string) {
 function getPageQueryFragmentsByType(type: string) {
   switch (type) {
     case "pages":
-      return gql`
-        ${linkFragment}
-        ${allPageBlocksFragment}
-        ${pageFragmentFull}
-        ${entryQueryify(`...pageFragmentFull`)}
-      `;
+      return PageQuery;
     case "educatorPages":
-      return gql`
-        ${linkFragment}
-        ${allPageBlocksFragment}
-        ${educatorPageFragmentFull}
-        ${entryQueryify(`...educatorPageFragmentFull`)}
-      `;
+      return EducatorPageQuery;
     case "studentPages":
       return gql`
-        ${linkFragment}
+        ${cantoAssetSingleFragment}
         ${allPageBlocksFragment}
         ${studentPageFragmentFull}
         ${entryQueryify(`...studentPageFragmentFull`)}
       `;
     case "investigationLandingPage":
       return gql`
-        ${linkFragment}
+        ${cantoAssetSingleFragment}
         ${allPageBlocksFragment}
         ${investigationLandingPageFragmentFull}
         ${entryQueryify(`...investigationLandingPageFragmentFull`)}
       `;
     case "redirectPage":
       return gql`
+        ${cantoAssetSingleFragment}
         ${redirectFragment}
         ${entryQueryify(`...redirectFragment`)}
       `;
     default:
-      return gql`
-        ${linkFragment}
-        ${allPageBlocksFragment}
-        ${pageFragmentFull}
-        ${studentPageFragmentFull}
-        ${educatorPageFragmentFull}
-        ${investigationLandingPageFragmentFull}
-        ${redirectFragment}
-        ${entryQueryify(`
-          ...pageFragmentFull
-          ...studentPageFragmentFull
-          ...educatorPageFragmentFull
-          ...investigationLandingPageFragmentFull
-          ...redirectFragment
-        `)}
-      `;
+      return PageQuery;
   }
 }
 
@@ -98,24 +72,11 @@ function getQueryFragments(
     case "pages":
       return getPageQueryFragmentsByType(type);
     case "news":
-      return gql`
-        ${allNewsBlocksFragment}
-        ${newsPostFragmentFull}
-        ${entryQueryify(`...newsPostFragmentFull`)}
-      `;
+      return NewsPostQuery;
     case "events":
-      return gql`
-        ${linkFragment}
-        ${allPageBlocksFragment}
-        ${eventFragmentFull}
-        ${entryQueryify(`...eventFragmentFull`)}
-      `;
+      return EventQuery;
     case "staffProfiles":
-      return gql`
-        ${allNewsBlocksFragment}
-        ${staffProfileFragmentFull}
-        ${entryQueryify(`...staffProfileFragmentFull`)}
-      `;
+      return StaffProfileQuery;
     case "glossaryTerms":
       return gql`
         ${glossaryTermFragmentFull}
@@ -123,25 +84,13 @@ function getQueryFragments(
       `;
     default:
       return gql`
-        ${linkFragment}
         ${allPageBlocksFragment}
-        ${allNewsBlocksFragment}
-        ${eventFragmentFull}
-        ${newsPostFragmentFull}
-        ${pageFragmentFull}
         ${studentPageFragmentFull}
-        ${staffProfileFragmentFull}
         ${glossaryTermFragmentFull}
-        ${educatorPageFragmentFull}
         ${investigationLandingPageFragmentFull}
         ${redirectFragment}
         ${entryQueryify(`
-          ...eventFragmentFull
-          ...newsPostFragmentFull
-          ...pageFragmentFull
           ...studentPageFragmentFull
-          ...educatorPageFragmentFull
-          ...staffProfileFragmentFull
           ...glossaryTermFragmentFull
           ...investigationLandingPageFragmentFull
           ...redirectFragment

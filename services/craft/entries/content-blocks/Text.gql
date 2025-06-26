@@ -1,0 +1,6 @@
+fragment textBlock on contentBlocks_text_BlockType {
+  id
+  typeHandle
+  backgroundColor
+  text
+}

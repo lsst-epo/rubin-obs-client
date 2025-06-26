@@ -1,0 +1,6 @@
+fragment videoBlockNews on contentBlocksNews_video_BlockType {
+  id
+  typeHandle
+  caption
+  url: externalUrlTranslatable
+}

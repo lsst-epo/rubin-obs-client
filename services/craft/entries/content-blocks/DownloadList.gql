@@ -1,0 +1,18 @@
+fragment downloadListBlock on contentBlocks_downloadList_BlockType {
+  id
+  typeHandle
+  assetsList {
+    ... on assetsList_item_BlockType {
+      id
+      typeHandle
+      linkText
+      assetSingle {
+        id
+        kind
+        filename
+        url
+        size
+      }
+    }
+  }
+}

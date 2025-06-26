@@ -1,0 +1,5 @@
+fragment summitStatusBlock on contentBlocks_summitStatus_BlockType {
+  id
+  typeHandle
+  summitStatusLayout
+}

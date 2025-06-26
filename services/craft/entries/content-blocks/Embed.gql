@@ -1,0 +1,8 @@
+fragment embedBlock on contentBlocks_iframe_BlockType {
+  id
+  typeHandle
+  embedTitle
+  fullWidth
+  embedCode
+  embedUrl: externalUrl
+}
