@@ -1,13 +1,8 @@
 "use client";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import {
-  makeReleaseFeature,
-  normalizeItemData,
-  useGlobalData,
-  useList,
-} from "@/lib/utils";
-
+import { normalizeItemData, useGlobalData, useList } from "@/lib/utils";
+import { makeReleaseFeature } from "@/lib/api/noirlab";
 import { makeTruncatedString } from "@/lib/utils/strings";
 
 import { makeDateString } from "@/helpers/dates";

@@ -1,0 +1,40 @@
+fragment CalloutNews on callouts_calloutNews_Entry {
+  calloutType: typeHandle
+  backgroundColor
+  id
+  entry: newsEntry {
+    ... on news_post_Entry {
+      title
+      url
+      date
+      dateCreated
+      description: teaser
+      pressReleaseId
+      hero {
+        ... on heroes_Asset {
+          altText
+          width
+          height
+          url @transform(mode: "crop", width: 900, height: 550)
+        }
+      }
+      image: hero {
+        ... on heroes_Asset {
+          altText
+          width
+          height
+          url @transform(mode: "crop", width: 900, height: 550)
+        }
+      }
+      entryType: postType {
+        title
+        slug
+      }
+      postType {
+        id
+        title
+        slug
+      }
+    }
+  }
+}
