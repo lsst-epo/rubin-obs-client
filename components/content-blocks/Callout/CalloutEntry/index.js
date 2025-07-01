@@ -2,11 +2,11 @@
 "use client";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { getSiteString, makeReleaseFeature } from "@/lib/utils";
+import { makeReleaseFeature } from "@/lib/utils";
 import { makeDateString } from "@/helpers/dates";
+import useRelease from "@/hooks/useRelease";
 import * as Styled from "./styles";
 import { Image } from "@rubin-epo/epo-react-lib";
-import { useRelease } from "@/lib/api/noirlabReleases";
 import { fallbackLng } from "@/lib/i18n/settings";
 
 const getDateString = (newsDate, eventStart, eventEnd, locale) => {
@@ -33,10 +33,7 @@ export default function CalloutEntry({ callout }) {
   } = useTranslation();
   const { id, entry, backgroundColor } = callout;
   // mix in the noirlabReleases from additional fetch to different endpoint
-  const { data: entryWithRelease } = useRelease(
-    getSiteString(language),
-    entry[0]
-  );
+  const { data: entryWithRelease } = useRelease(entry[0]);
 
   if (!entry[0] && !entryWithRelease) return null;
 

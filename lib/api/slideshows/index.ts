@@ -1,5 +1,5 @@
 import { gql } from "@urql/core";
-import queryAPI from "@/lib/api/client/query";
+import queryAPI from "@/lib/api/client/server";
 import { slideshowFragment } from "@/lib/api/fragments/slideshow";
 import { getSiteFromLocale } from "@/lib/helpers/site";
 

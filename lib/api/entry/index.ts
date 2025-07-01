@@ -1,5 +1,5 @@
 import { gql } from "@urql/core";
-import queryAPI from "@/lib/api/client/query";
+import queryAPI from "@/lib/api/client/server";
 import { fullBaseFieldsFragment } from "@/lib/api/fragments/shared";
 import { allPageBlocksFragment } from "@/api/fragments/content-blocks";
 import { redirectFragment } from "@/lib/api/fragments/page";
