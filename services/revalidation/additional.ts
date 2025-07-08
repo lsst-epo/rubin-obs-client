@@ -27,6 +27,7 @@ const additionalRevalidations: Revalidator = ({ parts, tagCollection }) => {
     const revalidator = revalidators[section];
     const tag = tags[section];
 
+    console.info(`[CLIENT_REVALIDATE_STATUS] Revalidating tag: ${tag}`);
     if (tag) {
       tagCollection.add(tag);
       revalidateTag(tag);
