@@ -14,7 +14,12 @@ const revalidate = (uri: string) => {
   const paths: Array<string> = [];
   const tagCollection = new Set<string>();
 
+  console.info(
+    "[CLIENT_REVALIDATE_STATUS] Inside of revalidate endpoint: /services/revalidation/index"
+  );
+
   languages.forEach((locale) => {
+    console.info(`[CLIENT_REVALIDATE_STATUS] Revalidating for: ${locale}`);
     const parts: Array<string> =
       uri === CRAFT_HOMEPAGE_URI ? [] : uri.split("/");
 
