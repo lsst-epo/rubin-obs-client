@@ -31,7 +31,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 
   if (uri) {
     console.info("[CLIENT_REVALIDATE_STATUS] About to attempt revalidation");
-    const debugOutput = revalidate(uri);
+    const debugOutput = await revalidate(uri);
     console.info(
       "[CLIENT_REVALIDATE_STATUS] Logging output of revalidation..."
     );
