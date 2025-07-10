@@ -129,7 +129,7 @@ const GalleryAsset: FunctionComponent<GalleryAssetProps> = async ({
           <CantoDownload directUrlOriginal={directUrlOriginal} />
           <SharePopup
             title={name}
-            url={`gallery/${gallery}/${id}`}
+            url={`gallery/collections/${gallery}/${id}`}
             file={
               scheme === "image"
                 ? {
