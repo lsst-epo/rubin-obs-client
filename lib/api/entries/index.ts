@@ -1,5 +1,5 @@
 import { env } from "@/env";
-import queryAPI from "@/lib/api/client/query";
+import queryAPI from "@/lib/api/client/server";
 import { getSiteFromLocale } from "@/lib/helpers/site";
 import { graphql } from "@/gql";
 

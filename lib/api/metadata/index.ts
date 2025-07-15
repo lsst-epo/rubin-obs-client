@@ -1,4 +1,4 @@
-import queryAPI from "@/lib/api/client/query";
+import queryAPI from "@/lib/api/client/server";
 import { getSiteFromLocale } from "@/lib/helpers/site";
 import { fallbackLng } from "@/lib/i18n/settings";
 import { graphql } from "@/gql";

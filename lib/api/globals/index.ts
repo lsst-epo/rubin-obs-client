@@ -1,6 +1,6 @@
 import { graphql } from "@/gql";
 import { fallbackLng } from "@/lib/i18n/settings";
-import queryAPI from "@/lib/api/client/query";
+import queryAPI from "@/lib/api/client/server";
 import { getSiteFromLocale } from "@/lib/helpers/site";
 import tags from "../client/tags";
 
