@@ -1,4 +1,5 @@
 import { gql } from "@urql/core";
+import { print } from "graphql";
 import queryAPI from "@/lib/api/client/query";
 import { fullBaseFieldsFragment } from "@/lib/api/fragments/shared";
 import { allPageBlocksFragment } from "@/api/fragments/content-blocks";
@@ -17,7 +18,7 @@ import EventQuery from "@/services/craft/entries/event";
 
 function entryQueryify(fragment: string) {
   return gql`
-    ${fullBaseFieldsFragment}
+    ${print(fullBaseFieldsFragment)}
     query getEntry(
       $section: [String]
       $type: [String]
@@ -53,8 +54,7 @@ function getPageQueryFragmentsByType(type: string) {
       `;
     case "redirectPage":
       return gql`
-        ${cantoAssetSingleFragment}
-        ${redirectFragment}
+        ${print(redirectFragment)}
         ${entryQueryify(`...redirectFragment`)}
       `;
     default:
