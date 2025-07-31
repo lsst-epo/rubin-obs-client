@@ -43,7 +43,11 @@ const NOIRLabImageAsset: FC<NOIRLabAssetProps<Locale>> = async ({
     notFound();
   }
 
-  const { FileSize } = resources[0];
+  let FileSize: any = null;
+  if (resources && resources.length > 0) {
+    FileSize = resources[0].FileSize;
+  }
+
   const caption = sanitize(description || "");
   const credit = data.credit
     ? sanitize(data.credit, { allowedTags: [], allowedAttributes: {} })
