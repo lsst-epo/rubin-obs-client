@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { striptags } from "@/lib/utils/strings";
 import { Grid } from "@rubin-epo/epo-react-lib";
-import { makeReleaseFeature } from "@/lib/utils";
+import { makeReleaseFeature } from "@/lib/api/noirlab";
 import DataList from "@/dynamic/DataList";
 import Tile from "@/atomic/Tile";
 
