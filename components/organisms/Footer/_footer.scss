@@ -23,8 +23,8 @@ $_form-breakpoint: functions.break(tablet);
 
     display: grid;
     grid-template:
-      "form colophon" auto
-      "form sponsors" auto / minmax(300px, auto) minmax(45%, 864px);
+      "colophon" auto
+      "sponsors" auto / minmax(80%, auto);
 
     @include base.respond($_form-breakpoint) {
       grid-template:
@@ -59,6 +59,10 @@ $_form-breakpoint: functions.break(tablet);
 
   &__sponsors-block {
     grid-area: sponsors;
+    justify-self: center;
+    width: 100%; 
+    min-width: 400px;
+    max-width: 700px;
   }
 
   &__form {
