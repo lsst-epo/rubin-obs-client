@@ -45,6 +45,7 @@ ENV NODE_ENV production
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
+RUN sudo apk add inotify-tools
 
 COPY --from=builder --chown=nextjs:nodejs /app/ ./
 
