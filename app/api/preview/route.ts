@@ -36,6 +36,10 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
   );
   const locale = getLocaleString(site);
   const uri = searchParams.get("uri");
+  console.info(
+    `[CLIENT_REVALIDATE_STATUS] secret: ${secret}; previewToken: ${previewToken}; site: ${site}; locale: ${locale}; uri: ${uri}`
+  );
+  console.info(`[CLIENT_REVALIDATE_STATUS]`, searchParams);
 
   // Check that this request came from Craft
   if (!isCraftPreview) {
@@ -49,6 +53,9 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
   }
 
   if (!uri) {
+    console.info(
+      "[CLIENT_REVALIDATE_STATUS] Returning a 422 in app/api/preview/route.ts for !uri"
+    );
     return new NextResponse("URI missing", { status: 422 });
   }
 
@@ -64,6 +71,9 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 
   // If the uri doesn't exist prevent draft mode from being enabled
   if (!data?.entry?.uri) {
+    console.info(
+      "[CLIENT_REVALIDATE_STATUS] Returning a 422 in app/api/preview/route.ts for !data?.entry?.uri"
+    );
     return new NextResponse("Invalid uri", { status: 422 });
   }
 
