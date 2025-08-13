@@ -15,6 +15,9 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   const { code } = await request.json();
 
   if (!code) {
+    console.info(
+      "[CLIENT_REVALIDATE_STATUS] Returning a 422 in app/api/charming-overlords/route.ts"
+    );
     return new NextResponse("Missing authorization code", { status: 422 });
   }
 
