@@ -29,4 +29,6 @@ const RootPage: FunctionComponent<LocaleProps> = async ({
   );
 };
 
+export const dynamic = "force-dynamic";
+
 export default RootPage;
