@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1.19
 FROM node:20-alpine AS base
 
 # Install dependencies only when needed
@@ -17,7 +18,7 @@ RUN \
 
 
 # Rebuild the source code only when needed
-FROM base AS builder
+FROM base AS yarn-builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
@@ -27,10 +28,18 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 # ENV NEXT_TELEMETRY_DISABLED 1
 
-ARG RUN_BUILD="true"
-ENV RUN_BUILD=${RUN_BUILD}
+# ARG RUN_BUILD="true"
+# ENV RUN_BUILD=${RUN_BUILD}
 
-RUN if $RUN_BUILD;then yarn static:build;fi
+# RUN if $RUN_BUILD;then yarn static:build;fi
+
+RUN --mount=type=bind,source=.env,target=/app/.env \
+  yarn static:build
+
+
+# FOR GCS bucket .next folder versioning
+FROM scratch AS nextjs-copy
+COPY --from=yarn-builder /app/.next /
 
 # If using npm comment out above and use below instead
 # RUN npm run build
