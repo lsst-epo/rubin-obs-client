@@ -3,6 +3,15 @@ concurrency:
   group: $${{ github.ref_name }}
 
 on:
+  workflow_dispatch:
+    inputs:
+      bucket-subfolder-suffix:
+        description: "Optional Bucket subfolder name suffix"
+        required: false
+        default: ''
+        type: string
+  # schedule:
+  #   - cron: 0 10 * * 1-5
   push:
     branches:
       - "develop"
@@ -30,7 +39,7 @@ jobs:
       environment_name: ${{ steps.deploy-info.outputs.environment_name }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4.2.1
       - name: Parse deployment info
         id: deploy-info
         run: |
@@ -47,9 +56,14 @@ jobs:
           fi
           echo environment_name=$environment_name >> "$GITHUB_OUTPUT"
           echo credentials_json=$credentials_json >> "$GITHUB_OUTPUT"
+
+          echo date=$(date +'%Y%m%d') >> $GITHUB_OUTPUT
+          echo project=$project >> "$GITHUB_OUTPUT"
+          echo appname="rubinobs-site" >> $GITHUB_OUTPUT
+          echo deployment=$deploymentname >> $GITHUB_OUTPUT
       - name: Docker meta
         id: meta
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@v5.6.1
         with:
           # list of Docker images to use as base name for tags
           images: |
@@ -67,8 +81,8 @@ jobs:
             type=semver,pattern={{major}}.{{minor}}
             type=semver,pattern={{major}}
             type=sha
-          build-args: |
-            RUN_BUILD=false
+          # build-args: |
+          #   RUN_BUILD=false
       -
         name: Parse deploy tag
         id: deploy-tag
@@ -79,32 +93,26 @@ jobs:
           echo image_tag=$(echo "$full_tag" | cut -f2 -d:) >> "$GITHUB_OUTPUT"
           echo image_name=$(echo "$full_tag" | cut -f1 -d:) >> "$GITHUB_OUTPUT"
           echo full_tag=$full_tag >> "$GITHUB_OUTPUT"
+
+          bucket_name=rubinobs-site-${{ steps.deploy-info.outputs.environment_name }}
+          bucket_subfolder=$(echo "$full_tag" | cut -f2 -d:)-${{ steps.deploy-info.outputs.date }}
+          echo bucket_name=$bucket_name >> "$GITHUB_OUTPUT"
+          echo bucket_subfolder=$(echo "$full_tag" | cut -f2 -d:)-${{ steps.deploy-info.outputs.date }} >> "$GITHUB_OUTPUT"
+          echo "bucket_name: $bucket_name"
+          echo "bucket_subfolder: $bucket_subfolder"
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
+        uses: docker/setup-qemu-action@v3.3.0
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3.11.1
       - name: Login to GCP
-        uses: "google-github-actions/auth@v2"
+        uses: "google-github-actions/auth@v2.1.7"
         with:
           credentials_json: ${{ steps.deploy-info.outputs.credentials_json }}
       - name: "Set up Cloud SDK"
         uses: "google-github-actions/setup-gcloud@v2"
       - run: gcloud --quiet auth configure-docker
-      - name: Build and push
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-          cache-to: |
-            type=gha
-          cache-from: |
-            type=gha
-          build-args: |
-            RUN_BUILD=false
       -
-        uses: imjasonh/setup-crane@v0.1
+        uses: imjasonh/setup-crane@v0.4
         if: ${{ github.event_name == 'pull_request' }}
       -
         name: Preview prep
@@ -114,6 +122,46 @@ jobs:
           if ! crane config ${API_IMAGE}:${{ steps.deploy-tag.outputs.image_tag }}; then
             crane tag ${API_IMAGE}:latest ${{ steps.deploy-tag.outputs.image_tag }}
           fi
+      -
+        name: Fetch and Set Environment Variables from Secret Manager
+        id: deploy-secrets
+        run: |
+          # Get appropriate secret name
+          SECRET_NAME=$(gcloud secrets list --filter="labels.deployment:${{ steps.deploy-info.outputs.deployment }}" --format="value(name)")
+          # The secret value must be a single-line JSON string.
+          SECRET_JSON=$(gcloud secrets versions access latest --secret=$SECRET_NAME)
+
+          # check secrets are being read
+          echo "$SECRET_JSON" | jq 'keys | length'
+
+          # Write secrets and format to .env file which will be mounted into docker build step
+          echo "$SECRET_JSON " | jq -r 'to_entries[] | "\(.key)=\(.value)"' > .env
+      - name: Build and push
+        uses: docker/build-push-action@v6.18.0
+        with:
+          context: .
+          push: true
+          target: runner
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-to: |
+            type=gha
+          cache-from: |
+            type=gha
+          build-args: |
+            RUN_BUILD=false
+      - 
+        name: Run static build in docker container based on .env file
+        run: |
+          docker version
+          DOCKER_BUILDKIT=1 docker build --target nextjs-copy --output type=local,dest=./.next .
+      -
+        name: Upload to GCS bucket
+        uses: 'google-github-actions/upload-cloud-storage@v3'
+        with:
+          path: '.next'
+          destination: '${{ steps.deploy-tag.outputs.bucket_name }}/${{ steps.deploy-tag.outputs.bucket_subfolder }}${{ github.event.inputs.bucket-subfolder-suffix }}' # bucket_name/prefix
+          gzip: false
       - name: Summary
         run: |
           cat <<-EOT >> "$GITHUB_STEP_SUMMARY"
