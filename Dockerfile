@@ -21,18 +21,7 @@ RUN \
 FROM base AS yarn-builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
-COPY . .
-
-# Next.js collects completely anonymous telemetry data about general usage.
-# Learn more here: https://nextjs.org/telemetry
-# Uncomment the following line in case you want to disable telemetry during the build.
-# ENV NEXT_TELEMETRY_DISABLED 1
-
-# ARG RUN_BUILD="true"
-# ENV RUN_BUILD=${RUN_BUILD}
-
-# RUN if $RUN_BUILD;then yarn static:build;fi
-
+COPY --exclude=.env . .
 RUN --mount=type=bind,source=.env,target=/app/.env \
   yarn static:build
 
@@ -40,9 +29,6 @@ RUN --mount=type=bind,source=.env,target=/app/.env \
 # FOR GCS bucket .next folder versioning
 FROM scratch AS nextjs-copy
 COPY --from=yarn-builder /app/.next /
-
-# If using npm comment out above and use below instead
-# RUN npm run build
 
 # Production image, copy all the files and run next
 FROM base AS runner
