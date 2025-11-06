@@ -147,7 +147,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-to: |
-            type=gha
+            type=gha,mode=max
           cache-from: |
             type=gha
           build-args: |
@@ -162,15 +162,11 @@ jobs:
         uses: docker/build-push-action@v6.18.0
         with:
           context: .
-          # We are only exporting files, not pushing an image
           push: false
-          # Specify the intermediate target to export
           target: nextjs-copy
-          # Define the output as a local directory
           outputs: type=local,dest=./.next
           build-args: |
             RUN_BUILD=false
-          # CRITICAL: Read from the cache populated by the step above
           cache-from: |
             type=gha
       - name: list contents of current working directory
