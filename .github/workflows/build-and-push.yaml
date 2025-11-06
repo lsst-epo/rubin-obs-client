@@ -152,11 +152,6 @@ jobs:
             type=gha
           build-args: |
             RUN_BUILD=false
-      # - 
-      #   name: Run static build in docker container based on .env file
-      #   run: |
-      #     docker version
-      #     DOCKER_BUILDKIT=1 docker build --target nextjs-copy --output type=local,dest=./.next .
       - 
         name: Run static build in docker container based on .env file
         uses: docker/build-push-action@v6.18.0
