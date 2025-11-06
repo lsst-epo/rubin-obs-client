@@ -16,7 +16,6 @@ on:
     branches:
       - "develop"
       - "main"
-      - "973-gcs-builds-from-develop"
     tags:
       - "v*"
   pull_request:
