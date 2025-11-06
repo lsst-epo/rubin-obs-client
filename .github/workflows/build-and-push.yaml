@@ -82,8 +82,6 @@ jobs:
             type=semver,pattern={{major}}.{{minor}}
             type=semver,pattern={{major}}
             type=sha
-          # build-args: |
-          #   RUN_BUILD=false
       -
         name: Parse deploy tag
         id: deploy-tag
