@@ -152,11 +152,27 @@ jobs:
             type=gha
           build-args: |
             RUN_BUILD=false
+      # - 
+      #   name: Run static build in docker container based on .env file
+      #   run: |
+      #     docker version
+      #     DOCKER_BUILDKIT=1 docker build --target nextjs-copy --output type=local,dest=./.next .
       - 
         name: Run static build in docker container based on .env file
-        run: |
-          docker version
-          DOCKER_BUILDKIT=1 docker build --target nextjs-copy --output type=local,dest=./.next .
+        uses: docker/build-push-action@v6.18.0
+        with:
+          context: .
+          # We are only exporting files, not pushing an image
+          push: false
+          # Specify the intermediate target to export
+          target: nextjs-copy
+          # Define the output as a local directory
+          outputs: type=local,dest=./.next
+          build-args: |
+            RUN_BUILD=false
+          # CRITICAL: Read from the cache populated by the step above
+          cache-from: |
+            type=gha
       - name: list contents of current working directory
         run: |
           pwd
