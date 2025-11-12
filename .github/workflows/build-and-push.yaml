@@ -12,10 +12,13 @@ on:
         type: string
   # schedule:
   #   - cron: 0 10 * * 1-5
+  permissions:
+    pull-requests: write
   push:
     branches:
       - "develop"
       - "main"
+      - "980-telemetry-from-973"
     tags:
       - "v*"
   pull_request:
@@ -38,6 +41,8 @@ jobs:
       image_name: ${{ steps.deploy-tag.outputs.image_name }}
       environment_name: ${{ steps.deploy-info.outputs.environment_name }}
     steps:
+      - name: Collect Workflow Telemetry
+        uses: catchpoint/workflow-telemetry-action@v2
       - name: Checkout
         uses: actions/checkout@v4.2.1
       - name: Parse deployment info
