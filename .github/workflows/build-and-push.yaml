@@ -12,8 +12,6 @@ on:
         type: string
   # schedule:
   #   - cron: 0 10 * * 1-5
-  permissions:
-    pull-requests: write
   push:
     branches:
       - "develop"
@@ -30,7 +28,8 @@ on:
     branches:
       - 'develop'
       - 'main'
-
+permissions:
+  pull-requests: write
 jobs:
   build:
     name: Build Container Image
