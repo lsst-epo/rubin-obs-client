@@ -16,7 +16,7 @@ on:
     branches:
       - "develop"
       - "main"
-      - "980-telemetry-from-973"
+      - "980-gha-telemetry-from-973"
     tags:
       - "v*"
   pull_request:
