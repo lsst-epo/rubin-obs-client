@@ -16,6 +16,7 @@ on:
     branches:
       - "develop"
       - "main"
+      - "980-gha-telemetry-from-973"
     tags:
       - "v*"
   pull_request:
@@ -27,7 +28,8 @@ on:
     branches:
       - 'develop'
       - 'main'
-
+permissions:
+  pull-requests: write
 jobs:
   build:
     name: Build Container Image
@@ -38,6 +40,8 @@ jobs:
       image_name: ${{ steps.deploy-tag.outputs.image_name }}
       environment_name: ${{ steps.deploy-info.outputs.environment_name }}
     steps:
+      - name: Collect Workflow Telemetry
+        uses: catchpoint/workflow-telemetry-action@v2
       - name: Checkout
         uses: actions/checkout@v4.2.1
       - name: Parse deployment info
