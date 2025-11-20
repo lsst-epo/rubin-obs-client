@@ -31,6 +31,11 @@ export async function getEntriesByLocale(locale: string) {
           uri
         }
       }
+      rubinBasicsEntries(limit: $limit) {
+        ... on rubinBasics_post_Entry {
+          uri
+        }
+      }
       slideshowsEntries(limit: $limit) {
         ... on slideshows_slideshow_Entry {
           uri
@@ -50,21 +55,31 @@ export async function getEntriesByLocale(locale: string) {
 
   if (!data) return [];
 
-  const { pagesEntries, newsEntries, slideshowsEntries, eventsEntries } = data;
+  const {
+    pagesEntries,
+    newsEntries,
+    rubinBasicsEntries,
+    slideshowsEntries,
+    eventsEntries,
+  } = data;
 
   const entries: Array<{ uriSegments: Array<string> }> = [];
 
-  [pagesEntries, newsEntries, slideshowsEntries, eventsEntries].forEach(
-    (set) => {
-      if (set !== null) {
-        set.forEach((entry) => {
-          if (entry && entry.uri) {
-            entries.push({ uriSegments: entry.uri.split("/") });
-          }
-        });
-      }
+  [
+    pagesEntries,
+    newsEntries,
+    rubinBasicsEntries,
+    slideshowsEntries,
+    eventsEntries,
+  ].forEach((set) => {
+    if (set !== null) {
+      set.forEach((entry) => {
+        if (entry && entry.uri) {
+          entries.push({ uriSegments: entry.uri.split("/") });
+        }
+      });
     }
-  );
+  });
 
   return entries;
 }

@@ -26,15 +26,21 @@ export default async function MediaAside({
     (a, i) => i < 4 && (a.textLink?.length > 0 || a.externalLink?.length > 0)
   );
 
-  const tagsWithLinks = tags.map(({ slug, title }) => {
-    return {
-      name: title,
-      destination: getPathname({
-        href: { pathname: `/${rootHomeLink?.uri}`, query: { search: slug } },
-        locale,
-      }),
-    };
-  });
+  const tagsWithLinks =
+    tags === undefined
+      ? []
+      : tags.map(({ slug, title }) => {
+          return {
+            name: title,
+            destination: getPathname({
+              href: {
+                pathname: `/${rootHomeLink?.uri}`,
+                query: { search: slug },
+              },
+              locale,
+            }),
+          };
+        });
 
   const mediaAssets = [
     ...contentBlockAssets

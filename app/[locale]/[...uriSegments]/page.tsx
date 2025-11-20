@@ -6,6 +6,7 @@ import { getEntrySectionByUri } from "@/lib/api/entries/index";
 import { getEntryDataByUri } from "@/lib/api/entry";
 import PageTemplate from "@/components/templates/Page";
 import NewsPageTemplate from "@/components/templates/NewsPage";
+import RubinBasicsPage from "@/components/templates/RubinBasicsPage";
 import GlossaryPageTemplate from "@/components/templates/GlossaryPage";
 import SlideshowPageTemplate from "@/components/templates/SlideshowPage";
 import StaffPageTemplate from "@/components/templates/StaffPage";
@@ -16,6 +17,7 @@ const sectionMap = {
   events: EventPageTemplate,
   glossaryTerms: GlossaryPageTemplate,
   news: NewsPageTemplate,
+  rubinBasics: RubinBasicsPage,
   slideshows: SlideshowPageTemplate,
   staffProfiles: StaffPageTemplate,
 };

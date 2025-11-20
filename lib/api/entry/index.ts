@@ -11,6 +11,7 @@ import { addRelatedInvestigation } from "@/services/craft/investigations";
 import { getSiteFromLocale } from "../../helpers/site";
 import { cantoAssetSingleFragment } from "../fragments/image";
 import NewsPostQuery from "@/services/craft/entries/news";
+import RubinBasicsPostQuery from "@/services/craft/entries/rubinBasics";
 import StaffProfileQuery from "@/services/craft/entries/staffProfile";
 import PageQuery from "@/services/craft/entries/page";
 import EducatorPageQuery from "@/services/craft/entries/educatorPage";
@@ -73,6 +74,8 @@ function getQueryFragments(
       return getPageQueryFragmentsByType(type);
     case "news":
       return NewsPostQuery;
+    case "rubinBasics":
+      return RubinBasicsPostQuery;
     case "events":
       return EventQuery;
     case "staffProfiles":
