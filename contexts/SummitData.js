@@ -1,6 +1,6 @@
 import { createContext, useContext, useMemo } from "react";
 import PropTypes from "prop-types";
-import { useEfd, efdQuery } from "@/lib/api/efd";
+import { useSummitDataQuery } from "@/lib/api/summitData";
 import useAstroweather from "@/lib/api/astroweather";
 
 export const SummitDataContext = createContext({});
@@ -11,20 +11,35 @@ export const SummitDataProvider = ({ children }) => {
     isLoading: astroweatherIsLoading,
     isError: astroweatherIsError,
   } = useAstroweather();
-  const { data, isLoading, isError } = useEfd(efdQuery);
+  const { data, isLoading, isError } = useSummitDataQuery();
+  let summitData = {};
+  let summitMedia = { items: {} };
 
-  const { summitData, summitMedia } = data || {
-    summitData: {},
-    summitMedia: { items: {} },
-  };
+  if (data) {
+    summitMedia = {
+      items: {
+        allSkyImage: data.allSkyImage,
+        allSkyVideo: data.allSkyVideo,
+      },
+    };
+
+    summitData = {
+      current: data.summitCurrentData.current,
+      daily: data.summitDailyData.daily,
+      hourly: data.summitHourlyData.hourly,
+    };
+    if (summitData.current.dewPoint === null) {
+      summitData.current.dewPoint = 1.0; // temporary code just for demoing/unblocking us
+    }
+  }
   const value = useMemo(
     () => ({
       summitData,
       summitMedia,
       astroweatherData,
-      error: { efd: isError, astroweather: astroweatherIsError },
+      error: { hasura: isError, astroweather: astroweatherIsError },
       isLoading: {
-        efd: isLoading,
+        hasura: isLoading,
         astroweather: astroweatherIsLoading,
       },
     }),

@@ -44,7 +44,7 @@ export const env = createEnv({
     NEXT_PUBLIC_API_URL: z.string().url(),
     NEXT_PUBLIC_BASE_URL: z.string().url(),
     NEXT_PUBLIC_CONTACT_FORM_POST_URL: z.string().url(),
-    NEXT_PUBLIC_EFD_URL: z.string().url(),
+    NEXT_PUBLIC_HASURA_URL: z.string().url(),
     NEXT_PUBLIC_GOOGLE_APP_ID: z.string().min(1),
     NEXT_PUBLIC_HASURA_SECRET: z.string().min(1).optional(),
     NEXT_PUBLIC_NOIRLAB_BASE_URL: z.string().url(),
@@ -58,7 +58,7 @@ export const env = createEnv({
     NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
     NEXT_PUBLIC_CONTACT_FORM_POST_URL:
       process.env.NEXT_PUBLIC_CONTACT_FORM_POST_URL,
-    NEXT_PUBLIC_EFD_URL: process.env.NEXT_PUBLIC_EFD_URL,
+    NEXT_PUBLIC_HASURA_URL: process.env.NEXT_PUBLIC_HASURA_URL,
     NEXT_PUBLIC_GOOGLE_APP_ID: process.env.NEXT_PUBLIC_GOOGLE_APP_ID,
     NEXT_PUBLIC_HASURA_SECRET: process.env.NEXT_PUBLIC_HASURA_SECRET,
     NEXT_PUBLIC_NOIRLAB_BASE_URL: process.env.NEXT_PUBLIC_NOIRLAB_BASE_URL,
