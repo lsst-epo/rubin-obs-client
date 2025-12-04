@@ -24,7 +24,12 @@ const Related = () => {
     isOpen,
   };
 
-  if (isLoading.efd || isLoading.astroweather || !astroweatherData || !current)
+  if (
+    isLoading.hasura ||
+    isLoading.astroweather ||
+    !astroweatherData ||
+    !current
+  )
     return (
       <WidgetSection {...sectionProps}>
         <Loader isVisible={true} />
