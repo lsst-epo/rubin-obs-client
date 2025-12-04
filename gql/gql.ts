@@ -166,8 +166,8 @@ const documents = {
     types.MixedLinkFragmentFragmentDoc,
   'fragment SiteInfoFragment on siteInfo_GlobalSet {\n  language\n  name\n  handle\n  siteTitle\n  siteDescription\n  siteImage {\n    ... on generalImages_Asset {\n      altText\n      width\n      height\n      url @transform(mode: "crop", width: 800)\n    }\n  }\n  contactInfo {\n    ... on contactInfo_mail_BlockType {\n      id\n      text\n      typeHandle\n    }\n    ... on contactInfo_phone_BlockType {\n      id\n      text\n      typeHandle\n    }\n  }\n}':
     types.SiteInfoFragmentFragmentDoc,
-  // "\n    query getContactForm($set: [String], $site: [String]) {\n      contactForm: globalSet(handle: $set, site: $site) {\n        ... on contactForm_GlobalSet {\n          contactFormTopics {\n            ... on contactFormTopics_topic_BlockType {\n              id\n              value: topicValue\n              label: topicLabel\n            }\n          }\n        }\n      }\n    }\n  ":
-  //   types.GetContactFormDocument,
+  "\n    query getContactForm($set: [String], $site: [String]) {\n      contactForm: globalSet(handle: $set, site: $site) {\n        ... on contactForm_GlobalSet {\n          contactFormTopics {\n            ... on contactFormTopics_topic_BlockType {\n              id\n              value: topicValue\n              label: topicLabel\n            }\n          }\n        }\n      }\n    }\n  ":
+    types.GetContactFormDocument,
   '\n    query getFooter($set: [String], $site: [String]) {\n      footer: globalSet(handle: $set, site: $site) {\n        ... on footer_GlobalSet {\n          id\n          name\n          handle\n          links {\n            ...LinksFragment\n          }\n          colophon\n          supportersLogos {\n            ... on generalImages_Asset {\n              altText\n              width\n              height\n              url @transform(mode: "fit", width: 1000)\n            }\n          }\n          supportersLogosAlt\n        }\n      }\n    }\n  ':
     types.GetFooterDocument,
   "\n    query getLogos($set: [String], $site: [String]) {\n      siteInfo: globalSet(handle: $set, site: $site) {\n        ... on siteInfo_GlobalSet {\n          __typename\n          logoLarge {\n            url {\n              directUrlOriginal\n            }\n            width\n            height\n          }\n          logoSmall {\n            url {\n              directUrlOriginal\n            }\n            width\n            height\n          }\n        }\n      }\n    }\n  ":
@@ -657,9 +657,9 @@ export function graphql(
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-// export function graphql(
-//   source: "\n    query getContactForm($set: [String], $site: [String]) {\n      contactForm: globalSet(handle: $set, site: $site) {\n        ... on contactForm_GlobalSet {\n          contactFormTopics {\n            ... on contactFormTopics_topic_BlockType {\n              id\n              value: topicValue\n              label: topicLabel\n            }\n          }\n        }\n      }\n    }\n  "
-// ): (typeof documents)["\n    query getContactForm($set: [String], $site: [String]) {\n      contactForm: globalSet(handle: $set, site: $site) {\n        ... on contactForm_GlobalSet {\n          contactFormTopics {\n            ... on contactFormTopics_topic_BlockType {\n              id\n              value: topicValue\n              label: topicLabel\n            }\n          }\n        }\n      }\n    }\n  "];
+export function graphql(
+  source: "\n    query getContactForm($set: [String], $site: [String]) {\n      contactForm: globalSet(handle: $set, site: $site) {\n        ... on contactForm_GlobalSet {\n          contactFormTopics {\n            ... on contactFormTopics_topic_BlockType {\n              id\n              value: topicValue\n              label: topicLabel\n            }\n          }\n        }\n      }\n    }\n  "
+): (typeof documents)["\n    query getContactForm($set: [String], $site: [String]) {\n      contactForm: globalSet(handle: $set, site: $site) {\n        ... on contactForm_GlobalSet {\n          contactFormTopics {\n            ... on contactFormTopics_topic_BlockType {\n              id\n              value: topicValue\n              label: topicLabel\n            }\n          }\n        }\n      }\n    }\n  "];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

@@ -13,7 +13,8 @@ export default function CurrentTimeLapse({ video, caption }) {
   } = useTranslation();
   const isMounted = useIsMounted();
   if (!isMounted) return null;
-  const { mediaLink, timeCreated } = video;
+  const baseUrl = "https://storage.googleapis.com/";
+  const { timeCreated, bucket, name } = video;
   const isAfterMidnight =
     formatTime(new Date(timeCreated), language, {
       dateStyle: undefined,
@@ -50,7 +51,7 @@ export default function CurrentTimeLapse({ video, caption }) {
       <Styled.Wrapper>
         <ReactPlayer
           className="react-player"
-          url={mediaLink}
+          url={`${baseUrl}${bucket}/${name}`}
           controls
           muted
           loop

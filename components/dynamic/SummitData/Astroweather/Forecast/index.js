@@ -28,7 +28,12 @@ const ForecastAstroweather = () => {
     isOpen,
   };
 
-  if (isLoading.astroweather || isLoading.efd || !current || !astroweatherData)
+  if (
+    isLoading.astroweather ||
+    isLoading.hasura ||
+    !current ||
+    !astroweatherData
+  )
     return (
       <WidgetSection {...sectionProps}>
         <Loader isVisible={true} />
