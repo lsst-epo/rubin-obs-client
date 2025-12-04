@@ -12,7 +12,7 @@ const conversion = 180 / Math.PI;
 const getAzimuth = (time) =>
   getMoonPosition(time, lat, long).azimuth * conversion + 180;
 
-const getLunarTimes = () => {
+export const getLunarTimes = () => {
   const now = new Date();
 
   return Array.apply(null, Array(14)).map((value, i) => {
@@ -30,7 +30,7 @@ const getLunarTimes = () => {
   });
 };
 
-const getSolarTimes = () => {
+export const getSolarTimes = () => {
   const offset = timezoneOffset(timezone);
   const localOffset = timezoneOffsetLocal(timezone);
 

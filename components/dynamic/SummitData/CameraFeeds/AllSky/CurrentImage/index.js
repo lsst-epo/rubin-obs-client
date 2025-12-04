@@ -10,7 +10,8 @@ export default function CurrentImage({ image, caption, altText, isPreview }) {
     t,
     i18n: { language = "en" },
   } = useTranslation();
-  const { mediaLink, timeCreated } = image;
+  const { mediaLink, timeCreated, bucket, name } = image;
+  const baseUrl = "https://storage.googleapis.com/";
   const timeShort = formatTime(new Date(timeCreated), language, {
     dateStyle: "short",
     timeStyle: "short",
@@ -25,9 +26,9 @@ export default function CurrentImage({ image, caption, altText, isPreview }) {
   const defaultCaption = `The sky over Rubin: ${timeShort}`;
   const currentImage = {
     altText: altText || defaultAltText,
-    url: mediaLink,
-    url2x: mediaLink,
-    url3x: mediaLink,
+    url: `${baseUrl}${bucket}/${name}`,
+    url2x: `${baseUrl}${bucket}/${name}`,
+    url3x: `${baseUrl}${bucket}/${name}`,
   };
 
   if (isPreview) {
