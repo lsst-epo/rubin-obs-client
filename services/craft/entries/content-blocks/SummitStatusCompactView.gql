@@ -1,0 +1,8 @@
+fragment summitStatusCompactViewBlock on contentBlocks_summitStatusCompactView_BlockType {
+  domeStatus
+  alertCount
+  allSkyImage
+  exposureCount
+  surveyProgress
+  weatherCondition
+}

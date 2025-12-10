@@ -72,7 +72,7 @@ const documents = {
     types.ComplexTableBlockFragmentDoc,
   "fragment contactBlock on contentBlocks_contact_BlockType {\n  id\n  typeHandle\n  header\n  linkText\n  pageEntry {\n    id\n    uri\n    title\n  }\n}":
     types.ContactBlockFragmentDoc,
-  "fragment ContentBlocks on contentBlocks_NeoField {\n  ...accordionGroupBlock\n  ...calloutBlock\n  ...complexTableBlock\n  ...contactBlock\n  ...ctaGridBlock\n  ...imageGridBlock\n  ...imageBlock\n  ...investigationGridBlock\n  ...linkBlock\n  ...newsBlock\n  ...relatedContentBlock\n  ...scheduleBlock\n  ...shareBlock\n  ...simpleTableBlock\n  ...slideBlock\n  ...staffGridBlock\n  ...tableGroupBlock\n  ...textBlock\n  ...videoBlock\n  ...downloadListBlock\n  ...embedBlock\n  ...summitStatusBlock\n  ...publicationsListBlock\n  ...peopleBlock\n  ...keyNumbersBlock\n  ...skyviewerBlock\n  ...linkedImageListBlock\n  ...imageComparisonBlock\n  ...firstLookWidgetsBlock\n}":
+  "fragment ContentBlocks on contentBlocks_NeoField {\n  ...accordionGroupBlock\n  ...calloutBlock\n  ...complexTableBlock\n  ...contactBlock\n  ...ctaGridBlock\n  ...imageGridBlock\n  ...imageBlock\n  ...investigationGridBlock\n  ...linkBlock\n  ...newsBlock\n  ...relatedContentBlock\n  ...scheduleBlock\n  ...shareBlock\n  ...simpleTableBlock\n  ...slideBlock\n  ...staffGridBlock\n  ...tableGroupBlock\n  ...textBlock\n  ...videoBlock\n  ...downloadListBlock\n  ...embedBlock\n  ...summitStatusBlock\n  ...summitStatusCompactViewBlock\n  ...publicationsListBlock\n  ...peopleBlock\n  ...keyNumbersBlock\n  ...skyviewerBlock\n  ...linkedImageListBlock\n  ...imageComparisonBlock\n  ...firstLookWidgetsBlock\n}":
     types.ContentBlocksFragmentDoc,
   "fragment downloadListBlock on contentBlocks_downloadList_BlockType {\n  id\n  typeHandle\n  assetsList {\n    ... on assetsList_item_BlockType {\n      id\n      typeHandle\n      linkText\n      assetSingle {\n        id\n        kind\n        filename\n        url\n        size\n      }\n    }\n  }\n}":
     types.DownloadListBlockFragmentDoc,
@@ -116,6 +116,8 @@ const documents = {
     types.StaffGridBlockFragmentDoc,
   "fragment summitStatusBlock on contentBlocks_summitStatus_BlockType {\n  id\n  typeHandle\n  summitStatusLayout\n}":
     types.SummitStatusBlockFragmentDoc,
+  "fragment summitStatusCompactViewBlock on contentBlocks_summitStatusCompactView_BlockType {\n  domeStatus\n  alertCount\n  allSkyImage\n  exposureCount\n  surveyProgress\n  weatherCondition\n}":
+    types.SummitStatusCompactViewBlockFragmentDoc,
   "fragment tableGroupBlock on contentBlocks_tableGroup_BlockType {\n  id\n  typeHandle\n  sites\n  items: children {\n    ...complexTableBlock\n  }\n}":
     types.TableGroupBlockFragmentDoc,
   "fragment textBlock on contentBlocks_text_BlockType {\n  id\n  typeHandle\n  backgroundColor\n  text\n}":
@@ -378,8 +380,8 @@ export function graphql(
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: "fragment ContentBlocks on contentBlocks_NeoField {\n  ...accordionGroupBlock\n  ...calloutBlock\n  ...complexTableBlock\n  ...contactBlock\n  ...ctaGridBlock\n  ...imageGridBlock\n  ...imageBlock\n  ...investigationGridBlock\n  ...linkBlock\n  ...newsBlock\n  ...relatedContentBlock\n  ...scheduleBlock\n  ...shareBlock\n  ...simpleTableBlock\n  ...slideBlock\n  ...staffGridBlock\n  ...tableGroupBlock\n  ...textBlock\n  ...videoBlock\n  ...downloadListBlock\n  ...embedBlock\n  ...summitStatusBlock\n  ...publicationsListBlock\n  ...peopleBlock\n  ...keyNumbersBlock\n  ...skyviewerBlock\n  ...linkedImageListBlock\n  ...imageComparisonBlock\n  ...firstLookWidgetsBlock\n}"
-): (typeof documents)["fragment ContentBlocks on contentBlocks_NeoField {\n  ...accordionGroupBlock\n  ...calloutBlock\n  ...complexTableBlock\n  ...contactBlock\n  ...ctaGridBlock\n  ...imageGridBlock\n  ...imageBlock\n  ...investigationGridBlock\n  ...linkBlock\n  ...newsBlock\n  ...relatedContentBlock\n  ...scheduleBlock\n  ...shareBlock\n  ...simpleTableBlock\n  ...slideBlock\n  ...staffGridBlock\n  ...tableGroupBlock\n  ...textBlock\n  ...videoBlock\n  ...downloadListBlock\n  ...embedBlock\n  ...summitStatusBlock\n  ...publicationsListBlock\n  ...peopleBlock\n  ...keyNumbersBlock\n  ...skyviewerBlock\n  ...linkedImageListBlock\n  ...imageComparisonBlock\n  ...firstLookWidgetsBlock\n}"];
+  source: "fragment ContentBlocks on contentBlocks_NeoField {\n  ...accordionGroupBlock\n  ...calloutBlock\n  ...complexTableBlock\n  ...contactBlock\n  ...ctaGridBlock\n  ...imageGridBlock\n  ...imageBlock\n  ...investigationGridBlock\n  ...linkBlock\n  ...newsBlock\n  ...relatedContentBlock\n  ...scheduleBlock\n  ...shareBlock\n  ...simpleTableBlock\n  ...slideBlock\n  ...staffGridBlock\n  ...tableGroupBlock\n  ...textBlock\n  ...videoBlock\n  ...downloadListBlock\n  ...embedBlock\n  ...summitStatusBlock\n  ...summitStatusCompactViewBlock\n  ...publicationsListBlock\n  ...peopleBlock\n  ...keyNumbersBlock\n  ...skyviewerBlock\n  ...linkedImageListBlock\n  ...imageComparisonBlock\n  ...firstLookWidgetsBlock\n}"
+): (typeof documents)["fragment ContentBlocks on contentBlocks_NeoField {\n  ...accordionGroupBlock\n  ...calloutBlock\n  ...complexTableBlock\n  ...contactBlock\n  ...ctaGridBlock\n  ...imageGridBlock\n  ...imageBlock\n  ...investigationGridBlock\n  ...linkBlock\n  ...newsBlock\n  ...relatedContentBlock\n  ...scheduleBlock\n  ...shareBlock\n  ...simpleTableBlock\n  ...slideBlock\n  ...staffGridBlock\n  ...tableGroupBlock\n  ...textBlock\n  ...videoBlock\n  ...downloadListBlock\n  ...embedBlock\n  ...summitStatusBlock\n  ...summitStatusCompactViewBlock\n  ...publicationsListBlock\n  ...peopleBlock\n  ...keyNumbersBlock\n  ...skyviewerBlock\n  ...linkedImageListBlock\n  ...imageComparisonBlock\n  ...firstLookWidgetsBlock\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -506,6 +508,12 @@ export function graphql(
 export function graphql(
   source: "fragment summitStatusBlock on contentBlocks_summitStatus_BlockType {\n  id\n  typeHandle\n  summitStatusLayout\n}"
 ): (typeof documents)["fragment summitStatusBlock on contentBlocks_summitStatus_BlockType {\n  id\n  typeHandle\n  summitStatusLayout\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: "fragment summitStatusCompactViewBlock on contentBlocks_summitStatusCompactView_BlockType {\n  domeStatus\n  alertCount\n  allSkyImage\n  exposureCount\n  surveyProgress\n  weatherCondition\n}"
+): (typeof documents)["fragment summitStatusCompactViewBlock on contentBlocks_summitStatusCompactView_BlockType {\n  domeStatus\n  alertCount\n  allSkyImage\n  exposureCount\n  surveyProgress\n  weatherCondition\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
