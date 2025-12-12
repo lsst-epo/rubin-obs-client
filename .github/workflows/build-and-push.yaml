@@ -16,10 +16,8 @@ on:
     branches:
       - "develop"
       - "main"
-      - "1006-gha-tag-from-develop" # TODO: remove, 
     tags:
       - "v*"
-      - "t*" # TODO: remove
   pull_request:
     types:
       - labeled
@@ -29,7 +27,6 @@ on:
     branches:
       - 'develop'
       - 'main'
-
 jobs:
   build:
     name: Build Container Image
@@ -50,9 +47,8 @@ jobs:
         run: |
           # Determine environment to deploy to
           if ${{ github.ref_type == 'tag'}}; then
-            # TODO: add prod back
-            environment_name="int"
-            credentials_json='${{ secrets.SKYVIEWER_INT_SERVICE_ACCOUNT }}'
+            environment_name="prod"
+            credentials_json='${{ secrets.PIPELINE_EPO_PROD_PROJECT }}'
           elif ${{ contains(github.ref, 'main') || contains(github.base_ref, 'main') }}; then
             environment_name="int"
             credentials_json='${{ secrets.SKYVIEWER_INT_SERVICE_ACCOUNT }}'
@@ -94,9 +90,6 @@ jobs:
         run: |
           # Parse container image tag to deploy
           full_tag=$(echo "$DOCKER_METADATA_OUTPUT_JSON" | jq -r '.tags[0]')
-
-          echo "old full_tag: $full_tag"; # TODO: remove
-          echo "ref_name: ${{ github.ref_name }}"; # TODO: remove
 
           echo "Will use tag \"$full_tag\" for deployment."
           echo image_tag=$(echo "$full_tag" | cut -f2 -d:) >> "$GITHUB_OUTPUT"
