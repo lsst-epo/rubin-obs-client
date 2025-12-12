@@ -30,6 +30,7 @@ const SummitStatusCompactView: FC<SummitStatusCompactViewProps> = (props) => {
         <UnitLocalization />
         <SummitDataProvider>
           {allSkyImage && <CameraFeeds />}
+          {/* {allSkyImage && <CurrentImage />} */}
         </SummitDataProvider>
       </WeatherUnitProvider>
     </Styled.Container>

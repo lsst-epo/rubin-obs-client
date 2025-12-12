@@ -1,4 +1,6 @@
 fragment summitStatusCompactViewBlock on contentBlocks_summitStatusCompactView_BlockType {
+  id
+  typeHandle
   domeStatus
   alertCount
   allSkyImage
