@@ -107,7 +107,8 @@ jobs:
           # bucket_subfolder=$(echo "$full_tag" | cut -f2 -d:)-${{ steps.deploy-info.outputs.date }}
           bucket_subfolder=${{ github.ref_name }}-${{ steps.deploy-info.outputs.date }}
           echo bucket_name=$bucket_name >> "$GITHUB_OUTPUT"
-          echo bucket_subfolder=$(echo "$full_tag" | cut -f2 -d:)-${{ steps.deploy-info.outputs.date }} >> "$GITHUB_OUTPUT"
+          # echo bucket_subfolder=$(echo "$full_tag" | cut -f2 -d:)-${{ steps.deploy-info.outputs.date }} >> "$GITHUB_OUTPUT"
+          echo bucket_subfolder=$bucket_subfolder >> "$GITHUB_OUTPUT"
           echo "bucket_name: $bucket_name"
           echo "bucket_subfolder: $bucket_subfolder"
       - name: Set up QEMU
