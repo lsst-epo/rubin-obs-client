@@ -16,7 +16,7 @@ on:
     branches:
       - "develop"
       - "main"
-      - "1006-gha-tag" # TODO: remove
+      - "1006-gha-tag" # TODO: remove, TODO: branch off develop, not main
     tags:
       - "v*"
       - "t*" # TODO: remove
@@ -48,8 +48,8 @@ jobs:
           # Determine environment to deploy to
           if ${{ github.ref_type == 'tag'}}; then
             # TODO: add prod back
-            environment_name="dev"
-            credentials_json='${{ secrets.DEV_SA_KEY }}'
+            environment_name="int"
+            credentials_json='${{ secrets.SKYVIEWER_INT_SERVICE_ACCOUNT }}'
           elif ${{ contains(github.ref, 'main') || contains(github.base_ref, 'main') }}; then
             environment_name="int"
             credentials_json='${{ secrets.SKYVIEWER_INT_SERVICE_ACCOUNT }}'
