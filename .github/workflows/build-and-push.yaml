@@ -16,8 +16,10 @@ on:
     branches:
       - "develop"
       - "main"
+      - "1006-gha-tag-from-develop" # TODO: remove, 
     tags:
       - "v*"
+      - "t*" # TODO: remove
   pull_request:
     types:
       - labeled
@@ -32,11 +34,14 @@ jobs:
   build:
     name: Build Container Image
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'push' || contains(github.event.pull_request.labels.*.name, 'preview') || github.event.label.name == 'preview' }}
+    if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' || contains(github.event.pull_request.labels.*.name, 'preview') || github.event.label.name == 'preview' }}
     outputs:
       image_tag: ${{ steps.deploy-tag.outputs.image_tag }}
       image_name: ${{ steps.deploy-tag.outputs.image_name }}
       environment_name: ${{ steps.deploy-info.outputs.environment_name }}
+      date: ${{ steps.deploy-info.outputs.date }}
+      bucketname: ${{ steps.deploy-tag.outputs.bucket_name }}
+      bucketfolder: ${{ steps.deploy-tag.outputs.bucket_subfolder }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4.2.1
@@ -45,8 +50,9 @@ jobs:
         run: |
           # Determine environment to deploy to
           if ${{ github.ref_type == 'tag'}}; then
-            environment_name="prod"
-            credentials_json='${{ secrets.PIPELINE_EPO_PROD_PROJECT }}'
+            # TODO: add prod back
+            environment_name="int"
+            credentials_json='${{ secrets.SKYVIEWER_INT_SERVICE_ACCOUNT }}'
           elif ${{ contains(github.ref, 'main') || contains(github.base_ref, 'main') }}; then
             environment_name="int"
             credentials_json='${{ secrets.SKYVIEWER_INT_SERVICE_ACCOUNT }}'
@@ -88,15 +94,21 @@ jobs:
         run: |
           # Parse container image tag to deploy
           full_tag=$(echo "$DOCKER_METADATA_OUTPUT_JSON" | jq -r '.tags[0]')
+
+          echo "old full_tag: $full_tag"; # TODO: remove
+          echo "ref_name: ${{ github.ref_name }}"; # TODO: remove
+
           echo "Will use tag \"$full_tag\" for deployment."
           echo image_tag=$(echo "$full_tag" | cut -f2 -d:) >> "$GITHUB_OUTPUT"
           echo image_name=$(echo "$full_tag" | cut -f1 -d:) >> "$GITHUB_OUTPUT"
           echo full_tag=$full_tag >> "$GITHUB_OUTPUT"
 
           bucket_name=rubinobs-site-${{ steps.deploy-info.outputs.environment_name }}
-          bucket_subfolder=$(echo "$full_tag" | cut -f2 -d:)-${{ steps.deploy-info.outputs.date }}
+          # bucket_subfolder=$(echo "$full_tag" | cut -f2 -d:)-${{ steps.deploy-info.outputs.date }}
+          bucket_subfolder=${{ github.ref_name }}-${{ steps.deploy-info.outputs.date }}
           echo bucket_name=$bucket_name >> "$GITHUB_OUTPUT"
-          echo bucket_subfolder=$(echo "$full_tag" | cut -f2 -d:)-${{ steps.deploy-info.outputs.date }} >> "$GITHUB_OUTPUT"
+          # echo bucket_subfolder=$(echo "$full_tag" | cut -f2 -d:)-${{ steps.deploy-info.outputs.date }} >> "$GITHUB_OUTPUT"
+          echo bucket_subfolder=$bucket_subfolder >> "$GITHUB_OUTPUT"
           echo "bucket_name: $bucket_name"
           echo "bucket_subfolder: $bucket_subfolder"
       - name: Set up QEMU
@@ -212,7 +224,7 @@ jobs:
     name: Trigger deploy to ${{ needs.build.outputs.environment_name }}
     needs: build
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'push' }}
+    if: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
     steps:
       - name: Generate Webhook Payload
         id: payload
@@ -220,6 +232,8 @@ jobs:
           PARAMETERS=(
             client.image.tag=${{ needs.build.outputs.image_tag }}
             client.image.repository=${{ needs.build.outputs.image_name }}
+            global.gcsFuse.bucketName=${{ needs.build.outputs.bucketname }}
+            global.gcsFuse.bucketFolder=${{ needs.build.outputs.bucketfolder }}${{ github.event.inputs.bucket-subfolder-suffix }}/.next
           )
           DATA="{
             \"app_name\": \"rubinobs-site\",
