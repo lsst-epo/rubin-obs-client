@@ -1,11 +1,23 @@
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+import { useSummitData } from "@/contexts/SummitData";
 import { Image } from "@rubin-epo/epo-react-lib";
 import { timezone } from "@/lib/observatory";
 import { formatTime } from "@/helpers/formatters";
 import * as Styled from "./styles";
 
 export default function CurrentImage({ image, caption, altText, isPreview }) {
+  // TODO: Remove image prop and always recieve from SummitDataProvider if CameraFeeds will no longer be used
+  const {
+    summitMedia: {
+      items: { allSkyImage, allSkyVideo },
+    },
+    astroweatherData,
+    isLoading,
+  } = useSummitData();
+  console.info("in CurrentImage logging allSkyImage: ", allSkyImage);
+  image = image || allSkyImage;
+
   const {
     t,
     i18n: { language = "en" },
@@ -40,9 +52,9 @@ export default function CurrentImage({ image, caption, altText, isPreview }) {
   }
 
   return (
-    <Styled.Figure caption={caption || defaultCaption}>
-      <Image image={currentImage} />
-    </Styled.Figure>
+    // <Styled.Figure caption={caption || defaultCaption}>
+    <Image image={currentImage} />
+    // </Styled.Figure>
   );
 }
 
