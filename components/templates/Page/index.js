@@ -68,6 +68,7 @@ export default async function Page({
       dynamicComponent === "videoGalleryItems" ||
       dynamicComponent === "jobs" ||
       dynamicComponent === "news" ||
+      dynamicComponent === "rubinBasics" ||
       dynamicComponent === "slideshows" ||
       dynamicComponent === "staffProfiles" ||
       dynamicComponent === "scientificStaff" ||

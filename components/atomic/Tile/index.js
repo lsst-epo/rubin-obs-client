@@ -34,6 +34,7 @@ const Tile = ({
     pages: "8:5",
     events: "1:1",
     news: isFeature ? "1:1" : "4:3",
+    rubinBasics: isFeature ? "1:1" : "4:3",
     slideshows: "4:3",
     search: "1:1",
   };

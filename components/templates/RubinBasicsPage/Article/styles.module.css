@@ -1,0 +1,11 @@
+.pretitle {
+  padding-block-end: var(--size-spacing-2xs);
+}
+
+.subtitleSecondary {
+  padding-block: var(--size-spacing-2xs);
+}
+
+.subtitle {
+  padding-block-start: var(--size-spacing-2xs);
+}

@@ -166,6 +166,11 @@
     "closed": "Closed",
     "loading": "Loading the Jobs..."
   },
+  "rubin-basics": {
+    "related-posts": "Related Rubin Basics Posts",
+    "back-to-posts": "Go Back to Rubin Basics Posts",
+    "loading": "Loading the Rubin Basics..."
+  },
   "news": {
     "news": "News",
     "related-posts": "Related News Posts",
