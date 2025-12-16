@@ -35,7 +35,9 @@ const DataList = ({
     newsPosts: "news-post",
     pressReleases: "press-release",
     videoGalleryItems: "video",
+    rubinBasics: "rubin-basics",
   };
+
   const listType = categories.find((c) => c.slug === listTypeMap[component]);
   const listTypeId = listType?.id;
 

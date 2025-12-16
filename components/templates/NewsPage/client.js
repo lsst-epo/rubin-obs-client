@@ -105,7 +105,7 @@ export default async function NewsPage({ data }) {
             releaseImages={releaseImages}
             releaseVideos={releaseVideos}
             tags={postTags}
-            rootHomeLink={rootHomeLink}
+            pathForTagSearch={rootHomeLink}
           />
         )}
       </Styled.NewsDetail>

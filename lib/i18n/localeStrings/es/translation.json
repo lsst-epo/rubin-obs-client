@@ -181,6 +181,11 @@
     "closed": "Cerrado",
     "loading": "Cargando los Trabajos..."
   },
+  "rubin-basics": {
+    "related-posts": "Publicacions relacionadas",
+    "back-to-posts": "Volver a publicacions",
+    "loading": "Cargando las publicacions..."
+  },
   "news": {
     "news": "News",
     "related-posts": "Noticias relacionadas",

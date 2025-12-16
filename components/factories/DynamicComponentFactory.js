@@ -9,6 +9,7 @@ import SlideshowList from "@/dynamic/SlideshowList";
 import StaffList from "@/dynamic/StaffList";
 import TempList from "@/dynamic/TempList";
 import GlossaryList from "@/dynamic/GlossaryList";
+import RubinBasicsList from "@/dynamic/RubinBasicsList";
 
 const componentMap = {
   alertStream: TempList,
@@ -25,6 +26,8 @@ const componentMap = {
   scientificStaff: StaffList,
   telescopeStatus: TempList,
   glossaryTerms: GlossaryList,
+  rubinBasics: RubinBasicsList,
+  rubinBasicsPosts: RubinBasicsList,
 };
 
 export default function DynamicComponentFactory({ componentType, pageId }) {
