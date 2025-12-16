@@ -17,7 +17,7 @@ export default async function MediaAside({
   releaseImages = [],
   releaseVideos = [],
   tags,
-  rootHomeLink,
+  pathForTagSearch,
 }) {
   const locale = await getLocale();
   const { t } = await useTranslation(locale);
@@ -26,15 +26,21 @@ export default async function MediaAside({
     (a, i) => i < 4 && (a.textLink?.length > 0 || a.externalLink?.length > 0)
   );
 
-  const tagsWithLinks = tags.map(({ slug, title }) => {
-    return {
-      name: title,
-      destination: getPathname({
-        href: { pathname: `/${rootHomeLink?.uri}`, query: { search: slug } },
-        locale,
-      }),
-    };
-  });
+  const tagsWithLinks =
+    tags === undefined
+      ? []
+      : tags.map(({ slug, title }) => {
+          return {
+            name: title,
+            destination: getPathname({
+              href: {
+                pathname: `${pathForTagSearch?.uri}`,
+                query: { search: slug },
+              },
+              locale,
+            }),
+          };
+        });
 
   const mediaAssets = [
     ...contentBlockAssets
@@ -52,7 +58,7 @@ export default async function MediaAside({
   ];
 
   return (
-    <Aside {...{ tags, rootHomeLink }}>
+    <Aside {...{ tags, pathForTagSearch }}>
       {manualAssets?.length > 0 && (
         <AsideSection>
           {manualAssets.map((a, i) => {
@@ -121,5 +127,5 @@ MediaAside.propTypes = {
   releaseImages: PropTypes.array,
   releaseVideos: PropTypes.array,
   tags: PropTypes.array,
-  rootHomeLink: PropTypes.object,
+  pathForTagSearch: PropTypes.object,
 };
