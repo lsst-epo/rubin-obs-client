@@ -66,7 +66,7 @@ export const SectionContent = styled.div`
   }
 
   @media screen and (min-width: ${BREAK_PHABLET_MIN}) {
-    --grid-columns: repeat(4, 1fr);
+    --grid-columns: repeat(3, 1fr);
   }
 `;
 

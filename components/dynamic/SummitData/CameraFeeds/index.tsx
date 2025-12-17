@@ -38,6 +38,12 @@ const CameraFeeds = (isCompact) => {
         <Styled.CondensedBackground $variant="secondary">
           <CurrentImage image={allSkyImage} />
         </Styled.CondensedBackground>
+        <Styled.InfoIcon
+          src="/images/information-icon.svg"
+          alt="info icon"
+          width={100}
+          height={100}
+        />
       </WidgetSection>
     );
   }
