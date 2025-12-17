@@ -7,8 +7,9 @@ import SummitStatusModal from "@/components/modal/SummitStatusModal";
 import AllSky from "./AllSky";
 import CurrentImage from "./AllSky/CurrentImage";
 import * as Styled from "./styles";
+// import CurrentTimeLapse from "./AllSky/CurrentTimeLapse";
 
-const CameraFeeds = () => {
+const CameraFeeds = (isCompact) => {
   const {
     summitMedia: {
       items: { allSkyImage, allSkyVideo },
@@ -31,10 +32,20 @@ const CameraFeeds = () => {
     );
   }
 
+  if (isCompact) {
+    return (
+      <Styled.CondensedBackground $variant="secondary">
+        <Styled.Container>
+          <CurrentImage image={allSkyImage} />
+        </Styled.Container>
+      </Styled.CondensedBackground>
+    );
+  }
+
   return (
     <WidgetPreview
       title="All Sky Camera Feeds"
-      callout="The Sky Over Rubin"
+      callout="All-Sky Camera"
       openModalCallback={() => {
         setModalOpen(true);
       }}

@@ -6,9 +6,7 @@ import { SummitStatusCompactViewBlockFragmentDoc } from "@/gql/graphql";
 import { WeatherUnitProvider } from "@/contexts/WeatherUnit";
 import UnitLocalization from "@/components/layout/UnitLocalization";
 import { SummitDataProvider } from "@/contexts/SummitData";
-// import CameraFeeds from "@/components/dynamic/SummitData/CameraFeeds";
-import CurrentImage from "@/components/dynamic/SummitData/CameraFeeds/AllSky/CurrentImage";
-import WidgetSection from "@/components/layout/WidgetSection";
+import CameraFeeds from "@/components/dynamic/SummitData/CameraFeeds";
 import WidgetGrid from "@/components/layout/WidgetGrid";
 
 import * as Styled from "./styles";
@@ -28,14 +26,14 @@ const SummitStatusCompactView: FC<SummitStatusCompactViewProps> = (props) => {
     weatherCondition,
   } = useFragment(SummitStatusCompactViewBlockFragmentDoc, props);
 
-  const testImage = {
-    timeCreated: "2025-12-12T20:05:36.457Z",
-    updated: "2025-12-12T20:05:36.457Z",
-    mediaLink:
-      "https://storage.googleapis.com/download/storage/v1/b/epo_rubintv_data/o/all_sky_current%2Fall_sky_current.jpg?generation=1765569936321849&alt=media",
-    bucket: "epo_rubintv_data",
-    name: "all_sky_current/all_sky_current.jpg",
-  };
+  // const testImage = {
+  //   timeCreated: "2025-12-12T20:05:36.457Z",
+  //   updated: "2025-12-12T20:05:36.457Z",
+  //   mediaLink:
+  //     "https://storage.googleapis.com/download/storage/v1/b/epo_rubintv_data/o/all_sky_current%2Fall_sky_current.jpg?generation=1765569936321849&alt=media",
+  //   bucket: "epo_rubintv_data",
+  //   name: "all_sky_current/all_sky_current.jpg",
+  // };
 
   return (
     <Styled.Container>
@@ -43,14 +41,7 @@ const SummitStatusCompactView: FC<SummitStatusCompactViewProps> = (props) => {
         <UnitLocalization />
         <SummitDataProvider>
           <WidgetGrid>
-            {/* {allSkyImage && <CameraFeeds />} */}
-            {allSkyImage && (
-              <WidgetSection isCollapsible={false}>
-                <Styled.CondensedBackground $variant="secondary">
-                  <CurrentImage image={testImage} />
-                </Styled.CondensedBackground>
-              </WidgetSection>
-            )}
+            {allSkyImage && <CameraFeeds isCompact={true} />}
           </WidgetGrid>
         </SummitDataProvider>
       </WeatherUnitProvider>
