@@ -7,7 +7,6 @@ import SummitStatusModal from "@/components/modal/SummitStatusModal";
 import AllSky from "./AllSky";
 import CurrentImage from "./AllSky/CurrentImage";
 import * as Styled from "./styles";
-// import CurrentTimeLapse from "./AllSky/CurrentTimeLapse";
 
 const CameraFeeds = (isCompact) => {
   const {
@@ -34,11 +33,12 @@ const CameraFeeds = (isCompact) => {
 
   if (isCompact) {
     return (
-      <Styled.CondensedBackground $variant="secondary">
-        <Styled.Container>
+      // TODO: Add title text to translation JSON
+      <WidgetSection isCollapsible={false} title="All-Sky Camera">
+        <Styled.CondensedBackground $variant="secondary">
           <CurrentImage image={allSkyImage} />
-        </Styled.Container>
-      </Styled.CondensedBackground>
+        </Styled.CondensedBackground>
+      </WidgetSection>
     );
   }
 
