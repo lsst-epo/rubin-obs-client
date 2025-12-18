@@ -39,11 +39,7 @@ export default function CurrentImage({ image, caption, altText, isPreview }) {
     );
   }
 
-  return (
-    <Styled.Figure caption={caption || defaultCaption}>
-      <Image image={currentImage} />
-    </Styled.Figure>
-  );
+  return <Image image={currentImage} />;
 }
 
 CurrentImage.propTypes = {

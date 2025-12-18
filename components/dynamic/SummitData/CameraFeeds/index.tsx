@@ -1,14 +1,17 @@
 import { useState } from "react";
 import { useSummitData } from "@/contexts/SummitData";
+import { useTranslation } from "react-i18next";
 import Loader from "@/components/atomic/Loader";
 import WidgetPreview from "@/components/layout/WidgetPreview";
 import WidgetSection from "@/components/layout/WidgetSection";
 import SummitStatusModal from "@/components/modal/SummitStatusModal";
 import AllSky from "./AllSky";
 import CurrentImage from "./AllSky/CurrentImage";
+import InfoIcon from "@/components/molecules/InfoIcon";
 import * as Styled from "./styles";
 
-const CameraFeeds = () => {
+const CameraFeeds = (isCompact) => {
+  const { t } = useTranslation();
   const {
     summitMedia: {
       items: { allSkyImage, allSkyVideo },
@@ -31,10 +34,24 @@ const CameraFeeds = () => {
     );
   }
 
+  if (isCompact) {
+    return (
+      <WidgetSection
+        isCollapsible={false}
+        title={t("summit_dashboard.sections.all_sky_image.title")}
+      >
+        <Styled.CondensedBackground $variant="secondary">
+          <CurrentImage image={allSkyImage} />
+        </Styled.CondensedBackground>
+        <InfoIcon />
+      </WidgetSection>
+    );
+  }
+
   return (
     <WidgetPreview
       title="All Sky Camera Feeds"
-      callout="The Sky Over Rubin"
+      callout="All-Sky Camera"
       openModalCallback={() => {
         setModalOpen(true);
       }}
