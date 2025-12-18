@@ -36,7 +36,6 @@ const CameraFeeds = (isCompact) => {
 
   if (isCompact) {
     return (
-      // TODO: Add title text to translation JSON
       <WidgetSection
         isCollapsible={false}
         title={t("summit_dashboard.sections.all_sky_image.title")}

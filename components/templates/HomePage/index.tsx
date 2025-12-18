@@ -84,7 +84,6 @@ const HomePage: FC<HomePageProps> = async ({
     sliderLabels = sliderArray.map((slider) => slider.header);
     labelMap = { ...sliderLabels.map((k, i) => ({ [icons[i]]: k })) };
   }
-  // console.info("logging finalContentBlocks", finalContentBlocks);
 
   return (
     <>
