@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useSummitData } from "@/contexts/SummitData";
+import { useTranslation } from "react-i18next";
 import Loader from "@/components/atomic/Loader";
 import WidgetPreview from "@/components/layout/WidgetPreview";
 import WidgetSection from "@/components/layout/WidgetSection";
@@ -10,6 +11,7 @@ import InfoIcon from "@/components/molecules/InfoIcon";
 import * as Styled from "./styles";
 
 const CameraFeeds = (isCompact) => {
+  const { t } = useTranslation();
   const {
     summitMedia: {
       items: { allSkyImage, allSkyVideo },
@@ -35,7 +37,10 @@ const CameraFeeds = (isCompact) => {
   if (isCompact) {
     return (
       // TODO: Add title text to translation JSON
-      <WidgetSection isCollapsible={false} title="All-Sky Camera">
+      <WidgetSection
+        isCollapsible={false}
+        title={t("summit_dashboard.sections.all_sky_image.title")}
+      >
         <Styled.CondensedBackground $variant="secondary">
           <CurrentImage image={allSkyImage} />
         </Styled.CondensedBackground>

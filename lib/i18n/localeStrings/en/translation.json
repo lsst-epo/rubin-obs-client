@@ -426,6 +426,9 @@
           "time_moonrise": "Moonrise time",
           "time_moonset": "Moonset time"
         }
+      },
+      "all_sky_image": {
+        "title": "All-Sky Camera"
       }
     },
     "weather": {
