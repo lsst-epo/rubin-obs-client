@@ -19,7 +19,7 @@ const SummitStatus = ({ summitStatusLayout, widgetPreviews = [] }) => {
         <SummitDataProvider>
           <WidgetGrid>
             <Observation />
-            <CameraFeeds />
+            <CameraFeeds isCompact={false} />
             <Weather />
             <Astroweather />
           </WidgetGrid>
