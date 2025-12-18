@@ -4,10 +4,11 @@ import styled from "styled-components";
 
 export const WidgetSection = styled.section`
   --section-color: var(--white, #fff);
+  --widget-background-color: #313333;
 
-  padding: var(--PADDING_SMALL, 20px);
+  padding: 10px;
   color: var(--section-color);
-  background-color: var(--black, #000);
+  background-color: var(--widget-background-color);
   border-radius: 10px;
 
   h1,
@@ -45,20 +46,27 @@ export const SectionHeader = styled.h2`
   justify-content: space-between;
 `;
 
+export const SectionTitle = styled.p`
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  font-size: medium;
+  text-align: center;
+`;
+
 export const SectionContent = styled.div`
   --grid-columns: repeat(2, 1fr);
 
   grid-template-columns: var(--grid-columns);
   grid-auto-rows: fit-content(10rem);
-  grid-gap: var(--PADDING_SMALL, 20px);
-  margin-block-start: var(--PADDING_SMALL, 20px);
+  grid-gap: 0px;
 
   &:not([hidden]) {
     display: grid;
   }
 
   @media screen and (min-width: ${BREAK_PHABLET_MIN}) {
-    --grid-columns: repeat(4, 1fr);
+    --grid-columns: repeat(3, 1fr);
   }
 `;
 
