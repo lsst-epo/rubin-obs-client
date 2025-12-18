@@ -16,8 +16,3 @@ export const Container = styled.div`
   grid-column: 1 / -1;
   gap: var(--widget-padding);
 `;
-
-export const InfoIcon = styled.div`
-  grid-column: 2;
-  place-self: center center;
-`;

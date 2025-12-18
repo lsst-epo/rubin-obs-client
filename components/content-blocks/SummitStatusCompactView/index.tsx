@@ -2,7 +2,6 @@
 import { FC } from "react";
 import { FragmentType, useFragment } from "@/gql";
 import { SummitStatusCompactViewBlockFragmentDoc } from "@/gql/graphql";
-// import { Container } from "@rubin-epo/epo-react-lib";
 import { WeatherUnitProvider } from "@/contexts/WeatherUnit";
 import { SummitDataProvider } from "@/contexts/SummitData";
 import CameraFeeds from "@/components/dynamic/SummitData/CameraFeeds";
@@ -28,7 +27,6 @@ const SummitStatusCompactView: FC<SummitStatusCompactViewProps> = (props) => {
   return (
     <Styled.Container>
       <WeatherUnitProvider>
-        {/* <UnitLocalization /> */}
         <SummitDataProvider>
           <WidgetGrid>
             {allSkyImage && <CameraFeeds isCompact={true} />}
@@ -38,10 +36,6 @@ const SummitStatusCompactView: FC<SummitStatusCompactViewProps> = (props) => {
     </Styled.Container>
   );
 };
-
-// SummitStatusCompactView.propTypes = {
-//   summitStatusLayout: PropTypes.oneOf(["compact", "full"]),
-// };
 
 SummitStatusCompactView.displayName = "ContentBlock.SummitStatusCompactView";
 
