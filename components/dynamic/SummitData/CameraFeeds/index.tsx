@@ -6,6 +6,7 @@ import WidgetSection from "@/components/layout/WidgetSection";
 import SummitStatusModal from "@/components/modal/SummitStatusModal";
 import AllSky from "./AllSky";
 import CurrentImage from "./AllSky/CurrentImage";
+import UniqueIconComposer from "@/components/svg/UniqueIconComposer";
 import * as Styled from "./styles";
 
 const CameraFeeds = (isCompact) => {
@@ -38,12 +39,9 @@ const CameraFeeds = (isCompact) => {
         <Styled.CondensedBackground $variant="secondary">
           <CurrentImage image={allSkyImage} />
         </Styled.CondensedBackground>
-        <Styled.InfoIcon
-          src="/images/information-icon.svg"
-          alt="info icon"
-          width={100}
-          height={100}
-        />
+        <Styled.InfoIcon>
+          <UniqueIconComposer icon="info" />
+        </Styled.InfoIcon>
       </WidgetSection>
     );
   }

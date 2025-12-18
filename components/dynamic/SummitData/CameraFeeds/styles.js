@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import WidgetBackground from "@/components/atomic/WidgetBackground";
-import Image from "next/image";
 
 export const CondensedBackground = styled(WidgetBackground)`
   display: grid;
@@ -18,7 +17,7 @@ export const Container = styled.div`
   gap: var(--widget-padding);
 `;
 
-export const InfoIcon = styled(Image)`
+export const InfoIcon = styled.div`
   grid-column: 2;
   place-self: center center;
 `;

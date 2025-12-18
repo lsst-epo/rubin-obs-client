@@ -59,7 +59,7 @@ export const SectionContent = styled.div`
 
   grid-template-columns: var(--grid-columns);
   grid-auto-rows: fit-content(10rem);
-  grid-gap: var(--PADDING_SMALL, 20px);
+  grid-gap: 0px;
 
   &:not([hidden]) {
     display: grid;
