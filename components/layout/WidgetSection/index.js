@@ -14,7 +14,7 @@ const WidgetSection = ({
 
   return (
     <Styled.WidgetSection>
-      <Styled.SectionHeader>
+      <Styled.SectionTitle>
         {isCollapsible ? (
           <Styled.SectionIconButton
             onClickCallback={handleToggle}
@@ -27,7 +27,7 @@ const WidgetSection = ({
         ) : (
           title
         )}
-      </Styled.SectionHeader>
+      </Styled.SectionTitle>
       <Styled.SectionContent hidden={isCollapsible && !isOpen}>
         {children}
       </Styled.SectionContent>

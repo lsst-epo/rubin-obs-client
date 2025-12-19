@@ -3,6 +3,7 @@ import Cloudy from "./weather/Cloudy";
 import CloudyPartial from "./weather/CloudyPartial";
 import Filter from "./Filter";
 import Gear from "./Gear";
+import Info from "./Info";
 import Rain from "./weather/Rain";
 import RainHeavy from "./weather/RainHeavy";
 import RainLight from "./weather/RainLight";
@@ -18,6 +19,7 @@ export default {
   CloudyPartial,
   Filter,
   Gear,
+  Info,
   Rain,
   RainHeavy,
   RainLight,

@@ -21,6 +21,7 @@ fragment ContentBlocks on contentBlocks_NeoField {
   ...downloadListBlock
   ...embedBlock
   ...summitStatusBlock
+  ...summitStatusCompactViewBlock
   ...publicationsListBlock
   ...peopleBlock
   ...keyNumbersBlock
