@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import * as Styled from "./styles";
+import InfoIcon from "@/components/molecules/InfoIcon";
 
 const WidgetSection = ({
   children,
@@ -31,6 +32,7 @@ const WidgetSection = ({
       <Styled.SectionContent hidden={isCollapsible && !isOpen}>
         {children}
       </Styled.SectionContent>
+      <InfoIcon width={10} height={10} />
     </Styled.WidgetSection>
   );
 };

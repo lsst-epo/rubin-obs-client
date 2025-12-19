@@ -15,8 +15,8 @@ export const WidgetGrid = styled.div`
     margin-block-start: var(--widget-row-gap);
   }
 
-  @media screen and (min-width: ${token("BREAK_TABLET_MIN")}) {
-    --widget-columns: 3;
+  @media screen and (min-width: ${token("BREAK_MOBILE_MIN")}) {
+    --widget-columns: 2;
   }
 
   @media screen and (min-width: ${token("BREAK_DESKTOP_SMALL")}) {
