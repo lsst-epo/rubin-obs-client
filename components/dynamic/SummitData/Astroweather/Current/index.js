@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSummitData } from "@/contexts/SummitData";
-import WidgetSection from "@/components/layout/WidgetSection";
+import WidgetSection from "@/components/layout/SummitStatus/WidgetSection";
 import Daylight from "@/components/widgets/CurrentData/patterns/Daylight";
 
 const CurrentAstroweather = () => {
