@@ -6,7 +6,8 @@ export const WidgetSection = styled.section`
   --section-color: var(--white, #fff);
   --widget-background-color: #313333;
 
-  padding: 10px;
+  min-height: 170px;
+  padding: 10px 10px 0px;
   color: var(--section-color);
   background-color: var(--widget-background-color);
   border-radius: 10px;
@@ -50,7 +51,7 @@ export const SectionTitle = styled.p`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  font-size: medium;
+  font-size: small;
   text-align: center;
 `;
 

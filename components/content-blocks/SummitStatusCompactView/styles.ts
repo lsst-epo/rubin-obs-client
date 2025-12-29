@@ -2,6 +2,7 @@ import styled from "styled-components";
 import WidgetBackground from "@/components/atomic/WidgetBackground";
 
 export const Container = styled.div`
+  padding: 25px 0px 0px;
   background-color: var(--neutral95, #1f2121);
 `;
 
