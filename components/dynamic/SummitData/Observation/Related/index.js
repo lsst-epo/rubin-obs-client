@@ -4,7 +4,7 @@ import { useWeatherUnit } from "@/contexts/WeatherUnit";
 import { useSummitData } from "@/contexts/SummitData";
 import { convertTemperature } from "@/helpers/converters";
 import Loader from "@/components/atomic/Loader";
-import WidgetSection from "@/components/layout/WidgetSection";
+import WidgetSection from "@/components/layout/SummitStatus/WidgetSection";
 import DewpointCurrent from "@/components/widgets/CurrentData/patterns/Dewpoint";
 import MoonPhase from "@/components/widgets/CurrentData/patterns/MoonPhase";
 

@@ -6,6 +6,8 @@ const svgInternalShape = {
   stroke: PropTypes.string,
   fill: PropTypes.string,
   svgProps: PropTypes.object,
+  width: PropTypes.number,
+  height: PropTypes.number,
 };
 
 export default svgInternalShape;

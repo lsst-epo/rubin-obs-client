@@ -9,12 +9,14 @@ const variants = {
 export const WidgetBackground = styled.div`
   --widget-background-color: ${({ $variant = "primary" }) =>
     variants[$variant]};
-  --widget-padding: ${fluidScale("20px", "10px")};
+  --widget-padding: ${fluidScale("10px", "5px")};
 
   display: flex;
   flex-direction: column;
+  place-self: center center;
   align-items: center;
   justify-content: space-between;
+  width: 65%;
   padding: var(--widget-padding);
   font-size: 0.75rem;
   background-color: var(--widget-background-color);
