@@ -2,12 +2,11 @@ import { useState } from "react";
 import { useSummitData } from "@/contexts/SummitData";
 import { useTranslation } from "react-i18next";
 import Loader from "@/components/atomic/Loader";
-import WidgetPreview from "@/components/layout/WidgetPreview";
-import WidgetSection from "@/components/layout/WidgetSection";
+import WidgetPreview from "@/components/layout/SummitStatus/WidgetPreview";
+import WidgetSection from "@/components/layout/SummitStatus/WidgetSection";
 import SummitStatusModal from "@/components/modal/SummitStatusModal";
 import AllSky from "./AllSky";
 import CurrentImage from "./AllSky/CurrentImage";
-import InfoIcon from "@/components/molecules/InfoIcon";
 import * as Styled from "./styles";
 
 const CameraFeeds = (isCompact) => {
@@ -43,7 +42,6 @@ const CameraFeeds = (isCompact) => {
         <Styled.CondensedBackground $variant="secondary">
           <CurrentImage image={allSkyImage} />
         </Styled.CondensedBackground>
-        <InfoIcon />
       </WidgetSection>
     );
   }
