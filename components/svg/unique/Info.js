@@ -1,11 +1,11 @@
 import defaultProps from "./defaultProps";
 import svgShape from "@/shapes/svg";
 
-const Info = ({ size = 20 }) => {
+const Info = ({ width = 20, height = 20 }) => {
   const uniqueProps = {
     viewBox: "0 0 60 60",
-    width: size,
-    height: size,
+    width,
+    height,
   };
 
   const mergedSvgProps = { ...defaultProps, ...uniqueProps };
