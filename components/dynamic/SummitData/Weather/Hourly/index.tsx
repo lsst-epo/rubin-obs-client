@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useWeatherUnit } from "@/contexts/WeatherUnit";
 import { useSummitData } from "@/contexts/SummitData";
 import Loader from "@/components/atomic/Loader";
-import WidgetSection from "@/components/layout/WidgetSection";
+import WidgetSection from "@/components/layout/SummitStatus/WidgetSection";
 import Windspeed from "@/components/widgets/HourlyData/patterns/Windspeed";
 import { convertWindspeed } from "@/helpers/converters";
 

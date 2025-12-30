@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import Loader from "@/components/atomic/Loader";
-import WidgetPreview from "@/components/layout/WidgetPreview";
+import WidgetPreview from "@/components/layout/SummitStatus/WidgetPreview";
 import SummitStatusModal from "@/components/modal/SummitStatusModal";
 import DewpointCurrent from "@/components/widgets/CurrentData/patterns/Dewpoint";
 import TemperatureCurrent from "@/components/widgets/CurrentData/patterns/Temperature";
