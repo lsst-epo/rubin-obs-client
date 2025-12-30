@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import WidgetGrid from ".";
-import WidgetPreview from "@/layout/WidgetPreview";
+import WidgetPreview from "@/layout/SummitStatus/WidgetPreview";
 
 const meta = {
   component: WidgetGrid,
