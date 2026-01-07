@@ -5,6 +5,7 @@ import InfoIcon from "@/components/molecules/InfoIcon";
 const WidgetSection = ({
   children,
   title,
+  caption,
   isCollapsible = true,
   isOpen = true,
   onToggleCallback,
@@ -32,6 +33,7 @@ const WidgetSection = ({
       <Styled.SectionContent hidden={isCollapsible && !isOpen}>
         {children}
       </Styled.SectionContent>
+      {caption && <Styled.SectionCaption>{caption}</Styled.SectionCaption>}
       <InfoIcon width={10} height={10} />
     </Styled.WidgetSection>
   );
@@ -42,6 +44,7 @@ WidgetSection.displayName = "Layout.WidgetSection";
 WidgetSection.propTypes = {
   children: PropTypes.node,
   title: PropTypes.string,
+  caption: PropTypes.string,
   isCollapsible: PropTypes.bool,
   isOpen: PropTypes.bool,
   onToggleCallback: PropTypes.func,

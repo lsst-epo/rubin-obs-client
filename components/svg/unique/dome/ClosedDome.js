@@ -1,4 +1,4 @@
-import defaultProps from "./defaultProps";
+import defaultProps from "../defaultProps";
 import svgShape from "@/shapes/svg";
 
 const ClosedDome = ({ width = 69.716, height = 70 }) => {
