@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export const WidgetGrid = styled.div`
   --widget-row-gap: var(--PADDING_SMALL, 20px);
-  --widget-columns: ${(props) => (props.gridCount > 1 ? 2 : 1)};
+  --widget-columns: ${(props) => (props.gridcount > 1 ? 2 : 1)};
 
   display: inline-grid;
   grid-template-columns: repeat(var(--widget-columns), 1fr);
@@ -18,7 +18,7 @@ export const WidgetGrid = styled.div`
   }
 
   @media screen and (min-width: ${token("BREAK_DESKTOP_SMALL")}) {
-    --widget-columns: ${(props) => props.gridCount};
+    --widget-columns: ${(props) => props.gridcount};
 
     grid-template-columns: none;
     grid-auto-columns: calc(100vw / 7);
