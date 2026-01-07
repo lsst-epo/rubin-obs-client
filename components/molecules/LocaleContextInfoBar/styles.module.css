@@ -1,0 +1,33 @@
+.localeText {
+    color: #000;
+    font-size: clamp(0.5rem, 1rem, 2rem);
+    vertical-align: middle;
+
+    @media screen and (min-width: 1130px) {
+        width: fit-content;
+        font-size: 13px;
+        margin: 0px 10px 0px 0px;
+    }
+}
+
+.container {
+    background-color: #30dfe3;
+    display: flex;
+    align-self: flex-start;
+    justify-content: space-around;
+    padding: 2px 10px;
+    border-radius: 5px;
+    width: 100%;
+    
+    margin: 0px 0px 20px;
+
+    @media screen and (min-width: 1130px) {
+        width: fit-content;
+        justify-content:  center;
+    }
+}
+
+.icon {
+    margin: 0px 5px 0px 0px;
+    vertical-align: middle;
+}
