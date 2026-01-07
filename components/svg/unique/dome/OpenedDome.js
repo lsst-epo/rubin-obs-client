@@ -3,9 +3,9 @@ import svgShape from "@/shapes/svg";
 
 const OpenedDome = ({ width = 69.716, height = 70 }) => {
   const uniqueProps = {
-    viewBox: "0 0 60 60",
-    width,
-    height,
+    viewBox: "0 0 69.716 70",
+    width: "100%",
+    height: "auto",
   };
 
   const mergedSvgProps = { ...defaultProps, ...uniqueProps };

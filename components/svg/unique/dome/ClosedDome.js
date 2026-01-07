@@ -4,8 +4,8 @@ import svgShape from "@/shapes/svg";
 const ClosedDome = ({ width = 69.716, height = 70 }) => {
   const uniqueProps = {
     viewBox: "0 0 69.716 70",
-    width,
-    height,
+    width: "100%",
+    height: "auto",
   };
 
   const mergedSvgProps = { ...defaultProps, ...uniqueProps };
