@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const WidgetGrid = ({ gridCount, children }) => {
   return (
-    <Styled.WidgetGrid gridCount={gridCount}>{children}</Styled.WidgetGrid>
+    <Styled.WidgetGrid gridcount={gridCount}>{children}</Styled.WidgetGrid>
   );
 };
 

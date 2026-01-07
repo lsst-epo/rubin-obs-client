@@ -32,6 +32,30 @@ export const SummitDataProvider = ({ children }) => {
       summitData.current.dewPoint = 1.0; // temporary code just for demoing/unblocking us
     }
   }
+  const dateTime = Object.fromEntries(
+    new Intl.DateTimeFormat("en-US", {
+      timeZone: "America/Santiago",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: false,
+    })
+      .formatToParts(new Date())
+      .map((p) => [p.type, p.value])
+  );
+
+  const time = `${dateTime.hour}:${dateTime.minute} hrs`;
+  const date = `${dateTime.year}-${dateTime.month}-${dateTime.day}`;
+
+  const localeContextInfo = {
+    time,
+    date,
+    location: "Chile",
+  };
+
   const value = useMemo(
     () => ({
       summitData,
@@ -42,6 +66,11 @@ export const SummitDataProvider = ({ children }) => {
         hasura: isLoading,
         astroweather: astroweatherIsLoading,
       },
+      localeContextInfo: {
+        time,
+        date,
+        location: "Chile",
+      },
     }),
     [
       summitData,
@@ -51,6 +80,7 @@ export const SummitDataProvider = ({ children }) => {
       isError,
       astroweatherIsLoading,
       astroweatherIsError,
+      localeContextInfo,
     ]
   );
 
