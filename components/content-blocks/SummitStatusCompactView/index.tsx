@@ -5,6 +5,7 @@ import { SummitStatusCompactViewBlockFragmentDoc } from "@/gql/graphql";
 import { WeatherUnitProvider } from "@/contexts/WeatherUnit";
 import { SummitDataProvider } from "@/contexts/SummitData";
 import CameraFeeds from "@/components/dynamic/SummitData/CameraFeeds";
+import DomeStatus from "@/components/dynamic/SummitData/DomeStatus";
 import WidgetGrid from "@/components/layout/SummitStatus/WidgetGrid";
 import WidgetContainer from "@/components/layout/SummitStatus/WidgetContainer";
 
@@ -41,6 +42,7 @@ const SummitStatusCompactView: FC<SummitStatusCompactViewProps> = (props) => {
           <WidgetContainer>
             <WidgetGrid gridCount={gridCount}>
               {allSkyImage && <CameraFeeds isCompact={true} />}
+              {domeStatus && <DomeStatus isCompact={true} />}
             </WidgetGrid>
           </WidgetContainer>
         </SummitDataProvider>

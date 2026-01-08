@@ -12,6 +12,8 @@ import Sort from "./Sort";
 import StormLightning from "./weather/StormLightning";
 import StormLightningRain from "./weather/StormLightningRain";
 import Sun from "./weather/Sun";
+import OpenedDome from "./dome/OpenedDome";
+import ClosedDome from "./dome/ClosedDome";
 
 export default {
   Arrow,
@@ -28,4 +30,6 @@ export default {
   StormLightning,
   StormLightningRain,
   Sun,
+  OpenedDome,
+  ClosedDome,
 };
