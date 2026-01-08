@@ -55,6 +55,14 @@ export const SectionTitle = styled.p`
   text-align: center;
 `;
 
+export const SectionCaption = styled.p`
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  font-size: small;
+  text-align: center;
+`;
+
 export const SectionContent = styled.div`
   --grid-columns: repeat(2, 1fr);
 
