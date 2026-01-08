@@ -28,5 +28,4 @@ Cypress.on("uncaught:exception", (err, runnable) => {
   if (err) {
     console.error(err);
   }
-
 });

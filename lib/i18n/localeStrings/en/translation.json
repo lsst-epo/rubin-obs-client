@@ -426,6 +426,14 @@
           "time_moonrise": "Moonrise time",
           "time_moonset": "Moonset time"
         }
+      },
+      "all_sky_image": {
+        "title": "All-Sky Camera"
+      },
+      "dome_status": {
+        "title": "Dome Status",
+        "status_open": "Open",
+        "status_closed": "Closed"
       }
     },
     "weather": {
