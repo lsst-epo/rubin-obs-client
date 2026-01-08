@@ -5,7 +5,8 @@ import Loader from "@/components/atomic/Loader";
 import WidgetPreview from "@/components/layout/SummitStatus/WidgetPreview";
 import WidgetSection from "@/components/layout/SummitStatus/WidgetSection";
 import UniqueIconComposer from "@/components/svg/UniqueIconComposer";
-import * as Styled from "./styles";
+import clsx from "clsx";
+import styles from "./styles.module.css";
 
 const DomeStatus = (isCompact) => {
   const { t } = useTranslation();
@@ -13,7 +14,6 @@ const DomeStatus = (isCompact) => {
     summitData: { domeStatus },
     isLoading,
   } = useSummitData();
-  console.info("domestatus: ", domeStatus);
 
   const [isModalOpen, setModalOpen] = useState(false);
 
@@ -41,13 +41,15 @@ const DomeStatus = (isCompact) => {
             : t("summit_dashboard.sections.dome_status.status_closed")
         }
       >
-        <Styled.CondensedBackground $variant="secondary">
+        <div
+          className={clsx(styles.widgetBackground, styles.condensedBackground)}
+        >
           {domeStatus ? (
             <UniqueIconComposer icon="openedDome" />
           ) : (
             <UniqueIconComposer icon="closedDome" />
           )}
-        </Styled.CondensedBackground>
+        </div>
       </WidgetSection>
     );
   }
