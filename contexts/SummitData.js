@@ -57,6 +57,10 @@ export const SummitDataProvider = ({ children }) => {
     location: "Chile",
   };
 
+  const surveyProgress = {
+    completion: 30,
+  };
+
   const value = useMemo(
     () => ({
       summitData,
@@ -72,6 +76,7 @@ export const SummitDataProvider = ({ children }) => {
         date,
         location: "Chile",
       },
+      surveyProgress,
     }),
     [
       summitData,
@@ -82,6 +87,7 @@ export const SummitDataProvider = ({ children }) => {
       astroweatherIsLoading,
       astroweatherIsError,
       localeContextInfo,
+      surveyProgress,
     ]
   );
 

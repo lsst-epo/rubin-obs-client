@@ -434,6 +434,10 @@
         "title": "Dome Status",
         "status_open": "Open",
         "status_closed": "Closed"
+      },
+      "survey_progress": {
+        "title": "Survey Progress",
+        "caption": "of the 10-year survey"
       }
     },
     "weather": {
