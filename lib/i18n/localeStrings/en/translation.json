@@ -434,6 +434,10 @@
         "title": "Dome Status",
         "status_open": "Open",
         "status_closed": "Closed"
+      },
+      "exposure_count": {
+        "title": "Tonight, Rubin has taken",
+        "caption": "Images"
       }
     },
     "weather": {

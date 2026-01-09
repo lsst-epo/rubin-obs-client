@@ -6,6 +6,7 @@ import { WeatherUnitProvider } from "@/contexts/WeatherUnit";
 import { SummitDataProvider } from "@/contexts/SummitData";
 import CameraFeeds from "@/components/dynamic/SummitData/CameraFeeds";
 import DomeStatus from "@/components/dynamic/SummitData/DomeStatus";
+import ExposureCount from "@/components/dynamic/SummitData/ExposureCount";
 import WidgetGrid from "@/components/layout/SummitStatus/WidgetGrid";
 import WidgetContainer from "@/components/layout/SummitStatus/WidgetContainer";
 
@@ -43,6 +44,7 @@ const SummitStatusCompactView: FC<SummitStatusCompactViewProps> = (props) => {
             <WidgetGrid gridCount={gridCount}>
               {allSkyImage && <CameraFeeds isCompact={true} />}
               {domeStatus && <DomeStatus isCompact={true} />}
+              {exposureCount && <ExposureCount isCompact={true} />}
             </WidgetGrid>
           </WidgetContainer>
         </SummitDataProvider>
