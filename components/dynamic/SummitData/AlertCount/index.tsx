@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useSummitData } from "@/contexts/SummitData";
+import { formatLargeNumber } from "@/helpers/formatters";
 import Loader from "@/components/atomic/Loader";
 import WidgetSection from "@/components/layout/SummitStatus/WidgetSection";
 import clsx from "clsx";
@@ -14,7 +15,7 @@ const AlertCount = (isCompact) => {
   } = useSummitData();
 
   // TODO: Delete this when the alert count data source is up
-  const alertCount = 1234;
+  const alertCount = formatLargeNumber(2234000);
 
   if (isLoading.hasura === undefined || isLoading.hasura) {
     return (
