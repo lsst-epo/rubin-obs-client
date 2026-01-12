@@ -1,26 +1,27 @@
-import { useState } from "react";
-import { useSummitData } from "@/contexts/SummitData";
 import { useTranslation } from "react-i18next";
+import { useSummitData } from "@/contexts/SummitData";
 import Loader from "@/components/atomic/Loader";
 import WidgetSection from "@/components/layout/SummitStatus/WidgetSection";
-import UniqueIconComposer from "@/components/svg/UniqueIconComposer";
 import clsx from "clsx";
 import styles from "./styles.module.css";
 
-const ExposureCount = (isCompact) => {
+const AlertCount = (isCompact) => {
   const { t } = useTranslation();
   const {
-    summitData: { exposureCount },
+    // TODO: Uncomment this when the alert count data source is up
+    // summitData: { alertCount },
     isLoading,
   } = useSummitData();
-  const [isModalOpen, setModalOpen] = useState(false);
+
+  // TODO: Delete this when the alert count data source is up
+  const alertCount = 1234;
 
   if (isLoading.hasura === undefined || isLoading.hasura) {
     return (
       <WidgetSection
         isCollapsible={false}
-        title={t("summit_dashboard.sections.exposure_count.title")}
-        caption={t("summit_dashboard.sections.exposure_count.caption")}
+        title={t("summit_dashboard.sections.alert_count.title")}
+        caption={t("summit_dashboard.sections.alert_count.caption")}
       >
         <div
           className={clsx(styles.widgetBackground, styles.condensedBackground)}
@@ -31,24 +32,23 @@ const ExposureCount = (isCompact) => {
     );
   }
 
-  if (isCompact && exposureCount !== undefined) {
+  if (isCompact && alertCount !== undefined) {
     return (
       <WidgetSection
         isCollapsible={false}
-        title={t("summit_dashboard.sections.exposure_count.title")}
-        caption={t("summit_dashboard.sections.exposure_count.caption")}
+        title={t("summit_dashboard.sections.alert_count.title")}
+        caption={t("summit_dashboard.sections.alert_count.caption")}
       >
         <div
           className={clsx(styles.widgetBackground, styles.condensedBackground)}
         >
-          <UniqueIconComposer icon="TelescopeFootprint"></UniqueIconComposer>
-          <span>{exposureCount}</span>
+          <span>{alertCount}</span>
         </div>
       </WidgetSection>
     );
   }
 };
 
-ExposureCount.displayName = "Dynamic.ExposureCount";
+AlertCount.displayName = "Dynamic.AlertCount";
 
-export default ExposureCount;
+export default AlertCount;
