@@ -58,3 +58,10 @@ export const formatAngle = (angle = 0, locale = "en") =>
     unit: "degree",
     unitDisplay: "narrow",
   }).format(angle);
+
+export const formatLargeNumber = (value, locale = "en") => {
+  return new Intl.NumberFormat(locale, {
+    notation: "compact",
+    maximumFractionDigits: 0,
+  }).format(value);
+};
