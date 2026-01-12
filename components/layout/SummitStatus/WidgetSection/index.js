@@ -33,8 +33,10 @@ const WidgetSection = ({
       <Styled.SectionContent hidden={isCollapsible && !isOpen}>
         {children}
       </Styled.SectionContent>
-      {caption && <Styled.SectionCaption>{caption}</Styled.SectionCaption>}
-      <InfoIcon width={10} height={10} />
+      <Styled.SectionFooter>
+        {caption && <Styled.SectionCaption>{caption}</Styled.SectionCaption>}
+        <InfoIcon width={10} height={10} />
+      </Styled.SectionFooter>
     </Styled.WidgetSection>
   );
 };
