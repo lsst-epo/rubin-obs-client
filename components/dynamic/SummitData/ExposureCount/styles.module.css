@@ -14,7 +14,6 @@
   border-radius: calc(var(--widget-padding) / 2);
 }
 
-
 .condensedBackground {
   display: grid;
   grid-template-rows: 100%;
@@ -22,4 +21,21 @@
   grid-column: 1 / -1;
   gap: var(--widget-padding);
   place-items: center center;
+  position: relative;
+  
+  /* Declare container in order to use cqi later down */
+  container-type: inline-size; 
+}
+
+.condensedBackground > svg, 
+.condensedBackground > span {
+  grid-area: 1 / 1; 
+  z-index: 1;       
+}
+
+.condensedBackground > span {
+  z-index: 2;
+
+  /* Fluid resizing of text relative to SVG */
+  font-size: clamp(1rem, 20cqi + 0.5rem, 5rem);
 }
