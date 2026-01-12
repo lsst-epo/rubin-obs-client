@@ -14,6 +14,7 @@ import StormLightningRain from "./weather/StormLightningRain";
 import Sun from "./weather/Sun";
 import OpenedDome from "./dome/OpenedDome";
 import ClosedDome from "./dome/ClosedDome";
+import TelescopeFootprint from "./TelescopeFootprint";
 
 export default {
   Arrow,
@@ -32,4 +33,5 @@ export default {
   Sun,
   OpenedDome,
   ClosedDome,
+  TelescopeFootprint,
 };
