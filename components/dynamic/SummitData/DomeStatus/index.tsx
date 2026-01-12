@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useSummitData } from "@/contexts/SummitData";
 import { useTranslation } from "react-i18next";
 import Loader from "@/components/atomic/Loader";
-import WidgetPreview from "@/components/layout/SummitStatus/WidgetPreview";
 import WidgetSection from "@/components/layout/SummitStatus/WidgetSection";
 import UniqueIconComposer from "@/components/svg/UniqueIconComposer";
 import clsx from "clsx";
@@ -19,14 +18,17 @@ const DomeStatus = (isCompact) => {
 
   if (isLoading.hasura === undefined || isLoading.hasura) {
     return (
-      <WidgetPreview
-        title="Observation-related information"
-        openModalCallback={() => {
-          setModalOpen(true);
-        }}
+      <WidgetSection
+        isCollapsible={false}
+        title={t("summit_dashboard.sections.exposure_count.title")}
+        caption={t("summit_dashboard.sections.exposure_count.caption")}
       >
-        <Loader isVisible={true} />
-      </WidgetPreview>
+        <div
+          className={clsx(styles.widgetBackground, styles.condensedBackground)}
+        >
+          <Loader isVisible={true} />
+        </div>
+      </WidgetSection>
     );
   }
 
