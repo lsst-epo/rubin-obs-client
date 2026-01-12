@@ -6,6 +6,8 @@ export const WidgetSection = styled.section`
   --section-color: var(--white, #fff);
   --widget-background-color: #313333;
 
+  display: flex;
+  flex-direction: column;
   min-height: 170px;
   padding: 10px 10px 0px;
   color: var(--section-color);
@@ -81,4 +83,12 @@ export const SectionContent = styled.div`
 
 export const SectionSubHeader = styled.h3`
   grid-column: 1/-1;
+`;
+
+export const SectionFooter = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: auto;
 `;
