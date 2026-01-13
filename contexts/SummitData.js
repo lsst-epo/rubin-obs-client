@@ -30,6 +30,7 @@ export const SummitDataProvider = ({ children }) => {
       domeStatus: data.nightlyDigest.nightlyDigest.domeStatus,
       exposureCount: data.nightlyDigest.nightlyDigest.exposureCount,
       surveyProgress: data.nightlyDigest.nightlyDigest.surveyProgress,
+      alertCount: data.nightlyDigest.nightlyDigest.alertCount,
     };
     if (summitData.current.dewPoint === null) {
       summitData.current.dewPoint = 1.0; // temporary code just for demoing/unblocking us

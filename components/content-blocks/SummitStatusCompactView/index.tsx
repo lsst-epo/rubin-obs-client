@@ -48,7 +48,7 @@ const SummitStatusCompactView: FC<SummitStatusCompactViewProps> = (props) => {
               {domeStatus && <DomeStatus isCompact={true} />}
               {exposureCount && <ExposureCount isCompact={true} />}
               {SurveyProgress && <SurveyProgress />}
-              {alertCount && <AlertCount isCompact={true} />}
+              {alertCount && <AlertCount />}
             </WidgetGrid>
           </WidgetContainer>
         </SummitDataProvider>
