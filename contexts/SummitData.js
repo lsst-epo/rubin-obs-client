@@ -29,6 +29,7 @@ export const SummitDataProvider = ({ children }) => {
       hourly: data.summitHourlyData.hourly,
       domeStatus: data.nightlyDigest.nightlyDigest.domeStatus,
       exposureCount: data.nightlyDigest.nightlyDigest.exposureCount,
+      surveyProgress: data.nightlyDigest.nightlyDigest.surveyProgress,
     };
     if (summitData.current.dewPoint === null) {
       summitData.current.dewPoint = 1.0; // temporary code just for demoing/unblocking us

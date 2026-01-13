@@ -438,6 +438,10 @@
       "exposure_count": {
         "title": "Tonight, Rubin has taken",
         "caption": "Images"
+      },
+      "survey_progress": {
+        "title": "Survey Progress",
+        "caption": "of the 10-year survey"
       }
     },
     "weather": {
