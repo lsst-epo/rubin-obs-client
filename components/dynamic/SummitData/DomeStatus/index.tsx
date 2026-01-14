@@ -35,6 +35,7 @@ const DomeStatus = (isCompact) => {
   if (isCompact && domeStatus !== undefined) {
     return (
       <WidgetSection
+        tooltipText={"text from dome status"}
         isCollapsible={false}
         title={t("summit_dashboard.sections.dome_status.title")}
         caption={

@@ -9,6 +9,7 @@ const WidgetSection = ({
   isCollapsible = true,
   isOpen = true,
   onToggleCallback,
+  tooltipText = "",
 }) => {
   const handleToggle = () => {
     onToggleCallback && onToggleCallback(!isOpen);
@@ -35,7 +36,7 @@ const WidgetSection = ({
       </Styled.SectionContent>
       <Styled.SectionFooter>
         {caption && <Styled.SectionCaption>{caption}</Styled.SectionCaption>}
-        <InfoIcon width={10} height={10} />
+        <InfoIcon width={10} height={10} tooltipText={tooltipText} />
       </Styled.SectionFooter>
     </Styled.WidgetSection>
   );
@@ -50,6 +51,7 @@ WidgetSection.propTypes = {
   isCollapsible: PropTypes.bool,
   isOpen: PropTypes.bool,
   onToggleCallback: PropTypes.func,
+  tooltipText: PropTypes.string,
 };
 
 export default WidgetSection;

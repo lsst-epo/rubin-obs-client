@@ -34,6 +34,7 @@ const ExposureCount = (isCompact) => {
   if (isCompact && exposureCount !== undefined) {
     return (
       <WidgetSection
+        tooltipText={"text from exposure count"}
         isCollapsible={false}
         title={t("summit_dashboard.sections.exposure_count.title")}
         caption={t("summit_dashboard.sections.exposure_count.caption")}

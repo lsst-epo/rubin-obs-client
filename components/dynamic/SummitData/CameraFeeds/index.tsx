@@ -36,6 +36,7 @@ const CameraFeeds = (isCompact) => {
   if (isCompact) {
     return (
       <WidgetSection
+        tooltipText={"data from all sky camera"}
         isCollapsible={false}
         title={t("summit_dashboard.sections.all_sky_image.title")}
       >
@@ -66,7 +67,7 @@ const CameraFeeds = (isCompact) => {
         open={isModalOpen}
         onClose={() => setModalOpen(false)}
       >
-        <WidgetSection isCollapsible={false}>
+        <WidgetSection isCollapsible={false} tooltipText={"test test"}>
           <Styled.CondensedBackground $variant="secondary">
             <AllSky image={allSkyImage} video={allSkyVideo} />
           </Styled.CondensedBackground>

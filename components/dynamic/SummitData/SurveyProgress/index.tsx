@@ -23,6 +23,7 @@ const SurveyProgress = () => {
 
   return (
     <WidgetSection
+      tooltipText={"text from survey progress"}
       isCollapsible={false}
       title={t("summit_dashboard.sections.survey_progress.title")}
       caption={t("summit_dashboard.sections.survey_progress.caption")}
