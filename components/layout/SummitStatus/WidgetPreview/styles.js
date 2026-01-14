@@ -48,7 +48,7 @@ export const PreviewHeader = styled.h2`
   align-items: center;
   justify-content: space-between;
   padding: 0 0.5rem;
-  font-size: 80%;
+  font-size: 70%;
   color: var(--black, #000);
   background-color: #d9d9d9;
 `;
@@ -81,6 +81,6 @@ export const PreviewCallout = styled.p`
   grid-area: callout;
   align-items: center;
   justify-content: center;
-  font-size: 90%;
+  font-size: 80%;
   color: var(--white, #fff);
 `;

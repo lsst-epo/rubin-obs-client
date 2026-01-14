@@ -426,6 +426,26 @@
           "time_moonrise": "Moonrise time",
           "time_moonset": "Moonset time"
         }
+      },
+      "all_sky_image": {
+        "title": "All-Sky Camera"
+      },
+      "dome_status": {
+        "title": "Dome Status",
+        "status_open": "Open",
+        "status_closed": "Closed"
+      },
+      "exposure_count": {
+        "title": "Tonight, Rubin has taken",
+        "caption": "Images"
+      },
+      "survey_progress": {
+        "title": "Survey Progress",
+        "caption": "of the 10-year survey"
+      },
+      "alert_count": {
+        "title": "Tonight, Rubin has issued",
+        "caption": "Alerts"
       }
     },
     "weather": {
