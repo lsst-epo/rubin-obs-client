@@ -7,31 +7,21 @@ assignees: ''
 
 ---
 
-## Expected Behavior
+## User story
+As a <person>, I need <something> to <do something>. 
+
+## Short description
+This does something or another ....
 
 
-## Actual Behavior
+...
 
+## New or updated features and their tests
 
-## Steps to Reproduce the Problem
+1. New widget
+1.1 Test 1  - test widget appears on screen
 
-  1.
-  1.
-  1.
+2. New icon
+2.1 Test 1  - Show 
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
-
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
-
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
- - Version [e.g. 22]
-
-**Additional context**
-Add any other context about the problem here.
+## Additional links/resources

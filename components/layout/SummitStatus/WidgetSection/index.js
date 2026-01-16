@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import * as Styled from "./styles";
 import InfoIcon from "@/components/molecules/InfoIcon";
+import { ArrowOrientation } from "@/components/atomic/Tooltip";
 
 const WidgetSection = ({
   children,
@@ -36,7 +37,12 @@ const WidgetSection = ({
       </Styled.SectionContent>
       <Styled.SectionFooter>
         {caption && <Styled.SectionCaption>{caption}</Styled.SectionCaption>}
-        <InfoIcon width={10} height={10} tooltipText={tooltipText} />
+        <InfoIcon
+          width={10}
+          height={10}
+          tooltipText={tooltipText}
+          arrowOrientation={ArrowOrientation.UP}
+        />
       </Styled.SectionFooter>
     </Styled.WidgetSection>
   );

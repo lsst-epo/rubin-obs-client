@@ -2,26 +2,25 @@ import { useState } from "react";
 import * as Styled from "./styles";
 import UniqueIconComposer from "@/components/svg/UniqueIconComposer";
 import PropTypes from "prop-types";
-import Tooltip from "@/components/charts/Tooltip";
+import Tooltip from "@/components/atomic/Tooltip";
 
-const InfoIcon = ({ size, height, width, tooltipText }) => {
+const InfoIcon = ({
+  size,
+  height,
+  width,
+  tooltipText,
+  showTooltips = true,
+  arrowOrientation,
+}) => {
   const [isTooltipVisible, setTooltipVisible] = useState(false);
-  const x = 0;
-  const value = tooltipText;
-  console.info("tooltipText: ", tooltipText);
 
   return (
+    // <Styled.InfoIconContainer>
     <>
       <Styled.InfoIcon>
-        <g
-          onMouseEnter={() => {
-            console.info("onHover!");
-            setTooltipVisible(true);
-          }}
-          onMouseLeave={() => {
-            console.info("no longer hovering!");
-            setTooltipVisible(false);
-          }}
+        <span
+          onMouseEnter={() => showTooltips && setTooltipVisible(true)}
+          onMouseLeave={() => showTooltips && setTooltipVisible(false)}
         >
           <UniqueIconComposer
             icon="info"
@@ -29,12 +28,17 @@ const InfoIcon = ({ size, height, width, tooltipText }) => {
             height={height}
             width={width}
           />
-        </g>
+        </span>
       </Styled.InfoIcon>
-      {tooltipText && (
-        <Tooltip y={100} isVisible={isTooltipVisible} {...{ x, value }} />
+      {showTooltips && (
+        <Tooltip
+          isVisible={isTooltipVisible}
+          value={tooltipText}
+          arrowOrientation={arrowOrientation}
+        />
       )}
     </>
+    // </Styled.InfoIconContainer>
   );
 };
 
@@ -43,6 +47,8 @@ InfoIcon.propTypes = {
   width: PropTypes.number,
   height: PropTypes.number,
   tooltipText: PropTypes.string,
+  showTooltips: PropTypes.bool,
+  arrowOrientation: PropTypes.string,
 };
 
 export default InfoIcon;
