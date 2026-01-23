@@ -1,13 +1,13 @@
 import PropTypes from "prop-types";
-import { ChartBase } from "@/components/charts";
+import { ChartBase } from "@/components/svg/charts";
 import * as Styled from "./styles";
 import { getLinearScale } from "@/lib/utils";
 import { formatTime } from "@/helpers/formatters";
-import XAxis from "@/components/charts/XAxis";
+import XAxis from "@/components/svg/charts/XAxis";
 import { timezoneOffset } from "@/helpers";
 import { timezone } from "@/lib/observatory";
 import { useTranslation } from "react-i18next";
-import ChartLegend from "@/components/charts/Legend";
+import ChartLegend from "@/components/svg/charts/Legend";
 import { fallbackLng } from "@/lib/i18n/settings";
 
 const Daylight = ({ times = [], variant = "primary" }) => {

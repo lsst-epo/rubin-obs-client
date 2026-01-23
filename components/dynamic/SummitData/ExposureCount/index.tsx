@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, FC } from "react";
 import { useSummitData } from "@/contexts/SummitData";
 import { useTranslation } from "react-i18next";
 import Loader from "@/components/atomic/Loader";
@@ -7,7 +7,12 @@ import UniqueIconComposer from "@/components/svg/UniqueIconComposer";
 import clsx from "clsx";
 import styles from "./styles.module.css";
 
-const ExposureCount = (isCompact) => {
+interface ExposureCountProps {
+  tooltipText: string | null;
+  isCompact: boolean;
+}
+
+const ExposureCount: FC<ExposureCountProps> = ({ isCompact, tooltipText }) => {
   const { t } = useTranslation();
   const {
     summitData: { exposureCount },
@@ -34,6 +39,7 @@ const ExposureCount = (isCompact) => {
   if (isCompact && exposureCount !== undefined) {
     return (
       <WidgetSection
+        tooltipText={tooltipText}
         isCollapsible={false}
         title={t("summit_dashboard.sections.exposure_count.title")}
         caption={t("summit_dashboard.sections.exposure_count.caption")}
