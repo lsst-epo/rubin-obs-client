@@ -116,7 +116,7 @@ const documents = {
     types.StaffGridBlockFragmentDoc,
   "fragment summitStatusBlock on contentBlocks_summitStatus_BlockType {\n  id\n  typeHandle\n  summitStatusLayout\n}":
     types.SummitStatusBlockFragmentDoc,
-  "fragment summitStatusCompactViewBlock on contentBlocks_summitStatusCompactView_BlockType {\n  id\n  typeHandle\n  domeStatus\n  alertCount\n  allSkyImage\n  exposureCount\n  surveyProgress\n  weatherCondition\n}":
+  "fragment summitStatusCompactViewBlock on contentBlocks_summitStatusCompactView_BlockType {\n  id\n  typeHandle\n  domeStatus\n  domeStatusTooltipText\n  alertCount\n  alertCountTooltipText\n  allSkyImage\n  allSkyImageTooltipText\n  exposureCount\n  exposureCountTooltipText\n  surveyProgress\n  surveyProgressTooltipText\n  weatherCondition\n  weatherConditionTooltipText\n}":
     types.SummitStatusCompactViewBlockFragmentDoc,
   "fragment tableGroupBlock on contentBlocks_tableGroup_BlockType {\n  id\n  typeHandle\n  sites\n  items: children {\n    ...complexTableBlock\n  }\n}":
     types.TableGroupBlockFragmentDoc,
@@ -512,8 +512,8 @@ export function graphql(
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: "fragment summitStatusCompactViewBlock on contentBlocks_summitStatusCompactView_BlockType {\n  id\n  typeHandle\n  domeStatus\n  alertCount\n  allSkyImage\n  exposureCount\n  surveyProgress\n  weatherCondition\n}"
-): (typeof documents)["fragment summitStatusCompactViewBlock on contentBlocks_summitStatusCompactView_BlockType {\n  id\n  typeHandle\n  domeStatus\n  alertCount\n  allSkyImage\n  exposureCount\n  surveyProgress\n  weatherCondition\n}"];
+  source: "fragment summitStatusCompactViewBlock on contentBlocks_summitStatusCompactView_BlockType {\n  id\n  typeHandle\n  domeStatus\n  domeStatusTooltipText\n  alertCount\n  alertCountTooltipText\n  allSkyImage\n  allSkyImageTooltipText\n  exposureCount\n  exposureCountTooltipText\n  surveyProgress\n  surveyProgressTooltipText\n  weatherCondition\n  weatherConditionTooltipText\n}"
+): (typeof documents)["fragment summitStatusCompactViewBlock on contentBlocks_summitStatusCompactView_BlockType {\n  id\n  typeHandle\n  domeStatus\n  domeStatusTooltipText\n  alertCount\n  alertCountTooltipText\n  allSkyImage\n  allSkyImageTooltipText\n  exposureCount\n  exposureCountTooltipText\n  surveyProgress\n  surveyProgressTooltipText\n  weatherCondition\n  weatherConditionTooltipText\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

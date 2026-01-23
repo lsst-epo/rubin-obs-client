@@ -1,3 +1,4 @@
+import { FC } from "react";
 import { useSummitData } from "@/contexts/SummitData";
 import { useTranslation } from "react-i18next";
 import Loader from "@/components/atomic/Loader";
@@ -6,7 +7,11 @@ import styles from "./styles.module.css";
 import clsx from "clsx";
 import { ProgressRadial } from "@rubin-epo/epo-react-lib";
 
-const SurveyProgress = () => {
+interface SurveyProgressProps {
+  tooltipText: string | null;
+}
+
+const SurveyProgress: FC<SurveyProgressProps> = ({ tooltipText }) => {
   const { t } = useTranslation();
   const {
     summitData: { surveyProgress },
@@ -23,6 +28,7 @@ const SurveyProgress = () => {
 
   return (
     <WidgetSection
+      tooltipText={tooltipText}
       isCollapsible={false}
       title={t("summit_dashboard.sections.survey_progress.title")}
       caption={t("summit_dashboard.sections.survey_progress.caption")}

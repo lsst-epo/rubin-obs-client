@@ -1,0 +1,35 @@
+.tooltipContainer {
+    background-color: #dce0e3;
+    color: #000;
+    position: absolute;
+    padding: 5px 10px;
+    z-index: 1;
+    border: 2px #fff solid;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    max-width: 33.333vw;
+    width: max-content;
+    bottom: 30px;
+    transform: translateX(-46%);
+
+    @media screen and (min-width: 1130px) {
+        max-width: calc((100vw / 7) - 1vw);
+        font-size: 0.6rem;
+        transform: translateX(-47%);
+    }
+}
+
+.toolbarArrowContainer {
+    display: flex;
+    justify-content: center;
+    background: inherit;
+}
+
+.tooltipArrow {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: inherit;
+    transform: rotate(45deg);
+    bottom: -6px;
+}
