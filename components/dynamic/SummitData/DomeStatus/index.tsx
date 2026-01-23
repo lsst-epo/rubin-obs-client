@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, FC } from "react";
 import { useSummitData } from "@/contexts/SummitData";
 import { useTranslation } from "react-i18next";
 import Loader from "@/components/atomic/Loader";
@@ -7,7 +7,12 @@ import UniqueIconComposer from "@/components/svg/UniqueIconComposer";
 import clsx from "clsx";
 import styles from "./styles.module.css";
 
-const DomeStatus = (isCompact) => {
+interface DomeStatusProps {
+  tooltipText: string | null;
+  isCompact: boolean;
+}
+
+const DomeStatus: FC<DomeStatusProps> = ({ isCompact, tooltipText }) => {
   const { t } = useTranslation();
   const {
     summitData: { domeStatus },
@@ -35,6 +40,7 @@ const DomeStatus = (isCompact) => {
   if (isCompact && domeStatus !== undefined) {
     return (
       <WidgetSection
+        tooltipText={tooltipText}
         isCollapsible={false}
         title={t("summit_dashboard.sections.dome_status.title")}
         caption={

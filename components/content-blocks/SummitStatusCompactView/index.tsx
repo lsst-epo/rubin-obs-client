@@ -22,11 +22,17 @@ const SummitStatusCompactView: FC<SummitStatusCompactViewProps> = (props) => {
   // TODO: Rename fields (handles?) in Craft to resemble booleans (allSkyImage --> showAllSkyImage)
   const {
     domeStatus,
+    domeStatusTooltipText,
     alertCount,
+    alertCountTooltipText,
     allSkyImage,
+    allSkyImageTooltipText,
     exposureCount,
+    exposureCountTooltipText,
     surveyProgress,
+    surveyProgressTooltipText,
     weatherCondition,
+    weatherConditionTooltipText,
   } = useFragment(SummitStatusCompactViewBlockFragmentDoc, props);
 
   const gridCount = [
@@ -44,11 +50,28 @@ const SummitStatusCompactView: FC<SummitStatusCompactViewProps> = (props) => {
         <SummitDataProvider>
           <WidgetContainer>
             <WidgetGrid gridCount={gridCount}>
-              {allSkyImage && <CameraFeeds isCompact={true} />}
-              {domeStatus && <DomeStatus isCompact={true} />}
-              {exposureCount && <ExposureCount isCompact={true} />}
-              {SurveyProgress && <SurveyProgress />}
-              {alertCount && <AlertCount />}
+              {allSkyImage && (
+                <CameraFeeds
+                  tooltipText={allSkyImageTooltipText}
+                  isCompact={true}
+                />
+              )}
+              {domeStatus && (
+                <DomeStatus
+                  tooltipText={domeStatusTooltipText}
+                  isCompact={true}
+                />
+              )}
+              {exposureCount && (
+                <ExposureCount
+                  tooltipText={exposureCountTooltipText}
+                  isCompact={true}
+                />
+              )}
+              {SurveyProgress && (
+                <SurveyProgress tooltipText={surveyProgressTooltipText} />
+              )}
+              {alertCount && <AlertCount tooltipText={alertCountTooltipText} />}
             </WidgetGrid>
           </WidgetContainer>
         </SummitDataProvider>

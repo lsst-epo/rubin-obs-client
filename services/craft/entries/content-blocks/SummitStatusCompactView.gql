@@ -2,9 +2,15 @@ fragment summitStatusCompactViewBlock on contentBlocks_summitStatusCompactView_B
   id
   typeHandle
   domeStatus
+  domeStatusTooltipText
   alertCount
+  alertCountTooltipText
   allSkyImage
+  allSkyImageTooltipText
   exposureCount
+  exposureCountTooltipText
   surveyProgress
+  surveyProgressTooltipText
   weatherCondition
+  weatherConditionTooltipText
 }

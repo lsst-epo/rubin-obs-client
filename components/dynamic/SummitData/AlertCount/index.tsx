@@ -1,3 +1,4 @@
+import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useSummitData } from "@/contexts/SummitData";
 import { formatLargeNumber } from "@/helpers/formatters";
@@ -6,7 +7,11 @@ import WidgetSection from "@/components/layout/SummitStatus/WidgetSection";
 import clsx from "clsx";
 import styles from "./styles.module.css";
 
-const AlertCount = () => {
+interface AlertCountProps {
+  tooltipText: string | null;
+}
+
+const AlertCount: FC<AlertCountProps> = ({ tooltipText }) => {
   const { t } = useTranslation();
   const {
     summitData: { alertCount },
@@ -17,6 +22,7 @@ const AlertCount = () => {
 
   return (
     <WidgetSection
+      tooltipText={tooltipText}
       isCollapsible={false}
       title={t("summit_dashboard.sections.alert_count.title")}
       caption={t("summit_dashboard.sections.alert_count.caption")}

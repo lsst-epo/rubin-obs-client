@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, FC } from "react";
 import { useSummitData } from "@/contexts/SummitData";
 import { useTranslation } from "react-i18next";
 import Loader from "@/components/atomic/Loader";
@@ -9,7 +9,12 @@ import AllSky from "./AllSky";
 import CurrentImage from "./AllSky/CurrentImage";
 import * as Styled from "./styles";
 
-const CameraFeeds = (isCompact) => {
+interface CameraFeedsProps {
+  isCompact: boolean;
+  tooltipText: string | null;
+}
+
+const CameraFeeds: FC<CameraFeedsProps> = ({ isCompact, tooltipText }) => {
   const { t } = useTranslation();
   const {
     summitMedia: {
@@ -36,6 +41,7 @@ const CameraFeeds = (isCompact) => {
   if (isCompact) {
     return (
       <WidgetSection
+        tooltipText={tooltipText}
         isCollapsible={false}
         title={t("summit_dashboard.sections.all_sky_image.title")}
       >
@@ -66,7 +72,7 @@ const CameraFeeds = (isCompact) => {
         open={isModalOpen}
         onClose={() => setModalOpen(false)}
       >
-        <WidgetSection isCollapsible={false}>
+        <WidgetSection isCollapsible={false} tooltipText={"test test"}>
           <Styled.CondensedBackground $variant="secondary">
             <AllSky image={allSkyImage} video={allSkyVideo} />
           </Styled.CondensedBackground>
