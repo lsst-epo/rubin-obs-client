@@ -173,7 +173,7 @@ export const SummitDataProvider = ({ children }) => {
     })
     .set(23, {
       daySVG: "DayOvercastRain",
-      nightSVG: "DayOvercastRain",
+      nightSVG: "NightOvercastRain",
       description: t(
         "summit_dashboard.sections.weather_condition.description.overcast_with_rain"
       ),
@@ -282,13 +282,13 @@ export const SummitDataProvider = ({ children }) => {
     };
 
     summitData = {
-      current: data.summitCurrentData.current,
-      daily: data.summitDailyData.daily,
-      hourly: data.summitHourlyData.hourly,
-      domeStatus: data.nightlyDigest.nightlyDigest.domeStatus,
-      exposureCount: data.nightlyDigest.nightlyDigest.exposureCount,
-      surveyProgress: data.nightlyDigest.nightlyDigest.surveyProgress,
-      alertCount: data.nightlyDigest.nightlyDigest.alertCount,
+      current: data.summitCurrentData?.current,
+      daily: data.summitDailyData?.daily,
+      hourly: data.summitHourlyData?.hourly,
+      domeStatus: data.nightlyDigest?.nightlyDigest?.domeStatus,
+      exposureCount: data.nightlyDigest?.nightlyDigest?.exposureCount,
+      surveyProgress: data.nightlyDigest?.nightlyDigest?.surveyProgress,
+      alertCount: data.nightlyDigest?.nightlyDigest?.alertCount,
     };
     if (summitData.current.dewPoint === null) {
       summitData.current.dewPoint = 1.0; // temporary code just for demoing/unblocking us

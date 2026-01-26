@@ -34,7 +34,7 @@
 }
 
 .condensedBackground > span {
-  z-index: 2;
+  z-index: 1;
 
   /* Fluid resizing of text relative to SVG */
   font-size: clamp(1rem, 20cqi + 0.5rem, 5rem);
