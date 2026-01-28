@@ -1,14 +1,21 @@
-import { useState } from "react";
+import { useState, FC } from "react";
 import { useSummitData } from "@/contexts/SummitData";
+import { useTranslation } from "react-i18next";
 import Loader from "@/components/atomic/Loader";
-import WidgetPreview from "@/components/layout/WidgetPreview";
-import WidgetSection from "@/components/layout/WidgetSection";
+import WidgetPreview from "@/components/layout/SummitStatus/WidgetPreview";
+import WidgetSection from "@/components/layout/SummitStatus/WidgetSection";
 import SummitStatusModal from "@/components/modal/SummitStatusModal";
 import AllSky from "./AllSky";
 import CurrentImage from "./AllSky/CurrentImage";
 import * as Styled from "./styles";
 
-const CameraFeeds = () => {
+interface CameraFeedsProps {
+  isCompact: boolean;
+  tooltipText: string | null;
+}
+
+const CameraFeeds: FC<CameraFeedsProps> = ({ isCompact, tooltipText }) => {
+  const { t } = useTranslation();
   const {
     summitMedia: {
       items: { allSkyImage, allSkyVideo },
@@ -31,10 +38,24 @@ const CameraFeeds = () => {
     );
   }
 
+  if (isCompact) {
+    return (
+      <WidgetSection
+        tooltipText={tooltipText}
+        isCollapsible={false}
+        title={t("summit_dashboard.sections.all_sky_image.title")}
+      >
+        <Styled.CondensedBackground $variant="secondary">
+          <CurrentImage image={allSkyImage} />
+        </Styled.CondensedBackground>
+      </WidgetSection>
+    );
+  }
+
   return (
     <WidgetPreview
       title="All Sky Camera Feeds"
-      callout="The Sky Over Rubin"
+      callout="All-Sky Camera"
       openModalCallback={() => {
         setModalOpen(true);
       }}
@@ -51,7 +72,7 @@ const CameraFeeds = () => {
         open={isModalOpen}
         onClose={() => setModalOpen(false)}
       >
-        <WidgetSection isCollapsible={false}>
+        <WidgetSection isCollapsible={false} tooltipText={"test test"}>
           <Styled.CondensedBackground $variant="secondary">
             <AllSky image={allSkyImage} video={allSkyVideo} />
           </Styled.CondensedBackground>

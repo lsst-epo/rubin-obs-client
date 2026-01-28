@@ -1,0 +1,15 @@
+fragment summitStatusCompactViewBlock on contentBlocks_summitStatusCompactView_BlockType {
+  id
+  typeHandle
+  domeStatus
+  domeStatusTooltipText
+  alertCount
+  alertCountTooltipText
+  allSkyImage
+  allSkyImageTooltipText
+  exposureCount
+  exposureCountTooltipText
+  surveyProgress
+  surveyProgressTooltipText
+  weatherCondition
+}

@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import WidgetSection from "@/components/layout/WidgetSection";
+import WidgetSection from "@/components/layout/SummitStatus/WidgetSection";
 import * as Styled from "./styles";
 
 const Instruments = ({ azimuth, zenith }) => {

@@ -11,6 +11,7 @@ const RubinBasicsPostQuery = graphql(`
       ...BaseFields
       ... on rubinBasics_post_Entry {
         description: teaser
+        overlapHero
         siteHandle
         postTags {
           ... on newsTags_Tag {

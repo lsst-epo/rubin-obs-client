@@ -1,5 +1,5 @@
 "use client";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import {
   containerWide,
   containerFullBleed,
@@ -35,6 +35,11 @@ export const Article = styled.article`
   z-index: 1;
   margin-block-start: calc(var(--size-spacing-l) * -1);
   background-color: white;
+  ${(props) =>
+    props.overlapHero === false &&
+    css`
+      margin-top: 0px;
+    `}
 
   @media (max-width: ${tokens.BREAK_TABLET}) {
     margin-block-start: auto;

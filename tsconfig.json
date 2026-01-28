@@ -25,7 +25,7 @@
       "@/*": ["./*"],
       "@/lib/*": ["lib/*"],
       "@/api/*": ["lib/api/*"],
-      "@/charts/*": ["charts/*"],
+      "@/charts/*": ["svg/charts/*"],
       "@/components/*": ["components/*"],
       "@/content-blocks": ["components/content-blocks"],
       "@/dynamic/*": ["components/dynamic/*"],
