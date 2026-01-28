@@ -33,7 +33,6 @@ const SummitStatusCompactView: FC<SummitStatusCompactViewProps> = (props) => {
     surveyProgress,
     surveyProgressTooltipText,
     weatherCondition,
-    weatherConditionTooltipText,
   } = useFragment(SummitStatusCompactViewBlockFragmentDoc, props);
 
   const gridCount = [
