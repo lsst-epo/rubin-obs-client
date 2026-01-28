@@ -7,7 +7,7 @@
   place-self: center center;
   align-items: center;
   justify-content: space-between;
-  width: 65%;
+  width: 75%;
   padding: var(--widget-padding);
   font-size: 0.75rem;
   background-color: var(--widget-background-color);
@@ -21,21 +21,4 @@
   grid-column: 1 / -1;
   gap: var(--widget-padding);
   place-items: center center;
-  position: relative;
-  
-  /* Declare container in order to use cqi later down */
-  container-type: inline-size; 
-}
-
-.condensedBackground > svg, 
-.condensedBackground > span {
-  grid-area: 1 / 1; 
-  z-index: 1;       
-}
-
-.condensedBackground > span {
-  z-index: 1;
-
-  /* Fluid resizing of text relative to SVG */
-  font-size: clamp(1rem, 20cqi + 0.5rem, 5rem);
 }
