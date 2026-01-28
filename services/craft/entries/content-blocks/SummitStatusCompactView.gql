@@ -12,5 +12,4 @@ fragment summitStatusCompactViewBlock on contentBlocks_summitStatusCompactView_B
   surveyProgress
   surveyProgressTooltipText
   weatherCondition
-  weatherConditionTooltipText
 }
