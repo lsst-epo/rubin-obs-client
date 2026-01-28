@@ -2,12 +2,10 @@ import { useState, FC } from "react";
 import { useSummitData } from "@/contexts/SummitData";
 import { useTranslation } from "react-i18next";
 import Loader from "@/components/atomic/Loader";
-import WidgetPreview from "@/components/layout/SummitStatus/WidgetPreview";
 import WidgetSection from "@/components/layout/SummitStatus/WidgetSection";
-import SummitStatusModal from "@/components/modal/SummitStatusModal";
-import AllSky from "./AllSky";
 import CurrentImage from "./AllSky/CurrentImage";
-import * as Styled from "./styles";
+import clsx from "clsx";
+import styles from "./styles.module.css";
 
 interface CameraFeedsProps {
   isCompact: boolean;
@@ -25,60 +23,24 @@ const CameraFeeds: FC<CameraFeedsProps> = ({ isCompact, tooltipText }) => {
   } = useSummitData();
   const [isModalOpen, setModalOpen] = useState(false);
 
-  if (isLoading.hasura === undefined || isLoading.hasura) {
-    return (
-      <WidgetPreview
-        title="Observation-related information"
-        openModalCallback={() => {
-          setModalOpen(true);
-        }}
-      >
-        <Loader isVisible={true} />
-      </WidgetPreview>
-    );
-  }
-
-  if (isCompact) {
-    return (
-      <WidgetSection
-        tooltipText={tooltipText}
-        isCollapsible={false}
-        title={t("summit_dashboard.sections.all_sky_image.title")}
-      >
-        <Styled.CondensedBackground $variant="secondary">
-          <CurrentImage image={allSkyImage} />
-        </Styled.CondensedBackground>
-      </WidgetSection>
-    );
-  }
+  const stillLoading = isLoading.hasura === undefined || isLoading.hasura;
 
   return (
-    <WidgetPreview
-      title="All Sky Camera Feeds"
-      callout="All-Sky Camera"
-      openModalCallback={() => {
-        setModalOpen(true);
-      }}
+    <WidgetSection
+      tooltipText={tooltipText}
+      isCollapsible={false}
+      title={t("summit_dashboard.sections.all_sky_image.title")}
     >
-      <Styled.CondensedBackground $variant="secondary">
-        {isLoading.hasura ? (
+      <div
+        className={clsx(styles.widgetBackground, styles.condensedBackground)}
+      >
+        {stillLoading ? (
           <Loader isVisible={true} />
         ) : (
-          <CurrentImage image={allSkyImage} isPreview />
+          <CurrentImage image={allSkyImage} />
         )}
-      </Styled.CondensedBackground>
-      <SummitStatusModal
-        showLocalization={false}
-        open={isModalOpen}
-        onClose={() => setModalOpen(false)}
-      >
-        <WidgetSection isCollapsible={false} tooltipText={"test test"}>
-          <Styled.CondensedBackground $variant="secondary">
-            <AllSky image={allSkyImage} video={allSkyVideo} />
-          </Styled.CondensedBackground>
-        </WidgetSection>
-      </SummitStatusModal>
-    </WidgetPreview>
+      </div>
+    </WidgetSection>
   );
 };
 
