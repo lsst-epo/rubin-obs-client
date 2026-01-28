@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import RubinBasicsPageClient from "./client";
 
-const NewsPage: FunctionComponent<{
+const RubinBasicsPage: FunctionComponent<{
   section: string;
   data: PageEntry;
   locale: string;
@@ -10,4 +10,4 @@ const NewsPage: FunctionComponent<{
   return <RubinBasicsPageClient {...{ data, section, locale }} />;
 };
 
-export default NewsPage;
+export default RubinBasicsPage;
