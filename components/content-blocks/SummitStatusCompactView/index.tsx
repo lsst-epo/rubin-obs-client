@@ -9,6 +9,7 @@ import DomeStatus from "@/components/dynamic/SummitData/DomeStatus";
 import ExposureCount from "@/components/dynamic/SummitData/ExposureCount";
 import SurveyProgress from "@/components/dynamic/SummitData/SurveyProgress";
 import AlertCount from "@/components/dynamic/SummitData/AlertCount";
+import WeatherCondition from "@/components/dynamic/SummitData/WeatherCondition";
 import WidgetGrid from "@/components/layout/SummitStatus/WidgetGrid";
 import WidgetContainer from "@/components/layout/SummitStatus/WidgetContainer";
 
@@ -72,6 +73,7 @@ const SummitStatusCompactView: FC<SummitStatusCompactViewProps> = (props) => {
                 <SurveyProgress tooltipText={surveyProgressTooltipText} />
               )}
               {alertCount && <AlertCount tooltipText={alertCountTooltipText} />}
+              {weatherCondition && <WeatherCondition />}
             </WidgetGrid>
           </WidgetContainer>
         </SummitDataProvider>

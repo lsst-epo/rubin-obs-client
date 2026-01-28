@@ -36,7 +36,9 @@ const WidgetSection = ({
       </Styled.SectionContent>
       <Styled.SectionFooter>
         {caption && <Styled.SectionCaption>{caption}</Styled.SectionCaption>}
-        <InfoIcon width={10} height={10} tooltipText={tooltipText} />
+        {tooltipText && (
+          <InfoIcon width={10} height={10} tooltipText={tooltipText} />
+        )}
       </Styled.SectionFooter>
     </Styled.WidgetSection>
   );
