@@ -17,6 +17,7 @@ export default async function RubinBasicsPage({ data }) {
     focalPointY,
     heroCaption,
     id,
+    overlapHero,
     newsAssets: rubinBasicAssets,
     postTags,
     title,
@@ -98,9 +99,16 @@ export default async function RubinBasicsPage({ data }) {
         data={hero}
         narrowCaption={showAside}
         {...{ focalPointX, focalPointY }}
+        overlapHero={overlapHero}
       />
       <Styled.NewsDetail $showAside={showAside}>
-        {data && <RubinBasicsArticle data={data} hero={hero[0]} />}
+        {data && (
+          <RubinBasicsArticle
+            data={data}
+            hero={hero[0]}
+            overlapHero={overlapHero}
+          />
+        )}
         {showAside && (
           <MediaAside
             manualAssets={manualAssets}
