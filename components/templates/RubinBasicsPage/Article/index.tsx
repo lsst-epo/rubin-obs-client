@@ -33,6 +33,7 @@ const Article: FC<ArticleProps> = async ({ data, hero }) => {
     description,
     title,
     id,
+    overlapHero = true,
     subtitle,
     postTags = [],
   } = data;
@@ -70,7 +71,7 @@ const Article: FC<ArticleProps> = async ({ data, hero }) => {
   };
 
   return (
-    <Styled.Article>
+    <Styled.Article overlapHero={overlapHero}>
       <StructuredData jsonLd={metadata} id={id} />
       <Container paddingSize="medium">
         <div>
