@@ -35,4 +35,5 @@ NewsHero.propTypes = {
   caption: PropTypes.string,
   focalPointX: PropTypes.number,
   focalPointY: PropTypes.number,
+  overlapHero: PropTypes.bool,
 };
