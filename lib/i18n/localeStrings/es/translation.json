@@ -395,6 +395,24 @@
       "south_abbr": "S",
       "east_abbr": "E",
       "west_abbr": "O"
+    },
+    "sections": {
+      "all_sky_image": {
+        "title": "All-Sky Camera"
+      },
+      "dome_status": {
+        "title": "Dome Status",
+        "status_open": "Open",
+        "status_closed": "Closed"
+      },
+      "exposure_count": {
+        "title": "Tonight, Rubin has taken",
+        "caption": "Images"
+      },
+      "survey_progress": {
+        "title": "Survey Progress",
+        "caption": "of the 10-year survey"
+      }
     }
   },
   "first_look": {

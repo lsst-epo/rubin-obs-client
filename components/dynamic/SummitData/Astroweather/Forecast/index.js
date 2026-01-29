@@ -4,11 +4,11 @@ import { useWeatherUnit } from "@/contexts/WeatherUnit";
 import { useSummitData } from "@/contexts/SummitData";
 import { convertTemperature } from "@/helpers/converters";
 
-import WidgetSection from "@/components/layout/WidgetSection";
+import WidgetSection from "@/components/layout/SummitStatus/WidgetSection";
 import MoonRise from "@/components/widgets/CurrentData/patterns/MoonRise";
 import MoonPhase from "@/components/widgets/CurrentData/patterns/MoonPhase";
 import DailyMoonrise from "@/components/widgets/DailyData/patterns/Moonrise";
-import { SectionSubHeader } from "@/components/layout/WidgetSection/styles";
+import { SectionSubHeader } from "@/components/layout/SummitStatus/WidgetSection/styles";
 import Loader from "@/components/atomic/Loader";
 import DewpointCurrent from "@/components/widgets/CurrentData/patterns/Dewpoint";
 
