@@ -12,6 +12,7 @@ import Sort from "./Sort";
 import StormLightning from "./legacyWeather/StormLightning";
 import StormLightningRain from "./legacyWeather/StormLightningRain";
 import Sun from "./legacyWeather/Sun";
+import Offline from "./Offline";
 import OpenedDome from "./dome/OpenedDome";
 import ClosedDome from "./dome/ClosedDome";
 import TelescopeFootprint from "./TelescopeFootprint";
@@ -67,6 +68,7 @@ export default {
   StormLightning,
   StormLightningRain,
   Sun,
+  Offline,
   OpenedDome,
   ClosedDome,
   TelescopeFootprint,
