@@ -27,7 +27,6 @@ const CameraFeeds: FC<CameraFeedsProps> = ({ tooltipText }) => {
   if (stillLoading) {
     return (
       <WidgetSection
-        isOffline={true}
         isCollapsible={false}
         title={t("summit_dashboard.sections.all_sky_image.title")}
       >

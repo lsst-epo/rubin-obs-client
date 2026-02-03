@@ -41,7 +41,6 @@ const WeatherCondition = () => {
     return (
       <WidgetSection
         isCollapsible={false}
-        isOffline={true}
         title={t("summit_dashboard.sections.weather_condition.title")}
         caption={t("summit_dashboard.error_message")}
       >

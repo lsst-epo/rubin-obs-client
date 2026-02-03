@@ -62,7 +62,6 @@ export const SectionCaption = styled.p`
   align-items: center;
   justify-content: space-evenly;
   font-size: small;
-  color: ${(props) => (props.$offline ? "#CF4040" : "white")};
   text-align: center;
 `;
 

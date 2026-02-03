@@ -48,7 +48,6 @@ const SurveyProgress: FC<SurveyProgressProps> = ({ tooltipText }) => {
       <WidgetSection
         tooltipText={tooltipText}
         isCollapsible={false}
-        isOffline={true}
         title={t("summit_dashboard.sections.survey_progress.title")}
         caption={t("summit_dashboard.error_message")}
       >

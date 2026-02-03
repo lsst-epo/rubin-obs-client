@@ -41,7 +41,6 @@ const ExposureCount: FC<ExposureCountProps> = ({ tooltipText }) => {
       <WidgetSection
         tooltipText={tooltipText}
         isCollapsible={false}
-        isOffline={true}
         title={t("summit_dashboard.sections.exposure_count.title")}
         caption={t("summit_dashboard.error_message")}
       >

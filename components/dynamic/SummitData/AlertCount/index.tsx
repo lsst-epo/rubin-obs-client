@@ -43,7 +43,6 @@ const AlertCount: FC<AlertCountProps> = ({ tooltipText }) => {
       <WidgetSection
         tooltipText={tooltipText}
         isCollapsible={false}
-        isOffline={true}
         title={t("summit_dashboard.sections.alert_count.title")}
         caption={t("summit_dashboard.error_message")}
       >
