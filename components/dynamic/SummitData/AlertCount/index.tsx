@@ -18,7 +18,6 @@ const AlertCount: FC<AlertCountProps> = ({ tooltipText }) => {
     summitData: { alertCount },
     isLoading,
   } = useSummitData();
-
   const stillLoading = isLoading.hasura === undefined || isLoading.hasura;
 
   // While loading, show the title and the loading animation
@@ -43,7 +42,7 @@ const AlertCount: FC<AlertCountProps> = ({ tooltipText }) => {
       <WidgetSection
         tooltipText={tooltipText}
         isCollapsible={false}
-        title={t("summit_dashboard.sections.alert_count.title")}
+        title={t("summit_dashboard.sections.alert_count.error_title")}
         caption={t("summit_dashboard.error_message")}
       >
         <div

@@ -41,7 +41,7 @@ const ExposureCount: FC<ExposureCountProps> = ({ tooltipText }) => {
       <WidgetSection
         tooltipText={tooltipText}
         isCollapsible={false}
-        title={t("summit_dashboard.sections.exposure_count.title")}
+        title={t("summit_dashboard.sections.exposure_count.error_title")}
         caption={t("summit_dashboard.error_message")}
       >
         <div
