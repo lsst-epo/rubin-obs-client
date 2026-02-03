@@ -4,6 +4,7 @@ import { useSummitData } from "@/contexts/SummitData";
 import { formatLargeNumber } from "@/helpers/formatters";
 import Loader from "@/components/atomic/Loader";
 import WidgetSection from "@/components/layout/SummitStatus/WidgetSection";
+import UniqueIconComposer from "@/components/svg/UniqueIconComposer";
 import clsx from "clsx";
 import styles from "./styles.module.css";
 
@@ -20,6 +21,42 @@ const AlertCount: FC<AlertCountProps> = ({ tooltipText }) => {
 
   const stillLoading = isLoading.hasura === undefined || isLoading.hasura;
 
+  // While loading, show the title and the loading animation
+  if (stillLoading) {
+    return (
+      <WidgetSection
+        isCollapsible={false}
+        title={t("summit_dashboard.sections.alert_count.title")}
+      >
+        <div
+          className={clsx(styles.widgetBackground, styles.condensedBackground)}
+        >
+          <Loader isVisible={true} />
+        </div>
+      </WidgetSection>
+    );
+  }
+
+  // If bad data: show the title, offline icon, offline message, and the info icon if applicable
+  if (alertCount === undefined || alertCount === null) {
+    return (
+      <WidgetSection
+        tooltipText={tooltipText}
+        isCollapsible={false}
+        isOffline={true}
+        title={t("summit_dashboard.sections.alert_count.title")}
+        caption={t("summit_dashboard.error_message")}
+      >
+        <div
+          className={clsx(styles.widgetBackground, styles.condensedBackground)}
+        >
+          <UniqueIconComposer icon="Offline" />
+        </div>
+      </WidgetSection>
+    );
+  }
+
+  // Otherwise, render the complete widget
   return (
     <WidgetSection
       tooltipText={tooltipText}
@@ -30,11 +67,7 @@ const AlertCount: FC<AlertCountProps> = ({ tooltipText }) => {
       <div
         className={clsx(styles.widgetBackground, styles.condensedBackground)}
       >
-        {stillLoading ? (
-          <Loader isVisible={true} />
-        ) : (
-          <span>{formatLargeNumber(alertCount)}</span>
-        )}
+        <span>{formatLargeNumber(alertCount)}</span>
       </div>
     </WidgetSection>
   );

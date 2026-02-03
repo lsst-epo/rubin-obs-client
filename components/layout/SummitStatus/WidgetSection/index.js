@@ -8,6 +8,7 @@ const WidgetSection = ({
   caption,
   isCollapsible = true,
   isOpen = true,
+  isOffline = false,
   onToggleCallback,
   tooltipText = "",
 }) => {
@@ -35,7 +36,11 @@ const WidgetSection = ({
         {children}
       </Styled.SectionContent>
       <Styled.SectionFooter>
-        {caption && <Styled.SectionCaption>{caption}</Styled.SectionCaption>}
+        {caption && (
+          <Styled.SectionCaption $offline={isOffline}>
+            {caption}
+          </Styled.SectionCaption>
+        )}
         {tooltipText && (
           <InfoIcon width={10} height={10} tooltipText={tooltipText} />
         )}
@@ -52,6 +57,7 @@ WidgetSection.propTypes = {
   caption: PropTypes.string,
   isCollapsible: PropTypes.bool,
   isOpen: PropTypes.bool,
+  isOffline: PropTypes.bool,
   onToggleCallback: PropTypes.func,
   tooltipText: PropTypes.string,
 };

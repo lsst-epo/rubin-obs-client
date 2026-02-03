@@ -1,4 +1,4 @@
-import { useState, FC } from "react";
+import { FC } from "react";
 import { useSummitData } from "@/contexts/SummitData";
 import { useTranslation } from "react-i18next";
 import Loader from "@/components/atomic/Loader";
@@ -6,25 +6,58 @@ import WidgetSection from "@/components/layout/SummitStatus/WidgetSection";
 import CurrentImage from "./AllSky/CurrentImage";
 import clsx from "clsx";
 import styles from "./styles.module.css";
+import UniqueIconComposer from "@/components/svg/UniqueIconComposer";
 
 interface CameraFeedsProps {
-  isCompact: boolean;
   tooltipText: string | null;
 }
 
-const CameraFeeds: FC<CameraFeedsProps> = ({ isCompact, tooltipText }) => {
+const CameraFeeds: FC<CameraFeedsProps> = ({ tooltipText }) => {
   const { t } = useTranslation();
   const {
     summitMedia: {
-      items: { allSkyImage, allSkyVideo },
+      items: { allSkyImage },
     },
-    astroweatherData,
     isLoading,
   } = useSummitData();
-  const [isModalOpen, setModalOpen] = useState(false);
 
   const stillLoading = isLoading.hasura === undefined || isLoading.hasura;
 
+  // While loading, show the title and the loading animation
+  if (stillLoading) {
+    return (
+      <WidgetSection
+        isOffline={true}
+        isCollapsible={false}
+        title={t("summit_dashboard.sections.all_sky_image.title")}
+      >
+        <div
+          className={clsx(styles.widgetBackground, styles.condensedBackground)}
+        >
+          <Loader isVisible={true} />
+        </div>
+      </WidgetSection>
+    );
+  }
+
+  // If bad data: show the title, offline icon, offline message, and the info icon if applicable
+  if (allSkyImage === undefined || allSkyImage === null) {
+    return (
+      <WidgetSection
+        tooltipText={tooltipText}
+        isCollapsible={false}
+        title={t("summit_dashboard.sections.all_sky_image.title")}
+      >
+        <div
+          className={clsx(styles.widgetBackground, styles.condensedBackground)}
+        >
+          <UniqueIconComposer icon="Offline" />
+        </div>
+      </WidgetSection>
+    );
+  }
+
+  // Otherwise, render the complete widget
   return (
     <WidgetSection
       tooltipText={tooltipText}
@@ -34,11 +67,7 @@ const CameraFeeds: FC<CameraFeedsProps> = ({ isCompact, tooltipText }) => {
       <div
         className={clsx(styles.widgetBackground, styles.condensedBackground)}
       >
-        {stillLoading ? (
-          <Loader isVisible={true} />
-        ) : (
-          <CurrentImage image={allSkyImage} />
-        )}
+        <CurrentImage image={allSkyImage} />
       </div>
     </WidgetSection>
   );

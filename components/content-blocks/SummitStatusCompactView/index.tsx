@@ -50,29 +50,18 @@ const SummitStatusCompactView: FC<SummitStatusCompactViewProps> = (props) => {
         <SummitDataProvider>
           <WidgetContainer>
             <WidgetGrid gridCount={gridCount}>
+              {weatherCondition && <WeatherCondition />}
               {allSkyImage && (
-                <CameraFeeds
-                  tooltipText={allSkyImageTooltipText}
-                  isCompact={true}
-                />
+                <CameraFeeds tooltipText={allSkyImageTooltipText} />
               )}
-              {domeStatus && (
-                <DomeStatus
-                  tooltipText={domeStatusTooltipText}
-                  isCompact={true}
-                />
-              )}
+              {domeStatus && <DomeStatus tooltipText={domeStatusTooltipText} />}
               {exposureCount && (
-                <ExposureCount
-                  tooltipText={exposureCountTooltipText}
-                  isCompact={true}
-                />
+                <ExposureCount tooltipText={exposureCountTooltipText} />
               )}
+              {alertCount && <AlertCount tooltipText={alertCountTooltipText} />}
               {SurveyProgress && (
                 <SurveyProgress tooltipText={surveyProgressTooltipText} />
               )}
-              {alertCount && <AlertCount tooltipText={alertCountTooltipText} />}
-              {weatherCondition && <WeatherCondition />}
             </WidgetGrid>
           </WidgetContainer>
         </SummitDataProvider>

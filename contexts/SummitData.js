@@ -11,11 +11,10 @@ export const SummitDataProvider = ({ children }) => {
   const weatherSvgs = new Map();
   weatherSvgs
     .set(0, {
-      // Use for showing error if invalid pictocode is received
-      // TODO: Fill with Error SVG when delivered by Jose
-      daySVG: "",
-      nightSVG: "",
-      description: "Error retrieving weather",
+      // Use for showing error state if invalid pictocode is received
+      daySVG: undefined,
+      nightSVG: undefined,
+      description: undefined,
     })
     .set(1, {
       daySVG: "DayClearCloudless",
@@ -277,7 +276,6 @@ export const SummitDataProvider = ({ children }) => {
     summitMedia = {
       items: {
         allSkyImage: data.allSkyImage,
-        allSkyVideo: data.allSkyVideo,
       },
     };
 
@@ -285,17 +283,13 @@ export const SummitDataProvider = ({ children }) => {
       current: data.summitCurrentData?.current,
       daily: data.summitDailyData?.daily,
       hourly: data.summitHourlyData?.hourly,
-      domeStatus: data.nightlyDigest?.nightlyDigest?.domeStatus,
-      exposureCount: data.nightlyDigest?.nightlyDigest?.exposureCount,
-      surveyProgress: data.nightlyDigest?.nightlyDigest?.surveyProgress,
-      alertCount: data.nightlyDigest?.nightlyDigest?.alertCount,
+      domeStatus: data.currentWidgetData?.dome?.isOpen,
+      exposureCount: data.currentWidgetData?.exposure?.count,
+      surveyProgress: data.currentWidgetData?.survey?.progress,
+      alertCount: data.currentWidgetData?.alert?.count,
     };
-    if (summitData.current.dewPoint === null) {
-      summitData.current.dewPoint = 1.0; // temporary code just for demoing/unblocking us
-    }
 
-    const rawPictocode =
-      data.weatherData?.rawCurrentWeather?.data_current?.pictocode_detailed;
+    const rawPictocode = data.currentWidgetData?.weather?.pictocode;
     pictocode = rawPictocode <= 35 ? rawPictocode : 0;
   }
 

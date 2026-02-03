@@ -1,4 +1,4 @@
-import { useState, FC } from "react";
+import { FC } from "react";
 import { useSummitData } from "@/contexts/SummitData";
 import { useTranslation } from "react-i18next";
 import Loader from "@/components/atomic/Loader";
@@ -9,24 +9,23 @@ import styles from "./styles.module.css";
 
 interface DomeStatusProps {
   tooltipText: string | null;
-  isCompact: boolean;
 }
 
-const DomeStatus: FC<DomeStatusProps> = ({ isCompact, tooltipText }) => {
+const DomeStatus: FC<DomeStatusProps> = ({ tooltipText }) => {
   const { t } = useTranslation();
   const {
     summitData: { domeStatus },
     isLoading,
   } = useSummitData();
 
-  const [isModalOpen, setModalOpen] = useState(false);
+  const stillLoading = isLoading.hasura === undefined || isLoading.hasura;
 
-  if (isLoading.hasura === undefined || isLoading.hasura) {
+  // If bad data: show the title, offline icon, offline message, and the info icon if applicable
+  if (stillLoading) {
     return (
       <WidgetSection
         isCollapsible={false}
-        title={t("summit_dashboard.sections.exposure_count.title")}
-        caption={t("summit_dashboard.sections.exposure_count.caption")}
+        title={t("summit_dashboard.sections.dome_status.title")}
       >
         <div
           className={clsx(styles.widgetBackground, styles.condensedBackground)}
@@ -37,30 +36,48 @@ const DomeStatus: FC<DomeStatusProps> = ({ isCompact, tooltipText }) => {
     );
   }
 
-  if (isCompact && domeStatus !== undefined) {
+  // If bad data, show the title, offline icon, and the info icon if applicable
+  if (domeStatus === undefined || domeStatus === null) {
     return (
       <WidgetSection
         tooltipText={tooltipText}
         isCollapsible={false}
+        isOffline={true}
         title={t("summit_dashboard.sections.dome_status.title")}
-        caption={
-          domeStatus
-            ? t("summit_dashboard.sections.dome_status.status_open")
-            : t("summit_dashboard.sections.dome_status.status_closed")
-        }
+        caption={t("summit_dashboard.error_message")}
       >
         <div
           className={clsx(styles.widgetBackground, styles.condensedBackground)}
         >
-          {domeStatus ? (
-            <UniqueIconComposer icon="openedDome" />
-          ) : (
-            <UniqueIconComposer icon="closedDome" />
-          )}
+          <UniqueIconComposer icon="Offline" />
         </div>
       </WidgetSection>
     );
   }
+
+  // Otherwise, render the complete widget
+  return (
+    <WidgetSection
+      tooltipText={tooltipText}
+      isCollapsible={false}
+      title={t("summit_dashboard.sections.dome_status.title")}
+      caption={
+        domeStatus
+          ? t("summit_dashboard.sections.dome_status.status_open")
+          : t("summit_dashboard.sections.dome_status.status_closed")
+      }
+    >
+      <div
+        className={clsx(styles.widgetBackground, styles.condensedBackground)}
+      >
+        {domeStatus ? (
+          <UniqueIconComposer icon="openedDome" />
+        ) : (
+          <UniqueIconComposer icon="closedDome" />
+        )}
+      </div>
+    </WidgetSection>
+  );
 };
 
 DomeStatus.displayName = "Dynamic.DomeStatus";
