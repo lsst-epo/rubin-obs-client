@@ -34,12 +34,12 @@ const WidgetSection = ({
       <Styled.SectionContent hidden={isCollapsible && !isOpen}>
         {children}
       </Styled.SectionContent>
-      <Styled.SectionFooter>
-        {caption && <Styled.SectionCaption>{caption}</Styled.SectionCaption>}
-        {tooltipText && (
+      {caption && <Styled.SectionCaption>{caption}</Styled.SectionCaption>}
+      {tooltipText && (
+        <Styled.SectionInfoIconContainer>
           <InfoIcon width={10} height={10} tooltipText={tooltipText} />
-        )}
-      </Styled.SectionFooter>
+        </Styled.SectionInfoIconContainer>
+      )}
     </Styled.WidgetSection>
   );
 };

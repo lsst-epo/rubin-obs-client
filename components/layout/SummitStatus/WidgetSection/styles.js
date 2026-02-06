@@ -1,5 +1,4 @@
 import IconButton from "@/components/atomic/Button/IconButton";
-import { BREAK_PHABLET_MIN } from "@/styles/globalStyles";
 import styled from "styled-components";
 
 export const WidgetSection = styled.section`
@@ -8,11 +7,15 @@ export const WidgetSection = styled.section`
 
   display: flex;
   flex-direction: column;
-  min-height: 170px;
+  min-height: 20vh;
   padding: 10px 10px 0px;
   color: var(--section-color);
   background-color: var(--widget-background-color);
   border-radius: 10px;
+
+  @media screen and (width >= 1130px) {
+    height: 20vh;
+  }
 
   h1,
   h2,
@@ -49,19 +52,11 @@ export const SectionHeader = styled.h2`
   justify-content: space-between;
 `;
 
-export const SectionTitle = styled.p`
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  font-size: clamp(0.5rem, 1rem, 2rem);
-  text-align: center;
-
-  @media screen and (width >= 1130px) {
-    font-size: small;
-  }
+export const SectionSubHeader = styled.h3`
+  grid-column: 1/-1;
 `;
 
-export const SectionCaption = styled.p`
+export const SectionTitle = styled.p`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -79,24 +74,30 @@ export const SectionContent = styled.div`
   grid-template-columns: var(--grid-columns);
   grid-auto-rows: fit-content(10rem);
   grid-gap: 0px;
+  height: 50%;
 
   &:not([hidden]) {
     display: grid;
   }
+`;
 
-  @media screen and (min-width: ${BREAK_PHABLET_MIN}) {
-    --grid-columns: repeat(3, 1fr);
+export const SectionCaption = styled.p`
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 5px;
+  font-size: clamp(0.5rem, 1rem, 2rem);
+  text-align: center;
+
+  @media screen and (width >= 1130px) {
+    font-size: small;
   }
 `;
 
-export const SectionSubHeader = styled.h3`
-  grid-column: 1/-1;
-`;
-
-export const SectionFooter = styled.div`
+export const SectionInfoIconContainer = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-evenly;
   margin-top: auto;
 `;
