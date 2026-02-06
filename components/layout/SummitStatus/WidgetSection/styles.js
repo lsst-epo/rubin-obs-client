@@ -53,16 +53,24 @@ export const SectionTitle = styled.p`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  font-size: small;
+  font-size: clamp(0.5rem, 1rem, 2rem);
   text-align: center;
+
+  @media screen and (width >= 1130px) {
+    font-size: small;
+  }
 `;
 
 export const SectionCaption = styled.p`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  font-size: small;
+  font-size: clamp(0.5rem, 1rem, 2rem);
   text-align: center;
+
+  @media screen and (width >= 1130px) {
+    font-size: small;
+  }
 `;
 
 export const SectionContent = styled.div`
