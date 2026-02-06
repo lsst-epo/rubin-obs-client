@@ -13,7 +13,8 @@ const WeatherCondition = () => {
     isLoading,
   } = useSummitData();
 
-  const stillLoading = isLoading.hasura === undefined || isLoading.hasura;
+  // const stillLoading = isLoading.hasura === undefined || isLoading.hasura;
+  const stillLoading = true;
 
   return (
     <WidgetSection

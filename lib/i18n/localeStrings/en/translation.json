@@ -448,7 +448,7 @@
         "caption": "Alerts"
       },
       "weather_condition": {
-        "title": "Condition",
+        "title": "Weather Conditions",
         "description": {
           "clear_cloudless_sky": "Clear, cloudless sky",
           "clear_and_few_clouds": "Clear and few clouds",
