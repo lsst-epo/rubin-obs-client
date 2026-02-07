@@ -1,4 +1,5 @@
 import IconButton from "@/components/atomic/Button/IconButton";
+import InfoIcon from "@/components/molecules/InfoIcon";
 import styled from "styled-components";
 
 export const WidgetSection = styled.section`
@@ -100,4 +101,14 @@ export const SectionInfoIconContainer = styled.div`
   align-items: center;
   justify-content: space-evenly;
   margin-top: auto;
+`;
+
+export const WidgetInfoIcon = styled(InfoIcon)`
+  width: 12px;
+  height: 12px;
+
+  @media screen and (width >= 1130px) {
+    width: 10px;
+    height: 10px;
+  }
 `;
