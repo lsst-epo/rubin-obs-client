@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import * as Styled from "./styles";
-import InfoIcon from "@/components/molecules/InfoIcon";
 
 const WidgetSection = ({
   children,
@@ -35,10 +34,18 @@ const WidgetSection = ({
         {children}
       </Styled.SectionContent>
       <Styled.SectionFooter>
-        {caption && <Styled.SectionCaption>{caption}</Styled.SectionCaption>}
-        {tooltipText && (
-          <InfoIcon width={10} height={10} tooltipText={tooltipText} />
-        )}
+        <Styled.SectionCaptionContainer>
+          {caption && <Styled.SectionCaption>{caption}</Styled.SectionCaption>}
+        </Styled.SectionCaptionContainer>
+        <Styled.SectionInfoIconContainer>
+          {tooltipText && (
+            <Styled.WidgetInfoIcon
+              height={"0.6em"}
+              width={"0.6em"}
+              tooltipText={tooltipText}
+            />
+          )}
+        </Styled.SectionInfoIconContainer>
       </Styled.SectionFooter>
     </Styled.WidgetSection>
   );

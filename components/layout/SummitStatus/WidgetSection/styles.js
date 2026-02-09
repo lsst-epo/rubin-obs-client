@@ -1,4 +1,5 @@
 import IconButton from "@/components/atomic/Button/IconButton";
+import InfoIcon from "@/components/molecules/InfoIcon";
 import { BREAK_PHABLET_MIN } from "@/styles/globalStyles";
 import styled from "styled-components";
 
@@ -53,16 +54,24 @@ export const SectionTitle = styled.p`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  font-size: small;
+  font-size: clamp(0.5rem, 1rem, 2rem);
   text-align: center;
+
+  @media screen and (width >= 1130px) {
+    font-size: small;
+  }
 `;
 
 export const SectionCaption = styled.p`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  font-size: small;
+  font-size: clamp(0.5rem, 1rem, 2rem);
   text-align: center;
+
+  @media screen and (width >= 1130px) {
+    font-size: small;
+  }
 `;
 
 export const SectionContent = styled.div`
@@ -89,6 +98,20 @@ export const SectionFooter = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
+  min-height: max-content;
   margin-top: auto;
+`;
+
+export const SectionCaptionContainer = styled.div`
+  min-height: 1.5rem;
+`;
+
+export const SectionInfoIconContainer = styled.div`
+  min-height: 1.5rem;
+`;
+
+export const WidgetInfoIcon = styled(InfoIcon)`
+  width: 100%;
+  height: 100%;
 `;
