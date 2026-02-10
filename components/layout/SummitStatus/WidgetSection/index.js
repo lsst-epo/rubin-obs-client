@@ -52,6 +52,7 @@ WidgetSection.propTypes = {
   caption: PropTypes.string,
   isCollapsible: PropTypes.bool,
   isOpen: PropTypes.bool,
+  isOffline: PropTypes.bool,
   onToggleCallback: PropTypes.func,
   tooltipText: PropTypes.string,
 };
