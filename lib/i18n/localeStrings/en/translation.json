@@ -376,6 +376,7 @@
   },
   "summit_dashboard": {
     "open_modal": "Expand content",
+    "error_message": "Offline",
     "unit_localization": {
       "settings": "Settings",
       "label_temp": "Temperature",
@@ -437,6 +438,7 @@
       },
       "exposure_count": {
         "title": "Tonight, Rubin has taken",
+        "error_title": "Exposure Count",
         "caption": "Images"
       },
       "survey_progress": {
@@ -445,10 +447,11 @@
       },
       "alert_count": {
         "title": "Tonight, Rubin has issued",
+        "error_title": "Alert Count",
         "caption": "Alerts"
       },
       "weather_condition": {
-        "title": "Condition",
+        "title": "Weather Condition",
         "description": {
           "clear_cloudless_sky": "Clear, cloudless sky",
           "clear_and_few_clouds": "Clear and few clouds",
