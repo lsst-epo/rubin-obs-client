@@ -80,6 +80,8 @@ export const SectionContent = styled.div`
   grid-template-columns: var(--grid-columns);
   grid-auto-rows: fit-content(10rem);
   grid-gap: 0px;
+  align-content: center;
+  height: 50%;
 
   &:not([hidden]) {
     display: grid;
@@ -87,6 +89,8 @@ export const SectionContent = styled.div`
 
   @media screen and (min-width: ${BREAK_PHABLET_MIN}) {
     --grid-columns: repeat(3, 1fr);
+
+    height: 60%;
   }
 `;
 
