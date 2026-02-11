@@ -30,7 +30,7 @@
 .condensedBackground > svg, 
 .condensedBackground > span {
   grid-area: 1 / 1; 
-  z-index: 1;       
+  z-index: 1;    
 }
 
 .condensedBackground > span {
