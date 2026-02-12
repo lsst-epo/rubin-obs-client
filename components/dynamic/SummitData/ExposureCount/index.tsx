@@ -59,7 +59,6 @@ const ExposureCount: FC<ExposureCountProps> = ({ tooltipText }) => {
       tooltipText={tooltipText}
       isCollapsible={false}
       title={t("summit_dashboard.sections.exposure_count.title")}
-      caption={t("summit_dashboard.sections.exposure_count.caption")}
     >
       <div
         className={clsx(styles.widgetBackground, styles.condensedBackground)}

@@ -60,7 +60,6 @@ const AlertCount: FC<AlertCountProps> = ({ tooltipText }) => {
       tooltipText={tooltipText}
       isCollapsible={false}
       title={t("summit_dashboard.sections.alert_count.title")}
-      caption={t("summit_dashboard.sections.alert_count.caption")}
     >
       <div
         className={clsx(styles.widgetBackground, styles.condensedBackground)}

@@ -1,11 +1,11 @@
 import defaultProps from "../defaultProps";
 import svgShape from "@/shapes/svg";
 
-const NightClearFewClouds = ({ width, height }) => {
+const NightClearFewClouds = ({ width = "auto", height = "100%" }) => {
   const uniqueProps = {
     viewBox: "0 0 90 90",
-    width: "100%",
-    height: "auto",
+    width,
+    height,
   };
 
   const mergedSvgProps = { ...defaultProps, ...uniqueProps };

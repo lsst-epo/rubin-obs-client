@@ -1,8 +1,10 @@
 import defaultProps from "./defaultProps";
 import svgShape from "@/shapes/svg";
 
-const TelescopeFootprint = () => {
+const TelescopeFootprint = (width = "auto", height = "100%") => {
   const uniqueProps = {
+    height,
+    width,
     viewBox: "0 0 80 80",
   };
   const mergedSvgProps = { ...defaultProps, ...uniqueProps };
