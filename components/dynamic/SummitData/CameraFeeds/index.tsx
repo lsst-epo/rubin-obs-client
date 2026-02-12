@@ -1,63 +1,74 @@
-import { useState } from "react";
+import { FC } from "react";
 import { useSummitData } from "@/contexts/SummitData";
+import { useTranslation } from "react-i18next";
 import Loader from "@/components/atomic/Loader";
-import WidgetPreview from "@/components/layout/WidgetPreview";
-import WidgetSection from "@/components/layout/WidgetSection";
-import SummitStatusModal from "@/components/modal/SummitStatusModal";
-import AllSky from "./AllSky";
+import WidgetSection from "@/components/layout/SummitStatus/WidgetSection";
 import CurrentImage from "./AllSky/CurrentImage";
-import * as Styled from "./styles";
+import clsx from "clsx";
+import styles from "./styles.module.css";
+import UniqueIconComposer from "@/components/svg/UniqueIconComposer";
 
-const CameraFeeds = () => {
+interface CameraFeedsProps {
+  tooltipText: string | null;
+}
+
+const CameraFeeds: FC<CameraFeedsProps> = ({ tooltipText }) => {
+  const { t } = useTranslation();
   const {
     summitMedia: {
-      items: { allSkyImage, allSkyVideo },
+      items: { allSkyImage },
     },
-    astroweatherData,
     isLoading,
   } = useSummitData();
-  const [isModalOpen, setModalOpen] = useState(false);
 
-  if (isLoading.hasura === undefined || isLoading.hasura) {
+  const stillLoading = isLoading.hasura === undefined || isLoading.hasura;
+
+  // While loading, show the title and the loading animation
+  if (stillLoading) {
     return (
-      <WidgetPreview
-        title="Observation-related information"
-        openModalCallback={() => {
-          setModalOpen(true);
-        }}
+      <WidgetSection
+        isCollapsible={false}
+        title={t("summit_dashboard.sections.all_sky_image.title")}
       >
-        <Loader isVisible={true} />
-      </WidgetPreview>
+        <div
+          className={clsx(styles.widgetBackground, styles.condensedBackground)}
+        >
+          <Loader isVisible={true} />
+        </div>
+      </WidgetSection>
     );
   }
 
-  return (
-    <WidgetPreview
-      title="All Sky Camera Feeds"
-      callout="The Sky Over Rubin"
-      openModalCallback={() => {
-        setModalOpen(true);
-      }}
-    >
-      <Styled.CondensedBackground $variant="secondary">
-        {isLoading.hasura ? (
-          <Loader isVisible={true} />
-        ) : (
-          <CurrentImage image={allSkyImage} isPreview />
-        )}
-      </Styled.CondensedBackground>
-      <SummitStatusModal
-        showLocalization={false}
-        open={isModalOpen}
-        onClose={() => setModalOpen(false)}
+  // If bad data: show the title, offline icon, offline message, and the info icon if applicable
+  if (allSkyImage === undefined || allSkyImage === null) {
+    return (
+      <WidgetSection
+        tooltipText={tooltipText}
+        isCollapsible={false}
+        title={t("summit_dashboard.sections.all_sky_image.title")}
       >
-        <WidgetSection isCollapsible={false}>
-          <Styled.CondensedBackground $variant="secondary">
-            <AllSky image={allSkyImage} video={allSkyVideo} />
-          </Styled.CondensedBackground>
-        </WidgetSection>
-      </SummitStatusModal>
-    </WidgetPreview>
+        <div
+          className={clsx(styles.widgetBackground, styles.condensedBackground)}
+        >
+          <UniqueIconComposer icon="Offline" />
+        </div>
+      </WidgetSection>
+    );
+  }
+
+  // Otherwise, render the complete widget
+  return (
+    <WidgetSection
+      tooltipText={tooltipText}
+      isCollapsible={false}
+      title={t("summit_dashboard.sections.all_sky_image.title")}
+    >
+      <div
+        className={clsx(styles.widgetBackground, styles.condensedBackground)}
+      >
+        <CurrentImage image={allSkyImage} />
+      </div>
+    </WidgetSection>
   );
 };
 

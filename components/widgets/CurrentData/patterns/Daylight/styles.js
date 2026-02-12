@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { token } from "@/styles/globalStyles";
-import { ChartFigure } from "@/components/charts";
+import { ChartFigure } from "@/components/svg/charts";
 
 export const Figure = styled(ChartFigure)`
   --widget-columns: 1 / -1;

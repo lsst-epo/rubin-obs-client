@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSummitData } from "@/contexts/SummitData";
-import WidgetPreview from "@/components/layout/WidgetPreview";
+import WidgetPreview from "@/components/layout/SummitStatus/WidgetPreview";
 import SummitStatusModal from "@/components/modal/SummitStatusModal";
 import MoonPhase from "@/components/widgets/CurrentData/patterns/MoonPhase";
 import Daylight from "@/components/widgets/CurrentData/patterns/Daylight";

@@ -1,0 +1,26 @@
+.widgetBackground {
+  --widget-background-color: "#313333";
+  --widget-padding: clamp(5px, -2.5px + 0.977vw, 10px);
+
+  display: flex;
+  flex-direction: column;
+  place-self: center center;
+  align-items: center;
+  justify-content: space-between;
+  width: 65%;
+  padding: var(--widget-padding);
+  font-size: 0.75rem;
+  background-color: var(--widget-background-color);
+  border-radius: calc(var(--widget-padding) / 2);
+}
+
+.condensedBackground {
+  display: grid;
+  grid-template-rows: 100%;
+  grid-template-columns: repeat(1, 1fr);
+  grid-column: 1 / -1;
+  gap: var(--widget-padding);
+  place-items: center center;
+  
+  container-type: inline-size; 
+}

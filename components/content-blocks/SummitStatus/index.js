@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Container } from "@rubin-epo/epo-react-lib";
 import { WeatherUnitProvider } from "@/contexts/WeatherUnit";
 import UnitLocalization from "@/components/layout/UnitLocalization";
-import WidgetGrid from "@/components/layout/WidgetGrid";
+import WidgetGrid from "@/components/layout/SummitStatus/WidgetGrid";
 import { SummitDataProvider } from "@/contexts/SummitData";
 import Weather from "@/components/dynamic/SummitData/Weather";
 import Astroweather from "@/components/dynamic/SummitData/Astroweather";
@@ -19,7 +19,7 @@ const SummitStatus = ({ summitStatusLayout, widgetPreviews = [] }) => {
         <SummitDataProvider>
           <WidgetGrid>
             <Observation />
-            <CameraFeeds />
+            <CameraFeeds isCompact={false} />
             <Weather />
             <Astroweather />
           </WidgetGrid>

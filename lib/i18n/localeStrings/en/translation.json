@@ -376,6 +376,7 @@
   },
   "summit_dashboard": {
     "open_modal": "Expand content",
+    "error_message": "Offline",
     "unit_localization": {
       "settings": "Settings",
       "label_temp": "Temperature",
@@ -425,6 +426,49 @@
           "forecast": "Moonrise and moonset times forecast (next fourteen days)",
           "time_moonrise": "Moonrise time",
           "time_moonset": "Moonset time"
+        }
+      },
+      "all_sky_image": {
+        "title": "All-Sky Camera"
+      },
+      "dome_status": {
+        "title": "Dome Status",
+        "status_open": "Open",
+        "status_closed": "Closed"
+      },
+      "exposure_count": {
+        "title": "Rubin Images tonight:",
+        "caption": "Images"
+      },
+      "survey_progress": {
+        "title": "Survey Progress",
+        "caption": "of the 10-year survey"
+      },
+      "alert_count": {
+        "title": "Rubin Alerts tonight:",
+        "caption": "Alerts"
+      },
+      "weather_condition": {
+        "title": "Weather Conditions",
+        "description": {
+          "clear_cloudless_sky": "Clear, cloudless sky",
+          "clear_and_few_clouds": "Clear and few clouds",
+          "partly_cloudy": "Partly cloudy",
+          "mixed_with_thunderstorms": "Mixed with a chance of local thunderstorms",
+          "fog": "Fog",
+          "mostly_cloudy": "Mostly cloudy",
+          "overcast": "Overcast",
+          "overcast_with_rain": "Overcast with rain",
+          "overcast_with_snow": "Overcast with snow",
+          "showers_and_thunderstorms": "Showers, thunderstorms likely",
+          "cloudy_heavy_rain_and_thunderstorms": "Cloudy with thunderstorms and heavy showers",
+          "mixed_with_showers": "Mixed with showers",
+          "overcast_with_snow_and_rain": "Overcast with mixture of snow and rain",
+          "overcast_with_light_rain": "Overcast with occasional rain",
+          "overcast_with_light_snow": "Overcast with occasional snow",
+          "overcast_with_heavy_rain": "Overcast with heavy rain",
+          "mostly_cloudy_with_snow": "Mostly cloudy with snow",
+          "mostly_cloudy_with_thunderstorms": "Mostly cloudy with thunderstorms and showers"
         }
       }
     },

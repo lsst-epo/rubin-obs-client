@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Loader from "@/components/atomic/Loader";
-import WidgetPreview from "@/components/layout/WidgetPreview";
+import WidgetPreview from "@/components/layout/SummitStatus/WidgetPreview";
 import SummitStatusModal from "@/components/modal/SummitStatusModal";
 import { useSummitData } from "@/contexts/SummitData";
 import Azimuth from "@/components/widgets/CurrentData/patterns/Azimuth";
