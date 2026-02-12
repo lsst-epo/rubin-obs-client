@@ -21,7 +21,7 @@ const SurveyProgress: FC<SurveyProgressProps> = ({ tooltipText }) => {
   const progressFormatter = (value) =>
     Intl.NumberFormat("en-US", {
       style: "percent",
-      maximumFractionDigits: 1,
+      maximumFractionDigits: 0,
     }).format(value / 100);
 
   const stillLoading = isLoading.hasura === undefined || isLoading.hasura;

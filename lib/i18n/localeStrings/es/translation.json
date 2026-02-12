@@ -390,28 +390,145 @@
     "callout_text": "¡Cuéntale a todos que acaba de comenzar una nueva era para la astronomía!"
   },
   "summit_dashboard": {
+    "open_modal": "Ampliar contenido",
+    "error_message": "Offline",
     "unit_localization": {
+      "settings": "Settings",
+      "label_temp": "Temperature",
+      "label_windspeed": "Windspeed",
+      "label_humidity": "Humidity",
+      "label_precipitation": "Precipitation",
+      "fahrenheit": "Fahrenheit",
+      "celsius": "Celsius",
+      "NM": "kn",
+      "mi": "mph",
+      "m": "m/s",
+      "NM_full": "Knots",
+      "mi_full": "Miles per hour",
+      "m_full": "Meters per second",
       "north_abbr": "N",
       "south_abbr": "S",
       "east_abbr": "E",
-      "west_abbr": "O"
+      "west_abbr": "W",
+      "degrees_per_second": "Grados por segundo",
+      "degrees_per_second_withUnit": "{{unit}} grados por segundo",
+      "minutes_per_shot": "Minutos por disparo",
+      "minutes_per_shot_withUnit": "{{unit}} minutos por disparo"
     },
     "sections": {
+      "observations": {
+        "related": "Observaciones meteorológicas relacionadas",
+        "instruments": "¿Hacia dónde apuntan los instrumentos?"
+      },
+      "weather": {
+        "preview": "El tiempo en la cumbre",
+        "current": "El tiempo en la cumbre ahora",
+        "hourly": "Estadísticas meteorológicas por horas",
+        "daily": "Variaciones diarias de temperatura - {{unit}} grados (la semana pasada)"
+      },
+      "astro": {
+        "title": "Astroweather",
+        "daylight": {
+          "title": "Twilight, day, and night times",
+          "observing": "Dark enough to observe from {{from}} to {{to}}",
+          "twilight": "Twilight from {{from}} to {{to}}",
+          "daylight": "Daylight from {{from}} to {{to}}",
+          "current": "Current local time {{time}}. It is too light to observe right now.",
+          "current_observable": "Current local time {{time}}. It is dark enough to observe right now.",
+          "midnight": "Midnight"
+        },
+        "moonrise": {
+          "forecast": "Moonrise and moonset times forecast (next fourteen days)",
+          "time_moonrise": "Moonrise time",
+          "time_moonset": "Moonset time"
+        }
+      },
       "all_sky_image": {
-        "title": "All-Sky Camera"
+        "title": "Cámara de cielo completo"
       },
       "dome_status": {
-        "title": "Dome Status",
-        "status_open": "Open",
-        "status_closed": "Closed"
+        "title": "Estado del domo",
+        "status_open": "Abierta",
+        "status_closed": "Cerrada"
       },
       "exposure_count": {
-        "title": "Tonight, Rubin has taken",
-        "caption": "Images"
+        "title": "Las fotos de Rubin esta noche:",
+        "caption": "Imágenes"
       },
       "survey_progress": {
-        "title": "Survey Progress",
-        "caption": "of the 10-year survey"
+        "title": "Progreso de la encuesta",
+        "caption": "de la encuesta de 10 años"
+      },
+      "alert_count": {
+        "title": "Alertas Rubin esta noche:",
+        "caption": "Alertas"
+      },
+      "weather_condition": {
+        "title": "Condiciones climáticas",
+        "description": {
+          "clear_cloudless_sky": "Cielo despejado y sin nubes",
+          "clear_and_few_clouds": "Despejado y pocas nubes",
+          "partly_cloudy": "Parcialmente nublado",
+          "mixed_with_thunderstorms": "Mezclado con probabilidad de tormentas eléctricas locales",
+          "fog": "Niebla",
+          "mostly_cloudy": "Mayormente nublada",
+          "overcast": "Nublada",
+          "overcast_with_rain": "Nublado con lluvia",
+          "overcast_with_snow": "Cubierto con nieve",
+          "showers_and_thunderstorms": "Probables lluvias y tormentas eléctricas",
+          "cloudy_heavy_rain_and_thunderstorms": "Nublado con tormentas eléctricas y fuertes lluvias.",
+          "mixed_with_showers": "Mezclado con duchas",
+          "overcast_with_snow_and_rain": "Nublado con mezcla de nieve y lluvia",
+          "overcast_with_light_rain": "Nublado con lluvias ocasionales",
+          "overcast_with_light_snow": "Nublado con nieve ocasional",
+          "overcast_with_heavy_rain": "Nublado con fuertes lluvias",
+          "mostly_cloudy_with_snow": "Mayormente nublada con nieve",
+          "mostly_cloudy_with_thunderstorms": "Mayormente nublado con tormentas eléctricas y lluvias"
+        }
+      }
+    },
+    "weather": {
+      "temp_daily_max": "High",
+      "temp_daily_min": "Low",
+      "windspeed_direction": "Direction: {{direction}}",
+      "condition_now": "Now",
+      "no_data_yet": "No data yet"
+    },
+    "astro": {
+      "daylight": {
+        "night": "Night",
+        "twilight": "Twilight",
+        "day": "Day"
+      },
+      "moon": {
+        "new": "New Moon",
+        "full": "Full Moon",
+        "crescent_waxing": "Waxing Crescent",
+        "crescent_waning": "Waning Crescent",
+        "gibbous_waxing": "Waxing Gibbous",
+        "gibbous_waning": "Waning Gibbous",
+        "quarter_first": "First Quarter",
+        "quarter_last": "Last Quarter"
+      },
+      "moonlight": {
+        "moonrise": "Moonrise",
+        "moonset": "Moonset"
+      }
+    },
+    "widgets": {
+      "hourly": {
+        "windspeed": "Hourly wind speed report - {{unit}}",
+        "precipitation": "Hourly precipitation probability report - Probability percentage"
+      },
+      "current": {
+        "windspeed": "Average windspeed",
+        "moon": "Tonight we will have a",
+        "azimuth": "Azimuth",
+        "azimuth_angle": "Azimuth: {{angle}}",
+        "zenith": "Zenith",
+        "zenith_angle": "Zenith: {{angle}}",
+        "slew_speed": "Slew speed",
+        "shutter_speed": "Camera shutter speed"
       }
     }
   },

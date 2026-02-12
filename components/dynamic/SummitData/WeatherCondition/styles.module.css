@@ -7,11 +7,13 @@
   place-self: center center;
   align-items: center;
   justify-content: space-between;
-  width: 75%;
+  width: 65%;
+  height: auto;
   padding: var(--widget-padding);
   font-size: 0.75rem;
   background-color: var(--widget-background-color);
   border-radius: calc(var(--widget-padding) / 2);
+  object-fit: contain;
 }
 
 .condensedBackground {
