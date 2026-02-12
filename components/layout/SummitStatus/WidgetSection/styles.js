@@ -54,6 +54,7 @@ export const SectionTitle = styled.p`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  padding-bottom: 0.5rem;
   font-size: clamp(0.5rem, 1rem, 2rem);
   text-align: center;
 

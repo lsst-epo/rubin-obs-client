@@ -3,6 +3,7 @@ import { token } from "@/styles/globalStyles";
 
 export const WidgetContainer = styled.div`
   padding: 15px 20px;
+  margin-bottom: 1rem;
   color: #fff;
   background-color: none;
   border-radius: 10px;
