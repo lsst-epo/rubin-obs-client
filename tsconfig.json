@@ -50,7 +50,7 @@
     "types": ["cypress", "node"]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "__tests__"],
   // Old "moduleResolution": "Node" option required for Cypress
   // https://github.com/cypress-io/cypress/issues/26308#issuecomment-1663592648
   //
