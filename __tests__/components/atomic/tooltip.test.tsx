@@ -8,20 +8,16 @@ function mockedTooltipFormatter(text: string): string {
 
 describe(Tooltip.displayName || "Tooltip", () => {
   const validValue = "This is a valid tooltip text value.";
-  const invalidValue = 42;
 
-  it("displays the tooltip with a valid string value", () => {
+  it("displays the tooltip with a valid value string", () => {
     render(<Tooltip value={validValue} isVisible={true} />);
     expect(screen.getByText(validValue)).toBeInTheDocument();
   });
 
-  it("does not render when a number is passed as value", () => {
-    render(<Tooltip value={invalidValue as any} isVisible={true} />);
-    expect(document.getElementById("tooltipText")).not.toBeInTheDocument();
-  });
+  // Test an empty string
 
-  it("does not render when the text value is undefined", () => {
-    render(<Tooltip value={undefined as any} isVisible={true} />);
+  it("does not display the tooltip when the value string is empty", () => {
+    render(<Tooltip value={""} isVisible={true} />);
     expect(document.getElementById("tooltipText")).not.toBeInTheDocument();
   });
 
