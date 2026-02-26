@@ -47,10 +47,10 @@
       "@/gql/*": ["gql/*"],
       "@/services/*": ["services/*"]
     },
-    "types": ["cypress", "node"]
+    "types": ["jest", "@testing-library/jest-dom", "node"]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules", "__tests__"],
+  "exclude": ["node_modules", "cypress"],
   // Old "moduleResolution": "Node" option required for Cypress
   // https://github.com/cypress-io/cypress/issues/26308#issuecomment-1663592648
   //

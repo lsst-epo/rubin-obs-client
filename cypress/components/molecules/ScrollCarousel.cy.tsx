@@ -1,5 +1,5 @@
 import { mount } from "cypress/react18";
-import ScrollCarousel from ".";
+import ScrollCarousel from "@/components/molecules/ScrollCarousel/index";
 
 describe("<ScrollCarousel>", () => {
   it("renders to page", () => {
