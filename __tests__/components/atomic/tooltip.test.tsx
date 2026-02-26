@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
-import Tooltip from "../../../components/atomic/Tooltip/index";
+import Tooltip from "@/components/atomic/Tooltip/index";
 
 function mockedTooltipFormatter(text: string): string {
   return text.toUpperCase();
@@ -13,8 +13,6 @@ describe(Tooltip.displayName || "Tooltip", () => {
     render(<Tooltip value={validValue} isVisible={true} />);
     expect(screen.getByText(validValue)).toBeInTheDocument();
   });
-
-  // Test an empty string
 
   it("does not display the tooltip when the value string is empty", () => {
     render(<Tooltip value={""} isVisible={true} />);
@@ -42,8 +40,10 @@ describe(Tooltip.displayName || "Tooltip", () => {
     expect(screen.getByText(validValue.toUpperCase())).toBeInTheDocument();
   });
 
-  it("formats the tooltip text when a formatterFunction is provided", () => {
+  it("does not modify the tooltip text when a formatterFunction is NOT provided", () => {
     render(<Tooltip value={validValue} isVisible={true} />);
-    expect(screen.getByText(validValue)).toBeInTheDocument();
+    expect(
+      screen.queryByText(validValue.toUpperCase())
+    ).not.toBeInTheDocument();
   });
 });
