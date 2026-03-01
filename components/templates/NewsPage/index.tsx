@@ -14,7 +14,7 @@ const sanitize = (dirty: string | undefined) => {
       `${env.NEXT_PUBLIC_NOIRLAB_BASE_URL}`
     );
     const sanitizeOptions: IOptions = {
-      allowedTags: [...defaults.allowedTags, "iframe"],
+      allowedTags: [...defaults.allowedTags, "iframe", "img"],
       allowedAttributes: {
         ...defaults.allowedAttributes,
         iframe: ["src", "style", "width", "height", "allowfullscreen"],
