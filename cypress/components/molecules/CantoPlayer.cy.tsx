@@ -1,5 +1,5 @@
 import { mount } from "cypress/react18";
-import CantoPlayer from ".";
+import CantoPlayer from "@/components/molecules/players/Canto/index";
 import { CantoVideoMetadata } from "@/lib/api/galleries/schema";
 
 const videos: Array<{

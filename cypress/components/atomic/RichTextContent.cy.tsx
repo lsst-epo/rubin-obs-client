@@ -1,4 +1,4 @@
-import RichTextContent from "./index";
+import RichTextContent from "@/atomic/RichTextContent/index";
 import { striptags } from "@/lib/utils/strings";
 import { mount } from "cypress/react18";
 
