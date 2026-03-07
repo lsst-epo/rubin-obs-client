@@ -64,4 +64,4 @@ If you visit the Rubin Observatory summit site and would like to commemorate you
 |----|-------|--------|
 |2024, November 15|[@alexgoff](https://github.com/alexgoff)|Primera commit|
 |2024, November 15|[@ericdrosas87](https://github.com/ericdrosas87)|First visit|
-
+|2026, March 07|[@jeffinnes](https://github.com/jeffinnes)|First visit|
