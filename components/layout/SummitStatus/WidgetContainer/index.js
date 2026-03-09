@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import LocaleContextInfoBar from "@/components/molecules/LocaleContextInfoBar";
 import { useSummitData } from "@/contexts/SummitData";
 
-const WidgetContainer = ({ children }) => {
+const WidgetContainer = ({ dashboardCaption, children }) => {
   const {
     localeContextInfo: { time, date, location },
   } = useSummitData();
@@ -14,7 +14,7 @@ const WidgetContainer = ({ children }) => {
       <Styled.WidgetContainer>
         <Styled.HeaderText>Rubin summit status dashboard</Styled.HeaderText>
         {children}
-        <Styled.FooterText>See more summit status widgets!</Styled.FooterText>
+        <Styled.FooterText>{dashboardCaption}</Styled.FooterText>
       </Styled.WidgetContainer>
     </Styled.Wrapper>
   );
@@ -22,6 +22,7 @@ const WidgetContainer = ({ children }) => {
 WidgetContainer.displayName = "Layout.WidgetContainer";
 
 WidgetContainer.propTypes = {
+  dashboardCaption: PropTypes.string,
   children: PropTypes.node,
 };
 export default WidgetContainer;
