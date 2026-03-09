@@ -1,3 +1,4 @@
+import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useSummitData } from "@/contexts/SummitData";
 import Loader from "@/components/atomic/Loader";
@@ -6,7 +7,11 @@ import UniqueIconComposer from "@/components/svg/UniqueIconComposer";
 import clsx from "clsx";
 import styles from "./styles.module.css";
 
-const WeatherCondition = () => {
+interface WeatherConditionProps {
+  tooltipText: string | null;
+}
+
+const WeatherCondition: FC<WeatherConditionProps> = ({ tooltipText }) => {
   const { t } = useTranslation();
   const {
     currentWeatherArtifacts: { svgName, weatherDescription },
@@ -41,6 +46,7 @@ const WeatherCondition = () => {
     return (
       <WidgetSection
         isCollapsible={false}
+        tooltipText={tooltipText}
         title={t("summit_dashboard.sections.weather_condition.title")}
         caption={t("summit_dashboard.error_message")}
       >
@@ -60,6 +66,7 @@ const WeatherCondition = () => {
   // Otherwise, render the complete widget
   return (
     <WidgetSection
+      tooltipText={tooltipText}
       isCollapsible={false}
       title={t("summit_dashboard.sections.weather_condition.title")}
       caption={weatherDescription}
