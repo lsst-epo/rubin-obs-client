@@ -323,7 +323,9 @@ export const SummitDataProvider = ({ children }) => {
 
     // Switch to using nighttime SVG at 7pm
     const svgName =
-      dateTime.hour < "19" ? currentWeather.daySVG : currentWeather.nightSVG;
+      dateTime.hour > "7" && dateTime.hour < "19"
+        ? currentWeather.daySVG
+        : currentWeather.nightSVG;
     const weatherDescription = currentWeather.description;
 
     currentWeatherArtifacts = {
