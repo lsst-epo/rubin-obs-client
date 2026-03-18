@@ -390,6 +390,7 @@
     "callout_text": "¡Cuéntale a todos que acaba de comenzar una nueva era para la astronomía!"
   },
   "summit_dashboard": {
+    "title": "What's happening at Rubin Observatory?",
     "open_modal": "Expandir contenido",
     "error_message": "Desconectado",
     "unit_localization": {
