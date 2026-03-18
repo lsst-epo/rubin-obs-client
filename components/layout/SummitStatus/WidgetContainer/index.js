@@ -2,8 +2,10 @@ import * as Styled from "./styles";
 import PropTypes from "prop-types";
 import LocaleContextInfoBar from "@/components/molecules/LocaleContextInfoBar";
 import { useSummitData } from "@/contexts/SummitData";
+import { useTranslation } from "react-i18next";
 
 const WidgetContainer = ({ dashboardCaption, children }) => {
+  const { t } = useTranslation();
   const {
     localeContextInfo: { time, date, location },
   } = useSummitData();
@@ -12,7 +14,7 @@ const WidgetContainer = ({ dashboardCaption, children }) => {
     <Styled.Wrapper>
       <LocaleContextInfoBar time={time} date={date} location={location} />
       <Styled.WidgetContainer>
-        <Styled.HeaderText>Rubin summit status dashboard</Styled.HeaderText>
+        <Styled.HeaderText>{t("summit_dashboard.title")}</Styled.HeaderText>
         {children}
         <Styled.FooterText>{dashboardCaption}</Styled.FooterText>
       </Styled.WidgetContainer>
