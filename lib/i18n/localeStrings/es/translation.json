@@ -390,77 +390,77 @@
     "callout_text": "¡Cuéntale a todos que acaba de comenzar una nueva era para la astronomía!"
   },
   "summit_dashboard": {
-    "open_modal": "Ampliar contenido",
-    "error_message": "Offline",
+    "open_modal": "Expandir contenido",
+    "error_message": "Desconectado",
     "unit_localization": {
-      "settings": "Settings",
-      "label_temp": "Temperature",
-      "label_windspeed": "Windspeed",
-      "label_humidity": "Humidity",
-      "label_precipitation": "Precipitation",
+      "settings": "Ajustes",
+      "label_temp": "Temperatura",
+      "label_windspeed": "Velocidad del viento",
+      "label_humidity": "Humedad",
+      "label_precipitation": "Precipitación",
       "fahrenheit": "Fahrenheit",
       "celsius": "Celsius",
       "NM": "kn",
       "mi": "mph",
       "m": "m/s",
-      "NM_full": "Knots",
-      "mi_full": "Miles per hour",
-      "m_full": "Meters per second",
+      "NM_full": "Nudos",
+      "mi_full": "Millas por hora",
+      "m_full": "Metros por segundo",
       "north_abbr": "N",
       "south_abbr": "S",
       "east_abbr": "E",
-      "west_abbr": "W",
+      "west_abbr": "O",
       "degrees_per_second": "Grados por segundo",
-      "degrees_per_second_withUnit": "{{unit}} grados por segundo",
-      "minutes_per_shot": "Minutos por disparo",
-      "minutes_per_shot_withUnit": "{{unit}} minutos por disparo"
+      "degrees_per_second_withUnit": "{{unidad}} grados por segundo",
+      "minutes_per_shot": "Minutos por captura",
+      "minutes_per_shot_withUnit": "{{unidad}} minutos por captura"
     },
     "sections": {
       "observations": {
-        "related": "Observaciones meteorológicas relacionadas",
+        "related": "Observaciones relacionadas al clima",
         "instruments": "¿Hacia dónde apuntan los instrumentos?"
       },
       "weather": {
-        "preview": "El tiempo en la cumbre",
-        "current": "El tiempo en la cumbre ahora",
-        "hourly": "Estadísticas meteorológicas por horas",
-        "daily": "Variaciones diarias de temperatura - {{unit}} grados (la semana pasada)"
+        "preview": "Clima en la cumbre",
+        "current": "Clima en la cumbre ahora",
+        "hourly": "Estadísticas climáticas por hora",
+        "daily": "Variaciones diarias de temperatura - {{unidad}} grados (la semana pasada)"
       },
       "astro": {
         "title": "Astroweather",
         "daylight": {
-          "title": "Twilight, day, and night times",
-          "observing": "Dark enough to observe from {{from}} to {{to}}",
-          "twilight": "Twilight from {{from}} to {{to}}",
-          "daylight": "Daylight from {{from}} to {{to}}",
-          "current": "Current local time {{time}}. It is too light to observe right now.",
-          "current_observable": "Current local time {{time}}. It is dark enough to observe right now.",
-          "midnight": "Midnight"
+          "title": "Horas del crepúsculo, día y noche",
+          "observing": "Lo bastante oscuro para observar desde {{desde}} hasta {{hasta}}",
+          "twilight": "Crepúsculo {{desde}} hasta {{hasta}}",
+          "daylight": "Luz del día desde {{desde}} hasta {{hasta}}",
+          "current": "Hora local actual {{hora}}. Está demasiado claro para observar ahora mismo.",
+          "current_observable": "Hora local actual {{hora}}. Está demasiado oscuro para observar ahora mismo.",
+          "midnight": "Medianoche"
         },
         "moonrise": {
-          "forecast": "Moonrise and moonset times forecast (next fourteen days)",
-          "time_moonrise": "Moonrise time",
-          "time_moonset": "Moonset time"
+          "forecast": "Pronóstico de horas de salida de la Luna y puesta de la Luna (próximos catorce días)",
+          "time_moonrise": "Hora de la salida de la Luna",
+          "time_moonset": "Hora de puesta de la Luna"
         }
       },
       "all_sky_image": {
-        "title": "Cámara de cielo completo"
+        "title": "Cámara All-Sky"
       },
       "dome_status": {
-        "title": "Estado del domo",
+        "title": "Estado de la cúpula",
         "status_open": "Abierta",
         "status_closed": "Cerrada"
       },
       "exposure_count": {
-        "title": "Las fotos de Rubin esta noche:",
+        "title": "Fotos de Rubin de esta noche:",
         "caption": "Imágenes"
       },
       "survey_progress": {
-        "title": "Progreso de la encuesta",
-        "caption": "de la encuesta de 10 años"
+        "title": "Progreso de la Investigación",
+        "caption": "de la Investigación de 10 años"
       },
       "alert_count": {
-        "title": "Alertas Rubin esta noche:",
+        "title": "Alertas de Rubin esta noche:",
         "caption": "Alertas"
       },
       "weather_condition": {
@@ -469,66 +469,66 @@
           "clear_cloudless_sky": "Cielo despejado y sin nubes",
           "clear_and_few_clouds": "Despejado y pocas nubes",
           "partly_cloudy": "Parcialmente nublado",
-          "mixed_with_thunderstorms": "Mezclado con probabilidad de tormentas eléctricas locales",
+          "mixed_with_thunderstorms": "Mixto con probabilidad de tormentas eléctricas locales",
           "fog": "Niebla",
-          "mostly_cloudy": "Mayormente nublada",
-          "overcast": "Nublada",
+          "mostly_cloudy": "Mayormente nublado",
+          "overcast": "Nublado",
           "overcast_with_rain": "Nublado con lluvia",
-          "overcast_with_snow": "Cubierto con nieve",
-          "showers_and_thunderstorms": "Probables lluvias y tormentas eléctricas",
-          "cloudy_heavy_rain_and_thunderstorms": "Nublado con tormentas eléctricas y fuertes lluvias.",
-          "mixed_with_showers": "Mezclado con duchas",
+          "overcast_with_snow": "Nublado con nieve",
+          "showers_and_thunderstorms": "Probabilidad de lluvias y tormentas eléctricas",
+          "cloudy_heavy_rain_and_thunderstorms": "Nublado con tormentas eléctricas y fuertes lluvias",
+          "mixed_with_showers": "Mixto con chubascos",
           "overcast_with_snow_and_rain": "Nublado con mezcla de nieve y lluvia",
           "overcast_with_light_rain": "Nublado con lluvias ocasionales",
           "overcast_with_light_snow": "Nublado con nieve ocasional",
           "overcast_with_heavy_rain": "Nublado con fuertes lluvias",
-          "mostly_cloudy_with_snow": "Mayormente nublada con nieve",
+          "mostly_cloudy_with_snow": "Mayormente nublado con nieve",
           "mostly_cloudy_with_thunderstorms": "Mayormente nublado con tormentas eléctricas y lluvias"
         }
       }
     },
     "weather": {
-      "temp_daily_max": "High",
-      "temp_daily_min": "Low",
-      "windspeed_direction": "Direction: {{direction}}",
-      "condition_now": "Now",
-      "no_data_yet": "No data yet"
+      "temp_daily_max": "Alta",
+      "temp_daily_min": "Baja",
+      "windspeed_direction": "Dirección: {{Dirección}}",
+      "condition_now": "Ahora",
+      "no_data_yet": "Sin datos aún"
     },
     "astro": {
       "daylight": {
-        "night": "Night",
-        "twilight": "Twilight",
-        "day": "Day"
+        "night": "Noche",
+        "twilight": "Crepúsculo",
+        "day": "Día"
       },
       "moon": {
-        "new": "New Moon",
-        "full": "Full Moon",
-        "crescent_waxing": "Waxing Crescent",
-        "crescent_waning": "Waning Crescent",
-        "gibbous_waxing": "Waxing Gibbous",
-        "gibbous_waning": "Waning Gibbous",
-        "quarter_first": "First Quarter",
-        "quarter_last": "Last Quarter"
+        "new": "Luna nueva",
+        "full": "Luna llena",
+        "crescent_waxing": "Luna creciente",
+        "crescent_waning": "Luna menguante",
+        "gibbous_waxing": "Luna creciente gibosa",
+        "gibbous_waning": "Luna menguante gibosa",
+        "quarter_first": "Primer cuarto ",
+        "quarter_last": "Último cuarto"
       },
       "moonlight": {
-        "moonrise": "Moonrise",
-        "moonset": "Moonset"
+        "moonrise": "Salida de la Luna",
+        "moonset": "Puesta de la Luna"
       }
     },
     "widgets": {
       "hourly": {
-        "windspeed": "Hourly wind speed report - {{unit}}",
-        "precipitation": "Hourly precipitation probability report - Probability percentage"
+        "windspeed": "Reporte de velocidad del viento por hora - {{unidad}}",
+        "precipitation": "Reporte de probabilidad de precipitaciones por hora - Porcentaje de probabilidad"
       },
       "current": {
-        "windspeed": "Average windspeed",
-        "moon": "Tonight we will have a",
-        "azimuth": "Azimuth",
-        "azimuth_angle": "Azimuth: {{angle}}",
-        "zenith": "Zenith",
-        "zenith_angle": "Zenith: {{angle}}",
-        "slew_speed": "Slew speed",
-        "shutter_speed": "Camera shutter speed"
+        "windspeed": "Velocidad del viento promedio",
+        "moon": "Esta noche tendremos",
+        "azimuth": "Acimut",
+        "azimuth_angle": "Acimut: {{ángulo}}",
+        "zenith": "Cénit",
+        "zenith_angle": "Cénit: {{ángulo}}",
+        "slew_speed": "Velocidad de movimiento (slew)",
+        "shutter_speed": "Velocidad del shutter de la cámara"
       }
     }
   },
