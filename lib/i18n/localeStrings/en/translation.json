@@ -375,6 +375,7 @@
     "callout_text": "Don’t keep it to yourself! Tell everybody a new era for astronomy has just begun!"
   },
   "summit_dashboard": {
+    "title": "What's happening at Rubin Observatory?",
     "open_modal": "Expand content",
     "error_message": "Offline",
     "unit_localization": {
