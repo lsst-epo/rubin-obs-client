@@ -34,7 +34,7 @@ const SummitStatusCompactView: FC<SummitStatusCompactViewProps> = (props) => {
     surveyProgressTooltipText,
     weatherCondition,
     weatherConditionTooltipText,
-    dashboardCaption,
+    summitStatusDashboardCaption,
   } = useFragment(SummitStatusCompactViewBlockFragmentDoc, props);
 
   const gridCount = [
@@ -50,7 +50,7 @@ const SummitStatusCompactView: FC<SummitStatusCompactViewProps> = (props) => {
     <Styled.Container>
       <WeatherUnitProvider>
         <SummitDataProvider>
-          <WidgetContainer dashboardCaption={dashboardCaption}>
+          <WidgetContainer dashboardCaption={summitStatusDashboardCaption}>
             <WidgetGrid gridCount={gridCount}>
               {weatherCondition && (
                 <WeatherCondition tooltipText={weatherConditionTooltipText} />
