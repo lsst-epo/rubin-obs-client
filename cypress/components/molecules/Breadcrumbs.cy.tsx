@@ -1,5 +1,5 @@
 import { NextIntlClientProvider } from "next-intl";
-import Breadcrumbs from ".";
+import Breadcrumbs from "@/components/molecules/Breadcrumbs/index";
 import { mount } from "cypress/react18";
 import { fallbackLng } from "@/lib/i18n/settings";
 import { ListItem } from "schema-dts";
