@@ -1,5 +1,5 @@
 import { mount } from "cypress/react18";
-import SharePopup from ".";
+import SharePopup from "@/components/molecules/SharePopup/index";
 
 describe("<SharePopup>", () => {
   it("renders to page", () => {
