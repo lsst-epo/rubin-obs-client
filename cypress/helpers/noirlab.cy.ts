@@ -1,5 +1,5 @@
 import { Category } from "@/services/noirlab";
-import { isRubinAsset, rewriteAssetUrl } from "./noirlab";
+import { isRubinAsset, rewriteAssetUrl } from "@/helpers/noirlab";
 
 const imageId = "ann25007a";
 const imageUrl = `https://noirlab.edu/public/images/${imageId}/`;

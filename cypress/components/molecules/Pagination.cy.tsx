@@ -1,5 +1,5 @@
 import { mount } from "cypress/react18";
-import Pagination from ".";
+import Pagination from "@/components/molecules/Pagination";
 import { SearchParamsContext } from "next/dist/shared/lib/hooks-client-context.shared-runtime";
 import I18NextClientProvider from "@/contexts/i18next";
 
