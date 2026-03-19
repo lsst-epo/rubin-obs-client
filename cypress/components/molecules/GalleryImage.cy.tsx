@@ -1,5 +1,5 @@
 import { mount } from "cypress/react18";
-import GalleryImage from ".";
+import GalleryImage from "@/components/molecules/GalleryImage/index";
 import { LinkProps } from "next/link";
 import { ImageObject } from "schema-dts";
 

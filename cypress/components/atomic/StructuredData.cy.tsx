@@ -1,6 +1,6 @@
 import { mount } from "cypress/react";
 import { ImageObject } from "schema-dts";
-import StructuredData from ".";
+import StructuredData from "@/atomic/StructuredData/index";
 
 const id = "schema";
 const imageObject: ImageObject = {
