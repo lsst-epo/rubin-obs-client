@@ -26,8 +26,10 @@ export const FooterText = styled.p`
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  place-self: center;
   align-items: center;
   justify-content: center;
   width: fit-content;
+  margin: 1rem;
   margin-inline: auto;
 `;
