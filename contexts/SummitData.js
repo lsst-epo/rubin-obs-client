@@ -271,6 +271,8 @@ export const SummitDataProvider = ({ children }) => {
   let summitData = {};
   let summitMedia = { items: {} };
   let pictocode;
+  let currentWeatherArtifacts = {};
+  let timeBasedLabels = {};
 
   if (data) {
     summitMedia = {
@@ -317,20 +319,34 @@ export const SummitDataProvider = ({ children }) => {
     location: "Chile",
   };
 
-  let currentWeatherArtifacts = {};
   if (pictocode !== undefined && pictocode <= 35) {
     const currentWeather = weatherSvgs.get(pictocode);
 
     // Switch to using nighttime SVG at 7pm
-    const svgName =
-      dateTime.hour > "7" && dateTime.hour < "19"
-        ? currentWeather.daySVG
-        : currentWeather.nightSVG;
+    let svgName;
+    let alertsTitle;
+    let exposuresTitle;
+    if (dateTime.hour < 7 && dateTime.hour > 19) {
+      svgName = currentWeather.nightSVG;
+      alertsTitle = t("summit_dashboard.sections.alert_count.title.night");
+      exposuresTitle = t(
+        "summit_dashboard.sections.exposure_count.title.night"
+      );
+    } else {
+      svgName = currentWeather.daySVG;
+      alertsTitle = t("summit_dashboard.sections.alert_count.title.day");
+      exposuresTitle = t("summit_dashboard.sections.exposure_count.title.day");
+    }
     const weatherDescription = currentWeather.description;
 
     currentWeatherArtifacts = {
       svgName,
       weatherDescription,
+    };
+
+    timeBasedLabels = {
+      alertsTitle,
+      exposuresTitle,
     };
   }
 
@@ -350,6 +366,7 @@ export const SummitDataProvider = ({ children }) => {
         location: "Chile",
       },
       currentWeatherArtifacts,
+      timeBasedLabels,
     }),
     [
       summitData,
@@ -361,6 +378,7 @@ export const SummitDataProvider = ({ children }) => {
       astroweatherIsError,
       localeContextInfo,
       currentWeatherArtifacts,
+      timeBasedLabels,
     ]
   );
 

@@ -9,6 +9,10 @@ const LocaleContextInfoBar = ({ time, date, location }) => {
   }
   return (
     <div className={styles.container}>
+      <span className={styles.localeText}>
+        <UniqueIconComposer className={styles.icon} icon="pin" size={15} />
+        {location}
+      </span>
       {time && (
         <span className={styles.localeText}>
           <UniqueIconComposer className={styles.icon} icon="time" size={15} />
@@ -25,10 +29,6 @@ const LocaleContextInfoBar = ({ time, date, location }) => {
           {date}
         </span>
       )}
-      <span className={styles.localeText}>
-        <UniqueIconComposer className={styles.icon} icon="pin" size={15} />
-        {location}
-      </span>
     </div>
   );
 };

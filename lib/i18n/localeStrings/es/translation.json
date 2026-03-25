@@ -453,7 +453,11 @@
         "status_closed": "Cerrada"
       },
       "exposure_count": {
-        "title": "Fotos de Rubin de esta noche:",
+        "default_title": "Imágenes de Rubin",
+        "title": {
+          "day": "Imágenes de Rubin de anoche:",
+          "night": "Imágenes de Rubin de esta noche:"
+        },
         "caption": "Imágenes"
       },
       "survey_progress": {
@@ -461,7 +465,11 @@
         "caption": "de la Investigación de 10 años"
       },
       "alert_count": {
-        "title": "Alertas de Rubin esta noche:",
+        "default_title": "Alertas de Rubin",
+        "title": {
+          "day": "Alertas de Rubin de anoche:",
+          "night": "Alertas de Rubin esta noche:"
+        },
         "caption": "Alertas"
       },
       "weather_condition": {
