@@ -62,6 +62,6 @@ export const formatAngle = (angle = 0, locale = "en") =>
 export const formatLargeNumber = (value, locale = "en") => {
   return new Intl.NumberFormat(locale, {
     notation: "compact",
-    maximumFractionDigits: 0,
+    ...(value > 9999 && { maximumSignificantDigits: 2 }),
   }).format(value);
 };

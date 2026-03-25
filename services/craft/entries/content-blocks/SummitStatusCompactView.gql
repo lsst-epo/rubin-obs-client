@@ -13,5 +13,13 @@ fragment summitStatusCompactViewBlock on contentBlocks_summitStatusCompactView_B
   surveyProgressTooltipText
   weatherCondition
   weatherConditionTooltipText
-  summitStatusDashboardCaption
+  summitStatusDashboardCaption {
+    url
+    ariaLabel
+    customText
+    target
+    text
+    title
+    type
+  }
 }

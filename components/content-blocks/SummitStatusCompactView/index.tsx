@@ -63,7 +63,7 @@ const SummitStatusCompactView: FC<SummitStatusCompactViewProps> = (props) => {
                 <ExposureCount tooltipText={exposureCountTooltipText} />
               )}
               {alertCount && <AlertCount tooltipText={alertCountTooltipText} />}
-              {SurveyProgress && (
+              {surveyProgress && (
                 <SurveyProgress tooltipText={surveyProgressTooltipText} />
               )}
             </WidgetGrid>
