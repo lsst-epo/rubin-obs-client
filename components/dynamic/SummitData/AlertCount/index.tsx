@@ -16,6 +16,7 @@ const AlertCount: FC<AlertCountProps> = ({ tooltipText }) => {
   const { t } = useTranslation();
   const {
     summitData: { alertCount },
+    timeBasedLabels: { alertsTitle },
     isLoading,
   } = useSummitData();
   const stillLoading = isLoading.hasura === undefined || isLoading.hasura;
@@ -25,7 +26,7 @@ const AlertCount: FC<AlertCountProps> = ({ tooltipText }) => {
     return (
       <WidgetSection
         isCollapsible={false}
-        title={t("summit_dashboard.sections.alert_count.title")}
+        title={t("summit_dashboard.sections.alert_count.default_title")}
       >
         <div
           className={clsx(styles.widgetBackground, styles.condensedBackground)}
@@ -42,7 +43,7 @@ const AlertCount: FC<AlertCountProps> = ({ tooltipText }) => {
       <WidgetSection
         tooltipText={tooltipText}
         isCollapsible={false}
-        title={t("summit_dashboard.sections.alert_count.error_title")}
+        title={alertsTitle}
         caption={t("summit_dashboard.error_message")}
       >
         <div
@@ -59,7 +60,7 @@ const AlertCount: FC<AlertCountProps> = ({ tooltipText }) => {
     <WidgetSection
       tooltipText={tooltipText}
       isCollapsible={false}
-      title={t("summit_dashboard.sections.alert_count.title")}
+      title={alertsTitle}
     >
       <div
         className={clsx(styles.widgetBackground, styles.condensedBackground)}
