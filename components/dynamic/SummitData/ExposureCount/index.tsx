@@ -15,6 +15,7 @@ const ExposureCount: FC<ExposureCountProps> = ({ tooltipText }) => {
   const { t } = useTranslation();
   const {
     summitData: { exposureCount },
+    timeBasedLabels: { exposuresTitle },
     isLoading,
   } = useSummitData();
   const stillLoading = isLoading.hasura === undefined || isLoading.hasura;
@@ -24,7 +25,7 @@ const ExposureCount: FC<ExposureCountProps> = ({ tooltipText }) => {
     return (
       <WidgetSection
         isCollapsible={false}
-        title={t("summit_dashboard.sections.exposure_count.title")}
+        title={t("summit_dashboard.sections.exposure_count.default_title")}
       >
         <div
           className={clsx(styles.widgetBackground, styles.condensedBackground)}
@@ -41,7 +42,7 @@ const ExposureCount: FC<ExposureCountProps> = ({ tooltipText }) => {
       <WidgetSection
         tooltipText={tooltipText}
         isCollapsible={false}
-        title={t("summit_dashboard.sections.exposure_count.error_title")}
+        title={exposuresTitle}
         caption={t("summit_dashboard.error_message")}
       >
         <div
@@ -58,7 +59,7 @@ const ExposureCount: FC<ExposureCountProps> = ({ tooltipText }) => {
     <WidgetSection
       tooltipText={tooltipText}
       isCollapsible={false}
-      title={t("summit_dashboard.sections.exposure_count.title")}
+      title={exposuresTitle}
     >
       <div
         className={clsx(styles.widgetBackground, styles.condensedBackground)}

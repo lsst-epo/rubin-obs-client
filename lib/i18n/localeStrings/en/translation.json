@@ -438,7 +438,11 @@
         "status_closed": "Closed"
       },
       "exposure_count": {
-        "title": "Rubin Images tonight:",
+        "default_title": "Rubin Images",
+        "title": {
+          "day": "Rubin Images last night:",
+          "night": "Rubin Images tonight:"
+        },
         "caption": "Images"
       },
       "survey_progress": {
@@ -446,7 +450,11 @@
         "caption": "of the 10-year survey"
       },
       "alert_count": {
-        "title": "Rubin Alerts tonight:",
+        "default_title": "Rubin Alerts",
+        "title": {
+          "day": "Rubin Alerts last night:",
+          "night": "Rubin Alerts tonight:"
+        },
         "caption": "Alerts"
       },
       "weather_condition": {
