@@ -15,7 +15,7 @@
     @media screen and (min-width: 1130px) {
         max-width: calc((100vw / 7) - 1vw);
         font-size: 0.6rem;
-        transform: translateX(-47%);
+        transform: translateX(-39%);
     }
 }
 
