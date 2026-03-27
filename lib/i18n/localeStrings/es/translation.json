@@ -197,7 +197,8 @@
     "contacts": "Contactos"
   },
   "pages": {
-    "page": "Pagina"
+    "page": "Pagina",
+    "date_last_updated": "Fecha de última actualización: {{dateUpdated}}"
   },
   "pagination": {
     "label": "Paginación",

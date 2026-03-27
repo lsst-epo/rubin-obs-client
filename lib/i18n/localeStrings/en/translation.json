@@ -182,7 +182,8 @@
     "contacts": "Contacts"
   },
   "pages": {
-    "page": "Page"
+    "page": "Page",
+    "date_last_updated": "Date last updated: {{dateUpdated}}"
   },
   "pagination": {
     "label": "Pagination",

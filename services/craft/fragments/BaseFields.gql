@@ -2,6 +2,7 @@ fragment BaseFields on EntryInterface {
   id
   uri
   title
+  dateUpdated @formatDateTime(format: "d M Y H:i (T)")
   language
   typeHandle
   localized {
