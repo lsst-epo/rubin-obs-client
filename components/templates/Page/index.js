@@ -31,6 +31,7 @@ export default async function Page({
     id,
     pageType = "standard",
     title,
+    dateUpdated,
     uri,
     typeHandle,
     overlapHero,
@@ -60,6 +61,9 @@ export default async function Page({
     uri,
     title,
   };
+
+  // Check the first segment of the URI to determine if this is a "For Scientists" page
+  const isForScientistsPage = breadcrumbs[0]?.uri === "for-scientists";
 
   // add FilterBar to dynamic pages
   const hasFilterbar =
@@ -141,6 +145,9 @@ export default async function Page({
                 paddingSize={isMediumPadding ? "medium" : undefined}
               >
                 <h1>{title}</h1>
+                {isForScientistsPage && dateUpdated && (
+                  <p>{t("pages.date_last_updated", { dateUpdated })}</p>
+                )}
                 {isEventsPage && (
                   <NavButtons
                     linkLeft="upcoming"

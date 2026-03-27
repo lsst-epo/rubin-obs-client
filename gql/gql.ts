@@ -154,7 +154,7 @@ const documents = {
     types.GetRubinBasicsEntryDocument,
   '\n  query getStaffProfileEntry(\n    $section: [String]\n    $type: [String]\n    $site: [String]\n    $uri: [String]\n  ) {\n    entry(section: $section, type: $type, site: $site, uri: $uri) {\n      ...BaseFields\n      ... on staffProfiles_staffProfiles_Entry {\n        bio: staffBio\n        heroImage: staffPortrait {\n          ... on staffProfiles_Asset {\n            altText\n            width\n            height\n            url @transform(mode: "crop", width: 1920, height: 1067)\n          }\n        }\n        quote: pullQuote\n        tags: staffTags {\n          ... on staffTags_Tag {\n            id\n            slug\n            title\n          }\n        }\n        tradingCard: staffTradingCard {\n          ... on staffProfiles_Asset {\n            altText\n            width\n            height\n            url @transform(mode: "fit", width: 540)\n          }\n        }\n        contentBlocks: contentBlocksNews {\n          ...ContentBlocksNews\n        }\n      }\n    }\n  }\n':
     types.GetStaffProfileEntryDocument,
-  "fragment BaseFields on EntryInterface {\n  id\n  uri\n  title\n  language\n  typeHandle\n  localized {\n    uri\n    language\n  }\n}":
+  'fragment BaseFields on EntryInterface {\n  id\n  uri\n  title\n  dateUpdated @formatDateTime(format: "d M Y H:i (T)")\n  language\n  typeHandle\n  localized {\n    uri\n    language\n  }\n}':
     types.BaseFieldsFragmentDoc,
   "fragment CantoAssetDetailed on CantoDamAssetInterface {\n  additional {\n    AltTextEN\n    AltTextES\n    CaptionEN\n    CaptionES\n    Credit\n    TitleEN\n    TitleES\n  }\n  default {\n    ContentType\n    DateCreated\n    DateModified\n    DateUploaded\n    Size\n  }\n  approvalStatus\n  height\n  id\n  keyword\n  name\n  owner\n  ownerName\n  scheme\n  size\n  smartTags\n  tag\n  time\n  url {\n    directUrlOriginal\n    directUrlPreview\n    directUrlPreviewPlay\n    download\n    metadata\n    preview\n    PNG\n    HighJPG\n  }\n  width\n}":
     types.CantoAssetDetailedFragmentDoc,
@@ -626,8 +626,8 @@ export function graphql(
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: "fragment BaseFields on EntryInterface {\n  id\n  uri\n  title\n  language\n  typeHandle\n  localized {\n    uri\n    language\n  }\n}"
-): (typeof documents)["fragment BaseFields on EntryInterface {\n  id\n  uri\n  title\n  language\n  typeHandle\n  localized {\n    uri\n    language\n  }\n}"];
+  source: 'fragment BaseFields on EntryInterface {\n  id\n  uri\n  title\n  dateUpdated @formatDateTime(format: "d M Y H:i (T)")\n  language\n  typeHandle\n  localized {\n    uri\n    language\n  }\n}'
+): (typeof documents)['fragment BaseFields on EntryInterface {\n  id\n  uri\n  title\n  dateUpdated @formatDateTime(format: "d M Y H:i (T)")\n  language\n  typeHandle\n  localized {\n    uri\n    language\n  }\n}'];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
