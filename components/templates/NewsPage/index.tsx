@@ -19,7 +19,7 @@ const sanitize = (dirty: string | undefined) => {
         ...defaults.allowedAttributes,
         iframe: ["src", "style", "width", "height", "allowfullscreen"],
       },
-      allowedIframeHostnames: [noirLabHostname],
+      allowedIframeHostnames: [noirLabHostname, "www.youtube.com"],
     };
 
     return sanitizeHtml(dirty, sanitizeOptions);
