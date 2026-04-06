@@ -11,7 +11,8 @@ export const WidgetGrid = styled.div`
   grid-auto-flow: row dense;
   grid-gap: var(--widget-row-gap);
   place-content: center;
-  justify-content: center;
+  width: fit-content;
+  max-width: 100%;
 
   &:not(:first-child) {
     margin-block-start: var(--widget-row-gap);
@@ -20,8 +21,7 @@ export const WidgetGrid = styled.div`
   @media screen and (min-width: ${token("BREAK_DESKTOP_SMALL")}) {
     --widget-columns: ${(props) => props.gridcount};
 
-    grid-template-columns: none;
-    grid-auto-columns: calc(100vw / 7);
+    grid-auto-columns: minmax(0, 1fr);
     grid-auto-flow: column;
   }
 `;
