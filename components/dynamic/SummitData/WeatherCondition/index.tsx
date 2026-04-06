@@ -51,11 +51,7 @@ const WeatherCondition: FC<WeatherConditionProps> = ({ tooltipText }) => {
         caption={t("summit_dashboard.error_message")}
       >
         <div
-          className={clsx(
-            styles.widgetBackground,
-            styles.condensedBackground,
-            styles.errorTheme
-          )}
+          className={clsx(styles.widgetBackground, styles.condensedBackground)}
         >
           <UniqueIconComposer icon="Offline" />
         </div>

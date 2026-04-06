@@ -9,11 +9,16 @@ export const WidgetSection = styled.section`
 
   display: flex;
   flex-direction: column;
+  max-width: 170px;
   min-height: 170px;
   padding: 10px 10px 0px;
   color: var(--section-color);
   background-color: var(--widget-background-color);
   border-radius: 10px;
+
+  @media screen and (min-width: ${BREAK_PHABLET_MIN}) {
+    max-width: 200px;
+  }
 
   h1,
   h2,
@@ -76,23 +81,11 @@ export const SectionCaption = styled.p`
 `;
 
 export const SectionContent = styled.div`
-  --grid-columns: repeat(2, 1fr);
-
-  grid-template-columns: var(--grid-columns);
-  grid-auto-rows: fit-content(10rem);
-  grid-gap: 0px;
-  align-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;     
+  width: 100%;            
   height: 50%;
-
-  &:not([hidden]) {
-    display: grid;
-  }
-
-  @media screen and (min-width: ${BREAK_PHABLET_MIN}) {
-    --grid-columns: repeat(3, 1fr);
-
-    height: 60%;
-  }
 `;
 
 export const SectionSubHeader = styled.h3`
