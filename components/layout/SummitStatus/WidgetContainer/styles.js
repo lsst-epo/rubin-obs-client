@@ -2,6 +2,10 @@ import styled from "styled-components";
 import { token } from "@/styles/globalStyles";
 
 export const WidgetContainer = styled.div`
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  justify-content: center;
   padding: 15px 20px;
   margin-bottom: 1rem;
   color: #fff;
@@ -26,8 +30,10 @@ export const FooterText = styled.p`
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  place-self: center;
   align-items: center;
   justify-content: center;
   width: fit-content;
+  margin: 1rem;
   margin-inline: auto;
 `;
