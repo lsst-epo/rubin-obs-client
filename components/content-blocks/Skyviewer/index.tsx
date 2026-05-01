@@ -51,8 +51,13 @@ const SkyviewerBlock: FC<SkyviewerProps> = ({ locale, ...props }) => {
 
   const { ra, dec, fov, fullWidth, backgroundColor, embedTitle } = data;
 
-  const params = new URLSearchParams({ ra, dec, fov });
-  const path = addLocaleUriSegment(locale, `embed?${params.toString()}`);
+  const params = new URLSearchParams({ target: `${ra}+${dec}`, fov });
+
+  // Create a path with locale and query params and swap pesky encoded '+' value with the actual value
+  const path = addLocaleUriSegment(
+    locale,
+    `embed?${params.toString()}`
+  ).replace("%2B", "+");
   const src = new URL(path, env.SKYVIEWER_BASE_URL);
   const allowed = [
     "fullscreen",
