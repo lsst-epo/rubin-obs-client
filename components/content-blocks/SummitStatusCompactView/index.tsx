@@ -10,6 +10,7 @@ import ExposureCount from "@/components/dynamic/SummitData/ExposureCount";
 import SurveyProgress from "@/components/dynamic/SummitData/SurveyProgress";
 import AlertCount from "@/components/dynamic/SummitData/AlertCount";
 import WeatherCondition from "@/components/dynamic/SummitData/WeatherCondition";
+import SunsetSunrise from "@/components/dynamic/SummitData/SunsetSunrise";
 import WidgetGrid from "@/components/layout/SummitStatus/WidgetGrid";
 import WidgetContainer from "@/components/layout/SummitStatus/WidgetContainer";
 
@@ -34,6 +35,8 @@ const SummitStatusCompactView: FC<SummitStatusCompactViewProps> = (props) => {
     surveyProgressTooltipText,
     weatherCondition,
     weatherConditionTooltipText,
+    sunsetSunriseTimes,
+    sunsetSunriseTimesTooltipText,
     summitStatusDashboardCaption,
   } = useFragment(SummitStatusCompactViewBlockFragmentDoc, props);
 
@@ -44,6 +47,7 @@ const SummitStatusCompactView: FC<SummitStatusCompactViewProps> = (props) => {
     surveyProgress,
     weatherCondition,
     allSkyImage,
+    sunsetSunriseTimes,
   ].filter(Boolean).length;
 
   return (
@@ -65,6 +69,9 @@ const SummitStatusCompactView: FC<SummitStatusCompactViewProps> = (props) => {
               {alertCount && <AlertCount tooltipText={alertCountTooltipText} />}
               {surveyProgress && (
                 <SurveyProgress tooltipText={surveyProgressTooltipText} />
+              )}
+              {sunsetSunriseTimes && (
+                <SunsetSunrise tooltipText={sunsetSunriseTimesTooltipText} />
               )}
             </WidgetGrid>
           </WidgetContainer>
