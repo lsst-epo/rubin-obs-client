@@ -3,7 +3,7 @@ import { token } from "@/styles/globalStyles";
 
 export const WidgetContainer = styled.div`
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 15px 20px;
