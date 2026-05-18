@@ -48,6 +48,13 @@ function getSunsetAndSunrise(
   return { sunset, sunrise };
 }
 
+function formatSolarTime(date: Date): string {
+  return date.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
 const SunsetSunrise: FC<SunsetSunriseProps> = ({ tooltipText }) => {
   const { t } = useTranslation();
   const { astroweatherData, localeContextInfo, isLoading } = useSummitData();
@@ -103,11 +110,11 @@ const SunsetSunrise: FC<SunsetSunriseProps> = ({ tooltipText }) => {
         <div className={clsx(styles.sunsetSunriseContainer)}>
           <div className={clsx(styles.sunsetTime)}>
             {/* TODO: Add sunset icon */}
-            {sunset.toLocaleTimeString()}
+            {formatSolarTime(sunset)}
           </div>
           <div className={clsx(styles.sunriseTime)}>
             {/* TODO: Add sunrise icon */}
-            {sunrise.toLocaleTimeString()}
+            {formatSolarTime(sunrise)}
           </div>
         </div>
       </div>

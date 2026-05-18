@@ -482,7 +482,7 @@
         }
       },
       "sunrise_sunset" : {
-        "title": "Sunrise and Sunset"
+        "title": "Sunset and Sunrise"
       }
     },
     "weather": {
