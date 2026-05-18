@@ -480,6 +480,9 @@
           "mostly_cloudy_with_snow": "Mostly cloudy with snow",
           "mostly_cloudy_with_thunderstorms": "Mostly cloudy with thunderstorms and showers"
         }
+      },
+      "sunrise_sunset" : {
+        "title": "Sunset and Sunrise"
       }
     },
     "weather": {
