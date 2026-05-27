@@ -1,27 +1,45 @@
 fragment summitStatusCompactViewBlock on contentBlocks_summitStatusCompactView_BlockType {
   id
   typeHandle
-  domeStatus
-  domeStatusTooltipText
-  alertCount
-  alertCountTooltipText
-  allSkyImage
-  allSkyImageTooltipText
-  exposureCount
-  exposureCountTooltipText
-  surveyProgress
-  surveyProgressTooltipText
-  weatherCondition
+  showWeatherCondition
   weatherConditionTooltipText
-  sunsetSunriseTimes
+  showAllSkyImage
+  allSkyImageTooltipText
+  showDomeStatus
+  domeStatusTooltipText
+  showExposureCount
+  exposureCountTooltipText
+  showAlertCount
+  alertCountTooltipText
+  showSurveyProgress
+  surveyProgressTooltipText
+  showSunsetSunriseTimes
   sunsetSunriseTimesTooltipText
+  showWildlifeGallerySpotlight
+  wildlifeGallery {
+    ... on galleries_gallery_Entry {
+      id
+      assetAlbum {
+        id
+        url {
+          directUrlOriginal
+        }
+        additional {
+          AltTextEN
+          CaptionEN
+          Credit
+        }
+      }
+    }
+  }
+  wildlifeGallerySpotlightTooltipText
   summitStatusDashboardCaption {
-    url
-    ariaLabel
     customText
-    target
-    text
-    title
+    ariaLabel
+    url
     type
+    title
+    text
+    target
   }
 }
