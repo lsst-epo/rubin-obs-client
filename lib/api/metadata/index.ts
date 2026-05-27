@@ -65,6 +65,18 @@ export async function getEntryMetadataByUri(uri: string, locale = fallbackLng) {
             }
           }
         }
+        ... on rubinBasics_post_Entry {
+          description: teaser
+          title
+          image: hero {
+            ... on heroes_Asset {
+              altText
+              width
+              height
+              url @transform(mode: "crop", width: 1200, height: 630)
+            }
+          }
+        }
         ... on glossaryTerms_glossaryTerm_Entry {
           title
           cantoAssetSingle {
