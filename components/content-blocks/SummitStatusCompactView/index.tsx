@@ -13,8 +13,7 @@ import WeatherCondition from "@/components/dynamic/SummitData/WeatherCondition";
 import SunsetSunrise from "@/components/dynamic/SummitData/SunsetSunrise";
 import WidgetGrid from "@/components/layout/SummitStatus/WidgetGrid";
 import WidgetContainer from "@/components/layout/SummitStatus/WidgetContainer";
-import Image from "next/image";
-import Link from "next/link";
+import GallerySpotlight from "@/components/molecules/GallerySpotlight";
 
 import * as Styled from "./styles";
 
@@ -43,21 +42,6 @@ const SummitStatusCompactView: FC<SummitStatusCompactViewProps> = (props) => {
     wildlifeGallerySpotlightTooltipText,
     summitStatusDashboardCaption,
   } = useFragment(SummitStatusCompactViewBlockFragmentDoc, props);
-
-  console.info(wildlifeGallery[0]);
-  const gallery = wildlifeGallery[0];
-  const wildlifeSpotlightImageUrls = gallery?.assetAlbum.map(
-    (image) => image.url.directUrlOriginal
-  );
-  const wildlifeSpotlightIds = gallery?.assetAlbum?.map((image) => image.id);
-
-  const galleryStr = "/gallery/collections/wildlife-spotlight-test-gallery/";
-  const galleryLink = wildlifeSpotlightIds
-    ? galleryStr + wildlifeSpotlightIds[0]
-    : "no-id";
-  const testUrl = wildlifeSpotlightImageUrls
-    ? wildlifeSpotlightImageUrls[0]
-    : "no-url";
 
   const gridCount = [
     showWeatherCondition,
@@ -98,10 +82,7 @@ const SummitStatusCompactView: FC<SummitStatusCompactViewProps> = (props) => {
                 <SunsetSunrise tooltipText={sunsetSunriseTimesTooltipText} />
               )}
               {showWildlifeGallerySpotlight && (
-                // <p>boop</p>
-                <Link href={galleryLink}>
-                  <Image src={testUrl} width={500} height={500} alt="alt" />
-                </Link>
+                <GallerySpotlight images={wildlifeGallery[0]?.assetAlbum} />
               )}
             </WidgetGrid>
           </WidgetContainer>
