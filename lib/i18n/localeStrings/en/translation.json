@@ -483,6 +483,9 @@
       },
       "sunrise_sunset" : {
         "title": "Sunset and Sunrise"
+      },
+      "wildlife_spotlight" : {
+        "title": "Wildlife Spotlight"
       }
     },
     "weather": {

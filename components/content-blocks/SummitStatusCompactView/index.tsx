@@ -13,7 +13,7 @@ import WeatherCondition from "@/components/dynamic/SummitData/WeatherCondition";
 import SunsetSunrise from "@/components/dynamic/SummitData/SunsetSunrise";
 import WidgetGrid from "@/components/layout/SummitStatus/WidgetGrid";
 import WidgetContainer from "@/components/layout/SummitStatus/WidgetContainer";
-import GallerySpotlight from "@/components/molecules/GallerySpotlight";
+import WildlifeGallerySpotlight from "@/components/dynamic/SummitData/WildlifeGallerySpotlight";
 
 import * as Styled from "./styles";
 
@@ -82,7 +82,10 @@ const SummitStatusCompactView: FC<SummitStatusCompactViewProps> = (props) => {
                 <SunsetSunrise tooltipText={sunsetSunriseTimesTooltipText} />
               )}
               {showWildlifeGallerySpotlight && (
-                <GallerySpotlight images={wildlifeGallery[0]?.assetAlbum} />
+                <WildlifeGallerySpotlight
+                  images={wildlifeGallery[0]?.assetAlbum}
+                  tooltipText={wildlifeGallerySpotlightTooltipText}
+                />
               )}
             </WidgetGrid>
           </WidgetContainer>
