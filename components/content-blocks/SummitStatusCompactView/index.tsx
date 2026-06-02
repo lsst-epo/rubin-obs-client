@@ -83,8 +83,7 @@ const SummitStatusCompactView: FC<SummitStatusCompactViewProps> = (props) => {
               )}
               {showWildlifeGallerySpotlight && (
                 <WildlifeGallerySpotlight
-                  gallerySlug={wildlifeGallery.slug}
-                  images={wildlifeGallery[0]?.assetAlbum}
+                  gallery={wildlifeGallery[0]}
                   tooltipText={wildlifeGallerySpotlightTooltipText}
                 />
               )}

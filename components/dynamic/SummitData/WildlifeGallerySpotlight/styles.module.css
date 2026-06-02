@@ -7,8 +7,8 @@
   place-self: center center;
   align-items: center;
   justify-content: space-between;
-  width: 65%;
-  padding: var(--widget-padding);
+  width: 75%;
+  height: 85%;
   font-size: 0.75rem;
   background-color: var(--widget-background-color);
   border-radius: calc(var(--widget-padding) / 2);

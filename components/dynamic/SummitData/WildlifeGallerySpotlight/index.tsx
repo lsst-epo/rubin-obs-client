@@ -6,23 +6,19 @@ import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 import styles from "./styles.module.css";
 
-const TITLE = "Wildlife Spotlight";
-
 interface WildlifeGallerySpotlightProps {
   tooltipText: string | null;
-  gallerySlug: string;
-  images: any;
+  gallery: any;
 }
 
 const WildlifeGallerySpotlight: FC<WildlifeGallerySpotlightProps> = ({
   tooltipText,
-  gallerySlug,
-  images,
+  gallery,
 }) => {
   const { t } = useTranslation();
 
   // If bad data: show the title, offline icon, offline message, and the info icon if applicable
-  if (images === undefined || images === null) {
+  if (gallery === undefined || gallery === null) {
     return (
       <WidgetSection
         tooltipText={tooltipText}
@@ -40,6 +36,8 @@ const WildlifeGallerySpotlight: FC<WildlifeGallerySpotlightProps> = ({
   }
 
   // Otherwise, render the complete widget
+  const { slug, assetAlbum } = gallery;
+
   return (
     <WidgetSection
       tooltipText={tooltipText}
@@ -49,7 +47,7 @@ const WildlifeGallerySpotlight: FC<WildlifeGallerySpotlightProps> = ({
       <div
         className={clsx(styles.widgetBackground, styles.condensedBackground)}
       >
-        <GallerySpotlight gallerySlug={gallerySlug} images={images} />
+        <GallerySpotlight gallerySlug={slug} images={assetAlbum} />
       </div>
     </WidgetSection>
   );
