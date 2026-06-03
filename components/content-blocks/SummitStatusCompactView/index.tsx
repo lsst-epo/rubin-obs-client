@@ -13,6 +13,7 @@ import WeatherCondition from "@/components/dynamic/SummitData/WeatherCondition";
 import SunsetSunrise from "@/components/dynamic/SummitData/SunsetSunrise";
 import WidgetGrid from "@/components/layout/SummitStatus/WidgetGrid";
 import WidgetContainer from "@/components/layout/SummitStatus/WidgetContainer";
+import WildlifeGallerySpotlight from "@/components/dynamic/SummitData/WildlifeGallerySpotlight";
 
 import * as Styled from "./styles";
 
@@ -21,33 +22,36 @@ interface SummitStatusCompactViewProps
   locale: string;
 }
 const SummitStatusCompactView: FC<SummitStatusCompactViewProps> = (props) => {
-  // TODO: Rename fields (handles?) in Craft to resemble booleans (allSkyImage --> showAllSkyImage)
   const {
-    domeStatus,
-    domeStatusTooltipText,
-    alertCount,
-    alertCountTooltipText,
-    allSkyImage,
-    allSkyImageTooltipText,
-    exposureCount,
-    exposureCountTooltipText,
-    surveyProgress,
-    surveyProgressTooltipText,
-    weatherCondition,
+    showWeatherCondition,
     weatherConditionTooltipText,
-    sunsetSunriseTimes,
+    showAllSkyImage,
+    allSkyImageTooltipText,
+    showDomeStatus,
+    domeStatusTooltipText,
+    showExposureCount,
+    exposureCountTooltipText,
+    showAlertCount,
+    alertCountTooltipText,
+    showSurveyProgress,
+    surveyProgressTooltipText,
+    showSunsetSunriseTimes,
     sunsetSunriseTimesTooltipText,
+    showWildlifeGallerySpotlight,
+    wildlifeGallery,
+    wildlifeGallerySpotlightTooltipText,
     summitStatusDashboardCaption,
   } = useFragment(SummitStatusCompactViewBlockFragmentDoc, props);
 
   const gridCount = [
-    domeStatus,
-    alertCount,
-    exposureCount,
-    surveyProgress,
-    weatherCondition,
-    allSkyImage,
-    sunsetSunriseTimes,
+    showWeatherCondition,
+    showAllSkyImage,
+    showDomeStatus,
+    showExposureCount,
+    showAlertCount,
+    showSurveyProgress,
+    showSunsetSunriseTimes,
+    showWildlifeGallerySpotlight,
   ].filter(Boolean).length;
 
   return (
@@ -56,22 +60,32 @@ const SummitStatusCompactView: FC<SummitStatusCompactViewProps> = (props) => {
         <SummitDataProvider>
           <WidgetContainer dashboardCaption={summitStatusDashboardCaption}>
             <WidgetGrid gridCount={gridCount}>
-              {weatherCondition && (
+              {showWeatherCondition && (
                 <WeatherCondition tooltipText={weatherConditionTooltipText} />
               )}
-              {allSkyImage && (
+              {showAllSkyImage && (
                 <CameraFeeds tooltipText={allSkyImageTooltipText} />
               )}
-              {domeStatus && <DomeStatus tooltipText={domeStatusTooltipText} />}
-              {exposureCount && (
+              {showDomeStatus && (
+                <DomeStatus tooltipText={domeStatusTooltipText} />
+              )}
+              {showExposureCount && (
                 <ExposureCount tooltipText={exposureCountTooltipText} />
               )}
-              {alertCount && <AlertCount tooltipText={alertCountTooltipText} />}
-              {surveyProgress && (
+              {showAlertCount && (
+                <AlertCount tooltipText={alertCountTooltipText} />
+              )}
+              {showSurveyProgress && (
                 <SurveyProgress tooltipText={surveyProgressTooltipText} />
               )}
-              {sunsetSunriseTimes && (
+              {showSunsetSunriseTimes && (
                 <SunsetSunrise tooltipText={sunsetSunriseTimesTooltipText} />
+              )}
+              {showWildlifeGallerySpotlight && (
+                <WildlifeGallerySpotlight
+                  gallery={wildlifeGallery[0]}
+                  tooltipText={wildlifeGallerySpotlightTooltipText}
+                />
               )}
             </WidgetGrid>
           </WidgetContainer>
