@@ -9,7 +9,7 @@ import clsx from "clsx";
 import styles from "./styles.module.css";
 
 interface AlertCountProps {
-  tooltipText: string | null;
+  tooltipText: string | undefined;
 }
 
 const AlertCount: FC<AlertCountProps> = ({ tooltipText }) => {

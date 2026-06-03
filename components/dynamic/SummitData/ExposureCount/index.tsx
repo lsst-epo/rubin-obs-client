@@ -8,7 +8,7 @@ import clsx from "clsx";
 import styles from "./styles.module.css";
 
 interface ExposureCountProps {
-  tooltipText: string | null;
+  tooltipText: string | undefined;
 }
 
 const ExposureCount: FC<ExposureCountProps> = ({ tooltipText }) => {

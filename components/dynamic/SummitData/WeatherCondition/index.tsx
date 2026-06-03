@@ -8,7 +8,7 @@ import clsx from "clsx";
 import styles from "./styles.module.css";
 
 interface WeatherConditionProps {
-  tooltipText: string | null;
+  tooltipText: string | undefined;
 }
 
 const WeatherCondition: FC<WeatherConditionProps> = ({ tooltipText }) => {

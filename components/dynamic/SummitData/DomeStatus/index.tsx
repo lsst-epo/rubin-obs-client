@@ -8,7 +8,7 @@ import clsx from "clsx";
 import styles from "./styles.module.css";
 
 interface DomeStatusProps {
-  tooltipText: string | null;
+  tooltipText: string | undefined;
 }
 
 const DomeStatus: FC<DomeStatusProps> = ({ tooltipText }) => {

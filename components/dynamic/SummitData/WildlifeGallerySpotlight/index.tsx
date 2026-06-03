@@ -7,7 +7,7 @@ import clsx from "clsx";
 import styles from "./styles.module.css";
 
 interface WildlifeGallerySpotlightProps {
-  tooltipText: string | null;
+  tooltipText: string | undefined;
   gallery: any;
 }
 
