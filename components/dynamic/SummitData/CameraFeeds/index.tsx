@@ -9,7 +9,7 @@ import styles from "./styles.module.css";
 import UniqueIconComposer from "@/components/svg/UniqueIconComposer";
 
 interface CameraFeedsProps {
-  tooltipText: string | null;
+  tooltipText: string | undefined;
 }
 
 const CameraFeeds: FC<CameraFeedsProps> = ({ tooltipText }) => {

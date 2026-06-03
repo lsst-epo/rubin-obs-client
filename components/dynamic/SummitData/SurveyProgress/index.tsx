@@ -8,7 +8,7 @@ import clsx from "clsx";
 import { ProgressRadial } from "@rubin-epo/epo-react-lib";
 import UniqueIconComposer from "@/components/svg/UniqueIconComposer";
 interface SurveyProgressProps {
-  tooltipText: string | null;
+  tooltipText: string | undefined;
 }
 
 const SurveyProgress: FC<SurveyProgressProps> = ({ tooltipText }) => {

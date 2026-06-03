@@ -11,7 +11,7 @@ import { lat, long, altitude } from "@/lib/observatory";
 import { getTimes } from "@/lib/suncalc";
 
 interface SunsetSunriseProps {
-  tooltipText: string | null;
+  tooltipText: string | undefined;
 }
 
 function getSunsetAndSunrise(
