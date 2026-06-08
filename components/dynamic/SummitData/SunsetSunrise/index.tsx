@@ -109,13 +109,13 @@ const SunsetSunrise: FC<SunsetSunriseProps> = ({ tooltipText }) => {
         className={clsx(styles.widgetBackground, styles.condensedBackground)}
       >
         <div className={clsx(styles.sunsetSunriseContainer)}>
-          <div className={clsx(styles.sunsetTime)}>
-            {/* TODO: Add sunset icon */}
-            {formatSolarTime(sunset)}
+          <div className={clsx(styles.timeBar, styles.sunsetTime)}>
+            <UniqueIconComposer icon="Sunset" />
+            {formatSolarTime(sunset) + " hrs."}
           </div>
-          <div className={clsx(styles.sunriseTime)}>
-            {/* TODO: Add sunrise icon */}
-            {formatSolarTime(sunrise)}
+          <div className={clsx(styles.timeBar, styles.sunriseTime)}>
+            <UniqueIconComposer icon="Sunrise" />
+            {formatSolarTime(sunrise) + " hrs."}
           </div>
         </div>
       </div>

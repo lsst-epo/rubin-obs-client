@@ -43,6 +43,20 @@
   font-weight: bold;
   color: black;
 }
+
+.timeBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.timeBar > svg {
+  height: 1em;
+  width: auto;
+
+  margin: 0.25em;
+}
   
 .sunsetTime {
   background-color:  #f9b263;
