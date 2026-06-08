@@ -42,7 +42,7 @@ const GallerySpotlight: FC<GallerySpotlightProps> = ({
   gallerySlug,
   images,
   randomizeImageOrder = false, // TODO: implement randomization
-  imageSwapInterval = MS_PER_SEC,
+  imageSwapInterval = MS_PER_DAY,
   width = 500,
   height = 500,
 }) => {
