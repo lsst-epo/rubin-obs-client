@@ -52,6 +52,8 @@ import DayMostlyCloudySnow from "./weather/DayMostlyCloudySnow";
 import NightMostlyCloudySnow from "./weather/NightMostlyCloudySnow";
 import DayCloudyRainThunder from "./weather/DayCloudyRainThunder";
 import NightCloudyRainThunder from "./weather/NightCloudyRainThunder";
+import Sunset from "./sunTimes/Sunset";
+import Sunrise from "./sunTimes/Sunrise";
 
 export default {
   Arrow,
@@ -108,4 +110,6 @@ export default {
   NightMostlyCloudySnow,
   DayCloudyRainThunder,
   NightCloudyRainThunder,
+  Sunset,
+  Sunrise,
 };

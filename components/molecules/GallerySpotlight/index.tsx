@@ -24,10 +24,24 @@ interface GallerySpotlightProps {
   height?: number;
 }
 
+/**
+ * A generic widget to provide a rotating display of images from a gallery.
+ *
+ * @typedef {object} GallerySpotlightProps
+ * @property {string} gallerySlug The slug of the gallery's page on the main site as set in Craft
+ * @property {object} images A list of images in the gallery, provided by the assetAlbum GQL field
+ * @property {boolean} randomizeImageOrder Whether to select the next image in the list for swapping or to randomly select it
+ * @property {number} imageSwapInterval How often to swap the image in milliseconds
+ * @property {number} width The width of the image in px
+ * @property {number} height The height of the image in px
+ *
+ * @param {GallerySpotlightProps} props
+ * @returns {JSX.Element}
+ */
 const GallerySpotlight: FC<GallerySpotlightProps> = ({
   gallerySlug,
   images,
-  randomizeImageOrder = false,
+  randomizeImageOrder = false, // TODO: implement randomization
   imageSwapInterval = MS_PER_DAY,
   width = 500,
   height = 500,
