@@ -310,7 +310,7 @@ export const SummitDataProvider = ({ children }) => {
       .map((p) => [p.type, p.value])
   );
 
-  const time = `${dateTime.hour}:${dateTime.minute} hrs`;
+  const time = `${dateTime.hour}:${dateTime.minute}`;
   const date = `${dateTime.year}-${dateTime.month}-${dateTime.day}`;
 
   const localeContextInfo = {

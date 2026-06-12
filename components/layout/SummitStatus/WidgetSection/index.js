@@ -8,6 +8,8 @@ const WidgetSection = ({
   isCollapsible = true,
   isOpen = true,
   onToggleCallback,
+  tooltipId = "",
+  tooltipLabel = "",
   tooltipText = "",
 }) => {
   const handleToggle = () => {
@@ -42,6 +44,7 @@ const WidgetSection = ({
             <Styled.WidgetInfoIcon
               height={"0.6em"}
               width={"0.6em"}
+              tooltipLabel={tooltipLabel}
               tooltipText={tooltipText}
             />
           )}
@@ -61,6 +64,8 @@ WidgetSection.propTypes = {
   isOpen: PropTypes.bool,
   isOffline: PropTypes.bool,
   onToggleCallback: PropTypes.func,
+  tooltipId: PropTypes.string,
+  tooltipLabel: PropTypes.string,
   tooltipText: PropTypes.string,
 };
 

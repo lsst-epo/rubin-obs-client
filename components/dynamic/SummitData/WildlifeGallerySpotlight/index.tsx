@@ -7,11 +7,13 @@ import clsx from "clsx";
 import styles from "./styles.module.css";
 
 interface WildlifeGallerySpotlightProps {
+  tooltipLabel: string | undefined;
   tooltipText: string | undefined;
   gallery: any;
 }
 
 const WildlifeGallerySpotlight: FC<WildlifeGallerySpotlightProps> = ({
+  tooltipLabel,
   tooltipText,
   gallery,
 }) => {
@@ -21,6 +23,7 @@ const WildlifeGallerySpotlight: FC<WildlifeGallerySpotlightProps> = ({
   if (gallery === undefined || gallery === null) {
     return (
       <WidgetSection
+        tooltipLabel={tooltipLabel}
         tooltipText={tooltipText}
         isCollapsible={false}
         title={t("summit_dashboard.sections.wildlife_spotlight.title")}
@@ -40,6 +43,7 @@ const WildlifeGallerySpotlight: FC<WildlifeGallerySpotlightProps> = ({
 
   return (
     <WidgetSection
+      tooltipLabel={tooltipLabel}
       tooltipText={tooltipText}
       isCollapsible={false}
       title={t("summit_dashboard.sections.wildlife_spotlight.title")}

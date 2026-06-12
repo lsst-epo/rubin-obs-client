@@ -11,6 +11,7 @@ import { lat, long, altitude } from "@/lib/observatory";
 import { getTimes } from "@/lib/suncalc";
 
 interface SunsetSunriseProps {
+  tooltipLabel: string | undefined;
   tooltipText: string | undefined;
 }
 
@@ -56,7 +57,10 @@ function formatSolarTime(date: Date): string {
   });
 }
 
-const SunsetSunrise: FC<SunsetSunriseProps> = ({ tooltipText }) => {
+const SunsetSunrise: FC<SunsetSunriseProps> = ({
+  tooltipLabel,
+  tooltipText,
+}) => {
   const { t } = useTranslation();
   const { astroweatherData, localeContextInfo, isLoading } = useSummitData();
   const stillLoading = isLoading.hasura === undefined || isLoading.hasura;
@@ -81,6 +85,7 @@ const SunsetSunrise: FC<SunsetSunriseProps> = ({ tooltipText }) => {
   if (localeContextInfo === undefined || localeContextInfo === null) {
     return (
       <WidgetSection
+        tooltipLabel={tooltipLabel}
         tooltipText={tooltipText}
         isCollapsible={false}
         title={t("summit_dashboard.sections.sunrise_sunset.title")}
@@ -98,9 +103,12 @@ const SunsetSunrise: FC<SunsetSunriseProps> = ({ tooltipText }) => {
   // Otherwise, render the complete widget
   const { time, date } = localeContextInfo;
   const { sunset, sunrise } = getSunsetAndSunrise(time, date);
+  const sunsetTimeStr = `Sunset: ${formatSolarTime(sunset)}`;
+  const sunriseTimeStr = `Sunrise: ${formatSolarTime(sunrise)}`;
 
   return (
     <WidgetSection
+      tooltipLabel={tooltipLabel}
       tooltipText={tooltipText}
       isCollapsible={false}
       title={t("summit_dashboard.sections.sunrise_sunset.title")}
@@ -109,14 +117,23 @@ const SunsetSunrise: FC<SunsetSunriseProps> = ({ tooltipText }) => {
         className={clsx(styles.widgetBackground, styles.condensedBackground)}
       >
         <div className={clsx(styles.sunsetSunriseContainer)}>
-          <div className={clsx(styles.timeBar, styles.sunsetTime)}>
+          <div
+            className={clsx(styles.timeBar, styles.sunsetTime)}
+            aria-hidden="true"
+          >
             <UniqueIconComposer icon="Sunset" />
             {formatSolarTime(sunset) + " hrs."}
           </div>
-          <div className={clsx(styles.timeBar, styles.sunriseTime)}>
+          <span className={styles.srOnly}>{sunsetTimeStr}</span>
+
+          <div
+            className={clsx(styles.timeBar, styles.sunriseTime)}
+            aria-hidden="true"
+          >
             <UniqueIconComposer icon="Sunrise" />
             {formatSolarTime(sunrise) + " hrs."}
           </div>
+          <span className={styles.srOnly}>{sunriseTimeStr}</span>
         </div>
       </div>
     </WidgetSection>

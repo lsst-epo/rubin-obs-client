@@ -9,10 +9,11 @@ import styles from "./styles.module.css";
 import UniqueIconComposer from "@/components/svg/UniqueIconComposer";
 
 interface CameraFeedsProps {
+  tooltipLabel: string | undefined;
   tooltipText: string | undefined;
 }
 
-const CameraFeeds: FC<CameraFeedsProps> = ({ tooltipText }) => {
+const CameraFeeds: FC<CameraFeedsProps> = ({ tooltipLabel, tooltipText }) => {
   const { t } = useTranslation();
   const {
     summitMedia: {
@@ -43,6 +44,7 @@ const CameraFeeds: FC<CameraFeedsProps> = ({ tooltipText }) => {
   if (allSkyImage === undefined || allSkyImage === null) {
     return (
       <WidgetSection
+        tooltipLabel={tooltipLabel}
         tooltipText={tooltipText}
         isCollapsible={false}
         title={t("summit_dashboard.sections.all_sky_image.title")}
@@ -59,6 +61,7 @@ const CameraFeeds: FC<CameraFeedsProps> = ({ tooltipText }) => {
   // Otherwise, render the complete widget
   return (
     <WidgetSection
+      tooltipLabel={tooltipLabel}
       tooltipText={tooltipText}
       isCollapsible={false}
       title={t("summit_dashboard.sections.all_sky_image.title")}

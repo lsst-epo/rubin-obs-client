@@ -59,6 +59,7 @@ export const SectionTitle = styled.p`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  min-height: auto;
   padding-bottom: 0.5rem;
   font-size: clamp(0.5rem, 1rem, 2rem);
   text-align: center;
@@ -97,12 +98,12 @@ export const SectionFooter = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  min-height: max-content;
+  max-height: max-content;
   margin-top: auto;
 `;
 
 export const SectionCaptionContainer = styled.div`
-  min-height: 1.5rem;
+  min-height: auto;
 `;
 
 export const SectionInfoIconContainer = styled.div`

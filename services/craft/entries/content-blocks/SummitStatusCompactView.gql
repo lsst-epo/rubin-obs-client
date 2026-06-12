@@ -25,9 +25,10 @@ fragment summitStatusCompactViewBlock on contentBlocks_summitStatusCompactView_B
           directUrlOriginal
         }
         additional {
-          AltTextEN
-          CaptionEN
-          Credit
+          altTextEn: AltTextEN
+          captionEn: CaptionEN
+          credit: Credit
+          titleEn: TitleEN
         }
       }
     }

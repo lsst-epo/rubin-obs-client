@@ -8,10 +8,11 @@ import clsx from "clsx";
 import styles from "./styles.module.css";
 
 interface DomeStatusProps {
+  tooltipLabel: string | undefined;
   tooltipText: string | undefined;
 }
 
-const DomeStatus: FC<DomeStatusProps> = ({ tooltipText }) => {
+const DomeStatus: FC<DomeStatusProps> = ({ tooltipLabel, tooltipText }) => {
   const { t } = useTranslation();
   const {
     summitData: { domeStatus },
@@ -40,6 +41,7 @@ const DomeStatus: FC<DomeStatusProps> = ({ tooltipText }) => {
   if (domeStatus === undefined || domeStatus === null) {
     return (
       <WidgetSection
+        tooltipLabel={tooltipLabel}
         tooltipText={tooltipText}
         isCollapsible={false}
         title={t("summit_dashboard.sections.dome_status.title")}
@@ -57,6 +59,7 @@ const DomeStatus: FC<DomeStatusProps> = ({ tooltipText }) => {
   // Otherwise, render the complete widget
   return (
     <WidgetSection
+      tooltipLabel={tooltipLabel}
       tooltipText={tooltipText}
       isCollapsible={false}
       title={t("summit_dashboard.sections.dome_status.title")}

@@ -8,10 +8,14 @@ import clsx from "clsx";
 import { ProgressRadial } from "@rubin-epo/epo-react-lib";
 import UniqueIconComposer from "@/components/svg/UniqueIconComposer";
 interface SurveyProgressProps {
+  tooltipLabel: string | undefined;
   tooltipText: string | undefined;
 }
 
-const SurveyProgress: FC<SurveyProgressProps> = ({ tooltipText }) => {
+const SurveyProgress: FC<SurveyProgressProps> = ({
+  tooltipLabel,
+  tooltipText,
+}) => {
   const { t } = useTranslation();
   const {
     summitData: { surveyProgress },
@@ -46,6 +50,7 @@ const SurveyProgress: FC<SurveyProgressProps> = ({ tooltipText }) => {
   if (surveyProgress === undefined || surveyProgress === null) {
     return (
       <WidgetSection
+        tooltipLabel={tooltipLabel}
         tooltipText={tooltipText}
         isCollapsible={false}
         title={t("summit_dashboard.sections.survey_progress.title")}
@@ -63,6 +68,7 @@ const SurveyProgress: FC<SurveyProgressProps> = ({ tooltipText }) => {
   // Otherwise, render the complete widget
   return (
     <WidgetSection
+      tooltipLabel={tooltipLabel}
       tooltipText={tooltipText}
       isCollapsible={false}
       title={t("summit_dashboard.sections.survey_progress.title")}
@@ -70,6 +76,7 @@ const SurveyProgress: FC<SurveyProgressProps> = ({ tooltipText }) => {
     >
       <div
         className={clsx(styles.widgetBackground, styles.condensedBackground)}
+        aria-hidden="true"
       >
         <ProgressRadial
           value={surveyProgress}
@@ -79,6 +86,10 @@ const SurveyProgress: FC<SurveyProgressProps> = ({ tooltipText }) => {
           markerFormatter={progressFormatter}
         />
       </div>
+
+      <span className={styles.srOnly}>{`${progressFormatter(
+        surveyProgress
+      )} progress made`}</span>
     </WidgetSection>
   );
 };

@@ -7,6 +7,9 @@ const LocaleContextInfoBar = ({ time, date, location }) => {
   if ((time === undefined && date === undefined) || location === undefined) {
     return <></>;
   }
+
+  const srOnlyTime = `Local time: ${time} hours`;
+
   return (
     <div className={styles.container}>
       <span className={styles.localeText}>
@@ -14,10 +17,13 @@ const LocaleContextInfoBar = ({ time, date, location }) => {
         {location}
       </span>
       {time && (
-        <span className={styles.localeText}>
-          <UniqueIconComposer className={styles.icon} icon="time" size={15} />
-          {time}
-        </span>
+        <>
+          <span className={styles.localeText} aria-hidden="true">
+            <UniqueIconComposer className={styles.icon} icon="time" size={15} />
+            {`${time} hrs`}
+          </span>
+          <span className={styles.srOnly}>{srOnlyTime}</span>
+        </>
       )}
       {date && (
         <span className={styles.localeText}>

@@ -61,29 +61,51 @@ const SummitStatusCompactView: FC<SummitStatusCompactViewProps> = (props) => {
           <WidgetContainer dashboardCaption={summitStatusDashboardCaption}>
             <WidgetGrid gridCount={gridCount}>
               {showWeatherCondition && (
-                <WeatherCondition tooltipText={weatherConditionTooltipText} />
+                <WeatherCondition
+                  tooltipText={weatherConditionTooltipText}
+                  tooltipLabel="weather widget tooltip"
+                />
               )}
               {showAllSkyImage && (
-                <CameraFeeds tooltipText={allSkyImageTooltipText} />
+                <CameraFeeds
+                  tooltipText={allSkyImageTooltipText}
+                  tooltipLabel="all sky widget tooltip"
+                />
               )}
               {showDomeStatus && (
-                <DomeStatus tooltipText={domeStatusTooltipText} />
+                <DomeStatus
+                  tooltipText={domeStatusTooltipText}
+                  tooltipLabel="dome status widget tooltip"
+                />
               )}
               {showExposureCount && (
-                <ExposureCount tooltipText={exposureCountTooltipText} />
+                <ExposureCount
+                  tooltipText={exposureCountTooltipText}
+                  tooltipLabel="exposures widget tooltip"
+                />
               )}
               {showAlertCount && (
-                <AlertCount tooltipText={alertCountTooltipText} />
+                <AlertCount
+                  tooltipText={alertCountTooltipText}
+                  tooltipLabel="alerts widget tooltip"
+                />
               )}
               {showSurveyProgress && (
-                <SurveyProgress tooltipText={surveyProgressTooltipText} />
+                <SurveyProgress
+                  tooltipText={surveyProgressTooltipText}
+                  tooltipLabel="survey progress widget tooltip"
+                />
               )}
               {showSunsetSunriseTimes && (
-                <SunsetSunrise tooltipText={sunsetSunriseTimesTooltipText} />
+                <SunsetSunrise
+                  tooltipText={sunsetSunriseTimesTooltipText}
+                  tooltipLabel="sun times widget tooltip"
+                />
               )}
               {showWildlifeGallerySpotlight && (
                 <WildlifeGallerySpotlight
                   gallery={wildlifeGallery[0]}
+                  tooltipLabel="wildlife widget tooltip"
                   tooltipText={wildlifeGallerySpotlightTooltipText}
                 />
               )}
