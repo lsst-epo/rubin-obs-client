@@ -25,6 +25,7 @@ const SurveyProgress: FC<SurveyProgressProps> = ({ tooltipText }) => {
     }).format(value / 100);
 
   const stillLoading = isLoading.hasura === undefined || isLoading.hasura;
+  const tooltipLabel = "survey progress widget tooltip";
 
   // While loading, show the title and the loading animation
   if (stillLoading) {
@@ -46,6 +47,7 @@ const SurveyProgress: FC<SurveyProgressProps> = ({ tooltipText }) => {
   if (surveyProgress === undefined || surveyProgress === null) {
     return (
       <WidgetSection
+        tooltipLabel={tooltipLabel}
         tooltipText={tooltipText}
         isCollapsible={false}
         title={t("summit_dashboard.sections.survey_progress.title")}
@@ -63,6 +65,7 @@ const SurveyProgress: FC<SurveyProgressProps> = ({ tooltipText }) => {
   // Otherwise, render the complete widget
   return (
     <WidgetSection
+      tooltipLabel={tooltipLabel}
       tooltipText={tooltipText}
       isCollapsible={false}
       title={t("summit_dashboard.sections.survey_progress.title")}
@@ -70,6 +73,7 @@ const SurveyProgress: FC<SurveyProgressProps> = ({ tooltipText }) => {
     >
       <div
         className={clsx(styles.widgetBackground, styles.condensedBackground)}
+        aria-hidden="true"
       >
         <ProgressRadial
           value={surveyProgress}
@@ -79,6 +83,10 @@ const SurveyProgress: FC<SurveyProgressProps> = ({ tooltipText }) => {
           markerFormatter={progressFormatter}
         />
       </div>
+
+      <span className={styles.srOnly}>{`${progressFormatter(
+        surveyProgress
+      )} progress made`}</span>
     </WidgetSection>
   );
 };

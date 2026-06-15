@@ -22,6 +22,7 @@ const CameraFeeds: FC<CameraFeedsProps> = ({ tooltipText }) => {
   } = useSummitData();
 
   const stillLoading = isLoading.hasura === undefined || isLoading.hasura;
+  const tooltipLabel = "all sky widget tooltip";
 
   // While loading, show the title and the loading animation
   if (stillLoading) {
@@ -43,6 +44,7 @@ const CameraFeeds: FC<CameraFeedsProps> = ({ tooltipText }) => {
   if (allSkyImage === undefined || allSkyImage === null) {
     return (
       <WidgetSection
+        tooltipLabel={tooltipLabel}
         tooltipText={tooltipText}
         isCollapsible={false}
         title={t("summit_dashboard.sections.all_sky_image.title")}
@@ -59,6 +61,7 @@ const CameraFeeds: FC<CameraFeedsProps> = ({ tooltipText }) => {
   // Otherwise, render the complete widget
   return (
     <WidgetSection
+      tooltipLabel={tooltipLabel}
       tooltipText={tooltipText}
       isCollapsible={false}
       title={t("summit_dashboard.sections.all_sky_image.title")}

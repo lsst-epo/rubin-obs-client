@@ -16,11 +16,13 @@ const WildlifeGallerySpotlight: FC<WildlifeGallerySpotlightProps> = ({
   gallery,
 }) => {
   const { t } = useTranslation();
+  const tooltipLabel = "wildlife widget tooltip";
 
   // If bad data: show the title, offline icon, offline message, and the info icon if applicable
   if (gallery === undefined || gallery === null) {
     return (
       <WidgetSection
+        tooltipLabel={tooltipLabel}
         tooltipText={tooltipText}
         isCollapsible={false}
         title={t("summit_dashboard.sections.wildlife_spotlight.title")}
@@ -40,6 +42,7 @@ const WildlifeGallerySpotlight: FC<WildlifeGallerySpotlightProps> = ({
 
   return (
     <WidgetSection
+      tooltipLabel={tooltipLabel}
       tooltipText={tooltipText}
       isCollapsible={false}
       title={t("summit_dashboard.sections.wildlife_spotlight.title")}

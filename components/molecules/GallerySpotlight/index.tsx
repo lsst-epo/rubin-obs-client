@@ -66,7 +66,7 @@ const GallerySpotlight: FC<GallerySpotlightProps> = ({
   const currentImage = images[calculateImageIndex()];
 
   const {
-    additional: { AltTextEN: altTextEn, CaptionEN: captionEn, Credit: credit },
+    additional: { titleEn },
     url: { directUrlOriginal: imageUrl },
     id: cantoImageId,
   } = currentImage;
@@ -81,7 +81,7 @@ const GallerySpotlight: FC<GallerySpotlightProps> = ({
           src={imageUrl}
           width={width}
           height={height}
-          alt={altTextEn}
+          alt={titleEn || "wildlife image"}
         />
       </Link>
     </div>

@@ -186423,15 +186423,23 @@ export const SummitStatusCompactViewBlockFragmentDoc = {
                                 selections: [
                                   {
                                     kind: "Field",
+                                    alias: { kind: "Name", value: "altTextEn" },
                                     name: { kind: "Name", value: "AltTextEN" },
                                   },
                                   {
                                     kind: "Field",
+                                    alias: { kind: "Name", value: "captionEn" },
                                     name: { kind: "Name", value: "CaptionEN" },
                                   },
                                   {
                                     kind: "Field",
+                                    alias: { kind: "Name", value: "credit" },
                                     name: { kind: "Name", value: "Credit" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    alias: { kind: "Name", value: "titleEn" },
+                                    name: { kind: "Name", value: "TitleEN" },
                                   },
                                 ],
                               },
@@ -191244,15 +191252,23 @@ export const ContentBlocksFragmentDoc = {
                                 selections: [
                                   {
                                     kind: "Field",
+                                    alias: { kind: "Name", value: "altTextEn" },
                                     name: { kind: "Name", value: "AltTextEN" },
                                   },
                                   {
                                     kind: "Field",
+                                    alias: { kind: "Name", value: "captionEn" },
                                     name: { kind: "Name", value: "CaptionEN" },
                                   },
                                   {
                                     kind: "Field",
+                                    alias: { kind: "Name", value: "credit" },
                                     name: { kind: "Name", value: "Credit" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    alias: { kind: "Name", value: "titleEn" },
+                                    name: { kind: "Name", value: "TitleEN" },
                                   },
                                 ],
                               },
@@ -201286,15 +201302,23 @@ export const HomepageDocument = {
                                 selections: [
                                   {
                                     kind: "Field",
+                                    alias: { kind: "Name", value: "altTextEn" },
                                     name: { kind: "Name", value: "AltTextEN" },
                                   },
                                   {
                                     kind: "Field",
+                                    alias: { kind: "Name", value: "captionEn" },
                                     name: { kind: "Name", value: "CaptionEN" },
                                   },
                                   {
                                     kind: "Field",
+                                    alias: { kind: "Name", value: "credit" },
                                     name: { kind: "Name", value: "Credit" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    alias: { kind: "Name", value: "titleEn" },
+                                    name: { kind: "Name", value: "TitleEN" },
                                   },
                                 ],
                               },
@@ -207960,15 +207984,23 @@ export const GetEducatorPageEntryDocument = {
                                 selections: [
                                   {
                                     kind: "Field",
+                                    alias: { kind: "Name", value: "altTextEn" },
                                     name: { kind: "Name", value: "AltTextEN" },
                                   },
                                   {
                                     kind: "Field",
+                                    alias: { kind: "Name", value: "captionEn" },
                                     name: { kind: "Name", value: "CaptionEN" },
                                   },
                                   {
                                     kind: "Field",
+                                    alias: { kind: "Name", value: "credit" },
                                     name: { kind: "Name", value: "Credit" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    alias: { kind: "Name", value: "titleEn" },
+                                    name: { kind: "Name", value: "TitleEN" },
                                   },
                                 ],
                               },
@@ -212882,15 +212914,23 @@ export const GetEventEntryDocument = {
                                 selections: [
                                   {
                                     kind: "Field",
+                                    alias: { kind: "Name", value: "altTextEn" },
                                     name: { kind: "Name", value: "AltTextEN" },
                                   },
                                   {
                                     kind: "Field",
+                                    alias: { kind: "Name", value: "captionEn" },
                                     name: { kind: "Name", value: "CaptionEN" },
                                   },
                                   {
                                     kind: "Field",
+                                    alias: { kind: "Name", value: "credit" },
                                     name: { kind: "Name", value: "Credit" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    alias: { kind: "Name", value: "titleEn" },
+                                    name: { kind: "Name", value: "TitleEN" },
                                   },
                                 ],
                               },
@@ -219676,15 +219716,23 @@ export const GetPageEntryDocument = {
                                 selections: [
                                   {
                                     kind: "Field",
+                                    alias: { kind: "Name", value: "altTextEn" },
                                     name: { kind: "Name", value: "AltTextEN" },
                                   },
                                   {
                                     kind: "Field",
+                                    alias: { kind: "Name", value: "captionEn" },
                                     name: { kind: "Name", value: "CaptionEN" },
                                   },
                                   {
                                     kind: "Field",
+                                    alias: { kind: "Name", value: "credit" },
                                     name: { kind: "Name", value: "Credit" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    alias: { kind: "Name", value: "titleEn" },
+                                    name: { kind: "Name", value: "TitleEN" },
                                   },
                                 ],
                               },
