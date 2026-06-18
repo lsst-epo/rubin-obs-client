@@ -47,7 +47,6 @@ const WeatherCondition: FC<WeatherConditionProps> = ({ tooltipText }) => {
     return (
       <WidgetSection
         isCollapsible={false}
-        tooltipId="weatherTooltip"
         tooltipLabel={tooltipLabel}
         tooltipText={tooltipText}
         title={t("summit_dashboard.sections.weather_condition.title")}

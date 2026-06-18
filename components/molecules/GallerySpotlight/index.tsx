@@ -81,7 +81,7 @@ const GallerySpotlight: FC<GallerySpotlightProps> = ({
           src={imageUrl}
           width={width}
           height={height}
-          alt={titleEn || "wildlife image"}
+          alt={titleEn || "photo gallery image"}
         />
       </Link>
     </div>

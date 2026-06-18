@@ -63,7 +63,6 @@ WidgetSection.propTypes = {
   isOpen: PropTypes.bool,
   isOffline: PropTypes.bool,
   onToggleCallback: PropTypes.func,
-  tooltipId: PropTypes.string,
   tooltipLabel: PropTypes.string,
   tooltipText: PropTypes.string,
 };
