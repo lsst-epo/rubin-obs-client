@@ -12,6 +12,7 @@ interface WeatherConditionProps {
 }
 
 const WeatherCondition: FC<WeatherConditionProps> = ({ tooltipText }) => {
+  const tooltipLabel = "weather widget tooltip";
   const { t } = useTranslation();
   const {
     currentWeatherArtifacts: { svgName, weatherDescription },
@@ -46,6 +47,7 @@ const WeatherCondition: FC<WeatherConditionProps> = ({ tooltipText }) => {
     return (
       <WidgetSection
         isCollapsible={false}
+        tooltipLabel={tooltipLabel}
         tooltipText={tooltipText}
         title={t("summit_dashboard.sections.weather_condition.title")}
         caption={t("summit_dashboard.error_message")}
@@ -62,6 +64,7 @@ const WeatherCondition: FC<WeatherConditionProps> = ({ tooltipText }) => {
   // Otherwise, render the complete widget
   return (
     <WidgetSection
+      tooltipLabel={tooltipLabel}
       tooltipText={tooltipText}
       isCollapsible={false}
       title={t("summit_dashboard.sections.weather_condition.title")}
