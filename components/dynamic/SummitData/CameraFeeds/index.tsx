@@ -48,6 +48,7 @@ const CameraFeeds: FC<CameraFeedsProps> = ({ tooltipText }) => {
         tooltipText={tooltipText}
         isCollapsible={false}
         title={t("summit_dashboard.sections.all_sky_image.title")}
+        caption={t("summit_dashboard.error_message")}
       >
         <div
           className={clsx(styles.widgetBackground, styles.condensedBackground)}
