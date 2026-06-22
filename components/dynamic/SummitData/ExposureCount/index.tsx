@@ -19,6 +19,8 @@ const ExposureCount: FC<ExposureCountProps> = ({ tooltipText }) => {
     isLoading,
   } = useSummitData();
   const stillLoading = isLoading.hasura === undefined || isLoading.hasura;
+  const tooltipLabel = "exposures widget tooltip";
+  const exposureCountStr = `${exposureCount} images`;
 
   // While loading, show the title and the loading animation
   if (stillLoading) {
@@ -40,6 +42,7 @@ const ExposureCount: FC<ExposureCountProps> = ({ tooltipText }) => {
   if (exposureCount === undefined || exposureCount === null) {
     return (
       <WidgetSection
+        tooltipLabel={tooltipLabel}
         tooltipText={tooltipText}
         isCollapsible={false}
         title={exposuresTitle}
@@ -57,6 +60,7 @@ const ExposureCount: FC<ExposureCountProps> = ({ tooltipText }) => {
   // Otherwise, render the complete widget
   return (
     <WidgetSection
+      tooltipLabel={tooltipLabel}
       tooltipText={tooltipText}
       isCollapsible={false}
       title={exposuresTitle}
@@ -65,7 +69,8 @@ const ExposureCount: FC<ExposureCountProps> = ({ tooltipText }) => {
         className={clsx(styles.widgetBackground, styles.condensedBackground)}
       >
         <UniqueIconComposer icon="TelescopeFootprint"></UniqueIconComposer>
-        <span>{exposureCount}</span>
+        <span aria-hidden="true">{exposureCount}</span>
+        <span className={styles.srOnly}>{exposureCountStr}</span>
       </div>
     </WidgetSection>
   );

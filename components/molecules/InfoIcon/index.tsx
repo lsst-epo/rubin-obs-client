@@ -8,6 +8,7 @@ const InfoIcon = ({
   size,
   height,
   width,
+  tooltipLabel,
   tooltipText,
   showTooltips = true,
 }) => {
@@ -16,24 +17,15 @@ const InfoIcon = ({
 
   return (
     <Styled.InfoIconContainer>
-      {tooltipText && showTooltips && (
-        <Tooltip
-          isVisible={isTooltipVisible || isClickedOpen}
-          value={tooltipText}
-        />
-      )}
       <Styled.InfoIcon>
-        <span
+        <button
           onMouseEnter={() => showTooltips && setTooltipVisible(true)}
           onMouseLeave={() => showTooltips && setTooltipVisible(false)}
           onPointerUp={() => {
             setIsClickedOpen((prev) => !prev);
             setTooltipVisible(false);
           }}
-          role="tooltip"
-          aria-roledescription="tooltip"
-          aria-label="Summit status dashboard widget tooltip"
-          aria-labelledby="tooltipText"
+          aria-label={tooltipLabel}
         >
           <UniqueIconComposer
             icon="info"
@@ -41,8 +33,13 @@ const InfoIcon = ({
             height={height}
             width={width}
           />
-        </span>
+        </button>
       </Styled.InfoIcon>
+      <Tooltip
+        isRendered={tooltipText && showTooltips}
+        isVisible={isTooltipVisible || isClickedOpen}
+        value={tooltipText}
+      />
     </Styled.InfoIconContainer>
   );
 };
@@ -51,6 +48,7 @@ InfoIcon.propTypes = {
   size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   width: PropTypes.number,
   height: PropTypes.number,
+  tooltipLabel: PropTypes.string,
   tooltipText: PropTypes.string,
   showTooltips: PropTypes.bool,
 };

@@ -19,6 +19,7 @@ const DomeStatus: FC<DomeStatusProps> = ({ tooltipText }) => {
   } = useSummitData();
 
   const stillLoading = isLoading.hasura === undefined || isLoading.hasura;
+  const tooltipLabel = "dome status widget tooltip";
 
   // If bad data: show the title, offline icon, offline message, and the info icon if applicable
   if (stillLoading) {
@@ -40,6 +41,7 @@ const DomeStatus: FC<DomeStatusProps> = ({ tooltipText }) => {
   if (domeStatus === undefined || domeStatus === null) {
     return (
       <WidgetSection
+        tooltipLabel={tooltipLabel}
         tooltipText={tooltipText}
         isCollapsible={false}
         title={t("summit_dashboard.sections.dome_status.title")}
@@ -57,6 +59,7 @@ const DomeStatus: FC<DomeStatusProps> = ({ tooltipText }) => {
   // Otherwise, render the complete widget
   return (
     <WidgetSection
+      tooltipLabel={tooltipLabel}
       tooltipText={tooltipText}
       isCollapsible={false}
       title={t("summit_dashboard.sections.dome_status.title")}

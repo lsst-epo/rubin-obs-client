@@ -20,6 +20,9 @@ const AlertCount: FC<AlertCountProps> = ({ tooltipText }) => {
     isLoading,
   } = useSummitData();
   const stillLoading = isLoading.hasura === undefined || isLoading.hasura;
+  const tooltipLabel = "alerts widget tooltip";
+
+  const alertCountStr = `${alertCount} alerts`;
 
   // While loading, show the title and the loading animation
   if (stillLoading) {
@@ -41,6 +44,7 @@ const AlertCount: FC<AlertCountProps> = ({ tooltipText }) => {
   if (alertCount === undefined || alertCount === null) {
     return (
       <WidgetSection
+        tooltipLabel={tooltipLabel}
         tooltipText={tooltipText}
         isCollapsible={false}
         title={alertsTitle}
@@ -58,6 +62,7 @@ const AlertCount: FC<AlertCountProps> = ({ tooltipText }) => {
   // Otherwise, render the complete widget
   return (
     <WidgetSection
+      tooltipLabel={tooltipLabel}
       tooltipText={tooltipText}
       isCollapsible={false}
       title={alertsTitle}
@@ -65,7 +70,8 @@ const AlertCount: FC<AlertCountProps> = ({ tooltipText }) => {
       <div
         className={clsx(styles.widgetBackground, styles.condensedBackground)}
       >
-        <span>{formatLargeNumber(alertCount)}</span>
+        <span aria-hidden="true">{formatLargeNumber(alertCount)}</span>
+        <span className={styles.srOnly}>{alertCountStr}</span>
       </div>
     </WidgetSection>
   );

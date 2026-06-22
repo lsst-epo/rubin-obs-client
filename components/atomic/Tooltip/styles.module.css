@@ -21,6 +21,10 @@
     }
 }
 
+.tooltipContainerHidden {
+    display: none;
+}
+
 .toolbarArrowContainer {
     display: flex;
     justify-content: center;
