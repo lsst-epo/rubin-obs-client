@@ -326,7 +326,8 @@ export const SummitDataProvider = ({ children }) => {
     let svgName;
     let alertsTitle;
     let exposuresTitle;
-    if (dateTime.hour < 7 && dateTime.hour > 19) {
+    // If the hour is before 7:00a OR after 7p
+    if (dateTime.hour < 7 || dateTime.hour >= 19) {
       svgName = currentWeather.nightSVG;
       alertsTitle = t("summit_dashboard.sections.alert_count.title.night");
       exposuresTitle = t(
