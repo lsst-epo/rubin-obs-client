@@ -22,7 +22,6 @@
     "baseUrl": ".",
     "strictNullChecks": true,
     "paths": {
-      "@/*": ["./*"],
       "@/lib/*": ["lib/*"],
       "@/api/*": ["lib/api/*"],
       "@/charts/*": ["svg/charts/*"],
@@ -45,7 +44,8 @@
       "@/helpers/*": ["helpers/*"],
       "@/hoc/*": ["components/hoc/*"],
       "@/gql/*": ["gql/*"],
-      "@/services/*": ["services/*"]
+      "@/services/*": ["services/*"],
+      "@/*": ["./*"]
     },
     "types": ["jest", "@testing-library/jest-dom", "node"]
   },
