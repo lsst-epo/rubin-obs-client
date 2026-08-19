@@ -10,22 +10,22 @@ describe(Tooltip.displayName || "Tooltip", () => {
   const validValue = "This is a valid tooltip text value.";
 
   it("displays the tooltip with a valid value string", () => {
-    render(<Tooltip value={validValue} isVisible={true} />);
+    render(<Tooltip value={validValue} isRendered={true} isVisible={true} />);
     expect(screen.getByText(validValue)).toBeInTheDocument();
   });
 
   it("does not display the tooltip when the value string is empty", () => {
-    render(<Tooltip value={""} isVisible={true} />);
+    render(<Tooltip value={""} isRendered={true} isVisible={true} />);
     expect(document.getElementById("tooltipText")).not.toBeInTheDocument();
   });
 
   it("renders the tooltip when isVisible is true", () => {
-    render(<Tooltip value={validValue} isVisible={true} />);
+    render(<Tooltip value={validValue} isRendered={true} isVisible={true} />);
     expect(document.getElementById("tooltipText")).toBeInTheDocument();
   });
 
   it("does not render the tooltip when isVisible is false", () => {
-    render(<Tooltip value={validValue} isVisible={false} />);
+    render(<Tooltip value={validValue} isRendered={false} isVisible={false} />);
     expect(document.getElementById("tooltipText")).not.toBeInTheDocument();
   });
 
@@ -34,6 +34,7 @@ describe(Tooltip.displayName || "Tooltip", () => {
       <Tooltip
         value={validValue}
         isVisible={true}
+        isRendered={true}
         tooltipFormatter={mockedTooltipFormatter}
       />
     );
@@ -41,7 +42,7 @@ describe(Tooltip.displayName || "Tooltip", () => {
   });
 
   it("does not modify the tooltip text when a formatterFunction is NOT provided", () => {
-    render(<Tooltip value={validValue} isVisible={true} />);
+    render(<Tooltip value={validValue} isRendered={true} isVisible={true} />);
     expect(
       screen.queryByText(validValue.toUpperCase())
     ).not.toBeInTheDocument();
