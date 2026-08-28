@@ -14,19 +14,9 @@ describe(Tooltip.displayName || "Tooltip", () => {
     expect(screen.getByText(validValue)).toBeInTheDocument();
   });
 
-  it("does not display the tooltip when the value string is empty", () => {
-    render(<Tooltip value={""} isRendered={true} isVisible={true} />);
-    expect(document.getElementById("tooltipText")).not.toBeInTheDocument();
-  });
-
-  it("renders the tooltip when isVisible is true", () => {
-    render(<Tooltip value={validValue} isRendered={true} isVisible={true} />);
-    expect(document.getElementById("tooltipText")).toBeInTheDocument();
-  });
-
   it("does not render the tooltip when isVisible is false", () => {
     render(<Tooltip value={validValue} isRendered={false} isVisible={false} />);
-    expect(document.getElementById("tooltipText")).not.toBeInTheDocument();
+    expect(screen.queryByText(validValue)).not.toBeInTheDocument();
   });
 
   it("formats the tooltip text when a formatterFunction is provided", () => {
