@@ -111,6 +111,8 @@ export async function getEntryDataByUri(
   const site = getSiteFromLocale(locale);
   const query = getQueryFragments(uri, section, type, site);
 
+  // console.info("[debug] about to execute queryAPI() in /lib/api/entry/indext.ts for site: ", site);
+
   const { data } = await queryAPI({
     query,
     variables: {
@@ -120,6 +122,8 @@ export async function getEntryDataByUri(
       uri: decodeURI(uri),
     },
   });
+
+  // console.info("[debug] logging data from query service: ", data);
 
   // Get the related investigation
   return { ...data?.entry, ...(await addRelatedInvestigation(data?.entry)) };

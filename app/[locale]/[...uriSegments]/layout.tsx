@@ -53,11 +53,21 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const uri = uriSegments.join("/");
 
-  const entrySectionType = await getEntrySectionByUri(uri, locale);
+  let entrySectionType = await getEntrySectionByUri(uri, locale);
+  process.env.DEBUG_LAYOUT &&
+    console.info(
+      "[debug] logging entrySectionType in layout.tsx: ",
+      entrySectionType
+    );
 
   // Handle 404 if there is no data
   if (!entrySectionType) {
-    notFound();
+    if (locale !== "en") {
+      entrySectionType = await getEntrySectionByUri(uri, "en");
+      if (!entrySectionType) {
+        notFound();
+      }
+    }
   }
 
   const { typeHandle } = entrySectionType;
@@ -69,10 +79,17 @@ export async function generateMetadata(
     );
   }
 
-  const metadata = await getEntryMetadataByUri(uri, locale);
+  let metadata = await getEntryMetadataByUri(uri, locale);
+  process.env.DEBUG_LAYOUT && console.info("[debug] layout: ", metadata);
 
   if (!metadata?.entry) {
-    notFound();
+    if (locale !== "en") {
+      metadata = await getEntryMetadataByUri(uri, "en");
+      if (!metadata?.entry) {
+        process.env.DEBUG_LAYOUT && console.info("[debug] not found!");
+        notFound();
+      }
+    }
   }
 
   const {

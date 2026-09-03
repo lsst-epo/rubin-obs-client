@@ -50,18 +50,19 @@ export default async function Page({
   },
   breadcrumbs,
   children,
+  overrideLocale,
 }) {
   const {
     t,
     i18n: { language },
-  } = await useTranslation();
+  } = await useTranslation("en");
 
   const pageLink = {
     id,
     uri,
     title,
   };
-
+  // console.info("[debug] got to page template for language: ", language)
   // Check the first segment of the URI to determine if this is a "For Scientists" page
   const isForScientistsPage = breadcrumbs[0]?.uri === "for-scientists";
 
@@ -92,6 +93,7 @@ export default async function Page({
     filter: [...eventFilter.map(({ id }) => id)],
   };
 
+  console.info("[debug] about to render JSX output, typeHandle: ", typeHandle);
   return (
     <AuthorizePage typeHandle={typeHandle}>
       {breadcrumbs && (
@@ -197,6 +199,7 @@ Page.displayName = "Template.Page";
 
 Page.propTypes = {
   data: pageShape,
+  overrideLocale: PropTypes.string,
   breadcrumbs: PropTypes.arrayOf(internalLinkShape),
   children: PropTypes.node,
 };
