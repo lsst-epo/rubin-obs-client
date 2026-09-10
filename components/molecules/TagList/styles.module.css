@@ -8,7 +8,7 @@
 
 .tag {
   & a {
-    color: var(--color-font-accent);
+    color: #12726D;
   }
 
   &[data-no-break="true"] {

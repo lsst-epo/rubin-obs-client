@@ -39,7 +39,7 @@
 .link {
   display: block;
   padding-inline: var(--size-spacing-2xs);
-  color: var(--color-font-accent);
+  color: #12726D;
 
   &[aria-current="page"] {
     color: #3f3f3f;

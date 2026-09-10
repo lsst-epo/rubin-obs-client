@@ -8,7 +8,7 @@
   }
 
   & a:not([class^="c-"]) {
-    color: var(--link-color, var(--color-font-accent));
+    color: #12726D;
     text-decoration: underline;
   }
 
