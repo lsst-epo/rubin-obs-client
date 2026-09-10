@@ -3,12 +3,12 @@
 
 .container {
   & a {
-    color: var(--color-font-accent);
+    color:  #12726D;
     text-decoration: none;
 
     &:hover,
     &:focus-visible {
-      color: var(--color-font-accent);
+      color:  #12726D;
       text-decoration: underline;
     }
   }
