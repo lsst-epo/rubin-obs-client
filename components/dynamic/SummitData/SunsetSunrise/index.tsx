@@ -78,60 +78,67 @@ const SunsetSunrise: FC<SunsetSunriseProps> = ({ tooltipText }) => {
     );
   }
 
-  // If bad data: show the title, offline icon, offline message, and the info icon if applicable
-  if (localeContextInfo === undefined || localeContextInfo === null) {
-    return (
-      <WidgetSection
-        tooltipLabel={tooltipLabel}
-        tooltipText={tooltipText}
-        isCollapsible={false}
-        title={t("summit_dashboard.sections.sunrise_sunset.title")}
-        caption={t("summit_dashboard.error_message")}
-      >
-        <div
-          className={clsx(styles.widgetBackground, styles.condensedBackground)}
+  if (localeContextInfo !== undefined && localeContextInfo !== null) {
+    const { time, date } = localeContextInfo;
+    const { sunset, sunrise } = getSunsetAndSunrise(time, date);
+    if (
+      sunset.toString() !== "Invalid Date" &&
+      sunrise.toString() !== "Invalid Date"
+    ) {
+      const sunsetTimeStr = `Sunset: ${formatSolarTime(sunset)}`;
+      const sunriseTimeStr = `Sunrise: ${formatSolarTime(sunrise)}`;
+
+      return (
+        <WidgetSection
+          tooltipLabel={tooltipLabel}
+          tooltipText={tooltipText}
+          isCollapsible={false}
+          title={t("summit_dashboard.sections.sunrise_sunset.title")}
         >
-          <UniqueIconComposer icon="Offline" />
-        </div>
-      </WidgetSection>
-    );
+          <div
+            className={clsx(
+              styles.widgetBackground,
+              styles.condensedBackground
+            )}
+          >
+            <div className={clsx(styles.sunsetSunriseContainer)}>
+              <div
+                className={clsx(styles.timeBar, styles.sunsetTime)}
+                aria-hidden="true"
+              >
+                <UniqueIconComposer icon="Sunset" />
+                {formatSolarTime(sunset) + " hrs."}
+              </div>
+              <span className={styles.srOnly}>{sunsetTimeStr}</span>
+
+              <div
+                className={clsx(styles.timeBar, styles.sunriseTime)}
+                aria-hidden="true"
+              >
+                <UniqueIconComposer icon="Sunrise" />
+                {formatSolarTime(sunrise) + " hrs."}
+              </div>
+              <span className={styles.srOnly}>{sunriseTimeStr}</span>
+            </div>
+          </div>
+        </WidgetSection>
+      );
+    }
   }
 
-  // Otherwise, render the complete widget
-  const { time, date } = localeContextInfo;
-  const { sunset, sunrise } = getSunsetAndSunrise(time, date);
-  const sunsetTimeStr = `Sunset: ${formatSolarTime(sunset)}`;
-  const sunriseTimeStr = `Sunrise: ${formatSolarTime(sunrise)}`;
-
+  // At this point, validation failed so show offline message
   return (
     <WidgetSection
       tooltipLabel={tooltipLabel}
       tooltipText={tooltipText}
       isCollapsible={false}
       title={t("summit_dashboard.sections.sunrise_sunset.title")}
+      caption={t("summit_dashboard.error_message")}
     >
       <div
         className={clsx(styles.widgetBackground, styles.condensedBackground)}
       >
-        <div className={clsx(styles.sunsetSunriseContainer)}>
-          <div
-            className={clsx(styles.timeBar, styles.sunsetTime)}
-            aria-hidden="true"
-          >
-            <UniqueIconComposer icon="Sunset" />
-            {formatSolarTime(sunset) + " hrs."}
-          </div>
-          <span className={styles.srOnly}>{sunsetTimeStr}</span>
-
-          <div
-            className={clsx(styles.timeBar, styles.sunriseTime)}
-            aria-hidden="true"
-          >
-            <UniqueIconComposer icon="Sunrise" />
-            {formatSolarTime(sunrise) + " hrs."}
-          </div>
-          <span className={styles.srOnly}>{sunriseTimeStr}</span>
-        </div>
+        <UniqueIconComposer icon="Offline" />
       </div>
     </WidgetSection>
   );
