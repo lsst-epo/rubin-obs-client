@@ -12,6 +12,7 @@ import Pagination from "@/components/molecules/Pagination";
 import LinkedImage from "@/components/molecules/LinkedImage";
 import FilteredResults from "../FilteredResults";
 import styles from "./styles.module.css";
+import PaginationPair from "@/components/molecules/PaginationPair";
 interface PreviewGridProps {
   gallery: string;
   locale: string;
@@ -96,13 +97,15 @@ const PreviewGridContent: FunctionComponent<PreviewGridProps> = async ({
   return (
     <>
       <FilteredResults {...{ total, filters }} />
-      <MasonryGrid items={items} />
-      <Pagination
+      <PaginationPair
         limit={limit}
         page={page}
         total={total}
         offset={getOffset(limit, page)}
-      />
+        autofocus={"top"}
+      >
+        <MasonryGrid items={items} />
+      </PaginationPair>
     </>
   );
 };

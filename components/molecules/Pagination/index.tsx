@@ -1,5 +1,5 @@
 "use client";
-import React, { FC } from "react";
+import React, { FC, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Trans, useTranslation } from "react-i18next";
@@ -10,6 +10,8 @@ interface PaginationProps {
   offset: number;
   page: number;
   total: number;
+  autofocus?: boolean;
+  ariaLabel?: string;
 }
 
 const Pagination: FC<PaginationProps> = ({
@@ -17,10 +19,22 @@ const Pagination: FC<PaginationProps> = ({
   offset,
   page: currentPage,
   total,
+  autofocus = false,
+  ariaLabel,
 }) => {
   const { t } = useTranslation();
+  if (!ariaLabel) ariaLabel = t("pagination.label.default");
+
   const queryParams = useSearchParams();
   const query = queryParams ? Object.fromEntries(queryParams) : {};
+
+  const focusedNav = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (focusedNav.current) {
+      focusedNav.current.focus();
+    }
+  });
 
   const from = offset + 1;
   let to = offset + limit;
@@ -53,7 +67,12 @@ const Pagination: FC<PaginationProps> = ({
 
   return (
     <div className={styles.container}>
-      <nav className={styles.navDesktop} aria-label={t("pagination.label")}>
+      <nav
+        className={styles.navDesktop}
+        aria-label={ariaLabel}
+        ref={autofocus ? focusedNav : null}
+        tabIndex={-1}
+      >
         <div>
           <Trans i18nKey="pagination.showing-range">
             Showing {{ from }} to {{ to }} of {{ length: total }}
@@ -100,7 +119,7 @@ const Pagination: FC<PaginationProps> = ({
           )}
         </div>
       </nav>
-      <nav className={styles.navMobile} aria-label={t("pagination.label")}>
+      <nav className={styles.navMobile} aria-label={ariaLabel}>
         <div>
           {prev > 0 ? (
             <Link

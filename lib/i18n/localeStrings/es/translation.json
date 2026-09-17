@@ -201,7 +201,11 @@
     "date_last_updated": "Fecha de última actualización: {{dateUpdated}}"
   },
   "pagination": {
-    "label": "Paginación",
+    "label": {
+      "default": "Paginación",
+      "top": "Paginación superior",
+      "bottom": "Paginación inferior"
+    },
     "previous": "Anterior",
     "next": "Siguiente",
     "of": "de",
