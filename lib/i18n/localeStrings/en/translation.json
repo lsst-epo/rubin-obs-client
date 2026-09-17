@@ -186,7 +186,11 @@
     "date_last_updated": "Date last updated: {{dateUpdated}}"
   },
   "pagination": {
-    "label": "Pagination",
+    "label": {
+      "default": "Pagination",
+      "top": "Upper Pagination",
+      "bottom": "Lower Pagination"
+    },
     "previous": "Previous",
     "next": "Next",
     "of": "of",
