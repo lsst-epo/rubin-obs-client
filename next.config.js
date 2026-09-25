@@ -10,6 +10,7 @@ const jiti = createJiti(__filename);
 
 const { env } = await jiti.import("./env");
 const headers = await jiti.import("./config/headers", { default: true });
+const redirects = await jiti.import("./redirects", { default: true });
 
 const withNextIntl = createNextIntlPlugin("./lib/i18n/request.ts");
 
@@ -17,6 +18,9 @@ const withNextIntl = createNextIntlPlugin("./lib/i18n/request.ts");
 export default withNextIntl({
   async generateBuildId() {
     return "rubin-obs-client-next-build-id";
+  },
+  async redirects() {
+    return redirects({ assessmentRedirectUrl: env.ASSESSMENT_REDIRECT_URL });
   },
   images: {
     remotePatterns: [
