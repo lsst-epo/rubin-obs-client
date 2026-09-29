@@ -39,6 +39,7 @@ export const env = createEnv({
       .catch(3600)
       .default(3600),
     METRICS_SECRET_TOKEN: z.string().min(1),
+    ASSESSMENT_REDIRECT_URL: z.string(),
   },
   client: {
     NEXT_PUBLIC_API_URL: z.string().url(),

@@ -1,14 +1,16 @@
 # Rubin Observatory Operational Client/UI
 
 React/Next.js client for the Rubin Observatory operational site with Docker support.
+Intended to be used with the Rubin EPO [rubin-obs-api](https://github.com/lsst-epo/rubin-obs-api/).
 
 ## Local development
 
 0. Ensure that the Craft CMS container is running and functioning correctly by going to http://localhost:8080/api, if everything is working fine you should see some message about a missing GraphQL query
-1. Install dependencies ```yarn``` 
-2. Start the dev server ```yarn dev```
+1. Create a `.env` file in the root of your project based on the `.env.local.sample`
+2. Install dependencies `yarn`
+3. Start the dev server `yarn dev`
 
-This should be all that you need to do to get the client running. However, there is an assumption that you have the rubin-obs-api project running in some way, either with the legacy CIC scripts or preferably within a container. 
+This should be all that you need to do to get the client running. However, there is an assumption that you have the rubin-obs-api project running in some way, either with the legacy CIC scripts or preferably within a container.
 
 ## Running the client within a Docker container
 
@@ -46,12 +48,11 @@ For your convenience, a node.js script has been included in this repo that grabs
 node getApiGatewayURL
 ```
 
-
 ### Manual:
 
 1. Ensure that the Craft CMS container is running and functioning correctly by going to http://localhost:8080/api, if everything is working fine you should see some message about a missing GraphQL query
-2. In the terminal, enter the command ```docker network ls``` and you should she text table output - under the "NAME" column verify that you see one row with the value "rubin-obs-api_default"
-3. Enter the command ```docker network inspect rubin-obs-api_default``` (note the underscore)
+2. In the terminal, enter the command `docker network ls` and you should she text table output - under the "NAME" column verify that you see one row with the value "rubin-obs-api_default"
+3. Enter the command `docker network inspect rubin-obs-api_default` (note the underscore)
 4. The ouput from the above command will be a JSON object, the gateway IP can be found at: IPAM.Config.Gateway
 
 This IP will change between bringing up and down the container, so keep in mind that you'll need to do this step everytime you bring the Craft CMS containers down and back up.
@@ -60,8 +61,8 @@ This IP will change between bringing up and down the container, so keep in mind 
 
 If you visit the Rubin Observatory summit site and would like to commemorate your visit with a commit, enter it here:
 
-|Date|Visitor|Comments|
-|----|-------|--------|
-|2024, November 15|[@alexgoff](https://github.com/alexgoff)|Primera commit|
-|2024, November 15|[@ericdrosas87](https://github.com/ericdrosas87)|First visit|
-|2026, March 07|[@jeffinnes](https://github.com/jeffinnes)|First visit|
+| Date              | Visitor                                          | Comments       |
+| ----------------- | ------------------------------------------------ | -------------- |
+| 2024, November 15 | [@alexgoff](https://github.com/alexgoff)         | Primera commit |
+| 2024, November 15 | [@ericdrosas87](https://github.com/ericdrosas87) | First visit    |
+| 2026, March 07    | [@jeffinnes](https://github.com/jeffinnes)       | First visit    |
