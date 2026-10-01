@@ -1,0 +1,6 @@
+{
+  // Vitest-only: the base "include" omits JS, so "@/" aliases wouldn't
+  // resolve inside the .js/.jsx modules the tests import
+  "extends": "./tsconfig.json",
+  "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"]
+}

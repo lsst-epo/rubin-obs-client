@@ -1,6 +1,5 @@
+import { describe, it, expect } from "vitest";
 import { makeDateString, makeDateObject } from "./dates";
-
-process.env.TZ = "America/Phoenix";
 
 // UTC midnight on New Year's Day. Un-normalized, a negative-offset timezone
 // renders the previous day, month and year: "December 31, 2024"

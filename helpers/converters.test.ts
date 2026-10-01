@@ -1,3 +1,4 @@
+import { describe, it, expect } from "vitest";
 import { convertTemperature, convertWindspeed } from "./converters";
 // °F = (°C × 1.8) + 32
 

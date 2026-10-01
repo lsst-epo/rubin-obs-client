@@ -1,3 +1,4 @@
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import {
   formatTemperature,
   formatPercent,
@@ -6,8 +7,6 @@ import {
   formatAngle,
   formatLargeNumber,
 } from "./formatters";
-
-process.env.TZ = "America/Phoenix";
 
 // Noon UTC in January, when Santiago observes daylight time (UTC-3)
 const noonUTC = new Date("2025-01-01T12:00:00Z");
@@ -61,11 +60,11 @@ describe("formatTime", () => {
 describe("formatDayName", () => {
   beforeEach(() => {
     // Wednesday, January 1, 2025 in Phoenix
-    jest.useFakeTimers().setSystemTime(noonUTC);
+    vi.useFakeTimers().setSystemTime(noonUTC);
   });
 
   afterEach(() => {
-    jest.useRealTimers();
+    vi.useRealTimers();
   });
 
   it("returns Sunday by default", () => {

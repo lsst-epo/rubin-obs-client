@@ -1,3 +1,4 @@
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import {
   capitalize,
   hasImage,
@@ -11,12 +12,9 @@ import {
 } from "./index";
 
 // `.env` is gitignored, so the real env module would fail validation in CI.
-// Relative path because SWC only rewrites "@/" aliases in import statements
-jest.mock("../env", () => ({
+vi.mock("@/env", () => ({
   env: { NEXT_PUBLIC_BASE_URL: "https://rubinobservatory.org" },
 }));
-
-process.env.TZ = "America/Phoenix";
 
 describe("capitalize", () => {
   it("capitalizes the first character", () => {
@@ -82,21 +80,21 @@ describe("fileSize", () => {
 
 describe("wait", () => {
   beforeEach(() => {
-    jest.useFakeTimers();
+    vi.useFakeTimers();
   });
 
   afterEach(() => {
-    jest.useRealTimers();
+    vi.useRealTimers();
   });
 
   it("resolves after the given number of seconds", async () => {
-    const resolved = jest.fn();
+    const resolved = vi.fn();
     wait(2).then(resolved);
 
-    await jest.advanceTimersByTimeAsync(1999);
+    await vi.advanceTimersByTimeAsync(1999);
     expect(resolved).not.toHaveBeenCalled();
 
-    await jest.advanceTimersByTimeAsync(2); // 2001ms will have passed
+    await vi.advanceTimersByTimeAsync(2); // 2001ms will have passed
     expect(resolved).toHaveBeenCalled();
   });
 });
@@ -104,11 +102,11 @@ describe("wait", () => {
 describe("timezoneOffset", () => {
   beforeEach(() => {
     // January, when Santiago observes daylight time (UTC-3)
-    jest.useFakeTimers().setSystemTime(new Date("2025-01-01T12:00:00Z"));
+    vi.useFakeTimers().setSystemTime(new Date("2025-01-01T12:00:00Z"));
   });
 
   afterEach(() => {
-    jest.useRealTimers();
+    vi.useRealTimers();
   });
 
   it("returns the hours behind UTC for a timezone", () => {
@@ -118,11 +116,11 @@ describe("timezoneOffset", () => {
 
 describe("timezoneOffsetLocal", () => {
   beforeEach(() => {
-    jest.useFakeTimers().setSystemTime(new Date("2025-01-01T12:00:00Z"));
+    vi.useFakeTimers().setSystemTime(new Date("2025-01-01T12:00:00Z"));
   });
 
   afterEach(() => {
-    jest.useRealTimers();
+    vi.useRealTimers();
   });
 
   it("returns the difference between the local and given timezone", () => {
