@@ -1,3 +1,4 @@
+import { describe, it, expect, vi } from "vitest";
 import { ImageMini, VideoMini } from "@/services/noirlab";
 import {
   extractDescription,
@@ -8,14 +9,9 @@ import {
 } from "./noirlab";
 
 // `.env` is gitignored, so the real env module would fail validation in CI.
-// Relative path because SWC only rewrites "@/" aliases in import statements
-jest.mock("../env", () => ({
+vi.mock("@/env", () => ({
   env: { NEXT_PUBLIC_BASE_URL: "https://rubinobservatory.org" },
 }));
-
-// next-intl ships ESM-only, which Jest can't parse.
-// ToDo: remove after switching from Jest to Vitest
-jest.mock("next-intl/server", () => ({ getLocale: jest.fn() }));
 
 const assetUrl = "https://noirlab.edu/public/images/noirlab2301a/";
 const galleryUrl =

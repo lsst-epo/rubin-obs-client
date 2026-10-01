@@ -47,7 +47,7 @@
       "@/services/*": ["services/*"],
       "@/*": ["./*"]
     },
-    "types": ["jest", "@testing-library/jest-dom", "node"]
+    "types": ["node"]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules", "cypress", "cypress.config.ts"],
