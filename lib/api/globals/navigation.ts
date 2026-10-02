@@ -29,15 +29,38 @@ export async function getNavigationItems(
 ): Promise<Array<InternalLinkWithChildren>> {
   const site = getSiteFromLocale(locale);
   const { t } = await serverTranslation(locale);
-
+  console.info("logging site in navigation: ", site);
   const query = graphql(`
-    query getNavigationItems($site: [String]) {
+    query getNavigationItems(
+      $site: [String]
+      $includeFallback: Boolean = false
+    ) {
       navigationItems: entries(
         section: ["pages"]
         site: $site
         level: 1
         isVisible: true
       ) {
+        id
+        title
+        uri
+        children(isVisible: true) {
+          id
+          title
+          uri
+          children(isVisible: true) {
+            id
+            title
+            uri
+          }
+        }
+      }
+      fallbackNavigationItems: entries(
+        section: ["pages"]
+        site: "default"
+        level: 1
+        isVisible: true
+      ) @include(if: $includeFallback) {
         id
         title
         uri
@@ -62,15 +85,26 @@ export async function getNavigationItems(
     }
   `);
 
+  const includeFallback = site !== "default";
+
   const { data } = await queryAPI({
     query,
-    variables: { site },
+    variables: { site, includeFallback },
     fetchOptions: { next: { tags: [tags.globals] } },
   });
 
   if (!data || !data.navigationItems) return [];
 
-  const { navigationItems, galleriesEntries } = data;
+  console.info("logging data: ", data.navigationItems[0].children);
+
+  let { navigationItems, galleriesEntries } = data;
+
+  if (includeFallback) {
+    navigationItems = mergeFallbackNavigation(
+      data.fallbackNavigationItems,
+      data.navigationItems
+    );
+  }
 
   const { data: structure = [] } =
     navigationStructure.safeParse(navigationItems);
@@ -90,4 +124,23 @@ export async function getNavigationItems(
   }
 
   return structure;
+}
+
+function mergeFallbackNavigation(fallback, navigation) {
+  for (const fallbackItem of fallback) {
+    const item = navigation.find(({ uri }) => uri === fallbackItem.uri);
+
+    if (!item) {
+      navigation.push(fallbackItem);
+      continue;
+    }
+
+    if (fallbackItem.children?.length) {
+      item.children ??= [];
+
+      mergeFallbackNavigation(fallbackItem.children, item.children);
+    }
+  }
+
+  return navigation;
 }

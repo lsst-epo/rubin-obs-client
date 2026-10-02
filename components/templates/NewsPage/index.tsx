@@ -77,6 +77,7 @@ const NewsPage: FunctionComponent<{
           translation_mode: "fallback",
         },
       });
+      console.info("logging locale in NewsPage template: ", locale);
 
       if (release) {
         const {
