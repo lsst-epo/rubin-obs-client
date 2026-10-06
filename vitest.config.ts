@@ -53,6 +53,7 @@ export default defineConfig({
         "**/styles.{js,jsx,ts,tsx}", // Ignore styled components
         "**/*.gen.{js,jsx,ts,tsx}", // Ignore generated files
         "**/*.d.ts", // Ignore type files
+        "services/craft/entries/**", // Ignore Craft entry GraphQL wrappers
         "components/svg/**", // Ignore SVGs
         "lib/suncalc.js", // Ignore the 3rd party Suncalc library
       ],
