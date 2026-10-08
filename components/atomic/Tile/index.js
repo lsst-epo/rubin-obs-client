@@ -8,6 +8,7 @@ import MixedLink from "@rubin-epo/epo-react-lib/MixedLink";
 import { mixedLinkShape } from "@/shapes/link";
 import { useGlobalData } from "@/lib/utils";
 import * as Styled from "./styles";
+import { EarlyAccess } from "@/components/atomic";
 
 const Tile = ({
   className,

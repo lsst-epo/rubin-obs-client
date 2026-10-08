@@ -12,6 +12,7 @@ import SlideshowPageTemplate from "@/components/templates/SlideshowPage";
 import StaffPageTemplate from "@/components/templates/StaffPage";
 import EventPageTemplate from "@/components/templates/EventPage";
 import GalleryLandingPageTemplate from "@/components/templates/GalleryLandingPage";
+import Banner from "@/components/atomic/Banner";
 
 const sectionMap = {
   events: EventPageTemplate,
@@ -31,22 +32,22 @@ const UriSegmentsPage: FunctionComponent<
 > = async ({ params: { locale, uriSegments }, searchParams = {} }) => {
   setRequestLocale(locale);
   const uri = uriSegments.join("/");
-  let overrideLocale: any = null;
-
-  // console.info("[debug] inside of /app/[locale]/[...uriSegments]/page.tsx for locale: ", locale);
+  const FALLBACK_LOCALE = "en";
+  let overrideLocale: string = "";
   let entrySectionType = await getEntrySectionByUri(uri, locale);
-  // console.info("[debug] logging entrySectionType: ", entrySectionType);
 
   // Handle 404 if there is no data
   if (!entrySectionType) {
-    if (locale !== "en") {
-      // console.info("[debug] not an english query, falling back to english for getEntrySectionByUri")
-      entrySectionType = await getEntrySectionByUri(uri, "en");
-      // console.info("[debug] logging entrySectionType for english fallback: ", entrySectionType);
+    /**
+     * Check if locale === `en`, if not perform fallback GQL query to show
+     * `en` version
+     */
+    if (locale !== FALLBACK_LOCALE) {
+      entrySectionType = await getEntrySectionByUri(uri, FALLBACK_LOCALE);
       if (!entrySectionType) {
         notFound();
       } else {
-        overrideLocale = "en";
+        overrideLocale = FALLBACK_LOCALE;
       }
     }
   }
@@ -68,26 +69,17 @@ const UriSegmentsPage: FunctionComponent<
 
   // Handle 404 if there is no data
   if (!currentId) {
-    console.info(
-      "[debug] returning a notFound from page for currentId: ",
-      currentId
-    );
     notFound();
   }
 
   const breadcrumbs = await getBreadcrumbsById(parseInt(currentId), locale);
-  // console.info("[debug] logging breadcrumbs: ", breadcrumbs);
-
   const Template = sectionMap[section] || pageMap[type] || PageTemplate;
-  // console.info("[debug] logging Template: ", Template)
 
   return (
     <>
       {overrideLocale && (
-        <div>
-          This page has not been translated to your language yet, showing
-          English versionz
-        </div>
+        <Banner text={"Esta página aún no se ha traducido a su idioma; se muestra la versión en inglés."}
+                theme={"warning"}/>
       )}
       <Template
         {...{

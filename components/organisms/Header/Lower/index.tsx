@@ -14,7 +14,6 @@ interface LowerHeaderProps {
 
 const LowerHeader: FunctionComponent<LowerHeaderProps> = async ({ locale }) => {
   const navigationItems = await getNavigationItems(locale);
-  // console.info("logging navigationItems: ", navigationItems);
 
   return (
     <HeaderLevel className={styles.lower}>

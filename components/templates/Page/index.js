@@ -93,7 +93,6 @@ export default async function Page({
     filter: [...eventFilter.map(({ id }) => id)],
   };
 
-  console.info("[debug] about to render JSX output, typeHandle: ", typeHandle);
   return (
     <AuthorizePage typeHandle={typeHandle}>
       {breadcrumbs && (

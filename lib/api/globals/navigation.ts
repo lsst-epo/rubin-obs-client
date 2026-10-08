@@ -29,7 +29,6 @@ export async function getNavigationItems(
 ): Promise<Array<InternalLinkWithChildren>> {
   const site = getSiteFromLocale(locale);
   const { t } = await serverTranslation(locale);
-  console.info("logging site in navigation: ", site);
   const query = graphql(`
     query getNavigationItems(
       $site: [String]
@@ -95,8 +94,6 @@ export async function getNavigationItems(
 
   if (!data || !data.navigationItems) return [];
 
-  console.info("logging data: ", data.navigationItems[0].children);
-
   let { navigationItems, galleriesEntries } = data;
 
   if (includeFallback) {
@@ -127,18 +124,20 @@ export async function getNavigationItems(
 }
 
 function mergeFallbackNavigation(fallback, navigation) {
-  for (const fallbackItem of fallback) {
-    const item = navigation.find(({ uri }) => uri === fallbackItem.uri);
+  if(fallback && typeof fallback[Symbol.iterator] === "function") {
+    for (const fallbackItem of fallback) {
+      const item = navigation.find(({ uri }) => uri === fallbackItem.uri);
 
-    if (!item) {
-      navigation.push(fallbackItem);
-      continue;
-    }
+      if (!item) {
+        navigation.push(fallbackItem);
+        continue;
+      }
 
-    if (fallbackItem.children?.length) {
-      item.children ??= [];
+      if (fallbackItem.children?.length) {
+        item.children ??= [];
 
-      mergeFallbackNavigation(fallbackItem.children, item.children);
+        mergeFallbackNavigation(fallbackItem.children, item.children);
+      }
     }
   }
 
