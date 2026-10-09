@@ -8,7 +8,7 @@
 
 .tag {
   & a {
-    color: var(--color-font-link-default);
+    color: var(--color-font-link-default, #009fa1);
   }
 
   &[data-no-break="true"] {
