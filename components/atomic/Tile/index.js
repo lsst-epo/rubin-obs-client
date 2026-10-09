@@ -23,11 +23,14 @@ const Tile = ({
   titleTag = "h3",
   type = "related",
   showSharePopup,
+  localeFallback
 }) => {
   const uid = useId();
   const { siteInfo } = useGlobalData();
   const finalImage =
     type === "jobs" ? image : image || siteInfo?.siteImage?.[0];
+
+  console.info("logging fallback in Tile: ", localeFallback);
 
   typeof link === "string" && (link = { url: link });
 
@@ -54,6 +57,7 @@ const Tile = ({
           "padded-bottom": showSharePopup,
         })}
       >
+        {localeFallback && <Styled.TranslationPendingFlag/>}
         {finalImage && (
           <div className="image">
             {ratio ? (
@@ -118,6 +122,7 @@ Tile.propTypes = {
   type: PropTypes.string,
   showSharePopup: PropTypes.bool,
   link: PropTypes.oneOfType([PropTypes.string, mixedLinkShape]),
+  localeFallback: PropTypes.bool
 };
 
 export default Tile;
