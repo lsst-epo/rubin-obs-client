@@ -13,8 +13,6 @@ import {
 } from "@/styles/globalStyles";
 import TrnslationPending from "@/atomic/Flag/patterns/TranslationPending";
 import { FlagBody, OffsetWrapper } from "@/atomic/Flag/styles";
-
-const DURATION_WIDTH = "197px";
 /*
 Media queries are done this way for special treatment at tablet level vs phone level...
 @media (max-width: ${BREAK_PHABLET}) {}
@@ -24,7 +22,8 @@ Media queries are done this way for special treatment at tablet level vs phone l
 export const TranslationPendingFlag = styled(TrnslationPending)`
   position: absolute;
   top: 0;
-  right: ${DURATION_WIDTH};
+  left: 0px;
+  z-index: 10;
 
   @media (max-width: ${tokens.BREAK_TABLET}) {
     right: auto;

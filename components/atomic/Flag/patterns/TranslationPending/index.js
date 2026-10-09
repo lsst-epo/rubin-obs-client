@@ -10,8 +10,8 @@ function TranslationPending({ className, children }) {
     <Styled.EarlyAccess className={className} color="#f80">
       {/* <div>{t("investigation.early_access.line_1_text")}</div> */}
       {/* <div>{t("investigation.early_access.line_2_text")}</div> */}
-      <div>{"Translation"}</div>
-      <div>{"Pending"}</div>
+      <div>{"Traducción"}</div>
+      <div>{"Pendiente"}</div>
     </Styled.EarlyAccess>
   );
 }
