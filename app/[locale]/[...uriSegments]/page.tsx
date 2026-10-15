@@ -12,6 +12,8 @@ import SlideshowPageTemplate from "@/components/templates/SlideshowPage";
 import StaffPageTemplate from "@/components/templates/StaffPage";
 import EventPageTemplate from "@/components/templates/EventPage";
 import GalleryLandingPageTemplate from "@/components/templates/GalleryLandingPage";
+import Banner from "@/components/atomic/Banner";
+import { useTranslation } from "@/lib/i18n";
 
 const sectionMap = {
   events: EventPageTemplate,
@@ -31,16 +33,34 @@ const UriSegmentsPage: FunctionComponent<
 > = async ({ params: { locale, uriSegments }, searchParams = {} }) => {
   setRequestLocale(locale);
   const uri = uriSegments.join("/");
-
-  const entrySectionType = await getEntrySectionByUri(uri, locale);
+  const FALLBACK_LOCALE = "en";
+  let overrideLocale: string = "";
+  let entrySectionType = await getEntrySectionByUri(uri, locale);
+  const { t } = await useTranslation(locale);
 
   // Handle 404 if there is no data
   if (!entrySectionType) {
-    notFound();
+    /**
+     * Check if locale === `en`, if not perform fallback GQL query to show
+     * `en` version
+     */
+    if (locale !== FALLBACK_LOCALE) {
+      entrySectionType = await getEntrySectionByUri(uri, FALLBACK_LOCALE);
+      if (!entrySectionType) {
+        notFound();
+      } else {
+        overrideLocale = FALLBACK_LOCALE;
+      }
+    }
   }
 
   const { sectionHandle: section, typeHandle: type } = entrySectionType;
-  const data = await getEntryDataByUri(uri, section, type, locale);
+  const data = await getEntryDataByUri(
+    uri,
+    section,
+    type,
+    overrideLocale || locale
+  );
 
   // Handle redirect if the entry has one
   if (data?.typeHandle === "redirectPage" && data?.linkTo?.url) {
@@ -55,10 +75,25 @@ const UriSegmentsPage: FunctionComponent<
   }
 
   const breadcrumbs = await getBreadcrumbsById(parseInt(currentId), locale);
-
   const Template = sectionMap[section] || pageMap[type] || PageTemplate;
 
-  return <Template {...{ section, breadcrumbs, data, locale, searchParams }} />;
+  return (
+    <>
+      <Template
+        {...{
+          section,
+          breadcrumbs,
+          data,
+          locale,
+          searchParams,
+          overrideLocale,
+        }}
+      />
+      {overrideLocale && (
+        <Banner text={t("locale-fallback.banner")} theme={"warning"} stickyPosition={"bottom"}/>
+      )}
+    </>
+  );
 };
 
 export default UriSegmentsPage;

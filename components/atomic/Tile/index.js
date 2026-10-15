@@ -22,6 +22,7 @@ const Tile = ({
   titleTag = "h3",
   type = "related",
   showSharePopup,
+  localeFallback
 }) => {
   const uid = useId();
   const { siteInfo } = useGlobalData();
@@ -55,6 +56,7 @@ const Tile = ({
       >
         {finalImage && (
           <div className="image">
+            {localeFallback && <Styled.TranslationPendingFlag/>}
             {ratio ? (
               <Styled.ResponsiveImage aspectRatio={ratio} image={finalImage} />
             ) : (
@@ -117,6 +119,7 @@ Tile.propTypes = {
   type: PropTypes.string,
   showSharePopup: PropTypes.bool,
   link: PropTypes.oneOfType([PropTypes.string, mixedLinkShape]),
+  localeFallback: PropTypes.bool
 };
 
 export default Tile;
