@@ -1,5 +1,6 @@
 /* eslint-disable */
 import styled from "styled-components";
+import { tokens, fluidScale } from "@/styles/globalStyles";
 import BaseMixedLink from "@rubin-epo/epo-react-lib/MixedLink";
 import BaseResponsiveImage from "@rubin-epo/epo-react-lib/ResponsiveImage";
 import SharePopupComponent from "@/components/molecules/SharePopup";
@@ -10,12 +11,48 @@ import {
   BREAK_TABLET_MIN,
   respond,
 } from "@/styles/globalStyles";
-
+import TrnslationPending from "@/atomic/Flag/patterns/TranslationPending";
+import { FlagBody, OffsetWrapper } from "@/atomic/Flag/styles";
 /*
 Media queries are done this way for special treatment at tablet level vs phone level...
 @media (max-width: ${BREAK_PHABLET}) {}
 @media (min-width: ${BREAK_PHABLET_MIN}) and (max-width: ${BREAK_TABLET}) {}
 */
+
+export const TranslationPendingFlag = styled(TrnslationPending)`
+  position: absolute;
+  top: 0;
+  left: 0px;
+  z-index: 10;
+
+  @media (max-width: ${tokens.BREAK_TABLET}) {
+    right: auto;
+    left: 0;
+  }
+
+  ${OffsetWrapper} {
+    transform: translateX(50%);
+
+    @media (max-width: ${tokens.BREAK_TABLET}) {
+      transform: unset;
+    }
+  }
+
+  ${FlagBody} {
+    padding-right: ${fluidScale(
+      "14px",
+      "8px",
+      tokens.BREAK_TABLET,
+      tokens.BREAK_MOBILE
+    )};
+    padding-left: ${fluidScale(
+      "14px",
+      "8px",
+      tokens.BREAK_TABLET,
+      tokens.BREAK_MOBILE
+    )};
+  }
+`;
 
 export const ResponsiveImage = styled(BaseResponsiveImage)`
   height: 100%;
