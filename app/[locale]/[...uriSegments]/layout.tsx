@@ -52,12 +52,25 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const uri = uriSegments.join("/");
+  const FALLBACK_LOCALE = "en";
+  let overrideLocale: string = "";
 
-  const entrySectionType = await getEntrySectionByUri(uri, locale);
+  let entrySectionType = await getEntrySectionByUri(uri, locale);
 
   // Handle 404 if there is no data
   if (!entrySectionType) {
-    notFound();
+    /**
+     * Check if locale === `en`, if not perform fallback GQL query to show
+     * `en` version
+     */
+    if (locale !== FALLBACK_LOCALE) {
+      entrySectionType = await getEntrySectionByUri(uri, FALLBACK_LOCALE);
+      if (!entrySectionType) {
+        notFound();
+      } else {
+        overrideLocale = FALLBACK_LOCALE;
+      }
+    }
   }
 
   const { typeHandle } = entrySectionType;
@@ -69,10 +82,15 @@ export async function generateMetadata(
     );
   }
 
-  const metadata = await getEntryMetadataByUri(uri, locale);
+  let metadata = await getEntryMetadataByUri(uri, locale);
 
   if (!metadata?.entry) {
-    notFound();
+    metadata = await getEntryMetadataByUri(uri, FALLBACK_LOCALE);
+    if (locale !== FALLBACK_LOCALE) {
+      if(!metadata) {
+        notFound();
+      }
+    }
   }
 
   const {
