@@ -33,6 +33,13 @@
     "success": "Thank you. We’ve received your message.",
     "error": "We seem to have run into a problem."
   },
+  "locale-fallback": {
+    "flag": {
+      "translation": "Translation",
+      "pending": "Pending"
+    },
+    "banner": "This page has not yet been translated into your language, showing the fallback language"
+  },
   "form": {
     "email": "Email",
     "email_required": "Email (required)",

@@ -29,15 +29,37 @@ export async function getNavigationItems(
 ): Promise<Array<InternalLinkWithChildren>> {
   const site = getSiteFromLocale(locale);
   const { t } = await serverTranslation(locale);
-
   const query = graphql(`
-    query getNavigationItems($site: [String]) {
+    query getNavigationItems(
+      $site: [String]
+      $includeFallback: Boolean = false
+    ) {
       navigationItems: entries(
         section: ["pages"]
         site: $site
         level: 1
         isVisible: true
       ) {
+        id
+        title
+        uri
+        children(isVisible: true) {
+          id
+          title
+          uri
+          children(isVisible: true) {
+            id
+            title
+            uri
+          }
+        }
+      }
+      fallbackNavigationItems: entries(
+        section: ["pages"]
+        site: "default"
+        level: 1
+        isVisible: true
+      ) @include(if: $includeFallback) {
         id
         title
         uri
@@ -62,15 +84,24 @@ export async function getNavigationItems(
     }
   `);
 
+  const includeFallback = site !== "default";
+
   const { data } = await queryAPI({
     query,
-    variables: { site },
+    variables: { site, includeFallback },
     fetchOptions: { next: { tags: [tags.globals] } },
   });
 
   if (!data || !data.navigationItems) return [];
 
-  const { navigationItems, galleriesEntries } = data;
+  let { navigationItems, galleriesEntries } = data;
+
+  if (includeFallback) {
+    navigationItems = mergeFallbackNavigation(
+      data.fallbackNavigationItems,
+      data.navigationItems
+    );
+  }
 
   const { data: structure = [] } =
     navigationStructure.safeParse(navigationItems);
@@ -90,4 +121,26 @@ export async function getNavigationItems(
   }
 
   return structure;
+}
+
+function mergeFallbackNavigation(fallbackNavItems, localizedNavItems) {
+  if(fallbackNavItems && typeof fallbackNavItems[Symbol.iterator] === "function") {
+    for (const fallbackItem of fallbackNavItems) {
+      const item = localizedNavItems.find(({ id }) => id === fallbackItem.id);
+
+      if (!item) {
+        localizedNavItems.push(fallbackItem);
+        continue;
+      }
+
+      if (fallbackItem.children?.length) {
+        item.children ??= [];
+
+        // Recursively populate child pages
+        mergeFallbackNavigation(fallbackItem.children, item.children);
+      }
+    }
+  }
+
+  return localizedNavItems;
 }

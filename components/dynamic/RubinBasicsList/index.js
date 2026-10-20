@@ -55,6 +55,7 @@ const RubinBasicsList = ({
                     title,
                     uri,
                     url,
+                    fallback
                   },
                   i
                 ) => (
@@ -67,6 +68,7 @@ const RubinBasicsList = ({
                           }
                         : null
                     }
+                    localeFallback={fallback}
                     image={
                       image?.[0] ||
                       makeReleaseFeature(releaseImages)?.[0] ||
