@@ -1,4 +1,4 @@
-import "@testing-library/jest-dom";
+import { describe, it, expect, vi } from "vitest";
 import type { FC } from "react";
 import { render, screen } from "@testing-library/react";
 import Filters from "@/components/organisms/Filters";
@@ -11,12 +11,12 @@ const MockedChild: FC = () => {
  * The ClearFiltersButton component in the Filters component
  * imports useRouter, usePathname, and useSearchParams from next/navigation
  * so we have to mock them because they are not available
- * in the JSDOM environment where Jest tests run.
+ * in the JSDOM environment where Vitest tests run.
  */
-jest.mock("next/navigation", () => ({
+vi.mock("next/navigation", () => ({
   useRouter() {
     return {
-      push: jest.fn(),
+      push: vi.fn(),
     };
   },
   usePathname() {

@@ -13,7 +13,8 @@ interface DateStringOptions {
 export const makeDateString = (
   date: string,
   options: DateStringOptions = {}
-) => {
+): string | undefined => {
+  if (!date) return;
   const { isShort = false, isCraftDate = true, locale = fallbackLng } = options;
   const newDate = new Date(date);
 
