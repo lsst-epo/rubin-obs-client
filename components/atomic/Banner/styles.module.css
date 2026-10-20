@@ -1,0 +1,39 @@
+
+.banner {
+    background-color:  #DCE0E3;
+    text-align: center;
+    padding: 10px 0px 10px 0px;
+    margin: 0 auto;
+    z-index: 100;
+}
+
+.banner[data-sticky-position="top"] {
+    position: sticky;
+    top: 0;
+}
+
+.banner[data-sticky-position="bottom"] {
+    position: sticky;
+    bottom: 0;
+}
+
+.banner[data-color="info"] {
+    background-color: #3CAE3F;
+    color: #fff;
+}
+
+.banner[data-color="warning"] {
+    background-color: #FAB364;
+    color: #000;
+}
+
+.banner[data-color="error"] {
+    background-color: #ED4C4C;
+    color: #000;
+}
+
+.icon {
+    width: 25px;
+    height: 25px;
+    position: relative;
+}
