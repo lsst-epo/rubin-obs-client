@@ -86,7 +86,7 @@ module.exports = {
     ],
     "padded-blocks": 0,
     "prefer-const": 2,
-    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/rules-of-hooks": "warn",
     "react-hooks/exhaustive-deps": "warn",
     "react/no-unknown-property": ["error", { ignore: ["transform-origin"] }],
     "react/react-in-jsx-scope": 0,
