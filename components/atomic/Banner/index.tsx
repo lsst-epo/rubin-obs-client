@@ -8,16 +8,15 @@ interface BannerProps {
   stickyPosition?: string;
 }
 
-const Banner: FC<BannerProps> = ({
-  text,
-  theme,
-  stickyPosition = "top"
-}) => {
-
+const Banner: FC<BannerProps> = ({ text, theme, stickyPosition = "top" }) => {
   return (
-      <div className={styles.banner} data-color={theme} data-sticky-position={stickyPosition}>
-          {text}
-      </div>
+    <div
+      className={styles.banner}
+      data-color={theme}
+      data-sticky-position={stickyPosition}
+    >
+      {text}
+    </div>
   );
 };
 
