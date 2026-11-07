@@ -54,6 +54,8 @@ const UriSegmentsPage: FunctionComponent<
     }
   }
 
+  if (!entrySectionType) return notFound();
+
   const { sectionHandle: section, typeHandle: type } = entrySectionType;
   const data = await getEntryDataByUri(
     uri,
@@ -90,7 +92,11 @@ const UriSegmentsPage: FunctionComponent<
         }}
       />
       {overrideLocale && (
-        <Banner text={t("locale-fallback.banner")} theme={"warning"} stickyPosition={"bottom"}/>
+        <Banner
+          text={t("locale-fallback.banner")}
+          theme={"warning"}
+          stickyPosition={"bottom"}
+        />
       )}
     </>
   );

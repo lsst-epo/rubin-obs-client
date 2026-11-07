@@ -124,7 +124,10 @@ export async function getNavigationItems(
 }
 
 function mergeFallbackNavigation(fallbackNavItems, localizedNavItems) {
-  if(fallbackNavItems && typeof fallbackNavItems[Symbol.iterator] === "function") {
+  if (
+    fallbackNavItems &&
+    typeof fallbackNavItems[Symbol.iterator] === "function"
+  ) {
     for (const fallbackItem of fallbackNavItems) {
       const item = localizedNavItems.find(({ id }) => id === fallbackItem.id);
 
