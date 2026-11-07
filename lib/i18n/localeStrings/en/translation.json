@@ -201,6 +201,7 @@
     "previous": "Previous",
     "next": "Next",
     "of": "of",
+    "current-of-total": "{{current}} <0>of</0> {{total}}",
     "current-slide": "Slide {{current}}",
     "showing-current-slide": "Showing slide {{current}} of {{length}}",
     "showing-range": "Showing {{from}} to {{to}} of {{length}}",
@@ -492,10 +493,10 @@
           "mostly_cloudy_with_thunderstorms": "Mostly cloudy with thunderstorms and showers"
         }
       },
-      "sunrise_sunset" : {
+      "sunrise_sunset": {
         "title": "Sunset and Sunrise"
       },
-      "wildlife_spotlight" : {
+      "wildlife_spotlight": {
         "title": "Wildlife Spotlight"
       }
     },

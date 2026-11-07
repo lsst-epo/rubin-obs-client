@@ -1,0 +1,124 @@
+@use "abstracts/mixins/base";
+@use "abstracts/mixins/layout";
+@use "abstracts/functions";
+
+$breakTablet: functions.break(tablet);
+
+.dialog {
+  inset: 0;
+  padding: 0;
+  overscroll-behavior: contain;
+  transition:
+    opacity var(--time-transition-base) ease,
+    display var(--time-transition-base) allow-discrete,
+    overlay var(--time-transition-base) allow-discrete;
+
+  &[open] {
+    z-index: 9999; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    inline-size: 100%;
+    max-inline-size: none;
+    block-size: 100%;
+    max-block-size: none;
+    margin: 0;
+    color: var(--white);
+    background-color: var(--black);
+    border: none;
+    opacity: 1;
+
+    @starting-style {
+      opacity: 0;
+    }
+  }
+
+  & > * {
+    inline-size: 100%;
+
+    @include layout.container-wide;
+  }
+}
+
+.header {
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: 10px;
+  padding-inline: 16px;
+
+  @include base.fluid-scale(
+    padding-block,
+    24px,
+    10px
+  );
+  @include base.fluid-scale(
+    padding-inline,
+    80px,
+    16px
+  );
+
+  & h1 {
+    font-size: 17px;
+  }
+}
+
+.panel {
+  z-index: 1;
+  flex: 1;
+  padding-block-end: 10px;
+  padding-inline: 0px;
+
+  @include base.fluid-scale(
+    padding-inline,
+    80px,
+    20px
+  );
+
+  @media (max-width: $breakTablet) {
+    padding-inline: 0px;
+  }
+}
+
+.slider {
+  @media (max-width: $breakTablet) {
+    --slider-border-radius: 0px;
+  }
+}
+
+.descriptions {
+  @media (max-width: $breakTablet) {
+    padding-inline: 20px;
+  }
+}
+
+.video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.close {
+  @include base.fluid-scale(
+    --close-button-size,
+    56px,
+    36px
+  );
+
+  inline-size: var(--close-button-size);
+  block-size: var(--close-button-size);
+  background-color: #1f2121;
+  border-radius: 100%;
+
+  svg {
+    inline-size: 36%;
+    block-size: 36%;
+  }
+
+  &:hover {
+    color: #000;
+    background-color: #00babc;
+    transition: color 0.2s, background-color 0.2s;
+  }
+}

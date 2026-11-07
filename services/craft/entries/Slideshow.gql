@@ -1,0 +1,29 @@
+fragment SlideshowDialog on slideshows_slideshow_Entry {
+  id
+  title
+  description: richTextDescription
+  coverImage: representativeAssetVariant {
+    ... on assetVariants_Asset {
+      altText
+      width
+      height
+      url @transform(mode: "fit", width: 1000)
+    }
+  }
+  items: slideshowItems {
+    ... on slideshowItems_slide_BlockType {
+      id
+      title: slideTitle
+      description: slideContent
+      teaser: slidePreviewContent
+      image: slideAsset {
+        ... on assetVariants_Asset {
+          altText
+          width
+          height
+          url @transform(mode: "fit", width: 1000)
+        }
+      }
+    }
+  }
+}

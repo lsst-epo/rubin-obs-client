@@ -22,7 +22,7 @@ const Tile = ({
   titleTag = "h3",
   type = "related",
   showSharePopup,
-  localeFallback
+  localeFallback,
 }) => {
   const uid = useId();
   const { siteInfo } = useGlobalData();
@@ -56,7 +56,7 @@ const Tile = ({
       >
         {finalImage && (
           <div className="image">
-            {localeFallback && <Styled.TranslationPendingFlag/>}
+            {localeFallback && <Styled.TranslationPendingFlag />}
             {ratio ? (
               <Styled.ResponsiveImage aspectRatio={ratio} image={finalImage} />
             ) : (
@@ -88,11 +88,13 @@ const Tile = ({
         )}
         {footer && (
           <div className="footer">
-            {footer.button && (
+            {footer.buttonComponent ? (
+              <>{footer.buttonComponent}</>
+            ) : footer.button ? (
               <div className={`c-buttonish c-buttonish--inert`}>
                 {footer.button}
               </div>
-            )}
+            ) : null}
             {footer.sticker && <div>{footer.sticker}</div>}
           </div>
         )}
@@ -119,7 +121,7 @@ Tile.propTypes = {
   type: PropTypes.string,
   showSharePopup: PropTypes.bool,
   link: PropTypes.oneOfType([PropTypes.string, mixedLinkShape]),
-  localeFallback: PropTypes.bool
+  localeFallback: PropTypes.bool,
 };
 
 export default Tile;
