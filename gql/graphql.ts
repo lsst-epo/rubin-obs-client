@@ -16641,6 +16641,7 @@ export type ContentBlocksNews_NeoField =
   | ContentBlocksNews_LinkedAsset_BlockType
   | ContentBlocksNews_RelatedContentItem_BlockType
   | ContentBlocksNews_RelatedContent_BlockType
+  | ContentBlocksNews_SkyviewerTour_BlockType
   | ContentBlocksNews_Skyviewer_BlockType
   | ContentBlocksNews_Text_BlockType
   | ContentBlocksNews_Video_BlockType;
@@ -17432,6 +17433,68 @@ export type ContentBlocksNews_RelatedContent_BlockTypeNumberOfItemsArgs = {
   label: InputMaybe<Scalars["Boolean"]["input"]>;
 };
 
+export type ContentBlocksNews_SkyviewerTour_BlockType = ElementInterface &
+  NeoBlockInterface & {
+    __typename?: "contentBlocksNews_skyviewerTour_BlockType";
+    /** Return a number of related elements for a field. */
+    _count: Maybe<Scalars["Int"]["output"]>;
+    /** Whether the element is archived. */
+    archived: Maybe<Scalars["Boolean"]["output"]>;
+    backgroundColor: Maybe<Scalars["String"]["output"]>;
+    /** The date the element was created. */
+    dateCreated: Maybe<Scalars["DateTime"]["output"]>;
+    /** The date the element was last updated. */
+    dateUpdated: Maybe<Scalars["DateTime"]["output"]>;
+    /** Whether the element is enabled. */
+    enabled: Maybe<Scalars["Boolean"]["output"]>;
+    /** The ID of the field that owns the Neo block. */
+    fieldId: Maybe<Scalars["Int"]["output"]>;
+    fullWidth: Maybe<Scalars["Boolean"]["output"]>;
+    /** The ID of the entity */
+    id: Maybe<Scalars["ID"]["output"]>;
+    /** The language of the site element is associated with. */
+    language: Maybe<Scalars["String"]["output"]>;
+    /** The Neo block’s level. */
+    level: Maybe<Scalars["Int"]["output"]>;
+    /** The ID of the primary owner of the Neo block. */
+    primaryOwnerId: Maybe<Scalars["Int"]["output"]>;
+    /** The element’s search score, if the `search` parameter was used when querying for the element. */
+    searchScore: Maybe<Scalars["Int"]["output"]>;
+    /** The handle of the site the element is associated with. */
+    siteHandle: Maybe<Scalars["String"]["output"]>;
+    /** The ID of the site the element is associated with. */
+    siteId: Maybe<Scalars["Int"]["output"]>;
+    /** The unique identifier for an element-site relation. */
+    siteSettingsId: Maybe<Scalars["ID"]["output"]>;
+    /** The element’s slug. */
+    slug: Maybe<Scalars["String"]["output"]>;
+    /** The sort order of the Neo block within the owner element field. */
+    sortOrder: Maybe<Scalars["Int"]["output"]>;
+    /** The element’s status. */
+    status: Maybe<Scalars["String"]["output"]>;
+    /** The element’s title. */
+    title: Maybe<Scalars["String"]["output"]>;
+    tourUrl: Maybe<Scalars["String"]["output"]>;
+    /** Whether the element has been soft-deleted. */
+    trashed: Maybe<Scalars["Boolean"]["output"]>;
+    /** The handle of the Neo block’s type. */
+    typeHandle: Maybe<Scalars["String"]["output"]>;
+    /** The ID of the Neo block’s type. */
+    typeId: Maybe<Scalars["Int"]["output"]>;
+    /** The UID of the entity */
+    uid: Maybe<Scalars["String"]["output"]>;
+    /** The element’s URI. */
+    uri: Maybe<Scalars["String"]["output"]>;
+  };
+
+export type ContentBlocksNews_SkyviewerTour_BlockType_CountArgs = {
+  field: Scalars["String"]["input"];
+};
+
+export type ContentBlocksNews_SkyviewerTour_BlockTypeBackgroundColorArgs = {
+  label: InputMaybe<Scalars["Boolean"]["input"]>;
+};
+
 export type ContentBlocksNews_Skyviewer_BlockType = ElementInterface &
   NeoBlockInterface & {
     __typename?: "contentBlocksNews_skyviewer_BlockType";
@@ -17643,6 +17706,7 @@ export type ContentBlocks_NeoField =
   | ContentBlocks_Schedule_BlockType
   | ContentBlocks_Share_BlockType
   | ContentBlocks_SimpleTable_BlockType
+  | ContentBlocks_SkyviewerTour_BlockType
   | ContentBlocks_Skyviewer_BlockType
   | ContentBlocks_SlideBlock_BlockType
   | ContentBlocks_Slide_BlockType
@@ -21240,6 +21304,68 @@ export type ContentBlocks_SimpleTable_BlockTypeSimpleTableArgs = {
 };
 
 export type ContentBlocks_SimpleTable_BlockTypeSitesArgs = {
+  label: InputMaybe<Scalars["Boolean"]["input"]>;
+};
+
+export type ContentBlocks_SkyviewerTour_BlockType = ElementInterface &
+  NeoBlockInterface & {
+    __typename?: "contentBlocks_skyviewerTour_BlockType";
+    /** Return a number of related elements for a field. */
+    _count: Maybe<Scalars["Int"]["output"]>;
+    /** Whether the element is archived. */
+    archived: Maybe<Scalars["Boolean"]["output"]>;
+    backgroundColor: Maybe<Scalars["String"]["output"]>;
+    /** The date the element was created. */
+    dateCreated: Maybe<Scalars["DateTime"]["output"]>;
+    /** The date the element was last updated. */
+    dateUpdated: Maybe<Scalars["DateTime"]["output"]>;
+    /** Whether the element is enabled. */
+    enabled: Maybe<Scalars["Boolean"]["output"]>;
+    /** The ID of the field that owns the Neo block. */
+    fieldId: Maybe<Scalars["Int"]["output"]>;
+    fullWidth: Maybe<Scalars["Boolean"]["output"]>;
+    /** The ID of the entity */
+    id: Maybe<Scalars["ID"]["output"]>;
+    /** The language of the site element is associated with. */
+    language: Maybe<Scalars["String"]["output"]>;
+    /** The Neo block’s level. */
+    level: Maybe<Scalars["Int"]["output"]>;
+    /** The ID of the primary owner of the Neo block. */
+    primaryOwnerId: Maybe<Scalars["Int"]["output"]>;
+    /** The element’s search score, if the `search` parameter was used when querying for the element. */
+    searchScore: Maybe<Scalars["Int"]["output"]>;
+    /** The handle of the site the element is associated with. */
+    siteHandle: Maybe<Scalars["String"]["output"]>;
+    /** The ID of the site the element is associated with. */
+    siteId: Maybe<Scalars["Int"]["output"]>;
+    /** The unique identifier for an element-site relation. */
+    siteSettingsId: Maybe<Scalars["ID"]["output"]>;
+    /** The element’s slug. */
+    slug: Maybe<Scalars["String"]["output"]>;
+    /** The sort order of the Neo block within the owner element field. */
+    sortOrder: Maybe<Scalars["Int"]["output"]>;
+    /** The element’s status. */
+    status: Maybe<Scalars["String"]["output"]>;
+    /** The element’s title. */
+    title: Maybe<Scalars["String"]["output"]>;
+    tourUrl: Maybe<Scalars["String"]["output"]>;
+    /** Whether the element has been soft-deleted. */
+    trashed: Maybe<Scalars["Boolean"]["output"]>;
+    /** The handle of the Neo block’s type. */
+    typeHandle: Maybe<Scalars["String"]["output"]>;
+    /** The ID of the Neo block’s type. */
+    typeId: Maybe<Scalars["Int"]["output"]>;
+    /** The UID of the entity */
+    uid: Maybe<Scalars["String"]["output"]>;
+    /** The element’s URI. */
+    uri: Maybe<Scalars["String"]["output"]>;
+  };
+
+export type ContentBlocks_SkyviewerTour_BlockType_CountArgs = {
+  field: Scalars["String"]["input"];
+};
+
+export type ContentBlocks_SkyviewerTour_BlockTypeBackgroundColorArgs = {
   label: InputMaybe<Scalars["Boolean"]["input"]>;
 };
 
@@ -258567,6 +258693,11 @@ export type HomepageQuery = {
                 ContentBlocks_ContentBlocks_SimpleTable_BlockType_Fragment: ContentBlocks_ContentBlocks_SimpleTable_BlockType_Fragment;
               };
             })
+          | ({ __typename?: "contentBlocks_skyviewerTour_BlockType" } & {
+              " $fragmentRefs"?: {
+                ContentBlocks_ContentBlocks_SkyviewerTour_BlockType_Fragment: ContentBlocks_ContentBlocks_SkyviewerTour_BlockType_Fragment;
+              };
+            })
           | ({ __typename?: "contentBlocks_skyviewer_BlockType" } & {
               " $fragmentRefs"?: {
                 ContentBlocks_ContentBlocks_Skyviewer_BlockType_Fragment: ContentBlocks_ContentBlocks_Skyviewer_BlockType_Fragment;
@@ -258705,6 +258836,10 @@ export type HomepageQuery = {
                   uri: string | null;
                 }
               | {
+                  __typename?: "contentBlocksNews_skyviewerTour_BlockType";
+                  uri: string | null;
+                }
+              | {
                   __typename?: "contentBlocksNews_skyviewer_BlockType";
                   uri: string | null;
                 }
@@ -258838,6 +258973,10 @@ export type HomepageQuery = {
                 }
               | {
                   __typename?: "contentBlocks_simpleTable_BlockType";
+                  uri: string | null;
+                }
+              | {
+                  __typename?: "contentBlocks_skyviewerTour_BlockType";
                   uri: string | null;
                 }
               | {
@@ -259617,6 +259756,7 @@ export type AccordionGroupBlockFragment = {
     | { __typename?: "contentBlocksNews_linkedAsset_BlockType" }
     | { __typename?: "contentBlocksNews_relatedContentItem_BlockType" }
     | { __typename?: "contentBlocksNews_relatedContent_BlockType" }
+    | { __typename?: "contentBlocksNews_skyviewerTour_BlockType" }
     | { __typename?: "contentBlocksNews_skyviewer_BlockType" }
     | { __typename?: "contentBlocksNews_text_BlockType" }
     | { __typename?: "contentBlocksNews_video_BlockType" }
@@ -259656,6 +259796,7 @@ export type AccordionGroupBlockFragment = {
     | { __typename?: "contentBlocks_schedule_BlockType" }
     | { __typename?: "contentBlocks_share_BlockType" }
     | { __typename?: "contentBlocks_simpleTable_BlockType" }
+    | { __typename?: "contentBlocks_skyviewerTour_BlockType" }
     | { __typename?: "contentBlocks_skyviewer_BlockType" }
     | { __typename?: "contentBlocks_slideBlock_BlockType" }
     | { __typename?: "contentBlocks_slide_BlockType" }
@@ -259693,6 +259834,7 @@ export type CtaGridBlockFragment = {
     | { __typename?: "contentBlocksNews_linkedAsset_BlockType" }
     | { __typename?: "contentBlocksNews_relatedContentItem_BlockType" }
     | { __typename?: "contentBlocksNews_relatedContent_BlockType" }
+    | { __typename?: "contentBlocksNews_skyviewerTour_BlockType" }
     | { __typename?: "contentBlocksNews_skyviewer_BlockType" }
     | { __typename?: "contentBlocksNews_text_BlockType" }
     | { __typename?: "contentBlocksNews_video_BlockType" }
@@ -259751,6 +259893,7 @@ export type CtaGridBlockFragment = {
     | { __typename?: "contentBlocks_schedule_BlockType" }
     | { __typename?: "contentBlocks_share_BlockType" }
     | { __typename?: "contentBlocks_simpleTable_BlockType" }
+    | { __typename?: "contentBlocks_skyviewerTour_BlockType" }
     | { __typename?: "contentBlocks_skyviewer_BlockType" }
     | { __typename?: "contentBlocks_slideBlock_BlockType" }
     | { __typename?: "contentBlocks_slide_BlockType" }
@@ -260669,6 +260812,16 @@ type ContentBlocks_ContentBlocks_SimpleTable_BlockType_Fragment = ({
   " $fragmentName"?: "ContentBlocks_ContentBlocks_SimpleTable_BlockType_Fragment";
 };
 
+type ContentBlocks_ContentBlocks_SkyviewerTour_BlockType_Fragment = ({
+  __typename?: "contentBlocks_skyviewerTour_BlockType";
+} & {
+  " $fragmentRefs"?: {
+    RelatedContentBlock_ContentBlocks_SkyviewerTour_BlockType_Fragment: RelatedContentBlock_ContentBlocks_SkyviewerTour_BlockType_Fragment;
+  };
+}) & {
+  " $fragmentName"?: "ContentBlocks_ContentBlocks_SkyviewerTour_BlockType_Fragment";
+};
+
 type ContentBlocks_ContentBlocks_Skyviewer_BlockType_Fragment = ({
   __typename?: "contentBlocks_skyviewer_BlockType";
 } & {
@@ -260809,6 +260962,7 @@ export type ContentBlocksFragment =
   | ContentBlocks_ContentBlocks_Schedule_BlockType_Fragment
   | ContentBlocks_ContentBlocks_Share_BlockType_Fragment
   | ContentBlocks_ContentBlocks_SimpleTable_BlockType_Fragment
+  | ContentBlocks_ContentBlocks_SkyviewerTour_BlockType_Fragment
   | ContentBlocks_ContentBlocks_Skyviewer_BlockType_Fragment
   | ContentBlocks_ContentBlocks_SlideBlock_BlockType_Fragment
   | ContentBlocks_ContentBlocks_Slide_BlockType_Fragment
@@ -260981,6 +261135,10 @@ export type ImageGridBlockFragment = {
           uri: string | null;
         }
       | {
+          __typename?: "contentBlocksNews_skyviewerTour_BlockType";
+          uri: string | null;
+        }
+      | {
           __typename?: "contentBlocksNews_skyviewer_BlockType";
           uri: string | null;
         }
@@ -261066,6 +261224,10 @@ export type ImageGridBlockFragment = {
       | { __typename?: "contentBlocks_share_BlockType"; uri: string | null }
       | {
           __typename?: "contentBlocks_simpleTable_BlockType";
+          uri: string | null;
+        }
+      | {
+          __typename?: "contentBlocks_skyviewerTour_BlockType";
           uri: string | null;
         }
       | { __typename?: "contentBlocks_skyviewer_BlockType"; uri: string | null }
@@ -261179,6 +261341,7 @@ export type ImageGridBlockFragment = {
     | { __typename?: "contentBlocksNews_linkedAsset_BlockType" }
     | { __typename?: "contentBlocksNews_relatedContentItem_BlockType" }
     | { __typename?: "contentBlocksNews_relatedContent_BlockType" }
+    | { __typename?: "contentBlocksNews_skyviewerTour_BlockType" }
     | { __typename?: "contentBlocksNews_skyviewer_BlockType" }
     | { __typename?: "contentBlocksNews_text_BlockType" }
     | { __typename?: "contentBlocksNews_video_BlockType" }
@@ -261231,6 +261394,7 @@ export type ImageGridBlockFragment = {
     | { __typename?: "contentBlocks_schedule_BlockType" }
     | { __typename?: "contentBlocks_share_BlockType" }
     | { __typename?: "contentBlocks_simpleTable_BlockType" }
+    | { __typename?: "contentBlocks_skyviewerTour_BlockType" }
     | { __typename?: "contentBlocks_skyviewer_BlockType" }
     | { __typename?: "contentBlocks_slideBlock_BlockType" }
     | { __typename?: "contentBlocks_slide_BlockType" }
@@ -261259,6 +261423,7 @@ export type InvestigationGridBlockFragment = {
     | { __typename?: "contentBlocksNews_linkedAsset_BlockType" }
     | { __typename?: "contentBlocksNews_relatedContentItem_BlockType" }
     | { __typename?: "contentBlocksNews_relatedContent_BlockType" }
+    | { __typename?: "contentBlocksNews_skyviewerTour_BlockType" }
     | { __typename?: "contentBlocksNews_skyviewer_BlockType" }
     | { __typename?: "contentBlocksNews_text_BlockType" }
     | { __typename?: "contentBlocksNews_video_BlockType" }
@@ -261461,6 +261626,7 @@ export type InvestigationGridBlockFragment = {
     | { __typename?: "contentBlocks_schedule_BlockType" }
     | { __typename?: "contentBlocks_share_BlockType" }
     | { __typename?: "contentBlocks_simpleTable_BlockType" }
+    | { __typename?: "contentBlocks_skyviewerTour_BlockType" }
     | { __typename?: "contentBlocks_skyviewer_BlockType" }
     | { __typename?: "contentBlocks_slideBlock_BlockType" }
     | { __typename?: "contentBlocks_slide_BlockType" }
@@ -261491,6 +261657,7 @@ export type KeyNumbersBlockFragment = {
     | { __typename?: "contentBlocksNews_linkedAsset_BlockType" }
     | { __typename?: "contentBlocksNews_relatedContentItem_BlockType" }
     | { __typename?: "contentBlocksNews_relatedContent_BlockType" }
+    | { __typename?: "contentBlocksNews_skyviewerTour_BlockType" }
     | { __typename?: "contentBlocksNews_skyviewer_BlockType" }
     | { __typename?: "contentBlocksNews_text_BlockType" }
     | { __typename?: "contentBlocksNews_video_BlockType" }
@@ -261532,6 +261699,7 @@ export type KeyNumbersBlockFragment = {
     | { __typename?: "contentBlocks_schedule_BlockType" }
     | { __typename?: "contentBlocks_share_BlockType" }
     | { __typename?: "contentBlocks_simpleTable_BlockType" }
+    | { __typename?: "contentBlocks_skyviewerTour_BlockType" }
     | { __typename?: "contentBlocks_skyviewer_BlockType" }
     | { __typename?: "contentBlocks_slideBlock_BlockType" }
     | { __typename?: "contentBlocks_slide_BlockType" }
@@ -261600,6 +261768,10 @@ export type LinkBlockFragment = {
         }
       | {
           __typename?: "contentBlocksNews_relatedContent_BlockType";
+          uri: string | null;
+        }
+      | {
+          __typename?: "contentBlocksNews_skyviewerTour_BlockType";
           uri: string | null;
         }
       | {
@@ -261688,6 +261860,10 @@ export type LinkBlockFragment = {
       | { __typename?: "contentBlocks_share_BlockType"; uri: string | null }
       | {
           __typename?: "contentBlocks_simpleTable_BlockType";
+          uri: string | null;
+        }
+      | {
+          __typename?: "contentBlocks_skyviewerTour_BlockType";
           uri: string | null;
         }
       | { __typename?: "contentBlocks_skyviewer_BlockType"; uri: string | null }
@@ -261869,6 +262045,10 @@ export type NewsBlockFragment = {
           uri: string | null;
         }
       | {
+          __typename?: "contentBlocksNews_skyviewerTour_BlockType";
+          uri: string | null;
+        }
+      | {
           __typename?: "contentBlocksNews_skyviewer_BlockType";
           uri: string | null;
         }
@@ -261954,6 +262134,10 @@ export type NewsBlockFragment = {
       | { __typename?: "contentBlocks_share_BlockType"; uri: string | null }
       | {
           __typename?: "contentBlocks_simpleTable_BlockType";
+          uri: string | null;
+        }
+      | {
+          __typename?: "contentBlocks_skyviewerTour_BlockType";
           uri: string | null;
         }
       | { __typename?: "contentBlocks_skyviewer_BlockType"; uri: string | null }
@@ -262118,6 +262302,7 @@ export type NewsBlockFragment = {
     | { __typename?: "contentBlocksNews_linkedAsset_BlockType" }
     | { __typename?: "contentBlocksNews_relatedContentItem_BlockType" }
     | { __typename?: "contentBlocksNews_relatedContent_BlockType" }
+    | { __typename?: "contentBlocksNews_skyviewerTour_BlockType" }
     | { __typename?: "contentBlocksNews_skyviewer_BlockType" }
     | { __typename?: "contentBlocksNews_text_BlockType" }
     | { __typename?: "contentBlocksNews_video_BlockType" }
@@ -262336,6 +262521,7 @@ export type NewsBlockFragment = {
     | { __typename?: "contentBlocks_schedule_BlockType" }
     | { __typename?: "contentBlocks_share_BlockType" }
     | { __typename?: "contentBlocks_simpleTable_BlockType" }
+    | { __typename?: "contentBlocks_skyviewerTour_BlockType" }
     | { __typename?: "contentBlocks_skyviewer_BlockType" }
     | { __typename?: "contentBlocks_slideBlock_BlockType" }
     | { __typename?: "contentBlocks_slide_BlockType" }
@@ -262478,6 +262664,10 @@ export type PublicationsListBlockFragment = {
           uri: string | null;
         }
       | {
+          __typename?: "contentBlocksNews_skyviewerTour_BlockType";
+          uri: string | null;
+        }
+      | {
           __typename?: "contentBlocksNews_skyviewer_BlockType";
           uri: string | null;
         }
@@ -262563,6 +262753,10 @@ export type PublicationsListBlockFragment = {
       | { __typename?: "contentBlocks_share_BlockType"; uri: string | null }
       | {
           __typename?: "contentBlocks_simpleTable_BlockType";
+          uri: string | null;
+        }
+      | {
+          __typename?: "contentBlocks_skyviewerTour_BlockType";
           uri: string | null;
         }
       | { __typename?: "contentBlocks_skyviewer_BlockType"; uri: string | null }
@@ -262848,6 +263042,7 @@ type RelatedContentBlock_ContentBlocks_RelatedContent_BlockType_Fragment = {
     | { __typename?: "contentBlocksNews_linkedAsset_BlockType" }
     | { __typename?: "contentBlocksNews_relatedContentItem_BlockType" }
     | { __typename?: "contentBlocksNews_relatedContent_BlockType" }
+    | { __typename?: "contentBlocksNews_skyviewerTour_BlockType" }
     | { __typename?: "contentBlocksNews_skyviewer_BlockType" }
     | { __typename?: "contentBlocksNews_text_BlockType" }
     | { __typename?: "contentBlocksNews_video_BlockType" }
@@ -263066,6 +263261,7 @@ type RelatedContentBlock_ContentBlocks_RelatedContent_BlockType_Fragment = {
     | { __typename?: "contentBlocks_schedule_BlockType" }
     | { __typename?: "contentBlocks_share_BlockType" }
     | { __typename?: "contentBlocks_simpleTable_BlockType" }
+    | { __typename?: "contentBlocks_skyviewerTour_BlockType" }
     | { __typename?: "contentBlocks_skyviewer_BlockType" }
     | { __typename?: "contentBlocks_slideBlock_BlockType" }
     | { __typename?: "contentBlocks_slide_BlockType" }
@@ -263106,6 +263302,12 @@ type RelatedContentBlock_ContentBlocks_SimpleTable_BlockType_Fragment = {
   __typename?: "contentBlocks_simpleTable_BlockType";
 } & {
   " $fragmentName"?: "RelatedContentBlock_ContentBlocks_SimpleTable_BlockType_Fragment";
+};
+
+type RelatedContentBlock_ContentBlocks_SkyviewerTour_BlockType_Fragment = {
+  __typename?: "contentBlocks_skyviewerTour_BlockType";
+} & {
+  " $fragmentName"?: "RelatedContentBlock_ContentBlocks_SkyviewerTour_BlockType_Fragment";
 };
 
 type RelatedContentBlock_ContentBlocks_Skyviewer_BlockType_Fragment = {
@@ -263199,6 +263401,7 @@ export type RelatedContentBlockFragment =
   | RelatedContentBlock_ContentBlocks_Schedule_BlockType_Fragment
   | RelatedContentBlock_ContentBlocks_Share_BlockType_Fragment
   | RelatedContentBlock_ContentBlocks_SimpleTable_BlockType_Fragment
+  | RelatedContentBlock_ContentBlocks_SkyviewerTour_BlockType_Fragment
   | RelatedContentBlock_ContentBlocks_Skyviewer_BlockType_Fragment
   | RelatedContentBlock_ContentBlocks_SlideBlock_BlockType_Fragment
   | RelatedContentBlock_ContentBlocks_Slide_BlockType_Fragment
@@ -263223,6 +263426,7 @@ export type ScheduleBlockFragment = {
     | { __typename?: "contentBlocksNews_linkedAsset_BlockType" }
     | { __typename?: "contentBlocksNews_relatedContentItem_BlockType" }
     | { __typename?: "contentBlocksNews_relatedContent_BlockType" }
+    | { __typename?: "contentBlocksNews_skyviewerTour_BlockType" }
     | { __typename?: "contentBlocksNews_skyviewer_BlockType" }
     | { __typename?: "contentBlocksNews_text_BlockType" }
     | { __typename?: "contentBlocksNews_video_BlockType" }
@@ -263263,6 +263467,7 @@ export type ScheduleBlockFragment = {
     | { __typename?: "contentBlocks_schedule_BlockType" }
     | { __typename?: "contentBlocks_share_BlockType" }
     | { __typename?: "contentBlocks_simpleTable_BlockType" }
+    | { __typename?: "contentBlocks_skyviewerTour_BlockType" }
     | { __typename?: "contentBlocks_skyviewer_BlockType" }
     | { __typename?: "contentBlocks_slideBlock_BlockType" }
     | { __typename?: "contentBlocks_slide_BlockType" }
@@ -263367,6 +263572,10 @@ export type SlideBlockFragment = {
           uri: string | null;
         }
       | {
+          __typename?: "contentBlocksNews_skyviewerTour_BlockType";
+          uri: string | null;
+        }
+      | {
           __typename?: "contentBlocksNews_skyviewer_BlockType";
           uri: string | null;
         }
@@ -263452,6 +263661,10 @@ export type SlideBlockFragment = {
       | { __typename?: "contentBlocks_share_BlockType"; uri: string | null }
       | {
           __typename?: "contentBlocks_simpleTable_BlockType";
+          uri: string | null;
+        }
+      | {
+          __typename?: "contentBlocks_skyviewerTour_BlockType";
           uri: string | null;
         }
       | { __typename?: "contentBlocks_skyviewer_BlockType"; uri: string | null }
@@ -263565,6 +263778,7 @@ export type SlideBlockFragment = {
     | { __typename?: "contentBlocksNews_linkedAsset_BlockType" }
     | { __typename?: "contentBlocksNews_relatedContentItem_BlockType" }
     | { __typename?: "contentBlocksNews_relatedContent_BlockType" }
+    | { __typename?: "contentBlocksNews_skyviewerTour_BlockType" }
     | { __typename?: "contentBlocksNews_skyviewer_BlockType" }
     | { __typename?: "contentBlocksNews_text_BlockType" }
     | { __typename?: "contentBlocksNews_video_BlockType" }
@@ -263599,6 +263813,7 @@ export type SlideBlockFragment = {
     | { __typename?: "contentBlocks_schedule_BlockType" }
     | { __typename?: "contentBlocks_share_BlockType" }
     | { __typename?: "contentBlocks_simpleTable_BlockType" }
+    | { __typename?: "contentBlocks_skyviewerTour_BlockType" }
     | { __typename?: "contentBlocks_skyviewer_BlockType" }
     | { __typename?: "contentBlocks_slideBlock_BlockType" }
     | {
@@ -263835,6 +264050,10 @@ export type StaffGridBlockFragment = {
           uri: string | null;
         }
       | {
+          __typename?: "contentBlocksNews_skyviewerTour_BlockType";
+          uri: string | null;
+        }
+      | {
           __typename?: "contentBlocksNews_skyviewer_BlockType";
           uri: string | null;
         }
@@ -263920,6 +264139,10 @@ export type StaffGridBlockFragment = {
       | { __typename?: "contentBlocks_share_BlockType"; uri: string | null }
       | {
           __typename?: "contentBlocks_simpleTable_BlockType";
+          uri: string | null;
+        }
+      | {
+          __typename?: "contentBlocks_skyviewerTour_BlockType";
           uri: string | null;
         }
       | { __typename?: "contentBlocks_skyviewer_BlockType"; uri: string | null }
@@ -264033,6 +264256,7 @@ export type StaffGridBlockFragment = {
     | { __typename?: "contentBlocksNews_linkedAsset_BlockType" }
     | { __typename?: "contentBlocksNews_relatedContentItem_BlockType" }
     | { __typename?: "contentBlocksNews_relatedContent_BlockType" }
+    | { __typename?: "contentBlocksNews_skyviewerTour_BlockType" }
     | { __typename?: "contentBlocksNews_skyviewer_BlockType" }
     | { __typename?: "contentBlocksNews_text_BlockType" }
     | { __typename?: "contentBlocksNews_video_BlockType" }
@@ -264067,6 +264291,7 @@ export type StaffGridBlockFragment = {
     | { __typename?: "contentBlocks_schedule_BlockType" }
     | { __typename?: "contentBlocks_share_BlockType" }
     | { __typename?: "contentBlocks_simpleTable_BlockType" }
+    | { __typename?: "contentBlocks_skyviewerTour_BlockType" }
     | { __typename?: "contentBlocks_skyviewer_BlockType" }
     | { __typename?: "contentBlocks_slideBlock_BlockType" }
     | { __typename?: "contentBlocks_slide_BlockType" }
@@ -264216,6 +264441,7 @@ export type TableGroupBlockFragment = {
     | { __typename?: "contentBlocksNews_linkedAsset_BlockType" }
     | { __typename?: "contentBlocksNews_relatedContentItem_BlockType" }
     | { __typename?: "contentBlocksNews_relatedContent_BlockType" }
+    | { __typename?: "contentBlocksNews_skyviewerTour_BlockType" }
     | { __typename?: "contentBlocksNews_skyviewer_BlockType" }
     | { __typename?: "contentBlocksNews_text_BlockType" }
     | { __typename?: "contentBlocksNews_video_BlockType" }
@@ -264254,6 +264480,7 @@ export type TableGroupBlockFragment = {
     | { __typename?: "contentBlocks_schedule_BlockType" }
     | { __typename?: "contentBlocks_share_BlockType" }
     | { __typename?: "contentBlocks_simpleTable_BlockType" }
+    | { __typename?: "contentBlocks_skyviewerTour_BlockType" }
     | { __typename?: "contentBlocks_skyviewer_BlockType" }
     | { __typename?: "contentBlocks_slideBlock_BlockType" }
     | { __typename?: "contentBlocks_slide_BlockType" }
@@ -265848,6 +266075,11 @@ export type GetEducatorPageEntryQuery = {
                 ContentBlocks_ContentBlocks_SimpleTable_BlockType_Fragment: ContentBlocks_ContentBlocks_SimpleTable_BlockType_Fragment;
               };
             })
+          | ({ __typename?: "contentBlocks_skyviewerTour_BlockType" } & {
+              " $fragmentRefs"?: {
+                ContentBlocks_ContentBlocks_SkyviewerTour_BlockType_Fragment: ContentBlocks_ContentBlocks_SkyviewerTour_BlockType_Fragment;
+              };
+            })
           | ({ __typename?: "contentBlocks_skyviewer_BlockType" } & {
               " $fragmentRefs"?: {
                 ContentBlocks_ContentBlocks_Skyviewer_BlockType_Fragment: ContentBlocks_ContentBlocks_Skyviewer_BlockType_Fragment;
@@ -266254,6 +266486,11 @@ export type GetEventEntryQuery = {
                 ContentBlocks_ContentBlocks_SimpleTable_BlockType_Fragment: ContentBlocks_ContentBlocks_SimpleTable_BlockType_Fragment;
               };
             })
+          | ({ __typename?: "contentBlocks_skyviewerTour_BlockType" } & {
+              " $fragmentRefs"?: {
+                ContentBlocks_ContentBlocks_SkyviewerTour_BlockType_Fragment: ContentBlocks_ContentBlocks_SkyviewerTour_BlockType_Fragment;
+              };
+            })
           | ({ __typename?: "contentBlocks_skyviewer_BlockType" } & {
               " $fragmentRefs"?: {
                 ContentBlocks_ContentBlocks_Skyviewer_BlockType_Fragment: ContentBlocks_ContentBlocks_Skyviewer_BlockType_Fragment;
@@ -266525,6 +266762,12 @@ type ContentBlocksNews_ContentBlocksNews_RelatedContent_BlockType_Fragment = ({
   " $fragmentName"?: "ContentBlocksNews_ContentBlocksNews_RelatedContent_BlockType_Fragment";
 };
 
+type ContentBlocksNews_ContentBlocksNews_SkyviewerTour_BlockType_Fragment = {
+  __typename?: "contentBlocksNews_skyviewerTour_BlockType";
+} & {
+  " $fragmentName"?: "ContentBlocksNews_ContentBlocksNews_SkyviewerTour_BlockType_Fragment";
+};
+
 type ContentBlocksNews_ContentBlocksNews_Skyviewer_BlockType_Fragment = ({
   __typename?: "contentBlocksNews_skyviewer_BlockType";
 } & {
@@ -266554,6 +266797,7 @@ export type ContentBlocksNewsFragment =
   | ContentBlocksNews_ContentBlocksNews_LinkedAsset_BlockType_Fragment
   | ContentBlocksNews_ContentBlocksNews_RelatedContentItem_BlockType_Fragment
   | ContentBlocksNews_ContentBlocksNews_RelatedContent_BlockType_Fragment
+  | ContentBlocksNews_ContentBlocksNews_SkyviewerTour_BlockType_Fragment
   | ContentBlocksNews_ContentBlocksNews_Skyviewer_BlockType_Fragment
   | ContentBlocksNews_ContentBlocksNews_Text_BlockType_Fragment
   | ContentBlocksNews_ContentBlocksNews_Video_BlockType_Fragment;
@@ -266788,6 +267032,7 @@ export type RelatedContentBlockNewsFragment = {
         >;
       }
     | { __typename?: "contentBlocksNews_relatedContent_BlockType" }
+    | { __typename?: "contentBlocksNews_skyviewerTour_BlockType" }
     | { __typename?: "contentBlocksNews_skyviewer_BlockType" }
     | { __typename?: "contentBlocksNews_text_BlockType" }
     | { __typename?: "contentBlocksNews_video_BlockType" }
@@ -266822,6 +267067,7 @@ export type RelatedContentBlockNewsFragment = {
     | { __typename?: "contentBlocks_schedule_BlockType" }
     | { __typename?: "contentBlocks_share_BlockType" }
     | { __typename?: "contentBlocks_simpleTable_BlockType" }
+    | { __typename?: "contentBlocks_skyviewerTour_BlockType" }
     | { __typename?: "contentBlocks_skyviewer_BlockType" }
     | { __typename?: "contentBlocks_slideBlock_BlockType" }
     | { __typename?: "contentBlocks_slide_BlockType" }
@@ -267106,6 +267352,11 @@ export type GetNewsEntryQuery = {
           | ({ __typename?: "contentBlocksNews_relatedContent_BlockType" } & {
               " $fragmentRefs"?: {
                 ContentBlocksNews_ContentBlocksNews_RelatedContent_BlockType_Fragment: ContentBlocksNews_ContentBlocksNews_RelatedContent_BlockType_Fragment;
+              };
+            })
+          | ({ __typename?: "contentBlocksNews_skyviewerTour_BlockType" } & {
+              " $fragmentRefs"?: {
+                ContentBlocksNews_ContentBlocksNews_SkyviewerTour_BlockType_Fragment: ContentBlocksNews_ContentBlocksNews_SkyviewerTour_BlockType_Fragment;
               };
             })
           | ({ __typename?: "contentBlocksNews_skyviewer_BlockType" } & {
@@ -268981,6 +269232,11 @@ export type GetPageEntryQuery = {
                 ContentBlocks_ContentBlocks_SimpleTable_BlockType_Fragment: ContentBlocks_ContentBlocks_SimpleTable_BlockType_Fragment;
               };
             })
+          | ({ __typename?: "contentBlocks_skyviewerTour_BlockType" } & {
+              " $fragmentRefs"?: {
+                ContentBlocks_ContentBlocks_SkyviewerTour_BlockType_Fragment: ContentBlocks_ContentBlocks_SkyviewerTour_BlockType_Fragment;
+              };
+            })
           | ({ __typename?: "contentBlocks_skyviewer_BlockType" } & {
               " $fragmentRefs"?: {
                 ContentBlocks_ContentBlocks_Skyviewer_BlockType_Fragment: ContentBlocks_ContentBlocks_Skyviewer_BlockType_Fragment;
@@ -269321,6 +269577,11 @@ export type GetRubinBasicsEntryQuery = {
                 ContentBlocksNews_ContentBlocksNews_RelatedContent_BlockType_Fragment: ContentBlocksNews_ContentBlocksNews_RelatedContent_BlockType_Fragment;
               };
             })
+          | ({ __typename?: "contentBlocksNews_skyviewerTour_BlockType" } & {
+              " $fragmentRefs"?: {
+                ContentBlocksNews_ContentBlocksNews_SkyviewerTour_BlockType_Fragment: ContentBlocksNews_ContentBlocksNews_SkyviewerTour_BlockType_Fragment;
+              };
+            })
           | ({ __typename?: "contentBlocksNews_skyviewer_BlockType" } & {
               " $fragmentRefs"?: {
                 ContentBlocksNews_ContentBlocksNews_Skyviewer_BlockType_Fragment: ContentBlocksNews_ContentBlocksNews_Skyviewer_BlockType_Fragment;
@@ -269577,6 +269838,11 @@ export type GetStaffProfileEntryQuery = {
           | ({ __typename?: "contentBlocksNews_relatedContent_BlockType" } & {
               " $fragmentRefs"?: {
                 ContentBlocksNews_ContentBlocksNews_RelatedContent_BlockType_Fragment: ContentBlocksNews_ContentBlocksNews_RelatedContent_BlockType_Fragment;
+              };
+            })
+          | ({ __typename?: "contentBlocksNews_skyviewerTour_BlockType" } & {
+              " $fragmentRefs"?: {
+                ContentBlocksNews_ContentBlocksNews_SkyviewerTour_BlockType_Fragment: ContentBlocksNews_ContentBlocksNews_SkyviewerTour_BlockType_Fragment;
               };
             })
           | ({ __typename?: "contentBlocksNews_skyviewer_BlockType" } & {
@@ -273199,6 +273465,10 @@ export type LinksFragmentFragment = {
           uri: string | null;
         }
       | {
+          __typename?: "contentBlocksNews_skyviewerTour_BlockType";
+          uri: string | null;
+        }
+      | {
           __typename?: "contentBlocksNews_skyviewer_BlockType";
           uri: string | null;
         }
@@ -273284,6 +273554,10 @@ export type LinksFragmentFragment = {
       | { __typename?: "contentBlocks_share_BlockType"; uri: string | null }
       | {
           __typename?: "contentBlocks_simpleTable_BlockType";
+          uri: string | null;
+        }
+      | {
+          __typename?: "contentBlocks_skyviewerTour_BlockType";
           uri: string | null;
         }
       | { __typename?: "contentBlocks_skyviewer_BlockType"; uri: string | null }
@@ -273436,6 +273710,10 @@ export type MixedLinkFragmentFragment = {
         uri: string | null;
       }
     | {
+        __typename?: "contentBlocksNews_skyviewerTour_BlockType";
+        uri: string | null;
+      }
+    | {
         __typename?: "contentBlocksNews_skyviewer_BlockType";
         uri: string | null;
       }
@@ -273514,6 +273792,10 @@ export type MixedLinkFragmentFragment = {
     | { __typename?: "contentBlocks_schedule_BlockType"; uri: string | null }
     | { __typename?: "contentBlocks_share_BlockType"; uri: string | null }
     | { __typename?: "contentBlocks_simpleTable_BlockType"; uri: string | null }
+    | {
+        __typename?: "contentBlocks_skyviewerTour_BlockType";
+        uri: string | null;
+      }
     | { __typename?: "contentBlocks_skyviewer_BlockType"; uri: string | null }
     | { __typename?: "contentBlocks_slideBlock_BlockType"; uri: string | null }
     | { __typename?: "contentBlocks_slide_BlockType"; uri: string | null }
