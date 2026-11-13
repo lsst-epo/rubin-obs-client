@@ -90,7 +90,11 @@ const UriSegmentsPage: FunctionComponent<
         }}
       />
       {overrideLocale && (
-        <Banner text={t("locale-fallback.banner")} theme={"warning"} stickyPosition={"bottom"}/>
+        <Banner
+          text={t("locale-fallback.banner")}
+          theme={"warning"}
+          stickyPosition={"bottom"}
+        />
       )}
     </>
   );

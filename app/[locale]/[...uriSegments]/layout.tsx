@@ -87,7 +87,7 @@ export async function generateMetadata(
   if (!metadata?.entry) {
     metadata = await getEntryMetadataByUri(uri, FALLBACK_LOCALE);
     if (locale !== FALLBACK_LOCALE) {
-      if(!metadata) {
+      if (!metadata) {
         notFound();
       }
     }
