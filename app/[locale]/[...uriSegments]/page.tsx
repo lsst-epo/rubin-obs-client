@@ -62,6 +62,9 @@ const UriSegmentsPage: FunctionComponent<
     overrideLocale || locale
   );
 
+  console.info(`\nuri: ${uri} , locale: ${locale}`);
+  console.info(JSON.stringify(data, null, 2));
+
   // Handle redirect if the entry has one
   if (data?.typeHandle === "redirectPage" && data?.linkTo?.url) {
     redirect(data.linkTo.url, RedirectType.replace);

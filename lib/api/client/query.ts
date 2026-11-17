@@ -70,6 +70,8 @@ const queryAPI = async <Query, Variables extends AnyVariables = AnyVariables>({
           console.info(result.error);
         } else if (result.error) {
           console.info("Some other error occurred!");
+          // SODHTODO - DELETE!
+          console.info("[query variabes]:", variables);
           console.info(result.error);
         }
       }
