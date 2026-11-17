@@ -24,7 +24,7 @@ export default async function NewsPage({ data }) {
     uri,
     images: releaseImages,
     videos: releaseVideos,
-    fallback
+    fallback,
   } = data;
 
   const locale = await getLocale();

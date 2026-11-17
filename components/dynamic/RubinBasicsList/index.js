@@ -55,7 +55,7 @@ const RubinBasicsList = ({
                     title,
                     uri,
                     url,
-                    fallback
+                    fallback,
                   },
                   i
                 ) => (

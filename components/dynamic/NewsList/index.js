@@ -40,8 +40,7 @@ const NewsList = ({
     >
       {({ entries, page }) => (
         <>
-          {
-            entries?.length > 0 && (
+          {entries?.length > 0 && (
             <Grid showFeature={canShowFeatured && page === 1} columns={cols}>
               {entries.map(
                 (
@@ -59,7 +58,7 @@ const NewsList = ({
                     title,
                     uri,
                     url,
-                    fallback
+                    fallback,
                   },
                   i
                 ) => (
