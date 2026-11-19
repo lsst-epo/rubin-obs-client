@@ -7,11 +7,8 @@ import Breadcrumbs from "@/components/molecules/Breadcrumbs";
 import { Container, Buttonish } from "@rubin-epo/epo-react-lib";
 import InlineSlideshow from "@/components/molecules//InlineSlideshow";
 
-export default function SlideshowPage({
-  data: {
-    entry: { openGraphImage, id, description, title, uri, items },
-  },
-}) {
+export default function SlideshowPage({ data: { entry } }) {
+  const { id, title, uri } = entry;
   const {
     t,
     i18n: { language: locale },
@@ -25,17 +22,6 @@ export default function SlideshowPage({
     title,
   };
 
-  // prepend main slide to content slides
-  const allItems = [
-    {
-      id,
-      title,
-      description,
-      image: openGraphImage,
-    },
-    ...items,
-  ];
-
   return (
     <>
       <Breadcrumbs
@@ -43,7 +29,7 @@ export default function SlideshowPage({
         locale={locale}
       />
       <h1 className="a-hidden">{title}</h1>
-      <InlineSlideshow items={allItems} />
+      <InlineSlideshow slideshow={entry} />
       <Container width="regular" bgColor={"black"}>
         <Buttonish
           url={`/${rootHomeLink?.uri}`}

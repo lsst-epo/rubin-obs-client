@@ -259744,7 +259744,7 @@ export type SitemapDataQuery = {
   } | null> | null;
 };
 
-export type SlideshowDialogFragment = {
+export type SlideshowSlidesFragment = {
   __typename?: "slideshows_slideshow_Entry";
   id: string | null;
   title: string | null;
@@ -259784,7 +259784,7 @@ export type SlideshowDialogFragment = {
       | null
     >;
   } | null>;
-} & { " $fragmentName"?: "SlideshowDialogFragment" };
+} & { " $fragmentName"?: "SlideshowSlidesFragment" };
 
 export type AccordionGroupBlockFragment = {
   __typename?: "contentBlocks_accordionGroup_BlockType";
@@ -280832,12 +280832,12 @@ export type GetSiblingsQuery = {
     | null;
 };
 
-export const SlideshowDialogFragmentDoc = {
+export const SlideshowSlidesFragmentDoc = {
   kind: "Document",
   definitions: [
     {
       kind: "FragmentDefinition",
-      name: { kind: "Name", value: "SlideshowDialog" },
+      name: { kind: "Name", value: "SlideshowSlides" },
       typeCondition: {
         kind: "NamedType",
         name: { kind: "Name", value: "slideshows_slideshow_Entry" },
@@ -281029,7 +281029,7 @@ export const SlideshowDialogFragmentDoc = {
       },
     },
   ],
-} as unknown as DocumentNode<SlideshowDialogFragment, unknown>;
+} as unknown as DocumentNode<SlideshowSlidesFragment, unknown>;
 export const AccordionGroupBlockFragmentDoc = {
   kind: "Document",
   definitions: [
