@@ -73,6 +73,8 @@ export async function generateMetadata(
     }
   }
 
+  if (!entrySectionType) return notFound();
+
   const { typeHandle } = entrySectionType;
 
   if (metadataMap[typeHandle]) {
@@ -87,7 +89,7 @@ export async function generateMetadata(
   if (!metadata?.entry) {
     metadata = await getEntryMetadataByUri(uri, FALLBACK_LOCALE);
     if (locale !== FALLBACK_LOCALE) {
-      if(!metadata) {
+      if (!metadata) {
         notFound();
       }
     }
