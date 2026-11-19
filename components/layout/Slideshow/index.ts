@@ -10,4 +10,5 @@ export { default as Wrapper } from "./components/Wrapper";
 export { BREAK_TABLET_LG } from "./constants";
 export { default as CarouselContext, useCarouselContext } from "./context";
 export { default as useCarousel } from "./hook";
+export { default as useSlideshowSlides } from "./slides";
 export type { CarouselOptions, CarouselConfig, SlideItem } from "./types";

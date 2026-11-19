@@ -9,38 +9,20 @@ import {
   Slide,
   Slider,
   Wrapper,
-  SlideItem,
+  useSlideshowSlides,
 } from "@/components/layout/Slideshow";
 import { useTranslation } from "react-i18next";
-import { FragmentType, useFragment } from "@/gql";
-import {
-  SlideshowDialogFragment,
-  SlideshowDialogFragmentDoc,
-} from "@/gql/graphql";
+import { FragmentType } from "@/gql";
+import { SlideshowSlidesFragmentDoc } from "@/gql/graphql";
 
 interface SlideshowDialogProps {
   id: string;
-  slideshow: FragmentType<typeof SlideshowDialogFragmentDoc>;
+  slideshow: FragmentType<typeof SlideshowSlidesFragmentDoc>;
 }
-
-type Asset = SlideshowDialogFragment["coverImage"][number];
-type SlideWithImage = SlideItem & Required<Pick<SlideItem, "image">>;
-
-const toSlideImage = (asset: Asset): SlideItem["image"] => {
-  if (!asset || !("url" in asset) || !asset.url) return undefined;
-
-  return asset;
-};
 
 const SlideshowDialog = forwardRef<HTMLDialogElement, SlideshowDialogProps>(
   ({ id, slideshow }, ref) => {
-    const {
-      id: entryId,
-      title,
-      description,
-      coverImage,
-      items,
-    } = useFragment(SlideshowDialogFragmentDoc, slideshow);
+    const { title, slides } = useSlideshowSlides(slideshow);
     const dialogRef = useRef<HTMLDialogElement>(null);
 
     const { t } = useTranslation();
@@ -52,18 +34,6 @@ const SlideshowDialog = forwardRef<HTMLDialogElement, SlideshowDialogProps>(
         dialogRef.current.close();
       }
     };
-
-    const slides: SlideItem[] = [
-      {
-        id: entryId,
-        title,
-        description,
-        image: toSlideImage(coverImage[0]),
-      },
-      ...items.flatMap((item) =>
-        item ? [{ ...item, image: toSlideImage(item.image[0]) }] : []
-      ),
-    ];
 
     return (
       <dialog ref={dialogRef} className={styles.dialog} id={id}>

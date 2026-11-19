@@ -6,32 +6,17 @@ import {
   Slide,
   Slider,
   Wrapper,
+  useSlideshowSlides,
 } from "@/components/layout/Slideshow";
+import { FragmentType } from "@/gql";
+import { SlideshowSlidesFragmentDoc } from "@/gql/graphql";
 
 interface Props {
-  items?: {
-    description?: string | null;
-    teaser?: string | null;
-    title?: string | null;
-    id?: string | null;
-    image?: {
-      altText?: string | null;
-      width?: number | null;
-      height?: number | null;
-      url?: string | null;
-    }[];
-  }[];
+  slideshow: FragmentType<typeof SlideshowSlidesFragmentDoc>;
 }
 
-export default function InlineSlideshow({ items = [] }: Props) {
-  const slides = items.map((item, i) => {
-    return {
-      ...item,
-      image: {
-        ...item.image?.[0],
-      },
-    };
-  });
+export default function InlineSlideshow({ slideshow }: Props) {
+  const { slides } = useSlideshowSlides(slideshow);
 
   return (
     <>

@@ -1,4 +1,4 @@
-fragment SlideshowDialog on slideshows_slideshow_Entry {
+fragment SlideshowSlides on slideshows_slideshow_Entry {
   id
   title
   description: richTextDescription
