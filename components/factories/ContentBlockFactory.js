@@ -29,6 +29,7 @@ import SkyviewerBlock from "@/components/content-blocks/Skyviewer";
 import LinkedImageListBlock from "@/components/content-blocks/LinkedImageList";
 import ImageComparisonBlock from "@/components/content-blocks/ImageComparison";
 import FirstLookWidgetsBlock from "@/components/content-blocks/FirstLookWidgets";
+import InlineSlideshowBlock from "@/components/content-blocks/InlineSlideshow";
 
 const blockMap = {
   accordionGroup: AccordionGroup,
@@ -63,6 +64,7 @@ const blockMap = {
   linkedImageList: LinkedImageListBlock,
   imageComparison: ImageComparisonBlock,
   firstLookWidgets: FirstLookWidgetsBlock,
+  inlineSlideshow: InlineSlideshowBlock,
 };
 
 export default async function ContentBlockFactory({ type, data, pageId }) {
