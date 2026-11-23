@@ -17690,6 +17690,7 @@ export type ContentBlocks_NeoField =
   | ContentBlocks_ImageGridItem_BlockType
   | ContentBlocks_ImageGrid_BlockType
   | ContentBlocks_Image_BlockType
+  | ContentBlocks_InlineSlideshow_BlockType
   | ContentBlocks_InvestigationCta_BlockType
   | ContentBlocks_InvestigationGrid_BlockType
   | ContentBlocks_KeyNumbersGridItem_BlockType
@@ -19300,6 +19301,246 @@ export type ContentBlocks_Image_BlockTypeContentImageArgs = {
 
 export type ContentBlocks_Image_BlockTypeFloatDirectionArgs = {
   label: InputMaybe<Scalars["Boolean"]["input"]>;
+};
+
+export type ContentBlocks_InlineSlideshow_BlockType = ElementInterface &
+  NeoBlockInterface & {
+    __typename?: "contentBlocks_inlineSlideshow_BlockType";
+    /** Return a number of related elements for a field. */
+    _count: Maybe<Scalars["Int"]["output"]>;
+    /** Whether the element is archived. */
+    archived: Maybe<Scalars["Boolean"]["output"]>;
+    backgroundColor: Maybe<Scalars["String"]["output"]>;
+    /** The date the element was created. */
+    dateCreated: Maybe<Scalars["DateTime"]["output"]>;
+    /** The date the element was last updated. */
+    dateUpdated: Maybe<Scalars["DateTime"]["output"]>;
+    /** Whether the element is enabled. */
+    enabled: Maybe<Scalars["Boolean"]["output"]>;
+    /** The ID of the field that owns the Neo block. */
+    fieldId: Maybe<Scalars["Int"]["output"]>;
+    /** The ID of the entity */
+    id: Maybe<Scalars["ID"]["output"]>;
+    /** The language of the site element is associated with. */
+    language: Maybe<Scalars["String"]["output"]>;
+    /** The Neo block’s level. */
+    level: Maybe<Scalars["Int"]["output"]>;
+    /** The ID of the primary owner of the Neo block. */
+    primaryOwnerId: Maybe<Scalars["Int"]["output"]>;
+    /** The element’s search score, if the `search` parameter was used when querying for the element. */
+    searchScore: Maybe<Scalars["Int"]["output"]>;
+    /** The handle of the site the element is associated with. */
+    siteHandle: Maybe<Scalars["String"]["output"]>;
+    /** The ID of the site the element is associated with. */
+    siteId: Maybe<Scalars["Int"]["output"]>;
+    /** The unique identifier for an element-site relation. */
+    siteSettingsId: Maybe<Scalars["ID"]["output"]>;
+    slideshowEntry: Array<Maybe<EntryInterface>>;
+    /** The element’s slug. */
+    slug: Maybe<Scalars["String"]["output"]>;
+    /** The sort order of the Neo block within the owner element field. */
+    sortOrder: Maybe<Scalars["Int"]["output"]>;
+    /** The element’s status. */
+    status: Maybe<Scalars["String"]["output"]>;
+    /** The element’s title. */
+    title: Maybe<Scalars["String"]["output"]>;
+    /** Whether the element has been soft-deleted. */
+    trashed: Maybe<Scalars["Boolean"]["output"]>;
+    /** The handle of the Neo block’s type. */
+    typeHandle: Maybe<Scalars["String"]["output"]>;
+    /** The ID of the Neo block’s type. */
+    typeId: Maybe<Scalars["Int"]["output"]>;
+    /** The UID of the entity */
+    uid: Maybe<Scalars["String"]["output"]>;
+    /** The element’s URI. */
+    uri: Maybe<Scalars["String"]["output"]>;
+  };
+
+export type ContentBlocks_InlineSlideshow_BlockType_CountArgs = {
+  field: Scalars["String"]["input"];
+};
+
+export type ContentBlocks_InlineSlideshow_BlockTypeBackgroundColorArgs = {
+  label: InputMaybe<Scalars["Boolean"]["input"]>;
+};
+
+export type ContentBlocks_InlineSlideshow_BlockTypeSlideshowEntryArgs = {
+  address: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  after: InputMaybe<Scalars["String"]["input"]>;
+  ancestorDist: InputMaybe<Scalars["Int"]["input"]>;
+  ancestorOf: InputMaybe<Scalars["Int"]["input"]>;
+  assetAlbum: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  attribution: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  authorGroup: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
+  authorGroupId: InputMaybe<
+    Array<InputMaybe<Scalars["QueryArgument"]["input"]>>
+  >;
+  authorId: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  authorPub: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  backgroundColor: InputMaybe<
+    Array<InputMaybe<Scalars["QueryArgument"]["input"]>>
+  >;
+  before: InputMaybe<Scalars["String"]["input"]>;
+  cantoAssetSingle: InputMaybe<
+    Array<InputMaybe<Scalars["QueryArgument"]["input"]>>
+  >;
+  caption: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  captionRichText: InputMaybe<
+    Array<InputMaybe<Scalars["QueryArgument"]["input"]>>
+  >;
+  city: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  closeDate: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  colorScheme: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  contentImage: InputMaybe<
+    Array<InputMaybe<Scalars["QueryArgument"]["input"]>>
+  >;
+  country: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  creditPub: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  date: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  dateCreated: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
+  dateUpdated: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
+  descendantDist: InputMaybe<Scalars["Int"]["input"]>;
+  descendantOf: InputMaybe<Scalars["Int"]["input"]>;
+  description: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  dynamicComponent: InputMaybe<
+    Array<InputMaybe<Scalars["QueryArgument"]["input"]>>
+  >;
+  editable: InputMaybe<Scalars["Boolean"]["input"]>;
+  email: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  eventEndTime: InputMaybe<
+    Array<InputMaybe<Scalars["QueryArgument"]["input"]>>
+  >;
+  eventEntry: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  eventStartTime: InputMaybe<
+    Array<InputMaybe<Scalars["QueryArgument"]["input"]>>
+  >;
+  eventType: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  expiryDate: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
+  externalUrl: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  externalUrlTranslatable: InputMaybe<
+    Array<InputMaybe<Scalars["QueryArgument"]["input"]>>
+  >;
+  featuredImage: InputMaybe<
+    Array<InputMaybe<Scalars["QueryArgument"]["input"]>>
+  >;
+  fixedOrder: InputMaybe<Scalars["Boolean"]["input"]>;
+  focalPointX: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  focalPointY: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  galleryEntry: InputMaybe<
+    Array<InputMaybe<Scalars["QueryArgument"]["input"]>>
+  >;
+  hasDescendants: InputMaybe<Scalars["Boolean"]["input"]>;
+  header: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  hero: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  hideTitle: InputMaybe<Scalars["Boolean"]["input"]>;
+  id: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  imageQuote: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  inReverse: InputMaybe<Scalars["Boolean"]["input"]>;
+  investigationDescription: InputMaybe<
+    Array<InputMaybe<Scalars["QueryArgument"]["input"]>>
+  >;
+  investigationStatus: InputMaybe<
+    Array<InputMaybe<Scalars["QueryArgument"]["input"]>>
+  >;
+  isVisible: InputMaybe<Scalars["Boolean"]["input"]>;
+  jobPosition: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  landingPage: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  language: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
+  leaves: InputMaybe<Scalars["Boolean"]["input"]>;
+  level: InputMaybe<Scalars["Int"]["input"]>;
+  limit: InputMaybe<Scalars["Int"]["input"]>;
+  linkTo: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  newsEntry: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  nextSiblingOf: InputMaybe<Scalars["Int"]["input"]>;
+  offset: InputMaybe<Scalars["Int"]["input"]>;
+  openDate: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  order: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  orderBy: InputMaybe<Scalars["String"]["input"]>;
+  overlapHero: InputMaybe<Scalars["Boolean"]["input"]>;
+  padImage: InputMaybe<Scalars["Boolean"]["input"]>;
+  pageType: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  personAffiliation: InputMaybe<
+    Array<InputMaybe<Scalars["QueryArgument"]["input"]>>
+  >;
+  phoneNumber: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  plainText: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  positionedAfter: InputMaybe<Scalars["Int"]["input"]>;
+  positionedBefore: InputMaybe<Scalars["Int"]["input"]>;
+  postDate: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
+  postTags: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  postType: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  preferSites: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  pressReleaseId: InputMaybe<
+    Array<InputMaybe<Scalars["QueryArgument"]["input"]>>
+  >;
+  prevSiblingOf: InputMaybe<Scalars["Int"]["input"]>;
+  pullQuote: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  quote: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  ratio: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  ref: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
+  registrationCloseDate: InputMaybe<
+    Array<InputMaybe<Scalars["QueryArgument"]["input"]>>
+  >;
+  registrationOpenDate: InputMaybe<
+    Array<InputMaybe<Scalars["QueryArgument"]["input"]>>
+  >;
+  relatedTo: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  relatedToAll: InputMaybe<
+    Array<InputMaybe<Scalars["QueryArgument"]["input"]>>
+  >;
+  relatedToAssets: InputMaybe<Array<InputMaybe<AssetCriteriaInput>>>;
+  relatedToCategories: InputMaybe<Array<InputMaybe<CategoryCriteriaInput>>>;
+  relatedToEntries: InputMaybe<Array<InputMaybe<EntryCriteriaInput>>>;
+  relatedToTags: InputMaybe<Array<InputMaybe<TagCriteriaInput>>>;
+  relatedToUsers: InputMaybe<Array<InputMaybe<UserCriteriaInput>>>;
+  representativeAssetVariant: InputMaybe<
+    Array<InputMaybe<Scalars["QueryArgument"]["input"]>>
+  >;
+  richTextDescription: InputMaybe<
+    Array<InputMaybe<Scalars["QueryArgument"]["input"]>>
+  >;
+  search: InputMaybe<Scalars["String"]["input"]>;
+  searchTermOptions: InputMaybe<SearchTermOptions>;
+  section: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
+  sectionId: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  showSiblingNav: InputMaybe<Scalars["Boolean"]["input"]>;
+  showSidebar: InputMaybe<Scalars["Boolean"]["input"]>;
+  site: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
+  siteId: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  siteSettingsId: InputMaybe<
+    Array<InputMaybe<Scalars["QueryArgument"]["input"]>>
+  >;
+  slideshowEntry: InputMaybe<
+    Array<InputMaybe<Scalars["QueryArgument"]["input"]>>
+  >;
+  slug: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
+  staffBio: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  staffLocation: InputMaybe<
+    Array<InputMaybe<Scalars["QueryArgument"]["input"]>>
+  >;
+  staffPortrait: InputMaybe<
+    Array<InputMaybe<Scalars["QueryArgument"]["input"]>>
+  >;
+  staffTags: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  staffTradingCard: InputMaybe<
+    Array<InputMaybe<Scalars["QueryArgument"]["input"]>>
+  >;
+  startDate: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  state: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  structureId: InputMaybe<Scalars["Int"]["input"]>;
+  subHeroText: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  subLocation: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  teaser: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  text: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  timezone: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  title: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
+  type: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
+  typeId: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  uid: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
+  unique: InputMaybe<Scalars["Boolean"]["input"]>;
+  uri: InputMaybe<Array<InputMaybe<Scalars["String"]["input"]>>>;
+  width: InputMaybe<Array<InputMaybe<Scalars["QueryArgument"]["input"]>>>;
+  withStructure: InputMaybe<Scalars["Boolean"]["input"]>;
 };
 
 export type ContentBlocks_InvestigationCta_BlockType = ElementInterface &
@@ -258614,6 +258855,11 @@ export type HomepageQuery = {
                 ContentBlocks_ContentBlocks_Image_BlockType_Fragment: ContentBlocks_ContentBlocks_Image_BlockType_Fragment;
               };
             })
+          | ({ __typename?: "contentBlocks_inlineSlideshow_BlockType" } & {
+              " $fragmentRefs"?: {
+                ContentBlocks_ContentBlocks_InlineSlideshow_BlockType_Fragment: ContentBlocks_ContentBlocks_InlineSlideshow_BlockType_Fragment;
+              };
+            })
           | ({ __typename?: "contentBlocks_investigationCta_BlockType" } & {
               " $fragmentRefs"?: {
                 ContentBlocks_ContentBlocks_InvestigationCta_BlockType_Fragment: ContentBlocks_ContentBlocks_InvestigationCta_BlockType_Fragment;
@@ -258910,6 +259156,10 @@ export type HomepageQuery = {
                 }
               | {
                   __typename?: "contentBlocks_image_BlockType";
+                  uri: string | null;
+                }
+              | {
+                  __typename?: "contentBlocks_inlineSlideshow_BlockType";
                   uri: string | null;
                 }
               | {
@@ -259823,6 +260073,7 @@ export type AccordionGroupBlockFragment = {
     | { __typename?: "contentBlocks_imageGridItem_BlockType" }
     | { __typename?: "contentBlocks_imageGrid_BlockType" }
     | { __typename?: "contentBlocks_image_BlockType" }
+    | { __typename?: "contentBlocks_inlineSlideshow_BlockType" }
     | { __typename?: "contentBlocks_investigationCta_BlockType" }
     | { __typename?: "contentBlocks_investigationGrid_BlockType" }
     | { __typename?: "contentBlocks_keyNumbersGridItem_BlockType" }
@@ -259920,6 +260171,7 @@ export type CtaGridBlockFragment = {
     | { __typename?: "contentBlocks_imageGridItem_BlockType" }
     | { __typename?: "contentBlocks_imageGrid_BlockType" }
     | { __typename?: "contentBlocks_image_BlockType" }
+    | { __typename?: "contentBlocks_inlineSlideshow_BlockType" }
     | { __typename?: "contentBlocks_investigationCta_BlockType" }
     | { __typename?: "contentBlocks_investigationGrid_BlockType" }
     | { __typename?: "contentBlocks_keyNumbersGridItem_BlockType" }
@@ -260685,6 +260937,17 @@ type ContentBlocks_ContentBlocks_Image_BlockType_Fragment = ({
   " $fragmentName"?: "ContentBlocks_ContentBlocks_Image_BlockType_Fragment";
 };
 
+type ContentBlocks_ContentBlocks_InlineSlideshow_BlockType_Fragment = ({
+  __typename?: "contentBlocks_inlineSlideshow_BlockType";
+} & {
+  " $fragmentRefs"?: {
+    RelatedContentBlock_ContentBlocks_InlineSlideshow_BlockType_Fragment: RelatedContentBlock_ContentBlocks_InlineSlideshow_BlockType_Fragment;
+    InlineSlideshowBlockFragment: InlineSlideshowBlockFragment;
+  };
+}) & {
+  " $fragmentName"?: "ContentBlocks_ContentBlocks_InlineSlideshow_BlockType_Fragment";
+};
+
 type ContentBlocks_ContentBlocks_InvestigationCta_BlockType_Fragment = ({
   __typename?: "contentBlocks_investigationCta_BlockType";
 } & {
@@ -260989,6 +261252,7 @@ export type ContentBlocksFragment =
   | ContentBlocks_ContentBlocks_ImageGridItem_BlockType_Fragment
   | ContentBlocks_ContentBlocks_ImageGrid_BlockType_Fragment
   | ContentBlocks_ContentBlocks_Image_BlockType_Fragment
+  | ContentBlocks_ContentBlocks_InlineSlideshow_BlockType_Fragment
   | ContentBlocks_ContentBlocks_InvestigationCta_BlockType_Fragment
   | ContentBlocks_ContentBlocks_InvestigationGrid_BlockType_Fragment
   | ContentBlocks_ContentBlocks_KeyNumbersGridItem_BlockType_Fragment
@@ -261221,6 +261485,10 @@ export type ImageGridBlockFragment = {
       | { __typename?: "contentBlocks_imageGrid_BlockType"; uri: string | null }
       | { __typename?: "contentBlocks_image_BlockType"; uri: string | null }
       | {
+          __typename?: "contentBlocks_inlineSlideshow_BlockType";
+          uri: string | null;
+        }
+      | {
           __typename?: "contentBlocks_investigationCta_BlockType";
           uri: string | null;
         }
@@ -261421,6 +261689,7 @@ export type ImageGridBlockFragment = {
       }
     | { __typename?: "contentBlocks_imageGrid_BlockType" }
     | { __typename?: "contentBlocks_image_BlockType" }
+    | { __typename?: "contentBlocks_inlineSlideshow_BlockType" }
     | { __typename?: "contentBlocks_investigationCta_BlockType" }
     | { __typename?: "contentBlocks_investigationGrid_BlockType" }
     | { __typename?: "contentBlocks_keyNumbersGridItem_BlockType" }
@@ -261454,6 +261723,43 @@ export type ImageGridBlockFragment = {
   > | null;
 } & { " $fragmentName"?: "ImageGridBlockFragment" };
 
+export type InlineSlideshowBlockFragment = {
+  __typename?: "contentBlocks_inlineSlideshow_BlockType";
+  id: string | null;
+  typeHandle: string | null;
+  backgroundColor: string | null;
+  slideshowEntry: Array<
+    | { __typename?: "callouts_calloutEvent_Entry" }
+    | { __typename?: "callouts_calloutNews_Entry" }
+    | { __typename?: "callouts_calloutQuote_Entry" }
+    | { __typename?: "callouts_calloutTwoTone_Entry" }
+    | { __typename?: "callouts_callout_Entry" }
+    | { __typename?: "events_events_Entry" }
+    | { __typename?: "galleries_gallery_Entry" }
+    | { __typename?: "glossaryTerms_glossaryTerm_Entry" }
+    | { __typename?: "homepage_homepage_Entry" }
+    | { __typename?: "investigations_investigation_Entry" }
+    | { __typename?: "jobs_job_Entry" }
+    | { __typename?: "news_post_Entry" }
+    | { __typename?: "pages_educatorPages_Entry" }
+    | { __typename?: "pages_galleryLandingPage_Entry" }
+    | { __typename?: "pages_investigationLandingPage_Entry" }
+    | { __typename?: "pages_pages_Entry" }
+    | { __typename?: "pages_redirectPage_Entry" }
+    | { __typename?: "pages_studentPages_Entry" }
+    | { __typename?: "people_person_Entry" }
+    | { __typename?: "publications_publication_Entry" }
+    | { __typename?: "rubinBasics_post_Entry" }
+    | { __typename?: "searchResults_searchResults_Entry" }
+    | ({ __typename?: "slideshows_slideshow_Entry" } & {
+        " $fragmentRefs"?: { SlideshowSlidesFragment: SlideshowSlidesFragment };
+      })
+    | { __typename?: "staffProfiles_staffProfiles_Entry" }
+    | { __typename?: "userProfilePage_userProfilePage_Entry" }
+    | null
+  >;
+} & { " $fragmentName"?: "InlineSlideshowBlockFragment" };
+
 export type InvestigationGridBlockFragment = {
   __typename?: "contentBlocks_investigationGrid_BlockType";
   typeHandle: string | null;
@@ -261485,6 +261791,7 @@ export type InvestigationGridBlockFragment = {
     | { __typename?: "contentBlocks_imageGridItem_BlockType" }
     | { __typename?: "contentBlocks_imageGrid_BlockType" }
     | { __typename?: "contentBlocks_image_BlockType" }
+    | { __typename?: "contentBlocks_inlineSlideshow_BlockType" }
     | {
         __typename?: "contentBlocks_investigationCta_BlockType";
         id: string | null;
@@ -261719,6 +262026,7 @@ export type KeyNumbersBlockFragment = {
     | { __typename?: "contentBlocks_imageGridItem_BlockType" }
     | { __typename?: "contentBlocks_imageGrid_BlockType" }
     | { __typename?: "contentBlocks_image_BlockType" }
+    | { __typename?: "contentBlocks_inlineSlideshow_BlockType" }
     | { __typename?: "contentBlocks_investigationCta_BlockType" }
     | { __typename?: "contentBlocks_investigationGrid_BlockType" }
     | {
@@ -261856,6 +262164,10 @@ export type LinkBlockFragment = {
         }
       | { __typename?: "contentBlocks_imageGrid_BlockType"; uri: string | null }
       | { __typename?: "contentBlocks_image_BlockType"; uri: string | null }
+      | {
+          __typename?: "contentBlocks_inlineSlideshow_BlockType";
+          uri: string | null;
+        }
       | {
           __typename?: "contentBlocks_investigationCta_BlockType";
           uri: string | null;
@@ -262131,6 +262443,10 @@ export type NewsBlockFragment = {
       | { __typename?: "contentBlocks_imageGrid_BlockType"; uri: string | null }
       | { __typename?: "contentBlocks_image_BlockType"; uri: string | null }
       | {
+          __typename?: "contentBlocks_inlineSlideshow_BlockType";
+          uri: string | null;
+        }
+      | {
           __typename?: "contentBlocks_investigationCta_BlockType";
           uri: string | null;
         }
@@ -262364,6 +262680,7 @@ export type NewsBlockFragment = {
     | { __typename?: "contentBlocks_imageGridItem_BlockType" }
     | { __typename?: "contentBlocks_imageGrid_BlockType" }
     | { __typename?: "contentBlocks_image_BlockType" }
+    | { __typename?: "contentBlocks_inlineSlideshow_BlockType" }
     | { __typename?: "contentBlocks_investigationCta_BlockType" }
     | { __typename?: "contentBlocks_investigationGrid_BlockType" }
     | { __typename?: "contentBlocks_keyNumbersGridItem_BlockType" }
@@ -262750,6 +263067,10 @@ export type PublicationsListBlockFragment = {
       | { __typename?: "contentBlocks_imageGrid_BlockType"; uri: string | null }
       | { __typename?: "contentBlocks_image_BlockType"; uri: string | null }
       | {
+          __typename?: "contentBlocks_inlineSlideshow_BlockType";
+          uri: string | null;
+        }
+      | {
           __typename?: "contentBlocks_investigationCta_BlockType";
           uri: string | null;
         }
@@ -262998,6 +263319,12 @@ type RelatedContentBlock_ContentBlocks_Image_BlockType_Fragment = {
   " $fragmentName"?: "RelatedContentBlock_ContentBlocks_Image_BlockType_Fragment";
 };
 
+type RelatedContentBlock_ContentBlocks_InlineSlideshow_BlockType_Fragment = {
+  __typename?: "contentBlocks_inlineSlideshow_BlockType";
+} & {
+  " $fragmentName"?: "RelatedContentBlock_ContentBlocks_InlineSlideshow_BlockType_Fragment";
+};
+
 type RelatedContentBlock_ContentBlocks_InvestigationCta_BlockType_Fragment = {
   __typename?: "contentBlocks_investigationCta_BlockType";
 } & {
@@ -263104,6 +263431,7 @@ type RelatedContentBlock_ContentBlocks_RelatedContent_BlockType_Fragment = {
     | { __typename?: "contentBlocks_imageGridItem_BlockType" }
     | { __typename?: "contentBlocks_imageGrid_BlockType" }
     | { __typename?: "contentBlocks_image_BlockType" }
+    | { __typename?: "contentBlocks_inlineSlideshow_BlockType" }
     | { __typename?: "contentBlocks_investigationCta_BlockType" }
     | { __typename?: "contentBlocks_investigationGrid_BlockType" }
     | { __typename?: "contentBlocks_keyNumbersGridItem_BlockType" }
@@ -263428,6 +263756,7 @@ export type RelatedContentBlockFragment =
   | RelatedContentBlock_ContentBlocks_ImageGridItem_BlockType_Fragment
   | RelatedContentBlock_ContentBlocks_ImageGrid_BlockType_Fragment
   | RelatedContentBlock_ContentBlocks_Image_BlockType_Fragment
+  | RelatedContentBlock_ContentBlocks_InlineSlideshow_BlockType_Fragment
   | RelatedContentBlock_ContentBlocks_InvestigationCta_BlockType_Fragment
   | RelatedContentBlock_ContentBlocks_InvestigationGrid_BlockType_Fragment
   | RelatedContentBlock_ContentBlocks_KeyNumbersGridItem_BlockType_Fragment
@@ -263488,6 +263817,7 @@ export type ScheduleBlockFragment = {
     | { __typename?: "contentBlocks_imageGridItem_BlockType" }
     | { __typename?: "contentBlocks_imageGrid_BlockType" }
     | { __typename?: "contentBlocks_image_BlockType" }
+    | { __typename?: "contentBlocks_inlineSlideshow_BlockType" }
     | { __typename?: "contentBlocks_investigationCta_BlockType" }
     | { __typename?: "contentBlocks_investigationGrid_BlockType" }
     | { __typename?: "contentBlocks_keyNumbersGridItem_BlockType" }
@@ -263657,6 +263987,10 @@ export type SlideBlockFragment = {
         }
       | { __typename?: "contentBlocks_imageGrid_BlockType"; uri: string | null }
       | { __typename?: "contentBlocks_image_BlockType"; uri: string | null }
+      | {
+          __typename?: "contentBlocks_inlineSlideshow_BlockType";
+          uri: string | null;
+        }
       | {
           __typename?: "contentBlocks_investigationCta_BlockType";
           uri: string | null;
@@ -263840,6 +264174,7 @@ export type SlideBlockFragment = {
     | { __typename?: "contentBlocks_imageGridItem_BlockType" }
     | { __typename?: "contentBlocks_imageGrid_BlockType" }
     | { __typename?: "contentBlocks_image_BlockType" }
+    | { __typename?: "contentBlocks_inlineSlideshow_BlockType" }
     | { __typename?: "contentBlocks_investigationCta_BlockType" }
     | { __typename?: "contentBlocks_investigationGrid_BlockType" }
     | { __typename?: "contentBlocks_keyNumbersGridItem_BlockType" }
@@ -264136,6 +264471,10 @@ export type StaffGridBlockFragment = {
       | { __typename?: "contentBlocks_imageGrid_BlockType"; uri: string | null }
       | { __typename?: "contentBlocks_image_BlockType"; uri: string | null }
       | {
+          __typename?: "contentBlocks_inlineSlideshow_BlockType";
+          uri: string | null;
+        }
+      | {
           __typename?: "contentBlocks_investigationCta_BlockType";
           uri: string | null;
         }
@@ -264318,6 +264657,7 @@ export type StaffGridBlockFragment = {
     | { __typename?: "contentBlocks_imageGridItem_BlockType" }
     | { __typename?: "contentBlocks_imageGrid_BlockType" }
     | { __typename?: "contentBlocks_image_BlockType" }
+    | { __typename?: "contentBlocks_inlineSlideshow_BlockType" }
     | { __typename?: "contentBlocks_investigationCta_BlockType" }
     | { __typename?: "contentBlocks_investigationGrid_BlockType" }
     | { __typename?: "contentBlocks_keyNumbersGridItem_BlockType" }
@@ -264507,6 +264847,7 @@ export type TableGroupBlockFragment = {
     | { __typename?: "contentBlocks_imageGridItem_BlockType" }
     | { __typename?: "contentBlocks_imageGrid_BlockType" }
     | { __typename?: "contentBlocks_image_BlockType" }
+    | { __typename?: "contentBlocks_inlineSlideshow_BlockType" }
     | { __typename?: "contentBlocks_investigationCta_BlockType" }
     | { __typename?: "contentBlocks_investigationGrid_BlockType" }
     | { __typename?: "contentBlocks_keyNumbersGridItem_BlockType" }
@@ -266038,6 +266379,11 @@ export type GetEducatorPageEntryQuery = {
                 ContentBlocks_ContentBlocks_Image_BlockType_Fragment: ContentBlocks_ContentBlocks_Image_BlockType_Fragment;
               };
             })
+          | ({ __typename?: "contentBlocks_inlineSlideshow_BlockType" } & {
+              " $fragmentRefs"?: {
+                ContentBlocks_ContentBlocks_InlineSlideshow_BlockType_Fragment: ContentBlocks_ContentBlocks_InlineSlideshow_BlockType_Fragment;
+              };
+            })
           | ({ __typename?: "contentBlocks_investigationCta_BlockType" } & {
               " $fragmentRefs"?: {
                 ContentBlocks_ContentBlocks_InvestigationCta_BlockType_Fragment: ContentBlocks_ContentBlocks_InvestigationCta_BlockType_Fragment;
@@ -266447,6 +266793,11 @@ export type GetEventEntryQuery = {
           | ({ __typename?: "contentBlocks_image_BlockType" } & {
               " $fragmentRefs"?: {
                 ContentBlocks_ContentBlocks_Image_BlockType_Fragment: ContentBlocks_ContentBlocks_Image_BlockType_Fragment;
+              };
+            })
+          | ({ __typename?: "contentBlocks_inlineSlideshow_BlockType" } & {
+              " $fragmentRefs"?: {
+                ContentBlocks_ContentBlocks_InlineSlideshow_BlockType_Fragment: ContentBlocks_ContentBlocks_InlineSlideshow_BlockType_Fragment;
               };
             })
           | ({ __typename?: "contentBlocks_investigationCta_BlockType" } & {
@@ -267094,6 +267445,7 @@ export type RelatedContentBlockNewsFragment = {
     | { __typename?: "contentBlocks_imageGridItem_BlockType" }
     | { __typename?: "contentBlocks_imageGrid_BlockType" }
     | { __typename?: "contentBlocks_image_BlockType" }
+    | { __typename?: "contentBlocks_inlineSlideshow_BlockType" }
     | { __typename?: "contentBlocks_investigationCta_BlockType" }
     | { __typename?: "contentBlocks_investigationGrid_BlockType" }
     | { __typename?: "contentBlocks_keyNumbersGridItem_BlockType" }
@@ -269193,6 +269545,11 @@ export type GetPageEntryQuery = {
           | ({ __typename?: "contentBlocks_image_BlockType" } & {
               " $fragmentRefs"?: {
                 ContentBlocks_ContentBlocks_Image_BlockType_Fragment: ContentBlocks_ContentBlocks_Image_BlockType_Fragment;
+              };
+            })
+          | ({ __typename?: "contentBlocks_inlineSlideshow_BlockType" } & {
+              " $fragmentRefs"?: {
+                ContentBlocks_ContentBlocks_InlineSlideshow_BlockType_Fragment: ContentBlocks_ContentBlocks_InlineSlideshow_BlockType_Fragment;
               };
             })
           | ({ __typename?: "contentBlocks_investigationCta_BlockType" } & {
@@ -273551,6 +273908,10 @@ export type LinksFragmentFragment = {
       | { __typename?: "contentBlocks_imageGrid_BlockType"; uri: string | null }
       | { __typename?: "contentBlocks_image_BlockType"; uri: string | null }
       | {
+          __typename?: "contentBlocks_inlineSlideshow_BlockType";
+          uri: string | null;
+        }
+      | {
           __typename?: "contentBlocks_investigationCta_BlockType";
           uri: string | null;
         }
@@ -273795,6 +274156,10 @@ export type MixedLinkFragmentFragment = {
       }
     | { __typename?: "contentBlocks_imageGrid_BlockType"; uri: string | null }
     | { __typename?: "contentBlocks_image_BlockType"; uri: string | null }
+    | {
+        __typename?: "contentBlocks_inlineSlideshow_BlockType";
+        uri: string | null;
+      }
     | {
         __typename?: "contentBlocks_investigationCta_BlockType";
         uri: string | null;
@@ -280832,204 +281197,6 @@ export type GetSiblingsQuery = {
     | null;
 };
 
-export const SlideshowSlidesFragmentDoc = {
-  kind: "Document",
-  definitions: [
-    {
-      kind: "FragmentDefinition",
-      name: { kind: "Name", value: "SlideshowSlides" },
-      typeCondition: {
-        kind: "NamedType",
-        name: { kind: "Name", value: "slideshows_slideshow_Entry" },
-      },
-      selectionSet: {
-        kind: "SelectionSet",
-        selections: [
-          { kind: "Field", name: { kind: "Name", value: "id" } },
-          { kind: "Field", name: { kind: "Name", value: "title" } },
-          {
-            kind: "Field",
-            alias: { kind: "Name", value: "description" },
-            name: { kind: "Name", value: "richTextDescription" },
-          },
-          {
-            kind: "Field",
-            alias: { kind: "Name", value: "coverImage" },
-            name: { kind: "Name", value: "representativeAssetVariant" },
-            selectionSet: {
-              kind: "SelectionSet",
-              selections: [
-                {
-                  kind: "InlineFragment",
-                  typeCondition: {
-                    kind: "NamedType",
-                    name: { kind: "Name", value: "assetVariants_Asset" },
-                  },
-                  selectionSet: {
-                    kind: "SelectionSet",
-                    selections: [
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "altText" },
-                      },
-                      { kind: "Field", name: { kind: "Name", value: "width" } },
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "height" },
-                      },
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "url" },
-                        directives: [
-                          {
-                            kind: "Directive",
-                            name: { kind: "Name", value: "transform" },
-                            arguments: [
-                              {
-                                kind: "Argument",
-                                name: { kind: "Name", value: "mode" },
-                                value: {
-                                  kind: "StringValue",
-                                  value: "fit",
-                                  block: false,
-                                },
-                              },
-                              {
-                                kind: "Argument",
-                                name: { kind: "Name", value: "width" },
-                                value: { kind: "IntValue", value: "1000" },
-                              },
-                            ],
-                          },
-                        ],
-                      },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-          {
-            kind: "Field",
-            alias: { kind: "Name", value: "items" },
-            name: { kind: "Name", value: "slideshowItems" },
-            selectionSet: {
-              kind: "SelectionSet",
-              selections: [
-                {
-                  kind: "InlineFragment",
-                  typeCondition: {
-                    kind: "NamedType",
-                    name: {
-                      kind: "Name",
-                      value: "slideshowItems_slide_BlockType",
-                    },
-                  },
-                  selectionSet: {
-                    kind: "SelectionSet",
-                    selections: [
-                      { kind: "Field", name: { kind: "Name", value: "id" } },
-                      {
-                        kind: "Field",
-                        alias: { kind: "Name", value: "title" },
-                        name: { kind: "Name", value: "slideTitle" },
-                      },
-                      {
-                        kind: "Field",
-                        alias: { kind: "Name", value: "description" },
-                        name: { kind: "Name", value: "slideContent" },
-                      },
-                      {
-                        kind: "Field",
-                        alias: { kind: "Name", value: "teaser" },
-                        name: { kind: "Name", value: "slidePreviewContent" },
-                      },
-                      {
-                        kind: "Field",
-                        alias: { kind: "Name", value: "image" },
-                        name: { kind: "Name", value: "slideAsset" },
-                        selectionSet: {
-                          kind: "SelectionSet",
-                          selections: [
-                            {
-                              kind: "InlineFragment",
-                              typeCondition: {
-                                kind: "NamedType",
-                                name: {
-                                  kind: "Name",
-                                  value: "assetVariants_Asset",
-                                },
-                              },
-                              selectionSet: {
-                                kind: "SelectionSet",
-                                selections: [
-                                  {
-                                    kind: "Field",
-                                    name: { kind: "Name", value: "altText" },
-                                  },
-                                  {
-                                    kind: "Field",
-                                    name: { kind: "Name", value: "width" },
-                                  },
-                                  {
-                                    kind: "Field",
-                                    name: { kind: "Name", value: "height" },
-                                  },
-                                  {
-                                    kind: "Field",
-                                    name: { kind: "Name", value: "url" },
-                                    directives: [
-                                      {
-                                        kind: "Directive",
-                                        name: {
-                                          kind: "Name",
-                                          value: "transform",
-                                        },
-                                        arguments: [
-                                          {
-                                            kind: "Argument",
-                                            name: {
-                                              kind: "Name",
-                                              value: "mode",
-                                            },
-                                            value: {
-                                              kind: "StringValue",
-                                              value: "fit",
-                                              block: false,
-                                            },
-                                          },
-                                          {
-                                            kind: "Argument",
-                                            name: {
-                                              kind: "Name",
-                                              value: "width",
-                                            },
-                                            value: {
-                                              kind: "IntValue",
-                                              value: "1000",
-                                            },
-                                          },
-                                        ],
-                                      },
-                                    ],
-                                  },
-                                ],
-                              },
-                            },
-                          ],
-                        },
-                      },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<SlideshowSlidesFragment, unknown>;
 export const AccordionGroupBlockFragmentDoc = {
   kind: "Document",
   definitions: [
@@ -286616,6 +286783,434 @@ export const FirstLookWidgetsBlockFragmentDoc = {
     },
   ],
 } as unknown as DocumentNode<FirstLookWidgetsBlockFragment, unknown>;
+export const SlideshowSlidesFragmentDoc = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "SlideshowSlides" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "slideshows_slideshow_Entry" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "title" } },
+          {
+            kind: "Field",
+            alias: { kind: "Name", value: "description" },
+            name: { kind: "Name", value: "richTextDescription" },
+          },
+          {
+            kind: "Field",
+            alias: { kind: "Name", value: "coverImage" },
+            name: { kind: "Name", value: "representativeAssetVariant" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "InlineFragment",
+                  typeCondition: {
+                    kind: "NamedType",
+                    name: { kind: "Name", value: "assetVariants_Asset" },
+                  },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "altText" },
+                      },
+                      { kind: "Field", name: { kind: "Name", value: "width" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "height" },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "url" },
+                        directives: [
+                          {
+                            kind: "Directive",
+                            name: { kind: "Name", value: "transform" },
+                            arguments: [
+                              {
+                                kind: "Argument",
+                                name: { kind: "Name", value: "mode" },
+                                value: {
+                                  kind: "StringValue",
+                                  value: "fit",
+                                  block: false,
+                                },
+                              },
+                              {
+                                kind: "Argument",
+                                name: { kind: "Name", value: "width" },
+                                value: { kind: "IntValue", value: "1000" },
+                              },
+                            ],
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: "Field",
+            alias: { kind: "Name", value: "items" },
+            name: { kind: "Name", value: "slideshowItems" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "InlineFragment",
+                  typeCondition: {
+                    kind: "NamedType",
+                    name: {
+                      kind: "Name",
+                      value: "slideshowItems_slide_BlockType",
+                    },
+                  },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      {
+                        kind: "Field",
+                        alias: { kind: "Name", value: "title" },
+                        name: { kind: "Name", value: "slideTitle" },
+                      },
+                      {
+                        kind: "Field",
+                        alias: { kind: "Name", value: "description" },
+                        name: { kind: "Name", value: "slideContent" },
+                      },
+                      {
+                        kind: "Field",
+                        alias: { kind: "Name", value: "teaser" },
+                        name: { kind: "Name", value: "slidePreviewContent" },
+                      },
+                      {
+                        kind: "Field",
+                        alias: { kind: "Name", value: "image" },
+                        name: { kind: "Name", value: "slideAsset" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "InlineFragment",
+                              typeCondition: {
+                                kind: "NamedType",
+                                name: {
+                                  kind: "Name",
+                                  value: "assetVariants_Asset",
+                                },
+                              },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "altText" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "width" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "height" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "url" },
+                                    directives: [
+                                      {
+                                        kind: "Directive",
+                                        name: {
+                                          kind: "Name",
+                                          value: "transform",
+                                        },
+                                        arguments: [
+                                          {
+                                            kind: "Argument",
+                                            name: {
+                                              kind: "Name",
+                                              value: "mode",
+                                            },
+                                            value: {
+                                              kind: "StringValue",
+                                              value: "fit",
+                                              block: false,
+                                            },
+                                          },
+                                          {
+                                            kind: "Argument",
+                                            name: {
+                                              kind: "Name",
+                                              value: "width",
+                                            },
+                                            value: {
+                                              kind: "IntValue",
+                                              value: "1000",
+                                            },
+                                          },
+                                        ],
+                                      },
+                                    ],
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<SlideshowSlidesFragment, unknown>;
+export const InlineSlideshowBlockFragmentDoc = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "inlineSlideshowBlock" },
+      typeCondition: {
+        kind: "NamedType",
+        name: {
+          kind: "Name",
+          value: "contentBlocks_inlineSlideshow_BlockType",
+        },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "typeHandle" } },
+          { kind: "Field", name: { kind: "Name", value: "backgroundColor" } },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "slideshowEntry" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "SlideshowSlides" },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "SlideshowSlides" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "slideshows_slideshow_Entry" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "title" } },
+          {
+            kind: "Field",
+            alias: { kind: "Name", value: "description" },
+            name: { kind: "Name", value: "richTextDescription" },
+          },
+          {
+            kind: "Field",
+            alias: { kind: "Name", value: "coverImage" },
+            name: { kind: "Name", value: "representativeAssetVariant" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "InlineFragment",
+                  typeCondition: {
+                    kind: "NamedType",
+                    name: { kind: "Name", value: "assetVariants_Asset" },
+                  },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "altText" },
+                      },
+                      { kind: "Field", name: { kind: "Name", value: "width" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "height" },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "url" },
+                        directives: [
+                          {
+                            kind: "Directive",
+                            name: { kind: "Name", value: "transform" },
+                            arguments: [
+                              {
+                                kind: "Argument",
+                                name: { kind: "Name", value: "mode" },
+                                value: {
+                                  kind: "StringValue",
+                                  value: "fit",
+                                  block: false,
+                                },
+                              },
+                              {
+                                kind: "Argument",
+                                name: { kind: "Name", value: "width" },
+                                value: { kind: "IntValue", value: "1000" },
+                              },
+                            ],
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: "Field",
+            alias: { kind: "Name", value: "items" },
+            name: { kind: "Name", value: "slideshowItems" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "InlineFragment",
+                  typeCondition: {
+                    kind: "NamedType",
+                    name: {
+                      kind: "Name",
+                      value: "slideshowItems_slide_BlockType",
+                    },
+                  },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      {
+                        kind: "Field",
+                        alias: { kind: "Name", value: "title" },
+                        name: { kind: "Name", value: "slideTitle" },
+                      },
+                      {
+                        kind: "Field",
+                        alias: { kind: "Name", value: "description" },
+                        name: { kind: "Name", value: "slideContent" },
+                      },
+                      {
+                        kind: "Field",
+                        alias: { kind: "Name", value: "teaser" },
+                        name: { kind: "Name", value: "slidePreviewContent" },
+                      },
+                      {
+                        kind: "Field",
+                        alias: { kind: "Name", value: "image" },
+                        name: { kind: "Name", value: "slideAsset" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "InlineFragment",
+                              typeCondition: {
+                                kind: "NamedType",
+                                name: {
+                                  kind: "Name",
+                                  value: "assetVariants_Asset",
+                                },
+                              },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "altText" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "width" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "height" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "url" },
+                                    directives: [
+                                      {
+                                        kind: "Directive",
+                                        name: {
+                                          kind: "Name",
+                                          value: "transform",
+                                        },
+                                        arguments: [
+                                          {
+                                            kind: "Argument",
+                                            name: {
+                                              kind: "Name",
+                                              value: "mode",
+                                            },
+                                            value: {
+                                              kind: "StringValue",
+                                              value: "fit",
+                                              block: false,
+                                            },
+                                          },
+                                          {
+                                            kind: "Argument",
+                                            name: {
+                                              kind: "Name",
+                                              value: "width",
+                                            },
+                                            value: {
+                                              kind: "IntValue",
+                                              value: "1000",
+                                            },
+                                          },
+                                        ],
+                                      },
+                                    ],
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<InlineSlideshowBlockFragment, unknown>;
 export const ContentBlocksFragmentDoc = {
   kind: "Document",
   definitions: [
@@ -286748,6 +287343,10 @@ export const ContentBlocksFragmentDoc = {
           {
             kind: "FragmentSpread",
             name: { kind: "Name", value: "firstLookWidgetsBlock" },
+          },
+          {
+            kind: "FragmentSpread",
+            name: { kind: "Name", value: "inlineSlideshowBlock" },
           },
         ],
       },
@@ -287172,6 +287771,199 @@ export const ContentBlocksFragmentDoc = {
                                       kind: "Name",
                                       value: "hasFlexibleCellWidth",
                                     },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "SlideshowSlides" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "slideshows_slideshow_Entry" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "title" } },
+          {
+            kind: "Field",
+            alias: { kind: "Name", value: "description" },
+            name: { kind: "Name", value: "richTextDescription" },
+          },
+          {
+            kind: "Field",
+            alias: { kind: "Name", value: "coverImage" },
+            name: { kind: "Name", value: "representativeAssetVariant" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "InlineFragment",
+                  typeCondition: {
+                    kind: "NamedType",
+                    name: { kind: "Name", value: "assetVariants_Asset" },
+                  },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "altText" },
+                      },
+                      { kind: "Field", name: { kind: "Name", value: "width" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "height" },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "url" },
+                        directives: [
+                          {
+                            kind: "Directive",
+                            name: { kind: "Name", value: "transform" },
+                            arguments: [
+                              {
+                                kind: "Argument",
+                                name: { kind: "Name", value: "mode" },
+                                value: {
+                                  kind: "StringValue",
+                                  value: "fit",
+                                  block: false,
+                                },
+                              },
+                              {
+                                kind: "Argument",
+                                name: { kind: "Name", value: "width" },
+                                value: { kind: "IntValue", value: "1000" },
+                              },
+                            ],
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: "Field",
+            alias: { kind: "Name", value: "items" },
+            name: { kind: "Name", value: "slideshowItems" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "InlineFragment",
+                  typeCondition: {
+                    kind: "NamedType",
+                    name: {
+                      kind: "Name",
+                      value: "slideshowItems_slide_BlockType",
+                    },
+                  },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      {
+                        kind: "Field",
+                        alias: { kind: "Name", value: "title" },
+                        name: { kind: "Name", value: "slideTitle" },
+                      },
+                      {
+                        kind: "Field",
+                        alias: { kind: "Name", value: "description" },
+                        name: { kind: "Name", value: "slideContent" },
+                      },
+                      {
+                        kind: "Field",
+                        alias: { kind: "Name", value: "teaser" },
+                        name: { kind: "Name", value: "slidePreviewContent" },
+                      },
+                      {
+                        kind: "Field",
+                        alias: { kind: "Name", value: "image" },
+                        name: { kind: "Name", value: "slideAsset" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "InlineFragment",
+                              typeCondition: {
+                                kind: "NamedType",
+                                name: {
+                                  kind: "Name",
+                                  value: "assetVariants_Asset",
+                                },
+                              },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "altText" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "width" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "height" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "url" },
+                                    directives: [
+                                      {
+                                        kind: "Directive",
+                                        name: {
+                                          kind: "Name",
+                                          value: "transform",
+                                        },
+                                        arguments: [
+                                          {
+                                            kind: "Argument",
+                                            name: {
+                                              kind: "Name",
+                                              value: "mode",
+                                            },
+                                            value: {
+                                              kind: "StringValue",
+                                              value: "fit",
+                                              block: false,
+                                            },
+                                          },
+                                          {
+                                            kind: "Argument",
+                                            name: {
+                                              kind: "Name",
+                                              value: "width",
+                                            },
+                                            value: {
+                                              kind: "IntValue",
+                                              value: "1000",
+                                            },
+                                          },
+                                        ],
+                                      },
+                                    ],
                                   },
                                 ],
                               },
@@ -291201,6 +291993,38 @@ export const ContentBlocksFragmentDoc = {
             },
           },
           { kind: "Field", name: { kind: "Name", value: "firstLookWidget" } },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "inlineSlideshowBlock" },
+      typeCondition: {
+        kind: "NamedType",
+        name: {
+          kind: "Name",
+          value: "contentBlocks_inlineSlideshow_BlockType",
+        },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "typeHandle" } },
+          { kind: "Field", name: { kind: "Name", value: "backgroundColor" } },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "slideshowEntry" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "SlideshowSlides" },
+                },
+              ],
+            },
+          },
         ],
       },
     },
@@ -301368,6 +302192,231 @@ export const HomepageDocument = {
     },
     {
       kind: "FragmentDefinition",
+      name: { kind: "Name", value: "SlideshowSlides" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "slideshows_slideshow_Entry" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "title" } },
+          {
+            kind: "Field",
+            alias: { kind: "Name", value: "description" },
+            name: { kind: "Name", value: "richTextDescription" },
+          },
+          {
+            kind: "Field",
+            alias: { kind: "Name", value: "coverImage" },
+            name: { kind: "Name", value: "representativeAssetVariant" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "InlineFragment",
+                  typeCondition: {
+                    kind: "NamedType",
+                    name: { kind: "Name", value: "assetVariants_Asset" },
+                  },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "altText" },
+                      },
+                      { kind: "Field", name: { kind: "Name", value: "width" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "height" },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "url" },
+                        directives: [
+                          {
+                            kind: "Directive",
+                            name: { kind: "Name", value: "transform" },
+                            arguments: [
+                              {
+                                kind: "Argument",
+                                name: { kind: "Name", value: "mode" },
+                                value: {
+                                  kind: "StringValue",
+                                  value: "fit",
+                                  block: false,
+                                },
+                              },
+                              {
+                                kind: "Argument",
+                                name: { kind: "Name", value: "width" },
+                                value: { kind: "IntValue", value: "1000" },
+                              },
+                            ],
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: "Field",
+            alias: { kind: "Name", value: "items" },
+            name: { kind: "Name", value: "slideshowItems" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "InlineFragment",
+                  typeCondition: {
+                    kind: "NamedType",
+                    name: {
+                      kind: "Name",
+                      value: "slideshowItems_slide_BlockType",
+                    },
+                  },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      {
+                        kind: "Field",
+                        alias: { kind: "Name", value: "title" },
+                        name: { kind: "Name", value: "slideTitle" },
+                      },
+                      {
+                        kind: "Field",
+                        alias: { kind: "Name", value: "description" },
+                        name: { kind: "Name", value: "slideContent" },
+                      },
+                      {
+                        kind: "Field",
+                        alias: { kind: "Name", value: "teaser" },
+                        name: { kind: "Name", value: "slidePreviewContent" },
+                      },
+                      {
+                        kind: "Field",
+                        alias: { kind: "Name", value: "image" },
+                        name: { kind: "Name", value: "slideAsset" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "InlineFragment",
+                              typeCondition: {
+                                kind: "NamedType",
+                                name: {
+                                  kind: "Name",
+                                  value: "assetVariants_Asset",
+                                },
+                              },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "altText" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "width" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "height" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "url" },
+                                    directives: [
+                                      {
+                                        kind: "Directive",
+                                        name: {
+                                          kind: "Name",
+                                          value: "transform",
+                                        },
+                                        arguments: [
+                                          {
+                                            kind: "Argument",
+                                            name: {
+                                              kind: "Name",
+                                              value: "mode",
+                                            },
+                                            value: {
+                                              kind: "StringValue",
+                                              value: "fit",
+                                              block: false,
+                                            },
+                                          },
+                                          {
+                                            kind: "Argument",
+                                            name: {
+                                              kind: "Name",
+                                              value: "width",
+                                            },
+                                            value: {
+                                              kind: "IntValue",
+                                              value: "1000",
+                                            },
+                                          },
+                                        ],
+                                      },
+                                    ],
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "inlineSlideshowBlock" },
+      typeCondition: {
+        kind: "NamedType",
+        name: {
+          kind: "Name",
+          value: "contentBlocks_inlineSlideshow_BlockType",
+        },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "typeHandle" } },
+          { kind: "Field", name: { kind: "Name", value: "backgroundColor" } },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "slideshowEntry" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "SlideshowSlides" },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
       name: { kind: "Name", value: "ContentBlocks" },
       typeCondition: {
         kind: "NamedType",
@@ -301495,6 +302544,10 @@ export const HomepageDocument = {
           {
             kind: "FragmentSpread",
             name: { kind: "Name", value: "firstLookWidgetsBlock" },
+          },
+          {
+            kind: "FragmentSpread",
+            name: { kind: "Name", value: "inlineSlideshowBlock" },
           },
         ],
       },
@@ -308050,6 +309103,231 @@ export const GetEducatorPageEntryDocument = {
     },
     {
       kind: "FragmentDefinition",
+      name: { kind: "Name", value: "SlideshowSlides" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "slideshows_slideshow_Entry" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "title" } },
+          {
+            kind: "Field",
+            alias: { kind: "Name", value: "description" },
+            name: { kind: "Name", value: "richTextDescription" },
+          },
+          {
+            kind: "Field",
+            alias: { kind: "Name", value: "coverImage" },
+            name: { kind: "Name", value: "representativeAssetVariant" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "InlineFragment",
+                  typeCondition: {
+                    kind: "NamedType",
+                    name: { kind: "Name", value: "assetVariants_Asset" },
+                  },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "altText" },
+                      },
+                      { kind: "Field", name: { kind: "Name", value: "width" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "height" },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "url" },
+                        directives: [
+                          {
+                            kind: "Directive",
+                            name: { kind: "Name", value: "transform" },
+                            arguments: [
+                              {
+                                kind: "Argument",
+                                name: { kind: "Name", value: "mode" },
+                                value: {
+                                  kind: "StringValue",
+                                  value: "fit",
+                                  block: false,
+                                },
+                              },
+                              {
+                                kind: "Argument",
+                                name: { kind: "Name", value: "width" },
+                                value: { kind: "IntValue", value: "1000" },
+                              },
+                            ],
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: "Field",
+            alias: { kind: "Name", value: "items" },
+            name: { kind: "Name", value: "slideshowItems" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "InlineFragment",
+                  typeCondition: {
+                    kind: "NamedType",
+                    name: {
+                      kind: "Name",
+                      value: "slideshowItems_slide_BlockType",
+                    },
+                  },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      {
+                        kind: "Field",
+                        alias: { kind: "Name", value: "title" },
+                        name: { kind: "Name", value: "slideTitle" },
+                      },
+                      {
+                        kind: "Field",
+                        alias: { kind: "Name", value: "description" },
+                        name: { kind: "Name", value: "slideContent" },
+                      },
+                      {
+                        kind: "Field",
+                        alias: { kind: "Name", value: "teaser" },
+                        name: { kind: "Name", value: "slidePreviewContent" },
+                      },
+                      {
+                        kind: "Field",
+                        alias: { kind: "Name", value: "image" },
+                        name: { kind: "Name", value: "slideAsset" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "InlineFragment",
+                              typeCondition: {
+                                kind: "NamedType",
+                                name: {
+                                  kind: "Name",
+                                  value: "assetVariants_Asset",
+                                },
+                              },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "altText" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "width" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "height" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "url" },
+                                    directives: [
+                                      {
+                                        kind: "Directive",
+                                        name: {
+                                          kind: "Name",
+                                          value: "transform",
+                                        },
+                                        arguments: [
+                                          {
+                                            kind: "Argument",
+                                            name: {
+                                              kind: "Name",
+                                              value: "mode",
+                                            },
+                                            value: {
+                                              kind: "StringValue",
+                                              value: "fit",
+                                              block: false,
+                                            },
+                                          },
+                                          {
+                                            kind: "Argument",
+                                            name: {
+                                              kind: "Name",
+                                              value: "width",
+                                            },
+                                            value: {
+                                              kind: "IntValue",
+                                              value: "1000",
+                                            },
+                                          },
+                                        ],
+                                      },
+                                    ],
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "inlineSlideshowBlock" },
+      typeCondition: {
+        kind: "NamedType",
+        name: {
+          kind: "Name",
+          value: "contentBlocks_inlineSlideshow_BlockType",
+        },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "typeHandle" } },
+          { kind: "Field", name: { kind: "Name", value: "backgroundColor" } },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "slideshowEntry" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "SlideshowSlides" },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
       name: { kind: "Name", value: "BaseFields" },
       typeCondition: {
         kind: "NamedType",
@@ -308227,6 +309505,10 @@ export const GetEducatorPageEntryDocument = {
           {
             kind: "FragmentSpread",
             name: { kind: "Name", value: "firstLookWidgetsBlock" },
+          },
+          {
+            kind: "FragmentSpread",
+            name: { kind: "Name", value: "inlineSlideshowBlock" },
           },
         ],
       },
@@ -312980,6 +314262,231 @@ export const GetEventEntryDocument = {
     },
     {
       kind: "FragmentDefinition",
+      name: { kind: "Name", value: "SlideshowSlides" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "slideshows_slideshow_Entry" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "title" } },
+          {
+            kind: "Field",
+            alias: { kind: "Name", value: "description" },
+            name: { kind: "Name", value: "richTextDescription" },
+          },
+          {
+            kind: "Field",
+            alias: { kind: "Name", value: "coverImage" },
+            name: { kind: "Name", value: "representativeAssetVariant" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "InlineFragment",
+                  typeCondition: {
+                    kind: "NamedType",
+                    name: { kind: "Name", value: "assetVariants_Asset" },
+                  },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "altText" },
+                      },
+                      { kind: "Field", name: { kind: "Name", value: "width" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "height" },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "url" },
+                        directives: [
+                          {
+                            kind: "Directive",
+                            name: { kind: "Name", value: "transform" },
+                            arguments: [
+                              {
+                                kind: "Argument",
+                                name: { kind: "Name", value: "mode" },
+                                value: {
+                                  kind: "StringValue",
+                                  value: "fit",
+                                  block: false,
+                                },
+                              },
+                              {
+                                kind: "Argument",
+                                name: { kind: "Name", value: "width" },
+                                value: { kind: "IntValue", value: "1000" },
+                              },
+                            ],
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: "Field",
+            alias: { kind: "Name", value: "items" },
+            name: { kind: "Name", value: "slideshowItems" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "InlineFragment",
+                  typeCondition: {
+                    kind: "NamedType",
+                    name: {
+                      kind: "Name",
+                      value: "slideshowItems_slide_BlockType",
+                    },
+                  },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      {
+                        kind: "Field",
+                        alias: { kind: "Name", value: "title" },
+                        name: { kind: "Name", value: "slideTitle" },
+                      },
+                      {
+                        kind: "Field",
+                        alias: { kind: "Name", value: "description" },
+                        name: { kind: "Name", value: "slideContent" },
+                      },
+                      {
+                        kind: "Field",
+                        alias: { kind: "Name", value: "teaser" },
+                        name: { kind: "Name", value: "slidePreviewContent" },
+                      },
+                      {
+                        kind: "Field",
+                        alias: { kind: "Name", value: "image" },
+                        name: { kind: "Name", value: "slideAsset" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "InlineFragment",
+                              typeCondition: {
+                                kind: "NamedType",
+                                name: {
+                                  kind: "Name",
+                                  value: "assetVariants_Asset",
+                                },
+                              },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "altText" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "width" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "height" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "url" },
+                                    directives: [
+                                      {
+                                        kind: "Directive",
+                                        name: {
+                                          kind: "Name",
+                                          value: "transform",
+                                        },
+                                        arguments: [
+                                          {
+                                            kind: "Argument",
+                                            name: {
+                                              kind: "Name",
+                                              value: "mode",
+                                            },
+                                            value: {
+                                              kind: "StringValue",
+                                              value: "fit",
+                                              block: false,
+                                            },
+                                          },
+                                          {
+                                            kind: "Argument",
+                                            name: {
+                                              kind: "Name",
+                                              value: "width",
+                                            },
+                                            value: {
+                                              kind: "IntValue",
+                                              value: "1000",
+                                            },
+                                          },
+                                        ],
+                                      },
+                                    ],
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "inlineSlideshowBlock" },
+      typeCondition: {
+        kind: "NamedType",
+        name: {
+          kind: "Name",
+          value: "contentBlocks_inlineSlideshow_BlockType",
+        },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "typeHandle" } },
+          { kind: "Field", name: { kind: "Name", value: "backgroundColor" } },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "slideshowEntry" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "SlideshowSlides" },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
       name: { kind: "Name", value: "BaseFields" },
       typeCondition: {
         kind: "NamedType",
@@ -313157,6 +314664,10 @@ export const GetEventEntryDocument = {
           {
             kind: "FragmentSpread",
             name: { kind: "Name", value: "firstLookWidgetsBlock" },
+          },
+          {
+            kind: "FragmentSpread",
+            name: { kind: "Name", value: "inlineSlideshowBlock" },
           },
         ],
       },
@@ -319782,6 +321293,231 @@ export const GetPageEntryDocument = {
     },
     {
       kind: "FragmentDefinition",
+      name: { kind: "Name", value: "SlideshowSlides" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "slideshows_slideshow_Entry" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "title" } },
+          {
+            kind: "Field",
+            alias: { kind: "Name", value: "description" },
+            name: { kind: "Name", value: "richTextDescription" },
+          },
+          {
+            kind: "Field",
+            alias: { kind: "Name", value: "coverImage" },
+            name: { kind: "Name", value: "representativeAssetVariant" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "InlineFragment",
+                  typeCondition: {
+                    kind: "NamedType",
+                    name: { kind: "Name", value: "assetVariants_Asset" },
+                  },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "altText" },
+                      },
+                      { kind: "Field", name: { kind: "Name", value: "width" } },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "height" },
+                      },
+                      {
+                        kind: "Field",
+                        name: { kind: "Name", value: "url" },
+                        directives: [
+                          {
+                            kind: "Directive",
+                            name: { kind: "Name", value: "transform" },
+                            arguments: [
+                              {
+                                kind: "Argument",
+                                name: { kind: "Name", value: "mode" },
+                                value: {
+                                  kind: "StringValue",
+                                  value: "fit",
+                                  block: false,
+                                },
+                              },
+                              {
+                                kind: "Argument",
+                                name: { kind: "Name", value: "width" },
+                                value: { kind: "IntValue", value: "1000" },
+                              },
+                            ],
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: "Field",
+            alias: { kind: "Name", value: "items" },
+            name: { kind: "Name", value: "slideshowItems" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "InlineFragment",
+                  typeCondition: {
+                    kind: "NamedType",
+                    name: {
+                      kind: "Name",
+                      value: "slideshowItems_slide_BlockType",
+                    },
+                  },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "Field", name: { kind: "Name", value: "id" } },
+                      {
+                        kind: "Field",
+                        alias: { kind: "Name", value: "title" },
+                        name: { kind: "Name", value: "slideTitle" },
+                      },
+                      {
+                        kind: "Field",
+                        alias: { kind: "Name", value: "description" },
+                        name: { kind: "Name", value: "slideContent" },
+                      },
+                      {
+                        kind: "Field",
+                        alias: { kind: "Name", value: "teaser" },
+                        name: { kind: "Name", value: "slidePreviewContent" },
+                      },
+                      {
+                        kind: "Field",
+                        alias: { kind: "Name", value: "image" },
+                        name: { kind: "Name", value: "slideAsset" },
+                        selectionSet: {
+                          kind: "SelectionSet",
+                          selections: [
+                            {
+                              kind: "InlineFragment",
+                              typeCondition: {
+                                kind: "NamedType",
+                                name: {
+                                  kind: "Name",
+                                  value: "assetVariants_Asset",
+                                },
+                              },
+                              selectionSet: {
+                                kind: "SelectionSet",
+                                selections: [
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "altText" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "width" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "height" },
+                                  },
+                                  {
+                                    kind: "Field",
+                                    name: { kind: "Name", value: "url" },
+                                    directives: [
+                                      {
+                                        kind: "Directive",
+                                        name: {
+                                          kind: "Name",
+                                          value: "transform",
+                                        },
+                                        arguments: [
+                                          {
+                                            kind: "Argument",
+                                            name: {
+                                              kind: "Name",
+                                              value: "mode",
+                                            },
+                                            value: {
+                                              kind: "StringValue",
+                                              value: "fit",
+                                              block: false,
+                                            },
+                                          },
+                                          {
+                                            kind: "Argument",
+                                            name: {
+                                              kind: "Name",
+                                              value: "width",
+                                            },
+                                            value: {
+                                              kind: "IntValue",
+                                              value: "1000",
+                                            },
+                                          },
+                                        ],
+                                      },
+                                    ],
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "inlineSlideshowBlock" },
+      typeCondition: {
+        kind: "NamedType",
+        name: {
+          kind: "Name",
+          value: "contentBlocks_inlineSlideshow_BlockType",
+        },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "typeHandle" } },
+          { kind: "Field", name: { kind: "Name", value: "backgroundColor" } },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "slideshowEntry" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "SlideshowSlides" },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
       name: { kind: "Name", value: "BaseFields" },
       typeCondition: {
         kind: "NamedType",
@@ -319959,6 +321695,10 @@ export const GetPageEntryDocument = {
           {
             kind: "FragmentSpread",
             name: { kind: "Name", value: "firstLookWidgetsBlock" },
+          },
+          {
+            kind: "FragmentSpread",
+            name: { kind: "Name", value: "inlineSlideshowBlock" },
           },
         ],
       },

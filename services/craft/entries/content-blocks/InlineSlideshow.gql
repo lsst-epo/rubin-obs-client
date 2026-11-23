@@ -1,0 +1,8 @@
+fragment inlineSlideshowBlock on contentBlocks_inlineSlideshow_BlockType {
+  id
+  typeHandle
+  backgroundColor
+  slideshowEntry {
+    ...SlideshowSlides
+  }
+}

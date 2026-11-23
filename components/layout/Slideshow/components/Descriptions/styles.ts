@@ -8,7 +8,6 @@ export const SlideDescriptions = styled.div`
   padding-block: 24px;
   font-size: 16px;
   line-height: 1.3;
-  color: var(--white, #fff);
 
   @media (min-width: ${BREAK_TABLET_LG}) {
     position: absolute;
@@ -19,6 +18,7 @@ export const SlideDescriptions = styled.div`
     max-block-size: 90%;
     padding-block: 0px;
     overflow: hidden;
+    color: var(--white, #fff);
     background-color: hsla(0deg, 0%, 0%, 70%);
     border: 1.5px solid rgba(255, 255, 255, 40%);
     border-radius: 12px;
